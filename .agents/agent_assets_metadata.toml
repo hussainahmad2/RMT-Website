@@ -1,0 +1,44 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "JjdobQCqlsNQPbKIsYhWD"
+uri = "file://artifacts/rmt-usa/src/assets/hero-bg.png"
+type = "image"
+title = "Night industrial refinery hero"
+
+[[generated]]
+id = "5dg63dSoFocMeE9aIZxc_"
+uri = "file://artifacts/rmt-usa/src/assets/project-pipeline.png"
+type = "image"
+title = "Pipeline construction project"
+
+[[generated]]
+id = "7OhWTms5GLqabr0arbqVa"
+uri = "file://artifacts/rmt-usa/src/assets/project-electrical.png"
+type = "image"
+title = "Electrical facility install"
+
+[[generated]]
+id = "-hxkJqN_DXwx3PExo9hWo"
+uri = "file://artifacts/rmt-usa/src/assets/project-welding.png"
+type = "image"
+title = "Welding fabrication shop"
+
+[[generated]]
+id = "bDQ1_hn5KlKNDy7-PX_QS"
+uri = "file://artifacts/rmt-usa/src/assets/project-maintenance.png"
+type = "image"
+title = "Refinery turnaround maintenance"
+
+[[generated]]
+id = "bS2OgFzX_Z07QX5pxi1_z"
+uri = "file://artifacts/rmt-usa/src/assets/about-team.png"
+type = "image"
+title = "Team safety meeting"
+
+[[generated]]
+id = "UvY4xKqBL08f1T342AkR9"
+uri = "file://artifacts/rmt-usa/src/assets/service-hero.png"
+type = "image"
+title = "Generic service hero"

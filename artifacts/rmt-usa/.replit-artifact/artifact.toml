@@ -1,0 +1,31 @@
+kind = "web"
+previewPath = "/"
+title = "RMT USA"
+version = "1.0.0"
+id = "artifacts/rmt-usa"
+router = "path"
+
+[[integratedSkills]]
+name = "react-vite"
+version = "1.0.0"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 18802
+
+[services.development]
+run = "pnpm --filter @workspace/rmt-usa run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/rmt-usa", "run", "build" ]
+publicDir = "artifacts/rmt-usa/dist/public"
+serve = "static"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "18802"
+BASE_PATH = "/"
