@@ -3,13 +3,148 @@ import { Link } from "wouter";
 import {
   Cpu, Shield, Brain, FlaskConical, CircuitBoard,
   Settings2, Pill, Factory, CheckCircle, ArrowRight, ArrowLeft, ChevronRight,
-  Search, ClipboardList, Wrench, TestTube2, Rocket
+  Search, ClipboardList, Wrench, TestTube2, Rocket,
+  FileSearch, Target, Layers, Microscope, PackageCheck, Truck,
+  MonitorSmartphone, GitBranch, ShieldCheck, FlaskRound, Boxes, BarChart3,
+  ScanLine, Zap, Cable, Radio, Award, Cog, ScrollText, TrendingUp, ClipboardCheck
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES, type ServiceData, type SubServiceData } from "@/data/services";
+
+/* ---- Per-service methodology steps ---- */
+interface MethodologyStep {
+  title: string;
+  desc: string;
+  points: string[];
+  Icon: React.ElementType;
+}
+
+const SERVICE_METHODOLOGY: Record<string, MethodologyStep[]> = {
+  "product-design": [
+    { title: "Design Brief & Inputs", Icon: FileSearch, desc: "Capture user needs, intended use, regulatory pathway, and technical constraints into a formal Design Input specification.", points: ["User needs analysis", "Regulatory classification", "Design input specification", "Risk-based requirements"] },
+    { title: "Concept Design", Icon: Target, desc: "Generate and evaluate multiple design concepts against the brief using structured design reviews and selection matrices.", points: ["Concept generation workshops", "Design trade-off analysis", "Feasibility modelling", "Concept selection review"] },
+    { title: "CAD Modelling & PCB Design", Icon: Layers, desc: "Convert selected concept into detailed 3D CAD and/or PCB designs with full DFM and DFA optimisation.", points: ["SolidWorks / CATIA / Fusion 360", "PCB layout (Altium, KiCad)", "FEA & simulation", "Design for Manufacturability review"] },
+    { title: "Prototyping", Icon: Wrench, desc: "Produce physical prototypes using the optimal manufacturing technology for each development stage.", points: ["3D printing (SLA / SLS / FDM)", "CNC machining", "PCB assembly", "Functional prototype validation"] },
+    { title: "Verification & Validation", Icon: TestTube2, desc: "Execute formal V&V testing protocols against design inputs, capturing objective evidence for the Design History File.", points: ["Test protocol authoring", "Dimensional & functional testing", "Environmental stress testing", "V&V report generation"] },
+    { title: "Design Freeze & Transfer", Icon: PackageCheck, desc: "Lock the final design, complete the Design History File, and transfer all documentation for regulatory submission and manufacturing.", points: ["Design freeze review", "DHF completion", "Manufacturing transfer package", "Regulatory submission readiness"] },
+  ],
+  "regulatory-compliance": [
+    { title: "Regulatory Gap Assessment", Icon: FileSearch, desc: "Evaluate your current device documentation and QMS against the applicable regulatory requirements to identify gaps and risk areas.", points: ["FDA 510(k) / PMA gap analysis", "EU MDR / IVDR assessment", "ISO 13485 QMS gap review", "Prioritised action plan"] },
+    { title: "Regulatory Strategy", Icon: Target, desc: "Define the optimal regulatory pathway, classification strategy, and submission roadmap tailored to your device and target markets.", points: ["Classification determination", "Pathway selection (510k / PMA / De Novo)", "Multi-jurisdiction strategy", "Timeline & milestone planning"] },
+    { title: "Technical Documentation", Icon: ScrollText, desc: "Prepare comprehensive technical files, clinical evaluations, risk management files, and all supporting documentation.", points: ["Technical File / 510(k) dossier", "Clinical Evaluation Report (CER)", "Biological Evaluation Report (BER)", "ISO 14971 Risk Management File"] },
+    { title: "QMS Implementation", Icon: ShieldCheck, desc: "Build or align your Quality Management System with ISO 13485 and regulatory requirements, including SOPs and procedures.", points: ["ISO 13485 QMS framework", "SOP & procedure writing", "Document control system", "Training programme"] },
+    { title: "Submission & Review", Icon: Rocket, desc: "Prepare, compile, and submit regulatory dossiers, managing authority queries and additional information requests.", points: ["eCTD / eSTAR submission", "Notified body liaison", "FDA query management", "Deficiency response authoring"] },
+    { title: "Approval & Post-Market", Icon: Award, desc: "Secure regulatory approval and establish post-market surveillance systems to maintain ongoing compliance.", points: ["Approval management", "PMS plan implementation", "Vigilance reporting setup", "Annual safety update reports"] },
+  ],
+  "software-ai": [
+    { title: "Software Requirements", Icon: ClipboardList, desc: "Define the software requirements specification aligned with IEC 62304, including intended use, safety classification, and functional requirements.", points: ["IEC 62304 safety class determination", "Software requirements specification (SRS)", "SOUP identification", "Intended use & indications"] },
+    { title: "Architecture & Design", Icon: Layers, desc: "Design a robust, scalable software architecture with full traceability between requirements, architecture, and detailed design.", points: ["System & software architecture", "Module decomposition", "Interface design", "Design traceability matrix"] },
+    { title: "Development & AI Training", Icon: GitBranch, desc: "Agile development of software modules and AI/ML models, with continuous integration and automated testing throughout.", points: ["Full-stack development", "AI/ML model training & validation", "Unit & integration testing", "CI/CD pipeline"] },
+    { title: "Software V&V Testing", Icon: MonitorSmartphone, desc: "Execute rigorous software verification and validation testing, including system-level testing, usability, and cybersecurity assessment.", points: ["System test execution", "Usability engineering (IEC 62366)", "Cybersecurity testing", "Regression testing"] },
+    { title: "SaMD Regulatory Submission", Icon: ShieldCheck, desc: "Prepare IEC 62304-compliant software documentation package for inclusion in FDA or EU MDR regulatory submissions.", points: ["Software description document", "Anomaly reports & resolution", "Labelling & IFU", "SaMD regulatory strategy"] },
+    { title: "Deployment & Maintenance", Icon: Rocket, desc: "Deploy the validated software with a formal release process, and maintain a structured problem resolution and change management process post-launch.", points: ["Release management", "Problem resolution (PRP)", "Change management procedure", "Post-market software updates"] },
+  ],
+  "quality-testing": [
+    { title: "Test Strategy & Planning", Icon: Target, desc: "Define the overall testing strategy, scope, and approach based on device risk classification and regulatory requirements.", points: ["Test strategy development", "Standards applicability analysis", "Risk-based test prioritisation", "Resource & timeline planning"] },
+    { title: "Protocol Design", Icon: ClipboardList, desc: "Author detailed test protocols with acceptance criteria, test methods, and pass/fail criteria traceable to design inputs.", points: ["IQ / OQ / PQ protocols", "Test method development", "Acceptance criteria definition", "Statistical sampling plans"] },
+    { title: "Test Execution", Icon: FlaskConical, desc: "Execute test protocols in qualified laboratory environments, with full data capture and traceability of equipment and materials.", points: ["Mechanical & electrical testing", "Environmental & stress testing", "Biocompatibility testing coordination", "IEC 60601 / ISO 11135 testing"] },
+    { title: "Data Analysis & CAPA", Icon: BarChart3, desc: "Analyse test results against acceptance criteria, investigate failures, and implement corrective actions before re-test.", points: ["Statistical data analysis", "Failure mode investigation", "Root cause analysis", "Corrective action planning"] },
+    { title: "Validation Reporting", Icon: ScrollText, desc: "Compile comprehensive test reports with full data packages, traceability matrices, and regulatory-submission-ready summaries.", points: ["Test summary reports", "Traceability matrix completion", "Deviation reporting", "V&V summary for DHF"] },
+    { title: "Audit Readiness Review", Icon: ShieldCheck, desc: "Final review of all testing documentation to ensure compliance, completeness, and readiness for regulatory submission or notified body audit.", points: ["Documentation completeness check", "Cross-reference verification", "Gap remediation", "Submission package assembly"] },
+  ],
+  "electronics-firmware": [
+    { title: "Requirements & Safety Analysis", Icon: FileSearch, desc: "Define hardware and firmware requirements, classify software safety levels per IEC 62304, and complete initial FMEA for the electronics subsystem.", points: ["Hardware requirements spec", "IEC 62304 safety classification", "System-level FMEA", "EMC & safety standards mapping"] },
+    { title: "Schematic Design", Icon: CircuitBoard, desc: "Develop full electronic schematics with component selection, power analysis, and EMC pre-compliance design principles applied from the start.", points: ["Altium / KiCad schematics", "Component selection & BOM", "Power budget analysis", "EMC pre-compliance design"] },
+    { title: "PCB Layout & Firmware Dev", Icon: Layers, desc: "Execute PCB layout with signal integrity and thermal analysis, and develop firmware with full IEC 62304 software lifecycle documentation.", points: ["Multi-layer PCB layout", "Signal integrity analysis", "Firmware architecture", "Unit & integration testing"] },
+    { title: "Hardware Integration Testing", Icon: Zap, desc: "Build and test prototype hardware assemblies, debug hardware-firmware interactions, and perform in-circuit functional verification.", points: ["Prototype build & bring-up", "Hardware-firmware integration debug", "Functional verification testing", "Oscilloscope & logic analyser analysis"] },
+    { title: "EMC & Safety Testing", Icon: Radio, desc: "Conduct pre-compliance and formal EMC testing, and perform IEC 60601-1 electrical safety testing at accredited laboratories.", points: ["IEC 60601-1 safety testing", "EMC pre-compliance (radiated/conducted)", "Formal EMC certification testing", "Creepage & clearance verification"] },
+    { title: "Certification & Transfer", Icon: Award, desc: "Complete all testing documentation, prepare regulatory electronics package, and transfer design files and firmware to manufacturing.", points: ["EMC test reports", "Safety test certification", "IEC 62304 software file closure", "Manufacturing design transfer"] },
+  ],
+  "turnkey-commissioning": [
+    { title: "Project Scoping & Planning", Icon: ClipboardList, desc: "Define the full project scope, deliverables, milestones, and risk register for the turnkey system delivery.", points: ["Detailed scope of work", "WBS & milestone schedule", "Risk register", "Resource allocation plan"] },
+    { title: "Engineering Design", Icon: Cog, desc: "Complete detailed engineering design for all system elements — mechanical, electrical, software, and process — with design reviews at key milestones.", points: ["Mechanical & electrical design", "Process flow diagrams (PFDs)", "P&IDs", "Design review gates"] },
+    { title: "Procurement & Fabrication", Icon: Boxes, desc: "Source, qualify, and procure all equipment, materials, and components from qualified suppliers, with incoming inspection and traceability.", points: ["Supplier qualification", "Purchase order management", "Incoming inspection", "Component traceability records"] },
+    { title: "Factory Acceptance Testing", Icon: PackageCheck, desc: "Assemble and fully test the system at our facility before shipment, executing a comprehensive FAT against agreed acceptance criteria.", points: ["System integration & build", "FAT protocol execution", "Punch list management", "Customer witnessed testing"] },
+    { title: "Site Commissioning", Icon: Wrench, desc: "Install and commission the system at your facility, performing SAT and process qualification to demonstrate performance at site conditions.", points: ["Site installation management", "Site Acceptance Testing (SAT)", "IQ / OQ / PQ execution", "Process performance qualification"] },
+    { title: "Handover & Training", Icon: Truck, desc: "Complete project documentation handover, train your operators and maintenance team, and establish ongoing support arrangements.", points: ["As-built documentation", "O&M manuals", "Operator & technician training", "Warranty & support agreement"] },
+  ],
+  "pharmaceutical": [
+    { title: "API Characterisation", Icon: Microscope, desc: "Fully characterise the active pharmaceutical ingredient, including physicochemical properties, stability drivers, and compatibility profile.", points: ["Physicochemical profiling", "Stability indication testing", "Excipient compatibility screening", "Analytical method development"] },
+    { title: "Formulation Development", Icon: FlaskRound, desc: "Design and optimise the pharmaceutical formulation using QbD principles, with systematic evaluation of critical formulation attributes.", points: ["QbD formulation approach", "Design of Experiments (DoE)", "Critical Quality Attribute (CQA) definition", "Prototype formulation batches"] },
+    { title: "Analytical Development", Icon: ScanLine, desc: "Develop and validate analytical methods for product characterisation, release testing, and stability studies.", points: ["HPLC & UV method development", "ICH Q2(R1) validation", "Reference standard qualification", "Stability-indicating methods"] },
+    { title: "Stability Studies", Icon: TrendingUp, desc: "Conduct ICH-guideline stability studies (accelerated, intermediate, and long-term) to define shelf life and storage conditions.", points: ["ICH Q1A(R2) stability design", "Accelerated & real-time storage", "Degradation product profiling", "Shelf life determination"] },
+    { title: "Process Scale-Up & Validation", Icon: Cog, desc: "Scale the manufacturing process from lab to pilot to commercial scale with formal process validation studies.", points: ["Technology transfer protocol", "Process characterisation studies", "Process Validation (PV) batches", "Continued Process Verification (CPV)"] },
+    { title: "Regulatory Submission", Icon: ScrollText, desc: "Prepare the pharmaceutical CMC section for IND, NDA/ANDA, IMPD, or MA submissions with full regulatory strategy guidance.", points: ["CMC section authoring", "IND / NDA / ANDA support", "IMPD & MA submissions", "Deficiency response management"] },
+  ],
+  "contract-manufacturing": [
+    { title: "Design Transfer", Icon: FileSearch, desc: "Formally transfer the device design from your engineering team to our manufacturing facility, establishing all process parameters and documentation.", points: ["Design transfer protocol", "Drawing & specification review", "Process flow development", "Manufacturing procedure authoring"] },
+    { title: "Supplier & Material Qualification", Icon: ClipboardCheck, desc: "Qualify all raw material suppliers and components against approved specifications, ensuring a robust and traceable supply chain.", points: ["Supplier qualification audits", "Approved supplier list (ASL)", "Incoming inspection procedures", "Material traceability system"] },
+    { title: "Process Validation", Icon: Cog, desc: "Validate all critical manufacturing processes using IQ / OQ / PQ methodology to ensure consistent product quality.", points: ["Installation Qualification (IQ)", "Operational Qualification (OQ)", "Performance Qualification (PQ)", "Cpk & process capability analysis"] },
+    { title: "Pilot Production Build", Icon: Boxes, desc: "Run an initial pilot production batch to verify process robustness and identify any issues before full commercial production begins.", points: ["Pilot batch execution", "First Article Inspection (FAI)", "In-process monitoring", "Yield & defect analysis"] },
+    { title: "Full-Scale Manufacturing", Icon: Factory, desc: "Execute commercial-scale manufacturing under a fully documented, ISO 13485-certified quality management system with complete batch traceability.", points: ["Batch manufacturing records (BMR)", "In-process quality controls", "Environmental monitoring", "Certificate of Conformance"] },
+    { title: "Release & Post-Market Support", Icon: PackageCheck, desc: "Perform final product release testing, labelling, packaging, and support ongoing post-market surveillance activities.", points: ["Final product release testing", "Labelling & packaging verification", "Complaint handling integration", "Post-market surveillance support"] },
+  ],
+};
+
+/* ---- Vertical Methodology Timeline Component ---- */
+function ServiceMethodology({ slug }: { slug: string }) {
+  const steps = SERVICE_METHODOLOGY[slug];
+  if (!steps || steps.length === 0) return null;
+
+  return (
+    <AnimatedSection>
+      <h2 className="font-heading text-3xl font-bold text-foreground mb-2 pb-3 border-b border-border">Our Methodology</h2>
+      <p className="text-muted-foreground text-sm mb-8">A structured, milestone-driven approach proven to de-risk your project at every stage.</p>
+
+      <div className="relative">
+        {/* Vertical connecting line */}
+        <div className="absolute left-[1.6rem] top-8 bottom-8 w-0.5 bg-gradient-to-b from-primary via-primary/40 to-transparent" />
+
+        <div className="space-y-0">
+          {steps.map((step, i) => (
+            <motion.div
+              key={step.title}
+              initial={{ opacity: 0, x: -16 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: "-40px" }}
+              transition={{ delay: i * 0.08, duration: 0.4 }}
+              className="relative flex gap-6 pb-8 last:pb-0 group"
+            >
+              {/* Step circle */}
+              <div className="relative shrink-0 z-10">
+                <div className={`w-14 h-14 rounded-full border-2 flex flex-col items-center justify-center transition-all duration-300
+                  ${i === 0 ? "bg-primary border-primary text-white shadow-lg shadow-primary/30" : "bg-card border-border text-primary group-hover:border-primary group-hover:bg-primary/5"}`}>
+                  <step.Icon className="w-5 h-5" />
+                  <span className="text-[9px] font-bold mt-0.5 opacity-60">{String(i + 1).padStart(2, "0")}</span>
+                </div>
+              </div>
+
+              {/* Content card */}
+              <div className="flex-1 bg-card border border-border rounded-xl p-5 group-hover:border-primary/40 group-hover:shadow-sm transition-all duration-300 mt-1">
+                <div className="flex items-start justify-between gap-3 mb-2">
+                  <h4 className="font-heading font-bold text-foreground text-base group-hover:text-primary transition-colors">{step.title}</h4>
+                  <span className="text-[10px] font-bold text-primary/60 bg-primary/8 px-2 py-0.5 rounded-full shrink-0 border border-primary/15">Step {i + 1}</span>
+                </div>
+                <p className="text-muted-foreground text-sm leading-relaxed mb-3">{step.desc}</p>
+                <div className="flex flex-wrap gap-1.5">
+                  {step.points.map((pt) => (
+                    <span key={pt} className="inline-flex items-center gap-1 text-xs text-muted-foreground bg-secondary/60 px-2.5 py-1 rounded-full border border-border/60">
+                      <span className="w-1 h-1 rounded-full bg-primary/60 shrink-0" />
+                      {pt}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+}
 
 /* ---- Map slug → icon ---- */
 const SERVICE_ICONS: Record<string, React.ReactNode> = {
@@ -402,6 +537,9 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
                   ))}
                 </div>
               </AnimatedSection>
+
+              {/* METHODOLOGY TIMELINE */}
+              <ServiceMethodology slug={service.slug} />
 
               {/* SUB-SERVICES — each is a clickable card linking to its own page */}
               <AnimatedSection>
