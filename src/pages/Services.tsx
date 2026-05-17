@@ -6,7 +6,8 @@ import {
   Search, ClipboardList, Wrench, TestTube2, Rocket,
   FileSearch, Target, Layers, Microscope, PackageCheck, Truck,
   MonitorSmartphone, GitBranch, ShieldCheck, FlaskRound, Boxes, BarChart3,
-  ScanLine, Zap, Cable, Radio, Award, Cog, ScrollText, TrendingUp, ClipboardCheck
+  ScanLine, Zap, Cable, Radio, Award, Cog, ScrollText, TrendingUp, ClipboardCheck,
+  Dna
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -78,6 +79,22 @@ const SERVICE_METHODOLOGY: Record<string, MethodologyStep[]> = {
     { title: "Stability Studies", Icon: TrendingUp, desc: "Conduct ICH-guideline stability studies (accelerated, intermediate, and long-term) to define shelf life and storage conditions.", points: ["ICH Q1A(R2) stability design", "Accelerated & real-time storage", "Degradation product profiling", "Shelf life determination"] },
     { title: "Process Scale-Up & Validation", Icon: Cog, desc: "Scale the manufacturing process from lab to pilot to commercial scale with formal process validation studies.", points: ["Technology transfer protocol", "Process characterisation studies", "Process Validation (PV) batches", "Continued Process Verification (CPV)"] },
     { title: "Regulatory Submission", Icon: ScrollText, desc: "Prepare the pharmaceutical CMC section for IND, NDA/ANDA, IMPD, or MA submissions with full regulatory strategy guidance.", points: ["CMC section authoring", "IND / NDA / ANDA support", "IMPD & MA submissions", "Deficiency response management"] },
+  ],
+  "bmd-laboratory-testing": [
+    { title: "Test Scope Definition", Icon: FileSearch, desc: "Define the testing programme based on product type, regulatory pathway, and applicable ISO / ICH standards.", points: ["Standards gap analysis", "Test matrix development", "Sample size planning", "Timeline & resource plan"] },
+    { title: "Method Qualification", Icon: ClipboardList, desc: "Develop or qualify test methods with acceptance criteria, equipment requirements, and traceability controls.", points: ["Method SOP authoring", "Equipment qualification", "Reference standard control", "Analyst training records"] },
+    { title: "Sample Receipt & Chain of Custody", Icon: PackageCheck, desc: "Log incoming samples with full chain of custody, storage conditions, and sample integrity checks.", points: ["Sample logging system", "Storage condition control", "Integrity inspection", "Hold-time studies"] },
+    { title: "Test Execution", Icon: FlaskConical, desc: "Execute microbiology, analytical, mechanical, and biocompatibility protocols in controlled laboratory environments.", points: ["Microbiology & analytical tests", "Material characterisation", "Mechanical testing", "In vitro biocompatibility"] },
+    { title: "Data Review & Reporting", Icon: ScrollText, desc: "Review raw data, perform statistical analysis, and compile regulatory-ready test summary reports.", points: ["Raw data review", "Statistical analysis", "OOS investigation", "Test summary report"] },
+    { title: "Regulatory Submission Support", Icon: ShieldCheck, desc: "Provide test data packages formatted for inclusion in technical files, 510(k)s, and biological evaluation reports.", points: ["BER / CER data tables", "Traceability matrices", "Notified body query support", "Audit documentation"] },
+  ],
+  "bmd-biomaterials-rd": [
+    { title: "Feasibility & Material Selection", Icon: FileSearch, desc: "Assess project feasibility, select candidate biomaterials and polymers, and define target performance specifications.", points: ["Material screening", "Regulatory pathway review", "Performance specification", "Risk assessment"] },
+    { title: "Formulation & Scaffold Design", Icon: Dna, desc: "Design electrospun scaffolds, hydrogels, coatings, or custom 3D biomaterial structures matched to the application.", points: ["Electrospinning & hydrogels", "Porosity & degradation design", "Drug loading strategy", "Prototype batches"] },
+    { title: "Characterisation & Testing", Icon: Microscope, desc: "Characterise mechanical, chemical, and biological properties using BMD laboratory capabilities.", points: ["SEM / FTIR / DSC analysis", "Mechanical testing", "Release kinetics", "In vitro biocompatibility"] },
+    { title: "Prototyping & Fabrication", Icon: Wrench, desc: "Produce functional prototypes via silicone molding, vacuum casting, or advanced fabrication methods.", points: ["Silicone mold tooling", "Vacuum cast prototypes", "Dimensional inspection", "Design iteration"] },
+    { title: "Scale-Up & Tech Transfer", Icon: Cog, desc: "Optimise processes and prepare technology transfer packages for manufacturing partners.", points: ["Process optimisation", "Critical parameter mapping", "Tech transfer protocol", "Manufacturing readiness"] },
+    { title: "Regulatory & Commercialisation", Icon: Rocket, desc: "Support regulatory documentation, IP strategy input, and pathway to commercial deployment.", points: ["Technical file inputs", "Biological evaluation support", "Partner liaison", "Commercialisation planning"] },
   ],
   "contract-manufacturing": [
     { title: "Design Transfer", Icon: FileSearch, desc: "Formally transfer the device design from your engineering team to our manufacturing facility, establishing all process parameters and documentation.", points: ["Design transfer protocol", "Drawing & specification review", "Process flow development", "Manufacturing procedure authoring"] },
@@ -155,6 +172,8 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
   "electronics-firmware": <CircuitBoard className="w-6 h-6" />,
   "turnkey-commissioning": <Settings2 className="w-6 h-6" />,
   "pharmaceutical": <Pill className="w-6 h-6" />,
+  "bmd-laboratory-testing": <Microscope className="w-6 h-6" />,
+  "bmd-biomaterials-rd": <Dna className="w-6 h-6" />,
   "contract-manufacturing": <Factory className="w-6 h-6" />,
 };
 
@@ -202,7 +221,7 @@ const PROVEN_PROCESS_PHASES = [
 export function ServicesOverview() {
   useSEO({
     title: "Our Services",
-    description: "RMT Medical Technologies provides comprehensive medical device services — product design, regulatory compliance, software & AI, quality testing, electronics, pharmaceutical development, and contract manufacturing.",
+    description: "RMT Medical Technologies provides comprehensive medical device and BMD services — product design, regulatory compliance, software & AI, quality testing, BMD laboratory testing (MBL), biomaterials R&D, pharmaceutical development, and contract manufacturing.",
     keywords: "medical device services, regulatory compliance, product design prototyping, contract manufacturing",
   });
 
@@ -232,7 +251,7 @@ export function ServicesOverview() {
               A comprehensive suite of medical device and technology services — covering every stage from design through regulatory approval, manufacturing, and commercialization.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mt-8 pt-6 border-t border-white/10">
-              {["8 Core Services", "End-to-End Solutions", "Global Regulatory Expertise"].map((b) => (
+              {["10 Core Services", "End-to-End Solutions", "Global Regulatory Expertise"].map((b) => (
                 <div key={b} className="flex items-center gap-2 text-sm text-white/65">
                   <span className="w-1.5 h-1.5 rounded-full bg-primary" />
                   {b}
@@ -440,6 +459,16 @@ const SERVICE_CAROUSEL_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80",
     "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
     "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
+  ],
+  "bmd-laboratory-testing": [
+    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
+    "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=800&q=80",
+    "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=800&q=80",
+  ],
+  "bmd-biomaterials-rd": [
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+    "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=800&q=80",
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
   ],
   "turnkey-commissioning": [
     "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",

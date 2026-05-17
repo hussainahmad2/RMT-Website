@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X, ArrowRight, ArrowLeft, CheckCircle, Cpu, Shield, Brain,
-  FlaskConical, CircuitBoard, Settings2, Pill, Factory,
+  FlaskConical, CircuitBoard, Settings2, Pill, Factory, Microscope, Dna,
   DollarSign, Calendar, User, Mail, Phone, Building2, FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -28,7 +28,9 @@ const SERVICES = [
   { id: "quality-testing", label: "Quality Testing", icon: <FlaskConical className="w-4 h-4" /> },
   { id: "electronics-firmware", label: "Electronics & Firmware", icon: <CircuitBoard className="w-4 h-4" /> },
   { id: "turnkey-commissioning", label: "Turnkey Commissioning", icon: <Settings2 className="w-4 h-4" /> },
-  { id: "pharmaceutical", label: "Pharmaceutical Development", icon: <Pill className="w-4 h-4" /> },
+  { id: "pharmaceutical", label: "Pharmaceutical Product Development", icon: <Pill className="w-4 h-4" /> },
+  { id: "bmd-laboratory-testing", label: "BMD Laboratory Testing (MBL)", icon: <Microscope className="w-4 h-4" /> },
+  { id: "bmd-biomaterials-rd", label: "Biomaterials & Polymer R&D (BMD)", icon: <Dna className="w-4 h-4" /> },
   { id: "contract-manufacturing", label: "Contract Manufacturing", icon: <Factory className="w-4 h-4" /> },
 ];
 
