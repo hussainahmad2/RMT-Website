@@ -1,10 +1,10 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import {
   Cpu, Shield, Brain, FlaskConical, CircuitBoard,
   Settings2, Pill, Factory, CheckCircle, ArrowRight, ArrowLeft, ChevronRight
 } from "lucide-react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
@@ -71,7 +71,7 @@ export function ServicesOverview() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1600&q=80')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-foreground/92 via-foreground/80 to-primary/50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/92 via-black/80 to-primary/50" />
         <div className="absolute inset-0 opacity-[0.05] text-white pointer-events-none" style={{ position: "absolute", right: "-10%", top: "-10%", width: "60%", height: "120%" }}>
           <StethoBg />
         </div>
@@ -161,6 +161,96 @@ export function ServicesOverview() {
 }
 
 /* ======================================================
+   SERVICE HERO CAROUSEL
+====================================================== */
+const SERVICE_CAROUSEL_IMAGES: Record<string, string[]> = {
+  "product-design": [
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=800&q=80",
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
+  ],
+  "regulatory-compliance": [
+    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80",
+    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=800&q=80",
+  ],
+  "software-ai": [
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+    "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=800&q=80",
+    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=800&q=80",
+  ],
+  "quality-testing": [
+    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
+    "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=800&q=80",
+    "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
+  ],
+  "electronics-firmware": [
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=800&q=80",
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
+    "https://images.unsplash.com/photo-1568952433726-3896e3881c65?w=800&q=80",
+  ],
+  "contract-manufacturing": [
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
+    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
+    "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
+  ],
+  "pharmaceutical": [
+    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=800&q=80",
+    "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=800&q=80",
+    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
+  ],
+  "turnkey-commissioning": [
+    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
+  ],
+};
+
+const FALLBACK_IMAGES = [
+  "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
+  "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
+];
+
+function ServiceHeroCarousel({ service }: { service: ServiceData }) {
+  const images = SERVICE_CAROUSEL_IMAGES[service.slug] ?? FALLBACK_IMAGES;
+  const [idx, setIdx] = useState(0);
+
+  useEffect(() => {
+    const t = setInterval(() => setIdx((i) => (i + 1) % images.length), 3500);
+    return () => clearInterval(t);
+  }, [images.length]);
+
+  return (
+    <div className="relative overflow-hidden rounded-2xl aspect-[4/3] shadow-2xl bg-[#060d17]">
+      <AnimatePresence>
+        <motion.img
+          key={idx}
+          src={images[idx]}
+          alt={service.name}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.9, ease: "easeInOut" }}
+          className="w-full h-full object-cover absolute inset-0"
+        />
+      </AnimatePresence>
+      <div className="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent pointer-events-none" />
+      {/* Dots */}
+      <div className="absolute bottom-4 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setIdx(i)}
+            className={`rounded-full transition-all duration-300 ${i === idx ? "bg-white w-5 h-2" : "bg-white/50 w-2 h-2"}`}
+          />
+        ))}
+      </div>
+    </div>
+  );
+}
+
+/* ======================================================
    SERVICE DETAIL
 ====================================================== */
 export function ServiceDetail({ params }: { params: { slug: string } }) {
@@ -185,7 +275,7 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
     <div className="bg-background min-h-screen pt-20">
 
       {/* UNIQUE HERO per service */}
-      <section className="relative py-20 bg-foreground overflow-hidden">
+      <section className="relative py-20 bg-[#060d17] overflow-hidden">
         {/* Decorative circles */}
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-primary/5 translate-y-1/2 -translate-x-1/2 pointer-events-none" />
@@ -217,10 +307,7 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
                 </div>
               </div>
               <div className="hidden lg:block">
-                <div className="relative overflow-hidden rounded-2xl aspect-[4/3] shadow-2xl">
-                  <img src={service.heroImage} alt={service.name} className="w-full h-full object-cover" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-foreground/50 to-transparent" />
-                </div>
+                <ServiceHeroCarousel service={service} />
               </div>
             </div>
           </AnimatedSection>
@@ -361,7 +448,7 @@ export function SubServiceDetail({ params }: { params: { slug: string; subSlug: 
     <div className="bg-background min-h-screen pt-20">
 
       {/* UNIQUE HERO */}
-      <section className="relative py-20 bg-foreground overflow-hidden">
+      <section className="relative py-20 bg-[#060d17] overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-primary/5 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
         <ServiceBgIcon slug={service.slug} />

@@ -73,7 +73,7 @@ export default function About() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&q=80')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-r from-foreground/92 via-foreground/80 to-primary/40" />
+        <div className="absolute inset-0 bg-gradient-to-r from-black/92 via-black/80 to-primary/40" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
         {/* Large decorative SVG overlay */}
         <div className="absolute right-12 top-1/2 -translate-y-1/2 w-80 h-80 opacity-[0.06] text-white pointer-events-none">

@@ -73,7 +73,7 @@ export default function Contact() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600&q=80')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 via-foreground/82 to-primary/50" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/82 to-primary/50" />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />
         <div className="container mx-auto px-4 md:px-6 text-center relative z-10 py-20">
           <AnimatedSection>

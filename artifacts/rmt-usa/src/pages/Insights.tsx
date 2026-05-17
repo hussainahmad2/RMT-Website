@@ -60,7 +60,7 @@ export default function Insights() {
     <div className="bg-background min-h-screen pt-20">
 
       {/* HERO */}
-      <section className="relative py-20 bg-foreground overflow-hidden">
+      <section className="relative py-20 bg-[#060d17] overflow-hidden">
         <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
         <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
           <AnimatedSection>
@@ -78,7 +78,7 @@ export default function Insights() {
             <div className="grid lg:grid-cols-2 gap-0 bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-xl transition-all group cursor-pointer">
               <div className="relative overflow-hidden aspect-video lg:aspect-auto">
                 <img src={featured.image} alt={featured.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/60 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
                 <span className={`absolute top-4 left-4 text-xs px-2.5 py-1 rounded-full font-semibold ${CATEGORY_COLORS[featured.category]}`}>{featured.category}</span>
               </div>
               <div className="p-8 flex flex-col justify-center">

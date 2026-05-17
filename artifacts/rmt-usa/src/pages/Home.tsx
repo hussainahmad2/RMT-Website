@@ -14,6 +14,7 @@ import { useSEO } from "@/lib/seo";
 
 /* ---- hero images carousel ---- */
 const heroImages = [
+  { src: "/company-building.jpg", alt: "RMT Medical Technologies headquarters" },
   { src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80", alt: "Medical device engineer working in laboratory" },
   { src: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&q=80", alt: "Medical team reviewing regulatory documentation" },
   { src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80", alt: "Pharmaceutical research and development" },
@@ -116,7 +117,7 @@ export default function Home() {
     <div className="bg-background text-foreground">
 
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-foreground">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-[#060d17]">
         {/* Decorative icon background */}
         <div className="absolute top-10 right-10 w-80 h-80 pointer-events-none opacity-[0.05]">
           <DnaBg />
@@ -159,15 +160,6 @@ export default function Home() {
                 </Link>
               </Button>
 
-              <button
-                type="button"
-                onClick={() => setQuoteOpen(true)}
-                className="inline-flex items-center gap-2.5 h-12 px-7 rounded-lg border border-white/20 bg-white/8 text-white font-semibold text-sm hover:bg-white/15 transition-colors"
-              >
-                <FileText className="w-4 h-4" />
-                Request a Quote
-              </button>
-
               {/* Watch Overview */}
               <button
                 type="button"
@@ -198,16 +190,16 @@ export default function Home() {
             transition={{ duration: 0.7, delay: 0.15 }}
             className="relative hidden lg:block"
           >
-            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl bg-muted">
-              <AnimatePresence mode="wait">
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl bg-[#060d17]">
+              <AnimatePresence>
                 <motion.img
                   key={heroIndex}
                   src={heroImages[heroIndex].src}
                   alt={heroImages[heroIndex].alt}
-                  initial={{ opacity: 0, scale: 1.05 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0.97 }}
-                  transition={{ duration: 0.7 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.9, ease: "easeInOut" }}
                   className="w-full h-full object-cover absolute inset-0"
                 />
               </AnimatePresence>

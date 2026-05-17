@@ -121,7 +121,7 @@ export default function Training() {
     <div className="bg-background min-h-screen pt-20">
 
       {/* HERO */}
-      <section className="relative py-24 bg-foreground overflow-hidden">
+      <section className="relative py-24 bg-[#060d17] overflow-hidden">
         <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/8 -translate-y-1/3 translate-x-1/3 pointer-events-none" />
         <div className="absolute right-0 bottom-0 w-72 h-72 opacity-[0.05] text-white pointer-events-none"><DnaBg /></div>
         <div className="container mx-auto px-4 md:px-6 relative z-10">

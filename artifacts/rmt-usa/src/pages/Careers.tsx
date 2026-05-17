@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Clock, ArrowRight, Users, TrendingUp, Shield, Heart, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
-import { SkeletonJobCard } from "@/components/SkeletonCard";
+import { LogoSpinner } from "@/components/LogoSpinner";
 
 interface Job {
   id: string;
@@ -122,7 +122,7 @@ export default function Careers() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 via-foreground/80 to-primary/60" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/92 via-black/80 to-primary/50" />
         {/* Decorative grid lines */}
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
         <div className="container mx-auto px-4 md:px-6 text-center relative z-10 py-24">
@@ -187,7 +187,7 @@ export default function Careers() {
 
           <div className="max-w-4xl mx-auto space-y-4">
             {loading
-              ? Array.from({ length: 4 }).map((_, i) => <SkeletonJobCard key={i} />)
+              ? <div className="py-16"><LogoSpinner size="lg" label="Loading openings..." className="mx-auto" /></div>
               : jobs.map((job, i) => (
               <motion.div
                 key={job.id}

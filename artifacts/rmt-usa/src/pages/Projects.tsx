@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
-import { SkeletonProjectCard } from "@/components/SkeletonCard";
+import { LogoSpinner } from "@/components/LogoSpinner";
 
 const CircuitBg = () => (
   <svg viewBox="0 0 200 200" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2">
@@ -74,7 +74,7 @@ export default function Projects() {
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
           style={{ backgroundImage: "url('https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=1600&q=80')" }}
         />
-        <div className="absolute inset-0 bg-gradient-to-br from-foreground/93 via-foreground/82 to-primary/45" />
+        <div className="absolute inset-0 bg-gradient-to-br from-black/92 via-black/80 to-primary/45" />
         <div className="absolute inset-0 opacity-[0.05] text-white pointer-events-none" style={{ position: "absolute", right: "-5%", bottom: "-10%", width: "50%", height: "120%" }}>
           <CircuitBg />
         </div>
@@ -117,9 +117,7 @@ export default function Projects() {
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-6">
           {loading ? (
-            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {Array.from({ length: 6 }).map((_, i) => <SkeletonProjectCard key={i} />)}
-            </div>
+            <div className="py-20"><LogoSpinner size="lg" label="Loading projects..." className="mx-auto" /></div>
           ) : (
           <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence>
@@ -136,7 +134,7 @@ export default function Projects() {
                 >
                   <div className="relative overflow-hidden aspect-video">
                     <img src={project.image} alt={project.title} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                    <div className="absolute inset-0 bg-gradient-to-t from-foreground/70 via-transparent to-transparent" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent" />
                     <div className="absolute top-3 left-3 flex flex-wrap gap-1.5">
                       {project.tags.slice(0, 2).map((tag) => (
                         <span key={tag} className="text-xs px-2 py-0.5 bg-primary text-white rounded-full font-medium">{tag}</span>
@@ -195,7 +193,7 @@ export default function Projects() {
               {/* Hero image */}
               <div className="relative aspect-video overflow-hidden rounded-t-2xl">
                 <img src={selected.image} alt={selected.title} className="w-full h-full object-cover" />
-                <div className="absolute inset-0 bg-gradient-to-t from-foreground/80 via-foreground/20 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
                 <div className="absolute bottom-4 left-5 right-12">
                   <div className="flex flex-wrap gap-1.5 mb-2">
                     {selected.tags.map((tag) => (
