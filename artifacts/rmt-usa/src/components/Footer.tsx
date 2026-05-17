@@ -1,96 +1,134 @@
 import React from "react";
 import { Link } from "wouter";
-import { MapPin, Phone, Mail, Facebook, Twitter, Linkedin, Instagram } from "lucide-react";
+import { MapPin, Phone, Mail, Linkedin, Twitter, Facebook } from "lucide-react";
+
+const services = [
+  { name: "Product Design & Prototyping", slug: "product-design" },
+  { name: "Regulatory Compliance", slug: "regulatory-compliance" },
+  { name: "Software & AI Solutions", slug: "software-ai" },
+  { name: "Quality Testing", slug: "quality-testing" },
+  { name: "Electronics & Firmware Development", slug: "electronics-firmware" },
+  { name: "Contract Manufacturing", slug: "contract-manufacturing" },
+];
 
 export const Footer = () => {
   return (
-    <footer className="bg-background border-t border-border pt-20 pb-10">
+    <footer className="bg-foreground text-background pt-16 pb-8">
       <div className="container mx-auto px-4 md:px-6">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-16">
-          
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-12">
+
           <div>
-            <Link href="/" className="inline-flex items-center gap-2 mb-6">
-              <div className="w-10 h-10 bg-primary flex items-center justify-center font-heading font-bold text-primary-foreground text-xl">
+            <Link href="/" className="inline-flex items-center gap-2.5 mb-5">
+              <div className="w-10 h-10 bg-primary flex items-center justify-center font-heading font-bold text-white text-sm rounded-sm">
                 RMT
               </div>
-              <span className="font-heading font-bold text-2xl tracking-wide text-foreground">
+              <span className="font-heading font-bold text-xl tracking-wide text-white">
                 RMT <span className="text-primary">USA</span>
               </span>
             </Link>
-            <p className="text-muted-foreground text-sm mb-6 max-w-sm">
-              Premium industrial services delivering mechanical, electrical, piping, fabrication, and maintenance excellence across major US and international sites.
+            <p className="text-background/60 text-sm mb-6 leading-relaxed">
+              End-to-end medical device and technology solutions — from design through regulatory approval and contract manufacturing.
             </p>
-            <div className="flex gap-4">
-              <a href="#" className="w-10 h-10 bg-secondary flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Facebook className="w-5 h-5" />
+            <div className="flex gap-3">
+              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"
+                className="w-9 h-9 rounded-full border border-background/20 flex items-center justify-center text-background/60 hover:text-primary hover:border-primary transition-colors">
+                <Linkedin className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 bg-secondary flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Twitter className="w-5 h-5" />
+              <a href="https://twitter.com" target="_blank" rel="noopener noreferrer" aria-label="Twitter"
+                className="w-9 h-9 rounded-full border border-background/20 flex items-center justify-center text-background/60 hover:text-primary hover:border-primary transition-colors">
+                <Twitter className="w-4 h-4" />
               </a>
-              <a href="#" className="w-10 h-10 bg-secondary flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Linkedin className="w-5 h-5" />
-              </a>
-              <a href="#" className="w-10 h-10 bg-secondary flex items-center justify-center text-foreground hover:bg-primary hover:text-primary-foreground transition-colors">
-                <Instagram className="w-5 h-5" />
+              <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+                className="w-9 h-9 rounded-full border border-background/20 flex items-center justify-center text-background/60 hover:text-primary hover:border-primary transition-colors">
+                <Facebook className="w-4 h-4" />
               </a>
             </div>
           </div>
 
           <div>
-            <h4 className="font-heading text-xl font-semibold mb-6">Quick Links</h4>
+            <h4 className="text-white font-semibold mb-5 text-sm uppercase tracking-widest">Quick Links</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/" className="text-muted-foreground hover:text-primary transition-colors">Home</Link></li>
-              <li><Link href="/about" className="text-muted-foreground hover:text-primary transition-colors">About Us</Link></li>
-              <li><Link href="/services" className="text-muted-foreground hover:text-primary transition-colors">Services</Link></li>
-              <li><Link href="/projects" className="text-muted-foreground hover:text-primary transition-colors">Projects</Link></li>
-              <li><Link href="/careers" className="text-muted-foreground hover:text-primary transition-colors">Careers</Link></li>
-              <li><Link href="/contact" className="text-muted-foreground hover:text-primary transition-colors">Contact</Link></li>
+              {[
+                { label: "Home", href: "/" },
+                { label: "About Us", href: "/about" },
+                { label: "Services", href: "/services" },
+                { label: "Projects", href: "/projects" },
+                { label: "Careers", href: "/careers" },
+                { label: "Contact", href: "/contact" },
+              ].map((link) => (
+                <li key={link.href}>
+                  <Link href={link.href} className="text-background/60 text-sm hover:text-primary transition-colors">
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
           <div>
-            <h4 className="font-heading text-xl font-semibold mb-6">Services</h4>
+            <h4 className="text-white font-semibold mb-5 text-sm uppercase tracking-widest">Services</h4>
             <ul className="flex flex-col gap-3">
-              <li><Link href="/services/mechanical" className="text-muted-foreground hover:text-primary transition-colors">Mechanical Services</Link></li>
-              <li><Link href="/services/electrical" className="text-muted-foreground hover:text-primary transition-colors">Electrical Services</Link></li>
-              <li><Link href="/services/piping" className="text-muted-foreground hover:text-primary transition-colors">Piping Services</Link></li>
-              <li><Link href="/services/welding-fabrication" className="text-muted-foreground hover:text-primary transition-colors">Welding & Fabrication</Link></li>
-              <li><Link href="/services/maintenance-turnaround" className="text-muted-foreground hover:text-primary transition-colors">Maintenance & Turnaround</Link></li>
-              <li><Link href="/services" className="text-primary hover:underline transition-colors mt-2 text-sm font-semibold">View All Services &rarr;</Link></li>
+              {services.map((svc) => (
+                <li key={svc.slug}>
+                  <Link href={`/services/${svc.slug}`} className="text-background/60 text-sm hover:text-primary transition-colors">
+                    {svc.name}
+                  </Link>
+                </li>
+              ))}
+              <li>
+                <Link href="/services" className="text-primary text-sm font-semibold hover:underline mt-1 inline-block">
+                  View All Services &rarr;
+                </Link>
+              </li>
             </ul>
           </div>
 
           <div>
-            <h4 className="font-heading text-xl font-semibold mb-6">Contact Us</h4>
+            <h4 className="text-white font-semibold mb-5 text-sm uppercase tracking-widest">Contact</h4>
             <ul className="flex flex-col gap-4">
               <li className="flex items-start gap-3">
-                <MapPin className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                <span className="text-muted-foreground text-sm">
-                  <strong>Headquarters</strong><br />
-                  12500 Industrial Blvd<br />
-                  Houston, TX 77015
+                <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                <span className="text-background/60 text-sm leading-relaxed">
+                  RMT USA Headquarters<br />
+                  United States of America
                 </span>
               </li>
               <li className="flex items-center gap-3">
-                <Phone className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-muted-foreground text-sm">+1 (800) 555-0199</span>
+                <Phone className="w-4 h-4 text-primary shrink-0" />
+                <a href="tel:+18005550199" className="text-background/60 text-sm hover:text-primary transition-colors">
+                  +1 (800) 555-0199
+                </a>
               </li>
               <li className="flex items-center gap-3">
-                <Mail className="w-5 h-5 text-primary shrink-0" />
-                <span className="text-muted-foreground text-sm">info@rmt-usa.com</span>
+                <Mail className="w-4 h-4 text-primary shrink-0" />
+                <a href="mailto:info@rmt-usa.com" className="text-background/60 text-sm hover:text-primary transition-colors">
+                  info@rmt-usa.com
+                </a>
               </li>
             </ul>
+
+            <div className="mt-6 pt-6 border-t border-background/10">
+              <p className="text-xs text-background/40 uppercase tracking-widest mb-2">Certifications</p>
+              <div className="flex flex-wrap gap-2">
+                {["ISO 13485", "FDA Registered", "CE Mark"].map((cert) => (
+                  <span key={cert} className="text-xs px-2 py-1 border border-primary/40 text-primary rounded">
+                    {cert}
+                  </span>
+                ))}
+              </div>
+            </div>
           </div>
 
         </div>
 
-        <div className="border-t border-border pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
-          <p className="text-muted-foreground text-sm">
+        <div className="border-t border-background/10 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+          <p className="text-background/40 text-sm">
             &copy; {new Date().getFullYear()} RMT USA. All rights reserved.
           </p>
-          <div className="flex gap-4">
-            <Link href="#" className="text-muted-foreground text-sm hover:text-primary transition-colors">Privacy Policy</Link>
-            <Link href="#" className="text-muted-foreground text-sm hover:text-primary transition-colors">Terms of Service</Link>
+          <div className="flex gap-6">
+            <a href="#" className="text-background/40 text-sm hover:text-primary transition-colors">Privacy Policy</a>
+            <a href="#" className="text-background/40 text-sm hover:text-primary transition-colors">Terms of Service</a>
+            <a href="#" className="text-background/40 text-sm hover:text-primary transition-colors">Cookie Policy</a>
           </div>
         </div>
       </div>
