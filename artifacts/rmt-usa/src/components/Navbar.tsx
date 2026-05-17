@@ -50,7 +50,7 @@ export const Navbar = () => {
 
           {/* LOGO */}
           <Link href="/" className="flex items-center shrink-0">
-            <img src={`${BASE}rmt-logo.webp`} alt="RMT Medical Technologies Inc." className="h-11 w-auto object-contain" />
+            <img src={`${BASE}rmt-logo.webp`} alt="RMT Medical Technologies Inc." className="h-14 w-auto object-contain" />
           </Link>
 
           {/* DESKTOP NAV */}
@@ -166,15 +166,11 @@ export const Navbar = () => {
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <Button
-              variant="outline"
               className="h-8 px-4 text-xs font-semibold rounded-lg gap-1.5"
               onClick={() => setQuoteOpen(true)}
             >
               <FileText className="w-3.5 h-3.5" />
               Request a Quote
-            </Button>
-            <Button asChild className="h-8 px-4 text-xs font-semibold rounded-lg">
-              <Link href="/contact">Contact Us</Link>
             </Button>
           </div>
 

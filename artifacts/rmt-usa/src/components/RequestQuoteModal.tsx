@@ -6,6 +6,7 @@ import {
   DollarSign, Calendar, User, Mail, Phone, Building2, FileText
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { LogoSpinner } from "@/components/LogoSpinner";
 
 interface QuoteFormData {
   services: string[];
@@ -75,6 +76,7 @@ interface RequestQuoteModalProps {
 export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
+  const [transitioning, setTransitioning] = useState(false);
   const [form, setForm] = useState<QuoteFormData>({
     services: [],
     projectType: "",
@@ -105,9 +107,29 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
     return true;
   };
 
+  const goNext = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setStep((s) => s + 1);
+      setTransitioning(false);
+    }, 500);
+  };
+
+  const goBack = () => {
+    setTransitioning(true);
+    setTimeout(() => {
+      setStep((s) => s - 1);
+      setTransitioning(false);
+    }, 400);
+  };
+
   const handleSubmit = () => {
-    console.log("Quote request submitted:", form);
-    setSubmitted(true);
+    setTransitioning(true);
+    setTimeout(() => {
+      console.log("Quote request submitted:", form);
+      setTransitioning(false);
+      setSubmitted(true);
+    }, 800);
   };
 
   const handleClose = () => {
@@ -115,6 +137,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
     setTimeout(() => {
       setStep(0);
       setSubmitted(false);
+      setTransitioning(false);
       setForm({ services: [], projectType: "", projectScope: "", budget: "", timeline: "", name: "", email: "", phone: "", company: "", message: "" });
     }, 350);
   };
@@ -140,9 +163,12 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
           >
             {/* Header */}
             <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-border shrink-0">
-              <div>
-                <h2 className="font-heading text-2xl font-bold text-foreground">Request a Quote</h2>
-                <p className="text-muted-foreground text-sm mt-0.5">Get a tailored proposal for your project</p>
+              <div className="flex items-center gap-3">
+                <img src="/rmt-icon.jpg" alt="RMT" className="w-8 h-8 rounded-full object-cover" />
+                <div>
+                  <h2 className="font-heading text-2xl font-bold text-foreground">Request a Quote</h2>
+                  <p className="text-muted-foreground text-sm mt-0.5">Get a tailored proposal for your project</p>
+                </div>
               </div>
               <button
                 onClick={handleClose}
@@ -191,24 +217,34 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                   animate={{ opacity: 1, scale: 1 }}
                   className="py-10 text-center space-y-4"
                 >
-                  <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
-                    <CheckCircle className="w-8 h-8 text-primary" />
-                  </div>
-                  <h3 className="font-heading text-2xl font-bold text-foreground">Quote Request Received</h3>
-                  <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
-                    Thank you, <strong className="text-foreground">{form.name}</strong>. Our team will review your requirements and send a tailored proposal within <strong className="text-foreground">2 business days</strong>.
-                  </p>
-                  <div className="bg-secondary/50 border border-border rounded-xl p-4 text-left max-w-sm mx-auto space-y-2">
-                    <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Your Selections</p>
-                    <p className="text-sm text-foreground"><span className="text-muted-foreground">Services:</span> {form.services.length} selected</p>
-                    <p className="text-sm text-foreground"><span className="text-muted-foreground">Project Type:</span> {form.projectType}</p>
-                    <p className="text-sm text-foreground"><span className="text-muted-foreground">Budget:</span> {form.budget}</p>
-                    <p className="text-sm text-foreground"><span className="text-muted-foreground">Timeline:</span> {form.timeline}</p>
-                  </div>
-                  <Button onClick={handleClose} className="mt-2 rounded-xl">
-                    Close
-                  </Button>
+                  <LogoSpinner size="lg" className="mx-auto" />
+                  <motion.div
+                    initial={{ opacity: 0, y: 10 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.3 }}
+                    className="space-y-4"
+                  >
+                    <div className="w-14 h-14 bg-primary/10 rounded-full flex items-center justify-center mx-auto">
+                      <CheckCircle className="w-7 h-7 text-primary" />
+                    </div>
+                    <h3 className="font-heading text-2xl font-bold text-foreground">Quote Request Received</h3>
+                    <p className="text-muted-foreground max-w-sm mx-auto leading-relaxed">
+                      Thank you, <strong className="text-foreground">{form.name}</strong>. Our team will review your requirements and send a tailored proposal within <strong className="text-foreground">2 business days</strong>.
+                    </p>
+                    <div className="bg-secondary/50 border border-border rounded-xl p-4 text-left max-w-sm mx-auto space-y-2">
+                      <p className="text-xs font-semibold text-muted-foreground uppercase tracking-wide">Your Selections</p>
+                      <p className="text-sm text-foreground"><span className="text-muted-foreground">Services:</span> {form.services.length} selected</p>
+                      <p className="text-sm text-foreground"><span className="text-muted-foreground">Project Type:</span> {form.projectType}</p>
+                      <p className="text-sm text-foreground"><span className="text-muted-foreground">Budget:</span> {form.budget}</p>
+                      <p className="text-sm text-foreground"><span className="text-muted-foreground">Timeline:</span> {form.timeline}</p>
+                    </div>
+                    <Button onClick={handleClose} className="mt-2 rounded-xl">Close</Button>
+                  </motion.div>
                 </motion.div>
+              ) : transitioning ? (
+                <div className="py-16 flex items-center justify-center">
+                  <LogoSpinner size="md" label="Loading next step..." />
+                </div>
               ) : (
                 <AnimatePresence mode="wait">
                   {/* STEP 0 — Services */}
@@ -381,9 +417,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                         </div>
                       </div>
                       <div>
-                        <label className="block text-sm font-medium text-foreground mb-1.5">
-                          Additional Notes
-                        </label>
+                        <label className="block text-sm font-medium text-foreground mb-1.5">Additional Notes</label>
                         <textarea
                           value={form.message}
                           onChange={(e) => setForm((f) => ({ ...f, message: e.target.value }))}
@@ -402,37 +436,25 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
             </div>
 
             {/* Footer actions */}
-            {!submitted && (
+            {!submitted && !transitioning && (
               <div className="flex items-center justify-between gap-3 px-6 py-4 border-t border-border bg-background shrink-0">
                 <div className="text-xs text-muted-foreground">
                   Step {step + 1} of {STEPS.length}
                 </div>
                 <div className="flex gap-2.5">
                   {step > 0 && (
-                    <Button
-                      variant="outline"
-                      onClick={() => setStep((s) => s - 1)}
-                      className="rounded-xl"
-                    >
+                    <Button variant="outline" onClick={goBack} className="rounded-xl">
                       <ArrowLeft className="w-4 h-4 mr-1.5" />
                       Back
                     </Button>
                   )}
                   {step < STEPS.length - 1 ? (
-                    <Button
-                      onClick={() => setStep((s) => s + 1)}
-                      disabled={!canProceed()}
-                      className="rounded-xl"
-                    >
+                    <Button onClick={goNext} disabled={!canProceed()} className="rounded-xl">
                       Next
                       <ArrowRight className="w-4 h-4 ml-1.5" />
                     </Button>
                   ) : (
-                    <Button
-                      onClick={handleSubmit}
-                      disabled={!canProceed()}
-                      className="rounded-xl"
-                    >
+                    <Button onClick={handleSubmit} disabled={!canProceed()} className="rounded-xl">
                       Submit Request
                       <ArrowRight className="w-4 h-4 ml-1.5" />
                     </Button>

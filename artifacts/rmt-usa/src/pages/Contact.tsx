@@ -6,6 +6,7 @@ import { MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle } from "lucide-reac
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
+import { LogoSpinner } from "@/components/LogoSpinner";
 
 interface FormData {
   name: string;
@@ -49,6 +50,7 @@ const offices = [
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
   useSEO({
@@ -59,9 +61,13 @@ export default function Contact() {
 
   const onSubmit = (data: FormData) => {
     console.log("Contact form:", data);
-    setSubmitted(true);
-    reset();
-    setTimeout(() => setSubmitted(false), 6000);
+    setSubmitting(true);
+    setTimeout(() => {
+      setSubmitting(false);
+      setSubmitted(true);
+      reset();
+      setTimeout(() => setSubmitted(false), 8000);
+    }, 1200);
   };
 
   return (
@@ -136,7 +142,11 @@ export default function Contact() {
               <AnimatedSection>
                 <h2 className="font-heading text-3xl font-bold text-foreground mb-6">Send Us a Message</h2>
 
-                {submitted ? (
+                {submitting ? (
+                  <div className="bg-card border border-border rounded-2xl p-16 flex flex-col items-center justify-center gap-4">
+                    <LogoSpinner size="lg" label="Sending your message..." />
+                  </div>
+                ) : submitted ? (
                   <motion.div initial={{ opacity: 0, scale: 0.95 }} animate={{ opacity: 1, scale: 1 }} className="bg-card border border-border rounded-2xl p-12 text-center">
                     <div className="w-16 h-16 bg-primary/10 rounded-full flex items-center justify-center mx-auto mb-5">
                       <CheckCircle className="w-8 h-8 text-primary" />
@@ -248,7 +258,7 @@ export default function Contact() {
               <AnimatedSection delay={0.2} className="bg-card border border-border rounded-2xl p-6">
                 <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">Our Certifications</h4>
                 <div className="flex flex-wrap gap-2">
-                  {["ISO 13485:2016", "FDA Registered", "CE Mark", "ISO 14971", "IEC 62304"].map((cert) => (
+                  {["ISO 13485:2025", "FDA Registered", "CE Mark", "ISO 14971", "IEC 62304"].map((cert) => (
                     <span key={cert} className="text-xs px-3 py-1.5 border border-primary/30 bg-primary/5 text-primary rounded-lg font-medium">
                       {cert}
                     </span>

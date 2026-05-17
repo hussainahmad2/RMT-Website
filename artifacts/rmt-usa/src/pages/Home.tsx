@@ -38,7 +38,7 @@ const stats = [
 ];
 
 const whyChoose = [
-  { title: "ISO 13485:2016 Certified", description: "Our quality management system meets the highest international standards for medical device manufacturing." },
+  { title: "ISO 13485:2025 Certified", description: "Our quality management system meets the highest international standards for medical device manufacturing." },
   { title: "FDA & CE Expertise", description: "Deep regulatory knowledge ensuring your product navigates approval pathways efficiently and successfully." },
   { title: "End-to-End Partnership", description: "From initial concept through design, testing, approval, and manufacturing — we are with you every step." },
   { title: "Global Reach", description: "Operating across the USA, Europe, Middle East, and South Asia with local regulatory expertise." },
@@ -140,7 +140,7 @@ export default function Home() {
               className="inline-flex items-center gap-2 bg-primary/10 border border-primary/25 rounded-full px-4 py-1.5 mb-6"
             >
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
-              <span className="text-primary text-xs font-bold uppercase tracking-widest">ISO 13485 Certified Company</span>
+              <span className="text-primary text-xs font-bold uppercase tracking-widest">ISO 13485:2025 Certified Company</span>
             </motion.div>
 
             <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-white mb-6">
@@ -174,7 +174,7 @@ export default function Home() {
             </div>
 
             <div className="mt-10 pt-8 border-t border-white/10 flex flex-wrap gap-6">
-              {["CE Mark Compliant", "ISO 13485:2016", "50+ Experts"].map((badge) => (
+              {["CE Mark Compliant", "ISO 13485:2025", "50+ Experts"].map((badge) => (
                 <div key={badge} className="flex items-center gap-2 text-sm text-white/65">
                   <CheckCircle className="w-4 h-4 text-primary" />
                   {badge}

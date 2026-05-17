@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import {
   Cpu, Shield, Brain, FlaskConical, CircuitBoard,
-  Settings2, Pill, Factory, CheckCircle, ArrowRight, ArrowLeft, ChevronRight
+  Settings2, Pill, Factory, CheckCircle, ArrowRight, ArrowLeft, ChevronRight,
+  Search, ClipboardList, Wrench, TestTube2, Rocket
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -99,9 +100,82 @@ export function ServicesOverview() {
         </div>
       </section>
 
+      {/* PROCESS TIMELINE */}
+      <section className="py-16 bg-secondary/20 border-y border-border overflow-hidden">
+        <div className="container mx-auto px-4 md:px-6">
+          <AnimatedSection className="text-center mb-12">
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">How We Work</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">Our Proven Process</h2>
+            <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">From first consultation to regulatory approval and beyond — a structured, milestone-driven approach that de-risks your project at every stage.</p>
+          </AnimatedSection>
+
+          {/* Horizontal connected timeline */}
+          <div className="relative">
+            {/* Connecting line */}
+            <div className="hidden lg:block absolute top-10 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-primary/40 to-transparent" style={{ top: "2.5rem" }} />
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-6 lg:gap-4 relative">
+              {[
+                { step: "01", title: "Discovery", Icon: Search, desc: "Deep-dive into your project goals, regulatory pathway, market requirements, and technical constraints.", color: "from-blue-500/10 to-primary/10" },
+                { step: "02", title: "Strategy", Icon: ClipboardList, desc: "We define a detailed project plan — scope, timeline, regulatory strategy, and risk mitigation roadmap.", color: "from-primary/10 to-indigo-500/10" },
+                { step: "03", title: "Design & Build", Icon: Wrench, desc: "Engineering, software, and regulatory teams work in parallel to deliver your device design and documentation.", color: "from-indigo-500/10 to-violet-500/10" },
+                { step: "04", title: "Validate", Icon: TestTube2, desc: "Rigorous V&V testing, risk management closure, and quality system review ahead of regulatory submission.", color: "from-violet-500/10 to-primary/10" },
+                { step: "05", title: "Approve & Scale", Icon: Rocket, desc: "Regulatory submission, approval management, and manufacturing scale-up for successful market launch.", color: "from-primary/10 to-blue-500/10" },
+              ].map((phase, i) => (
+                <motion.div
+                  key={phase.step}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                  className="relative flex flex-col items-center text-center group"
+                >
+                  {/* Number circle */}
+                  <div className="relative mb-4">
+                    <div className={`w-20 h-20 rounded-full bg-gradient-to-br ${phase.color} border-2 border-primary/25 flex flex-col items-center justify-center shadow-lg group-hover:border-primary group-hover:shadow-primary/20 transition-all duration-300`}>
+                      <phase.Icon className="w-7 h-7 text-primary mb-0.5" />
+                      <span className="text-[10px] font-bold text-primary/70">{phase.step}</span>
+                    </div>
+                    {/* Connector dot for desktop line */}
+                    <div className="hidden lg:block absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-3 h-3 rounded-full bg-primary border-2 border-background" />
+                  </div>
+                  <h3 className="font-heading text-base font-bold text-foreground mb-2 group-hover:text-primary transition-colors">{phase.title}</h3>
+                  <p className="text-muted-foreground text-xs leading-relaxed max-w-[180px]">{phase.desc}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+
+          {/* Regulatory pathways strip */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.4 }}
+            className="mt-14 grid grid-cols-2 sm:grid-cols-4 gap-4"
+          >
+            {[
+              { label: "FDA 510(k)", sub: "USA Clearance", color: "border-blue-500/30 bg-blue-500/5 text-blue-400" },
+              { label: "EU MDR CE", sub: "European Approval", color: "border-indigo-500/30 bg-indigo-500/5 text-indigo-400" },
+              { label: "ISO 13485:2025", sub: "QMS Certification", color: "border-primary/30 bg-primary/5 text-primary" },
+              { label: "PMA / De Novo", sub: "Class III Devices", color: "border-violet-500/30 bg-violet-500/5 text-violet-400" },
+            ].map((p) => (
+              <div key={p.label} className={`flex flex-col items-center text-center px-4 py-4 rounded-xl border ${p.color} transition-all hover:scale-[1.02]`}>
+                <p className="font-bold text-sm">{p.label}</p>
+                <p className="text-xs text-muted-foreground mt-0.5">{p.sub}</p>
+              </div>
+            ))}
+          </motion.div>
+        </div>
+      </section>
+
       {/* SERVICES GRID */}
       <section className="py-20">
         <div className="container mx-auto px-4 md:px-6">
+          <AnimatedSection className="text-center mb-12">
+            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">What We Offer</p>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">All Services</h2>
+          </AnimatedSection>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {ALL_SERVICES.map((svc, i) => (
               <motion.div

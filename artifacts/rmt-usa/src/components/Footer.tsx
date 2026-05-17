@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "wouter";
-import { MapPin, Phone, Mail, Linkedin, Twitter, Facebook } from "lucide-react";
+import { MapPin, Phone, Mail, Linkedin, Youtube, Facebook } from "lucide-react";
 import { ALL_SERVICES } from "@/data/services";
 
 const BASE = import.meta.env.BASE_URL;
@@ -27,8 +27,8 @@ export const Footer = () => {
             </p>
             <div className="flex gap-2.5">
               {[
-                { href: "https://linkedin.com", Icon: Linkedin, label: "LinkedIn" },
-                { href: "https://twitter.com", Icon: Twitter, label: "Twitter" },
+                { href: "https://www.linkedin.com/company/revivemedicaltechnologies", Icon: Linkedin, label: "LinkedIn" },
+                { href: "https://www.youtube.com/@ReviveMeditech", Icon: Youtube, label: "YouTube" },
                 { href: "https://facebook.com", Icon: Facebook, label: "Facebook" },
               ].map(({ href, Icon, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
@@ -94,7 +94,7 @@ export const Footer = () => {
             <div className="mt-5 pt-4 border-t border-white/10">
               <p className="text-xs text-white/30 uppercase tracking-widest mb-2">Certifications</p>
               <div className="flex flex-wrap gap-1.5">
-                {["ISO 13485", "CE Mark", "ISO 14971", "IEC 62304"].map((cert) => (
+                {["ISO 13485:2025", "CE Mark", "ISO 14971", "IEC 62304"].map((cert) => (
                   <span key={cert} className="text-xs px-2 py-1 border border-primary/35 text-primary rounded font-medium">{cert}</span>
                 ))}
               </div>
