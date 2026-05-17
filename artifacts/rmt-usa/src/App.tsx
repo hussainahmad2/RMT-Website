@@ -10,7 +10,7 @@ import { Footer } from "@/components/Footer";
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
-import { ServicesOverview, ServiceDetail } from "@/pages/Services";
+import { ServicesOverview, ServiceDetail, SubServiceDetail } from "@/pages/Services";
 import Projects from "@/pages/Projects";
 import Careers from "@/pages/Careers";
 import Contact from "@/pages/Contact";
@@ -24,6 +24,7 @@ function Router() {
       <Route path="/" component={Home} />
       <Route path="/about" component={About} />
       <Route path="/services" component={ServicesOverview} />
+      <Route path="/services/:slug/:subSlug" component={SubServiceDetail} />
       <Route path="/services/:slug" component={ServiceDetail} />
       <Route path="/projects" component={Projects} />
       <Route path="/careers" component={Careers} />

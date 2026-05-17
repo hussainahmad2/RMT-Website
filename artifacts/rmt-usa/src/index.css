@@ -28,6 +28,9 @@
   --color-accent: hsl(var(--accent));
   --color-accent-foreground: hsl(var(--accent-foreground));
 
+  --color-brand-red: hsl(var(--brand-red));
+  --color-brand-green: hsl(var(--brand-green));
+
   --color-destructive: hsl(var(--destructive));
   --color-destructive-foreground: hsl(var(--destructive-foreground));
 
@@ -44,28 +47,36 @@
 
 :root {
   --background: 0 0% 100%;
-  --foreground: 220 25% 12%;
-  --border: 220 15% 88%;
-  --card: 0 0% 98%;
-  --card-foreground: 220 25% 12%;
-  --card-border: 220 15% 90%;
-  --primary: 24 100% 50%;
+  --foreground: 218 30% 12%;
+  --border: 214 20% 88%;
+  --card: 0 0% 98.5%;
+  --card-foreground: 218 30% 12%;
+  --card-border: 214 20% 90%;
+
+  /* Brand Blue from RMT logo */
+  --primary: 212 65% 36%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 220 20% 96%;
-  --secondary-foreground: 220 25% 20%;
-  --muted: 220 15% 95%;
-  --muted-foreground: 220 15% 50%;
-  --accent: 24 100% 50%;
+
+  /* Brand Red from "MEDICAL TECHNOLOGIES Inc." in logo */
+  --brand-red: 358 68% 45%;
+  /* Brand Green from bottom arc of logo */
+  --brand-green: 152 42% 36%;
+
+  --secondary: 212 20% 96%;
+  --secondary-foreground: 212 30% 20%;
+  --muted: 212 18% 95%;
+  --muted-foreground: 212 15% 50%;
+  --accent: 212 65% 36%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 84% 60%;
   --destructive-foreground: 0 0% 100%;
-  --input: 220 15% 92%;
-  --ring: 24 100% 50%;
-  
+  --input: 214 20% 92%;
+  --ring: 212 65% 36%;
+
   --popover: 0 0% 100%;
-  --popover-foreground: 220 25% 12%;
-  --popover-border: 220 15% 88%;
-  
+  --popover-foreground: 218 30% 12%;
+  --popover-border: 214 20% 88%;
+
   --radius: 0.5rem;
   --app-font-sans: 'Plus Jakarta Sans', sans-serif;
   --app-font-serif: Georgia, serif;
@@ -73,28 +84,33 @@
 }
 
 .dark {
-  --background: 220 30% 8%;
-  --foreground: 220 15% 93%;
-  --border: 220 20% 20%;
-  --card: 220 25% 12%;
-  --card-foreground: 220 15% 93%;
-  --card-border: 220 20% 20%;
-  --primary: 24 100% 55%;
+  --background: 218 35% 8%;
+  --foreground: 214 20% 93%;
+  --border: 218 25% 20%;
+  --card: 218 30% 12%;
+  --card-foreground: 214 20% 93%;
+  --card-border: 218 25% 20%;
+
+  --primary: 212 65% 52%;
   --primary-foreground: 0 0% 100%;
-  --secondary: 220 20% 18%;
-  --secondary-foreground: 220 15% 80%;
-  --muted: 220 20% 16%;
-  --muted-foreground: 220 15% 60%;
-  --accent: 24 100% 55%;
+
+  --brand-red: 358 68% 58%;
+  --brand-green: 152 42% 48%;
+
+  --secondary: 218 25% 18%;
+  --secondary-foreground: 214 18% 80%;
+  --muted: 218 22% 16%;
+  --muted-foreground: 214 15% 60%;
+  --accent: 212 65% 52%;
   --accent-foreground: 0 0% 100%;
   --destructive: 0 72% 55%;
   --destructive-foreground: 0 0% 100%;
-  --input: 220 20% 20%;
-  --ring: 24 100% 55%;
-  
-  --popover: 220 30% 8%;
-  --popover-foreground: 220 15% 93%;
-  --popover-border: 220 20% 20%;
+  --input: 218 25% 20%;
+  --ring: 212 65% 52%;
+
+  --popover: 218 35% 8%;
+  --popover-foreground: 214 20% 93%;
+  --popover-border: 218 25% 20%;
 
   --elevate-1: rgba(255,255,255,0.04);
   --elevate-2: rgba(255,255,255,0.09);

@@ -4,17 +4,9 @@ import { Menu, X, ChevronDown, Sun, Moon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import { useTheme } from "@/components/ThemeProvider";
+import { ALL_SERVICES } from "@/data/services";
 
-const services = [
-  { name: "Product Design & Prototyping", slug: "product-design" },
-  { name: "Regulatory Compliance", slug: "regulatory-compliance" },
-  { name: "Software & AI Solutions", slug: "software-ai" },
-  { name: "Quality Testing", slug: "quality-testing" },
-  { name: "Electronics & Firmware Development", slug: "electronics-firmware" },
-  { name: "Turnkey Commissioning & Regulatory Approvals", slug: "turnkey-commissioning" },
-  { name: "Pharmaceutical Product Development", slug: "pharmaceutical" },
-  { name: "Contract Manufacturing", slug: "contract-manufacturing" },
-];
+const BASE = import.meta.env.BASE_URL;
 
 export const Navbar = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -39,40 +31,39 @@ export const Navbar = () => {
 
   return (
     <header
-      data-testid="navbar"
       className={`fixed top-0 w-full z-50 transition-all duration-300 ${
         isScrolled
-          ? "bg-background/95 backdrop-blur-md border-b border-border shadow-sm py-3"
-          : "bg-background/80 backdrop-blur-sm py-4"
+          ? "bg-background/96 backdrop-blur-md border-b border-border shadow-sm py-2"
+          : "bg-background/90 backdrop-blur-sm py-3"
       }`}
     >
       <div className="container mx-auto px-4 md:px-6 flex items-center justify-between">
-        <Link href="/" className="flex items-center gap-2.5" data-testid="link-home-logo">
-          <div className="w-10 h-10 bg-primary flex items-center justify-center font-heading font-bold text-white text-sm tracking-tight rounded-sm">
-            RMT
-          </div>
-          <span className="font-heading font-bold text-xl tracking-wide text-foreground">
-            RMT <span className="text-primary">USA</span>
-          </span>
+
+        {/* LOGO */}
+        <Link href="/" className="flex items-center gap-0" data-testid="link-home-logo">
+          <img
+            src={`${BASE}rmt-logo.webp`}
+            alt="RMT Medical Technologies Inc."
+            className="h-12 w-auto object-contain"
+          />
         </Link>
 
+        {/* DESKTOP NAV */}
         <nav className="hidden lg:flex items-center gap-7">
-          {["Home", "About Us"].map((label) => {
-            const href = label === "Home" ? "/" : "/about";
-            return (
-              <Link
-                key={label}
-                href={href}
-                data-testid={`link-nav-${label.toLowerCase().replace(" ", "-")}`}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location === href ? "text-primary" : "text-foreground/80"
-                }`}
-              >
-                {label}
-              </Link>
-            );
-          })}
+          <Link
+            href="/"
+            className={`text-sm font-medium transition-colors hover:text-primary ${location === "/" ? "text-primary" : "text-foreground/80"}`}
+          >
+            Home
+          </Link>
+          <Link
+            href="/about"
+            className={`text-sm font-medium transition-colors hover:text-primary ${location === "/about" ? "text-primary" : "text-foreground/80"}`}
+          >
+            About Us
+          </Link>
 
+          {/* SERVICES DROPDOWN */}
           <div
             className="relative"
             onMouseEnter={() => setServicesOpen(true)}
@@ -80,12 +71,10 @@ export const Navbar = () => {
           >
             <Link
               href="/services"
-              data-testid="link-nav-services"
-              className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary ${
-                location.startsWith("/services") ? "text-primary" : "text-foreground/80"
-              }`}
+              className={`flex items-center gap-1 text-sm font-medium transition-colors hover:text-primary ${location.startsWith("/services") ? "text-primary" : "text-foreground/80"}`}
             >
-              Services <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
+              Services
+              <ChevronDown className={`w-4 h-4 transition-transform duration-200 ${servicesOpen ? "rotate-180" : ""}`} />
             </Link>
 
             <AnimatePresence>
@@ -94,33 +83,28 @@ export const Navbar = () => {
                   initial={{ opacity: 0, y: 8 }}
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, y: 8 }}
-                  transition={{ duration: 0.18 }}
-                  className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[640px]"
+                  transition={{ duration: 0.16 }}
+                  className="absolute top-full left-1/2 -translate-x-1/2 pt-3 w-[680px]"
                 >
-                  <div className="bg-background border border-border shadow-xl rounded-lg p-5 grid grid-cols-2 gap-1">
-                    <div className="col-span-2 pb-3 mb-1 border-b border-border">
-                      <span className="text-xs font-semibold uppercase tracking-widest text-muted-foreground">Our Services</span>
+                  <div className="bg-background border border-border shadow-2xl rounded-xl p-5">
+                    <div className="flex items-center justify-between pb-3 mb-2 border-b border-border">
+                      <span className="text-xs font-bold uppercase tracking-widest text-muted-foreground">Our Services</span>
+                      <Link href="/services" className="text-xs text-primary font-semibold hover:underline" onClick={() => setServicesOpen(false)}>
+                        View All &rarr;
+                      </Link>
                     </div>
-                    {services.map((service) => (
-                      <Link
-                        key={service.slug}
-                        href={`/services/${service.slug}`}
-                        data-testid={`link-service-${service.slug}`}
-                        className="flex items-center gap-2.5 px-3 py-2 rounded-md text-sm text-foreground/80 hover:text-primary hover:bg-muted transition-colors"
-                        onClick={() => setServicesOpen(false)}
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
-                        {service.name}
-                      </Link>
-                    ))}
-                    <div className="col-span-2 pt-3 mt-1 border-t border-border">
-                      <Link
-                        href="/services"
-                        className="text-primary text-sm font-semibold hover:underline"
-                        onClick={() => setServicesOpen(false)}
-                      >
-                        View All Services &rarr;
-                      </Link>
+                    <div className="grid grid-cols-2 gap-0.5">
+                      {ALL_SERVICES.map((service) => (
+                        <Link
+                          key={service.slug}
+                          href={`/services/${service.slug}`}
+                          className="flex items-start gap-2.5 px-3 py-2.5 rounded-lg text-sm text-foreground/80 hover:text-primary hover:bg-muted transition-colors group"
+                          onClick={() => setServicesOpen(false)}
+                        >
+                          <div className="w-1.5 h-1.5 rounded-full bg-primary shrink-0 mt-1.5 group-hover:scale-125 transition-transform" />
+                          <span className="leading-tight">{service.name}</span>
+                        </Link>
+                      ))}
                     </div>
                   </div>
                 </motion.div>
@@ -134,10 +118,7 @@ export const Navbar = () => {
               <Link
                 key={label}
                 href={href}
-                data-testid={`link-nav-${label.toLowerCase()}`}
-                className={`text-sm font-medium transition-colors hover:text-primary ${
-                  location === href ? "text-primary" : "text-foreground/80"
-                }`}
+                className={`text-sm font-medium transition-colors hover:text-primary ${location === href ? "text-primary" : "text-foreground/80"}`}
               >
                 {label}
               </Link>
@@ -145,23 +126,23 @@ export const Navbar = () => {
           })}
         </nav>
 
+        {/* RIGHT SIDE ACTIONS */}
         <div className="hidden lg:flex items-center gap-3">
           <button
-            data-testid="button-theme-toggle"
             onClick={toggleTheme}
             className="w-9 h-9 flex items-center justify-center rounded-full border border-border hover:bg-muted transition-colors text-foreground/70 hover:text-foreground"
             aria-label="Toggle theme"
           >
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
-          <Button asChild variant="default" className="font-semibold h-9 px-5 text-sm rounded-md">
-            <Link href="/contact" data-testid="button-get-quote">Get a Quote</Link>
+          <Button asChild variant="default" className="font-semibold h-9 px-5 text-sm rounded-lg">
+            <Link href="/contact">Get a Quote</Link>
           </Button>
         </div>
 
+        {/* MOBILE ACTIONS */}
         <div className="lg:hidden flex items-center gap-2">
           <button
-            data-testid="button-theme-toggle-mobile"
             onClick={toggleTheme}
             className="w-9 h-9 flex items-center justify-center rounded-full border border-border text-foreground/70"
             aria-label="Toggle theme"
@@ -169,7 +150,6 @@ export const Navbar = () => {
             {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
           </button>
           <button
-            data-testid="button-mobile-menu"
             className="text-foreground p-2"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             aria-label="Toggle menu"
@@ -179,6 +159,7 @@ export const Navbar = () => {
         </div>
       </div>
 
+      {/* MOBILE MENU */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -187,28 +168,25 @@ export const Navbar = () => {
             exit={{ opacity: 0, height: 0 }}
             className="lg:hidden overflow-hidden bg-background border-b border-border absolute top-full left-0 w-full shadow-lg"
           >
-            <div className="flex flex-col p-4 gap-1">
+            <div className="flex flex-col p-4 gap-1 max-h-[80vh] overflow-y-auto">
               {navLinks.map((link) => (
                 <Link
                   key={link.name}
                   href={link.href}
-                  className={`text-base font-medium px-3 py-2.5 rounded-md transition-colors ${
-                    location === link.href ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"
-                  }`}
+                  className={`text-base font-medium px-3 py-2.5 rounded-md transition-colors ${location === link.href ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"}`}
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   {link.name}
                 </Link>
               ))}
               <div className="mt-2 border-t border-border pt-2">
-                <p className="text-xs font-semibold uppercase tracking-widest text-muted-foreground px-3 py-2">Services</p>
+                <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground px-3 py-2">Services</p>
                 <div className="pl-2 flex flex-col gap-0.5">
-                  <Link href="/services" className="text-primary text-sm px-3 py-1.5" onClick={() => setMobileMenuOpen(false)}>All Services</Link>
-                  {services.map((service) => (
+                  {ALL_SERVICES.map((service) => (
                     <Link
                       key={service.slug}
                       href={`/services/${service.slug}`}
-                      className="text-muted-foreground text-sm px-3 py-1.5 rounded-md hover:bg-muted"
+                      className="text-muted-foreground text-sm px-3 py-2 rounded-md hover:bg-muted hover:text-primary transition-colors"
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       {service.name}
@@ -216,7 +194,7 @@ export const Navbar = () => {
                   ))}
                 </div>
               </div>
-              <Button asChild className="mt-3 w-full rounded-md">
+              <Button asChild className="mt-3 w-full rounded-lg">
                 <Link href="/contact" onClick={() => setMobileMenuOpen(false)}>Get a Quote</Link>
               </Button>
             </div>
