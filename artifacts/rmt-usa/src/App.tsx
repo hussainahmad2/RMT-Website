@@ -14,6 +14,10 @@ import { ServicesOverview, ServiceDetail, SubServiceDetail } from "@/pages/Servi
 import Projects from "@/pages/Projects";
 import Careers from "@/pages/Careers";
 import Contact from "@/pages/Contact";
+import Testing from "@/pages/Testing";
+import Training from "@/pages/Training";
+import Insights from "@/pages/Insights";
+import Gallery from "@/pages/Gallery";
 import NotFound from "@/pages/not-found";
 
 const queryClient = new QueryClient();
@@ -27,6 +31,10 @@ function Router() {
       <Route path="/services/:slug/:subSlug" component={SubServiceDetail} />
       <Route path="/services/:slug" component={ServiceDetail} />
       <Route path="/projects" component={Projects} />
+      <Route path="/testing" component={Testing} />
+      <Route path="/training" component={Training} />
+      <Route path="/insights" component={Insights} />
+      <Route path="/gallery" component={Gallery} />
       <Route path="/careers" component={Careers} />
       <Route path="/contact" component={Contact} />
       <Route component={NotFound} />

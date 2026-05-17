@@ -51,7 +51,6 @@ const process = [
 
 const officeLocations = [
   { city: "United States", label: "HQ", description: "North America Operations" },
-  { city: "Germany", label: "EU", description: "European Operations" },
   { city: "Pakistan", label: "PAK", description: "South Asia Office" },
   { city: "UAE", label: "ME", description: "Middle East & Africa" },
 ];
@@ -115,16 +114,18 @@ export default function Home() {
     <div className="bg-background text-foreground">
 
       {/* ===== HERO ===== */}
-      <section className="relative min-h-screen flex items-center overflow-hidden pt-20">
+      <section className="relative min-h-screen flex items-center overflow-hidden pt-20 bg-foreground">
         {/* Decorative icon background */}
-        <div className="absolute top-10 right-10 w-80 h-80 pointer-events-none">
+        <div className="absolute top-10 right-10 w-80 h-80 pointer-events-none opacity-[0.05]">
           <DnaBg />
         </div>
-        <div className="absolute bottom-10 left-0 w-64 h-64 pointer-events-none">
+        <div className="absolute bottom-10 left-0 w-64 h-64 pointer-events-none opacity-[0.05]">
           <CircuitBg />
         </div>
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/10 -translate-y-1/3 translate-x-1/3 pointer-events-none" />
+        <div className="absolute bottom-0 left-0 w-80 h-80 rounded-full bg-primary/5 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
 
-        <div className="absolute inset-0 bg-gradient-to-br from-primary/3 via-transparent to-secondary/20 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-br from-primary/5 via-transparent to-transparent pointer-events-none" />
 
         <div className="container mx-auto px-4 md:px-6 grid lg:grid-cols-2 gap-12 items-center py-20">
           {/* LEFT TEXT */}
@@ -139,13 +140,13 @@ export default function Home() {
               <span className="text-primary text-xs font-bold uppercase tracking-widest">ISO 13485 Certified Company</span>
             </motion.div>
 
-            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-foreground mb-6">
+            <h1 className="font-heading text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight text-white mb-6">
               End-to-End<br />
               <span className="text-primary">Medical Device</span><br />
               Solutions
             </h1>
 
-            <p className="text-muted-foreground text-lg leading-relaxed max-w-lg mb-8">
+            <p className="text-white/65 text-lg leading-relaxed max-w-lg mb-8">
               From concept to commercialization — RMT Medical Technologies provides expert product design, regulatory compliance, software & AI, quality testing, and contract manufacturing for medical technology companies worldwide.
             </p>
 
@@ -156,11 +157,11 @@ export default function Home() {
                 </Link>
               </Button>
 
-              {/* Watch Overview — plain button, opens iframe */}
+              {/* Watch Overview */}
               <button
                 type="button"
                 onClick={() => setVideoOpen(true)}
-                className="inline-flex items-center gap-2.5 h-12 px-7 rounded-lg border border-border bg-background text-foreground font-semibold text-sm hover:bg-muted transition-colors"
+                className="inline-flex items-center gap-2.5 h-12 px-7 rounded-lg border border-white/20 bg-white/8 text-white font-semibold text-sm hover:bg-white/15 transition-colors"
               >
                 <div className="w-7 h-7 rounded-full bg-primary flex items-center justify-center shrink-0">
                   <Play className="w-3 h-3 fill-white text-white ml-0.5" />
@@ -169,9 +170,9 @@ export default function Home() {
               </button>
             </div>
 
-            <div className="mt-10 pt-8 border-t border-border flex flex-wrap gap-6">
-              {["FDA/CE Compliant", "ISO 13485:2016", "50+ Experts"].map((badge) => (
-                <div key={badge} className="flex items-center gap-2 text-sm text-muted-foreground">
+            <div className="mt-10 pt-8 border-t border-white/10 flex flex-wrap gap-6">
+              {["CE Mark Compliant", "ISO 13485:2016", "50+ Experts"].map((badge) => (
+                <div key={badge} className="flex items-center gap-2 text-sm text-white/65">
                   <CheckCircle className="w-4 h-4 text-primary" />
                   {badge}
                 </div>

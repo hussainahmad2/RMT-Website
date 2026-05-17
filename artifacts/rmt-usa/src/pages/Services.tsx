@@ -385,6 +385,17 @@ export function SubServiceDetail({ params }: { params: { slug: string; subSlug: 
 
             <div className="lg:col-span-2 space-y-10">
 
+              {/* Hero image for sub-service */}
+              <AnimatedSection>
+                <div className="rounded-2xl overflow-hidden shadow-lg aspect-video mb-8">
+                  <img
+                    src={service.heroImage}
+                    alt={subService.name}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+              </AnimatedSection>
+
               <AnimatedSection>
                 <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Overview</h2>
                 {subService.overview.map((para, i) => (

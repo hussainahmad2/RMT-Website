@@ -1,146 +1,147 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 interface Office {
   name: string;
   label: string;
-  x: string;
-  y: string;
+  cx: number;
+  cy: number;
   description: string;
 }
 
 const offices: Office[] = [
-  { name: "United States", label: "USA HQ", x: "22%", y: "38%", description: "Headquarters — North America" },
-  { name: "Germany", label: "Europe", x: "50%", y: "28%", description: "European Operations" },
-  { name: "Pakistan", label: "Pakistan", x: "63%", y: "43%", description: "South Asia Office" },
-  { name: "UAE", label: "Middle East", x: "58%", y: "46%", description: "Middle East & Africa" },
+  { name: "United States", label: "USA HQ", cx: 215, cy: 190, description: "North America" },
+  { name: "Pakistan", label: "Pakistan", cx: 638, cy: 215, description: "South Asia" },
+  { name: "UAE", label: "UAE", cx: 582, cy: 230, description: "Middle East" },
 ];
 
 export const WorldMap = () => {
   const [hovered, setHovered] = useState<string | null>(null);
 
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden bg-foreground/5 border border-border">
-      {/* Simplified SVG World Map */}
-      <svg
-        viewBox="0 0 1000 500"
-        className="w-full h-auto"
-        style={{ display: "block" }}
-      >
-        {/* Ocean background */}
-        <rect width="1000" height="500" fill="hsl(var(--secondary))" />
+    <div className="relative w-full rounded-2xl overflow-hidden border border-border bg-secondary/40">
+      <svg viewBox="0 0 1000 500" className="w-full h-auto block" style={{ background: "transparent" }}>
+
+        {/* ---- Continents ---- */}
+        {/* Greenland */}
+        <path d="M 195,12 C 220,6 252,10 265,26 C 275,40 268,58 248,64 C 224,68 196,54 190,38 C 185,26 188,16 195,12 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
 
         {/* North America */}
-        <path d="M 60 60 L 120 50 L 170 55 L 200 80 L 220 100 L 240 120 L 230 160 L 200 180 L 180 200 L 160 230 L 130 240 L 100 220 L 80 200 L 70 170 L 65 140 L 60 110 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        <path d="M 62,50 C 98,28 152,24 196,40 C 228,52 252,74 260,106 C 270,142 265,175 250,202 C 234,232 208,254 180,264 C 156,272 130,268 114,254 C 94,238 76,212 68,182 C 56,148 50,112 53,80 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
         {/* Mexico / Central America */}
-        <path d="M 130 240 L 160 230 L 170 250 L 160 270 L 140 275 L 125 260 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
-        {/* South America */}
-        <path d="M 160 300 L 200 280 L 240 290 L 260 320 L 265 360 L 255 400 L 230 430 L 200 440 L 175 420 L 155 390 L 150 350 L 155 320 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
-        {/* Greenland */}
-        <path d="M 175 20 L 210 15 L 230 30 L 220 50 L 195 55 L 175 45 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        <path d="M 178,264 C 192,268 200,278 195,296 C 188,308 172,312 162,302 C 152,290 155,274 165,268 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
+        {/* Caribbean islands */}
+        <ellipse cx="238" cy="248" rx="8" ry="5" className="fill-muted stroke-border" strokeWidth="0.6" />
 
-        {/* Europe */}
-        <path d="M 450 50 L 500 45 L 540 55 L 555 70 L 545 90 L 525 100 L 510 115 L 495 120 L 475 115 L 460 100 L 450 80 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        {/* South America */}
+        <path d="M 158,305 C 175,282 205,276 226,285 C 248,296 262,322 268,355 C 276,395 272,432 256,456 C 238,480 210,488 186,482 C 160,474 142,452 138,425 C 132,392 136,355 142,325 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
+
+        {/* Iceland */}
+        <ellipse cx="398" cy="40" rx="18" ry="10" className="fill-muted stroke-border" strokeWidth="0.6" />
+
+        {/* Europe (UK + mainland) */}
+        <path d="M 444,56 C 456,48 472,50 480,62 C 487,74 481,86 468,88 C 455,90 443,80 444,67 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
+        <path d="M 460,65 C 490,44 535,42 556,56 C 572,66 572,82 560,96 C 546,112 524,118 505,115 C 482,111 463,98 460,82 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
         {/* Scandinavia */}
-        <path d="M 490 20 L 520 15 L 535 35 L 520 50 L 500 45 L 490 30 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
-        {/* UK */}
-        <path d="M 440 55 L 455 50 L 460 65 L 448 72 L 440 65 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        <path d="M 488,22 C 510,12 536,15 548,30 C 558,43 553,60 536,66 C 518,70 496,60 488,44 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
 
         {/* Africa */}
-        <path d="M 460 130 L 510 120 L 555 130 L 570 160 L 575 200 L 570 250 L 550 300 L 520 340 L 500 360 L 480 350 L 460 310 L 445 270 L 440 230 L 445 190 L 450 160 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        <path d="M 455,135 C 488,122 535,124 564,140 C 588,154 596,182 594,215 C 592,252 580,290 562,320 C 540,358 510,388 488,402 C 466,414 445,410 432,393 C 417,373 413,340 418,305 C 424,265 436,232 442,198 C 448,168 448,152 455,135 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
+        {/* Madagascar */}
+        <path d="M 582,340 C 590,332 604,334 608,348 C 612,362 606,376 596,378 C 585,380 577,368 578,354 Z"
+          className="fill-muted stroke-border" strokeWidth="0.6" />
 
-        {/* Middle East */}
-        <path d="M 555 100 L 590 95 L 620 110 L 625 130 L 610 145 L 590 150 L 570 145 L 555 130 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
-
-        {/* South Asia (India + Pakistan) */}
-        <path d="M 610 115 L 660 110 L 690 120 L 695 150 L 685 180 L 660 200 L 640 210 L 625 200 L 615 175 L 610 150 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        {/* Middle East / Arabian Peninsula */}
+        <path d="M 553,100 C 580,90 616,94 636,110 C 652,124 652,148 638,165 C 622,182 596,188 574,178 C 552,168 543,144 548,120 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
 
         {/* Russia / Central Asia */}
-        <path d="M 530 15 L 700 10 L 780 25 L 800 50 L 760 70 L 720 75 L 680 70 L 650 80 L 620 75 L 595 80 L 570 70 L 550 55 L 535 40 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        <path d="M 538,14 C 620,4 725,6 800,20 C 842,28 874,45 876,65 C 878,85 855,102 820,106 C 782,110 735,102 700,96 C 660,90 620,90 590,86 C 558,80 536,64 532,44 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
+
+        {/* South Asia (India + Pakistan) */}
+        <path d="M 615,110 C 650,98 692,102 716,120 C 736,136 740,162 730,192 C 718,224 695,248 665,258 C 640,266 616,256 602,236 C 586,212 588,182 596,156 C 603,134 610,120 615,110 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
 
         {/* China / East Asia */}
-        <path d="M 700 55 L 780 50 L 820 65 L 830 90 L 815 120 L 790 130 L 760 125 L 730 130 L 710 120 L 695 100 L 695 75 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        <path d="M 700,50 C 745,38 798,42 834,62 C 858,76 865,104 852,132 C 838,162 806,178 770,176 C 738,174 710,158 698,132 C 685,105 686,72 700,50 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
         {/* Japan */}
-        <path d="M 830 70 L 845 65 L 855 80 L 845 92 L 832 88 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
-        {/* Southeast Asia */}
-        <path d="M 730 140 L 780 135 L 800 150 L 790 170 L 760 175 L 735 165 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        <path d="M 848,68 C 864,58 882,63 888,80 C 894,96 882,112 866,114 C 850,115 837,100 838,84 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
+        {/* SE Asia */}
+        <path d="M 738,155 C 765,142 800,146 812,168 C 822,186 812,208 793,214 C 770,220 745,208 738,185 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
 
         {/* Australia */}
-        <path d="M 760 280 L 830 265 L 880 275 L 900 310 L 890 350 L 860 375 L 820 380 L 785 365 L 760 335 L 750 305 Z" fill="hsl(var(--muted))" stroke="hsl(var(--border))" strokeWidth="1" />
+        <path d="M 768,282 C 818,264 878,268 912,292 C 934,308 940,340 928,368 C 914,398 878,424 840,428 C 800,432 764,412 750,384 C 734,354 740,315 760,295 Z"
+          className="fill-muted stroke-border" strokeWidth="0.8" />
+        {/* New Zealand */}
+        <path d="M 924,360 C 936,352 950,358 952,374 C 954,388 944,400 930,400 C 916,400 908,388 910,374 Z"
+          className="fill-muted stroke-border" strokeWidth="0.6" />
 
-        {/* Location Pin Markers */}
+        {/* ---- Office Pins ---- */}
         {offices.map((office) => (
-          <g key={office.name}>
-            {/* Shadow */}
-            <ellipse
-              cx={`${parseFloat(office.x) * 10}`}
-              cy={`${parseFloat(office.y) * 5 + 2}`}
-              rx="6"
-              ry="3"
-              fill="rgba(0,0,0,0.2)"
-            />
-            {/* Pin body */}
-            <circle
-              cx={`${parseFloat(office.x) * 10}`}
-              cy={`${parseFloat(office.y) * 5 - 10}`}
-              r={hovered === office.name ? "10" : "8"}
-              fill="hsl(var(--primary))"
-              className="cursor-pointer transition-all duration-200"
-              onMouseEnter={() => setHovered(office.name)}
-              onMouseLeave={() => setHovered(null)}
-            />
-            {/* Pin inner dot */}
-            <circle
-              cx={`${parseFloat(office.x) * 10}`}
-              cy={`${parseFloat(office.y) * 5 - 10}`}
-              r="3"
-              fill="white"
-              className="pointer-events-none"
-            />
-            {/* Pin tail */}
-            <path
-              d={`M ${parseFloat(office.x) * 10 - 3} ${parseFloat(office.y) * 5 - 2} L ${parseFloat(office.x) * 10} ${parseFloat(office.y) * 5} L ${parseFloat(office.x) * 10 + 3} ${parseFloat(office.y) * 5 - 2}`}
-              fill="hsl(var(--primary))"
-              className="pointer-events-none"
-            />
+          <g
+            key={office.name}
+            className="cursor-pointer"
+            onMouseEnter={() => setHovered(office.name)}
+            onMouseLeave={() => setHovered(null)}
+          >
             {/* Pulse ring */}
-            <circle
-              cx={`${parseFloat(office.x) * 10}`}
-              cy={`${parseFloat(office.y) * 5 - 10}`}
-              r="14"
-              fill="none"
-              stroke="hsl(var(--primary))"
-              strokeWidth="1.5"
-              opacity="0.4"
-            >
-              <animate attributeName="r" from="10" to="20" dur="2s" repeatCount="indefinite" />
-              <animate attributeName="opacity" from="0.5" to="0" dur="2s" repeatCount="indefinite" />
+            <circle cx={office.cx} cy={office.cy - 14} r="16" fill="hsl(var(--primary))" opacity="0.15">
+              <animate attributeName="r" from="12" to="26" dur="2.2s" repeatCount="indefinite" />
+              <animate attributeName="opacity" from="0.25" to="0" dur="2.2s" repeatCount="indefinite" />
             </circle>
+            {/* Pin drop shadow */}
+            <ellipse cx={office.cx} cy={office.cy + 1} rx="7" ry="3.5" fill="rgba(0,0,0,0.15)" />
+            {/* Pin body (teardrop) */}
+            <path
+              d={`M ${office.cx},${office.cy} C ${office.cx - 10},${office.cy - 8} ${office.cx - 12},${office.cy - 22} ${office.cx},${office.cy - 28} C ${office.cx + 12},${office.cy - 22} ${office.cx + 10},${office.cy - 8} ${office.cx},${office.cy} Z`}
+              fill={hovered === office.name ? "hsl(var(--primary) / 0.85)" : "hsl(var(--primary))"}
+              className="transition-all duration-200"
+            />
+            {/* Pin inner white circle */}
+            <circle cx={office.cx} cy={office.cy - 20} r="4.5" fill="white" opacity="0.9" />
+            {/* Pin inner ring */}
+            <circle cx={office.cx} cy={office.cy - 20} r="2" fill="hsl(var(--primary))" />
           </g>
         ))}
       </svg>
 
-      {/* Overlay Labels */}
+      {/* Hover tooltips */}
       {offices.map((office) => (
-        <div
-          key={office.name}
-          className="absolute pointer-events-none transition-opacity duration-200"
-          style={{
-            left: office.x,
-            top: `calc(${office.y} - 48px)`,
-            transform: "translateX(-50%)",
-            opacity: hovered === office.name ? 1 : 0,
-          }}
-        >
-          <div className="bg-foreground text-background text-xs px-2.5 py-1.5 rounded-lg shadow-lg whitespace-nowrap">
-            <p className="font-bold">{office.label}</p>
-            <p className="text-background/70">{office.description}</p>
-          </div>
-        </div>
+        <AnimatePresence key={office.name}>
+          {hovered === office.name && (
+            <motion.div
+              initial={{ opacity: 0, y: 6 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: 6 }}
+              transition={{ duration: 0.15 }}
+              className="absolute pointer-events-none z-20 bg-foreground text-background text-xs px-3 py-2 rounded-lg shadow-xl whitespace-nowrap"
+              style={{
+                left: `${(office.cx / 1000) * 100}%`,
+                top: `${((office.cy - 50) / 500) * 100}%`,
+                transform: "translateX(-50%)",
+              }}
+            >
+              <p className="font-bold">{office.label}</p>
+              <p className="text-background/60 mt-0.5">{office.description}</p>
+            </motion.div>
+          )}
+        </AnimatePresence>
       ))}
 
       {/* Legend */}
-      <div className="absolute bottom-3 right-4 flex items-center gap-2 bg-background/80 backdrop-blur-sm rounded-full px-3 py-1.5 border border-border">
+      <div className="absolute bottom-3 right-4 flex items-center gap-2 bg-background/90 backdrop-blur-sm rounded-full px-3.5 py-1.5 border border-border shadow-sm">
         <div className="w-3 h-3 rounded-full bg-primary" />
         <span className="text-xs text-muted-foreground font-medium">RMT USA Office</span>
       </div>
