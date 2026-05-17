@@ -68,13 +68,18 @@ export default function About() {
     <div className="bg-background min-h-screen pt-20">
 
       {/* ===== DARK HERO ===== */}
-      <section className="relative py-24 bg-foreground overflow-hidden">
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/10 -translate-y-1/3 translate-x-1/3 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-primary/5 translate-y-1/2 -translate-x-1/4 pointer-events-none" />
-        <div className="absolute right-12 top-1/2 -translate-y-1/2 w-72 h-72 opacity-[0.05] text-white pointer-events-none">
+      <section className="relative min-h-[480px] flex items-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&q=80')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-r from-foreground/92 via-foreground/80 to-primary/40" />
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />
+        {/* Large decorative SVG overlay */}
+        <div className="absolute right-12 top-1/2 -translate-y-1/2 w-80 h-80 opacity-[0.06] text-white pointer-events-none">
           <StethoBg />
         </div>
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className="container mx-auto px-4 md:px-6 relative z-10 py-24">
           <AnimatedSection>
             <div className="grid lg:grid-cols-2 gap-12 items-center">
               <div>

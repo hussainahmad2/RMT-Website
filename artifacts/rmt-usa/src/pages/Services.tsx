@@ -66,18 +66,35 @@ export function ServicesOverview() {
     <div className="bg-background min-h-screen pt-20">
 
       {/* HERO */}
-      <section className="relative py-24 bg-foreground overflow-hidden">
-        <ServiceBgIcon slug="regulatory-compliance" />
-        <div className="absolute inset-0 opacity-5 pointer-events-none text-white" style={{ position: "absolute", right: "-10%", top: "-10%", width: "60%", height: "120%" }}>
+      <section className="relative min-h-[420px] flex items-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1600&q=80')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-foreground/92 via-foreground/80 to-primary/50" />
+        <div className="absolute inset-0 opacity-[0.05] text-white pointer-events-none" style={{ position: "absolute", right: "-10%", top: "-10%", width: "60%", height: "120%" }}>
           <StethoBg />
         </div>
-        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "70px 70px" }} />
+        <ServiceBgIcon slug="regulatory-compliance" />
+        <div className="container mx-auto px-4 md:px-6 text-center relative z-10 py-24">
           <AnimatedSection>
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">What We Offer</p>
-            <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-5">Our Services</h1>
+            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-1.5 mb-6">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-primary text-xs font-bold uppercase tracking-widest">What We Offer</span>
+            </div>
+            <h1 className="font-heading text-5xl md:text-7xl font-bold text-white mb-5">Our <span className="text-primary">Services</span></h1>
             <p className="text-white/70 text-xl max-w-3xl mx-auto leading-relaxed">
               A comprehensive suite of medical device and technology services — covering every stage from design through regulatory approval, manufacturing, and commercialization.
             </p>
+            <div className="flex flex-wrap justify-center gap-6 mt-8 pt-6 border-t border-white/10">
+              {["8 Core Services", "End-to-End Solutions", "Global Regulatory Expertise"].map((b) => (
+                <div key={b} className="flex items-center gap-2 text-sm text-white/65">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  {b}
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
         </div>
       </section>

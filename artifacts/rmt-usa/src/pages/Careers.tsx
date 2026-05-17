@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, ArrowRight, Users, TrendingUp, Shield, Heart, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
+import { SkeletonJobCard } from "@/components/SkeletonCard";
 
 interface Job {
   id: string;
@@ -91,6 +92,7 @@ interface FormData {
 export default function Careers() {
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [loading, setLoading] = useState(true);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
   useSEO({
@@ -98,6 +100,11 @@ export default function Careers() {
     description: "Join RMT USA's growing team of medical device experts. We are hiring regulatory affairs specialists, medical device engineers, software developers, quality engineers, and more.",
     keywords: "medical device careers, regulatory affairs jobs, medical device engineer jobs, SaMD software engineer, quality engineer medical device",
   });
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 700);
+    return () => clearTimeout(t);
+  }, []);
 
   const onSubmit = (data: FormData) => {
     console.log("Application submitted:", data);
@@ -110,14 +117,34 @@ export default function Careers() {
     <div className="bg-background min-h-screen pt-20">
 
       {/* HERO */}
-      <section className="py-20 bg-secondary/30 border-b border-border">
-        <div className="container mx-auto px-4 md:px-6 text-center">
+      <section className="relative min-h-[420px] flex items-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-foreground/90 via-foreground/80 to-primary/60" />
+        {/* Decorative grid lines */}
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        <div className="container mx-auto px-4 md:px-6 text-center relative z-10 py-24">
           <AnimatedSection>
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Join Our Team</p>
-            <h1 className="font-heading text-5xl md:text-6xl font-bold text-foreground mb-5">Careers at RMT USA</h1>
-            <p className="text-muted-foreground text-xl max-w-3xl mx-auto leading-relaxed">
+            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-1.5 mb-6">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-primary text-xs font-bold uppercase tracking-widest">We Are Hiring</span>
+            </div>
+            <h1 className="font-heading text-5xl md:text-7xl font-bold text-white mb-5 leading-tight">
+              Careers at <span className="text-primary">RMT USA</span>
+            </h1>
+            <p className="text-white/70 text-xl max-w-3xl mx-auto leading-relaxed">
               Build your career at the intersection of medical technology, regulatory science, and engineering excellence. Help us bring life-changing devices to market.
             </p>
+            <div className="flex flex-wrap justify-center gap-6 mt-8 pt-6 border-t border-white/10">
+              {["50+ Expert Team", "Remote-Friendly Roles", "Global Offices"].map((b) => (
+                <div key={b} className="flex items-center gap-2 text-sm text-white/65">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  {b}
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
         </div>
       </section>
@@ -159,7 +186,9 @@ export default function Careers() {
           </AnimatedSection>
 
           <div className="max-w-4xl mx-auto space-y-4">
-            {jobs.map((job, i) => (
+            {loading
+              ? Array.from({ length: 4 }).map((_, i) => <SkeletonJobCard key={i} />)
+              : jobs.map((job, i) => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 16 }}

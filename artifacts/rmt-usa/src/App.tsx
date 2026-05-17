@@ -7,6 +7,7 @@ import { TooltipProvider } from "@/components/ui/tooltip";
 import { ThemeProvider } from "@/components/ThemeProvider";
 import { Navbar } from "@/components/Navbar";
 import { Footer } from "@/components/Footer";
+import { PageTransition } from "@/components/PageTransition";
 
 import Home from "@/pages/Home";
 import About from "@/pages/About";
@@ -24,21 +25,23 @@ const queryClient = new QueryClient();
 
 function Router() {
   return (
-    <Switch>
-      <Route path="/" component={Home} />
-      <Route path="/about" component={About} />
-      <Route path="/services" component={ServicesOverview} />
-      <Route path="/services/:slug/:subSlug" component={SubServiceDetail} />
-      <Route path="/services/:slug" component={ServiceDetail} />
-      <Route path="/projects" component={Projects} />
-      <Route path="/testing" component={Testing} />
-      <Route path="/training" component={Training} />
-      <Route path="/insights" component={Insights} />
-      <Route path="/gallery" component={Gallery} />
-      <Route path="/careers" component={Careers} />
-      <Route path="/contact" component={Contact} />
-      <Route component={NotFound} />
-    </Switch>
+    <PageTransition>
+      <Switch>
+        <Route path="/" component={Home} />
+        <Route path="/about" component={About} />
+        <Route path="/services" component={ServicesOverview} />
+        <Route path="/services/:slug/:subSlug" component={SubServiceDetail} />
+        <Route path="/services/:slug" component={ServiceDetail} />
+        <Route path="/projects" component={Projects} />
+        <Route path="/testing" component={Testing} />
+        <Route path="/training" component={Training} />
+        <Route path="/insights" component={Insights} />
+        <Route path="/gallery" component={Gallery} />
+        <Route path="/careers" component={Careers} />
+        <Route path="/contact" component={Contact} />
+        <Route component={NotFound} />
+      </Switch>
+    </PageTransition>
   );
 }
 

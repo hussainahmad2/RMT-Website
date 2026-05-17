@@ -2,8 +2,9 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
-  Cpu, Shield, Brain, FlaskConical, CircuitBoard, Settings2, Pill, Factory
+  Cpu, Shield, Brain, FlaskConical, CircuitBoard, Settings2, Pill, Factory, FileText
 } from "lucide-react";
+import { RequestQuoteModal } from "@/components/RequestQuoteModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { ServiceCard } from "@/components/ServiceCard";
@@ -96,6 +97,7 @@ const CircuitBg = () => (
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [videoOpen, setVideoOpen] = useState(false);
+  const [quoteOpen, setQuoteOpen] = useState(false);
 
   useSEO({
     title: "Medical Device & Technology Solutions",
@@ -156,6 +158,15 @@ export default function Home() {
                   Explore Services <ArrowRight className="ml-2 w-4 h-4" />
                 </Link>
               </Button>
+
+              <button
+                type="button"
+                onClick={() => setQuoteOpen(true)}
+                className="inline-flex items-center gap-2.5 h-12 px-7 rounded-lg border border-white/20 bg-white/8 text-white font-semibold text-sm hover:bg-white/15 transition-colors"
+              >
+                <FileText className="w-4 h-4" />
+                Request a Quote
+              </button>
 
               {/* Watch Overview */}
               <button
@@ -498,6 +509,7 @@ export default function Home() {
         </div>
       </section>
 
+      <RequestQuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </div>
   );
 }

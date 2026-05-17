@@ -1,10 +1,11 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import { ArrowRight, MapPin, Calendar, CheckCircle, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { SkeletonProjectCard } from "@/components/SkeletonCard";
 
 const CircuitBg = () => (
   <svg viewBox="0 0 200 200" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2">
@@ -53,8 +54,14 @@ const CATEGORIES: Category[] = ["All", "Medical Devices", "Regulatory", "Softwar
 export default function Projects() {
   const [filter, setFilter] = useState<Category>("All");
   const [selected, setSelected] = useState<Project | null>(null);
+  const [loading, setLoading] = useState(true);
 
   useSEO({ title: "Projects", description: "RMT Medical Technologies project portfolio — medical device development, regulatory compliance, software, and manufacturing case studies across 30+ countries.", keywords: "medical device projects portfolio, regulatory compliance case studies, ISO 13485 projects" });
+
+  useEffect(() => {
+    const t = setTimeout(() => setLoading(false), 800);
+    return () => clearTimeout(t);
+  }, []);
 
   const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
@@ -62,14 +69,32 @@ export default function Projects() {
     <div className="bg-background min-h-screen pt-20">
 
       {/* HERO */}
-      <section className="relative py-20 bg-foreground overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-        <div className="absolute right-12 bottom-0 w-56 h-56 opacity-[0.05] text-white pointer-events-none"><CircuitBg /></div>
-        <div className="container mx-auto px-4 md:px-6 text-center relative z-10">
+      <section className="relative min-h-[400px] flex items-center overflow-hidden">
+        <div
+          className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=1600&q=80')" }}
+        />
+        <div className="absolute inset-0 bg-gradient-to-br from-foreground/93 via-foreground/82 to-primary/45" />
+        <div className="absolute inset-0 opacity-[0.05] text-white pointer-events-none" style={{ position: "absolute", right: "-5%", bottom: "-10%", width: "50%", height: "120%" }}>
+          <CircuitBg />
+        </div>
+        <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)", backgroundSize: "60px 60px" }} />
+        <div className="container mx-auto px-4 md:px-6 text-center relative z-10 py-20">
           <AnimatedSection>
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Our Work</p>
-            <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-5">Project Portfolio</h1>
-            <p className="text-white/65 text-xl max-w-3xl mx-auto leading-relaxed">A selection of our medical device development, regulatory compliance, software, and manufacturing engagements across 30+ countries.</p>
+            <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-1.5 mb-6">
+              <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+              <span className="text-primary text-xs font-bold uppercase tracking-widest">Our Work</span>
+            </div>
+            <h1 className="font-heading text-5xl md:text-7xl font-bold text-white mb-5">Project <span className="text-primary">Portfolio</span></h1>
+            <p className="text-white/70 text-xl max-w-3xl mx-auto leading-relaxed">A selection of our medical device development, regulatory compliance, software, and manufacturing engagements across 30+ countries.</p>
+            <div className="flex flex-wrap justify-center gap-6 mt-8 pt-6 border-t border-white/10">
+              {["200+ Projects Delivered", "30+ Countries", "98% Approval Rate"].map((b) => (
+                <div key={b} className="flex items-center gap-2 text-sm text-white/65">
+                  <span className="w-1.5 h-1.5 rounded-full bg-primary" />
+                  {b}
+                </div>
+              ))}
+            </div>
           </AnimatedSection>
         </div>
       </section>
@@ -91,6 +116,11 @@ export default function Projects() {
       {/* PROJECT GRID */}
       <section className="py-16">
         <div className="container mx-auto px-4 md:px-6">
+          {loading ? (
+            <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+              {Array.from({ length: 6 }).map((_, i) => <SkeletonProjectCard key={i} />)}
+            </div>
+          ) : (
           <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence>
               {filtered.map((project, i) => (
@@ -135,6 +165,7 @@ export default function Projects() {
               ))}
             </AnimatePresence>
           </motion.div>
+          )}
         </div>
       </section>
 
