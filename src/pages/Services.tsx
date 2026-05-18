@@ -7,7 +7,7 @@ import {
   FileSearch, Target, Layers, Microscope, PackageCheck, Truck,
   MonitorSmartphone, GitBranch, ShieldCheck, FlaskRound, Boxes, BarChart3,
   ScanLine, Zap, Cable, Radio, Award, Cog, ScrollText, TrendingUp, ClipboardCheck,
-  Dna
+  Dna, Code2, Cloud, Sparkles, Terminal, Smartphone, Bug, Workflow, Activity
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -522,6 +522,485 @@ function ServiceHeroCarousel({ service }: { service: ServiceData }) {
 }
 
 /* ======================================================
+   SOFTWARE & AI — IMAGES, PROJECTS, ANIMATED HERO BG
+====================================================== */
+
+/* Card image per software-ai sub-service */
+const SOFTWARE_AI_SUB_IMAGES: Record<string, string> = {
+  "ai-machine-learning":
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
+  "devops-cloud":
+    "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80",
+  "application-development":
+    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80",
+  "ui-ux-development":
+    "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1200&q=80",
+  "software-quality-assurance":
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80",
+  "sdlc":
+    "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=1200&q=80",
+  "stlc":
+    "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=1200&q=80",
+  "samd-software":
+    "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1200&q=80",
+};
+
+/* Lucide icon per software-ai sub-service for card overlay */
+const SOFTWARE_AI_SUB_ICONS: Record<string, React.ElementType> = {
+  "ai-machine-learning": Sparkles,
+  "devops-cloud": Cloud,
+  "application-development": Code2,
+  "ui-ux-development": Smartphone,
+  "software-quality-assurance": Bug,
+  "sdlc": Workflow,
+  "stlc": Activity,
+  "samd-software": Terminal,
+};
+
+interface SoftwareAIProject {
+  title: string;
+  description: string;
+  image: string;
+  tech: string[];
+}
+
+/* Project gallery per software-ai sub-service */
+const SOFTWARE_AI_SUB_PROJECTS: Record<string, SoftwareAIProject[]> = {
+  "ai-machine-learning": [
+    {
+      title: "Retinal Disease Detection AI",
+      description:
+        "Deep-learning model for early detection of diabetic retinopathy from fundus images, validated against 80,000+ labelled scans.",
+      image: "https://images.unsplash.com/photo-1559757175-08a4f7e5bbf9?w=900&q=80",
+      tech: ["PyTorch", "CNN", "DICOM", "FDA SaMD"],
+    },
+    {
+      title: "ECG Arrhythmia Classifier",
+      description:
+        "Real-time arrhythmia classification model deployed to a wearable cardiac monitor with on-device inference under 50 ms.",
+      image: "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=900&q=80",
+      tech: ["TensorFlow Lite", "LSTM", "Edge ML"],
+    },
+    {
+      title: "Surgical Tool Tracking",
+      description:
+        "Computer vision pipeline for real-time surgical instrument tracking and anomaly detection in laparoscopic video streams.",
+      image: "https://images.unsplash.com/photo-1551076805-e1869033e561?w=900&q=80",
+      tech: ["YOLOv8", "OpenCV", "CUDA"],
+    },
+  ],
+  "devops-cloud": [
+    {
+      title: "HIPAA-Compliant Patient Portal",
+      description:
+        "Multi-region AWS architecture for a connected glucose-monitoring platform, processing 4M+ telemetry events daily.",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80",
+      tech: ["AWS", "Terraform", "HIPAA", "KMS"],
+    },
+    {
+      title: "Device Telemetry Pipeline",
+      description:
+        "Event-driven ingestion pipeline for cardiac implant telemetry with full audit logging and IEC 62304 change control.",
+      image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+      tech: ["Azure", "Kafka", "Kubernetes"],
+    },
+    {
+      title: "OTA Firmware Delivery",
+      description:
+        "CI/CD pipeline delivering signed, validated firmware updates to a Class IIa wearable across 14 markets.",
+      image: "https://images.unsplash.com/photo-1633265486064-086b219458ec?w=900&q=80",
+      tech: ["GitHub Actions", "GCP", "Code Signing"],
+    },
+  ],
+  "application-development": [
+    {
+      title: "Anesthesia Workstation App",
+      description:
+        "Tablet-based clinician workstation interfacing with infusion and ventilation hardware over secure BLE channels.",
+      image: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=900&q=80",
+      tech: ["React Native", "BLE", "IEC 62304"],
+    },
+    {
+      title: "Remote Patient Monitoring",
+      description:
+        "Cross-platform iOS/Android app pairing with home-use vital sign monitors, with offline-first sync to a clinical cloud.",
+      image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80",
+      tech: ["Flutter", "FHIR", "GraphQL"],
+    },
+    {
+      title: "Surgical Planning Workstation",
+      description:
+        "Desktop application for 3D pre-operative planning of orthopaedic implants, integrated with DICOM PACS systems.",
+      image: "https://images.unsplash.com/photo-1581093588401-fbb62a02f120?w=900&q=80",
+      tech: ["Electron", "VTK", "DICOM"],
+    },
+  ],
+  "ui-ux-development": [
+    {
+      title: "Infusion Pump Touch UI",
+      description:
+        "Human-factors engineered touch interface for a Class IIb infusion pump, with use-error analysis and summative evaluation.",
+      image: "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=900&q=80",
+      tech: ["IEC 62366", "Figma", "Qt"],
+    },
+    {
+      title: "Diabetes Coach Mobile App",
+      description:
+        "Patient-facing diabetes management app with adaptive UI based on glycaemic context and clinician-defined goals.",
+      image: "https://images.unsplash.com/photo-1545235617-9465d2a55698?w=900&q=80",
+      tech: ["SwiftUI", "Jetpack Compose"],
+    },
+    {
+      title: "ICU Bedside Monitor UI",
+      description:
+        "Redesign of a multi-parameter ICU bedside monitor display, reducing critical alarm response time by 31% in formative testing.",
+      image: "https://images.unsplash.com/photo-1580281658626-ee379f3cce93?w=900&q=80",
+      tech: ["Human Factors", "Usability"],
+    },
+  ],
+  "software-quality-assurance": [
+    {
+      title: "IV&V for Class C Infusion Software",
+      description:
+        "Independent verification & validation for an IEC 62304 Class C infusion device, closing 100% of pre-submission findings.",
+      image: "https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&q=80",
+      tech: ["IEC 62304", "Static Analysis"],
+    },
+    {
+      title: "Imaging Suite QA Pipeline",
+      description:
+        "Continuous QA pipeline for an AI-powered imaging suite, with automated regression and performance drift detection.",
+      image: "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=900&q=80",
+      tech: ["Jenkins", "Pytest", "MLflow"],
+    },
+    {
+      title: "Audit-Ready Test Library",
+      description:
+        "Library of 1,400+ traceable test cases for a Class IIa cardiology SaMD, mapped to design inputs and risk controls.",
+      image: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80",
+      tech: ["Polarion", "JIRA", "ALM"],
+    },
+  ],
+  "sdlc": [
+    {
+      title: "Class IIb Imaging Lifecycle",
+      description:
+        "End-to-end SDLC setup for a Class IIb radiology imaging platform, from requirements through release management.",
+      image: "https://images.unsplash.com/photo-1542831371-29b0f74f9713?w=900&q=80",
+      tech: ["IEC 62304", "Polarion"],
+    },
+    {
+      title: "Agile under IEC 62304",
+      description:
+        "Migrated a legacy waterfall team to a compliant Agile-in-Regulated model with traceable sprints and reviews.",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=900&q=80",
+      tech: ["Scrum", "ISO 13485", "DevOps"],
+    },
+    {
+      title: "Legacy Toolchain Modernisation",
+      description:
+        "Modernised the build, version-control and test toolchain for a 12-year-old Class II infusion platform.",
+      image: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
+      tech: ["Git", "Bazel", "SonarQube"],
+    },
+  ],
+  "stlc": [
+    {
+      title: "Implantable Programmer Test Strategy",
+      description:
+        "Risk-based test strategy for a neurostimulator programmer covering normal, abnormal and adversarial use scenarios.",
+      image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80",
+      tech: ["Risk-Based Testing"],
+    },
+    {
+      title: "Automated SaMD Regression",
+      description:
+        "Automated regression suite for a diagnostic SaMD, cutting release validation time from 5 weeks to 4 days.",
+      image: "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=900&q=80",
+      tech: ["Playwright", "Pytest"],
+    },
+    {
+      title: "Legacy Coverage Recovery",
+      description:
+        "Recovered code-coverage metrics on legacy firmware to satisfy notified body deficiency response.",
+      image: "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=900&q=80",
+      tech: ["Coverity", "GCOV"],
+    },
+  ],
+  "samd-software": [
+    {
+      title: "Diagnostic Decision Support SaMD",
+      description:
+        "Class IIa clinical decision support SaMD for emergency triage, deployed across 22 hospital sites in EU MDR markets.",
+      image: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=900&q=80",
+      tech: ["EU MDR Rule 11", "IEC 82304"],
+    },
+    {
+      title: "AI Dermatology SaMD",
+      description:
+        "AI-driven mobile SaMD for lesion classification, with FDA De Novo submission and post-market monitoring plan.",
+      image: "https://images.unsplash.com/photo-1666214280391-8ff5bd3c0bf0?w=900&q=80",
+      tech: ["FDA De Novo", "AI/ML"],
+    },
+    {
+      title: "Therapeutic Sleep Apnea SaMD",
+      description:
+        "Closed-loop SaMD adjusting CPAP therapy parameters based on inferred sleep stage, with full IEC 62304 lifecycle.",
+      image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&q=80",
+      tech: ["IEC 62304", "Closed-Loop"],
+    },
+  ],
+};
+
+/* Animated software/AI hero background — neural net nodes, code rain, grid */
+function SoftwareAIHeroBg() {
+  // Pseudo-random but deterministic positions so SSR/CSR match
+  const nodes = React.useMemo(
+    () =>
+      Array.from({ length: 22 }).map((_, i) => {
+        const seed = (i + 1) * 9301;
+        const x = ((seed * 49297) % 1200);
+        const y = ((seed * 233280) % 600);
+        return { x: 60 + (x % 1080), y: 40 + (y % 520), i };
+      }),
+    []
+  );
+
+  const edges = React.useMemo(() => {
+    const list: { a: number; b: number }[] = [];
+    for (let i = 0; i < nodes.length; i++) {
+      for (let j = i + 1; j < nodes.length; j++) {
+        const dx = nodes[i].x - nodes[j].x;
+        const dy = nodes[i].y - nodes[j].y;
+        const d = Math.sqrt(dx * dx + dy * dy);
+        if (d < 220) list.push({ a: i, b: j });
+      }
+    }
+    return list.slice(0, 38);
+  }, [nodes]);
+
+  const codeCols = React.useMemo(() => {
+    const chars = "01{}<>()[]=+*/-:;.";
+    return Array.from({ length: 26 }).map((_, c) => ({
+      left: (c / 26) * 100,
+      delay: (c * 0.37) % 4,
+      duration: 9 + ((c * 1.7) % 8),
+      glyphs: Array.from({ length: 28 }).map(
+        (_, g) => chars[(c * 7 + g * 3) % chars.length]
+      ),
+    }));
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden bg-[#020617]">
+      {/* Deep gradient base */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_30%,rgba(56,189,248,0.18),transparent_55%),radial-gradient(ellipse_at_70%_70%,rgba(99,102,241,0.22),transparent_60%),linear-gradient(180deg,#020617_0%,#050a1a_100%)]" />
+
+      {/* Grid layer */}
+      <div
+        className="absolute inset-0 opacity-[0.10]"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(125,211,252,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(125,211,252,0.5) 1px, transparent 1px)",
+          backgroundSize: "64px 64px",
+        }}
+      />
+
+      {/* Falling code rain */}
+      <div className="absolute inset-0 pointer-events-none">
+        {codeCols.map((col, i) => (
+          <motion.div
+            key={i}
+            className="absolute top-0 -translate-y-1/2 flex flex-col items-center font-mono text-[11px] leading-[1.1] text-cyan-300/35"
+            style={{ left: `${col.left}%` }}
+            initial={{ y: "-30%" }}
+            animate={{ y: "120%" }}
+            transition={{
+              duration: col.duration,
+              delay: col.delay,
+              repeat: Infinity,
+              ease: "linear",
+            }}
+          >
+            {col.glyphs.map((g, j) => (
+              <span
+                key={j}
+                className={
+                  j === 0
+                    ? "text-cyan-200/90 drop-shadow-[0_0_6px_rgba(125,211,252,0.6)]"
+                    : j < 4
+                    ? "text-cyan-300/60"
+                    : ""
+                }
+              >
+                {g}
+              </span>
+            ))}
+          </motion.div>
+        ))}
+      </div>
+
+      {/* Neural-net nodes + edges */}
+      <svg
+        viewBox="0 0 1200 600"
+        preserveAspectRatio="xMidYMid slice"
+        className="absolute inset-0 w-full h-full"
+        aria-hidden
+      >
+        <defs>
+          <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(125,211,252,0.95)" />
+            <stop offset="100%" stopColor="rgba(125,211,252,0)" />
+          </radialGradient>
+        </defs>
+        {edges.map((e, k) => {
+          const a = nodes[e.a];
+          const b = nodes[e.b];
+          return (
+            <motion.line
+              key={k}
+              x1={a.x}
+              y1={a.y}
+              x2={b.x}
+              y2={b.y}
+              stroke="rgba(125,211,252,0.35)"
+              strokeWidth={1}
+              initial={{ opacity: 0.05 }}
+              animate={{ opacity: [0.05, 0.45, 0.05] }}
+              transition={{
+                duration: 3 + (k % 5),
+                delay: (k % 7) * 0.2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          );
+        })}
+        {nodes.map((n, k) => (
+          <g key={k}>
+            <motion.circle
+              cx={n.x}
+              cy={n.y}
+              r={10}
+              fill="url(#node-glow)"
+              initial={{ opacity: 0.2 }}
+              animate={{ opacity: [0.15, 0.6, 0.15] }}
+              transition={{
+                duration: 2.5 + (k % 4),
+                delay: (k % 6) * 0.25,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+            <motion.circle
+              cx={n.x}
+              cy={n.y}
+              r={2.4}
+              fill="rgba(186,230,253,0.95)"
+              animate={{ r: [2, 3.4, 2] }}
+              transition={{
+                duration: 2 + (k % 3),
+                delay: (k % 5) * 0.3,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            />
+          </g>
+        ))}
+      </svg>
+
+      {/* Scanline sweep */}
+      <motion.div
+        aria-hidden
+        className="absolute inset-x-0 h-40 pointer-events-none"
+        style={{
+          background:
+            "linear-gradient(180deg, transparent, rgba(125,211,252,0.10), transparent)",
+        }}
+        initial={{ y: "-20%" }}
+        animate={{ y: "120%" }}
+        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Edge fades */}
+      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#020617] to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#020617] to-transparent pointer-events-none" />
+    </div>
+  );
+}
+
+/* Scatter of floating software icons used as a page-body background
+   for the Software & AI Solutions flow. Distributes ~60 lucide icons in a
+   jittered grid, each with a subtle float + rotate + opacity loop. */
+function SoftwareIconsScatterBg() {
+  const SCATTER_ICONS: React.ElementType[] = [
+    Code2, Cpu, Cloud, Terminal, Brain, Sparkles, GitBranch,
+    MonitorSmartphone, Workflow, Bug, Layers, Zap, Smartphone,
+    ShieldCheck, Activity, Cog, Boxes, ScanLine, CircuitBoard,
+  ];
+
+  const items = React.useMemo(() => {
+    const cols = 7;
+    const rows = 12;
+    const list: {
+      Icon: React.ElementType;
+      x: number; y: number; size: number; rot: number;
+      delay: number; dur: number; floatY: number;
+    }[] = [];
+    for (let r = 0; r < rows; r++) {
+      for (let c = 0; c < cols; c++) {
+        const idx = r * cols + c;
+        const seed = (idx + 1) * 9301 + 49297;
+        // Skip ~22% of cells for natural distribution
+        if (seed % 9 < 2) continue;
+        const Icon = SCATTER_ICONS[(seed >> 5) % SCATTER_ICONS.length];
+        const xJ = (((seed >> 7) % 100) - 50) / 100;
+        const yJ = (((seed >> 11) % 100) - 50) / 100;
+        const x = ((c + 0.5 + xJ * 0.7) / cols) * 100;
+        const y = ((r + 0.5 + yJ * 0.7) / rows) * 100;
+        const size = 18 + ((seed >> 13) % 24);
+        const rot = ((seed >> 9) % 50) - 25;
+        const delay = ((seed >> 17) % 100) / 20;
+        const dur = 7 + ((seed >> 15) % 8);
+        const floatY = 4 + ((seed >> 19) % 8);
+        list.push({ Icon, x, y, size, rot, delay, dur, floatY });
+      }
+    }
+    return list;
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
+
+  return (
+    <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
+      {items.map((it, i) => {
+        const Icon = it.Icon;
+        return (
+          <motion.div
+            key={i}
+            className="absolute text-primary/[0.09] dark:text-primary/[0.13]"
+            style={{ left: `${it.x}%`, top: `${it.y}%` }}
+            initial={{ rotate: it.rot, opacity: 0.05 }}
+            animate={{
+              y: [-it.floatY, it.floatY, -it.floatY],
+              rotate: [it.rot - 6, it.rot + 6, it.rot - 6],
+              opacity: [0.06, 0.16, 0.06],
+            }}
+            transition={{
+              duration: it.dur,
+              delay: it.delay,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+          >
+            <Icon size={it.size} strokeWidth={1.5} />
+          </motion.div>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ======================================================
    SERVICE DETAIL
 ====================================================== */
 export function ServiceDetail({ params }: { params: { slug: string } }) {
@@ -542,17 +1021,29 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
     );
   }
 
+  const isSoftwareAI = service.slug === "software-ai";
+  // Slightly more side padding for the Software & AI page, as requested.
+  const containerClass = isSoftwareAI
+    ? "container mx-auto px-6 md:px-10 lg:px-14"
+    : "container mx-auto px-4 md:px-6";
+
   return (
     <div className="bg-background min-h-screen pt-20">
 
       {/* UNIQUE HERO per service */}
       <section className="relative py-20 bg-[#060d17] overflow-hidden">
-        {/* Decorative circles */}
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-primary/5 translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-        <ServiceBgIcon slug={service.slug} />
+        {isSoftwareAI ? (
+          <SoftwareAIHeroBg />
+        ) : (
+          <>
+            {/* Decorative circles */}
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-64 h-64 rounded-full bg-primary/5 translate-y-1/2 -translate-x-1/2 pointer-events-none" />
+            <ServiceBgIcon slug={service.slug} />
+          </>
+        )}
 
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className={`${containerClass} relative z-10`}>
           <AnimatedSection>
             {/* Breadcrumb */}
             <nav className="flex items-center gap-2 text-sm text-white/50 mb-8">
@@ -561,15 +1052,23 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
               <span className="text-white">{service.name}</span>
             </nav>
 
-            <div className="grid lg:grid-cols-2 gap-12 items-center">
-              <div>
-                <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-primary/30">
+            {isSoftwareAI ? (
+              <div className="max-w-3xl">
+                <div className="inline-flex items-center gap-2 bg-cyan-400/10 border border-cyan-300/30 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm">
+                  <span className="w-2 h-2 rounded-full bg-cyan-300 animate-pulse" />
+                  <span className="text-cyan-200 text-xs font-bold uppercase tracking-widest">Software & AI</span>
+                </div>
+                <div className="w-16 h-16 bg-gradient-to-br from-cyan-400 to-indigo-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-cyan-500/30">
                   {SERVICE_ICONS[service.slug]}
                 </div>
-                <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">{service.name}</h1>
-                <p className="text-white/70 text-xl leading-relaxed mb-8">{service.tagline}</p>
+                <h1 className="font-heading text-5xl md:text-7xl font-bold text-white mb-5 leading-tight">
+                  {service.name}
+                </h1>
+                <p className="text-white/75 text-xl md:text-2xl leading-relaxed mb-8 max-w-2xl">
+                  {service.tagline}
+                </p>
                 <div className="flex flex-wrap gap-3">
-                  <Button asChild className="rounded-lg">
+                  <Button asChild className="rounded-lg bg-cyan-400 text-slate-900 hover:bg-cyan-300">
                     <Link href="/contact">Get a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
                   </Button>
                   <Button asChild variant="outline" className="rounded-lg border-white/20 text-white hover:bg-white/10">
@@ -577,17 +1076,36 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
                   </Button>
                 </div>
               </div>
-              <div className="hidden lg:block">
-                <ServiceHeroCarousel service={service} />
+            ) : (
+              <div className="grid lg:grid-cols-2 gap-12 items-center">
+                <div>
+                  <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-primary/30">
+                    {SERVICE_ICONS[service.slug]}
+                  </div>
+                  <h1 className="font-heading text-5xl md:text-6xl font-bold text-white mb-4 leading-tight">{service.name}</h1>
+                  <p className="text-white/70 text-xl leading-relaxed mb-8">{service.tagline}</p>
+                  <div className="flex flex-wrap gap-3">
+                    <Button asChild className="rounded-lg">
+                      <Link href="/contact">Get a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                    </Button>
+                    <Button asChild variant="outline" className="rounded-lg border-white/20 text-white hover:bg-white/10">
+                      <Link href="/services"><ArrowLeft className="mr-2 w-4 h-4" /> All Services</Link>
+                    </Button>
+                  </div>
+                </div>
+                <div className="hidden lg:block">
+                  <ServiceHeroCarousel service={service} />
+                </div>
               </div>
-            </div>
+            )}
           </AnimatedSection>
         </div>
       </section>
 
       {/* OVERVIEW */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 md:px-6">
+      <section className={`py-16 ${isSoftwareAI ? "relative overflow-hidden bg-background" : "bg-background"}`}>
+        {isSoftwareAI && <SoftwareIconsScatterBg />}
+        <div className={`${containerClass} ${isSoftwareAI ? "relative z-10" : ""}`}>
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-10">
 
@@ -603,34 +1121,97 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
               {/* METHODOLOGY TIMELINE */}
               <ServiceMethodology slug={service.slug} />
 
-              {/* SUB-SERVICES — each is a clickable card linking to its own page */}
+              {/* SUB-SERVICES — image cards for software-ai, compact rows elsewhere */}
               <AnimatedSection>
                 <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Services Included</h2>
-                <div className="grid sm:grid-cols-2 gap-4">
-                  {service.subServices.map((sub, i) => (
-                    <motion.div
-                      key={sub.slug}
-                      initial={{ opacity: 0, y: 16 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.06 }}
-                    >
-                      <Link
-                        href={`/services/${service.slug}/${sub.slug}`}
-                        className="group flex items-start gap-3 bg-card border border-border rounded-xl p-4 hover:border-primary/50 hover:shadow-md transition-all duration-200"
+
+                {isSoftwareAI ? (
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    {service.subServices.map((sub, i) => {
+                      const img = SOFTWARE_AI_SUB_IMAGES[sub.slug];
+                      const SubIcon = SOFTWARE_AI_SUB_ICONS[sub.slug] ?? Code2;
+                      return (
+                        <motion.div
+                          key={sub.slug}
+                          initial={{ opacity: 0, y: 20 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true, margin: "-30px" }}
+                          transition={{ delay: i * 0.06 }}
+                        >
+                          <Link
+                            href={`/services/${service.slug}/${sub.slug}`}
+                            className="group block rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/60 hover:shadow-xl transition-all duration-300"
+                          >
+                            <div className="relative aspect-[16/10] overflow-hidden bg-[#020617]">
+                              {img && (
+                                <img
+                                  src={img}
+                                  alt={sub.name}
+                                  loading="lazy"
+                                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                                />
+                              )}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                              <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-cyan-400/90 text-slate-900 text-[10px] font-bold uppercase tracking-widest rounded-full">
+                                <SubIcon className="w-3 h-3" />
+                                Service
+                              </div>
+                              <div className="absolute bottom-3 left-4 right-4">
+                                <h4 className="font-heading text-white text-lg font-bold leading-tight drop-shadow-md">
+                                  {sub.name}
+                                </h4>
+                              </div>
+                            </div>
+                            <div className="p-5">
+                              <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
+                                {sub.tagline}
+                              </p>
+                              <div className="flex flex-wrap gap-1.5 mb-4">
+                                {sub.keyPoints.slice(0, 3).map((kp) => (
+                                  <span
+                                    key={kp}
+                                    className="text-[11px] px-2 py-0.5 bg-primary/8 text-primary rounded-full border border-primary/15"
+                                  >
+                                    {kp}
+                                  </span>
+                                ))}
+                              </div>
+                              <div className="flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all">
+                                Explore <ArrowRight className="w-4 h-4" />
+                              </div>
+                            </div>
+                          </Link>
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                ) : (
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {service.subServices.map((sub, i) => (
+                      <motion.div
+                        key={sub.slug}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.06 }}
                       >
-                        <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-all">
-                          <CheckCircle className="w-4 h-4 text-primary group-hover:text-white" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <p className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors leading-snug">{sub.name}</p>
-                          <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{sub.tagline}</p>
-                        </div>
-                        <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0 mt-1" />
-                      </Link>
-                    </motion.div>
-                  ))}
-                </div>
+                        <Link
+                          href={`/services/${service.slug}/${sub.slug}`}
+                          className="group flex items-start gap-3 bg-card border border-border rounded-xl p-4 hover:border-primary/50 hover:shadow-md transition-all duration-200"
+                        >
+                          <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-all">
+                            <CheckCircle className="w-4 h-4 text-primary group-hover:text-white" />
+                          </div>
+                          <div className="flex-1 min-w-0">
+                            <p className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors leading-snug">{sub.name}</p>
+                            <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{sub.tagline}</p>
+                          </div>
+                          <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0 mt-1" />
+                        </Link>
+                      </motion.div>
+                    ))}
+                  </div>
+                )}
               </AnimatedSection>
 
               {/* CAPABILITIES */}
@@ -718,16 +1299,52 @@ export function SubServiceDetail({ params }: { params: { slug: string; subSlug: 
     );
   }
 
+  const isSoftwareAI = service.slug === "software-ai";
+  // Slightly more side padding for the Software & AI flow, as requested.
+  const containerClass = isSoftwareAI
+    ? "container mx-auto px-6 md:px-10 lg:px-14"
+    : "container mx-auto px-4 md:px-6";
+  const subProjects = isSoftwareAI ? SOFTWARE_AI_SUB_PROJECTS[subService.slug] ?? [] : [];
+  const subHeroImage = isSoftwareAI
+    ? SOFTWARE_AI_SUB_IMAGES[subService.slug] ?? service.heroImage
+    : service.heroImage;
+
   return (
     <div className="bg-background min-h-screen pt-20">
 
       {/* UNIQUE HERO */}
-      <section className="relative py-20 bg-[#060d17] overflow-hidden">
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-        <div className="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-primary/5 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
-        <ServiceBgIcon slug={service.slug} />
+      <section className="relative py-24 bg-[#060d17] overflow-hidden min-h-[460px] flex items-center">
+        {isSoftwareAI ? (
+          <>
+            {/* Sub-service image as full hero background */}
+            <div
+              className="absolute inset-0 bg-cover bg-center"
+              style={{ backgroundImage: `url('${subHeroImage}')` }}
+              aria-hidden
+            />
+            {/* Dark gradient overlay for text legibility */}
+            <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/95 via-[#020617]/75 to-[#020617]/35 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/85 via-transparent to-[#020617]/40 pointer-events-none" />
+            {/* Subtle grid sheen */}
+            <div
+              className="absolute inset-0 opacity-[0.08] pointer-events-none"
+              style={{
+                backgroundImage:
+                  "linear-gradient(rgba(125,211,252,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(125,211,252,0.5) 1px, transparent 1px)",
+                backgroundSize: "64px 64px",
+              }}
+              aria-hidden
+            />
+          </>
+        ) : (
+          <>
+            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
+            <div className="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-primary/5 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
+            <ServiceBgIcon slug={service.slug} />
+          </>
+        )}
 
-        <div className="container mx-auto px-4 md:px-6 relative z-10">
+        <div className={`${containerClass} relative z-10 w-full`}>
           {/* Breadcrumb */}
           <nav className="flex items-center gap-2 text-sm text-white/50 mb-8 flex-wrap">
             <Link href="/services" className="hover:text-white transition-colors">Services</Link>
@@ -757,22 +1374,25 @@ export function SubServiceDetail({ params }: { params: { slug: string; subSlug: 
       </section>
 
       {/* CONTENT */}
-      <section className="py-16 bg-background">
-        <div className="container mx-auto px-4 md:px-6">
+      <section className={`py-16 ${isSoftwareAI ? "relative overflow-hidden bg-background" : "bg-background"}`}>
+        {isSoftwareAI && <SoftwareIconsScatterBg />}
+        <div className={`${containerClass} ${isSoftwareAI ? "relative z-10" : ""}`}>
           <div className="grid lg:grid-cols-3 gap-12">
 
             <div className="lg:col-span-2 space-y-10">
 
-              {/* Hero image for sub-service */}
-              <AnimatedSection>
-                <div className="rounded-2xl overflow-hidden shadow-lg aspect-video mb-8">
-                  <img
-                    src={service.heroImage}
-                    alt={subService.name}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </AnimatedSection>
+              {/* In-content hero image — hidden for software-ai (moved into hero bg) */}
+              {!isSoftwareAI && (
+                <AnimatedSection>
+                  <div className="rounded-2xl overflow-hidden shadow-lg aspect-video mb-8">
+                    <img
+                      src={subHeroImage}
+                      alt={subService.name}
+                      className="w-full h-full object-cover"
+                    />
+                  </div>
+                </AnimatedSection>
+              )}
 
               <AnimatedSection>
                 <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Overview</h2>
@@ -780,6 +1400,68 @@ export function SubServiceDetail({ params }: { params: { slug: string; subSlug: 
                   <p key={i} className="text-muted-foreground leading-relaxed mb-4">{para}</p>
                 ))}
               </AnimatedSection>
+
+              {/* PROJECT GALLERY (software-ai only) */}
+              {isSoftwareAI && subProjects.length > 0 && (
+                <AnimatedSection>
+                  <div className="flex items-end justify-between gap-4 mb-5 pb-3 border-b border-border">
+                    <div>
+                      <h2 className="font-heading text-3xl font-bold text-foreground">Project Gallery</h2>
+                      <p className="text-muted-foreground text-sm mt-1">
+                        A snapshot of {subService.name.toLowerCase()} projects delivered for medical device and digital health clients.
+                      </p>
+                    </div>
+                    <span className="hidden sm:inline-flex text-[11px] font-bold text-primary/70 bg-primary/8 px-2.5 py-1 rounded-full border border-primary/15 shrink-0">
+                      {subProjects.length} projects
+                    </span>
+                  </div>
+
+                  <div className="grid sm:grid-cols-2 gap-5">
+                    {subProjects.map((p, i) => (
+                      <motion.article
+                        key={p.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-30px" }}
+                        transition={{ delay: i * 0.07 }}
+                        className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/50 hover:shadow-xl transition-all duration-300"
+                      >
+                        <div className="relative aspect-[16/10] overflow-hidden bg-[#020617]">
+                          <img
+                            src={p.image}
+                            alt={p.title}
+                            loading="lazy"
+                            className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent" />
+                          <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-cyan-400/90 text-slate-900 text-[10px] font-bold uppercase tracking-widest rounded-full">
+                            <Sparkles className="w-3 h-3" />
+                            Project
+                          </div>
+                        </div>
+                        <div className="p-5">
+                          <h4 className="font-heading text-foreground text-lg font-bold leading-tight mb-2 group-hover:text-primary transition-colors">
+                            {p.title}
+                          </h4>
+                          <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-3">
+                            {p.description}
+                          </p>
+                          <div className="flex flex-wrap gap-1.5">
+                            {p.tech.map((t) => (
+                              <span
+                                key={t}
+                                className="text-[11px] px-2 py-0.5 bg-primary/8 text-primary rounded-full border border-primary/15 font-medium"
+                              >
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                        </div>
+                      </motion.article>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              )}
 
               <AnimatedSection>
                 <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Key Highlights</h2>
