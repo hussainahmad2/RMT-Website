@@ -1,0 +1,374 @@
+================================================================================
+RMT USA WEBSITE — PROJECT STRUCTURE & SETUP REFERENCE
+================================================================================
+Purpose: Share this file with an AI assistant when you unzip a copy of this
+project (especially if folder layout is broken, files are misplaced, or the
+archive used pnpm instead of npm). It describes the CORRECT structure and how
+to restore it.
+
+Generated for: D:\Website (workspace root = project root)
+Package name: rmt-usa
+Last documented: May 2026
+
+================================================================================
+1. PROJECT TYPE & STACK
+================================================================================
+
+Type:        Single-page React application (SPA), client-side only
+Build tool:  Vite 7
+Language:    TypeScript 5.9
+UI:          React 19 + Tailwind CSS 4 + shadcn/ui (new-york style)
+Routing:     wouter (lightweight React router, NOT Next.js)
+State/data:  @tanstack/react-query (minimal use), mostly static data in TS files
+Animation:   framer-motion
+Forms:       react-hook-form + zod + @hookform/resolvers
+Icons:       lucide-react, react-icons
+
+There is NO backend in this repo. No server API routes. Contact/forms are UI-only
+unless wired elsewhere.
+
+================================================================================
+2. PACKAGE MANAGER & INSTALL
+================================================================================
+
+INTENDED (this reference copy):
+  - npm (package-lock.json present)
+  - .npmrc contains: legacy-peer-deps=true
+
+IF YOUR ZIP HAS pnpm:
+  - You may see pnpm-lock.yaml instead of package-lock.json
+  - Either is OK; pick ONE manager and stick to it:
+      npm install          → uses package-lock.json
+      pnpm install         → uses pnpm-lock.yaml
+  - After install, run: npm run dev   OR   pnpm dev
+
+Scripts (package.json):
+  npm run dev        → start Vite dev server (port 5173)
+  npm run build      → tsc --noEmit && vite build → output in dist/
+  npm run preview    → preview production build (port 4173)
+  npm run typecheck  → TypeScript check only
+
+Node: Use current LTS Node (18+ or 20+ recommended).
+
+DO NOT commit: node_modules/, dist/
+
+================================================================================
+3. CORRECT ROOT DIRECTORY LAYOUT
+================================================================================
+
+Website/                          ← PROJECT ROOT (all paths relative to here)
+├── index.html                    ← Vite HTML entry; loads /src/main.tsx
+├── package.json
+├── package-lock.json             ← npm lockfile (or pnpm-lock.yaml if pnpm)
+├── .npmrc                        ← legacy-peer-deps=true
+├── tsconfig.json                 ← TS paths: @/* → ./src/*
+├── vite.config.ts                ← Vite + React + Tailwind; alias @ → src
+├── components.json               ← shadcn/ui config (aliases, style)
+├── .gitignore
+├── PROJECT-STRUCTURE.txt         ← THIS FILE
+│
+├── public/                       ← Static assets copied as-is to build root
+│   ├── favicon.svg
+│   ├── rmt-logo.webp
+│   ├── rmt-icon.jpg
+│   ├── opengraph.jpg
+│   ├── company-building.jpg
+│   ├── world-map-bg.webp
+│   └── robots.txt
+│
+├── src/                          ← ALL application source code
+│   ├── main.tsx                  ← ReactDOM createRoot, imports App + index.css
+│   ├── App.tsx                   ← Router, providers, layout shell
+│   ├── index.css                 ← Tailwind 4 + theme CSS variables + fonts
+│   │
+│   ├── pages/                    ← Route-level page components
+│   ├── components/               ← Shared components + ui/ (shadcn)
+│   ├── data/                     ← Static content (services catalog)
+│   ├── lib/                      ← utils (cn), seo hook
+│   ├── hooks/                    ← use-toast, use-mobile
+│   └── assets/                   ← Images imported by pages (bundled by Vite)
+│
+├── dist/                         ← BUILD OUTPUT (generated; gitignored)
+├── node_modules/                 ← Dependencies (generated; gitignored)
+└── artifacts/                    ← Optional folder; may be empty
+
+WRONG layouts to fix if zip is "disrupted":
+  - src/App.tsx at root instead of src/App.tsx
+  - pages/ or components/ at root instead of under src/
+  - Missing index.html at root
+  - package.json buried inside a subfolder
+  - Duplicate nested Website/Website/ folders → flatten to single root
+
+================================================================================
+4. FULL src/ TREE (TARGET STRUCTURE)
+================================================================================
+
+src/
+├── main.tsx
+├── App.tsx
+├── index.css
+│
+├── pages/
+│   ├── Home.tsx
+│   ├── About.tsx
+│   ├── Services.tsx          ← Exports: ServicesOverview, ServiceDetail, SubServiceDetail
+│   ├── Projects.tsx
+│   ├── Gallery.tsx
+│   ├── Careers.tsx
+│   ├── Contact.tsx
+│   ├── Testing.tsx
+│   ├── Training.tsx
+│   ├── Insights.tsx
+│   └── not-found.tsx
+│
+├── components/
+│   ├── AnimatedSection.tsx
+│   ├── Footer.tsx
+│   ├── LogoSpinner.tsx
+│   ├── Navbar.tsx
+│   ├── PageTransition.tsx
+│   ├── RequestQuoteModal.tsx
+│   ├── ServiceCard.tsx
+│   ├── SkeletonCard.tsx
+│   ├── ThemeProvider.tsx
+│   ├── WorldMap.tsx
+│   └── ui/                   ← 55 shadcn primitives (button, card, dialog, …)
+│       ├── button.tsx
+│       ├── card.tsx
+│       ├── dialog.tsx
+│       ├── … (do not list individually unless restoring one-by-one)
+│       └── toaster.tsx
+│
+├── data/
+│   └── services.ts           ← ALL_SERVICES, ServiceData, SubServiceData
+│
+├── lib/
+│   ├── utils.ts              ← cn() classname helper
+│   └── seo.ts                ← useSEO() document title/meta hook
+│
+├── hooks/
+│   ├── use-toast.ts
+│   └── use-mobile.tsx
+│
+└── assets/
+    ├── about-team.png
+    ├── hero-bg.png
+    ├── project-electrical.png
+    ├── project-maintenance.png
+    ├── project-pipeline.png
+    ├── project-welding.png
+    └── service-hero.png
+
+================================================================================
+5. ROUTING (wouter) — MUST MATCH App.tsx
+================================================================================
+
+Base: import.meta.env.BASE_URL (usually "" or "/" for root deploy)
+
+Routes:
+  /                           → Home
+  /about                      → About
+  /services                   → ServicesOverview
+  /services/:slug             → ServiceDetail        (e.g. software-ai)
+  /services/:slug/:subSlug    → SubServiceDetail     (e.g. software-ai/ai-machine-learning)
+  /projects                   → Projects
+  /testing                    → Testing
+  /training                   → Training
+  /insights                   → Insights
+  /gallery                    → Gallery
+  /careers                    → Careers
+  /contact                    → Contact
+  (no match)                  → not-found
+
+Layout shell (every page):
+  Navbar → <main><Route component></main> → Footer
+  Wrapped in: QueryClientProvider, ThemeProvider, TooltipProvider, PageTransition
+
+================================================================================
+6. DATA LAYER — services.ts
+================================================================================
+
+File: src/data/services.ts
+
+Exports:
+  - interface SubServiceData { slug, name, tagline, overview[], keyPoints[], deliverables[] }
+  - interface ServiceData { slug, name, shortName, tagline, description, overview[],
+      subServices[], capabilities[], whyRMT[], keywords, heroImage, heroBg }
+  - const ALL_SERVICES: ServiceData[]
+
+Top-level service slugs (10):
+  product-design
+  regulatory-compliance
+  software-ai                    ← Special UI in Services.tsx (animated hero, image cards, galleries)
+  quality-testing
+  electronics-firmware
+  turnkey-commissioning
+  pharmaceutical
+  bmd-laboratory-testing
+  bmd-biomaterials-rd
+  contract-manufacturing
+
+software-ai sub-service slugs (8):
+  ai-machine-learning
+  devops-cloud
+  application-development
+  ui-ux-development
+  software-quality-assurance
+  sdlc
+  stlc
+  samd-software
+
+Pages read services via: import { ALL_SERVICES, … } from "@/data/services"
+
+Software & AI–specific UI data (images, projects, icons) lives INSIDE
+src/pages/Services.tsx as constants:
+  SOFTWARE_AI_SUB_IMAGES, SOFTWARE_AI_SUB_ICONS, SOFTWARE_AI_SUB_PROJECTS
+  Components: SoftwareAIHeroBg, SoftwareIconsScatterBg
+
+================================================================================
+7. PATH ALIASES & IMPORTS
+================================================================================
+
+TypeScript (tsconfig.json):
+  "@/*" → "./src/*"
+
+Vite (vite.config.ts):
+  "@" → path.resolve(__dirname, "src")
+
+shadcn (components.json):
+  components → @/components
+  ui         → @/components/ui
+  utils      → @/lib/utils
+  lib        → @/lib
+  hooks      → @/hooks
+
+Always import pages/components as:
+  import X from "@/pages/Home"
+  import { Button } from "@/components/ui/button"
+  import { cn } from "@/lib/utils"
+
+Never use deep relative paths like ../../../ if @/ works.
+
+================================================================================
+8. KEY CONFIG FILES (DO NOT DELETE)
+================================================================================
+
+index.html
+  - <motion.div id="root"> not used; plain <motion.div id="root">
+  - Script: <script type="module" src="/src/main.tsx">
+
+vite.config.ts
+  - plugins: react(), tailwindcss()
+  - resolve.alias: @ → src
+  - build.outDir: dist
+  - server.port: 5173
+
+tsconfig.json
+  - include: ["src"] only
+  - jsx: react-jsx, moduleResolution: bundler
+
+src/index.css
+  - Tailwind 4 via @import "tailwindcss"
+  - Fonts: Barlow Condensed (headings), Plus Jakarta Sans (body)
+  - CSS variables for light/dark theme (--primary, --background, etc.)
+
+components.json
+  - shadcn style: new-york, cssVariables: true, tailwind css: src/index.css
+
+================================================================================
+9. PAGE RESPONSIBILITIES (QUICK MAP)
+================================================================================
+
+Home.tsx           Landing, hero, service highlights, CTAs
+About.tsx          Company story, team, values
+Services.tsx       All service routes + Software & AI special layouts
+Projects.tsx       Project portfolio / case studies
+Gallery.tsx        Image gallery
+Contact.tsx        Contact form UI
+Careers.tsx        Job listings / careers
+Testing.tsx        BMD / lab testing marketing page
+Training.tsx       Training programs page
+Insights.tsx       Blog / insights listing
+not-found.tsx      404 page
+
+Shared:
+  Navbar.tsx       Site navigation + mobile menu
+  Footer.tsx       Footer links
+  RequestQuoteModal.tsx  Quote request modal (used across site)
+  AnimatedSection.tsx    Scroll-reveal wrapper (framer-motion)
+
+================================================================================
+10. RESTORING FROM A DISRUPTED ZIP / PNPM ARCHIVE
+================================================================================
+
+Step A — Identify project root
+  Must contain: package.json + index.html + src/main.tsx
+  If nested (e.g. Website/Website/), use the innermost folder that has all three.
+
+Step B — Fix folder placement
+  Move misplaced folders back under src/:
+    pages/     → src/pages/
+    components/→ src/components/
+    data/      → src/data/
+    lib/       → src/hooks/ → src/hooks/
+    assets/    → src/assets/
+
+Step C — Install dependencies
+  cd <project-root>
+  npm install     OR    pnpm install
+  (Do not mix lockfiles; delete the one you are NOT using if both exist.)
+
+Step D — Verify
+  npm run typecheck
+  npm run dev
+  Open http://localhost:5173
+
+Step E — Build for deploy
+  npm run build
+  Deploy contents of dist/ to static host (Netlify, Vercel static, S3, etc.)
+
+Common breakages after bad zip:
+  - Case sensitivity: Services.tsx vs services.tsx (Windows OK; Linux must match)
+  - src\pages\Services.tsx vs src/pages/Services.tsx (same file; avoid duplicates)
+  - Missing public/ assets → broken logos/favicon
+  - @ alias broken → vite.config.ts or tsconfig paths wrong
+
+================================================================================
+11. WHAT TO TELL THE AI WHEN FIXING STRUCTURE
+================================================================================
+
+Copy-paste prompt template:
+
+  "Restore this project to match PROJECT-STRUCTURE.txt in the repo.
+   Project root must have package.json, index.html, vite.config.ts, tsconfig.json.
+   All app code lives under src/ with pages/, components/, data/, lib/, hooks/, assets/.
+   Use npm (or pnpm if pnpm-lock.yaml only). Routing is wouter per App.tsx.
+   Path alias @ points to src/. Do not convert to Next.js.
+   Services data is in src/data/services.ts; Software & AI UI is in src/pages/Services.tsx."
+
+================================================================================
+12. FILES SAFE TO IGNORE (NOT PART OF APP RUNTIME)
+================================================================================
+
+BMD website content.docx     Content reference doc, not imported by code
+artifacts/                   Optional; not required for dev/build
+dist/                        Generated build output
+node_modules/                Generated dependencies
+.git/                        Version control
+
+================================================================================
+13. DEPENDENCY HIGHLIGHTS (package.json)
+================================================================================
+
+Core: react 19.1, react-dom 19.1, vite 7, typescript 5.9
+Router: wouter 3
+UI: @radix-ui/* (many), tailwindcss 4, class-variance-authority, tailwind-merge
+Motion: framer-motion 12
+Data: @tanstack/react-query 5
+Forms: react-hook-form, zod
+Charts: recharts (if used on pages)
+Theme: next-themes (via ThemeProvider)
+
+================================================================================
+END OF PROJECT-STRUCTURE.txt
+================================================================================
