@@ -7,7 +7,11 @@ import {
   FileSearch, Target, Layers, Microscope, PackageCheck, Truck,
   MonitorSmartphone, GitBranch, ShieldCheck, FlaskRound, Boxes, BarChart3,
   ScanLine, Zap, Cable, Radio, Award, Cog, ScrollText, TrendingUp, ClipboardCheck,
-  Dna, Code2, Cloud, Sparkles, Terminal, Smartphone, Bug, Workflow, Activity
+  Dna, Code2, Cloud, Sparkles, Terminal, Smartphone, Bug, Workflow, Activity,
+  Database, Server, Lock, Globe, Phone, Calendar, Star, Users,
+  Gauge, Medal, FileCheck, Mail, Network,
+  Atom, Stethoscope, Binary, Fingerprint, Waves, SlidersHorizontal,
+  LayoutDashboard, BookOpen, GraduationCap, Building2, Lightbulb
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -175,6 +179,121 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
   "bmd-laboratory-testing": <Microscope className="w-6 h-6" />,
   "bmd-biomaterials-rd": <Dna className="w-6 h-6" />,
   "contract-manufacturing": <Factory className="w-6 h-6" />,
+};
+
+/* ---- Per-service standards shown in sidebar ---- */
+const SERVICE_STANDARDS: Record<string, string[]> = {
+  "product-design":          ["ISO 13485:2016", "ISO 14971", "IEC 60601-1", "21 CFR Part 820", "IEC 62366"],
+  "regulatory-compliance":   ["FDA 510(k)/PMA", "EU MDR 2017/745", "ISO 13485", "MEDDEV 2.7.1", "IVDR 2017/746"],
+  "software-ai":             ["IEC 62304", "FDA SaMD Guidance", "IEC 82304", "EU MDR Rule 11", "HIPAA / SOC 2"],
+  "quality-testing":         ["ISO 13485", "ISO 10993", "IEC 60601-1", "ASTM Standards", "USP Standards"],
+  "electronics-firmware":    ["IEC 62304", "IPC-2221", "IEC 60601-1", "FCC / CE EMC", "UL/CSA Standards"],
+  "turnkey-commissioning":   ["ISO 13485", "GAMP 5", "IQ/OQ/PQ", "FDA 21 CFR", "GMP Regulations"],
+  "pharmaceutical":          ["ICH Q8/Q9/Q10", "FDA cGMP", "USP/NF Standards", "EU GMP Annex", "ICH Q1A(R2)"],
+  "bmd-laboratory-testing":  ["ISO 10993", "ISO 17025", "USP Standards", "ASTM Standards", "ISO 14155"],
+  "bmd-biomaterials-rd":     ["ISO 10993-1", "ISO 13485", "ASTM Standards", "FDA Guidance", "EU MDR Annex X"],
+  "contract-manufacturing":  ["ISO 13485", "FDA 21 CFR 820", "GMP Standards", "IPC Class 3", "ISO 9001:2015"],
+};
+
+/* ---- Per-service key stats shown in sidebar ---- */
+const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon: React.ElementType }[]> = {
+  "product-design":          [{ label: "Projects Delivered", value: "500+", icon: Gauge }, { label: "Prototype Technologies", value: "5+", icon: Layers }, { label: "Design Cycles", value: "48hr", icon: Zap }],
+  "regulatory-compliance":   [{ label: "Approval Rate", value: "98%", icon: Medal }, { label: "Jurisdictions", value: "40+", icon: Globe }, { label: "Submissions", value: "1,200+", icon: FileCheck }],
+  "software-ai":             [{ label: "AI Models Deployed", value: "80+", icon: Brain }, { label: "Platforms Supported", value: "15+", icon: LayoutDashboard }, { label: "Compliance Rate", value: "100%", icon: ShieldCheck }],
+  "quality-testing":         [{ label: "Tests Executed", value: "25k+", icon: FlaskConical }, { label: "Standards Covered", value: "50+", icon: BookOpen }, { label: "Turnaround", value: "72hr", icon: Zap }],
+  "electronics-firmware":    [{ label: "PCB Designs", value: "300+", icon: CircuitBoard }, { label: "EMC Certifications", value: "120+", icon: Radio }, { label: "Firmware Projects", value: "200+", icon: Binary }],
+  "turnkey-commissioning":   [{ label: "Systems Delivered", value: "80+", icon: Building2 }, { label: "Countries", value: "15+", icon: Globe }, { label: "On-Time Rate", value: "97%", icon: Medal }],
+  "pharmaceutical":          [{ label: "Formulations", value: "300+", icon: Atom }, { label: "Stability Studies", value: "150+", icon: Waves }, { label: "Submissions", value: "60+", icon: FileCheck }],
+  "bmd-laboratory-testing":  [{ label: "Tests Conducted", value: "10k+", icon: FlaskConical }, { label: "Standards Applied", value: "80+", icon: BookOpen }, { label: "Report Turnaround", value: "5 days", icon: Zap }],
+  "bmd-biomaterials-rd":     [{ label: "Biomaterial Studies", value: "200+", icon: Dna }, { label: "R&D Projects", value: "100+", icon: Lightbulb }, { label: "Partners", value: "30+", icon: Users }],
+  "contract-manufacturing":  [{ label: "Units Produced", value: "2M+", icon: Factory }, { label: "Quality Rate", value: "99.8%", icon: Medal }, { label: "Suppliers Qualified", value: "150+", icon: Network }],
+};
+
+/* ---- Per-service icon scatter icons ---- */
+const SERVICE_SCATTER_ICONS: Record<string, React.ElementType[]> = {
+  "product-design":         [Cpu, Layers, Wrench, Settings2, Cog, SlidersHorizontal, Gauge, Target, Boxes, PackageCheck],
+  "regulatory-compliance":  [Shield, FileSearch, ScrollText, Globe, CheckCircle, ShieldCheck, FileCheck, BookOpen, Award, Medal],
+  "software-ai":            [Code2, Cpu, Cloud, Terminal, Brain, Sparkles, GitBranch, MonitorSmartphone, Workflow, Bug, Layers, Zap, Smartphone, ShieldCheck, Activity, Cog, Boxes, ScanLine, CircuitBoard, Network, Database, Binary],
+  "quality-testing":        [FlaskConical, TestTube2, Microscope, BarChart3, ClipboardList, CheckCircle, Search, Target, ScanLine, Gauge],
+  "electronics-firmware":   [CircuitBoard, Zap, Radio, Cable, Binary, Network, ScanLine, Cpu, Waves, Layers],
+  "turnkey-commissioning":  [Settings2, Cog, Wrench, Factory, Building2, Truck, PackageCheck, Layers, ClipboardList, Target],
+  "pharmaceutical":         [FlaskConical, Atom, Waves, Dna, ScanLine, Microscope, TestTube2, BarChart3, PackageCheck, Stethoscope],
+  "bmd-laboratory-testing": [Microscope, FlaskConical, TestTube2, Atom, ScanLine, BarChart3, PackageCheck, Waves, Dna, CheckCircle],
+  "bmd-biomaterials-rd":    [Dna, Atom, Waves, Microscope, FlaskConical, Layers, Lightbulb, Brain, Network, TestTube2],
+  "contract-manufacturing": [Factory, Boxes, Cog, Truck, PackageCheck, Settings2, Gauge, Medal, ClipboardList, Network],
+};
+
+/* ---- Generic sub-service images per service (cycled by index) ---- */
+const SERVICE_GENERIC_SUB_IMAGES: Record<string, string[]> = {
+  "product-design": [
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80",
+    "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=80",
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80",
+    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=900&q=80",
+    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=900&q=80",
+  ],
+  "regulatory-compliance": [
+    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80",
+    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&q=80",
+    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80",
+    "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=900&q=80",
+    "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=900&q=80",
+  ],
+  "quality-testing": [
+    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80",
+    "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=900&q=80",
+    "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=900&q=80",
+    "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=900&q=80",
+    "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=900&q=80",
+    "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=900&q=80",
+  ],
+  "electronics-firmware": [
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
+    "https://images.unsplash.com/photo-1568952433726-3896e3881c65?w=900&q=80",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    "https://images.unsplash.com/photo-1555664424-778a1e5e1b48?w=900&q=80",
+  ],
+  "turnkey-commissioning": [
+    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=900&q=80",
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
+    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80",
+    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=900&q=80",
+    "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=900&q=80",
+  ],
+  "pharmaceutical": [
+    "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=900&q=80",
+    "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=900&q=80",
+    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80",
+    "https://images.unsplash.com/photo-1559757175-08a4f7e5bbf9?w=900&q=80",
+    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80",
+    "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=900&q=80",
+  ],
+  "bmd-laboratory-testing": [
+    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80",
+    "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=900&q=80",
+    "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=900&q=80",
+    "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=900&q=80",
+    "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=900&q=80",
+    "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=900&q=80",
+  ],
+  "bmd-biomaterials-rd": [
+    "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=900&q=80",
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80",
+    "https://images.unsplash.com/photo-1559757175-08a4f7e5bbf9?w=900&q=80",
+    "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80",
+    "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=900&q=80",
+  ],
+  "contract-manufacturing": [
+    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
+    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=900&q=80",
+    "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=900&q=80",
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
+    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80",
+    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=900&q=80",
+  ],
 };
 
 /* ---- Large decorative background icons per service ---- */
@@ -752,12 +871,11 @@ const SOFTWARE_AI_SUB_PROJECTS: Record<string, SoftwareAIProject[]> = {
   ],
 };
 
-/* Animated software/AI hero background — neural net nodes, code rain, grid */
+/* Animated software/AI hero background — neural net nodes, code rain, ECG wave, data packets */
 function SoftwareAIHeroBg() {
-  // Pseudo-random but deterministic positions so SSR/CSR match
   const nodes = React.useMemo(
     () =>
-      Array.from({ length: 22 }).map((_, i) => {
+      Array.from({ length: 28 }).map((_, i) => {
         const seed = (i + 1) * 9301;
         const x = ((seed * 49297) % 1200);
         const y = ((seed * 233280) % 600);
@@ -773,35 +891,51 @@ function SoftwareAIHeroBg() {
         const dx = nodes[i].x - nodes[j].x;
         const dy = nodes[i].y - nodes[j].y;
         const d = Math.sqrt(dx * dx + dy * dy);
-        if (d < 220) list.push({ a: i, b: j });
+        if (d < 240) list.push({ a: i, b: j });
       }
     }
-    return list.slice(0, 38);
+    return list.slice(0, 50);
   }, [nodes]);
 
   const codeCols = React.useMemo(() => {
-    const chars = "01{}<>()[]=+*/-:;.";
-    return Array.from({ length: 26 }).map((_, c) => ({
-      left: (c / 26) * 100,
+    const chars = "01{}<>()[]=+*/-:;.∑∆∏∂ƒ";
+    return Array.from({ length: 30 }).map((_, c) => ({
+      left: (c / 30) * 100,
       delay: (c * 0.37) % 4,
       duration: 9 + ((c * 1.7) % 8),
-      glyphs: Array.from({ length: 28 }).map(
+      glyphs: Array.from({ length: 32 }).map(
         (_, g) => chars[(c * 7 + g * 3) % chars.length]
       ),
     }));
   }, []);
 
+  /* Floating data-packet squares */
+  const packets = React.useMemo(() =>
+    Array.from({ length: 12 }).map((_, i) => ({
+      x: ((i * 83 + 17) % 90) + 5,
+      y: ((i * 61 + 29) % 80) + 10,
+      delay: (i * 0.6) % 5,
+      dur: 8 + (i % 6),
+    })), []
+  );
+
+  /* ECG heartbeat path — three repeating PQRST-like segments */
+  const ecgPath = "M0,50 L60,50 L80,45 L95,50 L105,10 L115,90 L125,50 L145,50 L165,45 L180,50 L190,10 L200,90 L210,50 L230,50 L250,45 L265,50 L275,10 L285,90 L295,50 L400,50";
+
   return (
     <div className="absolute inset-0 overflow-hidden bg-[#020617]">
-      {/* Deep gradient base */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_30%_30%,rgba(56,189,248,0.18),transparent_55%),radial-gradient(ellipse_at_70%_70%,rgba(99,102,241,0.22),transparent_60%),linear-gradient(180deg,#020617_0%,#050a1a_100%)]" />
+      {/* Rich multi-gradient base */}
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(56,189,248,0.22),transparent_50%),radial-gradient(ellipse_at_75%_60%,rgba(99,102,241,0.28),transparent_55%),radial-gradient(ellipse_at_55%_20%,rgba(16,185,129,0.12),transparent_45%),linear-gradient(180deg,#020617_0%,#050a1a_100%)]" />
 
-      {/* Grid layer */}
+      {/* Subtle film-grain texture */}
+      <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "url(\"data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E\")" }} />
+
+      {/* Perspective grid */}
       <div
-        className="absolute inset-0 opacity-[0.10]"
+        className="absolute inset-0 opacity-[0.12]"
         style={{
           backgroundImage:
-            "linear-gradient(rgba(125,211,252,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(125,211,252,0.5) 1px, transparent 1px)",
+            "linear-gradient(rgba(125,211,252,0.6) 1px, transparent 1px), linear-gradient(90deg, rgba(125,211,252,0.6) 1px, transparent 1px)",
           backgroundSize: "64px 64px",
         }}
       />
@@ -811,28 +945,14 @@ function SoftwareAIHeroBg() {
         {codeCols.map((col, i) => (
           <motion.div
             key={i}
-            className="absolute top-0 -translate-y-1/2 flex flex-col items-center font-mono text-[11px] leading-[1.1] text-cyan-300/35"
+            className="absolute top-0 -translate-y-1/2 flex flex-col items-center font-mono text-[10px] leading-[1.05] text-cyan-300/30"
             style={{ left: `${col.left}%` }}
             initial={{ y: "-30%" }}
-            animate={{ y: "120%" }}
-            transition={{
-              duration: col.duration,
-              delay: col.delay,
-              repeat: Infinity,
-              ease: "linear",
-            }}
+            animate={{ y: "130%" }}
+            transition={{ duration: col.duration, delay: col.delay, repeat: Infinity, ease: "linear" }}
           >
             {col.glyphs.map((g, j) => (
-              <span
-                key={j}
-                className={
-                  j === 0
-                    ? "text-cyan-200/90 drop-shadow-[0_0_6px_rgba(125,211,252,0.6)]"
-                    : j < 4
-                    ? "text-cyan-300/60"
-                    : ""
-                }
-              >
+              <span key={j} className={j === 0 ? "text-cyan-200/95 drop-shadow-[0_0_8px_rgba(125,211,252,0.8)]" : j < 5 ? "text-cyan-300/65" : j < 10 ? "text-cyan-400/35" : ""}>
                 {g}
               </span>
             ))}
@@ -841,102 +961,135 @@ function SoftwareAIHeroBg() {
       </div>
 
       {/* Neural-net nodes + edges */}
-      <svg
-        viewBox="0 0 1200 600"
-        preserveAspectRatio="xMidYMid slice"
-        className="absolute inset-0 w-full h-full"
-        aria-hidden
-      >
+      <svg viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" className="absolute inset-0 w-full h-full" aria-hidden>
         <defs>
-          <radialGradient id="node-glow" cx="50%" cy="50%" r="50%">
+          <radialGradient id="node-glow-main" cx="50%" cy="50%" r="50%">
             <stop offset="0%" stopColor="rgba(125,211,252,0.95)" />
             <stop offset="100%" stopColor="rgba(125,211,252,0)" />
           </radialGradient>
+          <radialGradient id="node-glow-indigo" cx="50%" cy="50%" r="50%">
+            <stop offset="0%" stopColor="rgba(165,180,252,0.95)" />
+            <stop offset="100%" stopColor="rgba(165,180,252,0)" />
+          </radialGradient>
+          <filter id="glow-filter">
+            <feGaussianBlur stdDeviation="3" result="coloredBlur"/>
+            <feMerge><feMergeNode in="coloredBlur"/><feMergeNode in="SourceGraphic"/></feMerge>
+          </filter>
         </defs>
+
+        {/* ECG heartbeat line — scrolling across bottom third */}
+        {[0, 400, 800].map((offset, idx) => (
+          <motion.path
+            key={idx}
+            d={`M${offset},480 ` + ecgPath.replace("M0,50", "").split(" ").map(seg => {
+              if (seg.startsWith("L") || seg.startsWith("M")) {
+                const parts = seg.slice(1).split(",");
+                return `${seg[0]}${parseFloat(parts[0]) + offset},${parseFloat(parts[1]) + 430}`;
+              }
+              return seg;
+            }).join(" ")}
+            stroke="rgba(52,211,153,0.7)"
+            strokeWidth={1.5}
+            fill="none"
+            filter="url(#glow-filter)"
+            initial={{ pathLength: 0, opacity: 0 }}
+            animate={{ pathLength: 1, opacity: [0, 0.8, 0] }}
+            transition={{ duration: 3, delay: idx * 1 + 0.5, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
+
+        {/* Data packets */}
+        {packets.map((p, k) => (
+          <motion.rect
+            key={k}
+            x={p.x * 12}
+            y={p.y * 6}
+            width={8}
+            height={8}
+            rx={2}
+            fill="rgba(125,211,252,0.6)"
+            filter="url(#glow-filter)"
+            initial={{ opacity: 0, x: 0, y: 0 }}
+            animate={{
+              opacity: [0, 0.8, 0.8, 0],
+              x: [0, ((k % 3) - 1) * 60],
+              y: [0, ((k % 2) === 0 ? -1 : 1) * 40],
+            }}
+            transition={{ duration: p.dur, delay: p.delay, repeat: Infinity, ease: "easeInOut" }}
+          />
+        ))}
+
+        {/* Network edges */}
         {edges.map((e, k) => {
           const a = nodes[e.a];
           const b = nodes[e.b];
           return (
             <motion.line
               key={k}
-              x1={a.x}
-              y1={a.y}
-              x2={b.x}
-              y2={b.y}
-              stroke="rgba(125,211,252,0.35)"
-              strokeWidth={1}
+              x1={a.x} y1={a.y} x2={b.x} y2={b.y}
+              stroke={k % 3 === 0 ? "rgba(165,180,252,0.4)" : "rgba(125,211,252,0.3)"}
+              strokeWidth={k % 5 === 0 ? 1.5 : 0.8}
               initial={{ opacity: 0.05 }}
-              animate={{ opacity: [0.05, 0.45, 0.05] }}
-              transition={{
-                duration: 3 + (k % 5),
-                delay: (k % 7) * 0.2,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+              animate={{ opacity: [0.03, k % 2 === 0 ? 0.5 : 0.35, 0.03] }}
+              transition={{ duration: 3 + (k % 5), delay: (k % 7) * 0.2, repeat: Infinity, ease: "easeInOut" }}
             />
           );
         })}
+
+        {/* Network nodes */}
         {nodes.map((n, k) => (
           <g key={k}>
-            <motion.circle
-              cx={n.x}
-              cy={n.y}
-              r={10}
-              fill="url(#node-glow)"
-              initial={{ opacity: 0.2 }}
-              animate={{ opacity: [0.15, 0.6, 0.15] }}
-              transition={{
-                duration: 2.5 + (k % 4),
-                delay: (k % 6) * 0.25,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+            <motion.circle cx={n.x} cy={n.y} r={12} fill={k % 3 === 0 ? "url(#node-glow-indigo)" : "url(#node-glow-main)"}
+              initial={{ opacity: 0.15 }} animate={{ opacity: [0.1, 0.65, 0.1] }}
+              transition={{ duration: 2.5 + (k % 4), delay: (k % 6) * 0.25, repeat: Infinity, ease: "easeInOut" }}
             />
-            <motion.circle
-              cx={n.x}
-              cy={n.y}
-              r={2.4}
-              fill="rgba(186,230,253,0.95)"
-              animate={{ r: [2, 3.4, 2] }}
-              transition={{
-                duration: 2 + (k % 3),
-                delay: (k % 5) * 0.3,
-                repeat: Infinity,
-                ease: "easeInOut",
-              }}
+            <motion.circle cx={n.x} cy={n.y} r={2.8} fill={k % 3 === 0 ? "rgba(199,210,254,0.98)" : "rgba(186,230,253,0.98)"}
+              animate={{ r: [2.2, 4, 2.2] }}
+              transition={{ duration: 2 + (k % 3), delay: (k % 5) * 0.3, repeat: Infinity, ease: "easeInOut" }}
             />
           </g>
         ))}
+
+        {/* Radar sweep */}
+        <motion.line
+          x1="600" y1="300" x2="900" y2="300"
+          stroke="rgba(125,211,252,0.25)"
+          strokeWidth={80}
+          style={{ transformOrigin: "600px 300px" }}
+          animate={{ rotate: [0, 360] }}
+          transition={{ duration: 12, repeat: Infinity, ease: "linear" }}
+        />
       </svg>
 
-      {/* Scanline sweep */}
-      <motion.div
-        aria-hidden
-        className="absolute inset-x-0 h-40 pointer-events-none"
-        style={{
-          background:
-            "linear-gradient(180deg, transparent, rgba(125,211,252,0.10), transparent)",
-        }}
-        initial={{ y: "-20%" }}
-        animate={{ y: "120%" }}
-        transition={{ duration: 6, repeat: Infinity, ease: "linear" }}
+      {/* Horizontal scanline sweep */}
+      <motion.div aria-hidden className="absolute inset-x-0 h-48 pointer-events-none"
+        style={{ background: "linear-gradient(180deg, transparent, rgba(125,211,252,0.08), rgba(99,102,241,0.06), transparent)" }}
+        initial={{ y: "-20%" }} animate={{ y: "130%" }}
+        transition={{ duration: 7, repeat: Infinity, ease: "linear" }}
+      />
+
+      {/* Vertical scanline sweep */}
+      <motion.div aria-hidden className="absolute inset-y-0 w-40 pointer-events-none"
+        style={{ background: "linear-gradient(90deg, transparent, rgba(125,211,252,0.05), transparent)" }}
+        initial={{ x: "-10%" }} animate={{ x: "110%" }}
+        transition={{ duration: 9, repeat: Infinity, ease: "linear", delay: 2 }}
       />
 
       {/* Edge fades */}
-      <div className="absolute inset-x-0 top-0 h-24 bg-gradient-to-b from-[#020617] to-transparent pointer-events-none" />
-      <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-[#020617] to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 top-0 h-28 bg-gradient-to-b from-[#020617] to-transparent pointer-events-none" />
+      <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-[#020617] to-transparent pointer-events-none" />
     </div>
   );
 }
 
-/* Scatter of floating software icons used as a page-body background
-   for the Software & AI Solutions flow. Distributes ~60 lucide icons in a
-   jittered grid, each with a subtle float + rotate + opacity loop. */
+/* Scatter of floating software icons used as a page-body background.
+   Distributes ~60 lucide icons in a jittered grid with subtle float + rotate + opacity. */
 function SoftwareIconsScatterBg() {
   const SCATTER_ICONS: React.ElementType[] = [
     Code2, Cpu, Cloud, Terminal, Brain, Sparkles, GitBranch,
     MonitorSmartphone, Workflow, Bug, Layers, Zap, Smartphone,
     ShieldCheck, Activity, Cog, Boxes, ScanLine, CircuitBoard,
+    Database, Server, Lock, Network, Binary, Fingerprint, Waves,
   ];
 
   const items = React.useMemo(() => {
@@ -1103,9 +1256,9 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
       </section>
 
       {/* OVERVIEW */}
-      <section className={`py-16 ${isSoftwareAI ? "relative overflow-hidden bg-background" : "bg-background"}`}>
-        {isSoftwareAI && <SoftwareIconsScatterBg />}
-        <div className={`${containerClass} ${isSoftwareAI ? "relative z-10" : ""}`}>
+      <section className="relative overflow-hidden bg-background py-16">
+        <SoftwareIconsScatterBg />
+        <div className={`${containerClass} relative z-10`}>
           <div className="grid lg:grid-cols-3 gap-12">
             <div className="lg:col-span-2 space-y-10">
 
@@ -1121,97 +1274,91 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
               {/* METHODOLOGY TIMELINE */}
               <ServiceMethodology slug={service.slug} />
 
-              {/* SUB-SERVICES — image cards for software-ai, compact rows elsewhere */}
+              {/* SUB-SERVICES — rich image cards for all services */}
               <AnimatedSection>
-                <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Services Included</h2>
-
-                {isSoftwareAI ? (
-                  <div className="grid sm:grid-cols-2 gap-5">
-                    {service.subServices.map((sub, i) => {
-                      const img = SOFTWARE_AI_SUB_IMAGES[sub.slug];
-                      const SubIcon = SOFTWARE_AI_SUB_ICONS[sub.slug] ?? Code2;
-                      return (
-                        <motion.div
-                          key={sub.slug}
-                          initial={{ opacity: 0, y: 20 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, margin: "-30px" }}
-                          transition={{ delay: i * 0.06 }}
-                        >
-                          <Link
-                            href={`/services/${service.slug}/${sub.slug}`}
-                            className="group block rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/60 hover:shadow-xl transition-all duration-300"
-                          >
-                            <div className="relative aspect-[16/10] overflow-hidden bg-[#020617]">
-                              {img && (
-                                <img
-                                  src={img}
-                                  alt={sub.name}
-                                  loading="lazy"
-                                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                                />
-                              )}
-                              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
-                              <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 bg-cyan-400/90 text-slate-900 text-[10px] font-bold uppercase tracking-widest rounded-full">
-                                <SubIcon className="w-3 h-3" />
-                                Service
-                              </div>
-                              <div className="absolute bottom-3 left-4 right-4">
-                                <h4 className="font-heading text-white text-lg font-bold leading-tight drop-shadow-md">
-                                  {sub.name}
-                                </h4>
-                              </div>
-                            </div>
-                            <div className="p-5">
-                              <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
-                                {sub.tagline}
-                              </p>
-                              <div className="flex flex-wrap gap-1.5 mb-4">
-                                {sub.keyPoints.slice(0, 3).map((kp) => (
-                                  <span
-                                    key={kp}
-                                    className="text-[11px] px-2 py-0.5 bg-primary/8 text-primary rounded-full border border-primary/15"
-                                  >
-                                    {kp}
-                                  </span>
-                                ))}
-                              </div>
-                              <div className="flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all">
-                                Explore <ArrowRight className="w-4 h-4" />
-                              </div>
-                            </div>
-                          </Link>
-                        </motion.div>
-                      );
-                    })}
-                  </div>
-                ) : (
-                  <div className="grid sm:grid-cols-2 gap-4">
-                    {service.subServices.map((sub, i) => (
+                <div className="flex items-end justify-between gap-4 mb-5 pb-3 border-b border-border">
+                  <h2 className="font-heading text-3xl font-bold text-foreground">Services Included</h2>
+                  <span className="hidden sm:inline-flex text-[11px] font-bold text-primary/70 bg-primary/8 px-2.5 py-1 rounded-full border border-primary/15 shrink-0">
+                    {service.subServices.length} services
+                  </span>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-5">
+                  {service.subServices.map((sub, i) => {
+                    const img = isSoftwareAI
+                      ? SOFTWARE_AI_SUB_IMAGES[sub.slug]
+                      : (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? [])[i % Math.max(1, (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? []).length)];
+                    const SubIcon = isSoftwareAI
+                      ? (SOFTWARE_AI_SUB_ICONS[sub.slug] ?? CheckCircle)
+                      : (SERVICE_SCATTER_ICONS[service.slug]?.[i % (SERVICE_SCATTER_ICONS[service.slug]?.length ?? 1)] ?? CheckCircle);
+                    return (
                       <motion.div
                         key={sub.slug}
-                        initial={{ opacity: 0, y: 16 }}
+                        initial={{ opacity: 0, y: 20 }}
                         whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true }}
+                        viewport={{ once: true, margin: "-30px" }}
                         transition={{ delay: i * 0.06 }}
                       >
                         <Link
                           href={`/services/${service.slug}/${sub.slug}`}
-                          className="group flex items-start gap-3 bg-card border border-border rounded-xl p-4 hover:border-primary/50 hover:shadow-md transition-all duration-200"
+                          className="group block rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/60 hover:shadow-xl transition-all duration-300"
                         >
-                          <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5 group-hover:bg-primary group-hover:text-white transition-all">
-                            <CheckCircle className="w-4 h-4 text-primary group-hover:text-white" />
+                          <div className="relative aspect-[16/10] overflow-hidden bg-[#060d17]">
+                            {img ? (
+                              <img
+                                src={img}
+                                alt={sub.name}
+                                loading="lazy"
+                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                              />
+                            ) : (
+                              <div className={`absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent flex items-center justify-center`}>
+                                <SubIcon className="w-20 h-20 text-primary/20" />
+                              </div>
+                            )}
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+                            {/* Icon badge top-left */}
+                            <div className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full ${isSoftwareAI ? "bg-cyan-400/90 text-slate-900" : "bg-primary/90 text-white"}`}>
+                              <SubIcon className="w-3 h-3" />
+                              {service.shortName}
+                            </div>
+                            {/* Large floating icon in top-right */}
+                            <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-35 transition-opacity">
+                              <SubIcon className="w-12 h-12 text-white" />
+                            </div>
+                            <div className="absolute bottom-3 left-4 right-4">
+                              <h4 className="font-heading text-white text-lg font-bold leading-tight drop-shadow-md group-hover:text-primary/90 transition-colors">
+                                {sub.name}
+                              </h4>
+                            </div>
                           </div>
-                          <div className="flex-1 min-w-0">
-                            <p className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors leading-snug">{sub.name}</p>
-                            <p className="text-xs text-muted-foreground mt-1 line-clamp-2">{sub.tagline}</p>
+                          <div className="p-5">
+                            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
+                              {sub.tagline}
+                            </p>
+                            <div className="flex flex-wrap gap-1.5 mb-4">
+                              {sub.keyPoints.slice(0, 3).map((kp) => (
+                                <span
+                                  key={kp}
+                                  className="text-[11px] px-2 py-0.5 bg-primary/8 text-primary rounded-full border border-primary/15"
+                                >
+                                  {kp}
+                                </span>
+                              ))}
+                            </div>
+                            <div className="flex items-center justify-between">
+                              <div className="flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all">
+                                Explore Service <ArrowRight className="w-4 h-4" />
+                              </div>
+                              <span className="text-[10px] text-muted-foreground bg-secondary/60 px-2 py-0.5 rounded-full border border-border/60">
+                                {sub.deliverables.length} deliverables
+                              </span>
+                            </div>
                           </div>
-                          <ArrowRight className="w-4 h-4 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all shrink-0 mt-1" />
                         </Link>
                       </motion.div>
-                    ))}
-                  </div>
-                )}
+                    );
+                  })}
+                </div>
               </AnimatedSection>
 
               {/* CAPABILITIES */}
@@ -1246,28 +1393,132 @@ export function ServiceDetail({ params }: { params: { slug: string } }) {
             </div>
 
             {/* SIDEBAR */}
-            <div>
-              <div className="sticky top-24 space-y-5">
-                <AnimatedSection className="bg-primary text-white rounded-2xl p-6">
-                  <h3 className="font-heading text-xl font-bold mb-3">Get a Quote</h3>
+            <div className="space-y-5">
+              {/* STICKY BLOCK */}
+              <div className="sticky top-24 space-y-5 z-10">
+                <AnimatedSection className="bg-primary text-white rounded-2xl p-6 shadow-xl shadow-primary/20">
+                  <h3 className="font-heading text-xl font-bold mb-2">Get a Quote</h3>
                   <p className="text-white/80 text-sm mb-5 leading-relaxed">Discuss your requirements with our specialists and receive a tailored proposal.</p>
-                  <Button asChild className="w-full bg-white text-primary hover:bg-white/90 rounded-lg font-bold">
+                  <Button asChild className="w-full bg-white text-primary hover:bg-white/90 rounded-lg font-bold mb-3">
                     <Link href="/contact">Request a Quote</Link>
                   </Button>
+                  <a href="tel:+15551234567" className="flex items-center justify-center gap-2 text-white/70 text-xs hover:text-white transition-colors">
+                    <Phone className="w-3.5 h-3.5" />
+                    Schedule a Call
+                  </a>
                 </AnimatedSection>
 
+                {/* KEY STATS */}
+                {SERVICE_SIDEBAR_STATS[service.slug] && (
+                  <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
+                    <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                      <Gauge className="w-3.5 h-3.5 text-primary" /> Key Metrics
+                    </h4>
+                    <div className="space-y-3">
+                      {SERVICE_SIDEBAR_STATS[service.slug].map((stat) => {
+                        const StatIcon = stat.icon;
+                        return (
+                          <div key={stat.label} className="flex items-center gap-3 p-2.5 bg-secondary/40 rounded-xl">
+                            <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                              <StatIcon className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <p className="font-bold text-foreground text-lg leading-none">{stat.value}</p>
+                              <p className="text-xs text-muted-foreground mt-0.5">{stat.label}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </AnimatedSection>
+                )}
+              </div>
+
+              {/* NON-STICKY: fills vertical space */}
+
+              {/* KEY STANDARDS */}
+              {SERVICE_STANDARDS[service.slug] && (
                 <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
-                  <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">Other Services</h4>
-                  <div className="flex flex-col gap-1">
-                    {ALL_SERVICES.filter((s) => s.slug !== service.slug).map((s) => (
-                      <Link key={s.slug} href={`/services/${s.slug}`} className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors py-1.5 border-b border-border last:border-0">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary/50 shrink-0" />
-                        {s.shortName}
-                      </Link>
+                  <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                    <ShieldCheck className="w-3.5 h-3.5 text-primary" /> Applicable Standards
+                  </h4>
+                  <div className="space-y-2.5">
+                    {SERVICE_STANDARDS[service.slug].map((std) => (
+                      <div key={std} className="flex items-center gap-2.5 group">
+                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors">
+                          <CheckCircle className="w-3 h-3 text-primary group-hover:text-white transition-colors" />
+                        </div>
+                        <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{std}</span>
+                      </div>
                     ))}
                   </div>
                 </AnimatedSection>
-              </div>
+              )}
+
+              {/* WHY RMT QUICK POINTS */}
+              <AnimatedSection className="bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 rounded-2xl p-6">
+                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                  <Star className="w-3.5 h-3.5 text-primary" /> Why Choose RMT
+                </h4>
+                <div className="space-y-3">
+                  {service.whyRMT.map((item) => (
+                    <div key={item.title} className="flex items-start gap-2.5">
+                      <Medal className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+                      <div>
+                        <p className="text-sm font-semibold text-foreground leading-snug">{item.title}</p>
+                        <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{item.desc}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </AnimatedSection>
+
+              {/* CORE CAPABILITIES QUICK TAGS */}
+              <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
+                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                  <Layers className="w-3.5 h-3.5 text-primary" /> Core Capabilities
+                </h4>
+                <div className="flex flex-wrap gap-2">
+                  {service.capabilities.map((cap) => (
+                    <span key={cap} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 bg-secondary/60 text-muted-foreground rounded-full border border-border/60 hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-colors cursor-default">
+                      <span className="w-1 h-1 rounded-full bg-primary/60 shrink-0" />
+                      {cap}
+                    </span>
+                  ))}
+                </div>
+              </AnimatedSection>
+
+              {/* OTHER SERVICES */}
+              <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
+                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                  <Globe className="w-3.5 h-3.5 text-primary" /> Other Services
+                </h4>
+                <div className="flex flex-col gap-0.5">
+                  {ALL_SERVICES.filter((s) => s.slug !== service.slug).map((s) => (
+                    <Link key={s.slug} href={`/services/${s.slug}`} className="group flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/60 last:border-0">
+                      <div className="w-6 h-6 bg-primary/8 rounded-md flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                        {SERVICE_ICONS[s.slug]}
+                      </div>
+                      <span className="flex-1">{s.shortName}</span>
+                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                    </Link>
+                  ))}
+                </div>
+              </AnimatedSection>
+
+              {/* CONTACT CTA */}
+              <AnimatedSection className="bg-[#020617] rounded-2xl p-6 text-white border border-primary/20">
+                <h4 className="font-heading text-base font-bold mb-2">Ready to Start?</h4>
+                <p className="text-white/60 text-xs leading-relaxed mb-4">Our {service.shortName} specialists are available for a free initial consultation.</p>
+                <div className="space-y-2">
+                  <Button asChild size="sm" className="w-full rounded-lg bg-primary hover:bg-primary/90">
+                    <Link href="/contact"><Mail className="w-3.5 h-3.5 mr-2" /> Send an Enquiry</Link>
+                  </Button>
+                  <Button asChild size="sm" variant="outline" className="w-full rounded-lg border-white/20 text-white hover:bg-white/10 hover:text-white">
+                    <Link href="/about"><Users className="w-3.5 h-3.5 mr-2" /> Meet the Team</Link>
+                  </Button>
+                </div>
+              </AnimatedSection>
             </div>
           </div>
         </div>
@@ -1300,49 +1551,70 @@ export function SubServiceDetail({ params }: { params: { slug: string; subSlug: 
   }
 
   const isSoftwareAI = service.slug === "software-ai";
-  // Slightly more side padding for the Software & AI flow, as requested.
-  const containerClass = isSoftwareAI
-    ? "container mx-auto px-6 md:px-10 lg:px-14"
-    : "container mx-auto px-4 md:px-6";
-  const subProjects = isSoftwareAI ? SOFTWARE_AI_SUB_PROJECTS[subService.slug] ?? [] : [];
+  const containerClass = "container mx-auto px-6 md:px-10 lg:px-14";
+  const subProjects = SOFTWARE_AI_SUB_PROJECTS[subService.slug] ?? [];
   const subHeroImage = isSoftwareAI
     ? SOFTWARE_AI_SUB_IMAGES[subService.slug] ?? service.heroImage
-    : service.heroImage;
+    : (SERVICE_GENERIC_SUB_IMAGES[service.slug]?.[
+        service.subServices.findIndex((ss) => ss.slug === subService.slug) %
+        Math.max(1, SERVICE_GENERIC_SUB_IMAGES[service.slug]?.length ?? 1)
+      ] ?? service.heroImage);
+
+  const subPageIcons = SERVICE_SCATTER_ICONS[service.slug] ?? [CheckCircle, Layers, Zap, Shield, Star, Globe];
 
   return (
     <div className="bg-background min-h-screen pt-20">
 
-      {/* UNIQUE HERO */}
-      <section className="relative py-24 bg-[#060d17] overflow-hidden min-h-[460px] flex items-center">
-        {isSoftwareAI ? (
-          <>
-            {/* Sub-service image as full hero background */}
-            <div
-              className="absolute inset-0 bg-cover bg-center"
-              style={{ backgroundImage: `url('${subHeroImage}')` }}
-              aria-hidden
-            />
-            {/* Dark gradient overlay for text legibility */}
-            <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/95 via-[#020617]/75 to-[#020617]/35 pointer-events-none" />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/85 via-transparent to-[#020617]/40 pointer-events-none" />
-            {/* Subtle grid sheen */}
-            <div
-              className="absolute inset-0 opacity-[0.08] pointer-events-none"
+      {/* HERO — full background image for all services */}
+      <section className="relative py-24 bg-[#060d17] overflow-hidden min-h-[520px] flex items-center">
+        {/* Background image */}
+        <div
+          className="absolute inset-0 bg-cover bg-center scale-105"
+          style={{ backgroundImage: `url('${subHeroImage}')` }}
+          aria-hidden
+        />
+        {/* Gradient overlays */}
+        <div className="absolute inset-0 bg-gradient-to-r from-[#020617]/97 via-[#020617]/80 to-[#020617]/40 pointer-events-none" />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#020617]/90 via-transparent to-[#020617]/50 pointer-events-none" />
+        {/* Subtle grid */}
+        <div
+          className="absolute inset-0 opacity-[0.07] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+            backgroundSize: "56px 56px",
+          }}
+          aria-hidden
+        />
+        {/* Floating service icons in hero background */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden>
+          {subPageIcons.slice(0, 8).map((IconEl, idx) => (
+            <motion.div
+              key={idx}
+              className="absolute text-white/[0.06]"
               style={{
-                backgroundImage:
-                  "linear-gradient(rgba(125,211,252,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(125,211,252,0.5) 1px, transparent 1px)",
-                backgroundSize: "64px 64px",
+                left: `${10 + (idx * 12) % 80}%`,
+                top: `${15 + (idx * 17) % 70}%`,
               }}
-              aria-hidden
-            />
-          </>
-        ) : (
-          <>
-            <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-primary/10 -translate-y-1/2 translate-x-1/3 pointer-events-none" />
-            <div className="absolute bottom-0 left-0 w-56 h-56 rounded-full bg-primary/5 translate-y-1/3 -translate-x-1/4 pointer-events-none" />
-            <ServiceBgIcon slug={service.slug} />
-          </>
-        )}
+              animate={{
+                y: [0, -12, 0],
+                rotate: [0, idx % 2 === 0 ? 8 : -8, 0],
+                opacity: [0.04, 0.10, 0.04],
+              }}
+              transition={{ duration: 6 + idx, repeat: Infinity, ease: "easeInOut", delay: idx * 0.5 }}
+            >
+              <IconEl size={60 + (idx % 3) * 20} strokeWidth={1} />
+            </motion.div>
+          ))}
+        </div>
+        {/* Scanline sweep */}
+        <motion.div
+          aria-hidden
+          className="absolute inset-x-0 h-32 pointer-events-none"
+          style={{ background: "linear-gradient(180deg, transparent, rgba(255,255,255,0.03), transparent)" }}
+          initial={{ y: "-20%" }} animate={{ y: "130%" }}
+          transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
+        />
 
         <div className={`${containerClass} relative z-10 w-full`}>
           {/* Breadcrumb */}
@@ -1374,35 +1646,30 @@ export function SubServiceDetail({ params }: { params: { slug: string; subSlug: 
       </section>
 
       {/* CONTENT */}
-      <section className={`py-16 ${isSoftwareAI ? "relative overflow-hidden bg-background" : "bg-background"}`}>
-        {isSoftwareAI && <SoftwareIconsScatterBg />}
-        <div className={`${containerClass} ${isSoftwareAI ? "relative z-10" : ""}`}>
+      <section className="relative overflow-hidden bg-background py-16">
+        <SoftwareIconsScatterBg />
+        <div className={`${containerClass} relative z-10`}>
           <div className="grid lg:grid-cols-3 gap-12">
 
             <div className="lg:col-span-2 space-y-10">
 
-              {/* In-content hero image — hidden for software-ai (moved into hero bg) */}
-              {!isSoftwareAI && (
-                <AnimatedSection>
-                  <div className="rounded-2xl overflow-hidden shadow-lg aspect-video mb-8">
-                    <img
-                      src={subHeroImage}
-                      alt={subService.name}
-                      className="w-full h-full object-cover"
-                    />
-                  </div>
-                </AnimatedSection>
-              )}
-
+              {/* Overview with icon */}
               <AnimatedSection>
-                <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Overview</h2>
-                {subService.overview.map((para, i) => (
-                  <p key={i} className="text-muted-foreground leading-relaxed mb-4">{para}</p>
-                ))}
+                <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
+                  <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
+                    {SERVICE_ICONS[service.slug]}
+                  </div>
+                  <h2 className="font-heading text-3xl font-bold text-foreground">Overview</h2>
+                </div>
+                <div className="space-y-4">
+                  {subService.overview.map((para, i) => (
+                    <p key={i} className="text-muted-foreground leading-relaxed text-[15px]">{para}</p>
+                  ))}
+                </div>
               </AnimatedSection>
 
-              {/* PROJECT GALLERY (software-ai only) */}
-              {isSoftwareAI && subProjects.length > 0 && (
+              {/* PROJECT GALLERY (all services with projects data) */}
+              {subProjects.length > 0 && (
                 <AnimatedSection>
                   <div className="flex items-end justify-between gap-4 mb-5 pb-3 border-b border-border">
                     <div>
@@ -1463,91 +1730,242 @@ export function SubServiceDetail({ params }: { params: { slug: string; subSlug: 
                 </AnimatedSection>
               )}
 
+              {/* KEY HIGHLIGHTS — redesigned with icons */}
               <AnimatedSection>
-                <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Key Highlights</h2>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {subService.keyPoints.map((point) => (
-                    <div key={point} className="flex items-start gap-3 bg-card border border-border rounded-xl p-4">
-                      <CheckCircle className="w-5 h-5 text-primary shrink-0 mt-0.5" />
-                      <span className="text-sm font-medium text-foreground">{point}</span>
-                    </div>
-                  ))}
+                <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <Star className="w-4 h-4 text-primary" />
+                  </div>
+                  <h2 className="font-heading text-3xl font-bold text-foreground">Key Highlights</h2>
                 </div>
-              </AnimatedSection>
-
-              <AnimatedSection>
-                <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Deliverables</h2>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {subService.deliverables.map((d) => (
-                    <div key={d} className="flex items-center gap-3 px-4 py-3 bg-primary/5 border border-primary/15 rounded-lg">
-                      <ArrowRight className="w-4 h-4 text-primary shrink-0" />
-                      <span className="text-sm font-medium text-foreground">{d}</span>
-                    </div>
-                  ))}
-                </div>
-              </AnimatedSection>
-
-              {/* OTHER SUB-SERVICES in this service */}
-              <AnimatedSection>
-                <h2 className="font-heading text-2xl font-bold text-foreground mb-5 pb-3 border-b border-border">
-                  Other {service.shortName} Services
-                </h2>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {service.subServices
-                    .filter((ss) => ss.slug !== subService.slug)
-                    .map((ss) => (
-                      <Link
-                        key={ss.slug}
-                        href={`/services/${service.slug}/${ss.slug}`}
-                        className="group flex items-start gap-3 bg-card border border-border rounded-xl p-4 hover:border-primary/40 transition-all"
+                <div className="grid sm:grid-cols-2 gap-4">
+                  {subService.keyPoints.map((point, idx) => {
+                    const HlIcon = subPageIcons[idx % subPageIcons.length];
+                    return (
+                      <motion.div
+                        key={point}
+                        initial={{ opacity: 0, y: 12 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.05 }}
+                        className="flex items-start gap-3 bg-card border border-border rounded-xl p-4 hover:border-primary/40 hover:shadow-md transition-all duration-200 group"
                       >
-                        <div className="w-7 h-7 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all">
-                          <CheckCircle className="w-3.5 h-3.5 text-primary group-hover:text-white" />
+                        <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors">
+                          <HlIcon className="w-4 h-4 text-primary group-hover:text-white transition-colors" />
                         </div>
-                        <div>
-                          <p className="font-semibold text-foreground text-sm group-hover:text-primary transition-colors">{ss.name}</p>
-                          <p className="text-xs text-muted-foreground mt-0.5 line-clamp-1">{ss.tagline}</p>
+                        <div className="flex-1 min-w-0">
+                          <span className="text-sm font-semibold text-foreground leading-snug">{point}</span>
                         </div>
-                      </Link>
-                    ))}
+                      </motion.div>
+                    );
+                  })}
                 </div>
               </AnimatedSection>
-            </div>
 
-            {/* SIDEBAR */}
-            <div>
-              <div className="sticky top-24 space-y-5">
-                <AnimatedSection className="bg-primary text-white rounded-2xl p-6">
-                  <h3 className="font-heading text-xl font-bold mb-3">Get a Quote</h3>
-                  <p className="text-white/80 text-sm mb-5 leading-relaxed">Speak with our {service.shortName} specialists today.</p>
-                  <Button asChild className="w-full bg-white text-primary hover:bg-white/90 rounded-lg font-bold">
-                    <Link href="/contact">Request a Quote</Link>
-                  </Button>
-                </AnimatedSection>
+              {/* DELIVERABLES — enhanced */}
+              <AnimatedSection>
+                <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
+                  <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
+                    <PackageCheck className="w-4 h-4 text-primary" />
+                  </div>
+                  <h2 className="font-heading text-3xl font-bold text-foreground">Deliverables</h2>
+                </div>
+                <div className="grid sm:grid-cols-2 gap-3">
+                  {subService.deliverables.map((d, idx) => (
+                    <motion.div
+                      key={d}
+                      initial={{ opacity: 0, x: -10 }}
+                      whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.04 }}
+                      className="flex items-center gap-3 px-4 py-3.5 bg-gradient-to-r from-primary/8 to-primary/4 border border-primary/15 rounded-xl hover:border-primary/40 hover:from-primary/12 transition-all"
+                    >
+                      <div className="w-6 h-6 rounded-full bg-primary/15 flex items-center justify-center shrink-0">
+                        <CheckCircle className="w-3.5 h-3.5 text-primary" />
+                      </div>
+                      <span className="text-sm font-medium text-foreground">{d}</span>
+                    </motion.div>
+                  ))}
+                </div>
+              </AnimatedSection>
 
-                <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
-                  <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">Parent Service</h4>
-                  <Link href={`/services/${service.slug}`} className="flex items-center gap-3 p-3 bg-muted rounded-xl hover:bg-primary/10 transition-colors group">
-                    <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+              {/* OTHER SUB-SERVICES — enhanced with images */}
+              {service.subServices.filter((ss) => ss.slug !== subService.slug).length > 0 && (
+                <AnimatedSection>
+                  <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
+                    <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
                       {SERVICE_ICONS[service.slug]}
                     </div>
-                    <div>
-                      <p className="font-semibold text-foreground text-sm">{service.shortName}</p>
-                      <p className="text-xs text-muted-foreground">{service.subServices.length} services</p>
-                    </div>
-                  </Link>
+                    <h2 className="font-heading text-2xl font-bold text-foreground">
+                      Other {service.shortName} Services
+                    </h2>
+                  </div>
+                  <div className="grid sm:grid-cols-2 gap-4">
+                    {service.subServices
+                      .filter((ss) => ss.slug !== subService.slug)
+                      .map((ss, idx) => {
+                        const ssImg = isSoftwareAI
+                          ? SOFTWARE_AI_SUB_IMAGES[ss.slug]
+                          : (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? [])[idx % Math.max(1, (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? []).length)];
+                        const SsIcon = isSoftwareAI
+                          ? (SOFTWARE_AI_SUB_ICONS[ss.slug] ?? CheckCircle)
+                          : (SERVICE_SCATTER_ICONS[service.slug]?.[idx % (SERVICE_SCATTER_ICONS[service.slug]?.length ?? 1)] ?? CheckCircle);
+                        return (
+                          <Link
+                            key={ss.slug}
+                            href={`/services/${service.slug}/${ss.slug}`}
+                            className="group block rounded-xl overflow-hidden border border-border bg-card hover:border-primary/50 hover:shadow-lg transition-all duration-300"
+                          >
+                            <div className="relative aspect-[16/8] overflow-hidden bg-[#060d17]">
+                              {ssImg && (
+                                <img src={ssImg} alt={ss.name} loading="lazy"
+                                  className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                              )}
+                              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/30 to-transparent" />
+                              <div className="absolute top-2 left-2 inline-flex items-center gap-1 px-2 py-0.5 bg-primary/90 text-white text-[9px] font-bold uppercase tracking-wider rounded-full">
+                                <SsIcon className="w-2.5 h-2.5" /> Service
+                              </div>
+                              <div className="absolute bottom-2 left-3 right-3">
+                                <p className="font-heading text-white text-sm font-bold leading-tight">{ss.name}</p>
+                              </div>
+                            </div>
+                            <div className="p-3 flex items-center justify-between">
+                              <p className="text-xs text-muted-foreground line-clamp-1 flex-1">{ss.tagline}</p>
+                              <ArrowRight className="w-3.5 h-3.5 text-primary shrink-0 ml-2 group-hover:translate-x-0.5 transition-transform" />
+                            </div>
+                          </Link>
+                        );
+                      })}
+                  </div>
+                </AnimatedSection>
+              )}
+            </div>
+
+            {/* SIDEBAR — rich content filling the column */}
+            <div className="space-y-5">
+              {/* STICKY BLOCK */}
+              <div className="sticky top-24 space-y-5 z-10">
+                <AnimatedSection className="bg-primary text-white rounded-2xl p-6 shadow-xl shadow-primary/20">
+                  <h3 className="font-heading text-xl font-bold mb-2">Get a Quote</h3>
+                  <p className="text-white/80 text-sm mb-4 leading-relaxed">Speak with our {service.shortName} specialists today.</p>
+                  <Button asChild className="w-full bg-white text-primary hover:bg-white/90 rounded-lg font-bold mb-3">
+                    <Link href="/contact">Request a Quote</Link>
+                  </Button>
+                  <a href="tel:+15551234567" className="flex items-center justify-center gap-2 text-white/70 text-xs hover:text-white transition-colors">
+                    <Phone className="w-3.5 h-3.5" /> Schedule a Call
+                  </a>
                 </AnimatedSection>
 
+                {/* KEY STATS */}
+                {SERVICE_SIDEBAR_STATS[service.slug] && (
+                  <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
+                    <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                      <Gauge className="w-3.5 h-3.5 text-primary" /> Key Metrics
+                    </h4>
+                    <div className="space-y-3">
+                      {SERVICE_SIDEBAR_STATS[service.slug].map((stat) => {
+                        const StatIcon = stat.icon;
+                        return (
+                          <div key={stat.label} className="flex items-center gap-3 p-2.5 bg-secondary/40 rounded-xl">
+                            <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
+                              <StatIcon className="w-4 h-4 text-primary" />
+                            </div>
+                            <div>
+                              <p className="font-bold text-foreground text-lg leading-none">{stat.value}</p>
+                              <p className="text-xs text-muted-foreground mt-0.5">{stat.label}</p>
+                            </div>
+                          </div>
+                        );
+                      })}
+                    </div>
+                  </AnimatedSection>
+                )}
+              </div>
+
+              {/* NON-STICKY — fills vertical space */}
+
+              {/* PARENT SERVICE */}
+              <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
+                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                  <Layers className="w-3.5 h-3.5 text-primary" /> Parent Service
+                </h4>
+                <Link href={`/services/${service.slug}`} className="flex items-center gap-3 p-3 bg-muted rounded-xl hover:bg-primary/10 transition-colors group">
+                  <div className="w-10 h-10 bg-primary/10 rounded-lg flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all">
+                    {SERVICE_ICONS[service.slug]}
+                  </div>
+                  <div>
+                    <p className="font-semibold text-foreground text-sm">{service.name}</p>
+                    <p className="text-xs text-muted-foreground">{service.subServices.length} sub-services</p>
+                  </div>
+                  <ArrowRight className="w-4 h-4 text-muted-foreground ml-auto group-hover:text-primary group-hover:translate-x-0.5 transition-all" />
+                </Link>
+              </AnimatedSection>
+
+              {/* KEY STANDARDS */}
+              {SERVICE_STANDARDS[service.slug] && (
                 <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
-                  <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">All Services</h4>
+                  <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                    <ShieldCheck className="w-3.5 h-3.5 text-primary" /> Applicable Standards
+                  </h4>
+                  <div className="space-y-2.5">
+                    {SERVICE_STANDARDS[service.slug].map((std) => (
+                      <div key={std} className="flex items-center gap-2.5 group">
+                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors">
+                          <CheckCircle className="w-3 h-3 text-primary group-hover:text-white transition-colors" />
+                        </div>
+                        <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{std}</span>
+                      </div>
+                    ))}
+                  </div>
+                </AnimatedSection>
+              )}
+
+              {/* DELIVERABLES QUICK COUNT */}
+              <AnimatedSection className="bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 rounded-2xl p-6">
+                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                  <PackageCheck className="w-3.5 h-3.5 text-primary" /> What You'll Receive
+                </h4>
+                <div className="space-y-2">
+                  {subService.deliverables.map((d) => (
+                    <div key={d} className="flex items-center gap-2 text-sm text-muted-foreground">
+                      <span className="w-1.5 h-1.5 rounded-full bg-primary shrink-0" />
+                      {d}
+                    </div>
+                  ))}
+                </div>
+              </AnimatedSection>
+
+              {/* ALL SERVICES */}
+              <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
+                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+                  <Globe className="w-3.5 h-3.5 text-primary" /> All Services
+                </h4>
+                <div className="flex flex-col gap-0.5">
                   {ALL_SERVICES.map((s) => (
-                    <Link key={s.slug} href={`/services/${s.slug}`} className="flex items-center gap-2 text-sm py-1.5 border-b border-border last:border-0 text-muted-foreground hover:text-primary transition-colors">
-                      <div className="w-1.5 h-1.5 rounded-full bg-primary/50 shrink-0" />
-                      {s.shortName}
+                    <Link key={s.slug} href={`/services/${s.slug}`} className="group flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors py-1.5 border-b border-border/60 last:border-0">
+                      <div className="w-6 h-6 bg-primary/8 rounded-md flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                        {SERVICE_ICONS[s.slug]}
+                      </div>
+                      <span className="flex-1">{s.shortName}</span>
+                      <ArrowRight className="w-3 h-3 opacity-0 group-hover:opacity-100 transition-all" />
                     </Link>
                   ))}
-                </AnimatedSection>
-              </div>
+                </div>
+              </AnimatedSection>
+
+              {/* FINAL CTA */}
+              <AnimatedSection className="bg-[#020617] rounded-2xl p-6 text-white border border-primary/20">
+                <h4 className="font-heading text-base font-bold mb-2">Ready to Start?</h4>
+                <p className="text-white/60 text-xs leading-relaxed mb-4">Our {service.shortName} team is ready for a free initial consultation to scope your project.</p>
+                <div className="space-y-2">
+                  <Button asChild size="sm" className="w-full rounded-lg bg-primary hover:bg-primary/90">
+                    <Link href="/contact"><Mail className="w-3.5 h-3.5 mr-2" /> Send an Enquiry</Link>
+                  </Button>
+                  <Button asChild size="sm" variant="outline" className="w-full rounded-lg border-white/20 text-white hover:bg-white/10 hover:text-white">
+                    <Link href="/about"><Users className="w-3.5 h-3.5 mr-2" /> Meet the Team</Link>
+                  </Button>
+                </div>
+              </AnimatedSection>
             </div>
 
           </div>
