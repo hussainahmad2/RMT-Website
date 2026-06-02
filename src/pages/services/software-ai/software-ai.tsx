@@ -272,7 +272,7 @@ export default function SoftwareAiServicePage({ params }: PageProps) {
       </section>
 
       {/* KEY METRICS */}
-      <section className="relative bg-gradient-to-r from-[#2d5e3a] via-[#53875F] to-[#3d7350] py-14 overflow-hidden">
+      <section className="relative bg-gradient-to-r from-[#00BCDC] via-[#00BCDC] to-[#009FB8] py-14 overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:48px_48px]" />
         <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-white/8 -translate-y-1/2 translate-x-1/3 pointer-events-none" aria-hidden />
         <div className="page-container relative z-10">

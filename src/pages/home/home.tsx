@@ -461,7 +461,7 @@ export default function Home() {
         <div className="absolute top-0 left-0 w-[480px] h-[480px] rounded-full border border-primary/[0.05] -translate-x-[25%] -translate-y-[25%] pointer-events-none hidden lg:block" aria-hidden />
         <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full border border-primary/[0.05] translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
         <div className="page-container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
+          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
             <AnimatedSection className="relative min-h-[200px]">
               <ColumnWatermark>
                 <CircuitBg />
@@ -474,12 +474,20 @@ export default function Home() {
                 </p>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
                   {whyChoose.map((item, i) => (
-                    <motion.div key={item.title} initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="bg-card border border-border rounded-xl p-5">
-                      <div className="w-8 h-8 bg-primary/10 rounded-md flex items-center justify-center mb-3">
-                        <CheckCircle className="w-4 h-4 text-primary" />
+                    <motion.div
+                      key={item.title}
+                      initial={{ opacity: 0, y: 20 }}
+                      whileInView={{ opacity: 1, y: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: i * 0.1 }}
+                      className="group relative overflow-hidden bg-card/95 border border-border rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-primary/40 transition-all duration-300"
+                    >
+                      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.08] via-transparent to-cyan-500/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="relative z-10 w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-3 border border-primary/15">
+                        <CheckCircle className="w-5 h-5 text-primary" />
                       </div>
-                      <h4 className="font-semibold text-foreground text-sm mb-1">{item.title}</h4>
-                      <p className="text-muted-foreground text-xs leading-relaxed">{item.description}</p>
+                      <h4 className="relative z-10 font-semibold text-foreground text-sm mb-1.5">{item.title}</h4>
+                      <p className="relative z-10 text-muted-foreground text-xs leading-relaxed">{item.description}</p>
                     </motion.div>
                   ))}
                 </div>
@@ -487,13 +495,26 @@ export default function Home() {
             </AnimatedSection>
 
             <AnimatedSection delay={0.15}>
-              <div className="relative w-full max-w-[380px] sm:max-w-[420px] md:max-w-[480px] mx-auto lg:mx-0">
-                <div className="rounded-2xl overflow-hidden aspect-square shadow-xl">
-                  <img src="https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=700&q=80" alt="RMT USA team of medical device engineers" className="w-full h-full object-cover" />
+              <div className="relative w-full max-w-[380px] sm:max-w-[430px] md:max-w-[500px] mx-auto lg:ml-auto lg:mr-0">
+                <div className="absolute -top-5 -left-5 h-24 w-24 rounded-2xl bg-gradient-to-br from-primary/30 to-cyan-500/30 blur-2xl pointer-events-none" aria-hidden />
+                <div className="absolute -bottom-8 -right-8 h-32 w-32 rounded-full bg-primary/20 blur-3xl pointer-events-none" aria-hidden />
+                <div className="group relative rounded-3xl overflow-hidden aspect-[4/4.6] shadow-2xl border border-white/10">
+                  <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=90" alt="Advanced medical innovation and diagnostics environment" className="w-full h-full object-cover object-center scale-[1.03] group-hover:scale-[1.08] transition-transform duration-700" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/70 via-[#071426]/20 to-transparent" />
+                  <div className="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 shadow-lg backdrop-blur">
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
+                    <span className="text-[11px] font-bold tracking-wider text-slate-700 uppercase">Trusted by global med-tech teams</span>
+                  </div>
                 </div>
-                <div className="absolute -bottom-4 -right-4 bg-background border border-border rounded-xl p-4 sm:p-5 shadow-lg">
+
+                <div className="absolute -bottom-4 -right-4 bg-background/95 border border-border rounded-2xl p-4 sm:p-5 shadow-xl backdrop-blur">
                   <p className="font-heading text-2xl sm:text-3xl font-bold text-primary">98%</p>
                   <p className="text-xs text-muted-foreground mt-1">Regulatory Approval Rate</p>
+                </div>
+
+                <div className="absolute -bottom-4 left-4 bg-slate-900 text-white border border-white/15 rounded-2xl px-4 py-3 shadow-xl">
+                  <p className="text-[11px] uppercase tracking-[0.16em] text-white/70 mb-1">Speed to Market</p>
+                  <p className="font-heading text-xl leading-none">2.4x Faster</p>
                 </div>
               </div>
             </AnimatedSection>
