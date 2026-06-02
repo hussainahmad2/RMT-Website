@@ -1500,6 +1500,738 @@ function SoftwareIconsScatterBg() {
   );
 }
 
+/* ---- Rich image cards (reference UI: badge, tags, explore link, deliverables) ---- */
+function RichSubServiceCard({
+  sub,
+  service,
+  href,
+  image,
+  Icon,
+  delay = 0,
+  variant = "default",
+}: {
+  sub: SubServiceData;
+  service: ServiceData;
+  href: string;
+  image?: string;
+  Icon: React.ElementType;
+  delay?: number;
+  variant?: "default" | "software-ai";
+}) {
+  const isCyan = variant === "software-ai";
+  const badgeClass = isCyan ? "bg-cyan-500/95 text-slate-900" : "bg-primary/90 text-white";
+  const tagClass = isCyan
+    ? "bg-cyan-500/8 text-cyan-700 dark:text-cyan-300 border-cyan-500/20"
+    : "bg-primary/8 text-primary border-primary/15";
+  const cardHover = isCyan ? "hover:border-cyan-400/60" : "hover:border-primary/60";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ delay }}
+    >
+      <Link
+        href={href}
+        className={`group block rounded-2xl overflow-hidden border border-border bg-card ${cardHover} hover:shadow-xl transition-all duration-300`}
+      >
+        <div className="relative aspect-[16/10] overflow-hidden bg-[#060d17]">
+          {image ? (
+            <img
+              src={image}
+              alt={sub.name}
+              loading="lazy"
+              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+            />
+          ) : (
+            <div className="absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent flex items-center justify-center">
+              <Icon className="w-20 h-20 text-primary/20" />
+            </div>
+          )}
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+          <div className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full ${badgeClass}`}>
+            <Icon className="w-3 h-3" />
+            {service.shortName}
+          </div>
+          <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-35 transition-opacity">
+            <Icon className="w-12 h-12 text-white" />
+          </div>
+          <h4 className="absolute bottom-3 left-4 right-4 font-heading text-white text-lg font-bold leading-tight drop-shadow-md group-hover:text-cyan-200 transition-colors">
+            {sub.name}
+          </h4>
+        </div>
+        <div className="p-5">
+          <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">{sub.tagline}</p>
+          <div className="flex flex-wrap gap-1.5 mb-4">
+            {sub.keyPoints.slice(0, 3).map((kp) => (
+              <span key={kp} className={`text-[11px] px-2 py-0.5 rounded-full border ${tagClass}`}>
+                {kp}
+              </span>
+            ))}
+          </div>
+          <div className="flex items-center justify-between gap-3">
+            <div className={`flex items-center gap-1.5 font-semibold text-sm group-hover:gap-2.5 transition-all ${isCyan ? "text-cyan-600 dark:text-cyan-400" : "text-primary"}`}>
+              Explore Service <ArrowRight className="w-4 h-4" />
+            </div>
+            <span className="text-[10px] text-muted-foreground bg-secondary/60 px-2 py-0.5 rounded-full border border-border/60 shrink-0">
+              {sub.deliverables.length} deliverables
+            </span>
+          </div>
+        </div>
+      </Link>
+    </motion.div>
+  );
+}
+
+function RichPortfolioCard({
+  project,
+  delay = 0,
+  Icon = Brain,
+}: {
+  project: SoftwareAIPortfolioProject;
+  delay?: number;
+  Icon?: React.ElementType;
+}) {
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-30px" }}
+      transition={{ delay }}
+      className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-cyan-400/50 hover:shadow-xl transition-all duration-300"
+    >
+      <div className="relative aspect-[16/10] overflow-hidden bg-[#060d17]">
+        <img
+          src={project.image}
+          alt={project.name}
+          loading="lazy"
+          className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
+        <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full bg-cyan-500/95 text-slate-900">
+          <Icon className="w-3 h-3" />
+          {project.tags[0] ?? "Project"}
+        </div>
+        <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-35 transition-opacity">
+          <Icon className="w-12 h-12 text-white" />
+        </div>
+        <h3 className="absolute bottom-3 left-4 right-4 font-heading text-white text-lg font-bold leading-tight drop-shadow-md">
+          {project.name}
+        </h3>
+      </div>
+      <div className="p-5">
+        <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">{project.description}</p>
+        <div className="flex flex-wrap gap-1.5 mb-4">
+          {project.tags.map((t) => (
+            <span
+              key={t}
+              className="text-[11px] px-2 py-0.5 bg-cyan-500/8 text-cyan-700 dark:text-cyan-300 rounded-full border border-cyan-500/20"
+            >
+              {t}
+            </span>
+          ))}
+        </div>
+        <div className="flex items-center justify-between gap-3">
+          <Link
+            href="/contact"
+            className="flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 font-semibold text-sm group-hover:gap-2.5 transition-all"
+          >
+            Explore Project <ArrowRight className="w-4 h-4" />
+          </Link>
+          <span className="text-[10px] text-muted-foreground bg-secondary/60 px-2 py-0.5 rounded-full border border-border/60 shrink-0">
+            {project.tags.length} modules
+          </span>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+/** Circular rings + line grid for Software & AI sections (home-style decor) */
+function SoftwareAIDecorLayer() {
+  return (
+    <>
+      <div className="absolute top-0 right-0 w-[420px] h-[420px] rounded-full border border-cyan-500/15 -translate-y-1/3 translate-x-1/4 pointer-events-none hidden md:block" aria-hidden />
+      <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full border border-primary/15 translate-y-1/3 -translate-x-1/4 pointer-events-none hidden md:block" aria-hidden />
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full border border-primary/8 pointer-events-none hidden lg:block" aria-hidden />
+      <div
+        className="absolute inset-0 opacity-[0.035] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(rgba(56,189,248,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(56,189,248,0.5) 1px, transparent 1px)",
+          backgroundSize: "48px 48px",
+        }}
+        aria-hidden
+      />
+      <div className="absolute left-0 top-1/2 -translate-y-1/2 w-48 h-48 md:w-64 md:h-64 opacity-[0.12] text-primary pointer-events-none hidden sm:block" aria-hidden>
+        <svg viewBox="0 0 200 200" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2">
+          <rect x="30" y="30" width="40" height="40" rx="4" />
+          <rect x="130" y="30" width="40" height="40" rx="4" />
+          <rect x="80" y="110" width="40" height="40" rx="4" />
+          <line x1="70" y1="50" x2="130" y2="50" />
+          <line x1="100" y1="70" x2="100" y2="110" />
+        </svg>
+      </div>
+    </>
+  );
+}
+
+/** Key metrics row — main column, above capabilities */
+function ServiceKeyMetricsBlock({
+  stats,
+  variant = "default",
+}: {
+  stats: { label: string; value: string; icon: React.ElementType }[];
+  variant?: "default" | "software-ai";
+}) {
+  const isCyan = variant === "software-ai";
+  return (
+    <AnimatedSection>
+      <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Key Metrics</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
+        {stats.map((stat) => {
+          const StatIcon = stat.icon;
+          return (
+            <div
+              key={stat.label}
+              className={`relative overflow-hidden rounded-2xl border p-5 text-center ${
+                isCyan
+                  ? "border-cyan-500/20 bg-gradient-to-br from-cyan-500/8 to-indigo-500/5"
+                  : "border-border bg-card"
+              }`}
+            >
+              <div
+                className={`mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full ${
+                  isCyan ? "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400" : "bg-primary/10 text-primary"
+                }`}
+              >
+                <StatIcon className="h-5 w-5" />
+              </div>
+              <p className="font-heading text-3xl font-bold text-foreground leading-none">{stat.value}</p>
+              <p className="mt-1.5 text-xs text-muted-foreground">{stat.label}</p>
+            </div>
+          );
+        })}
+      </div>
+    </AnimatedSection>
+  );
+}
+
+/** Standards with horizontal line structure */
+function ServiceStandardsBlock({
+  standards,
+  variant = "default",
+}: {
+  standards: string[];
+  variant?: "default" | "software-ai";
+}) {
+  const isCyan = variant === "software-ai";
+  return (
+    <AnimatedSection>
+      <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">
+        Compliance & Standards
+      </h2>
+      <div className="relative rounded-2xl border border-border bg-card/50 p-5 sm:p-6">
+        <div className="absolute left-6 right-6 top-[2.6rem] hidden h-px bg-border sm:block" aria-hidden />
+        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+          {standards.map((std, i) => (
+            <div
+              key={std}
+              className={`relative flex flex-1 min-w-[200px] items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${
+                isCyan
+                  ? "border-cyan-500/20 bg-background hover:border-cyan-400/40"
+                  : "border-border bg-background hover:border-primary/30"
+              }`}
+            >
+              <div
+                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
+                  isCyan ? "bg-cyan-500/12 text-cyan-600 dark:text-cyan-400" : "bg-primary/10 text-primary"
+                }`}
+              >
+                <ShieldCheck className="h-4 w-4" />
+              </div>
+              <div className="min-w-0 flex-1">
+                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                  Standard {String(i + 1).padStart(2, "0")}
+                </span>
+                <p className="text-sm font-semibold text-foreground leading-snug">{std}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </AnimatedSection>
+  );
+}
+
+/** Core capabilities — divider line list */
+function ServiceCapabilitiesBlock({
+  capabilities,
+  variant = "default",
+  title = "Core Capabilities",
+}: {
+  capabilities: string[];
+  variant?: "default" | "software-ai";
+  title?: string;
+}) {
+  const isCyan = variant === "software-ai";
+  return (
+    <AnimatedSection>
+      <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">{title}</h2>
+      <div className="divide-y divide-border rounded-2xl border border-border bg-card/40 overflow-hidden">
+        {capabilities.map((cap, i) => (
+          <div
+            key={cap}
+            className={`group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-muted/40 ${
+              isCyan ? "hover:bg-cyan-500/5" : ""
+            }`}
+          >
+            <div
+              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
+                isCyan
+                  ? "bg-cyan-500/12 text-cyan-700 dark:text-cyan-300"
+                  : "bg-primary/10 text-primary"
+              }`}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </div>
+            <span className="flex-1 text-sm font-medium text-foreground group-hover:text-primary transition-colors">{cap}</span>
+            <ArrowRight
+              className={`h-4 w-4 shrink-0 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0.5 ${
+                isCyan ? "text-cyan-600 dark:text-cyan-400" : "text-primary"
+              }`}
+            />
+          </div>
+        ))}
+      </div>
+    </AnimatedSection>
+  );
+}
+
+/** Why Choose RMT — circular card layout */
+function ServiceWhyRMTBlock({
+  items,
+  variant = "default",
+}: {
+  items: { title: string; desc: string }[];
+  variant?: "default" | "software-ai";
+}) {
+  const isCyan = variant === "software-ai";
+  return (
+    <AnimatedSection>
+      <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Why Choose RMT</h2>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+        {items.map((item, i) => (
+          <div key={item.title} className="flex flex-col items-center text-center">
+            <div className="relative mb-4">
+              <div
+                className={`absolute inset-0 rounded-full scale-125 ${
+                  isCyan ? "border border-cyan-500/15" : "border border-primary/15"
+                }`}
+                aria-hidden
+              />
+              <div
+                className={`relative flex h-24 w-24 items-center justify-center rounded-full ${
+                  isCyan
+                    ? "bg-gradient-to-br from-cyan-500/15 to-indigo-500/10 ring-2 ring-cyan-500/20"
+                    : "bg-gradient-to-br from-primary/15 to-primary/5 ring-2 ring-primary/20"
+                }`}
+              >
+                <div
+                  className={`flex h-14 w-14 items-center justify-center rounded-full ${
+                    isCyan ? "bg-cyan-500/20 text-cyan-700 dark:text-cyan-300" : "bg-primary/15 text-primary"
+                  }`}
+                >
+                  <CheckCircle className="h-6 w-6" />
+                </div>
+              </div>
+              <span
+                className={`absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full text-[10px] font-bold text-white ${
+                  isCyan ? "bg-cyan-600" : "bg-primary"
+                }`}
+              >
+                {i + 1}
+              </span>
+            </div>
+            <h4 className="font-semibold text-foreground text-sm mb-2 max-w-[200px]">{item.title}</h4>
+            <p className="text-muted-foreground text-xs leading-relaxed max-w-[220px]">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </AnimatedSection>
+  );
+}
+
+/** Shared sidebar: Get a Quote + Other Services (parent & sub-service pages) */
+function ServicePageSidebar({
+  service,
+  isSoftwareAI = false,
+  quoteHint,
+}: {
+  service: ServiceData;
+  isSoftwareAI?: boolean;
+  quoteHint?: string;
+}) {
+  return (
+    <div className="space-y-5">
+      <div className="sticky top-24 space-y-5 z-10">
+        <AnimatedSection
+          className={`text-white rounded-2xl p-6 shadow-xl ${
+            isSoftwareAI
+              ? "bg-gradient-to-br from-[#020617] to-[#0a1628] border border-cyan-500/25 shadow-cyan-500/10"
+              : "bg-primary shadow-primary/20"
+          }`}
+        >
+          <h3 className="font-heading text-xl font-bold mb-2">Get a Quote</h3>
+          <p className={`text-sm mb-5 leading-relaxed ${isSoftwareAI ? "text-white/70" : "text-white/80"}`}>
+            {quoteHint ?? "Discuss your requirements with our specialists and receive a tailored proposal."}
+          </p>
+          <Button
+            asChild
+            className={`w-full rounded-lg font-bold mb-3 ${
+              isSoftwareAI ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300" : "bg-white text-primary hover:bg-white/90"
+            }`}
+          >
+            <Link href="/contact">Request a Quote</Link>
+          </Button>
+          <a href="tel:+15551234567" className="flex items-center justify-center gap-2 text-white/70 text-xs hover:text-white transition-colors">
+            <Phone className="w-3.5 h-3.5" />
+            Schedule a Call
+          </a>
+        </AnimatedSection>
+
+        <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
+          <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+            <Globe className="w-3.5 h-3.5 text-primary" /> Other Services
+          </h4>
+          <div className="flex flex-col gap-0.5">
+            {ALL_SERVICES.filter((s) => s.slug !== service.slug).map((s) => (
+              <Link
+                key={s.slug}
+                href={`/services/${s.slug}`}
+                className="group flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/60 last:border-0"
+              >
+                <div className="w-6 h-6 bg-primary/8 rounded-md flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                  {SERVICE_ICONS[s.slug]}
+                </div>
+                <span className="flex-1">{s.shortName}</span>
+                <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+              </Link>
+            ))}
+          </div>
+        </AnimatedSection>
+      </div>
+    </div>
+  );
+}
+
+const SOFTWARE_AI_SUB_GALLERY: Record<string, string[]> = {
+  "custom-medical-software": [
+    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=80",
+    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80",
+    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&q=80",
+  ],
+  "software-compliance": [
+    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80",
+    "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=900&q=80",
+    "https://images.unsplash.com/photo-1555949963-aa79dcee981c?w=900&q=80",
+  ],
+  "ai-solutions": [
+    "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=900&q=80",
+    "https://images.unsplash.com/photo-1639762681485-74b7f0150504?w=900&q=80",
+    "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=900&q=80",
+  ],
+  "cloud-devops": [
+    "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=900&q=80",
+    "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=80",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+  ],
+  "software-quality-assurance": [
+    "https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&q=80",
+    "https://images.unsplash.com/photo-1581092918056-0c4c3acd3780?w=900&q=80",
+    "https://images.unsplash.com/photo-1504639725590-34d0984388bd?w=900&q=80",
+  ],
+};
+
+const SOFTWARE_AI_APPROACH_STEPS = [
+  { step: "01", title: "Discover", desc: "Requirements, intended use, regulatory pathway, and stakeholder alignment." },
+  { step: "02", title: "Design", desc: "Architecture, UX, security, and traceability mapped to applicable standards." },
+  { step: "03", title: "Build & Validate", desc: "Development, V&V, cybersecurity testing, and documentation for submission." },
+  { step: "04", title: "Deploy & Support", desc: "Release, cloud deployment, monitoring, and post-market change control." },
+];
+
+/** Full-width breakout inside page-container */
+function FullBleedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
+  return (
+    <div className={`relative left-1/2 -translate-x-1/2 w-screen max-w-[100vw] my-6 sm:my-8 ${className}`}>
+      {children}
+    </div>
+  );
+}
+
+/** Home-style centered stats bar (prominent) */
+function ProminentMetricsBar({
+  stats,
+  title = "Key Metrics",
+}: {
+  stats: { label: string; value: string; icon: React.ElementType }[];
+  title?: string;
+}) {
+  return (
+    <FullBleedSection>
+      <section className="bg-gradient-to-r from-cyan-600 via-cyan-500 to-teal-600 py-10 sm:py-12 shadow-lg">
+        <div className="page-container">
+          <p className="text-center text-white/85 text-xs font-bold uppercase tracking-[0.2em] mb-2">{title}</p>
+          <h3 className="text-center font-heading text-2xl sm:text-3xl font-bold text-white mb-8 sm:mb-10">
+            Proven Impact at Scale
+          </h3>
+          <div className={`grid gap-8 mx-auto max-w-4xl ${
+            stats.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 lg:grid-cols-4"
+          }`}>
+            {stats.map((stat, i) => {
+              const StatIcon = stat.icon;
+              return (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 16 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="text-center text-white"
+                >
+                  <div className="flex justify-center mb-3 opacity-90">
+                    <StatIcon className="w-6 h-6 sm:w-7 sm:h-7" />
+                  </div>
+                  <div className="font-heading text-4xl sm:text-5xl font-bold leading-none">{stat.value}</div>
+                  <div className="text-white/75 text-sm mt-2 font-medium">{stat.label}</div>
+                </motion.div>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+    </FullBleedSection>
+  );
+}
+
+/** Centered prominent standards strip */
+function ProminentStandardsSection({ standards }: { standards: string[] }) {
+  return (
+    <FullBleedSection>
+      <section className="bg-secondary/40 border-y border-border py-10 sm:py-12">
+        <div className="page-container text-center">
+          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-[0.2em] mb-2">
+            Compliance & Standards
+          </p>
+          <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-8">
+            Built for Regulated Healthcare Software
+          </h3>
+          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+            {standards.map((std) => (
+              <span
+                key={std}
+                className="inline-flex items-center gap-2 px-4 py-2.5 rounded-full border border-cyan-500/25 bg-background text-sm font-semibold text-foreground shadow-sm hover:border-cyan-400/50 hover:bg-cyan-500/5 transition-colors"
+              >
+                <ShieldCheck className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />
+                {std}
+              </span>
+            ))}
+          </div>
+        </div>
+      </section>
+    </FullBleedSection>
+  );
+}
+
+/** Framed image block for sub-service content sections */
+function SubServiceImageFrame({
+  src,
+  alt,
+  badge,
+  Icon,
+  className = "",
+  size = "md",
+}: {
+  src: string;
+  alt: string;
+  badge?: string;
+  Icon?: React.ElementType;
+  className?: string;
+  size?: "sm" | "md";
+}) {
+  const BadgeIcon = Icon ?? Brain;
+  const sizeClass =
+    size === "sm"
+      ? "max-w-[280px] mx-auto aspect-[2/1]"
+      : "max-w-md sm:max-w-lg mx-auto aspect-[5/3]";
+
+  return (
+    <div className={`relative w-full overflow-hidden rounded-xl border border-border bg-muted/20 shadow-md ${sizeClass} ${className}`}>
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        className="absolute inset-0 h-full w-full object-cover object-center"
+      />
+      <div className="absolute inset-0 bg-gradient-to-t from-black/35 via-transparent to-transparent pointer-events-none" />
+      {badge && (
+        <div className="absolute bottom-2.5 left-2.5 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/95 text-slate-900 text-[9px] font-bold uppercase tracking-widest">
+          <BadgeIcon className="w-3 h-3 shrink-0" />
+          {badge}
+        </div>
+      )}
+    </div>
+  );
+}
+
+/** Rich in-depth layout for Software & AI sub-service pages */
+function SoftwareAISubServiceContent({
+  subService,
+  service,
+  subHeroImage,
+  subPageIcons,
+}: {
+  subService: SubServiceData;
+  service: ServiceData;
+  subHeroImage: string;
+  subPageIcons: React.ElementType[];
+}) {
+  const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? Brain;
+  const gallery = SOFTWARE_AI_SUB_GALLERY[subService.slug] ?? [subHeroImage, ...SOFTWARE_AI_HERO_IMAGES.slice(0, 2)];
+
+  return (
+    <div className="space-y-10 sm:space-y-12">
+      {/* Intro — text first, compact centered image below */}
+      <AnimatedSection>
+        <div className="text-center lg:text-left max-w-3xl lg:max-w-none">
+          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Service Overview</p>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">{subService.name}</h2>
+          <p className="text-muted-foreground leading-relaxed text-[15px] mb-4">{subService.overview[0]}</p>
+          <p className="text-sm font-medium text-foreground/80 italic border-l-2 border-cyan-500/40 pl-4 lg:mx-0 mx-auto max-w-xl">
+            {subService.tagline}
+          </p>
+        </div>
+        <div className="mt-6 sm:mt-8 flex justify-center lg:justify-start">
+          <SubServiceImageFrame
+            src={subHeroImage}
+            alt={subService.name}
+            badge="Software & AI"
+            Icon={SubIcon}
+            size="md"
+          />
+        </div>
+      </AnimatedSection>
+
+      {subService.overview.slice(1).map((para, i) => (
+        <AnimatedSection key={para}>
+          <div className="max-w-3xl mx-auto lg:mx-0 space-y-5">
+            <p className="text-muted-foreground leading-relaxed text-[15px] text-center lg:text-left">{para}</p>
+            <div className="flex justify-center lg:justify-start pt-1">
+              <SubServiceImageFrame
+                src={gallery[(i + 1) % gallery.length]}
+                alt=""
+                size="sm"
+              />
+            </div>
+          </div>
+        </AnimatedSection>
+      ))}
+
+      {SERVICE_SIDEBAR_STATS[service.slug] && (
+        <ProminentMetricsBar stats={SERVICE_SIDEBAR_STATS[service.slug]} />
+      )}
+
+      {SERVICE_STANDARDS[service.slug] && (
+        <ProminentStandardsSection standards={SERVICE_STANDARDS[service.slug]} />
+      )}
+
+      <AnimatedSection>
+        <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border text-center lg:text-left">
+          Key Highlights
+        </h2>
+        <div className="divide-y divide-border rounded-2xl border border-border bg-card/40 overflow-hidden max-w-3xl lg:max-w-none mx-auto">
+          {subService.keyPoints.map((point, idx) => {
+            const HlIcon = subPageIcons[idx % subPageIcons.length];
+            return (
+              <div key={point} className="group flex items-center gap-4 px-5 py-3.5 hover:bg-cyan-500/5 transition-colors">
+                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/12 text-cyan-700 dark:text-cyan-300">
+                  <HlIcon className="h-4 w-4" />
+                </div>
+                <span className="flex-1 text-sm font-medium text-foreground">{point}</span>
+              </div>
+            );
+          })}
+        </div>
+      </AnimatedSection>
+
+      <AnimatedSection>
+        <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border text-center lg:text-left">
+          In Depth
+        </h2>
+        <div className="space-y-4 max-w-3xl lg:max-w-none mx-auto">
+          {subService.keyPoints.map((point, idx) => (
+            <motion.div
+              key={point}
+              initial={{ opacity: 0, y: 12 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.04 }}
+              className="rounded-xl border border-border bg-card px-5 py-4 hover:border-cyan-400/25 transition-colors"
+            >
+              <div className="flex items-start gap-3">
+                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-600 text-[11px] font-bold text-white">
+                  {idx + 1}
+                </span>
+                <div className="min-w-0 flex-1">
+                  <h4 className="font-semibold text-foreground text-sm mb-1.5 leading-snug">{point}</h4>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {idx === 0
+                      ? subService.tagline
+                      : subService.overview[(idx - 1) % subService.overview.length]}
+                  </p>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </div>
+      </AnimatedSection>
+
+      <div className="pt-2">
+        <ServiceCapabilitiesBlock
+          capabilities={subService.deliverables}
+          variant="software-ai"
+          title="Deliverables"
+        />
+      </div>
+
+      <AnimatedSection>
+        <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border text-center">
+          Our Approach
+        </h2>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl lg:max-w-none mx-auto">
+          {SOFTWARE_AI_APPROACH_STEPS.map((s, i) => (
+            <div key={s.step} className="relative bg-card border border-border rounded-xl p-4 text-center hover:border-cyan-400/30 transition-colors">
+              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 ring-2 ring-cyan-500/20">
+                <span className="font-heading text-base font-bold text-cyan-700 dark:text-cyan-300">{s.step}</span>
+              </div>
+              <h4 className="font-semibold text-foreground text-sm mb-1">{s.title}</h4>
+              <p className="text-muted-foreground text-xs leading-relaxed">{s.desc}</p>
+              {i < SOFTWARE_AI_APPROACH_STEPS.length - 1 && (
+                <div className="hidden lg:block absolute top-1/2 -right-2 w-4 h-px bg-cyan-500/30" aria-hidden />
+              )}
+            </div>
+          ))}
+        </div>
+      </AnimatedSection>
+
+      <ServiceCapabilitiesBlock capabilities={service.capabilities} variant="software-ai" />
+
+      <ServiceWhyRMTBlock items={service.whyRMT} variant="software-ai" />
+    </div>
+  );
+}
+
 /* ======================================================
    SERVICE DETAIL
 ====================================================== */
@@ -1544,7 +2276,12 @@ export function ServiceDetail({
       {/* UNIQUE HERO per service */}
       <section className={`relative bg-[#060d17] overflow-hidden ${isSoftwareAI ? "min-h-[80vh] flex items-center py-16" : "py-20"}`}>
         {isSoftwareAI ? (
-          <CinematicHeroBackground images={SOFTWARE_AI_HERO_IMAGES} alt={service.name} />
+          <>
+            <CinematicHeroBackground images={SOFTWARE_AI_HERO_IMAGES} alt={service.name} />
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full border border-cyan-400/15 -translate-y-1/2 translate-x-1/2 pointer-events-none" aria-hidden />
+            <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full border border-indigo-400/15 translate-y-1/2 -translate-x-1/2 pointer-events-none" aria-hidden />
+            <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[600px] h-[600px] rounded-full border border-white/5 pointer-events-none hidden lg:block" aria-hidden />
+          </>
         ) : (
           <>
             {/* Decorative circles */}
@@ -1615,9 +2352,10 @@ export function ServiceDetail({
 
       {/* OVERVIEW */}
       <section className="relative overflow-hidden bg-background py-16">
+        {isSoftwareAI ? <SoftwareAIDecorLayer /> : null}
         <SoftwareIconsScatterBg />
         <div className={`${containerClass} relative z-10`}>
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
             <div className="lg:col-span-2 space-y-10">
 
               <AnimatedSection>
@@ -1629,15 +2367,19 @@ export function ServiceDetail({
                 </div>
               </AnimatedSection>
 
-              {/* SUB-SERVICES ??rich image cards for all services */}
+              {/* SUB-SERVICES — rich image cards */}
               <AnimatedSection>
                 <div className="flex items-end justify-between gap-4 mb-5 pb-3 border-b border-border">
                   <h2 className="font-heading text-3xl font-bold text-foreground">Services Included</h2>
-                  <span className="hidden sm:inline-flex text-[11px] font-bold text-primary/70 bg-primary/8 px-2.5 py-1 rounded-full border border-primary/15 shrink-0">
+                  <span className={`hidden sm:inline-flex text-[11px] font-bold px-2.5 py-1 rounded-full border shrink-0 ${
+                    isSoftwareAI
+                      ? "text-cyan-600 bg-cyan-500/10 border-cyan-500/20"
+                      : "text-primary/70 bg-primary/8 border-primary/15"
+                  }`}>
                     {service.subServices.length} services
                   </span>
                 </div>
-                <div className={isSoftwareAI ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" : "grid sm:grid-cols-2 gap-5"}>
+                <div className="grid sm:grid-cols-2 gap-5">
                   {service.subServices.map((sub, i) => {
                     const img = isSoftwareAI
                       ? SOFTWARE_AI_SUB_IMAGES[sub.slug]
@@ -1646,139 +2388,53 @@ export function ServiceDetail({
                       ? (SOFTWARE_AI_SUB_ICONS[sub.slug] ?? CheckCircle)
                       : (SERVICE_SCATTER_ICONS[service.slug]?.[i % (SERVICE_SCATTER_ICONS[service.slug]?.length ?? 1)] ?? CheckCircle);
 
-                    if (isSoftwareAI) {
-                      return (
-                        <motion.div
-                          key={sub.slug}
-                          initial={{ opacity: 0, y: 12 }}
-                          whileInView={{ opacity: 1, y: 0 }}
-                          viewport={{ once: true, margin: "-20px" }}
-                          transition={{ delay: i * 0.04 }}
-                        >
-                          <Link
-                            href={`/services/${service.slug}/${sub.slug}`}
-                            className="group block relative rounded-xl overflow-hidden border border-border aspect-[4/3] hover:border-cyan-400/50 hover:shadow-lg transition-all duration-300"
-                          >
-                            {img ? (
-                              <img
-                                src={img}
-                                alt={sub.name}
-                                loading="lazy"
-                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                              />
-                            ) : (
-                              <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/20 to-indigo-600/30" />
-                            )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
-                            <div className="absolute inset-x-0 bottom-0 p-3">
-                              <h4 className="font-heading text-white text-sm font-bold leading-snug drop-shadow-md">
-                                {sub.name}
-                              </h4>
-                            </div>
-                          </Link>
-                        </motion.div>
-                      );
-                    }
-
                     return (
-                      <motion.div
+                      <RichSubServiceCard
                         key={sub.slug}
-                        initial={{ opacity: 0, y: 20 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-30px" }}
-                        transition={{ delay: i * 0.06 }}
-                      >
-                        <Link
-                          href={`/services/${service.slug}/${sub.slug}`}
-                          className="group block rounded-2xl overflow-hidden border border-border bg-card hover:border-primary/60 hover:shadow-xl transition-all duration-300"
-                        >
-                          <div className="relative aspect-[16/10] overflow-hidden bg-[#060d17]">
-                            {img ? (
-                              <img
-                                src={img}
-                                alt={sub.name}
-                                loading="lazy"
-                                className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
-                              />
-                            ) : (
-                              <div className={`absolute inset-0 bg-gradient-to-br from-primary/20 via-primary/10 to-transparent flex items-center justify-center`}>
-                                <SubIcon className="w-20 h-20 text-primary/20" />
-                              </div>
-                            )}
-                            <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
-                            {/* Icon badge top-left */}
-                            <div className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full ${isSoftwareAI ? "bg-cyan-400/90 text-slate-900" : "bg-primary/90 text-white"}`}>
-                              <SubIcon className="w-3 h-3" />
-                              {service.shortName}
-                            </div>
-                            {/* Large floating icon in top-right */}
-                            <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-35 transition-opacity">
-                              <SubIcon className="w-12 h-12 text-white" />
-                            </div>
-                            <div className="absolute bottom-3 left-4 right-4">
-                              <h4 className="font-heading text-white text-lg font-bold leading-tight drop-shadow-md group-hover:text-primary/90 transition-colors">
-                                {sub.name}
-                              </h4>
-                            </div>
-                          </div>
-                          <div className="p-5">
-                            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">
-                              {sub.tagline}
-                            </p>
-                            <div className="flex flex-wrap gap-1.5 mb-4">
-                              {sub.keyPoints.slice(0, 3).map((kp) => (
-                                <span
-                                  key={kp}
-                                  className="text-[11px] px-2 py-0.5 bg-primary/8 text-primary rounded-full border border-primary/15"
-                                >
-                                  {kp}
-                                </span>
-                              ))}
-                            </div>
-                            <div className="flex items-center justify-between">
-                              <div className="flex items-center gap-1.5 text-primary font-semibold text-sm group-hover:gap-2.5 transition-all">
-                                Explore Service <ArrowRight className="w-4 h-4" />
-                              </div>
-                              <span className="text-[10px] text-muted-foreground bg-secondary/60 px-2 py-0.5 rounded-full border border-border/60">
-                                {sub.deliverables.length} deliverables
-                              </span>
-                            </div>
-                          </div>
-                        </Link>
-                      </motion.div>
+                        sub={sub}
+                        service={service}
+                        href={`/services/${service.slug}/${sub.slug}`}
+                        image={img}
+                        Icon={SubIcon}
+                        delay={i * 0.06}
+                        variant={isSoftwareAI ? "software-ai" : "default"}
+                      />
                     );
                   })}
                 </div>
               </AnimatedSection>
 
-              {/* CAPABILITIES */}
-              <AnimatedSection>
-                <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Core Capabilities</h2>
-                <div className="grid sm:grid-cols-2 gap-3">
-                  {service.capabilities.map((cap) => (
-                    <div key={cap} className="flex items-center gap-3 p-3 rounded-lg hover:bg-muted transition-colors">
-                      <div className="w-2 h-2 rounded-full bg-primary shrink-0" />
-                      <span className="text-sm text-muted-foreground">{cap}</span>
-                    </div>
-                  ))}
-                </div>
-              </AnimatedSection>
+              {SERVICE_SIDEBAR_STATS[service.slug] && (
+                isSoftwareAI ? (
+                  <ProminentMetricsBar stats={SERVICE_SIDEBAR_STATS[service.slug]} />
+                ) : (
+                  <ServiceKeyMetricsBlock
+                    stats={SERVICE_SIDEBAR_STATS[service.slug]}
+                    variant="default"
+                  />
+                )
+              )}
 
-              {/* WHY RMT */}
-              <AnimatedSection>
-                <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Why Choose RMT</h2>
-                <div className={`grid gap-5 ${service.whyRMT.length > 3 ? "sm:grid-cols-2 lg:grid-cols-3" : "sm:grid-cols-3"}`}>
-                  {service.whyRMT.map((item) => (
-                    <div key={item.title} className="bg-card border border-border rounded-xl p-5">
-                      <div className="w-8 h-8 bg-primary/10 rounded-md flex items-center justify-center mb-3">
-                        <CheckCircle className="w-4 h-4 text-primary" />
-                      </div>
-                      <h4 className="font-semibold text-foreground text-sm mb-2">{item.title}</h4>
-                      <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
-                    </div>
-                  ))}
-                </div>
-              </AnimatedSection>
+              {SERVICE_STANDARDS[service.slug] && (
+                isSoftwareAI ? (
+                  <ProminentStandardsSection standards={SERVICE_STANDARDS[service.slug]} />
+                ) : (
+                  <ServiceStandardsBlock
+                    standards={SERVICE_STANDARDS[service.slug]}
+                    variant="default"
+                  />
+                )
+              )}
+
+              <ServiceCapabilitiesBlock
+                capabilities={service.capabilities}
+                variant={isSoftwareAI ? "software-ai" : "default"}
+              />
+
+              <ServiceWhyRMTBlock
+                items={service.whyRMT}
+                variant={isSoftwareAI ? "software-ai" : "default"}
+              />
 
               {isEngineering && <EngineeringMethodology />}
 
@@ -1791,14 +2447,26 @@ export function ServiceDetail({
 
             </div>
 
-            {/* SIDEBAR */}
+            {/* SIDEBAR — quote + other services only */}
             <div className="space-y-5">
-              {/* STICKY BLOCK */}
               <div className="sticky top-24 space-y-5 z-10">
-                <AnimatedSection className="bg-primary text-white rounded-2xl p-6 shadow-xl shadow-primary/20">
+                <AnimatedSection className={`text-white rounded-2xl p-6 shadow-xl ${
+                  isSoftwareAI
+                    ? "bg-gradient-to-br from-[#020617] to-[#0a1628] border border-cyan-500/25 shadow-cyan-500/10"
+                    : "bg-primary shadow-primary/20"
+                }`}>
                   <h3 className="font-heading text-xl font-bold mb-2">Get a Quote</h3>
-                  <p className="text-white/80 text-sm mb-5 leading-relaxed">Discuss your requirements with our specialists and receive a tailored proposal.</p>
-                  <Button asChild className="w-full bg-white text-primary hover:bg-white/90 rounded-lg font-bold mb-3">
+                  <p className={`text-sm mb-5 leading-relaxed ${isSoftwareAI ? "text-white/70" : "text-white/80"}`}>
+                    Discuss your requirements with our specialists and receive a tailored proposal.
+                  </p>
+                  <Button
+                    asChild
+                    className={`w-full rounded-lg font-bold mb-3 ${
+                      isSoftwareAI
+                        ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300"
+                        : "bg-white text-primary hover:bg-white/90"
+                    }`}
+                  >
                     <Link href="/contact">Request a Quote</Link>
                   </Button>
                   <a href="tel:+15551234567" className="flex items-center justify-center gap-2 text-white/70 text-xs hover:text-white transition-colors">
@@ -1807,105 +2475,28 @@ export function ServiceDetail({
                   </a>
                 </AnimatedSection>
 
-                {/* KEY STATS */}
-                {SERVICE_SIDEBAR_STATS[service.slug] && (
-                  <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
-                    <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
-                      <Gauge className="w-3.5 h-3.5 text-primary" /> Key Metrics
-                    </h4>
-                    <div className="space-y-3">
-                      {SERVICE_SIDEBAR_STATS[service.slug].map((stat) => {
-                        const StatIcon = stat.icon;
-                        return (
-                          <div key={stat.label} className="flex items-center gap-3 p-2.5 bg-secondary/40 rounded-xl">
-                            <div className="w-9 h-9 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                              <StatIcon className="w-4 h-4 text-primary" />
-                            </div>
-                            <div>
-                              <p className="font-bold text-foreground text-lg leading-none">{stat.value}</p>
-                              <p className="text-xs text-muted-foreground mt-0.5">{stat.label}</p>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-                  </AnimatedSection>
-                )}
-              </div>
-
-              {/* NON-STICKY: fills vertical space */}
-
-              {/* KEY STANDARDS */}
-              {SERVICE_STANDARDS[service.slug] && (
                 <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
                   <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-primary" /> Applicable Standards
+                    <Globe className="w-3.5 h-3.5 text-primary" /> Other Services
                   </h4>
-                  <div className="space-y-2.5">
-                    {SERVICE_STANDARDS[service.slug].map((std) => (
-                      <div key={std} className="flex items-center gap-2.5 group">
-                        <div className="w-5 h-5 rounded-full bg-primary/10 flex items-center justify-center shrink-0 group-hover:bg-primary transition-colors">
-                          <CheckCircle className="w-3 h-3 text-primary group-hover:text-white transition-colors" />
+                  <div className="flex flex-col gap-0.5">
+                    {ALL_SERVICES.filter((s) => s.slug !== service.slug).map((s) => (
+                      <Link
+                        key={s.slug}
+                        href={`/services/${s.slug}`}
+                        className="group flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/60 last:border-0"
+                      >
+                        <div className="w-6 h-6 bg-primary/8 rounded-md flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
+                          {SERVICE_ICONS[s.slug]}
                         </div>
-                        <span className="text-sm text-muted-foreground group-hover:text-foreground transition-colors">{std}</span>
-                      </div>
+                        <span className="flex-1">{s.shortName}</span>
+                        <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
+                      </Link>
                     ))}
                   </div>
                 </AnimatedSection>
-              )}
+              </div>
 
-              {/* WHY RMT QUICK POINTS */}
-              <AnimatedSection className="bg-gradient-to-br from-primary/5 to-primary/10 border border-primary/20 rounded-2xl p-6">
-                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
-                  <Star className="w-3.5 h-3.5 text-primary" /> Why Choose RMT
-                </h4>
-                <div className="space-y-3">
-                  {service.whyRMT.map((item) => (
-                    <div key={item.title} className="flex items-start gap-2.5">
-                      <Medal className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                      <div>
-                        <p className="text-sm font-semibold text-foreground leading-snug">{item.title}</p>
-                        <p className="text-xs text-muted-foreground mt-0.5 leading-relaxed">{item.desc}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </AnimatedSection>
-
-              {/* CORE CAPABILITIES QUICK TAGS */}
-              <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
-                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
-                  <Layers className="w-3.5 h-3.5 text-primary" /> Core Capabilities
-                </h4>
-                <div className="flex flex-wrap gap-2">
-                  {service.capabilities.map((cap) => (
-                    <span key={cap} className="inline-flex items-center gap-1 text-[11px] px-2.5 py-1 bg-secondary/60 text-muted-foreground rounded-full border border-border/60 hover:bg-primary/10 hover:text-primary hover:border-primary/20 transition-colors cursor-default">
-                      <span className="w-1 h-1 rounded-full bg-primary/60 shrink-0" />
-                      {cap}
-                    </span>
-                  ))}
-                </div>
-              </AnimatedSection>
-
-              {/* OTHER SERVICES */}
-              <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
-                <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
-                  <Globe className="w-3.5 h-3.5 text-primary" /> Other Services
-                </h4>
-                <div className="flex flex-col gap-0.5">
-                  {ALL_SERVICES.filter((s) => s.slug !== service.slug).map((s) => (
-                    <Link key={s.slug} href={`/services/${s.slug}`} className="group flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/60 last:border-0">
-                      <div className="w-6 h-6 bg-primary/8 rounded-md flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
-                        {SERVICE_ICONS[s.slug]}
-                      </div>
-                      <span className="flex-1">{s.shortName}</span>
-                      <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-                    </Link>
-                  ))}
-                </div>
-              </AnimatedSection>
-
-              {/* CONTACT CTA */}
               {!isSoftwareAI && (
               <AnimatedSection className="bg-[#020617] rounded-2xl p-6 text-white border border-primary/20">
                 <h4 className="font-heading text-base font-bold mb-2">Ready to Start?</h4>
@@ -1926,13 +2517,15 @@ export function ServiceDetail({
       </section>
 
       {isSoftwareAI && (
-        <section className="py-14 bg-muted/30 border-t border-border">
-          <div className={containerClass}>
+        <section className="py-24 bg-secondary/30 border-t border-border relative overflow-hidden">
+          <SoftwareAIDecorLayer />
+          <div className={`${containerClass} relative z-10`}>
             <AnimatedSection>
               <div className="flex items-end justify-between gap-4 mb-8 pb-3 border-b border-border">
-                <div>
-                  <h2 className="font-heading text-3xl font-bold text-foreground">Our Projects</h2>
-                  <p className="text-muted-foreground text-sm mt-1">
+                <div className="relative">
+                  <p className="text-cyan-600 dark:text-cyan-400 font-semibold text-sm uppercase tracking-widest mb-2">Portfolio</p>
+                  <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">Our Projects</h2>
+                  <p className="text-muted-foreground text-sm mt-2 max-w-xl">
                     Software and AI platforms we have delivered for healthcare and digital health clients.
                   </p>
                 </div>
@@ -1940,44 +2533,9 @@ export function ServiceDetail({
                   {SOFTWARE_AI_PORTFOLIO.length} projects
                 </span>
               </div>
-              <div className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
+              <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
                 {SOFTWARE_AI_PORTFOLIO.map((p, i) => (
-                  <motion.article
-                    key={p.name}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true, margin: "-20px" }}
-                    transition={{ delay: i * 0.05 }}
-                    className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-cyan-400/40 hover:shadow-lg transition-all duration-300"
-                  >
-                    <div className="relative aspect-[4/3] overflow-hidden bg-[#020617]">
-                      <img
-                        src={p.image}
-                        alt={p.name}
-                        loading="lazy"
-                        className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/75 via-black/20 to-transparent" />
-                      <h3 className="absolute bottom-3 left-3 right-3 font-heading text-white text-lg font-bold drop-shadow-md">
-                        {p.name}
-                      </h3>
-                    </div>
-                    <div className="p-4">
-                      <p className="text-muted-foreground text-xs leading-relaxed mb-3 line-clamp-3">
-                        {p.description}
-                      </p>
-                      <div className="flex flex-wrap gap-1">
-                        {p.tags.map((t) => (
-                          <span
-                            key={t}
-                            className="text-[10px] px-2 py-0.5 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300 rounded-full border border-cyan-500/20 font-medium"
-                          >
-                            {t}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  </motion.article>
+                  <RichPortfolioCard key={p.name} project={p} delay={i * 0.06} Icon={Brain} />
                 ))}
               </div>
             </AnimatedSection>
@@ -2066,7 +2624,11 @@ export function SubServiceDetail({
       {/* HERO */}
       <section className={`relative bg-[#060d17] overflow-hidden flex items-center ${isSoftwareAI ? "min-h-[80vh] py-16" : "min-h-[520px] py-24"}`}>
         {isSoftwareAI ? (
-          <CinematicHeroBackground images={subHeroCarouselImages} alt={subService.name} />
+          <>
+            <CinematicHeroBackground images={subHeroCarouselImages} alt={subService.name} />
+            <div className="absolute top-0 right-0 w-96 h-96 rounded-full border border-cyan-400/15 -translate-y-1/2 translate-x-1/2 pointer-events-none" aria-hidden />
+            <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full border border-indigo-400/15 translate-y-1/2 -translate-x-1/2 pointer-events-none" aria-hidden />
+          </>
         ) : (
           <>
             <div
@@ -2170,13 +2732,21 @@ export function SubServiceDetail({
 
       {/* CONTENT */}
       <section className="relative overflow-hidden bg-background py-16">
+        {isSoftwareAI ? <SoftwareAIDecorLayer /> : null}
         <SoftwareIconsScatterBg />
         <div className={`${containerClass} relative z-10`}>
-          <div className="grid lg:grid-cols-3 gap-12">
+          <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
 
             <div className="lg:col-span-2 space-y-10">
-
-              {/* Overview with icon */}
+              {isSoftwareAI ? (
+                <SoftwareAISubServiceContent
+                  subService={subService}
+                  service={service}
+                  subHeroImage={subHeroImage}
+                  subPageIcons={subPageIcons}
+                />
+              ) : (
+                <>
               <AnimatedSection>
                 <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
                   <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center text-primary">
@@ -2191,7 +2761,6 @@ export function SubServiceDetail({
                 </div>
               </AnimatedSection>
 
-              {/* KEY HIGHLIGHTS ??redesigned with icons */}
               <AnimatedSection>
                 <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
                   <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -2223,7 +2792,6 @@ export function SubServiceDetail({
                 </div>
               </AnimatedSection>
 
-              {/* DELIVERABLES ??enhanced */}
               <AnimatedSection>
                 <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
                   <div className="w-8 h-8 bg-primary/10 rounded-lg flex items-center justify-center">
@@ -2250,7 +2818,6 @@ export function SubServiceDetail({
                 </div>
               </AnimatedSection>
 
-              {/* OTHER SUB-SERVICES ??enhanced with images */}
               {service.subServices.filter((ss) => ss.slug !== subService.slug).length > 0 && (
                 <AnimatedSection>
                   <div className="flex items-center gap-3 mb-5 pb-3 border-b border-border">
@@ -2261,49 +2828,12 @@ export function SubServiceDetail({
                       Other {service.shortName} Services
                     </h2>
                   </div>
-                  <div className={isSoftwareAI ? "grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3" : "grid sm:grid-cols-2 gap-4"}>
+                  <div className="grid sm:grid-cols-2 gap-5">
                     {service.subServices
                       .filter((ss) => ss.slug !== subService.slug)
                       .map((ss, idx) => {
-                        const ssImg = isSoftwareAI
-                          ? SOFTWARE_AI_SUB_IMAGES[ss.slug]
-                          : (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? [])[idx % Math.max(1, (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? []).length)];
-                        const SsIcon = isSoftwareAI
-                          ? (SOFTWARE_AI_SUB_ICONS[ss.slug] ?? CheckCircle)
-                          : (SERVICE_SCATTER_ICONS[service.slug]?.[idx % (SERVICE_SCATTER_ICONS[service.slug]?.length ?? 1)] ?? CheckCircle);
-
-                        if (isSoftwareAI) {
-                          return (
-                            <motion.div
-                              key={ss.slug}
-                              initial={{ opacity: 0, y: 12 }}
-                              whileInView={{ opacity: 1, y: 0 }}
-                              viewport={{ once: true, margin: "-20px" }}
-                              transition={{ delay: idx * 0.04 }}
-                            >
-                              <Link
-                                href={`/services/${service.slug}/${ss.slug}`}
-                                className="group block relative rounded-xl overflow-hidden border border-border aspect-[4/3] hover:border-cyan-400/50 hover:shadow-lg transition-all duration-300"
-                              >
-                                {ssImg && (
-                                  <img
-                                    src={ssImg}
-                                    alt={ss.name}
-                                    loading="lazy"
-                                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                                  />
-                                )}
-                                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/35 to-black/10" />
-                                <div className="absolute inset-x-0 bottom-0 p-3">
-                                  <h4 className="font-heading text-white text-sm font-bold leading-snug drop-shadow-md">
-                                    {ss.name}
-                                  </h4>
-                                </div>
-                              </Link>
-                            </motion.div>
-                          );
-                        }
-
+                        const ssImg = (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? [])[idx % Math.max(1, (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? []).length)];
+                        const SsIcon = SERVICE_SCATTER_ICONS[service.slug]?.[idx % (SERVICE_SCATTER_ICONS[service.slug]?.length ?? 1)] ?? CheckCircle;
                         return (
                           <Link
                             key={ss.slug}
@@ -2333,9 +2863,17 @@ export function SubServiceDetail({
                   </div>
                 </AnimatedSection>
               )}
+                </>
+              )}
             </div>
 
-            {/* SIDEBAR ??rich content filling the column */}
+            {isSoftwareAI ? (
+              <ServicePageSidebar
+                service={service}
+                isSoftwareAI
+                quoteHint={`Speak with our ${subService.name} specialists and receive a tailored proposal for your project.`}
+              />
+            ) : (
             <div className="space-y-5">
               {/* STICKY BLOCK */}
               <div className="sticky top-24 space-y-5 z-10">
@@ -2463,6 +3001,7 @@ export function SubServiceDetail({
               </AnimatedSection>
               )}
             </div>
+            )}
 
           </div>
         </div>
