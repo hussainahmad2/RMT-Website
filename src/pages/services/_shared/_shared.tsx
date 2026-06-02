@@ -2098,136 +2098,167 @@ function SoftwareAISubServiceContent({
   subPageIcons: React.ElementType[];
 }) {
   const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? Brain;
-  const gallery = SOFTWARE_AI_SUB_GALLERY[subService.slug] ?? [subHeroImage, ...SOFTWARE_AI_HERO_IMAGES.slice(0, 2)];
 
   return (
-    <div className="space-y-10 sm:space-y-12">
-      {/* Intro — text first, compact centered image below */}
+    <div className="space-y-14">
+
+      {/* ── Overview 2-col layout ── */}
       <AnimatedSection>
-        <div className="text-center lg:text-left max-w-3xl lg:max-w-none">
-          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Service Overview</p>
-          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">{subService.name}</h2>
-          <p className="text-muted-foreground leading-relaxed text-[15px] mb-4">{subService.overview[0]}</p>
-          <p className="text-sm font-medium text-foreground/80 italic border-l-2 border-cyan-500/40 pl-4 lg:mx-0 mx-auto max-w-xl">
-            {subService.tagline}
-          </p>
-        </div>
-        <div className="mt-6 sm:mt-8 flex justify-center lg:justify-start">
-          <SubServiceImageFrame
-            src={subHeroImage}
-            alt={subService.name}
-            badge="Software & AI"
-            Icon={SubIcon}
-            size="md"
-          />
+        <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
+          <div className="lg:col-span-3 space-y-4">
+            <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+              <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">Service Overview</span>
+            </div>
+            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-tight">{subService.name}</h2>
+            <div className="space-y-3">
+              {subService.overview.map((para, i) => (
+                <p key={i} className="text-muted-foreground leading-relaxed text-[15px]">{para}</p>
+              ))}
+            </div>
+            <div className="pt-2 border-l-2 border-cyan-500/50 pl-4">
+              <p className="text-sm font-medium text-foreground/80 italic">{subService.tagline}</p>
+            </div>
+          </div>
+          <div className="lg:col-span-2">
+            <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-black/20 border border-border">
+              <img src={subHeroImage} alt={subService.name} loading="lazy"
+                className="absolute inset-0 w-full h-full object-cover" />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+              <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-cyan-500/95 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
+                <SubIcon className="w-3 h-3" /> Software & AI
+              </div>
+              <div className="absolute bottom-4 left-4 right-4">
+                <h3 className="font-heading text-white text-lg font-bold leading-tight drop-shadow">{subService.name}</h3>
+                <p className="text-white/70 text-xs mt-1 line-clamp-2">{subService.tagline}</p>
+              </div>
+            </div>
+          </div>
         </div>
       </AnimatedSection>
 
-      {subService.overview.slice(1).map((para, i) => (
-        <AnimatedSection key={para}>
-          <div className="max-w-3xl mx-auto lg:mx-0 space-y-5">
-            <p className="text-muted-foreground leading-relaxed text-[15px] text-center lg:text-left">{para}</p>
-            <div className="flex justify-center lg:justify-start pt-1">
-              <SubServiceImageFrame
-                src={gallery[(i + 1) % gallery.length]}
-                alt=""
-                size="sm"
-              />
-            </div>
-          </div>
-        </AnimatedSection>
-      ))}
-
-      {SERVICE_SIDEBAR_STATS[service.slug] && (
-        <ProminentMetricsBar stats={SERVICE_SIDEBAR_STATS[service.slug]} />
-      )}
-
-      {SERVICE_STANDARDS[service.slug] && (
-        <ProminentStandardsSection standards={SERVICE_STANDARDS[service.slug]} />
-      )}
-
+      {/* ── Key Features & Benefits — 2-col card grid ── */}
       <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border text-center lg:text-left">
-          Key Highlights
-        </h2>
-        <div className="divide-y divide-border rounded-2xl border border-border bg-card/40 overflow-hidden max-w-3xl lg:max-w-none mx-auto">
+        <div className="mb-6 pb-3 border-b border-border">
+          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Highlights</p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Key Features & Benefits</h2>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-4">
           {subService.keyPoints.map((point, idx) => {
             const HlIcon = subPageIcons[idx % subPageIcons.length];
             return (
-              <div key={point} className="group flex items-center gap-4 px-5 py-3.5 hover:bg-cyan-500/5 transition-colors">
-                <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-cyan-500/12 text-cyan-700 dark:text-cyan-300">
-                  <HlIcon className="h-4 w-4" />
+              <motion.div key={point}
+                initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: idx * 0.06 }}
+                className="group flex items-start gap-4 p-5 rounded-2xl border border-border bg-card hover:border-cyan-400/50 hover:bg-cyan-500/4 hover:shadow-md transition-all duration-300">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border border-cyan-500/20 group-hover:scale-105 transition-transform">
+                  <HlIcon className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
                 </div>
-                <span className="flex-1 text-sm font-medium text-foreground">{point}</span>
-              </div>
+                <div className="flex-1">
+                  <p className="text-sm font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">{point}</p>
+                </div>
+              </motion.div>
             );
           })}
         </div>
       </AnimatedSection>
 
+      {/* ── Metrics ── */}
+      {SERVICE_SIDEBAR_STATS[service.slug] && (
+        <ProminentMetricsBar stats={SERVICE_SIDEBAR_STATS[service.slug]} />
+      )}
+
+      {/* ── Deliverables — styled grid ── */}
       <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border text-center lg:text-left">
-          In Depth
-        </h2>
-        <div className="space-y-4 max-w-3xl lg:max-w-none mx-auto">
-          {subService.keyPoints.map((point, idx) => (
-            <motion.div
-              key={point}
-              initial={{ opacity: 0, y: 12 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: idx * 0.04 }}
-              className="rounded-xl border border-border bg-card px-5 py-4 hover:border-cyan-400/25 transition-colors"
-            >
-              <div className="flex items-start gap-3">
-                <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-cyan-600 text-[11px] font-bold text-white">
-                  {idx + 1}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <h4 className="font-semibold text-foreground text-sm mb-1.5 leading-snug">{point}</h4>
-                  <p className="text-muted-foreground text-sm leading-relaxed">
-                    {idx === 0
-                      ? subService.tagline
-                      : subService.overview[(idx - 1) % subService.overview.length]}
-                  </p>
-                </div>
+        <div className="mb-6 pb-3 border-b border-border">
+          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">What You Get</p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Deliverables</h2>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {subService.deliverables.map((del, idx) => (
+            <motion.div key={del}
+              initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }} transition={{ delay: idx * 0.05 }}
+              className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-cyan-400/40 transition-colors group">
+              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-cyan-500/12 group-hover:bg-cyan-500/20 transition-colors">
+                <CheckCircle className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
               </div>
+              <span className="text-sm font-medium text-foreground">{del}</span>
             </motion.div>
           ))}
         </div>
       </AnimatedSection>
 
-      <div className="pt-2">
-        <ServiceCapabilitiesBlock
-          capabilities={subService.deliverables}
-          variant="software-ai"
-          title="Deliverables"
-        />
-      </div>
+      {/* ── Standards ── */}
+      {SERVICE_STANDARDS[service.slug] && (
+        <ProminentStandardsSection standards={SERVICE_STANDARDS[service.slug]} />
+      )}
 
+      {/* ── Our Approach ── */}
       <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border text-center">
-          Our Approach
-        </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 max-w-4xl lg:max-w-none mx-auto">
+        <div className="mb-6 pb-3 border-b border-border">
+          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Methodology</p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Our Approach</h2>
+        </div>
+        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {SOFTWARE_AI_APPROACH_STEPS.map((s, i) => (
-            <div key={s.step} className="relative bg-card border border-border rounded-xl p-4 text-center hover:border-cyan-400/30 transition-colors">
-              <div className="mx-auto mb-2 flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 ring-2 ring-cyan-500/20">
-                <span className="font-heading text-base font-bold text-cyan-700 dark:text-cyan-300">{s.step}</span>
+            <motion.div key={s.step}
+              initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }} transition={{ delay: i * 0.08 }}
+              className="relative group bg-card border border-border rounded-2xl p-5 hover:border-cyan-400/40 hover:shadow-lg transition-all">
+              <div className="font-heading text-5xl font-black text-primary/7 leading-none mb-3 -mt-1 select-none">{s.step}</div>
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border border-cyan-500/20 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
+                <span className="font-bold text-cyan-600 dark:text-cyan-400 text-xs">{s.step}</span>
               </div>
-              <h4 className="font-semibold text-foreground text-sm mb-1">{s.title}</h4>
+              <h4 className="font-heading text-sm font-bold text-foreground mb-1.5">{s.title}</h4>
               <p className="text-muted-foreground text-xs leading-relaxed">{s.desc}</p>
               {i < SOFTWARE_AI_APPROACH_STEPS.length - 1 && (
                 <div className="hidden lg:block absolute top-1/2 -right-2 w-4 h-px bg-cyan-500/30" aria-hidden />
               )}
-            </div>
+            </motion.div>
           ))}
         </div>
       </AnimatedSection>
 
-      <ServiceCapabilitiesBlock capabilities={service.capabilities} variant="software-ai" />
+      {/* ── Service capabilities ── */}
+      <AnimatedSection>
+        <div className="mb-6 pb-3 border-b border-border">
+          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Full-Service Offering</p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">All {service.shortName} Capabilities</h2>
+        </div>
+        <div className="grid sm:grid-cols-2 gap-3">
+          {service.capabilities.map((cap, idx) => (
+            <motion.div key={cap}
+              initial={{ opacity: 0, x: -8 }} whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }} transition={{ delay: idx * 0.04 }}
+              className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-card hover:border-cyan-400/40 hover:bg-cyan-500/4 transition-all">
+              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-cyan-500/12 text-[10px] font-bold text-cyan-700 dark:text-cyan-300">{idx + 1}</span>
+              <span className="text-sm text-foreground font-medium group-hover:text-primary transition-colors">{cap}</span>
+            </motion.div>
+          ))}
+        </div>
+      </AnimatedSection>
 
-      <ServiceWhyRMTBlock items={service.whyRMT} variant="software-ai" />
+      {/* ── Dark CTA ── */}
+      <div className="relative rounded-2xl bg-gradient-to-br from-[#020617] to-[#0a1628] border border-cyan-500/20 p-8 overflow-hidden text-white">
+        <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-cyan-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
+        <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
+          <div className="flex-1">
+            <h3 className="font-heading text-xl font-bold mb-2">Ready to discuss {subService.name}?</h3>
+            <p className="text-white/60 text-sm leading-relaxed">Our specialists are available for a free consultation and can provide a tailored proposal within one business day.</p>
+          </div>
+          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
+            <Button asChild className="rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold shadow-lg shadow-cyan-500/25">
+              <Link href="/contact">Get a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
+            </Button>
+            <Button asChild variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
+              <Link href={`/services/${service.slug}`}><ArrowLeft className="mr-2 w-4 h-4" /> Back to {service.shortName}</Link>
+            </Button>
+          </div>
+        </div>
+      </div>
+
     </div>
   );
 }
@@ -2687,40 +2718,62 @@ export function SubServiceDetail({
             <span className="text-white">{subService.name}</span>
           </nav>
 
-          <div className="max-w-3xl">
+          <div className="max-w-4xl">
             {isSoftwareAI ? (
-              <>
-                <div className="inline-flex items-center gap-2 bg-cyan-400/10 border border-cyan-300/30 rounded-full px-4 py-1.5 mb-6 backdrop-blur-sm">
-                  <span className="w-2 h-2 rounded-full bg-cyan-300 animate-pulse" />
-                  <span className="text-cyan-200 text-xs font-bold uppercase tracking-widest">Software & AI</span>
-                </div>
-                <div className="w-14 h-14 bg-gradient-to-br from-cyan-400 to-indigo-500 rounded-2xl flex items-center justify-center text-white mb-6 shadow-lg shadow-cyan-500/30">
-                  {(() => {
-                    const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? Brain;
-                    return <SubIcon className="w-7 h-7" />;
-                  })()}
-                </div>
-              </>
+              (() => {
+                const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? Brain;
+                return (
+                  <>
+                    {/* Badge pill with icon */}
+                    <div className="inline-flex items-center gap-2.5 bg-cyan-400/10 border border-cyan-400/25 rounded-full px-5 py-2 mb-8 backdrop-blur-sm">
+                      <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
+                      <SubIcon className="w-4 h-4 text-cyan-300" />
+                      <span className="text-cyan-200 text-xs font-bold uppercase tracking-[0.18em]">Software & AI</span>
+                      <span className="w-px h-3 bg-cyan-400/30" />
+                      <span className="text-cyan-400/70 text-xs">IEC 62304 Compliant</span>
+                    </div>
+                    <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-black text-white mb-5 leading-[0.95] tracking-tight">
+                      {subService.name}
+                    </h1>
+                    <p className="text-white/65 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl">
+                      {subService.tagline}
+                    </p>
+                    {/* Trust badge row */}
+                    <div className="flex flex-wrap gap-2 mb-10">
+                      {["IEC 62304", "FDA SaMD", "HIPAA", "ISO 27001"].map((b) => (
+                        <span key={b} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/8 border border-white/15 text-white/70 text-xs font-semibold backdrop-blur-sm">
+                          <CheckCircle className="w-3 h-3 text-cyan-400 shrink-0" />{b}
+                        </span>
+                      ))}
+                    </div>
+                  </>
+                );
+              })()
             ) : (
-              <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-1.5 mb-6">
-                <div className="w-4 h-4 text-primary">{SERVICE_ICONS[service.slug]}</div>
-                <span className="text-primary text-xs font-bold uppercase tracking-widest">{service.shortName}</span>
-              </div>
+              <>
+                <div className="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-4 py-1.5 mb-6">
+                  <div className="w-4 h-4 text-primary">{SERVICE_ICONS[service.slug]}</div>
+                  <span className="text-primary text-xs font-bold uppercase tracking-widest">{service.shortName}</span>
+                </div>
+                <h1 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4 leading-tight">
+                  {subService.name}
+                </h1>
+                <p className="text-white/70 text-xl leading-relaxed mb-8">
+                  {subService.tagline}
+                </p>
+              </>
             )}
-            <h1 className={`font-heading font-bold text-white mb-4 leading-tight ${isSoftwareAI ? "text-5xl md:text-6xl" : "text-4xl md:text-5xl"}`}>
-              {subService.name}
-            </h1>
-            <p className={`leading-relaxed mb-8 ${isSoftwareAI ? "text-white/75 text-xl md:text-2xl max-w-2xl" : "text-white/70 text-xl"}`}>
-              {subService.tagline}
-            </p>
             <div className="flex flex-wrap gap-3">
               <Button
                 asChild
-                className={isSoftwareAI ? "rounded-lg bg-cyan-400 text-slate-900 hover:bg-cyan-300" : "rounded-lg"}
+                size="lg"
+                className={isSoftwareAI
+                  ? "rounded-xl px-8 bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold shadow-lg shadow-cyan-500/30"
+                  : "rounded-lg"}
               >
                 <Link href="/contact">Get a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
-              <Button asChild variant="outline" className="rounded-lg border-white/20 text-white hover:bg-white/10">
+              <Button asChild size="lg" variant="outline" className="rounded-xl px-8 border-white/20 text-white hover:bg-white/10 hover:text-white">
                 <Link href={`/services/${service.slug}`}>
                   <ArrowLeft className="mr-2 w-4 h-4" /> {service.shortName}
                 </Link>

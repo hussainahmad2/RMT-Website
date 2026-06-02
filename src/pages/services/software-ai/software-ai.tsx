@@ -92,10 +92,10 @@ const TECH_ITEMS: Record<TechCategory, { name: string; icon: React.ElementType }
 };
 
 const HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=85",
-  "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&q=85",
-  "https://images.unsplash.com/photo-1639762681485-74b7f0150504?w=1920&q=85",
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=85",
+  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1920&q=85",
+  "https://images.unsplash.com/photo-1559028012-481c04fa702d?w=1920&q=85",
+  "https://images.unsplash.com/photo-1581093577421-f561a654a353?w=1920&q=85",
+  "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1920&q=85",
 ];
 
 function HeroBackground() {
@@ -380,55 +380,6 @@ export default function SoftwareAiServicePage({ params }: PageProps) {
                 </div>
               </div>
 
-              {/* Core Capabilities */}
-              <AnimatedSection>
-                <div className="mb-5 pb-3 border-b border-border">
-                  <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Expertise</p>
-                  <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Core Capabilities</h2>
-                </div>
-                <div className="rounded-2xl border border-border bg-card/50 overflow-hidden divide-y divide-border">
-                  {SERVICE.capabilities.map((cap, i) => (
-                    <motion.div key={cap}
-                      initial={{ opacity: 0, x: -12 }} whileInView={{ opacity: 1, x: 0 }}
-                      viewport={{ once: true }} transition={{ delay: i * 0.06 }}
-                      className="group flex items-center gap-4 px-5 py-4 hover:bg-cyan-500/5 transition-colors">
-                      <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-cyan-500/12 text-cyan-700 dark:text-cyan-300 text-xs font-bold">
-                        {String(i + 1).padStart(2, "0")}
-                      </div>
-                      <span className="flex-1 text-sm font-medium text-foreground group-hover:text-primary transition-colors">{cap}</span>
-                      <ArrowRight className="h-4 w-4 shrink-0 text-cyan-500 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-                    </motion.div>
-                  ))}
-                </div>
-              </AnimatedSection>
-
-              {/* Why Choose */}
-              <AnimatedSection>
-                <div className="mb-6 pb-3 border-b border-border">
-                  <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Why RMT</p>
-                  <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Why Choose RMT</h2>
-                </div>
-                <div className="grid sm:grid-cols-3 gap-5">
-                  {SERVICE.whyRMT.map((item, i) => (
-                    <motion.div key={item.title}
-                      initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                      className="flex flex-col items-center text-center p-6 rounded-2xl border border-border bg-card hover:border-cyan-400/40 hover:shadow-md transition-all">
-                      <div className="relative mb-5">
-                        <div className="absolute inset-0 rounded-full scale-[1.3] border border-cyan-500/15" aria-hidden />
-                        <div className="relative flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/15 to-indigo-500/10 ring-2 ring-cyan-500/20">
-                          <div className="flex h-12 w-12 items-center justify-center rounded-full bg-cyan-500/20">
-                            <CheckCircle className="h-6 w-6 text-cyan-600 dark:text-cyan-400" />
-                          </div>
-                        </div>
-                        <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-cyan-600 text-white text-[10px] font-bold">{i + 1}</span>
-                      </div>
-                      <h4 className="font-semibold text-foreground text-sm mb-2">{item.title}</h4>
-                      <p className="text-muted-foreground text-xs leading-relaxed">{item.desc}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </AnimatedSection>
             </div>
 
             {/* Sidebar */}
@@ -483,8 +434,69 @@ export default function SoftwareAiServicePage({ params }: PageProps) {
         </div>
       </section>
 
+      {/* CORE CAPABILITIES — full-width centered */}
+      <section className="py-20 bg-background border-t border-border">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Expertise</p>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Core Capabilities</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              From regulated SaMD development to cloud-native AI platforms, our team brings deep technical and compliance expertise to every engagement.
+            </p>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
+            {SERVICE.capabilities.map((cap, i) => (
+              <motion.div key={cap}
+                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.05 }}
+                className="group flex items-start gap-4 p-5 rounded-2xl border border-border bg-card hover:border-cyan-400/50 hover:bg-cyan-500/4 hover:shadow-lg transition-all duration-300">
+                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border border-cyan-500/20 group-hover:scale-105 transition-transform">
+                  <span className="font-heading text-sm font-bold text-cyan-600 dark:text-cyan-400">{String(i + 1).padStart(2, "0")}</span>
+                </div>
+                <p className="text-sm font-medium text-foreground leading-snug mt-1.5 group-hover:text-primary transition-colors">{cap}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* WHY CHOOSE RMT — full-width centered */}
+      <section className="py-20 bg-secondary/30 border-y border-border">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Why RMT</p>
+            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Why Choose RMT</h2>
+            <p className="text-muted-foreground max-w-2xl mx-auto">
+              We combine medical device domain expertise with modern software engineering practices to deliver compliant, high-performance solutions.
+            </p>
+          </AnimatedSection>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            {SERVICE.whyRMT.map((item, i) => (
+              <motion.div key={item.title}
+                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }} transition={{ delay: i * 0.1 }}
+                className="group relative flex flex-col items-center text-center p-8 rounded-2xl border border-border bg-card hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-500/5 transition-all duration-300 overflow-hidden">
+                {/* Subtle bg gradient on hover */}
+                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-indigo-500/0 group-hover:from-cyan-500/4 group-hover:to-indigo-500/3 transition-all duration-500 pointer-events-none rounded-2xl" />
+                {/* Icon ring */}
+                <div className="relative mb-6">
+                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500/15 to-indigo-500/10 ring-2 ring-cyan-500/20 flex items-center justify-center group-hover:ring-cyan-400/40 transition-all">
+                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/25 to-indigo-500/15 flex items-center justify-center">
+                      <CheckCircle className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />
+                    </div>
+                  </div>
+                  <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-indigo-500 text-white text-[10px] font-bold shadow-lg">{i + 1}</span>
+                </div>
+                <h4 className="font-heading text-base font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{item.title}</h4>
+                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* TECHNOLOGIES */}
-      <section className="py-20 bg-secondary/30 border-y border-border relative overflow-hidden">
+      <section className="py-20 bg-background border-t border-border relative overflow-hidden">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.025)_1px,transparent_1px)] bg-[size:48px_48px]" />
         <div className="page-container relative z-10">
           <AnimatedSection className="text-center mb-10">
