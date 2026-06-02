@@ -39,31 +39,47 @@ export const Navbar = () => {
 
   const isActive = (href: string) => href === "/" ? location === "/" : location.startsWith(href);
 
+  const navLinkClass = (href: string) =>
+    `px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${
+      isActive(href) ? "text-primary" : "text-foreground/75"
+    }`;
+
+  const dropdownBtnClass = (active: boolean) =>
+    `flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${
+      active ? "text-primary" : "text-foreground/75"
+    }`;
+
   return (
     <>
       <header
         className={`fixed top-0 w-full z-50 transition-all duration-300 ${
-          isScrolled ? "bg-background/96 backdrop-blur-md border-b border-border shadow-sm py-1.5" : "bg-background/92 backdrop-blur-sm py-2"
+          isScrolled
+            ? "bg-background/96 backdrop-blur-md border-b border-border shadow-sm py-1.5"
+            : "bg-background/92 backdrop-blur-sm py-2"
         }`}
       >
-        <div className="page-container flex items-center justify-between h-14">
+        <div className="page-container flex items-center justify-between gap-3 h-12 sm:h-14">
 
-          {/* LOGO */}
+          {/* LOGO — top left */}
           <Link href="/" className="flex items-center shrink-0">
-            <img src={`${BASE}rmt-logo.webp`} alt="RMT Medical Technologies Inc." className="h-14 w-auto object-contain" />
+            <img
+              src={`${BASE}rmt-logo.webp`}
+              alt="RMT Medical Technologies Inc."
+              className="h-9 sm:h-10 md:h-11 w-auto object-contain"
+            />
           </Link>
 
-          {/* DESKTOP NAV */}
-          <nav className="hidden xl:flex items-center gap-1">
+          {/* DESKTOP NAV — center */}
+          <nav className="hidden xl:flex items-center gap-1 flex-1 justify-center">
 
             {/* Home */}
-            <Link href="/" className={`px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${isActive("/") ? "text-primary" : "text-foreground/75"}`}>
+            <Link href="/" className={navLinkClass("/")}>
               Home
             </Link>
 
             {/* Company dropdown */}
             <div className="relative" onMouseEnter={() => setOpenDropdown("company")} onMouseLeave={() => setOpenDropdown(null)}>
-              <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${isActive("/about") || isActive("/projects") ? "text-primary" : "text-foreground/75"}`}>
+              <button className={dropdownBtnClass(isActive("/about") || isActive("/projects"))}>
                 Company <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openDropdown === "company" ? "rotate-180" : ""}`} />
               </button>
               <AnimatePresence>
@@ -82,7 +98,7 @@ export const Navbar = () => {
 
             {/* Services dropdown */}
             <div className="relative" onMouseEnter={() => setOpenDropdown("services")} onMouseLeave={() => setOpenDropdown(null)}>
-              <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${isActive("/services") ? "text-primary" : "text-foreground/75"}`}>
+              <button className={dropdownBtnClass(isActive("/services"))}>
                 Services <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openDropdown === "services" ? "rotate-180" : ""}`} />
               </button>
               <AnimatePresence>
@@ -110,13 +126,13 @@ export const Navbar = () => {
             </div>
 
             {/* Testing */}
-            <Link href="/testing" className={`px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${isActive("/testing") ? "text-primary" : "text-foreground/75"}`}>
+            <Link href="/testing" className={navLinkClass("/testing")}>
               Testing
             </Link>
 
             {/* Training dropdown */}
             <div className="relative" onMouseEnter={() => setOpenDropdown("training")} onMouseLeave={() => setOpenDropdown(null)}>
-              <button className={`flex items-center gap-1 px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${isActive("/training") ? "text-primary" : "text-foreground/75"}`}>
+              <button className={dropdownBtnClass(isActive("/training"))}>
                 Training <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openDropdown === "training" ? "rotate-180" : ""}`} />
               </button>
               <AnimatePresence>
@@ -145,41 +161,43 @@ export const Navbar = () => {
             </div>
 
             {/* Insights */}
-            <Link href="/insights" className={`px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${isActive("/insights") ? "text-primary" : "text-foreground/75"}`}>
+            <Link href="/insights" className={navLinkClass("/insights")}>
               Insights
             </Link>
 
             {/* Careers */}
-            <Link href="/careers" className={`px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${isActive("/careers") ? "text-primary" : "text-foreground/75"}`}>
+            <Link href="/careers" className={navLinkClass("/careers")}>
               Careers
             </Link>
 
             {/* Contact */}
-            <Link href="/contact" className={`px-3 py-2 text-sm font-medium rounded-md transition-colors hover:bg-muted hover:text-primary ${isActive("/contact") ? "text-primary" : "text-foreground/75"}`}>
+            <Link href="/contact" className={navLinkClass("/contact")}>
               Contact
             </Link>
           </nav>
 
-          {/* RIGHT ACTIONS */}
-          <div className="hidden xl:flex items-center gap-2.5">
-            <button onClick={toggleTheme} className="w-8 h-8 flex items-center justify-center rounded-full border border-border hover:bg-muted transition-colors text-foreground/60 hover:text-foreground" aria-label="Toggle theme">
+          {/* RIGHT ACTIONS — dark toggle + quote, top right on all screens */}
+          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+            <button
+              onClick={toggleTheme}
+              className="w-8 h-8 flex items-center justify-center rounded-full border border-border hover:bg-muted transition-colors text-foreground/60 hover:text-foreground"
+              aria-label="Toggle theme"
+            >
               {theme === "dark" ? <Sun className="w-4 h-4" /> : <Moon className="w-4 h-4" />}
             </button>
             <Button
-              className="h-8 px-4 text-xs font-semibold rounded-lg gap-1.5"
+              className="h-8 px-2.5 sm:px-4 text-[11px] sm:text-xs font-semibold rounded-lg gap-1 sm:gap-1.5"
               onClick={() => setQuoteOpen(true)}
             >
-              <FileText className="w-3.5 h-3.5" />
-              Request a Quote
+              <FileText className="w-3.5 h-3.5 shrink-0" />
+              <span className="hidden min-[400px]:inline">Request a Quote</span>
+              <span className="min-[400px]:hidden">Quote</span>
             </Button>
-          </div>
-
-          {/* MOBILE HEADER */}
-          <div className="xl:hidden flex items-center gap-2">
-            <button onClick={toggleTheme} className="w-8 h-8 flex items-center justify-center rounded-full border border-border text-foreground/60" aria-label="Toggle theme">
-              {theme === "dark" ? <Sun className="w-3.5 h-3.5" /> : <Moon className="w-3.5 h-3.5" />}
-            </button>
-            <button className="p-1.5 text-foreground" onClick={() => setMobileOpen(!mobileOpen)} aria-label="Toggle menu">
+            <button
+              className="xl:hidden p-1.5 rounded-md transition-colors text-foreground hover:bg-muted"
+              onClick={() => setMobileOpen(!mobileOpen)}
+              aria-label="Toggle menu"
+            >
               {mobileOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
           </div>
