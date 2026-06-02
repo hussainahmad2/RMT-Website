@@ -1979,15 +1979,15 @@ function ProminentMetricsBar({
   title?: string;
 }) {
   return (
-    <FullBleedSection>
-      <section className="bg-gradient-to-r from-cyan-600 via-cyan-500 to-teal-600 py-10 sm:py-12 shadow-lg">
-        <div className="page-container">
-          <p className="text-center text-white/85 text-xs font-bold uppercase tracking-[0.2em] mb-2">{title}</p>
-          <h3 className="text-center font-heading text-2xl sm:text-3xl font-bold text-white mb-8 sm:mb-10">
+    <div className="rounded-3xl overflow-hidden shadow-xl">
+      <section className="bg-gradient-to-r from-cyan-600 via-cyan-500 to-teal-600 py-12 sm:py-14">
+        <div className="text-center px-6">
+          <p className="text-white/80 text-xs font-bold uppercase tracking-[0.22em] mb-2">{title}</p>
+          <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white mb-10">
             Proven Impact at Scale
           </h3>
-          <div className={`grid gap-8 mx-auto max-w-4xl ${
-            stats.length === 3 ? "grid-cols-1 sm:grid-cols-3" : "grid-cols-2 lg:grid-cols-4"
+          <div className={`grid gap-8 mx-auto max-w-3xl ${
+            stats.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
           }`}>
             {stats.map((stat, i) => {
               const StatIcon = stat.icon;
@@ -2000,18 +2000,18 @@ function ProminentMetricsBar({
                   transition={{ delay: i * 0.08 }}
                   className="text-center text-white"
                 >
-                  <div className="flex justify-center mb-3 opacity-90">
+                  <div className="flex justify-center mb-3 opacity-85">
                     <StatIcon className="w-6 h-6 sm:w-7 sm:h-7" />
                   </div>
                   <div className="font-heading text-4xl sm:text-5xl font-bold leading-none">{stat.value}</div>
-                  <div className="text-white/75 text-sm mt-2 font-medium">{stat.label}</div>
+                  <div className="text-white/70 text-sm mt-2 font-medium">{stat.label}</div>
                 </motion.div>
               );
             })}
           </div>
         </div>
       </section>
-    </FullBleedSection>
+    </div>
   );
 }
 
@@ -2238,26 +2238,6 @@ function SoftwareAISubServiceContent({
           ))}
         </div>
       </AnimatedSection>
-
-      {/* ── Dark CTA ── */}
-      <div className="relative rounded-2xl bg-gradient-to-br from-[#020617] to-[#0a1628] border border-cyan-500/20 p-8 overflow-hidden text-white">
-        <div className="absolute top-0 right-0 w-48 h-48 rounded-full bg-cyan-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.03)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none" />
-        <div className="relative flex flex-col sm:flex-row sm:items-center gap-6">
-          <div className="flex-1">
-            <h3 className="font-heading text-xl font-bold mb-2">Ready to discuss {subService.name}?</h3>
-            <p className="text-white/60 text-sm leading-relaxed">Our specialists are available for a free consultation and can provide a tailored proposal within one business day.</p>
-          </div>
-          <div className="flex flex-col sm:flex-row gap-2 shrink-0">
-            <Button asChild className="rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold shadow-lg shadow-cyan-500/25">
-              <Link href="/contact">Get a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
-            </Button>
-            <Button asChild variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
-              <Link href={`/services/${service.slug}`}><ArrowLeft className="mr-2 w-4 h-4" /> Back to {service.shortName}</Link>
-            </Button>
-          </div>
-        </div>
-      </div>
 
     </div>
   );
