@@ -323,9 +323,13 @@ export default function Home() {
       </AnimatePresence>
 
       {/* ===== STATS BAR ===== */}
-      <section className="bg-primary py-12">
-        <div className="page-container">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-8">
+      <section className="relative bg-primary py-14 overflow-hidden">
+        {/* Background pattern */}
+        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:48px_48px]" />
+        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white/8 -translate-y-1/2 translate-x-1/2 pointer-events-none" aria-hidden />
+        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-white/6 translate-y-1/2 -translate-x-1/2 pointer-events-none" aria-hidden />
+        <div className="page-container relative z-10">
+          <div className="grid grid-cols-2 lg:grid-cols-4">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -333,11 +337,13 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.1 }}
-                className="text-center text-white"
+                className={`text-center text-white px-4 sm:px-8 py-3 ${i < stats.length - 1 ? "border-r border-white/15" : ""}`}
               >
-                <div className="flex justify-center mb-2 opacity-80">{stat.icon}</div>
-                <div className="font-heading text-4xl font-bold">{stat.value}</div>
-                <div className="text-white/70 text-sm mt-1">{stat.label}</div>
+                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center shadow-inner">
+                  <span className="[&>svg]:w-7 [&>svg]:h-7">{stat.icon}</span>
+                </div>
+                <div className="font-heading text-4xl sm:text-5xl font-black tabular-nums leading-none mb-2">{stat.value}</div>
+                <div className="text-white/75 text-sm font-medium mt-1">{stat.label}</div>
               </motion.div>
             ))}
           </div>
