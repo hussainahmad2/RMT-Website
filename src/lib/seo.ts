@@ -7,9 +7,11 @@ interface SEOProps {
   ogImage?: string;
 }
 
+const SITE_NAME = "Revive Medical Technologies Inc";
+
 export function useSEO({ title, description, keywords, ogImage }: SEOProps) {
   useEffect(() => {
-    document.title = title + " | RMT USA";
+    document.title = title === SITE_NAME ? SITE_NAME : `${title} | ${SITE_NAME}`;
     const setMeta = (name: string, content: string) => {
       let el = document.querySelector(`meta[name="${name}"]`) as HTMLMetaElement;
       if (!el) { el = document.createElement("meta"); el.name = name; document.head.appendChild(el); }
@@ -22,7 +24,7 @@ export function useSEO({ title, description, keywords, ogImage }: SEOProps) {
     };
     setMeta("description", description);
     if (keywords) setMeta("keywords", keywords);
-    setOG("og:title", title + " | RMT USA");
+    setOG("og:title", title === SITE_NAME ? SITE_NAME : `${title} | ${SITE_NAME}`);
     setOG("og:description", description);
     setOG("og:type", "website");
     if (ogImage) setOG("og:image", ogImage);

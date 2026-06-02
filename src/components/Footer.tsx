@@ -14,7 +14,7 @@ const offices = [
 export const Footer = () => {
   return (
     <footer className="bg-[#060d17] text-white pt-14 pb-8">
-      <div className="container mx-auto px-4 md:px-6">
+      <div className="page-container">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 mb-10">
 
           {/* BRAND */}
@@ -23,7 +23,7 @@ export const Footer = () => {
               <img src={`${BASE}rmt-logo.webp`} alt="RMT Medical Technologies Inc." className="h-12 w-auto object-contain drop-shadow-sm" />
             </Link>
             <p className="text-white/50 text-sm mb-5 leading-relaxed">
-              End-to-end medical device and technology solutions — from design through regulatory approval and contract manufacturing.
+              End-to-end medical device and technology solutions ??from design through regulatory approval and contract manufacturing.
             </p>
             <div className="flex gap-2.5">
               {[

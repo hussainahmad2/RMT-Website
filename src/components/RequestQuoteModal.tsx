@@ -22,16 +22,16 @@ interface QuoteFormData {
 }
 
 const SERVICES = [
-  { id: "product-design", label: "Product Design & Prototyping", icon: <Cpu className="w-4 h-4" /> },
   { id: "regulatory-compliance", label: "Regulatory Compliance (FDA/CE)", icon: <Shield className="w-4 h-4" /> },
   { id: "software-ai", label: "Software & AI Solutions", icon: <Brain className="w-4 h-4" /> },
   { id: "quality-testing", label: "Quality Testing", icon: <FlaskConical className="w-4 h-4" /> },
-  { id: "electronics-firmware", label: "Electronics & Firmware", icon: <CircuitBoard className="w-4 h-4" /> },
+  { id: "automation-services", label: "Automation Services", icon: <Settings2 className="w-4 h-4" /> },
+  { id: "design-fabrication", label: "Design & Fabrication", icon: <Cpu className="w-4 h-4" /> },
+  { id: "engineering-product-development", label: "Engineering & Product Development", icon: <CircuitBoard className="w-4 h-4" /> },
   { id: "turnkey-commissioning", label: "Turnkey Commissioning", icon: <Settings2 className="w-4 h-4" /> },
-  { id: "pharmaceutical", label: "Pharmaceutical Product Development", icon: <Pill className="w-4 h-4" /> },
-  { id: "bmd-laboratory-testing", label: "BMD Laboratory Testing (MBL)", icon: <Microscope className="w-4 h-4" /> },
-  { id: "bmd-biomaterials-rd", label: "Biomaterials & Polymer R&D (BMD)", icon: <Dna className="w-4 h-4" /> },
-  { id: "contract-manufacturing", label: "Contract Manufacturing", icon: <Factory className="w-4 h-4" /> },
+  { id: "bmd", label: "Biomaterials & Drug Innovation (BMD)", icon: <Dna className="w-4 h-4" /> },
+  { id: "mbl-laboratory", label: "Microbiology Laboratory Testing", icon: <Microscope className="w-4 h-4" /> },
+  { id: "contract-manufacturing", label: "Medical Device Manufacturing", icon: <Factory className="w-4 h-4" /> },
 ];
 
 const PROJECT_TYPES = [
@@ -47,18 +47,18 @@ const PROJECT_TYPES = [
 
 const BUDGETS = [
   "Under $25,000",
-  "$25,000 – $100,000",
-  "$100,000 – $500,000",
-  "$500,000 – $1,000,000",
+  "$25,000 �?$100,000",
+  "$100,000 �?$500,000",
+  "$500,000 �?$1,000,000",
   "Over $1,000,000",
   "To be discussed",
 ];
 
 const TIMELINES = [
   "Less than 3 months",
-  "3 – 6 months",
-  "6 – 12 months",
-  "12 – 24 months",
+  "3 �?6 months",
+  "6 �?12 months",
+  "12 �?24 months",
   "Over 24 months",
   "Flexible / TBD",
 ];
@@ -166,7 +166,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
             {/* Header */}
             <div className="flex items-center justify-between px-6 pt-6 pb-4 border-b border-border shrink-0">
               <div className="flex items-center gap-3">
-                <img src="/rmt-icon.jpg" alt="RMT" className="w-8 h-8 rounded-full object-cover" />
+                <img src="/rmt-icon.png" alt="Revive Medical Technologies Inc" className="w-8 h-8 object-contain" />
                 <div>
                   <h2 className="font-heading text-2xl font-bold text-foreground">Request a Quote</h2>
                   <p className="text-muted-foreground text-sm mt-0.5">Get a tailored proposal for your project</p>
@@ -249,7 +249,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                 </div>
               ) : (
                 <AnimatePresence mode="wait">
-                  {/* STEP 0 — Services */}
+                  {/* STEP 0 �?Services */}
                   {step === 0 && (
                     <motion.div key="step0" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.22 }}>
                       <p className="text-sm text-muted-foreground mb-4">Select one or more services you need (required)</p>
@@ -278,7 +278,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                     </motion.div>
                   )}
 
-                  {/* STEP 1 — Project */}
+                  {/* STEP 1 �?Project */}
                   {step === 1 && (
                     <motion.div key="step1" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.22 }} className="space-y-5">
                       <div>
@@ -315,7 +315,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                     </motion.div>
                   )}
 
-                  {/* STEP 2 — Budget & Timeline */}
+                  {/* STEP 2 �?Budget & Timeline */}
                   {step === 2 && (
                     <motion.div key="step2" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.22 }} className="space-y-6">
                       <div>
@@ -363,7 +363,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                     </motion.div>
                   )}
 
-                  {/* STEP 3 — Contact */}
+                  {/* STEP 3 �?Contact */}
                   {step === 3 && (
                     <motion.div key="step3" initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.22 }} className="space-y-4">
                       <div className="grid sm:grid-cols-2 gap-4">

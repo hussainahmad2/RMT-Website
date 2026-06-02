@@ -59,7 +59,7 @@ export function SkeletonProjectCard() {
 export function SkeletonHero() {
   return (
     <div className="min-h-[360px] bg-foreground/5 flex items-center">
-      <div className="container mx-auto px-4 md:px-6 py-20 space-y-6">
+      <div className="page-container py-20 space-y-6">
         <Skeleton className="h-4 w-40 mx-auto rounded-full" />
         <Skeleton className="h-14 w-2/3 mx-auto" />
         <Skeleton className="h-14 w-1/2 mx-auto" />

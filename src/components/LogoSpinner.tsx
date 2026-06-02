@@ -19,11 +19,11 @@ export function LogoSpinner({ size = "md", className = "", label }: LogoSpinnerP
   return (
     <div className={`flex flex-col items-center justify-center ${s.wrapper} ${className}`}>
       <motion.img
-        src="/rmt-icon.jpg"
+        src="/rmt-icon.png"
         alt="Loading..."
         animate={{ rotate: 360 }}
         transition={{ duration: 1.4, repeat: Infinity, ease: "linear" }}
-        className={`${s.img} rounded-full object-cover`}
+        className={`${s.img} object-contain`}
         style={{ imageRendering: "auto" }}
       />
       {label && (

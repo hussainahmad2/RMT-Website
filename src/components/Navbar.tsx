@@ -46,7 +46,7 @@ export const Navbar = () => {
           isScrolled ? "bg-background/96 backdrop-blur-md border-b border-border shadow-sm py-1.5" : "bg-background/92 backdrop-blur-sm py-2"
         }`}
       >
-        <div className="container mx-auto px-4 lg:px-6 flex items-center justify-between h-14">
+        <div className="page-container flex items-center justify-between h-14">
 
           {/* LOGO */}
           <Link href="/" className="flex items-center shrink-0">
