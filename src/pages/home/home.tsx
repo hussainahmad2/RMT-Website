@@ -214,6 +214,11 @@ export default function Home() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/80 via-transparent to-[#060d17]/40" />
         </div>
 
+        {/* Orbital ring decorators */}
+        <div className="absolute top-1/2 right-0 w-[900px] h-[900px] rounded-full border border-white/[0.05] translate-x-1/3 -translate-y-1/2 pointer-events-none" aria-hidden />
+        <div className="absolute top-1/2 right-0 w-[620px] h-[620px] rounded-full border border-white/[0.07] translate-x-1/4 -translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden />
+        <div className="absolute bottom-0 left-1/3 w-[380px] h-[380px] rounded-full border border-white/[0.04] translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden />
+
         <div className="page-container relative z-10 py-10 sm:py-12 md:py-14 lg:py-16">
           <motion.div
             initial={{ opacity: 0, x: -30 }}
@@ -352,6 +357,12 @@ export default function Home() {
 
       {/* ===== CAPABILITIES SECTION ===== */}
       <section className="py-24 bg-background relative overflow-hidden">
+        {/* Grid dot pattern */}
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.07) 1px, transparent 1px)", backgroundSize: "28px 28px" }} aria-hidden />
+        {/* Orbital rings */}
+        <div className="absolute top-1/2 right-0 w-[680px] h-[680px] rounded-full border border-primary/[0.07] translate-x-[45%] -translate-y-1/2 pointer-events-none" aria-hidden />
+        <div className="absolute top-1/2 right-0 w-[460px] h-[460px] rounded-full border border-primary/[0.05] translate-x-[30%] -translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden />
+        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full border border-primary/[0.05] -translate-x-1/3 translate-y-1/3 pointer-events-none hidden lg:block" aria-hidden />
         <div className="page-container relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
             {/* Left — heading + large watermark (reference layout) */}
@@ -410,6 +421,11 @@ export default function Home() {
 
       {/* ===== SERVICES GRID ===== */}
       <section className="py-24 bg-secondary/30 relative overflow-hidden">
+        {/* Grid dot pattern */}
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.06) 1px, transparent 1px)", backgroundSize: "32px 32px" }} aria-hidden />
+        {/* Orbital rings */}
+        <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full border border-primary/[0.07] -translate-x-1/3 -translate-y-1/3 pointer-events-none hidden lg:block" aria-hidden />
+        <div className="absolute bottom-0 right-0 w-[360px] h-[360px] rounded-full border border-primary/[0.05] translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
         <SectionWatermark side="right">
           <DnaBg />
         </SectionWatermark>
@@ -438,6 +454,12 @@ export default function Home() {
 
       {/* ===== WHY RMT ===== */}
       <section className="py-24 bg-background relative overflow-hidden">
+        {/* Grid dot pattern */}
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.07) 1px, transparent 1px)", backgroundSize: "28px 28px" }} aria-hidden />
+        {/* Orbital rings */}
+        <div className="absolute top-0 left-0 w-[720px] h-[720px] rounded-full border border-primary/[0.07] -translate-x-[40%] -translate-y-[40%] pointer-events-none hidden lg:block" aria-hidden />
+        <div className="absolute top-0 left-0 w-[480px] h-[480px] rounded-full border border-primary/[0.05] -translate-x-[25%] -translate-y-[25%] pointer-events-none hidden lg:block" aria-hidden />
+        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full border border-primary/[0.05] translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
         <div className="page-container relative z-10">
           <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-center">
             <AnimatedSection className="relative min-h-[200px]">
@@ -481,6 +503,11 @@ export default function Home() {
 
       {/* ===== PROCESS ===== */}
       <section className="py-24 bg-secondary/30 relative overflow-hidden">
+        {/* Grid dot pattern */}
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.06) 1px, transparent 1px)", backgroundSize: "30px 30px" }} aria-hidden />
+        {/* Orbital rings */}
+        <div className="absolute top-1/2 right-0 w-[560px] h-[560px] rounded-full border border-primary/[0.07] translate-x-[40%] -translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden />
+        <div className="absolute bottom-0 left-0 w-[320px] h-[320px] rounded-full border border-primary/[0.05] -translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
         <SectionWatermark side="left">
           <StethoscopeBg />
         </SectionWatermark>
@@ -505,8 +532,14 @@ export default function Home() {
       </section>
 
       {/* ===== GLOBAL PRESENCE + WORLD MAP ===== */}
-      <section className="py-24 bg-background">
-        <div className="page-container">
+      <section className="py-24 bg-background relative overflow-hidden">
+        {/* Grid dot pattern */}
+        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.07) 1px, transparent 1px)", backgroundSize: "28px 28px" }} aria-hidden />
+        {/* Orbital rings */}
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full border border-primary/[0.07] translate-x-[35%] -translate-y-[35%] pointer-events-none hidden lg:block" aria-hidden />
+        <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full border border-primary/[0.05] translate-x-[20%] -translate-y-[20%] pointer-events-none hidden lg:block" aria-hidden />
+        <div className="absolute bottom-0 left-0 w-[340px] h-[340px] rounded-full border border-primary/[0.05] -translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
+        <div className="page-container relative z-10">
           <AnimatedSection className="text-center mb-12">
             <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Global Presence</p>
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">Operating Across 4 Continents</h2>
