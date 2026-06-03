@@ -5,6 +5,15 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import {
+  C_LEVEL_LEADERSHIP,
+  BUSINESS_MARKETING_UNIT,
+  RD_WING_ELECTROMECHANICAL,
+  RD_WING_BIOMATERIALS,
+  SOFTWARE_DEPARTMENT,
+} from "@/data/leadership";
+import { LeadershipCard } from "@/components/LeadershipCard";
+import { TeamWingSection } from "@/components/TeamDepartmentSection";
 
 /* Decorative SVG backgrounds */
 const StethoBg = () => (
@@ -50,12 +59,7 @@ const certifications = [
   { name: "GMP Compliance", description: "Good Manufacturing Practice" },
 ];
 
-const leadership = [
-  { name: "Dr. Robert M. Thompson", role: "Chief Executive Officer", image: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=300&q=80", bio: "20+ years in medical device industry with deep expertise in regulatory strategy and business development across CE and international markets." },
-  { name: "Sarah Chen, MS", role: "Chief Technology Officer", image: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=300&q=80", bio: "Former senior engineer at leading medical device OEM, specializing in electronics and software architecture for Class II/III devices." },
-  { name: "Dr. Maria Vasquez", role: "Head of Regulatory Affairs", image: "https://images.unsplash.com/photo-1594824476967-48c8b964273f?w=300&q=80", bio: "PhD Biomedical Engineering, 15 years of global regulatory submissions including complex EU MDR technical files." },
-  { name: "James O'Brien", role: "Head of Manufacturing", image: "https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&q=80", bio: "25 years in GMP manufacturing operations, leading ISO 13485 facilities and complex contract manufacturing programs globally." },
-];
+const [ceo, ...executiveTeam] = C_LEVEL_LEADERSHIP;
 
 export default function About() {
   useSEO({
@@ -207,29 +211,75 @@ export default function About() {
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Leadership</p>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">Meet Our Team</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">Industry veterans with deep expertise across medical device development, regulatory affairs, engineering, and manufacturing.</p>
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">Meet Our Executive Team</h2>
+            <p className="text-muted-foreground text-lg max-w-2xl mx-auto mt-4">
+              Experienced leaders across medical devices, finance, product, growth, and technology — united in bringing safe, innovative health solutions to market.
+            </p>
           </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
-            {leadership.map((person, i) => (
-              <motion.div key={person.name} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all group">
-                <div className="aspect-square overflow-hidden">
-                  <img src={person.image} alt={person.name} className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500" />
-                </div>
-                <div className="p-5">
-                  <h3 className="font-semibold text-foreground">{person.name}</h3>
-                  <p className="text-primary text-xs font-bold uppercase tracking-wide mt-0.5 mb-2">{person.role}</p>
-                  <p className="text-muted-foreground text-xs leading-relaxed">{person.bio}</p>
-                </div>
-              </motion.div>
+
+          <div className="mb-8">
+            <LeadershipCard person={ceo} index={0} featured />
+          </div>
+
+          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
+            {executiveTeam.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i + 1} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== BUSINESS & MARKETING UNIT ===== */}
+      <section className="py-20 bg-secondary/30">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Business & Marketing Unit
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {BUSINESS_MARKETING_UNIT.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <TeamWingSection
+        title="R&D Wing"
+        departments={[
+          {
+            name: "Electromechanical Department",
+            members: RD_WING_ELECTROMECHANICAL,
+          },
+          {
+            name: "Biomaterials Department",
+            members: RD_WING_BIOMATERIALS,
+          },
+        ]}
+        className="py-20 bg-background"
+      />
+
+      {/* ===== SOFTWARE DEPARTMENT ===== */}
+      <section className="py-20 bg-secondary/30">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Software Department
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {SOFTWARE_DEPARTMENT.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i} />
             ))}
           </div>
         </div>
       </section>
 
       {/* ===== CERTIFICATIONS ===== */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-20 bg-background">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Standards & Compliance</p>

@@ -1685,7 +1685,7 @@ function ServiceKeyMetricsBlock({
   stats: { label: string; value: string; icon: React.ElementType }[];
   variant?: "default" | "software-ai";
 }) {
-  const isCyan = variant === "software-ai";
+  const isSoftwareAI = variant === "software-ai";
   return (
     <AnimatedSection>
       <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Key Metrics</h2>
@@ -1696,14 +1696,14 @@ function ServiceKeyMetricsBlock({
             <div
               key={stat.label}
               className={`relative overflow-hidden rounded-2xl border p-5 text-center ${
-                isCyan
-                  ? "border-cyan-500/20 bg-gradient-to-br from-cyan-500/8 to-indigo-500/5"
+                isSoftwareAI
+                  ? "border-[#205897]/25 bg-gradient-to-br from-[#205897]/10 to-[#205897]/5"
                   : "border-border bg-card"
               }`}
             >
               <div
                 className={`mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full ${
-                  isCyan ? "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400" : "bg-primary/10 text-primary"
+                  isSoftwareAI ? "bg-[#205897]/15 text-[#205897]" : "bg-primary/10 text-primary"
                 }`}
               >
                 <StatIcon className="h-5 w-5" />
@@ -1974,13 +1974,20 @@ function FullBleedSection({ children, className = "" }: { children: React.ReactN
 function ProminentMetricsBar({
   stats,
   title = "Key Metrics",
+  variant = "default",
 }: {
   stats: { label: string; value: string; icon: React.ElementType }[];
   title?: string;
+  variant?: "default" | "software-ai";
 }) {
+  const sectionClass =
+    variant === "software-ai"
+      ? "bg-gradient-to-r from-[#205897] via-[#2a6ba8] to-[#1a4d78]"
+      : "bg-gradient-to-r from-[#2d5e3a] via-[#53875F] to-[#3d7350]";
+
   return (
     <div className="rounded-3xl overflow-hidden shadow-xl">
-      <section className="bg-gradient-to-r from-[#2d5e3a] via-[#53875F] to-[#3d7350] py-12 sm:py-14">
+      <section className={`${sectionClass} py-12 sm:py-14`}>
         <div className="text-center px-6">
           <p className="text-white/80 text-xs font-bold uppercase tracking-[0.22em] mb-2">{title}</p>
           <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white mb-10">
@@ -2163,9 +2170,14 @@ function SoftwareAISubServiceContent({
         </div>
       </AnimatedSection>
 
-      {/* ── Metrics ── */}
-      {SERVICE_SIDEBAR_STATS[service.slug] && (
-        <ProminentMetricsBar stats={SERVICE_SIDEBAR_STATS[service.slug]} />
+      {/* ── Metrics (hidden on BMD & MBL sub-service pages; kept on main service screens) ── */}
+      {SERVICE_SIDEBAR_STATS[service.slug] &&
+        service.slug !== "bmd" &&
+        service.slug !== "mbl-laboratory" && (
+        <ProminentMetricsBar
+          stats={SERVICE_SIDEBAR_STATS[service.slug]}
+          variant={service.slug === "software-ai" ? "software-ai" : "default"}
+        />
       )}
 
       {/* ── Deliverables — styled grid ── */}
@@ -2422,7 +2434,10 @@ export function ServiceDetail({
 
               {SERVICE_SIDEBAR_STATS[service.slug] && (
                 isSoftwareAI ? (
-                  <ProminentMetricsBar stats={SERVICE_SIDEBAR_STATS[service.slug]} />
+                  <ProminentMetricsBar
+                    stats={SERVICE_SIDEBAR_STATS[service.slug]}
+                    variant="software-ai"
+                  />
                 ) : (
                   <ServiceKeyMetricsBlock
                     stats={SERVICE_SIDEBAR_STATS[service.slug]}
