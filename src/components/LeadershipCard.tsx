@@ -21,6 +21,7 @@ type LeadershipCardProps = {
 export function LeadershipCard({ person, index = 0, featured = false }: LeadershipCardProps) {
   const [imgError, setImgError] = useState(false);
   const initials = initialsFromName(person.name);
+  const tightCrop = person.imageClassName?.includes("scale-");
 
   const imageBlock = (
     <div
@@ -34,8 +35,10 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
         <img
           src={person.image}
           alt={person.name}
-          className={`absolute inset-0 w-full h-full group-hover:scale-[1.02] transition-transform duration-500 ${
-            featured ? "object-cover object-center" : "object-cover object-[center_15%]"
+          className={`absolute inset-0 w-full h-full transition-transform duration-500 ${
+            person.imageClassName
+              ? `${person.imageClassName} ${tightCrop ? "group-hover:scale-[1.12]" : "group-hover:scale-[1.02]"}`
+              : `group-hover:scale-[1.02] ${featured ? "object-cover object-center" : "object-cover object-[center_15%]"}`
           }`}
           onError={() => setImgError(true)}
         />

@@ -8,6 +8,8 @@ export type LeadershipMember = {
   image: string;
   bio: string;
   detail?: string;
+  /** Tight crop — use only for Amir; all others use default or object-center */
+  imageClassName?: string;
 };
 
 /** C-level executive team */
@@ -51,6 +53,28 @@ export const C_LEVEL_LEADERSHIP: LeadershipMember[] = [
     bio: "Heads technology strategy across software, AI, cloud platforms, and connected medical systems.",
     detail:
       "Oversees IEC 62304-compliant development, cybersecurity, and integration of SaMD and IoT solutions into regulated product portfolios.",
+  },
+];
+
+/** R&D Wing — Microbiology Laboratory */
+export const RD_WING_MICROBIOLOGY_LABORATORY: LeadershipMember[] = [
+  {
+    name: "Hamza",
+    role: "Microbiology Laboratory Lead",
+    image: teamImage("rd-wing/microbiology-laboratory", "hamza.jpg"),
+    imageClassName: "object-cover object-center",
+    bio: "Leads microbiology laboratory operations supporting sterility, microbial limit, and pathogen testing for RMT R&D programmes.",
+    detail:
+      "Manages lab workflows, method validation, and quality documentation aligned with GMP and ISO 13485 laboratory requirements.",
+  },
+  {
+    name: "Syed Ali Hassan",
+    role: "Assistant, Microbiology",
+    image: teamImage("rd-wing/microbiology-laboratory", "ali.jpg"),
+    imageClassName: "object-cover object-[center_28%]",
+    bio: "Supports microbiology laboratory testing, sample handling, and documentation for sterility and microbial analysis programmes.",
+    detail:
+      "Assists with culture preparation, environmental monitoring, and QC records across RMT's microbiology R&D laboratory.",
   },
 ];
 
@@ -124,9 +148,136 @@ export const SOFTWARE_DEPARTMENT: LeadershipMember[] = [
     name: "Muhammad Amir",
     role: "AI Software Manager",
     image: teamImage("software-department", "amir.webp"),
+    imageClassName: "object-cover object-[center_20%] scale-[1.08]",
     bio: "Leads AI and machine learning initiatives for clinical, diagnostic, and operational healthcare software.",
     detail:
       "Drives model development, integration, and validation workflows for AI-enabled medical and healthtech products.",
+  },
+];
+
+/** Production Wing */
+export const PRODUCTION_WING: LeadershipMember[] = [
+  {
+    name: "Manal Fatima",
+    role: "General Manager, Production",
+    image: teamImage("production-wing", "manal.webp"),
+    imageClassName: "object-cover object-center",
+    bio: "Leads RMT's production operations, manufacturing coordination, and delivery of ISO 13485-aligned medical device output.",
+    detail:
+      "Oversees production planning, quality workflows, and cross-functional alignment between manufacturing, engineering, and regulatory teams.",
+  },
+];
+
+/** Regulatory Department */
+export const REGULATORY_DEPARTMENT: LeadershipMember[] = [
+  {
+    name: "Nida Ali",
+    role: "Director, Regulatory Affairs",
+    image: teamImage("regulatory-department", "nida.webp"),
+    imageClassName: "object-cover object-center",
+    bio: "Leads RMT's regulatory affairs function across FDA, CE, and international medical device submissions.",
+    detail:
+      "Directs technical file development, clinical evaluation, risk management documentation, and regulatory strategy for clients worldwide.",
+  },
+];
+
+/** Quality Control Wing */
+export const QUALITY_CONTROL_WING: LeadershipMember[] = [
+  {
+    name: "Suhail",
+    role: "General Manager, Quality",
+    image: teamImage("quality-control-wing", "suhail.webp"),
+    bio: "Leads RMT's quality management function across ISO 13485 systems, audits, and organisation-wide QMS excellence.",
+    detail:
+      "Sets quality strategy, ensures compliance with medical device standards, and drives continuous improvement across all RMT operations.",
+  },
+  {
+    name: "Hafsa Inam",
+    role: "Manager, QA",
+    image: teamImage("quality-control-wing", "hafsa.webp"),
+    bio: "Manages quality assurance processes, documentation control, and audit readiness for RMT's service and manufacturing activities.",
+    detail:
+      "Oversees CAPA, internal audits, SOP maintenance, and QA support for regulatory submissions and client projects.",
+  },
+  {
+    name: "Sualeha Naveed",
+    role: "Manager, QC (R&D)",
+    image: teamImage("quality-control-wing", "sualeha.webp"),
+    bio: "Leads quality control for R&D programmes including laboratory testing, validation, and research-phase product quality.",
+    detail:
+      "Ensures test method validation, sample integrity, and QC documentation for biomaterials, analytical, and development projects.",
+  },
+  {
+    name: "Muhammad Wahaj",
+    role: "Manager, QC (Production)",
+    image: teamImage("quality-control-wing", "wahaj.webp"),
+    bio: "Manages production quality control, in-process inspection, and release testing for manufactured medical devices.",
+    detail:
+      "Coordinates batch records, incoming inspection, and final product QC aligned with GMP and ISO 13485 manufacturing requirements.",
+  },
+];
+
+/** Supply Chain Wing */
+export const SUPPLY_CHAIN_WING: LeadershipMember[] = [
+  {
+    name: "Syed Mir",
+    role: "Manager, Supply Chain",
+    image: teamImage("supply-chain-wing", "mir.jpg"),
+    bio: "Leads RMT's supply chain operations including vendor management, procurement, and logistics for medical device programmes.",
+    detail:
+      "Coordinates sourcing, inventory planning, and supplier qualification to support R&D, production, and client delivery timelines.",
+  },
+  {
+    name: "Muhammad Fahad",
+    role: "Assistant Manager, Supply Chain",
+    image: teamImage("supply-chain-wing", "fahad.jpg"),
+    bio: "Supports day-to-day supply chain activities, purchase orders, and coordination with production and quality teams.",
+    detail:
+      "Manages material tracking, vendor communications, and supply chain documentation across RMT's global operations.",
+  },
+];
+
+/** Finance Department */
+export const FINANCE_DEPARTMENT: LeadershipMember[] = [
+  {
+    name: "Farman",
+    role: "Manager, Finance",
+    image: teamImage("finance-department", "farman.jpg"),
+    imageClassName: "object-cover object-center",
+    bio: "Leads RMT's finance function including budgeting, accounts, and financial reporting across global operations.",
+    detail:
+      "Oversees financial planning, compliance with accounting standards, and coordination with leadership on business performance and investment decisions.",
+  },
+  {
+    name: "Aneel Kumar",
+    role: "Assistant Manager, Finance",
+    image: teamImage("finance-department", "aneel.jpg"),
+    imageClassName: "object-cover object-center",
+    bio: "Supports day-to-day finance operations, bookkeeping, payroll coordination, and accounts payable/receivable.",
+    detail:
+      "Assists with financial documentation, expense tracking, and reporting to keep RMT's finance processes accurate and audit-ready.",
+  },
+];
+
+/** HR & Admin Support Wing */
+export const HR_ADMIN_SUPPORT_WING: LeadershipMember[] = [
+  {
+    name: "Sonia Saleem",
+    role: "Manager, HR",
+    image: teamImage("hr-admin-wing", "sonia.webp"),
+    imageClassName: "object-cover object-center",
+    bio: "Leads human resources including recruitment, employee relations, and HR policy across RMT's global teams.",
+    detail:
+      "Manages onboarding, performance processes, and workplace compliance to support RMT's growing medical device workforce.",
+  },
+  {
+    name: "Muhammad Asad Tariq",
+    role: "Manager, Admin",
+    image: teamImage("hr-admin-wing", "asad.webp"),
+    imageClassName: "object-cover object-center",
+    bio: "Oversees administrative operations, office management, and internal support services for RMT offices.",
+    detail:
+      "Coordinates facilities, logistics, documentation, and day-to-day admin workflows that keep RMT operations running smoothly.",
   },
 ];
 

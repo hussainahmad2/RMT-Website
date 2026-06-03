@@ -8,9 +8,16 @@ import { useSEO } from "@/lib/seo";
 import {
   C_LEVEL_LEADERSHIP,
   BUSINESS_MARKETING_UNIT,
+  RD_WING_MICROBIOLOGY_LABORATORY,
   RD_WING_ELECTROMECHANICAL,
   RD_WING_BIOMATERIALS,
   SOFTWARE_DEPARTMENT,
+  PRODUCTION_WING,
+  REGULATORY_DEPARTMENT,
+  QUALITY_CONTROL_WING,
+  SUPPLY_CHAIN_WING,
+  FINANCE_DEPARTMENT,
+  HR_ADMIN_SUPPORT_WING,
 } from "@/data/leadership";
 import { LeadershipCard } from "@/components/LeadershipCard";
 import { TeamWingSection } from "@/components/TeamDepartmentSection";
@@ -257,6 +264,10 @@ export default function About() {
             name: "Biomaterials Department",
             members: RD_WING_BIOMATERIALS,
           },
+          {
+            name: "Microbiology Laboratory",
+            members: RD_WING_MICROBIOLOGY_LABORATORY,
+          },
         ]}
         className="py-20 bg-background"
       />
@@ -272,6 +283,108 @@ export default function About() {
 
           <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
             {SOFTWARE_DEPARTMENT.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== PRODUCTION WING ===== */}
+      <section className="py-20 bg-background">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Production Wing
+            </h2>
+          </AnimatedSection>
+
+          <div className="max-w-sm mx-auto">
+            {PRODUCTION_WING.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== REGULATORY DEPARTMENT ===== */}
+      <section className="py-20 bg-secondary/30">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Regulatory Department
+            </h2>
+          </AnimatedSection>
+
+          <div className="max-w-sm mx-auto">
+            {REGULATORY_DEPARTMENT.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== QUALITY CONTROL WING ===== */}
+      <section className="py-20 bg-background">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Quality Control Wing
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
+            {QUALITY_CONTROL_WING.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== SUPPLY CHAIN WING ===== */}
+      <section className="py-20 bg-secondary/30">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Supply Chain Wing
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {SUPPLY_CHAIN_WING.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== FINANCE DEPARTMENT ===== */}
+      <section className="py-20 bg-background">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Finance Department
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {FINANCE_DEPARTMENT.map((person, i) => (
+              <LeadershipCard key={person.name} person={person} index={i} />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ===== HR & ADMIN SUPPORT WING ===== */}
+      <section className="py-20 bg-secondary/30">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              HR & Admin Support Wing
+            </h2>
+          </AnimatedSection>
+
+          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            {HR_ADMIN_SUPPORT_WING.map((person, i) => (
               <LeadershipCard key={person.name} person={person} index={i} />
             ))}
           </div>
