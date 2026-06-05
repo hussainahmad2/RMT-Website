@@ -28,7 +28,7 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
       className={
         featured
           ? "relative shrink-0 w-full lg:w-[38%] bg-muted overflow-hidden min-h-[320px] lg:min-h-[420px]"
-          : "relative aspect-[4/5] overflow-hidden bg-muted"
+          : "relative aspect-[4/5] w-full shrink-0 overflow-hidden bg-muted"
       }
     >
       {!imgError ? (
@@ -54,18 +54,24 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
   );
 
   const textBlock = (
-    <div className={`flex flex-col justify-center ${featured ? "p-6 lg:p-8 lg:flex-1" : "p-5"}`}>
-      <h3 className={`font-semibold text-foreground ${featured ? "text-xl lg:text-2xl" : ""}`}>
+    <div
+      className={`flex flex-col ${
+        featured ? "justify-center p-6 lg:p-8 lg:flex-1" : "p-5 min-h-[7.5rem]"
+      }`}
+    >
+      <h3
+        className={`font-semibold text-foreground line-clamp-2 ${featured ? "text-xl lg:text-2xl" : ""}`}
+      >
         {person.name}
       </h3>
-      <p className="text-primary text-xs font-bold uppercase tracking-wide mt-1 mb-3">{person.role}</p>
+      <p className="text-primary text-xs font-bold uppercase tracking-wide mt-1 mb-2 line-clamp-2">
+        {person.role}
+      </p>
       <p className={`text-muted-foreground leading-relaxed ${featured ? "text-sm" : "text-xs"}`}>
         {person.bio}
       </p>
-      {person.detail && (
-        <p className={`text-muted-foreground/90 leading-relaxed mt-3 ${featured ? "text-sm" : "text-xs"}`}>
-          {person.detail}
-        </p>
+      {featured && person.detail && (
+        <p className="text-muted-foreground/90 leading-relaxed mt-3 text-sm">{person.detail}</p>
       )}
     </div>
   );
@@ -76,7 +82,9 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08 }}
-      className="bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all group"
+      className={`bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all group ${
+        featured ? "" : "h-full flex flex-col"
+      }`}
     >
       {featured ? (
         <div className="flex flex-col lg:flex-row">

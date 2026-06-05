@@ -3,6 +3,33 @@ import { LeadershipCard } from "@/components/LeadershipCard";
 import type { LeadershipMember } from "@/data/leadership";
 import { cn } from "@/lib/utils";
 
+/** Same card width as Software Department; rows center when fewer than 4 members */
+export const TEAM_MEMBER_GRID =
+  "flex flex-wrap justify-center gap-6 max-w-6xl mx-auto";
+
+export const TEAM_MEMBER_CARD =
+  "w-full sm:w-[calc((100%-1.5rem)/2)] xl:w-[calc((100%-4.5rem)/4)]";
+
+export function TeamMemberGrid({
+  members,
+  indexOffset = 0,
+  className,
+}: {
+  members: LeadershipMember[];
+  indexOffset?: number;
+  className?: string;
+}) {
+  return (
+    <div className={cn(TEAM_MEMBER_GRID, className)}>
+      {members.map((person, i) => (
+        <div key={person.name} className={cn(TEAM_MEMBER_CARD, "flex flex-col")}>
+          <LeadershipCard person={person} index={indexOffset + i} />
+        </div>
+      ))}
+    </div>
+  );
+}
+
 export type TeamDepartment = {
   name: string;
   members: LeadershipMember[];
@@ -36,20 +63,11 @@ export function TeamWingSection({
                 </p>
               </AnimatedSection>
 
-              <div
-                className={cn(
-                  "grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto",
-                  dept.gridClassName
-                )}
-              >
-                {dept.members.map((person, i) => (
-                  <LeadershipCard
-                    key={person.name}
-                    person={person}
-                    index={deptIndex * 4 + i}
-                  />
-                ))}
-              </div>
+              <TeamMemberGrid
+                members={dept.members}
+                indexOffset={deptIndex * 4}
+                className={dept.gridClassName}
+              />
             </div>
           ))}
         </div>
@@ -64,7 +82,7 @@ export function TeamDepartmentSection({
   department,
   members,
   className = "py-20 bg-background",
-  gridClassName = "grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto",
+  gridClassName = TEAM_MEMBER_GRID,
 }: {
   title: string;
   department?: string;

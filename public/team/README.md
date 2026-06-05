@@ -9,6 +9,7 @@ team/
     electromechanical-department/
     biomaterials-department/
   software-department/
+  product-development-wing/
   production-wing/
   regulatory-department/
   quality-control-wing/

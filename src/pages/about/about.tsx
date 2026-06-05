@@ -12,6 +12,7 @@ import {
   RD_WING_ELECTROMECHANICAL,
   RD_WING_BIOMATERIALS,
   SOFTWARE_DEPARTMENT,
+  PRODUCT_DEVELOPMENT_WING,
   PRODUCTION_WING,
   REGULATORY_DEPARTMENT,
   QUALITY_CONTROL_WING,
@@ -20,7 +21,7 @@ import {
   HR_ADMIN_SUPPORT_WING,
 } from "@/data/leadership";
 import { LeadershipCard } from "@/components/LeadershipCard";
-import { TeamWingSection } from "@/components/TeamDepartmentSection";
+import { TeamWingSection, TeamMemberGrid } from "@/components/TeamDepartmentSection";
 
 /* Decorative SVG backgrounds */
 const StethoBg = () => (
@@ -228,16 +229,25 @@ export default function About() {
             <LeadershipCard person={ceo} index={0} featured />
           </div>
 
-          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6">
-            {executiveTeam.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i + 1} />
-            ))}
-          </div>
+          <TeamMemberGrid members={executiveTeam} indexOffset={1} />
+        </div>
+      </section>
+
+      {/* ===== SOFTWARE DEPARTMENT ===== */}
+      <section className="py-20 bg-secondary/30">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Software Department
+            </h2>
+          </AnimatedSection>
+
+          <TeamMemberGrid members={SOFTWARE_DEPARTMENT} />
         </div>
       </section>
 
       {/* ===== BUSINESS & MARKETING UNIT ===== */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-20 bg-background">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
@@ -245,11 +255,20 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {BUSINESS_MARKETING_UNIT.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i} />
-            ))}
-          </div>
+          <TeamMemberGrid members={BUSINESS_MARKETING_UNIT} />
+        </div>
+      </section>
+
+      {/* ===== PRODUCT DEVELOPMENT WING ===== */}
+      <section className="py-20 bg-secondary/30">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Product Development Wing
+            </h2>
+          </AnimatedSection>
+
+          <TeamMemberGrid members={PRODUCT_DEVELOPMENT_WING} />
         </div>
       </section>
 
@@ -272,25 +291,8 @@ export default function About() {
         className="py-20 bg-background"
       />
 
-      {/* ===== SOFTWARE DEPARTMENT ===== */}
-      <section className="py-20 bg-secondary/30">
-        <div className="page-container">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
-              Software Department
-            </h2>
-          </AnimatedSection>
-
-          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {SOFTWARE_DEPARTMENT.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i} />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ===== PRODUCTION WING ===== */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-secondary/30">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
@@ -298,16 +300,12 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <div className="max-w-sm mx-auto">
-            {PRODUCTION_WING.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i} />
-            ))}
-          </div>
+          <TeamMemberGrid members={PRODUCTION_WING} />
         </div>
       </section>
 
       {/* ===== REGULATORY DEPARTMENT ===== */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-20 bg-background">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
@@ -315,16 +313,12 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <div className="max-w-sm mx-auto">
-            {REGULATORY_DEPARTMENT.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i} />
-            ))}
-          </div>
+          <TeamMemberGrid members={REGULATORY_DEPARTMENT} />
         </div>
       </section>
 
       {/* ===== QUALITY CONTROL WING ===== */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-secondary/30">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
@@ -332,16 +326,12 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 xl:grid-cols-4 gap-6 max-w-6xl mx-auto">
-            {QUALITY_CONTROL_WING.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i} />
-            ))}
-          </div>
+          <TeamMemberGrid members={QUALITY_CONTROL_WING} />
         </div>
       </section>
 
       {/* ===== SUPPLY CHAIN WING ===== */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-20 bg-background">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
@@ -349,16 +339,12 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {SUPPLY_CHAIN_WING.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i} />
-            ))}
-          </div>
+          <TeamMemberGrid members={SUPPLY_CHAIN_WING} />
         </div>
       </section>
 
       {/* ===== FINANCE DEPARTMENT ===== */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-secondary/30">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
@@ -366,16 +352,12 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {FINANCE_DEPARTMENT.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i} />
-            ))}
-          </div>
+          <TeamMemberGrid members={FINANCE_DEPARTMENT} />
         </div>
       </section>
 
       {/* ===== HR & ADMIN SUPPORT WING ===== */}
-      <section className="py-20 bg-secondary/30">
+      <section className="py-20 bg-background">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
@@ -383,11 +365,7 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <div className="grid sm:grid-cols-2 gap-6 max-w-4xl mx-auto">
-            {HR_ADMIN_SUPPORT_WING.map((person, i) => (
-              <LeadershipCard key={person.name} person={person} index={i} />
-            ))}
-          </div>
+          <TeamMemberGrid members={HR_ADMIN_SUPPORT_WING} />
         </div>
       </section>
 
