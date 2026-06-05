@@ -12,7 +12,8 @@ import {
   Gauge, Medal, FileCheck, Mail, Network,
   Atom, Stethoscope, Binary, Fingerprint, Waves, SlidersHorizontal,
   LayoutDashboard, BookOpen, GraduationCap, Building2, Lightbulb,
-  PenTool, FileText, Heart, Package, Wind, Beaker
+  PenTool, FileText, Heart, Package, Wind, Beaker,
+  type LucideIcon,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -513,7 +514,7 @@ function BmdServiceExtras() {
 }
 
 /* ---- Medical device manufacturing (Revive content, main service page) ---- */
-const MANUFACTURING_PRODUCT_ICONS: Record<string, React.ElementType> = {
+const MANUFACTURING_PRODUCT_ICONS: Record<string, LucideIcon> = {
   stethoscope: Stethoscope,
   microscope: Microscope,
   atom: Atom,
@@ -753,7 +754,7 @@ function ProductDevelopmentServiceExtras() {
 
       <FullBleedBlock bgClassName="bg-secondary/30">
         <AnimatedSection>
-          <SectionHeading title="Why RMT Product Development" />
+          <SectionHeading title="Why RMT for Regulatory Commissioning & Approvals" />
           <WhyChooseGrid
             items={PRODUCT_DEVELOPMENT_WHY.map((w, i) => ({
               ...w,
@@ -921,7 +922,6 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
   "automation-services": <Cog className="w-6 h-6" />,
   "design-fabrication": <Wrench className="w-6 h-6" />,
   "engineering-product-development": <Settings2 className="w-6 h-6" />,
-  "turnkey-commissioning": <Settings2 className="w-6 h-6" />,
   "bmd": <Dna className="w-6 h-6" />,
   "mbl-laboratory": <Microscope className="w-6 h-6" />,
   "contract-manufacturing": <Factory className="w-6 h-6" />,
@@ -936,7 +936,6 @@ const SERVICE_STANDARDS: Record<string, string[]> = {
   "automation-services":       ["IEC 61131", "ISO 13849", "Modbus / Profibus", "GMP", "ISO 13485"],
   "design-fabrication":        ["SOLIDWORKS", "ANSYS", "COMSOL", "DFM / DFA", "ISO 13485"],
   "engineering-product-development": ["IEC 62304", "IPC-2221", "IEC 60601-1", "STM32 / ESP32", "ISO 13485"],
-  "turnkey-commissioning":   ["ISO 13485", "GAMP 5", "IQ/OQ/PQ", "FDA 21 CFR", "GMP Regulations"],
   "bmd":                     ["ISO 10993", "ISO 17025", "ICH Q1A(R2)", "ISO 13485", "FDA / EU MDR"],
   "mbl-laboratory":          ["GMP", "ISO 13485", "USP <71>", "USP <85>", "EU Pharmacopoeia"],
   "contract-manufacturing":  ["ISO 13485", "ISO 14644", "ISO 14971", "DRAP", "ISO 10993"],
@@ -951,7 +950,6 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
   "automation-services":     [{ label: "PLC Platforms", value: "Fatek+", icon: Cog }, { label: "HMI Systems", value: "Weintek", icon: MonitorSmartphone }, { label: "Motion Axes", value: "Multi", icon: Zap }],
   "design-fabrication":      [{ label: "CAD Platforms", value: "SOLIDWORKS", icon: Layers }, { label: "3D Printers", value: "4+", icon: Boxes }, { label: "Simulations", value: "ANSYS/COMSOL", icon: Gauge }],
   "engineering-product-development": [{ label: "Disciplines", value: "3+", icon: Settings2 }, { label: "Methodology Steps", value: "5", icon: Target }, { label: "Deliverable Types", value: "20+", icon: PackageCheck }],
-  "turnkey-commissioning":   [{ label: "Systems Delivered", value: "80+", icon: Building2 }, { label: "Countries", value: "15+", icon: Globe }, { label: "On-Time Rate", value: "97%", icon: Medal }],
   "bmd":                     [{ label: "Research Articles", value: "40+", icon: BookOpen }, { label: "Conference Papers", value: "12+", icon: FileCheck }, { label: "Granted Patents", value: "2", icon: Award }],
   "mbl-laboratory":          [{ label: "BET Methods", value: "6", icon: TestTube2 }, { label: "Sterility Methods", value: "5", icon: FlaskConical }, { label: "Pathogen Tests", value: "8", icon: Microscope }],
   "contract-manufacturing":  [{ label: "Cleanroom Grade", value: "ISO 5", icon: Factory }, { label: "Device Classes", value: "I?CIII", icon: Layers }, { label: "Lifecycle", value: "360??", icon: Target }],
@@ -966,7 +964,6 @@ const SERVICE_SCATTER_ICONS: Record<string, React.ElementType[]> = {
   "automation-services":    [Cog, Zap, Network, MonitorSmartphone, Cable, Radio, Settings2, Gauge, Cloud, Terminal],
   "design-fabrication":     [Wrench, Layers, Gauge, Boxes, Cpu, Microscope, Waves, Target, Cog, PackageCheck],
   "engineering-product-development": [Settings2, Cog, Wrench, CircuitBoard, Layers, Brain, Target, PackageCheck, Zap, Network],
-  "turnkey-commissioning":  [Settings2, Cog, Wrench, Factory, Building2, Truck, PackageCheck, Layers, ClipboardList, Target],
   "bmd":                    [Dna, Microscope, FlaskConical, Atom, Waves, Layers, Pill, ScanLine, TestTube2, Lightbulb],
   "mbl-laboratory":         [Microscope, FlaskConical, TestTube2, ShieldCheck, CheckCircle, Atom, ScanLine, PackageCheck, Waves, Bug],
   "contract-manufacturing": [Factory, Boxes, Cog, Truck, PackageCheck, Settings2, Gauge, Medal, ClipboardList, Network],
@@ -1010,14 +1007,6 @@ const SERVICE_GENERIC_SUB_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
     "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
     "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
-  ],
-  "turnkey-commissioning": [
-    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=900&q=80",
-    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
-    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
-    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80",
-    "https://images.unsplash.com/photo-1504868584819-f8e8b4b6d7e3?w=900&q=80",
-    "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=900&q=80",
   ],
   "bmd": [
     "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80",
@@ -1341,11 +1330,6 @@ const SERVICE_CAROUSEL_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
     "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=800&q=80",
     "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=800&q=80",
-  ],
-  "turnkey-commissioning": [
-    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
-    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
-    "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
   ],
 };
 
