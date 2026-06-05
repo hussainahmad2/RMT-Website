@@ -903,7 +903,7 @@ export const ALL_SERVICES: ServiceData[] = [
     slug: "mbl-laboratory",
     name: "Microbiology Laboratory Testing",
     shortName: "Microbiology Lab",
-    tagline: "Microbiology testing for product quality, safety, and GMP / ISO 13485 compliance.",
+    tagline: "Microbiology testing for product quality, safety, and GMP compliance / ISO 13485 alignment.",
     description:
       "Microbiology laboratory testing — sterility testing, bacterial endotoxin testing (BET), microbial limit testing, and specific pathogen testing for pharmaceutical and medical device products.",
     overview: [
@@ -992,11 +992,11 @@ export const ALL_SERVICES: ServiceData[] = [
       "Bacterial Endotoxin Testing (BET)",
       "Microbial Limit Testing",
       "Specific Pathogen Testing",
-      "GMP & ISO 13485 Aligned Lab",
+      "GMP Compliance & ISO 13485 Aligned Lab",
       "Rapid Microbial Detection",
     ],
     whyRMT: [
-      { title: "GMP & ISO 13485 Alignment", desc: "Microbiology testing and contamination control aligned with GMP and ISO 13485 standards." },
+      { title: "GMP Compliance & ISO 13485 Alignment", desc: "Microbiology testing and contamination control aligned with GMP compliance and ISO 13485 standards." },
       { title: "Broad Method Portfolio", desc: "Classical and rapid sterility, multiple BET platforms, and specified pathogen panels." },
       { title: "Regulatory-Ready Data", desc: "Traceable protocols, raw data, and reports supporting batch release and submissions." },
     ],

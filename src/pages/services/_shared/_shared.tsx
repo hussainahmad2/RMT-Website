@@ -32,10 +32,7 @@ import {
   BMD_RESEARCH_AREAS,
 } from "@/data/bmd-content";
 import {
-  MBL_BET_METHODS,
   MBL_EQUIPMENT,
-  MBL_SPECIFIC_PATHOGENS,
-  MBL_STERILITY_METHODS,
 } from "@/data/mbl-content";
 import {
   DESIGN_FABRICATION_PRINTERS,
@@ -331,42 +328,6 @@ function AutomationCommunicationExtras() {
 function MblServiceExtras() {
   return (
     <div className="space-y-10">
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Sterility Test Methods</h2>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {MBL_STERILITY_METHODS.map((m) => (
-            <div key={m.name} className="bg-card border border-border rounded-xl p-4">
-              <h3 className="font-heading font-semibold text-foreground text-sm mb-2">{m.name}</h3>
-              <p className="text-muted-foreground text-xs leading-relaxed">{m.description}</p>
-            </div>
-          ))}
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Bacterial Endotoxin Test (BET) Methods</h2>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {MBL_BET_METHODS.map((m) => (
-            <div key={m.name} className="bg-card border border-border rounded-xl p-4">
-              <h3 className="font-heading font-semibold text-foreground text-sm mb-2">{m.name}</h3>
-              <p className="text-muted-foreground text-xs leading-relaxed">{m.description}</p>
-            </div>
-          ))}
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Specific Pathogen Testing</h2>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-          A microbiological test performed to detect the presence or absence of specified harmful microorganisms in pharmaceutical, medical, or biological products to ensure product safety and compliance.
-        </p>
-        <div className="flex flex-wrap gap-2">
-          {MBL_SPECIFIC_PATHOGENS.map((p) => (
-            <span key={p} className="text-xs px-3 py-1.5 bg-card border border-border rounded-lg text-muted-foreground">{p}</span>
-          ))}
-        </div>
-      </AnimatedSection>
-
       <AnimatedSection>
         <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Equipment</h2>
         <div className="flex flex-wrap gap-2">
@@ -937,7 +898,7 @@ const SERVICE_STANDARDS: Record<string, string[]> = {
   "design-fabrication":        ["SOLIDWORKS", "ANSYS", "COMSOL", "DFM / DFA", "ISO 13485"],
   "engineering-product-development": ["IEC 62304", "IPC-2221", "IEC 60601-1", "STM32 / ESP32", "ISO 13485"],
   "bmd":                     ["ISO 10993", "ISO 17025", "ICH Q1A(R2)", "ISO 13485", "FDA / EU MDR"],
-  "mbl-laboratory":          ["GMP", "ISO 13485", "USP <71>", "USP <85>", "EU Pharmacopoeia"],
+  "mbl-laboratory":          ["GMP Compliance", "ISO 13485", "USP <71>", "USP <85>", "EU Pharmacopoeia"],
   "contract-manufacturing":  ["ISO 13485", "ISO 14644", "ISO 14971", "DRAP", "ISO 10993"],
 };
 
@@ -951,8 +912,22 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
   "design-fabrication":      [{ label: "CAD Platforms", value: "SOLIDWORKS", icon: Layers }, { label: "3D Printers", value: "4+", icon: Boxes }, { label: "Simulations", value: "ANSYS/COMSOL", icon: Gauge }],
   "engineering-product-development": [{ label: "Disciplines", value: "3+", icon: Settings2 }, { label: "Methodology Steps", value: "5", icon: Target }, { label: "Deliverable Types", value: "20+", icon: PackageCheck }],
   "bmd":                     [{ label: "Research Articles", value: "40+", icon: BookOpen }, { label: "Conference Papers", value: "12+", icon: FileCheck }, { label: "Granted Patents", value: "2", icon: Award }],
-  "mbl-laboratory":          [{ label: "BET Methods", value: "6", icon: TestTube2 }, { label: "Sterility Methods", value: "5", icon: FlaskConical }, { label: "Pathogen Tests", value: "8", icon: Microscope }],
+  "mbl-laboratory":          [
+    { label: "Client Projects Completed", value: "10+ Projects", icon: Rocket },
+    { label: "Years of Scientific Experience", value: "10+ Years", icon: GraduationCap },
+    { label: "Laboratory Success Rate", value: ">99% Accuracy", icon: Medal },
+    { label: "Turnaround Time", value: "24–72 Hours", icon: Calendar },
+  ],
   "contract-manufacturing":  [{ label: "Cleanroom Grade", value: "ISO 5", icon: Factory }, { label: "Device Classes", value: "I?CIII", icon: Layers }, { label: "Lifecycle", value: "360??", icon: Target }],
+};
+
+/** One key metric per sub-service (e.g. MBL testing programmes) */
+const SUB_SERVICE_SIDEBAR_STATS: Record<string, Record<string, { label: string; value: string; icon: React.ElementType }[]>> = {
+  "mbl-laboratory": {
+    "sterility-testing": [{ label: "Sterility Tests Performed", value: "250+ Tests", icon: FlaskConical }],
+    "bacterial-endotoxin-testing": [{ label: "Endotoxin Tests Conducted", value: "300+ Tests", icon: TestTube2 }],
+    "microbial-limit-testing": [{ label: "Bioburden Assessments Completed", value: "500+ Studies", icon: Microscope }],
+  },
 };
 
 /* ---- Per-service icon scatter icons ---- */
@@ -1948,8 +1923,8 @@ function SoftwareAIDecorLayer() {
   );
 }
 
-/** Key metrics row — main column, above capabilities */
-function ServiceKeyMetricsBlock({
+/** Key metrics — unified layout for all service & sub-service pages */
+function KeyMetricsSection({
   stats,
   variant = "default",
 }: {
@@ -1957,36 +1932,82 @@ function ServiceKeyMetricsBlock({
   variant?: "default" | "software-ai";
 }) {
   const isSoftwareAI = variant === "software-ai";
+  const gridClass =
+    stats.length === 4
+      ? "sm:grid-cols-2 xl:grid-cols-4"
+      : stats.length === 3
+        ? "sm:grid-cols-3"
+        : stats.length === 1
+          ? "max-w-md mx-auto"
+          : "sm:grid-cols-2";
+
   return (
     <AnimatedSection>
-      <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Key Metrics</h2>
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        {stats.map((stat) => {
+      <div className="flex items-end justify-between gap-4 mb-6 pb-3 border-b border-border">
+        <div>
+          <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-1 ${isSoftwareAI ? "text-cyan-600 dark:text-cyan-400" : "text-primary"}`}>
+            Performance
+          </p>
+          <h2 className="font-heading text-3xl font-bold text-foreground">Key Metrics</h2>
+        </div>
+        <BarChart3 className={`w-8 h-8 shrink-0 opacity-20 ${isSoftwareAI ? "text-cyan-600" : "text-primary"}`} />
+      </div>
+      <div className={`grid gap-4 ${gridClass}`}>
+        {stats.map((stat, i) => {
           const StatIcon = stat.icon;
           return (
-            <div
+            <motion.div
               key={stat.label}
-              className={`relative overflow-hidden rounded-2xl border p-5 text-center ${
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.07 }}
+              className={`group relative overflow-hidden rounded-2xl border p-5 transition-all hover:shadow-lg ${
                 isSoftwareAI
-                  ? "border-[#205897]/25 bg-gradient-to-br from-[#205897]/10 to-[#205897]/5"
-                  : "border-border bg-card"
+                  ? "border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 via-card to-card hover:border-cyan-400/40"
+                  : "border-border bg-gradient-to-br from-primary/5 via-card to-secondary/20 hover:border-primary/35"
               }`}
             >
               <div
-                className={`mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full ${
-                  isSoftwareAI ? "bg-[#205897]/15 text-[#205897]" : "bg-primary/10 text-primary"
+                className={`absolute -right-4 -top-4 h-24 w-24 rounded-full opacity-40 blur-2xl transition-opacity group-hover:opacity-60 ${
+                  isSoftwareAI ? "bg-cyan-500/20" : "bg-primary/15"
                 }`}
-              >
-                <StatIcon className="h-5 w-5" />
+                aria-hidden
+              />
+              <div className="relative flex items-start gap-4">
+                <div
+                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors ${
+                    isSoftwareAI
+                      ? "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-900"
+                      : "bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground"
+                  }`}
+                >
+                  <StatIcon className="h-5 w-5" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <p className="font-heading text-2xl sm:text-[1.65rem] font-bold text-foreground leading-tight tracking-tight">
+                    {stat.value}
+                  </p>
+                  <p className="mt-1.5 text-sm text-muted-foreground leading-snug">{stat.label}</p>
+                </div>
               </div>
-              <p className="font-heading text-3xl font-bold text-foreground leading-none">{stat.value}</p>
-              <p className="mt-1.5 text-xs text-muted-foreground">{stat.label}</p>
-            </div>
+            </motion.div>
           );
         })}
       </div>
     </AnimatedSection>
   );
+}
+
+/** @deprecated Use KeyMetricsSection */
+function ServiceKeyMetricsBlock({
+  stats,
+  variant = "default",
+}: {
+  stats: { label: string; value: string; icon: React.ElementType }[];
+  variant?: "default" | "software-ai";
+}) {
+  return <KeyMetricsSection stats={stats} variant={variant} />;
 }
 
 /** Standards with horizontal line structure */
@@ -2134,44 +2155,11 @@ function ServiceWhyRMTBlock({
   );
 }
 
-/** Shared sidebar: Get a Quote + Other Services (parent & sub-service pages) */
-function ServicePageSidebar({
-  service,
-  isSoftwareAI = false,
-  quoteHint,
-}: {
-  service: ServiceData;
-  isSoftwareAI?: boolean;
-  quoteHint?: string;
-}) {
+/** Shared sidebar — other services only (quote CTAs live in page footer) */
+function ServicePageSidebar({ service }: { service: ServiceData }) {
   return (
     <div className="space-y-5">
-      <div className="sticky top-24 space-y-5 z-10">
-        <AnimatedSection
-          className={`text-white rounded-2xl p-6 shadow-xl ${
-            isSoftwareAI
-              ? "bg-gradient-to-br from-[#020617] to-[#0a1628] border border-cyan-500/25 shadow-cyan-500/10"
-              : "bg-primary shadow-primary/20"
-          }`}
-        >
-          <h3 className="font-heading text-xl font-bold mb-2">Get a Quote</h3>
-          <p className={`text-sm mb-5 leading-relaxed ${isSoftwareAI ? "text-white/70" : "text-white/80"}`}>
-            {quoteHint ?? "Discuss your requirements with our specialists and receive a tailored proposal."}
-          </p>
-          <Button
-            asChild
-            className={`w-full rounded-lg font-bold mb-3 ${
-              isSoftwareAI ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300" : "bg-white text-primary hover:bg-white/90"
-            }`}
-          >
-            <Link href="/contact">Request a Quote</Link>
-          </Button>
-          <a href="tel:+15551234567" className="flex items-center justify-center gap-2 text-white/70 text-xs hover:text-white transition-colors">
-            <Phone className="w-3.5 h-3.5" />
-            Schedule a Call
-          </a>
-        </AnimatedSection>
-
+      <div className="sticky top-24 z-10">
         <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
           <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
             <Globe className="w-3.5 h-3.5 text-primary" /> Other Services
@@ -2194,6 +2182,73 @@ function ServicePageSidebar({
         </AnimatedSection>
       </div>
     </div>
+  );
+}
+
+/** Full-width CTA strip above site footer — Get a Quote + Ready to Start */
+function ServicePageFooterCta({
+  service,
+  isSoftwareAI = false,
+  subServiceName,
+}: {
+  service: ServiceData;
+  isSoftwareAI?: boolean;
+  subServiceName?: string;
+}) {
+  const scopeLabel = subServiceName
+    ? `${subServiceName.toLowerCase()} project`
+    : `${service.shortName} requirements`;
+
+  return (
+    <section className="border-t border-white/10 bg-[#060d17] text-white">
+      <div className="page-container py-14 md:py-16">
+        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
+          <AnimatedSection>
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${isSoftwareAI ? "text-cyan-400" : "text-primary"}`}>
+              Get a Quote
+            </p>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Discuss Your {subServiceName ?? service.shortName} Needs</h2>
+            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-lg">
+              Speak with our specialists about your {scopeLabel} and receive a tailored proposal. We respond within one business day.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button
+                asChild
+                size="lg"
+                className={`rounded-xl font-semibold ${isSoftwareAI ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300" : "bg-primary text-white hover:bg-primary/90"}`}
+              >
+                <Link href="/contact">Request a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
+                <a href="tel:+15551234567"><Phone className="w-4 h-4 mr-2" /> Schedule a Call</a>
+              </Button>
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${isSoftwareAI ? "text-cyan-400" : "text-primary"}`}>
+              Ready to Start?
+            </p>
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Work With Our {service.shortName} Team</h2>
+            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-lg">
+              Our {service.shortName} specialists are available for a free initial consultation to scope your project and answer your questions.
+            </p>
+            <div className="flex flex-col sm:flex-row gap-3">
+              <Button
+                asChild
+                size="lg"
+                className={`rounded-xl font-semibold ${isSoftwareAI ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300" : "bg-primary text-white hover:bg-primary/90"}`}
+              >
+                <Link href="/contact"><Mail className="w-4 h-4 mr-2" /> Send an Enquiry</Link>
+              </Button>
+              <Button asChild size="lg" variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
+                <Link href="/about"><Users className="w-4 h-4 mr-2" /> Meet the Team</Link>
+              </Button>
+            </div>
+          </AnimatedSection>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -2241,56 +2296,16 @@ function FullBleedSection({ children, className = "" }: { children: React.ReactN
   );
 }
 
-/** Home-style centered stats bar (prominent) */
+/** @deprecated Use KeyMetricsSection */
 function ProminentMetricsBar({
   stats,
-  title = "Key Metrics",
   variant = "default",
 }: {
   stats: { label: string; value: string; icon: React.ElementType }[];
   title?: string;
   variant?: "default" | "software-ai";
 }) {
-  const sectionClass =
-    variant === "software-ai"
-      ? "bg-gradient-to-r from-[#205897] via-[#2a6ba8] to-[#1a4d78]"
-      : "bg-gradient-to-r from-[#2d5e3a] via-[#53875F] to-[#3d7350]";
-
-  return (
-    <div className="rounded-3xl overflow-hidden shadow-xl">
-      <section className={`${sectionClass} py-12 sm:py-14`}>
-        <div className="text-center px-6">
-          <p className="text-white/80 text-xs font-bold uppercase tracking-[0.22em] mb-2">{title}</p>
-          <h3 className="font-heading text-2xl sm:text-3xl font-bold text-white mb-10">
-            Proven Impact at Scale
-          </h3>
-          <div className={`grid gap-8 mx-auto max-w-3xl ${
-            stats.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4"
-          }`}>
-            {stats.map((stat, i) => {
-              const StatIcon = stat.icon;
-              return (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 16 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="text-center text-white"
-                >
-                  <div className="flex justify-center mb-3 opacity-85">
-                    <StatIcon className="w-6 h-6 sm:w-7 sm:h-7" />
-                  </div>
-                  <div className="font-heading text-4xl sm:text-5xl font-bold leading-none">{stat.value}</div>
-                  <div className="text-white/70 text-sm mt-2 font-medium">{stat.label}</div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-    </div>
-  );
+  return <KeyMetricsSection stats={stats} variant={variant} />;
 }
 
 /** Centered prominent standards strip */
@@ -2375,7 +2390,8 @@ function SoftwareAISubServiceContent({
   subHeroImage: string;
   subPageIcons: React.ElementType[];
 }) {
-  const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? Brain;
+  const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? (SERVICE_SCATTER_ICONS[service.slug]?.[0] ?? CheckCircle);
+  const isSoftwareAI = service.slug === "software-ai";
 
   return (
     <div className="space-y-14">
@@ -2403,8 +2419,10 @@ function SoftwareAISubServiceContent({
               <img src={subHeroImage} alt={subService.name} loading="lazy"
                 className="absolute inset-0 w-full h-full object-cover" />
               <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-              <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full bg-cyan-500/95 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
-                <SubIcon className="w-3 h-3" /> Software & AI
+              <div className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${
+                isSoftwareAI ? "bg-cyan-500/95 text-slate-900" : "bg-primary/95 text-primary-foreground"
+              }`}>
+                <SubIcon className="w-3 h-3" /> {service.shortName}
               </div>
               <div className="absolute bottom-4 left-4 right-4">
                 <h3 className="font-heading text-white text-lg font-bold leading-tight drop-shadow">{subService.name}</h3>
@@ -2441,14 +2459,21 @@ function SoftwareAISubServiceContent({
         </div>
       </AnimatedSection>
 
-      {/* ── Metrics (hidden on BMD & MBL sub-service pages; kept on main service screens) ── */}
-      {SERVICE_SIDEBAR_STATS[service.slug] &&
-        service.slug !== "bmd" &&
-        service.slug !== "mbl-laboratory" && (
-        <ProminentMetricsBar
-          stats={SERVICE_SIDEBAR_STATS[service.slug]}
+      {/* ── Key metrics ── */}
+      {SUB_SERVICE_SIDEBAR_STATS[service.slug]?.[subService.slug] ? (
+        <KeyMetricsSection
+          stats={SUB_SERVICE_SIDEBAR_STATS[service.slug][subService.slug]}
           variant={service.slug === "software-ai" ? "software-ai" : "default"}
         />
+      ) : (
+        SERVICE_SIDEBAR_STATS[service.slug] &&
+        service.slug !== "bmd" &&
+        service.slug !== "mbl-laboratory" && (
+          <KeyMetricsSection
+            stats={SERVICE_SIDEBAR_STATS[service.slug]}
+            variant={service.slug === "software-ai" ? "software-ai" : "default"}
+          />
+        )
       )}
 
       {/* ── Deliverables — styled grid ── */}
@@ -2706,17 +2731,10 @@ export function ServiceDetail({
               </AnimatedSection>
 
               {SERVICE_SIDEBAR_STATS[service.slug] && (
-                isSoftwareAI ? (
-                  <ProminentMetricsBar
-                    stats={SERVICE_SIDEBAR_STATS[service.slug]}
-                    variant="software-ai"
-                  />
-                ) : (
-                  <ServiceKeyMetricsBlock
-                    stats={SERVICE_SIDEBAR_STATS[service.slug]}
-                    variant="default"
-                  />
-                )
+                <KeyMetricsSection
+                  stats={SERVICE_SIDEBAR_STATS[service.slug]}
+                  variant={isSoftwareAI ? "software-ai" : "default"}
+                />
               )}
 
               {SERVICE_STANDARDS[service.slug] && (
@@ -2750,71 +2768,8 @@ export function ServiceDetail({
 
             </div>
 
-            {/* SIDEBAR — quote + other services only */}
-            <div className="space-y-5">
-              <div className="sticky top-24 space-y-5 z-10">
-                <AnimatedSection className={`text-white rounded-2xl p-6 shadow-xl ${
-                  isSoftwareAI
-                    ? "bg-gradient-to-br from-[#020617] to-[#0a1628] border border-cyan-500/25 shadow-cyan-500/10"
-                    : "bg-primary shadow-primary/20"
-                }`}>
-                  <h3 className="font-heading text-xl font-bold mb-2">Get a Quote</h3>
-                  <p className={`text-sm mb-5 leading-relaxed ${isSoftwareAI ? "text-white/70" : "text-white/80"}`}>
-                    Discuss your requirements with our specialists and receive a tailored proposal.
-                  </p>
-                  <Button
-                    asChild
-                    className={`w-full rounded-lg font-bold mb-3 ${
-                      isSoftwareAI
-                        ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300"
-                        : "bg-white text-primary hover:bg-white/90"
-                    }`}
-                  >
-                    <Link href="/contact">Request a Quote</Link>
-                  </Button>
-                  <a href="tel:+15551234567" className="flex items-center justify-center gap-2 text-white/70 text-xs hover:text-white transition-colors">
-                    <Phone className="w-3.5 h-3.5" />
-                    Schedule a Call
-                  </a>
-                </AnimatedSection>
-
-                <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
-                  <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
-                    <Globe className="w-3.5 h-3.5 text-primary" /> Other Services
-                  </h4>
-                  <div className="flex flex-col gap-0.5">
-                    {ALL_SERVICES.filter((s) => s.slug !== service.slug).map((s) => (
-                      <Link
-                        key={s.slug}
-                        href={`/services/${s.slug}`}
-                        className="group flex items-center gap-2.5 text-sm text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/60 last:border-0"
-                      >
-                        <div className="w-6 h-6 bg-primary/8 rounded-md flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-white transition-all shrink-0">
-                          {SERVICE_ICONS[s.slug]}
-                        </div>
-                        <span className="flex-1">{s.shortName}</span>
-                        <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all" />
-                      </Link>
-                    ))}
-                  </div>
-                </AnimatedSection>
-              </div>
-
-              {!isSoftwareAI && (
-              <AnimatedSection className="bg-[#020617] rounded-2xl p-6 text-white border border-primary/20">
-                <h4 className="font-heading text-base font-bold mb-2">Ready to Start?</h4>
-                <p className="text-white/60 text-xs leading-relaxed mb-4">Our {service.shortName} specialists are available for a free initial consultation.</p>
-                <div className="space-y-2">
-                  <Button asChild size="sm" className="w-full rounded-lg bg-primary hover:bg-primary/90">
-                    <Link href="/contact"><Mail className="w-3.5 h-3.5 mr-2" /> Send an Enquiry</Link>
-                  </Button>
-                  <Button asChild size="sm" variant="outline" className="w-full rounded-lg border-white/20 text-white hover:bg-white/10 hover:text-white">
-                    <Link href="/about"><Users className="w-3.5 h-3.5 mr-2" /> Meet the Team</Link>
-                  </Button>
-                </div>
-              </AnimatedSection>
-              )}
-            </div>
+            {/* SIDEBAR — other services only */}
+            <ServicePageSidebar service={service} />
           </div>
         </div>
 
@@ -2851,30 +2806,7 @@ export function ServiceDetail({
         </section>
       )}
 
-      {isSoftwareAI && (
-        <section className="py-14 bg-background border-t border-border">
-          <div className={containerClass}>
-            <AnimatedSection className="w-full bg-[#020617] rounded-2xl p-8 md:p-10 text-white border border-cyan-500/25 shadow-xl">
-              <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-                <div className="max-w-2xl">
-                  <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Ready to Start?</h2>
-                  <p className="text-white/65 text-sm md:text-base leading-relaxed">
-                    Our {service.shortName} specialists are available for a free initial consultation. Tell us about your software or AI project and we will respond within one business day.
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto lg:min-w-[340px] shrink-0">
-                  <Button asChild size="lg" className="flex-1 rounded-lg bg-cyan-400 text-slate-900 hover:bg-cyan-300 font-semibold">
-                    <Link href="/contact"><Mail className="w-4 h-4 mr-2" /> Send an Enquiry</Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline" className="flex-1 rounded-lg border-white/25 text-white hover:bg-white/10 hover:text-white">
-                    <Link href="/about"><Users className="w-4 h-4 mr-2" /> Meet the Team</Link>
-                  </Button>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </section>
-      )}
+      <ServicePageFooterCta service={service} isSoftwareAI={isSoftwareAI} />
 
     </div>
   );
@@ -3023,38 +2955,17 @@ export function SubServiceDetail({
               />
             </div>
 
-            <ServicePageSidebar
-              service={service}
-              isSoftwareAI={isSoftwareAI}
-              quoteHint={`Speak with our ${subService.name} specialists and receive a tailored proposal for your project.`}
-            />
+            <ServicePageSidebar service={service} />
 
           </div>
         </div>
       </section>
 
-      <section className="py-14 bg-background border-t border-border">
-        <div className={containerClass}>
-          <AnimatedSection className={`w-full bg-[#020617] rounded-2xl p-8 md:p-10 text-white border shadow-xl ${isSoftwareAI ? "border-cyan-500/25" : "border-primary/25"}`}>
-            <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-              <div className="max-w-2xl">
-                <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Ready to Start?</h2>
-                <p className="text-white/65 text-sm md:text-base leading-relaxed">
-                  Our {service.shortName} team is ready for a free initial consultation to scope your {subService.name.toLowerCase()} project. We respond within one business day.
-                </p>
-              </div>
-              <div className="flex flex-col sm:flex-row gap-3 w-full lg:w-auto lg:min-w-[340px] shrink-0">
-                <Button asChild size="lg" className={`flex-1 rounded-lg font-semibold ${isSoftwareAI ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300" : "bg-primary text-white hover:bg-primary/90"}`}>
-                  <Link href="/contact"><Mail className="w-4 h-4 mr-2" /> Send an Enquiry</Link>
-                </Button>
-                <Button asChild size="lg" variant="outline" className="flex-1 rounded-lg border-white/25 text-white hover:bg-white/10 hover:text-white">
-                  <Link href="/about"><Users className="w-4 h-4 mr-2" /> Meet the Team</Link>
-                </Button>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
+      <ServicePageFooterCta
+        service={service}
+        isSoftwareAI={isSoftwareAI}
+        subServiceName={subService.name}
+      />
 
     </div>
   );
