@@ -7,22 +7,33 @@ import { cn } from "@/lib/utils";
 export const TEAM_MEMBER_GRID =
   "flex flex-wrap justify-center gap-6 max-w-6xl mx-auto";
 
+export const TEAM_MEMBER_GRID_5 =
+  "flex flex-wrap justify-center gap-6 max-w-7xl mx-auto";
+
 export const TEAM_MEMBER_CARD =
   "w-full sm:w-[calc((100%-1.5rem)/2)] xl:w-[calc((100%-4.5rem)/4)]";
+
+export const TEAM_MEMBER_CARD_5 =
+  "w-full sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)] xl:w-[calc((100%-6rem)/5)]";
 
 export function TeamMemberGrid({
   members,
   indexOffset = 0,
   className,
+  columns = 4,
 }: {
   members: LeadershipMember[];
   indexOffset?: number;
   className?: string;
+  columns?: 4 | 5;
 }) {
+  const gridClass = columns === 5 ? TEAM_MEMBER_GRID_5 : TEAM_MEMBER_GRID;
+  const cardClass = columns === 5 ? TEAM_MEMBER_CARD_5 : TEAM_MEMBER_CARD;
+
   return (
-    <div className={cn(TEAM_MEMBER_GRID, className)}>
+    <div className={cn(gridClass, className)}>
       {members.map((person, i) => (
-        <div key={person.name} className={cn(TEAM_MEMBER_CARD, "flex flex-col")}>
+        <div key={person.name} className={cn(cardClass, "flex flex-col")}>
           <LeadershipCard person={person} index={indexOffset + i} />
         </div>
       ))}

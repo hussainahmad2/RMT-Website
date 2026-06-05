@@ -1,0 +1,516 @@
+
+<style>
+.qa-hero{text-align:center;padding:2rem 1rem 1.5rem;border-bottom:0.5px solid var(--color-border-tertiary);margin-bottom:1.75rem}
+.qa-hero-badge{display:inline-flex;align-items:center;gap:5px;background:#E6F1FB;color:#0C447C;font-size:12px;font-weight:500;padding:4px 14px;border-radius:20px;margin-bottom:.85rem}
+.qa-hero h1{font-size:22px;font-weight:500;color:var(--color-text-primary);margin:0 0 .5rem}
+.qa-hero p{font-size:14px;color:var(--color-text-secondary);max-width:580px;margin:0 auto;line-height:1.6}
+.dept-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:1.5rem;justify-content:center}
+.dept-tab{padding:6px 14px;border-radius:20px;border:0.5px solid var(--color-border-secondary);font-size:13px;cursor:pointer;background:var(--color-background-primary);color:var(--color-text-secondary);transition:all .15s}
+.dept-tab.active{background:#E6F1FB;color:#0C447C;border-color:#B5D4F4;font-weight:500}
+.dept-panel{display:none}
+.dept-panel.active{display:block}
+.dept-header{display:flex;align-items:flex-start;gap:14px;margin-bottom:1.25rem;padding:1.1rem 1.2rem;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary)}
+.dept-icon{width:40px;height:40px;border-radius:10px;display:flex;align-items:center;justify-content:center;flex-shrink:0;font-size:20px}
+.di-blue{background:#E6F1FB;color:#185FA5}
+.di-teal{background:#E1F5EE;color:#0F6E56}
+.di-purple{background:#EEEDFE;color:#534AB7}
+.di-coral{background:#FAECE7;color:#993C1D}
+.dept-header-text h2{font-size:16px;font-weight:500;margin:0 0 4px;color:var(--color-text-primary)}
+.dept-header-text p{font-size:13px;color:var(--color-text-secondary);margin:0;line-height:1.5}
+.std-badge{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:500;padding:3px 11px;border-radius:20px;margin:0 4px 1rem 0}
+.sb-blue{background:#E6F1FB;color:#0C447C}
+.sb-teal{background:#E1F5EE;color:#085041}
+.sb-purple{background:#EEEDFE;color:#3C3489}
+.sb-coral{background:#FAECE7;color:#712B13}
+.slabel{font-size:11px;color:var(--color-text-tertiary);font-weight:500;letter-spacing:.07em;text-transform:uppercase;margin-bottom:.6rem;margin-top:1.1rem}
+.sgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:9px;margin-bottom:.5rem}
+.sc{background:var(--color-background-primary);border:0.5px solid var(--color-border-tertiary);border-radius:var(--border-radius-lg);padding:.9rem 1rem}
+.sc:hover{border-color:var(--color-border-secondary)}
+.sc-head{display:flex;align-items:center;gap:7px;margin-bottom:7px}
+.sc-head i{font-size:16px}
+.sc-title{font-size:13px;font-weight:500;color:var(--color-text-primary)}
+.sc ul{margin:0;padding:0;list-style:none}
+.sc ul li{font-size:12px;color:var(--color-text-secondary);padding:2.5px 0;border-bottom:0.5px solid var(--color-border-tertiary);line-height:1.4}
+.sc ul li:last-child{border-bottom:none}
+.sc ul li::before{content:"—";margin-right:5px;color:var(--color-text-tertiary);font-size:11px}
+.resp-tag{display:inline-block;font-size:10px;font-weight:500;padding:1px 7px;border-radius:10px;margin-left:4px;vertical-align:middle}
+.rt-qd{background:#E6F1FB;color:#0C447C}
+.rt-sd{background:#EEEDFE;color:#534AB7}
+.rt-bmd{background:#E1F5EE;color:#085041}
+.rt-pd{background:#FAECE7;color:#712B13}
+.why-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:9px;margin-top:.75rem}
+.wc{background:var(--color-background-secondary);border-radius:var(--border-radius-md);padding:.8rem 1rem;text-align:center}
+.wc i{font-size:19px;color:#185FA5;margin-bottom:5px;display:block}
+.wc p{font-size:12px;color:var(--color-text-secondary);margin:0;line-height:1.4}
+.divider{border:none;border-top:0.5px solid var(--color-border-tertiary);margin:1.5rem 0 1rem}
+</style>
+
+<h2 class="sr-only">Quality Department Services — Revive Meditech</h2>
+
+<div class="qa-hero">
+  <div class="qa-hero-badge"><i class="ti ti-shield-check" aria-hidden="true" style="font-size:12px"></i> ISO 13485 · IEC 60601 · ISO 14971</div>
+  <h1>Quality Department Services</h1>
+  <p>Hands-on testing, inspection, sign-off, and compliance support across all product lines — from R&amp;D bench to production release. QD leads all quality activities with department collaboration across EMD, SD, BMD, PD, PRD, and SC.</p>
+</div>
+
+<div class="dept-tabs">
+  <button class="dept-tab active" onclick="showDept('qa',this)"><i class="ti ti-clipboard-list" aria-hidden="true" style="font-size:12px;margin-right:4px"></i>Quality Assurance (QA)</button>
+  <button class="dept-tab" onclick="showDept('qcprod',this)"><i class="ti ti-microscope" aria-hidden="true" style="font-size:12px;margin-right:4px"></i>QC — Production</button>
+  <button class="dept-tab" onclick="showDept('sqa',this)"><i class="ti ti-code" aria-hidden="true" style="font-size:12px;margin-right:4px"></i>SQA / SaMD / SiMD</button>
+  <button class="dept-tab" onclick="showDept('qcrd',this)"><i class="ti ti-test-pipe" aria-hidden="true" style="font-size:12px;margin-right:4px"></i>QC — R&amp;D</button>
+</div>
+
+<!-- QA PANEL -->
+<div id="dept-qa" class="dept-panel active">
+  <div class="dept-header">
+    <div class="dept-icon di-blue"><i class="ti ti-clipboard-list" aria-hidden="true"></i></div>
+    <div class="dept-header-text">
+      <h2>Quality Assurance (QA)</h2>
+      <p>End-to-end QMS development, compliance consulting, audit readiness, and continuous improvement for medical device and healthcare organizations — structured around ISO 13485.</p>
+    </div>
+  </div>
+  <span class="std-badge sb-blue"><i class="ti ti-certificate" aria-hidden="true" style="font-size:11px"></i>ISO 13485</span>
+  <span class="std-badge sb-teal"><i class="ti ti-refresh" aria-hidden="true" style="font-size:11px"></i>Continuous Improvement</span>
+
+  <div class="slabel">QMS & Compliance</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-folders" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">QMS Development</span></div>
+      <ul>
+        <li>ISO 13485 compliant QMS design &amp; implementation</li>
+        <li>Quality manuals, SOPs, work instructions &amp; templates</li>
+        <li>QMS restructuring &amp; process optimization</li>
+        <li>Documentation review &amp; improvement</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-file-text" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">Document Control</span></div>
+      <ul>
+        <li>SOP writing, formatting &amp; revision control</li>
+        <li>Controlled document management setup</li>
+        <li>Master document list preparation</li>
+        <li>Technical &amp; quality document standardization</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-search" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">Audit &amp; Inspection Readiness</span></div>
+      <ul>
+        <li>Internal, process &amp; system audits</li>
+        <li>Mock audits &amp; compliance checks</li>
+        <li>Audit report preparation &amp; response support</li>
+        <li>Regulatory inspection preparation &amp; action plans</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-alert-triangle" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">CAPA &amp; Non-Conformance</span></div>
+      <ul>
+        <li>CAPA system setup &amp; improvement</li>
+        <li>Root cause analysis support</li>
+        <li>Deviation &amp; NC investigation</li>
+        <li>Corrective &amp; preventive action planning</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-shield" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">Risk Management</span></div>
+      <ul>
+        <li>Risk assessment facilitation</li>
+        <li>FMEA &amp; hazard analysis support</li>
+        <li>Risk management file preparation</li>
+        <li>Risk mitigation planning</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-checkup-list" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">Validation &amp; Qualification</span></div>
+      <ul>
+        <li>Process validation support</li>
+        <li>Equipment qualification (IQ / OQ / PQ)</li>
+        <li>Validation protocol &amp; report review</li>
+        <li>Validation documentation preparation</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slabel">Operational Quality</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-package" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">Product Release &amp; Batch Review</span></div>
+      <ul>
+        <li>Batch manufacturing record review</li>
+        <li>Release documentation verification</li>
+        <li>Pre-release compliance verification</li>
+        <li>Final QC pass — CEO presentation sign-off</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-message-report" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">Complaint Handling</span></div>
+      <ul>
+        <li>Complaint management system setup</li>
+        <li>Investigation &amp; trending analysis</li>
+        <li>Customer feedback review</li>
+        <li>Corrective action coordination</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-chart-bar" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">Quality Metrics &amp; Trending</span></div>
+      <ul>
+        <li>KPI monitoring &amp; dashboard preparation</li>
+        <li>CAPA, deviation &amp; audit trending</li>
+        <li>Bi-monthly QC review meetings</li>
+        <li>Continuous improvement reporting</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-users" aria-hidden="true" style="color:#185FA5"></i><span class="sc-title">Training Programs</span></div>
+      <ul>
+        <li>ISO 13485 &amp; QMS awareness training</li>
+        <li>Internal auditor training</li>
+        <li>Documentation practices &amp; compliance orientation</li>
+        <li>Calibration methodology &amp; regulatory testing</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QC PRODUCTION PANEL -->
+<div id="dept-qcprod" class="dept-panel">
+  <div class="dept-header">
+    <div class="dept-icon di-teal"><i class="ti ti-microscope" aria-hidden="true"></i></div>
+    <div class="dept-header-text">
+      <h2>Quality Control — Production (PRD)</h2>
+      <p>In-process and final product inspection, QC lab services, and release activities for EMD and SD bulk production lines and device batches. QD owns all testing and sign-off.</p>
+    </div>
+  </div>
+  <span class="std-badge sb-teal"><i class="ti ti-certificate" aria-hidden="true" style="font-size:11px"></i>ISO 13485 Clause 8</span>
+  <span class="std-badge sb-teal"><i class="ti ti-activity" aria-hidden="true" style="font-size:11px"></i>EMD · PRD · SC</span>
+
+  <div class="slabel">Production Inspection &amp; Testing</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-eye" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">In-Process &amp; Final Inspection</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Sample production &amp; module-level inspection</li>
+        <li>Integration testing (HW/SW interface validation)</li>
+        <li>Performance testing — speed, torque, precision</li>
+        <li>Factory Acceptance Testing (FAT) — pre-dispatch sign-off</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-bolt" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">Electrical &amp; Mechanical Testing</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Functional / operational testing — machines &amp; rigs</li>
+        <li>Electrical safety (IEC 60601 series — active devices)</li>
+        <li>Mechanical load &amp; stress testing</li>
+        <li>Usability &amp; ergonomics evaluation</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-truck" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">Incoming &amp; Goods Inspection</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>IQC of raw materials &amp; components (with SC)</li>
+        <li>Supplier CoC &amp; documentation verification</li>
+        <li>Sampling plans per AQL / ISO 2859</li>
+        <li>Quarantine management &amp; goods receipt records</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-alert-triangle" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">Non-Conformance Control</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>NC identification, tagging &amp; disposition</li>
+        <li>Scrap, rework &amp; use-as-is decisions</li>
+        <li>NC trending &amp; reporting</li>
+        <li>Batch record review &amp; product release</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slabel">QC Lab Services</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-zoom-in" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">Microscopic &amp; Dimensional Analysis</span></div>
+      <ul>
+        <li>Surface morphology analysis (Leica Microsystems)</li>
+        <li>Dimensional analysis — microspheres, stents, catheters</li>
+        <li>Structural evaluation &amp; measurement verification</li>
+        <li>Biomedical component morphology assessment</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-flask" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">UV Spectroscopy Analysis</span></div>
+      <ul>
+        <li>Drug quantification &amp; concentration determination</li>
+        <li>Drug release studies &amp; drug-eluting stent analysis</li>
+        <li>Calibration curve development</li>
+        <li>Analytical method support for biomaterials</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-droplet" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">Ultrasonication Services</span></div>
+      <ul>
+        <li>Sample dispersion &amp; particle deagglomeration</li>
+        <li>Suspension / emulsion preparation</li>
+        <li>Drug extraction &amp; dissolution enhancement</li>
+        <li>Lab instrument cleaning &amp; formulation optimization</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-clock" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">Shelf-Life &amp; Stability Studies</span></div>
+      <ul>
+        <li>Real-time &amp; accelerated stability studies (ASTM F1980)</li>
+        <li>Product integrity &amp; performance over time</li>
+        <li>Degradation rate &amp; profile analysis</li>
+        <li>Material stability &amp; biomaterial performance monitoring</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-activity" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">Catheter Bench Testing</span></div>
+      <ul>
+        <li>Air leakage under water &amp; hub assembly aspiration</li>
+        <li>Flow rate determination through catheter lumen</li>
+        <li>Leakage under pressure testing</li>
+        <li>Corrosion resistance evaluation</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-chart-line" aria-hidden="true" style="color:#0F6E56"></i><span class="sc-title">Statistical Process Control</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>SPC chart implementation</li>
+        <li>Cpk / Ppk process capability analysis</li>
+        <li>Yield &amp; defect rate reporting</li>
+        <li>Control limit setting &amp; trend monitoring</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- SQA PANEL -->
+<div id="dept-sqa" class="dept-panel">
+  <div class="dept-header">
+    <div class="dept-icon di-purple"><i class="ti ti-code" aria-hidden="true"></i></div>
+    <div class="dept-header-text">
+      <h2>Software Quality Assurance — SQA / SaMD / SiMD</h2>
+      <p>Quality oversight for device &amp; machine firmware, web/mobile applications, and Software as/in a Medical Device — spanning IEC 62304, ISO 13485 design controls, and cybersecurity requirements. QD collaborates closely with SD.</p>
+    </div>
+  </div>
+  <span class="std-badge sb-purple"><i class="ti ti-certificate" aria-hidden="true" style="font-size:11px"></i>IEC 62304</span>
+  <span class="std-badge sb-purple"><i class="ti ti-certificate" aria-hidden="true" style="font-size:11px"></i>ISO 13485</span>
+  <span class="std-badge sb-purple"><i class="ti ti-activity" aria-hidden="true" style="font-size:11px"></i>SD · QD</span>
+
+  <div class="slabel">Testing &amp; Verification</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-test-pipe" aria-hidden="true" style="color:#534AB7"></i><span class="sc-title">System &amp; Integration Testing</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Embedded firmware &amp; device software testing</li>
+        <li>Unit &amp; integration testing (SD self, prior to QD handover)</li>
+        <li>UAT / usability testing — web &amp; mobile platforms</li>
+        <li>Regression testing after every significant build</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-gauge" aria-hidden="true" style="color:#534AB7"></i><span class="sc-title">Performance &amp; Load Testing</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Application scalability &amp; response testing</li>
+        <li>Performance baseline &amp; threshold documentation</li>
+        <li>Requirements traceability review</li>
+        <li>Test case–to–requirement linkage (RTM)</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-lock" aria-hidden="true" style="color:#534AB7"></i><span class="sc-title">Security &amp; Penetration Testing</span><span class="resp-tag rt-sd">SD</span></div>
+      <ul>
+        <li>IT services &amp; infrastructure security testing</li>
+        <li>Cybersecurity risk assessment &amp; threat modeling</li>
+        <li>STRIDE / TARA analysis for active devices</li>
+        <li>Post-market cybersecurity monitoring</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-settings" aria-hidden="true" style="color:#534AB7"></i><span class="sc-title">IT Operations</span><span class="resp-tag rt-sd">SD</span></div>
+      <ul>
+        <li>Scheduled maintenance review cycles</li>
+        <li>IT services &amp; infrastructure maintenance</li>
+        <li>Software change &amp; configuration management</li>
+        <li>Third-party / SOUP component controls</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slabel">SaMD / SiMD Compliance</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-sitemap" aria-hidden="true" style="color:#534AB7"></i><span class="sc-title">Software Lifecycle (IEC 62304)</span></div>
+      <ul>
+        <li>Software development plan &amp; classification (Class A/B/C)</li>
+        <li>Architecture &amp; detailed design review</li>
+        <li>Change management &amp; problem resolution</li>
+        <li>Legacy software &amp; SOUP evaluation</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-file-analytics" aria-hidden="true" style="color:#534AB7"></i><span class="sc-title">SaMD Regulatory Dossier</span></div>
+      <ul>
+        <li>SaMD risk classification &amp; intended use documentation</li>
+        <li>Technical documentation preparation</li>
+        <li>Clinical evaluation support</li>
+        <li>Post-market surveillance planning</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-list-check" aria-hidden="true" style="color:#534AB7"></i><span class="sc-title">Traceability &amp; V&amp;V</span></div>
+      <ul>
+        <li>Requirements traceability matrix (RTM)</li>
+        <li>Design input–output linkage</li>
+        <li>Hazard-to-test traceability</li>
+        <li>V&amp;V protocol &amp; report review</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- QC R&D PANEL -->
+<div id="dept-qcrd" class="dept-panel">
+  <div class="dept-header">
+    <div class="dept-icon di-coral"><i class="ti ti-test-pipe" aria-hidden="true"></i></div>
+    <div class="dept-header-text">
+      <h2>Quality Control — R&amp;D (PD · EMD · BMD)</h2>
+      <p>Quality oversight embedded in the product development lifecycle for active and non-active medical devices — from design verification through transfer to manufacturing. QD collaborates with PD, EMD, and BMD.</p>
+    </div>
+  </div>
+  <span class="std-badge sb-coral"><i class="ti ti-certificate" aria-hidden="true" style="font-size:11px"></i>ISO 14971</span>
+  <span class="std-badge sb-coral"><i class="ti ti-certificate" aria-hidden="true" style="font-size:11px"></i>ISO 13485 §7.3</span>
+  <span class="std-badge sb-coral"><i class="ti ti-bolt" aria-hidden="true" style="font-size:11px"></i>IEC 60601-1</span>
+  <span class="std-badge sb-coral"><i class="ti ti-activity" aria-hidden="true" style="font-size:11px"></i>PD · QD · BMD</span>
+
+  <div class="slabel">Design Control &amp; V&amp;V</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-layout-grid" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Design Control (§7.3)</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Design input &amp; output documentation</li>
+        <li>Design review facilitation</li>
+        <li>DHF compilation &amp; review</li>
+        <li>Design change control management</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-checkup-list" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Design Verification &amp; Validation</span><span class="resp-tag rt-pd">PD+QD</span></div>
+      <ul>
+        <li>V&amp;V against design inputs (active &amp; non-active)</li>
+        <li>User needs &amp; intended use confirmation</li>
+        <li>Clinical / usability evaluation (HFE)</li>
+        <li>Pre-submission V&amp;V protocol guidance</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-ruler" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Dimensional &amp; Mechanical Testing</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Dimensional / tolerance inspection per engineering drawings</li>
+        <li>Mechanical performance — burst, kink, pull-force, fatigue</li>
+        <li>Advanced visual inspection (Leica microscopic systems)</li>
+        <li>Mechanical safety: impact, drop &amp; strength testing</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-shield" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Risk Management (ISO 14971)</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Hazard identification &amp; analysis</li>
+        <li>FMEA &amp; fault tree analysis</li>
+        <li>Residual risk evaluation</li>
+        <li>Risk management report review</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slabel">Active Device Testing</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-bolt" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Electrical Safety &amp; Performance</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>IEC 60601-1 compliance — safety &amp; essential performance</li>
+        <li>ISO 80601-2-30 — NIBP device requirements</li>
+        <li>EMC testing (electromagnetic compatibility)</li>
+        <li>PCB assembly evaluation for active devices</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-cpu" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Metrology &amp; Calibration</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Calibration — temperature, pressure, volume, time</li>
+        <li>Cleanroom equipment verification (particle counters)</li>
+        <li>Measurement system analysis (MSA)</li>
+        <li>Calibration record management</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-building-factory" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Equipment Qualification</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Installation Qualification (IQ)</li>
+        <li>Operational Qualification (OQ)</li>
+        <li>Performance Qualification (PQ)</li>
+        <li>Validation documentation &amp; reporting</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="slabel">Interventional &amp; Implantable Device Testing</div>
+  <div class="sgrid">
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-heart-rate-monitor" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Catheter Performance Testing</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Trackability &amp; pushability — tortuous pathway navigation</li>
+        <li>Flexural &amp; kink resistance (stents &amp; guide catheters)</li>
+        <li>Stent deliverability under simulated physiological conditions</li>
+        <li>Corrosion resistance &amp; material evaluation</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-circle-dotted" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Stent &amp; Surface Quality Control</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Electropolishing quality control (high-magnification)</li>
+        <li>Particulate evaluation &amp; edge-rounding verification</li>
+        <li>Leak &amp; package integrity testing</li>
+        <li>Corrosion &amp; material degradation evaluation</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-atom-2" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Biocompatibility &amp; Sterilization</span><span class="resp-tag rt-bmd">BMD+QD</span></div>
+      <ul>
+        <li>Biocompatibility testing per ISO 10993 (patient-contact products)</li>
+        <li>Sterilization validation — EO, gamma, e-beam</li>
+        <li>Shelf-life &amp; packaging validation (ASTM F1980)</li>
+        <li>Regulatory dossier readiness review (PD + PRD + QD)</li>
+      </ul>
+    </div>
+    <div class="sc">
+      <div class="sc-head"><i class="ti ti-microscope" aria-hidden="true" style="color:#993C1D"></i><span class="sc-title">Technical Consultancy</span><span class="resp-tag rt-qd">QD</span></div>
+      <ul>
+        <li>Design V&amp;V strategy — design inputs to outputs mapping</li>
+        <li>Customized training — calibration &amp; regulatory test setups</li>
+        <li>Regulatory pathway guidance &amp; submission gap analysis</li>
+        <li>System-level &amp; integration testing oversight</li>
+      </ul>
+    </div>
+  </div>
+
+  <div style="margin-top:1rem;padding:.9rem 1rem;background:var(--color-background-secondary);border-radius:var(--border-radius-lg);border:0.5px solid var(--color-border-tertiary)">
+    <p style="font-size:12px;color:var(--color-text-secondary);margin:0;line-height:1.6"><i class="ti ti-info-circle" aria-hidden="true" style="font-size:13px;color:#993C1D;margin-right:5px;vertical-align:-1px"></i><strong style="color:var(--color-text-primary);font-weight:500">QD Core Functions across all R&amp;D activities:</strong> Test plan creation for all departments · Inspection reports (signed &amp; stamped) · Module-level &amp; system-level integration testing · Performance &amp; usability testing · Bi-monthly QC review meetings · QC pass → CEO presentation (QD + Relevant Dept. Head)</p>
+  </div>
+</div>
+
+<hr class="divider">
+<div class="slabel">Why choose our quality department</div>
+<div class="why-grid">
+  <div class="wc"><i class="ti ti-award" aria-hidden="true"></i><p>Deep ISO 13485 expertise across medical device lifecycle</p></div>
+  <div class="wc"><i class="ti ti-adjustments" aria-hidden="true"></i><p>Customized for active, non-active, SaMD, SiMD &amp; implantable devices</p></div>
+  <div class="wc"><i class="ti ti-zoom-in" aria-hidden="true"></i><p>Advanced lab infrastructure — Leica, UV spectroscopy &amp; metrology</p></div>
+  <div class="wc"><i class="ti ti-users" aria-hidden="true"></i><p>Cross-functional with EMD, SD, BMD, PD, PRD &amp; SC teams</p></div>
+</div>
+
+<script>
+function showDept(id,btn){
+  document.querySelectorAll('.dept-panel').forEach(p=>p.classList.remove('active'));
+  document.querySelectorAll('.dept-tab').forEach(t=>t.classList.remove('active'));
+  document.getElementById('dept-'+id).classList.add('active');
+  btn.classList.add('active');
+}
+</script>

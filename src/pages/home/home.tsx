@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
-  Cpu, Shield, Brain, FlaskConical, CircuitBoard, Settings2, Pill, Factory, FileText,
+  Cpu, Shield, Brain, FlaskConical, CircuitBoard, Settings2, Pill, Factory, FileText, Layers,
   MapPin, Phone, Mail,
 } from "lucide-react";
 import { RequestQuoteModal } from "@/components/RequestQuoteModal";
@@ -25,7 +25,8 @@ const heroImages = [
 const featuredServices = [
   { title: "Regulatory Compliance", description: "Expert guidance through FDA, CE, and global regulatory pathways ??technical files, clinical evaluations, ISO certifications.", icon: <Shield className="w-6 h-6" />, slug: "regulatory-compliance", subServices: ["Technical File for FDA/CE", "Clinical Evaluation Report", "ISO 13485 Certification", "ISO 14971 Risk Management"] },
   { title: "Software & AI Solutions", description: "Intelligent software powering next-generation medical devices ??AI, cloud, SaMD, and full development lifecycle.", icon: <Brain className="w-6 h-6" />, slug: "software-ai", subServices: ["AI & Machine Learning", "DevOps/Cloud Computing", "Software as Medical Device", "UI/UX Development"] },
-  { title: "Quality Testing", description: "Rigorous bench-to-market testing ensuring safety, performance, and compliance with international standards.", icon: <FlaskConical className="w-6 h-6" />, slug: "quality-testing", subServices: ["Bench Testing", "Physico-Chemical Testing", "Dimensional Analysis", "Simulation"] },
+  { title: "Product Development", description: "Turnkey product development and regulatory consultancy from concept through design, V&V, and manufacturing transfer.", icon: <Layers className="w-6 h-6" />, slug: "product-development", subServices: ["Concept & Feasibility", "Design & Engineering", "Prototyping", "Regulatory Consultancy"] },
+  { title: "Quality Department Services", description: "QA, production QC, SaMD software quality, and R&D design control ??testing and compliance from bench to release.", icon: <FlaskConical className="w-6 h-6" />, slug: "quality-testing", subServices: ["Quality Assurance (QA)", "QC — Production", "SQA / SaMD", "QC — R&D"] },
   { title: "Automation Services", description: "PLC, HMI/SCADA, motion control, and industrial communication for manufacturing and biomedical automation.", icon: <Settings2 className="w-6 h-6" />, slug: "automation-services", subServices: ["PLC Programming", "HMI & SCADA", "Motion Control", "Industrial Communication"] },
   { title: "Design & Fabrication", description: "Mechanical design, thermal engineering, ANSYS/COMSOL simulation, and FDM/SLA rapid prototyping.", icon: <CircuitBoard className="w-6 h-6" />, slug: "design-fabrication", subServices: ["Mechanical Design", "Thermal Engineering", "Simulation & Analysis", "3D Printing"] },
   { title: "Medical Device Manufacturing", description: "ISO cleanroom manufacturing from Class I?III devices ??quality systems, development journey, testing, and scale-up.", icon: <Factory className="w-6 h-6" />, slug: "contract-manufacturing", subServices: ["Quality & Compliance", "Manufacturing Capabilities", "Cleanroom Infrastructure", "Development Journey"] },

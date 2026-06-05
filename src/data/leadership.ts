@@ -176,6 +176,12 @@ export const QUALITY_CONTROL_WING: LeadershipMember[] = [
     image: teamImage("quality-control-wing", "wahaj.webp"),
     bio: "Manages production QC, in-process inspection, and release testing for manufactured devices.",
   },
+  {
+    name: "Hammad Shakeel",
+    role: "Manager, Software Quality Assurance",
+    image: teamImage("quality-control-wing", "hammad.jpg"),
+    bio: "Leads software quality assurance for SaMD and SiMD, supporting IEC 62304 and FDA compliance.",
+  },
 ];
 
 /** Supply Chain Wing */

@@ -11,12 +11,14 @@ import {
   Database, Server, Lock, Globe, Phone, Calendar, Star, Users,
   Gauge, Medal, FileCheck, Mail, Network,
   Atom, Stethoscope, Binary, Fingerprint, Waves, SlidersHorizontal,
-  LayoutDashboard, BookOpen, GraduationCap, Building2, Lightbulb
+  LayoutDashboard, BookOpen, GraduationCap, Building2, Lightbulb,
+  PenTool, FileText, Heart, Package, Wind, Beaker
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 import { ALL_SERVICES, type ServiceData, type SubServiceData } from "@/data/services";
 import {
   BMD_ACADEMIC_PARTNERS,
@@ -47,11 +49,34 @@ import {
   MANUFACTURING_DEVELOPMENT_PHASES,
   MANUFACTURING_DEVICE_CLASSES,
   MANUFACTURING_ENVIRONMENTAL_CONTROLS,
+  MANUFACTURING_HERO_STATS,
   MANUFACTURING_PRODUCTS,
   MANUFACTURING_QUALITY_POINTS,
   MANUFACTURING_TESTING_SERVICES,
   MANUFACTURING_WHY_CHOOSE,
 } from "@/data/revive-manufacturing-content";
+import {
+  PRODUCT_DEVELOPMENT_PHASES,
+  PRODUCT_DEVELOPMENT_REGULATORY,
+  PRODUCT_DEVELOPMENT_MANUFACTURING,
+  PRODUCT_DEVELOPMENT_WHY,
+} from "@/data/product-development-content";
+import {
+  QUALITY_DEPARTMENTS,
+  QUALITY_WHY_CHOOSE,
+  type QualityDepartment,
+} from "@/data/quality-department-content";
+import {
+  FullBleedBlock,
+  SectionHeading,
+  LifecycleRoadmap,
+  PillarGrid,
+  IconFeatureStrip,
+  IconCardGrid,
+  StatBadgeRow,
+  WhyChooseGrid,
+  VerticalTimeline,
+} from "./service-extras-visual";
 
 const ENGINEERING_SERVICE_SLUGS = new Set([
   "automation-services",
@@ -488,147 +513,401 @@ function BmdServiceExtras() {
 }
 
 /* ---- Medical device manufacturing (Revive content, main service page) ---- */
+const MANUFACTURING_PRODUCT_ICONS: Record<string, React.ElementType> = {
+  stethoscope: Stethoscope,
+  microscope: Microscope,
+  atom: Atom,
+  shield: ShieldCheck,
+  gauge: Gauge,
+};
+
+const MANUFACTURING_DEVICE_ICONS = [Package, Layers, Heart, Zap, Truck, TrendingUp] as const;
+
 function ManufacturingServiceExtras() {
+  const heroStats = [
+    { label: MANUFACTURING_HERO_STATS[0].label, value: MANUFACTURING_HERO_STATS[0].value, icon: Wind },
+    { label: MANUFACTURING_HERO_STATS[1].label, value: MANUFACTURING_HERO_STATS[1].value, icon: Layers },
+    { label: MANUFACTURING_HERO_STATS[2].label, value: MANUFACTURING_HERO_STATS[2].value, icon: Medal },
+    { label: MANUFACTURING_HERO_STATS[3].label, value: MANUFACTURING_HERO_STATS[3].value, icon: Target },
+  ];
+
   return (
-    <div className="space-y-10">
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-          Built-In Quality at Every Stage
-        </h2>
-        <ul className="grid sm:grid-cols-2 gap-3">
-          {MANUFACTURING_QUALITY_POINTS.map((point) => (
-            <li key={point} className="flex items-start gap-2 text-sm text-muted-foreground">
-              <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              {point}
-            </li>
-          ))}
-        </ul>
-      </AnimatedSection>
+    <div className="space-y-0">
+      <FullBleedBlock bgClassName="bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "32px 32px" }} aria-hidden />
+        <AnimatedSection className="relative">
+          <SectionHeading
+            eyebrow="Quality & Compliance"
+            title="Built-In Quality at Every Stage"
+            description="Every device is backed by documented, validated, and auditable processes — ISO 13485 and DRAP-registered operations."
+            light
+          />
+          <StatBadgeRow items={heroStats} />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+            {MANUFACTURING_QUALITY_POINTS.map((point, i) => (
+              <motion.div
+                key={point}
+                initial={{ opacity: 0, y: 10 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.05 }}
+                className="flex items-start gap-3 rounded-xl border border-white/10 bg-white/5 backdrop-blur-sm px-4 py-3"
+              >
+                <ShieldCheck className="w-5 h-5 text-primary shrink-0 mt-0.5" />
+                <span className="text-sm text-white/80">{point}</span>
+              </motion.div>
+            ))}
+          </div>
+        </AnimatedSection>
+      </FullBleedBlock>
 
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-          Flagship Products & Technologies
-        </h2>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-          Precision-engineered medical devices and services developed to clinical-grade standards within certified cleanroom facilities ??interventional and diagnostic solutions across vascular and specialty medicine.
-        </p>
-        <div className="grid md:grid-cols-2 gap-6">
-          {MANUFACTURING_PRODUCTS.map((product) => (
-            <div key={product.name} className="bg-card border border-border rounded-xl p-5">
-              <h3 className="font-heading font-bold text-foreground mb-2">{product.name}</h3>
-              <p className="text-muted-foreground text-xs leading-relaxed mb-3">{product.description}</p>
-              <ul className="space-y-1">
-                {product.features.map((f) => (
-                  <li key={f} className="text-xs text-muted-foreground flex items-start gap-2">
-                    <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
-                    {f}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+      <FullBleedBlock bgClassName="bg-background">
+        <AnimatedSection>
+          <SectionHeading
+            eyebrow="Portfolio"
+            title="Flagship Products & Technologies"
+            description="Precision-engineered medical devices developed to clinical-grade standards within certified cleanroom facilities."
+          />
+          <IconCardGrid
+            columns={2}
+            cards={MANUFACTURING_PRODUCTS.map((p) => ({
+              title: p.name,
+              description: p.description,
+              features: p.features,
+              icon: MANUFACTURING_PRODUCT_ICONS[p.icon] ?? PackageCheck,
+            }))}
+          />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-secondary/40">
+        <AnimatedSection>
+          <SectionHeading
+            eyebrow="Capabilities"
+            title="Full-Spectrum Device Manufacturing"
+            description="From Class I general devices to Class III life-sustaining technologies and contract OEM production."
+          />
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
+            {MANUFACTURING_DEVICE_CLASSES.map((item, i) => {
+              const Icon = MANUFACTURING_DEVICE_ICONS[i] ?? Factory;
+              return (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, scale: 0.97 }}
+                  whileInView={{ opacity: 1, scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.06 }}
+                  className="relative bg-card border border-border rounded-2xl p-6 hover:border-primary/35 hover:shadow-lg transition-all overflow-hidden group"
+                >
+                  <span className="absolute top-4 right-4 text-5xl font-heading font-black text-primary/10 group-hover:text-primary/15 transition-colors">
+                    {String(i + 1).padStart(2, "0")}
+                  </span>
+                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+                    <Icon className="w-6 h-6" />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground mb-2">{item.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">{item.description}</p>
+                </motion.div>
+              );
+            })}
+          </div>
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-gradient-to-r from-primary/5 via-background to-primary/5">
+        <AnimatedSection>
+          <SectionHeading
+            eyebrow="Infrastructure"
+            title="World-Class Cleanroom Environments"
+            description="ISO-classified controlled spaces purpose-built for precision medical device production."
+          />
+          <div className="grid sm:grid-cols-3 gap-5 mb-8">
+            {MANUFACTURING_CLEANROOMS.map((room, i) => (
+              <motion.div
+                key={room.grade}
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: i * 0.08 }}
+                className="relative rounded-2xl border-2 border-primary/20 bg-gradient-to-b from-primary/10 to-card p-6 text-center overflow-hidden"
+              >
+                <div className="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-transparent via-primary to-transparent" />
+                <Wind className="w-8 h-8 text-primary mx-auto mb-3" />
+                <p className="text-3xl font-heading font-black text-primary">{room.grade}</p>
+                <p className="text-sm text-muted-foreground mt-3 leading-relaxed">{room.description}</p>
+              </motion.div>
+            ))}
+          </div>
+          <h3 className="font-heading font-semibold text-foreground mb-4">Environmental Control Systems</h3>
+          <IconFeatureStrip items={MANUFACTURING_ENVIRONMENTAL_CONTROLS} icon={Gauge} />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-background">
+        <AnimatedSection>
+          <SectionHeading
+            eyebrow="Process"
+            title="Development Journey"
+            description="From your idea to the patient's bedside — bridging technical, regulatory, and operational hurdles."
+          />
+          <VerticalTimeline
+            phases={MANUFACTURING_DEVELOPMENT_PHASES.map((p, i) => ({
+              ...p,
+              icon: [Lightbulb, Cog, Rocket][i] ?? Target,
+            }))}
+          />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-secondary/30">
+        <AnimatedSection>
+          <SectionHeading eyebrow="Validation" title="Testing & Validation" />
+          <IconCardGrid
+            columns={2}
+            cards={MANUFACTURING_TESTING_SERVICES.map((svc) => ({
+              title: svc.title,
+              description: svc.description,
+              icon: Beaker,
+            }))}
+          />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-background">
+        <AnimatedSection>
+          <SectionHeading eyebrow="Scale" title="Capacity Building" />
+          <IconFeatureStrip items={MANUFACTURING_CAPACITY_BUILDING} icon={Building2} />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-secondary/40">
+        <AnimatedSection>
+          <SectionHeading title="Why Choose Us for Manufacturing" />
+          <WhyChooseGrid
+            items={MANUFACTURING_WHY_CHOOSE.map((w, i) => ({
+              ...w,
+              icon: [Award, TrendingUp, ShieldCheck, Lightbulb, Factory][i] ?? CheckCircle,
+            }))}
+          />
+        </AnimatedSection>
+      </FullBleedBlock>
+    </div>
+  );
+}
+
+const PD_PHASE_ICONS = [Lightbulb, PenTool, Boxes, FlaskConical, Factory] as const;
+const PD_REG_ICONS = [ShieldCheck, ScrollText, FileText, ClipboardCheck, Globe] as const;
+
+/* ---- Product Development Wing (main service page) ---- */
+function ProductDevelopmentServiceExtras() {
+  return (
+    <div className="space-y-0">
+      <FullBleedBlock bgClassName="bg-gradient-to-br from-sky-950/90 via-slate-900 to-blue-950/90 relative overflow-hidden">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl" aria-hidden />
+        <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" aria-hidden />
+        <AnimatedSection className="relative">
+          <SectionHeading
+            eyebrow="Lifecycle"
+            title="Product Development Lifecycle"
+            description="Structured phases from clinical need through commercial-ready design — we manage technical and regulatory complexity so you can focus on growth."
+            light
+          />
+          <LifecycleRoadmap
+            variant="dark"
+            steps={PRODUCT_DEVELOPMENT_PHASES.map((phase, i) => ({
+              title: phase.title,
+              items: phase.items,
+              icon: PD_PHASE_ICONS[i] ?? Target,
+            }))}
+          />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-background">
+        <AnimatedSection>
+          <SectionHeading
+            eyebrow="Compliance"
+            title="Regulatory Consultancy Services"
+            description="Structured pathways for ISO, IEC, FDA, and CE requirements — minimizing approval timelines with audit-ready documentation."
+          />
+          <PillarGrid
+            pillars={PRODUCT_DEVELOPMENT_REGULATORY.map((block, i) => ({
+              title: block.title,
+              items: block.items,
+              icon: PD_REG_ICONS[i] ?? ShieldCheck,
+            }))}
+          />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-gradient-to-r from-secondary/50 via-background to-secondary/50">
+        <AnimatedSection>
+          <SectionHeading
+            eyebrow="Commercialization"
+            title="Turnkey Manufacturing Solutions"
+            description="Establishing sustainable manufacturing operations for long-term commercial success."
+          />
+          <IconFeatureStrip items={PRODUCT_DEVELOPMENT_MANUFACTURING} icon={Truck} />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-secondary/30">
+        <AnimatedSection>
+          <SectionHeading title="Why RMT Product Development" />
+          <WhyChooseGrid
+            items={PRODUCT_DEVELOPMENT_WHY.map((w, i) => ({
+              ...w,
+              icon: [Rocket, Users, ShieldCheck, Cpu, SlidersHorizontal, Zap][i] ?? CheckCircle,
+            }))}
+          />
+        </AnimatedSection>
+      </FullBleedBlock>
+    </div>
+  );
+}
+
+const QUALITY_TAB_ICONS: Record<string, React.ElementType> = {
+  qa: ClipboardList,
+  qcprod: Microscope,
+  sqa: Code2,
+  qcrd: TestTube2,
+};
+
+function QualityDepartmentPanel({ dept }: { dept: QualityDepartment }) {
+  const Icon = QUALITY_TAB_ICONS[dept.id] ?? ShieldCheck;
+
+  return (
+    <div className="space-y-8">
+      <div className="flex items-start gap-4 p-6 rounded-2xl border border-border bg-card shadow-sm">
+        <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-primary">
+          <Icon className="w-7 h-7" />
         </div>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-          Full-Spectrum Device Manufacturing
-        </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {MANUFACTURING_DEVICE_CLASSES.map((item) => (
-            <div key={item.title} className="bg-card border border-border rounded-xl p-4">
-              <h3 className="font-heading font-semibold text-foreground text-sm mb-2">{item.title}</h3>
-              <p className="text-muted-foreground text-xs leading-relaxed">{item.description}</p>
-            </div>
-          ))}
+        <div>
+          <h3 className="font-heading font-bold text-foreground text-lg mb-1">{dept.name}</h3>
+          <p className="text-sm text-muted-foreground leading-relaxed">{dept.description}</p>
+          <div className="flex flex-wrap gap-2 mt-3">
+            {dept.standards.map((s) => (
+              <span key={s} className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/8 text-primary border border-primary/15">
+                {s}
+              </span>
+            ))}
+          </div>
         </div>
-      </AnimatedSection>
+      </div>
 
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-          World-Class Cleanroom Environments
-        </h2>
-        <div className="grid sm:grid-cols-3 gap-4 mb-6">
-          {MANUFACTURING_CLEANROOMS.map((room) => (
-            <div key={room.grade} className="bg-primary/5 border border-primary/15 rounded-xl p-4 text-center">
-              <p className="text-xl font-heading font-bold text-primary">{room.grade}</p>
-              <p className="text-xs text-muted-foreground mt-2 leading-relaxed">{room.description}</p>
-            </div>
-          ))}
+      {dept.sections.map((section) => (
+        <div key={section.label}>
+          <h4 className="font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
+            <span className="w-8 h-0.5 bg-primary rounded-full" />
+            {section.label}
+          </h4>
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            {section.cards.map((card, ci) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: ci * 0.04 }}
+                className="group bg-card border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-md transition-all"
+              >
+                <div className="flex items-center gap-2 mb-3 flex-wrap">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors shrink-0">
+                    <CheckCircle className="w-4 h-4" />
+                  </div>
+                  <h5 className="font-semibold text-foreground text-sm">{card.title}</h5>
+                  {card.owner && (
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                      {card.owner}
+                    </span>
+                  )}
+                </div>
+                <ul className="space-y-1.5">
+                  {card.items.map((item) => (
+                    <li key={item} className="text-xs text-muted-foreground flex items-start gap-2 leading-relaxed">
+                      <span className="w-1 h-1 rounded-full bg-primary mt-1.5 shrink-0" />
+                      {item}
+                    </li>
+                  ))}
+                </ul>
+              </motion.div>
+            ))}
+          </div>
         </div>
-        <h3 className="font-heading font-semibold text-foreground mb-2">Environmental Control Systems</h3>
-        <ul className="grid sm:grid-cols-2 gap-2">
-          {MANUFACTURING_ENVIRONMENTAL_CONTROLS.map((c) => (
-            <li key={c} className="text-sm text-muted-foreground flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              {c}
-            </li>
-          ))}
-        </ul>
-      </AnimatedSection>
+      ))}
 
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-          Development Journey
-        </h2>
-        <div className="space-y-6">
-          {MANUFACTURING_DEVELOPMENT_PHASES.map((phase) => (
-            <div key={phase.title} className="bg-card border border-border rounded-xl p-5">
-              <h3 className="font-heading font-semibold text-foreground mb-3">{phase.title}</h3>
-              <ul className="space-y-1.5">
-                {phase.items.map((item) => (
-                  <li key={item} className="text-sm text-muted-foreground flex items-start gap-2">
-                    <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </div>
-          ))}
+      {dept.footerNote && (
+        <div className="bg-primary/5 border border-primary/15 rounded-xl p-5">
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            <strong className="text-foreground font-medium">QD Core Functions: </strong>
+            {dept.footerNote.replace(/^QD Core Functions across all R&D activities:\s*/, "")}
+          </p>
         </div>
-      </AnimatedSection>
+      )}
+    </div>
+  );
+}
 
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-          Testing & Validation
-        </h2>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {MANUFACTURING_TESTING_SERVICES.map((svc) => (
-            <div key={svc.title} className="bg-card border border-border rounded-xl p-4">
-              <h3 className="font-heading font-semibold text-foreground text-sm mb-2">{svc.title}</h3>
-              <p className="text-muted-foreground text-xs leading-relaxed">{svc.description}</p>
-            </div>
-          ))}
-        </div>
-      </AnimatedSection>
+const QUALITY_WHY_ICONS = [Award, SlidersHorizontal, Microscope, Users] as const;
 
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-          Capacity Building
-        </h2>
-        <ul className="grid sm:grid-cols-2 gap-2">
-          {MANUFACTURING_CAPACITY_BUILDING.map((item) => (
-            <li key={item} className="text-sm text-muted-foreground flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              {item}
-            </li>
-          ))}
-        </ul>
-      </AnimatedSection>
+/* ---- Quality Department Services (main service page) ---- */
+function QualityTestingServiceExtras() {
+  const [activeId, setActiveId] = useState(QUALITY_DEPARTMENTS[0].id);
+  const activeDept = QUALITY_DEPARTMENTS.find((d) => d.id === activeId) ?? QUALITY_DEPARTMENTS[0];
 
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-          Why Choose Us for Manufacturing
-        </h2>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          {MANUFACTURING_WHY_CHOOSE.map((item) => (
-            <div key={item.title} className="bg-card border border-border rounded-xl p-4">
-              <h3 className="font-semibold text-foreground text-sm mb-2">{item.title}</h3>
-              <p className="text-muted-foreground text-xs leading-relaxed">{item.description}</p>
-            </div>
-          ))}
-        </div>
-      </AnimatedSection>
+  return (
+    <div className="space-y-0">
+      <FullBleedBlock bgClassName="bg-gradient-to-br from-teal-950/90 via-slate-900 to-emerald-950/80 relative overflow-hidden">
+        <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} aria-hidden />
+        <AnimatedSection className="relative">
+          <SectionHeading
+            eyebrow="Organisation"
+            title="Quality Departments"
+            description="QD leads all quality activities with collaboration across EMD, SD, BMD, PD, PRD, and Supply Chain — from R&D bench to production release."
+            light
+          />
+          <div className="flex flex-wrap gap-2 mb-8">
+            {QUALITY_DEPARTMENTS.map((dept) => {
+              const TabIcon = QUALITY_TAB_ICONS[dept.id] ?? ShieldCheck;
+              const isActive = dept.id === activeId;
+              return (
+                <button
+                  key={dept.id}
+                  type="button"
+                  onClick={() => setActiveId(dept.id)}
+                  className={cn(
+                    "inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-medium transition-all",
+                    isActive
+                      ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25"
+                      : "bg-white/5 text-white/70 border-white/15 hover:bg-white/10 hover:text-white"
+                  )}
+                >
+                  <TabIcon className="w-4 h-4" />
+                  {dept.tabLabel}
+                </button>
+              );
+            })}
+          </div>
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-background">
+        <AnimatedSection>
+          <QualityDepartmentPanel dept={activeDept} />
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-secondary/40">
+        <AnimatedSection>
+          <SectionHeading title="Why Choose Our Quality Department" />
+          <WhyChooseGrid
+            items={QUALITY_WHY_CHOOSE.map((item, i) => ({
+              ...item,
+              icon: QUALITY_WHY_ICONS[i] ?? ShieldCheck,
+            }))}
+          />
+        </AnimatedSection>
+      </FullBleedBlock>
     </div>
   );
 }
@@ -637,6 +916,7 @@ function ManufacturingServiceExtras() {
 const SERVICE_ICONS: Record<string, React.ReactNode> = {
   "regulatory-compliance": <Shield className="w-6 h-6" />,
   "software-ai": <Brain className="w-6 h-6" />,
+  "product-development": <Layers className="w-6 h-6" />,
   "quality-testing": <FlaskConical className="w-6 h-6" />,
   "automation-services": <Cog className="w-6 h-6" />,
   "design-fabrication": <Wrench className="w-6 h-6" />,
@@ -651,7 +931,8 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
 const SERVICE_STANDARDS: Record<string, string[]> = {
   "regulatory-compliance":   ["FDA 510(k)/PMA", "EU MDR 2017/745", "ISO 13485", "MEDDEV 2.7.1", "IVDR 2017/746"],
   "software-ai":             ["IEC 62304", "FDA SaMD Guidance", "IEC 82304", "EU MDR Rule 11", "HIPAA / SOC 2"],
-  "quality-testing":         ["ISO 13485", "ISO 10993", "IEC 60601-1", "ASTM Standards", "USP Standards"],
+  "product-development":     ["ISO 13485", "ISO 14971", "IEC 62304", "IEC 60601", "FDA / CE"],
+  "quality-testing":         ["ISO 13485", "ISO 10993", "IEC 60601-1", "IEC 62304", "ISO 14971"],
   "automation-services":       ["IEC 61131", "ISO 13849", "Modbus / Profibus", "GMP", "ISO 13485"],
   "design-fabrication":        ["SOLIDWORKS", "ANSYS", "COMSOL", "DFM / DFA", "ISO 13485"],
   "engineering-product-development": ["IEC 62304", "IPC-2221", "IEC 60601-1", "STM32 / ESP32", "ISO 13485"],
@@ -665,7 +946,8 @@ const SERVICE_STANDARDS: Record<string, string[]> = {
 const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon: React.ElementType }[]> = {
   "regulatory-compliance":   [{ label: "Approval Rate", value: "98%", icon: Medal }, { label: "Jurisdictions", value: "40+", icon: Globe }, { label: "Submissions", value: "1,200+", icon: FileCheck }],
   "software-ai":             [{ label: "AI Models Deployed", value: "80+", icon: Brain }, { label: "Platforms Supported", value: "15+", icon: LayoutDashboard }, { label: "Compliance Rate", value: "100%", icon: ShieldCheck }],
-  "quality-testing":         [{ label: "Tests Executed", value: "25k+", icon: FlaskConical }, { label: "Standards Covered", value: "50+", icon: BookOpen }, { label: "Turnaround", value: "72hr", icon: Zap }],
+  "product-development":     [{ label: "Lifecycle Phases", value: "6+", icon: Layers }, { label: "Regulatory Frameworks", value: "10+", icon: ShieldCheck }, { label: "Engagement Models", value: "Flexible", icon: Target }],
+  "quality-testing":         [{ label: "Quality Departments", value: "4", icon: FlaskConical }, { label: "Standards Covered", value: "50+", icon: BookOpen }, { label: "Cross-Functional", value: "6 Depts", icon: Users }],
   "automation-services":     [{ label: "PLC Platforms", value: "Fatek+", icon: Cog }, { label: "HMI Systems", value: "Weintek", icon: MonitorSmartphone }, { label: "Motion Axes", value: "Multi", icon: Zap }],
   "design-fabrication":      [{ label: "CAD Platforms", value: "SOLIDWORKS", icon: Layers }, { label: "3D Printers", value: "4+", icon: Boxes }, { label: "Simulations", value: "ANSYS/COMSOL", icon: Gauge }],
   "engineering-product-development": [{ label: "Disciplines", value: "3+", icon: Settings2 }, { label: "Methodology Steps", value: "5", icon: Target }, { label: "Deliverable Types", value: "20+", icon: PackageCheck }],
@@ -679,6 +961,7 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
 const SERVICE_SCATTER_ICONS: Record<string, React.ElementType[]> = {
   "regulatory-compliance":  [Shield, FileSearch, ScrollText, Globe, CheckCircle, ShieldCheck, FileCheck, BookOpen, Award, Medal],
   "software-ai":            [Code2, Cpu, Cloud, Terminal, Brain, Sparkles, GitBranch, MonitorSmartphone, Workflow, Bug, Layers, Zap, Smartphone, ShieldCheck, Activity, Cog, Boxes, ScanLine, CircuitBoard, Network, Database, Binary],
+  "product-development":    [Layers, Target, PackageCheck, ClipboardList, Wrench, CircuitBoard, FlaskConical, ShieldCheck, FileCheck, Rocket, Cog, Microscope, Settings2, CheckCircle, Brain],
   "quality-testing":        [FlaskConical, TestTube2, Microscope, BarChart3, ClipboardList, CheckCircle, Search, Target, ScanLine, Gauge],
   "automation-services":    [Cog, Zap, Network, MonitorSmartphone, Cable, Radio, Settings2, Gauge, Cloud, Terminal],
   "design-fabrication":     [Wrench, Layers, Gauge, Boxes, Cpu, Microscope, Waves, Target, Cog, PackageCheck],
@@ -703,8 +986,12 @@ const SERVICE_GENERIC_SUB_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1564325724739-bae0bd08762c?w=900&q=80",
     "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=900&q=80",
     "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=900&q=80",
-    "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=900&q=80",
-    "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=900&q=80",
+  ],
+  "product-development": [
+    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
+    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
+    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80",
+    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
   ],
   "automation-services": [
     "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
@@ -2289,6 +2576,8 @@ export function ServiceDetail({
   const isEngineering = ENGINEERING_SERVICE_SLUGS.has(service.slug);
   const isAutomation = service.slug === "automation-services";
   const isManufacturing = service.slug === "contract-manufacturing";
+  const isProductDevelopment = service.slug === "product-development";
+  const isQualityTesting = service.slug === "quality-testing";
   const isDesignFabrication = service.slug === "design-fabrication";
   const isEngineeringProduct = service.slug === "engineering-product-development";
   const containerClass = "page-container";
@@ -2379,7 +2668,7 @@ export function ServiceDetail({
       </section>
 
       {/* OVERVIEW */}
-      <section className="relative overflow-hidden bg-background py-16">
+      <section className="relative overflow-x-clip bg-background py-16">
         {isSoftwareAI ? <SoftwareAIDecorLayer /> : null}
         <SoftwareIconsScatterBg />
         <div className={`${containerClass} relative z-10`}>
@@ -2472,7 +2761,6 @@ export function ServiceDetail({
               {isAutomation && <AutomationCommunicationExtras />}
               {isDesignFabrication && <DesignFabricationExtras />}
               {isEngineeringProduct && <EngineeringProductExtras />}
-              {isManufacturing && <ManufacturingServiceExtras />}
               {isBmd && <BmdServiceExtras />}
               {isMbl && <MblServiceExtras />}
 
@@ -2545,6 +2833,11 @@ export function ServiceDetail({
             </div>
           </div>
         </div>
+
+        {/* Full-width detailed sections — below sidebar, edge-to-edge */}
+        {isManufacturing && <ManufacturingServiceExtras />}
+        {isProductDevelopment && <ProductDevelopmentServiceExtras />}
+        {isQualityTesting && <QualityTestingServiceExtras />}
       </section>
 
       {isSoftwareAI && (

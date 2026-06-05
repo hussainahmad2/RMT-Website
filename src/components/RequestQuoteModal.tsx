@@ -24,7 +24,8 @@ interface QuoteFormData {
 const SERVICES = [
   { id: "regulatory-compliance", label: "Regulatory Compliance (FDA/CE)", icon: <Shield className="w-4 h-4" /> },
   { id: "software-ai", label: "Software & AI Solutions", icon: <Brain className="w-4 h-4" /> },
-  { id: "quality-testing", label: "Quality Testing", icon: <FlaskConical className="w-4 h-4" /> },
+  { id: "product-development", label: "Product Development", icon: <CircuitBoard className="w-4 h-4" /> },
+  { id: "quality-testing", label: "Quality Department Services", icon: <FlaskConical className="w-4 h-4" /> },
   { id: "automation-services", label: "Automation Services", icon: <Settings2 className="w-4 h-4" /> },
   { id: "design-fabrication", label: "Design & Fabrication", icon: <Cpu className="w-4 h-4" /> },
   { id: "engineering-product-development", label: "Engineering & Product Development", icon: <CircuitBoard className="w-4 h-4" /> },

@@ -56,7 +56,7 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
   const textBlock = (
     <div
       className={`flex flex-col ${
-        featured ? "justify-center p-6 lg:p-8 lg:flex-1" : "p-5 min-h-[7.5rem]"
+        featured ? "justify-center p-6 lg:p-8 lg:flex-1" : "p-5 min-h-[8.5rem]"
       }`}
     >
       <h3
@@ -64,7 +64,7 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
       >
         {person.name}
       </h3>
-      <p className="text-primary text-xs font-bold uppercase tracking-wide mt-1 mb-2 line-clamp-2">
+      <p className="text-primary text-xs font-bold uppercase tracking-wide mt-1 mb-2">
         {person.role}
       </p>
       <p className={`text-muted-foreground leading-relaxed ${featured ? "text-sm" : "text-xs"}`}>
