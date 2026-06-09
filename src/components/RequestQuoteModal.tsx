@@ -47,18 +47,18 @@ const PROJECT_TYPES = [
 
 const BUDGETS = [
   "Under $25,000",
-  "$25,000 �?$100,000",
-  "$100,000 �?$500,000",
-  "$500,000 �?$1,000,000",
+  "$25,000 – $100,000",
+  "$100,000 – $500,000",
+  "$500,000 – $1,000,000",
   "Over $1,000,000",
   "To be discussed",
 ];
 
 const TIMELINES = [
   "Less than 3 months",
-  "3 �?6 months",
-  "6 �?12 months",
-  "12 �?24 months",
+  "3 – 6 months",
+  "6 – 12 months",
+  "12 – 24 months",
   "Over 24 months",
   "Flexible / TBD",
 ];

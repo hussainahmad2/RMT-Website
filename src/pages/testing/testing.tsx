@@ -50,7 +50,7 @@ const testCategories: TestCategory[] = [
       { name: "Tensile & Fatigue Testing", description: "Tensile strength, elongation at break, and cyclic fatigue testing per ISO 10555 and ASTM standards for implants and structural components." },
       { name: "Hardness & Wear Testing", description: "Shore hardness, Rockwell hardness, and tribological wear testing for polymeric and metallic device components." },
       { name: "Compression & Burst Testing", description: "Compressive strength and burst pressure testing for surgical balloons, vascular grafts, and containment systems per ISO 7198." },
-      { name: "Dimensional Measurement", description: "CMM and optical coordinate measurement to verify dimensional conformance against engineering drawing specifications to ¡À0.01mm tolerance." },
+      { name: "Dimensional Measurement", description: "CMM and optical coordinate measurement to verify dimensional conformance against engineering drawing specifications to ï¿½ï¿½0.01mm tolerance." },
     ],
     standards: ["ISO 10555", "ASTM F2477", "ISO 7198", "ISO 10993-3"],
   },
@@ -118,7 +118,7 @@ export default function Testing() {
 
   useSEO({
     title: "Testing Services",
-    description: "Comprehensive medical device testing services ??microbiology, physical, chemical, electrical safety (IEC 60601), biocompatibility (ISO 10993), and packaging integrity testing.",
+    description: "Comprehensive medical device testing services â€” microbiology, physical, chemical, electrical safety (IEC 60601), biocompatibility (ISO 10993), and packaging integrity testing.",
     keywords: "medical device testing, microbiology testing, IEC 60601, ISO 10993 biocompatibility, sterility testing, electrical safety testing",
     path: "/testing",
   });
@@ -144,7 +144,7 @@ export default function Testing() {
                 Medical Device<br /><span className="text-primary">Testing Services</span>
               </h1>
               <p className="text-white/65 text-xl leading-relaxed mb-8">
-                Comprehensive laboratory testing services for medical devices ??from sterility and biocompatibility through electrical safety and packaging validation ??all aligned with FDA, EU MDR, and international standards.
+                Comprehensive laboratory testing services for medical devices â€” from sterility and biocompatibility through electrical safety and packaging validation â€” all aligned with FDA, EU MDR, and international standards.
               </p>
               <Button asChild className="rounded-lg h-11 px-7 font-semibold">
                 <Link href="/contact">Request Testing Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>

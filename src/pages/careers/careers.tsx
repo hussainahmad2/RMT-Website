@@ -37,7 +37,7 @@ const jobs: Job[] = [
   },
   {
     id: "3",
-    title: "Software Engineer ??Medical Devices (SaMD)",
+    title: "Software Engineer — Medical Devices (SaMD)",
     department: "Software & AI",
     location: "USA / Remote",
     type: "Full-time",
@@ -64,7 +64,7 @@ const jobs: Job[] = [
   },
   {
     id: "6",
-    title: "Project Manager ??Medical Device Development",
+    title: "Project Manager — Medical Device Development",
     department: "Operations",
     location: "USA / Remote",
     type: "Full-time",
@@ -75,7 +75,7 @@ const jobs: Job[] = [
 
 const benefits = [
   { icon: <TrendingUp className="w-5 h-5" />, title: "Career Growth", description: "Structured career development pathways, mentoring, and continuous learning opportunities in medical technology." },
-  { icon: <Shield className="w-5 h-5" />, title: "Meaningful Work", description: "Contribute to medical devices that directly improve patient lives ??work with purpose every day." },
+  { icon: <Shield className="w-5 h-5" />, title: "Meaningful Work", description: "Contribute to medical devices that directly improve patient lives — work with purpose every day." },
   { icon: <Users className="w-5 h-5" />, title: "Expert Team", description: "Work alongside leading regulatory, engineering, and scientific professionals from around the world." },
   { icon: <Heart className="w-5 h-5" />, title: "Comprehensive Benefits", description: "Competitive salary, health insurance, flexible working arrangements, and professional development funding." },
 ];

@@ -53,7 +53,7 @@ const milestones = [
 
 const values = [
   { icon: <Target className="w-5 h-5" />, title: "Precision", description: "Every detail matters in medical device development. We apply meticulous attention to standards, specifications, and documentation." },
-  { icon: <Users className="w-5 h-5" />, title: "Collaboration", description: "We work as an extension of your team ??transparent, communicative, and aligned with your goals at every stage." },
+  { icon: <Users className="w-5 h-5" />, title: "Collaboration", description: "We work as an extension of your team — transparent, communicative, and aligned with your goals at every stage." },
   { icon: <Award className="w-5 h-5" />, title: "Excellence", description: "We hold ourselves to the highest standards, because the patients who rely on the devices we help create deserve nothing less." },
   { icon: <Heart className="w-5 h-5" />, title: "Patient Focus", description: "Behind every medical device project is a patient whose quality of life depends on what we build. That responsibility drives us." },
 ];
@@ -104,7 +104,7 @@ export default function About() {
                   About RMT<br /><span className="text-primary">Medical Technologies</span>
                 </h1>
                 <p className="text-white/65 text-lg leading-relaxed mb-8">
-                  Founded in 2008, RMT Medical Technologies Inc. has grown from a specialist regulatory consultancy into a full-service medical device and technology partner ??operating across North America, South Asia, and the Middle East.
+                  Founded in 2008, RMT Medical Technologies Inc. has grown from a specialist regulatory consultancy into a full-service medical device and technology partner — operating across North America, South Asia, and the Middle East.
                 </p>
                 <div className="flex flex-wrap gap-4">
                   <Button asChild className="rounded-lg h-11 px-6">
@@ -145,9 +145,9 @@ export default function About() {
           </AnimatedSection>
           <div className="grid md:grid-cols-3 gap-6">
             {[
-              { Icon: Target, title: "Our Mission", text: "To accelerate medical device innovation by providing world-class engineering, regulatory, and manufacturing expertise ??enabling our clients to bring safer, more effective products to patients faster." },
-              { Icon: Eye, title: "Our Vision", text: "To be the most trusted global partner for end-to-end medical device development ??the first call every medical technology company makes when they need expertise, speed, and certainty." },
-              { Icon: Award, title: "Our Commitment", text: "To maintain the highest standards of quality, compliance, and technical excellence in everything we do ??because the patients who will use the devices we develop deserve nothing less." },
+              { Icon: Target, title: "Our Mission", text: "To accelerate medical device innovation by providing world-class engineering, regulatory, and manufacturing expertise — enabling our clients to bring safer, more effective products to patients faster." },
+              { Icon: Eye, title: "Our Vision", text: "To be the most trusted global partner for end-to-end medical device development — the first call every medical technology company makes when they need expertise, speed, and certainty." },
+              { Icon: Award, title: "Our Commitment", text: "To maintain the highest standards of quality, compliance, and technical excellence in everything we do — because the patients who will use the devices we develop deserve nothing less." },
             ].map(({ Icon, title, text }, i) => (
               <motion.div key={title} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }}
                 className="bg-card border border-border rounded-2xl p-7">

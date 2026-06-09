@@ -114,7 +114,7 @@ function EngineeringMethodology() {
               <div className="flex-1 bg-card border border-border rounded-xl p-5 group-hover:border-primary/40 group-hover:shadow-sm transition-all duration-300 mt-1">
                 <div className="flex items-start justify-between gap-3 mb-2">
                   <h4 className="font-heading font-bold text-foreground text-base group-hover:text-primary transition-colors">
-                    Step {i + 1} ??{step.title}
+                    Step {i + 1} — {step.title}
                   </h4>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-3">{step.description}</p>
@@ -145,7 +145,7 @@ function EngineeringProductExtras() {
         <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Key Highlights</h2>
         <ul className="grid sm:grid-cols-2 gap-3">
           {[
-            "End-to-End Product Development (Concept ??Prototype ??Production)",
+            "End-to-End Product Development (Concept → Prototype → Production)",
             "Cross-Disciplinary Engineering (Automation + Mechanical + Embedded)",
             "Industrial-Grade Design Standards",
             "Rapid Prototyping using FDM & SLA 3D Printing",
@@ -874,7 +874,7 @@ function QualityTestingServiceExtras() {
   );
 }
 
-/* ---- Map slug ??icon ---- */
+/* ---- Map slug — icon ---- */
 const SERVICE_ICONS: Record<string, React.ReactNode> = {
   "regulatory-compliance": <Shield className="w-6 h-6" />,
   "software-ai": <Brain className="w-6 h-6" />,
@@ -918,7 +918,7 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
     { label: "Laboratory Success Rate", value: ">99%", icon: Medal },
     { label: "Turnaround Time", value: "24–72h", icon: Calendar },
   ],
-  "contract-manufacturing":  [{ label: "Cleanroom Grade", value: "ISO 5", icon: Factory }, { label: "Device Classes", value: "I?CIII", icon: Layers }, { label: "Lifecycle", value: "360??", icon: Target }],
+  "contract-manufacturing":  [{ label: "Cleanroom Grade", value: "ISO 5", icon: Factory }, { label: "Device Classes", value: "I–III", icon: Layers }, { label: "Lifecycle", value: "360°", icon: Target }],
 };
 
 /** One key metric per sub-service (e.g. MBL testing programmes) */
@@ -1045,7 +1045,7 @@ const StethoBg = () => (
 
 const PROVEN_PROCESS_PHASES = [
   { step: "01", title: "Discovery", Icon: Search, desc: "Deep-dive into your project goals, regulatory pathway, market requirements, and technical constraints.", color: "from-blue-500/10 to-primary/10" },
-  { step: "02", title: "Strategy", Icon: ClipboardList, desc: "We define a detailed project plan ??scope, timeline, regulatory strategy, and risk mitigation roadmap.", color: "from-primary/10 to-indigo-500/10" },
+  { step: "02", title: "Strategy", Icon: ClipboardList, desc: "We define a detailed project plan — scope, timeline, regulatory strategy, and risk mitigation roadmap.", color: "from-primary/10 to-indigo-500/10" },
   { step: "03", title: "Design & Build", Icon: Wrench, desc: "Engineering, software, and regulatory teams work in parallel to deliver your device design and documentation.", color: "from-indigo-500/10 to-violet-500/10" },
   { step: "04", title: "Validate", Icon: TestTube2, desc: "Rigorous V&V testing, risk management closure, and quality system review ahead of regulatory submission.", color: "from-violet-500/10 to-primary/10" },
   { step: "05", title: "Approve & Scale", Icon: Rocket, desc: "Regulatory submission, approval management, and manufacturing scale-up for successful market launch.", color: "from-primary/10 to-blue-500/10" },
@@ -1057,7 +1057,7 @@ const PROVEN_PROCESS_PHASES = [
 export function ServicesOverview() {
   useSEO({
     title: "Our Services",
-    description: "RMT Medical Technologies provides comprehensive medical device and BMD services ??product design, regulatory compliance, software & AI, automation, design & fabrication, engineering product development, quality testing, biomaterials, microbiology lab testing, and contract manufacturing.",
+    description: "RMT Medical Technologies provides comprehensive medical device and BMD services — product design, regulatory compliance, software & AI, automation, design & fabrication, engineering product development, quality testing, biomaterials, microbiology lab testing, and contract manufacturing.",
     keywords: "medical device services, regulatory compliance, product design prototyping, contract manufacturing",
     path: "/services",
   });
@@ -1085,7 +1085,7 @@ export function ServicesOverview() {
             </div>
             <h1 className="font-heading text-5xl md:text-7xl font-bold text-white mb-5">Our <span className="text-primary">Services</span></h1>
             <p className="text-white/70 text-xl max-w-3xl mx-auto leading-relaxed">
-              A comprehensive suite of medical device and technology services ??covering every stage from design through regulatory approval, manufacturing, and commercialization.
+              A comprehensive suite of medical device and technology services — covering every stage from design through regulatory approval, manufacturing, and commercialization.
             </p>
             <div className="flex flex-wrap justify-center gap-6 mt-8 pt-6 border-t border-white/10">
               {["10 Core Services", "End-to-End Solutions", "Global Regulatory Expertise"].map((b) => (
@@ -1105,10 +1105,10 @@ export function ServicesOverview() {
           <AnimatedSection className="text-center mb-12">
             <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">How We Work</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">Our Proven Process</h2>
-            <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">From first consultation to regulatory approval and beyond ??a structured, milestone-driven approach that de-risks your project at every stage.</p>
+            <p className="text-muted-foreground mt-3 max-w-2xl mx-auto">From first consultation to regulatory approval and beyond — a structured, milestone-driven approach that de-risks your project at every stage.</p>
           </AnimatedSection>
 
-          {/* Process timeline ??horizontal on desktop, vertical on mobile */}
+          {/* Process timeline — horizontal on desktop, vertical on mobile */}
           <div className="relative max-w-6xl mx-auto">
             {/* Desktop connector line (runs through circle centers) */}
             <div
@@ -1394,7 +1394,7 @@ function CinematicHeroBackground({ images, alt }: { images: string[]; alt: strin
 }
 
 /* ======================================================
-   SOFTWARE & AI ??IMAGES, PROJECTS, ANIMATED HERO BG
+   SOFTWARE & AI — IMAGES, PROJECTS, ANIMATED HERO BG
 ====================================================== */
 
 /* Card image per software-ai sub-service */
@@ -1465,7 +1465,7 @@ const SOFTWARE_AI_PORTFOLIO: SoftwareAIPortfolioProject[] = [
   },
 ];
 
-/* Animated software/AI hero background ??neural net nodes, code rain, ECG wave, data packets */
+/* Animated software/AI hero background — neural net nodes, code rain, ECG wave, data packets */
 function SoftwareAIHeroBg() {
   const nodes = React.useMemo(
     () =>
@@ -1492,7 +1492,7 @@ function SoftwareAIHeroBg() {
   }, [nodes]);
 
   const codeCols = React.useMemo(() => {
-    const chars = "01{}<>()[]=+*/-:;.???????";
+    const chars = "01{}<>()[]=+*/-:;.@#$%&";
     return Array.from({ length: 30 }).map((_, c) => ({
       left: (c / 30) * 100,
       delay: (c * 0.37) % 4,
@@ -1513,7 +1513,7 @@ function SoftwareAIHeroBg() {
     })), []
   );
 
-  /* ECG heartbeat path ??three repeating PQRST-like segments */
+  /* ECG heartbeat path — three repeating PQRST-like segments */
   const ecgPath = "M0,50 L60,50 L80,45 L95,50 L105,10 L115,90 L125,50 L145,50 L165,45 L180,50 L190,10 L200,90 L210,50 L230,50 L250,45 L265,50 L275,10 L285,90 L295,50 L400,50";
 
   return (
@@ -1571,7 +1571,7 @@ function SoftwareAIHeroBg() {
           </filter>
         </defs>
 
-        {/* ECG heartbeat line ??scrolling across bottom third */}
+        {/* ECG heartbeat line — scrolling across bottom third */}
         {[0, 400, 800].map((offset, idx) => (
           <motion.path
             key={idx}
@@ -2858,7 +2858,7 @@ export function SubServiceDetail({
   const subService = service?.subServices.find((ss) => ss.slug === subSlug);
 
   useSEO({
-    title: subService ? `${subService.name} ??${service?.shortName}` : "Not Found",
+    title: subService ? `${subService.name} — ${service?.shortName}` : "Not Found",
     description: subService?.tagline ?? "Sub-service not found.",
     keywords: `${subService?.name}, ${service?.name}, medical device`,
   });

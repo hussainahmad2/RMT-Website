@@ -48,11 +48,11 @@ const tracks: TrainingTrack[] = [
     audience: "Quality engineers, regulatory affairs professionals, QMS managers, senior management",
     modules: [
       { name: "HIPAA Compliance", duration: "2 days", level: "Intermediate", description: "Healthcare data privacy and security requirements, breach notification, and practical compliance strategies for medical device companies handling health data." },
-      { name: "ISO 13485:2016", duration: "3 days", level: "Foundation", description: "Comprehensive implementation guide for the medical device QMS standard ??documentation requirements, process approach, and internal audit techniques." },
-      { name: "ISO 14971", duration: "2 days", level: "Intermediate", description: "Medical device risk management throughout the product lifecycle ??hazard identification, risk analysis, risk control, and residual risk evaluation." },
-      { name: "ISO 62304", duration: "2 days", level: "Intermediate", description: "Software lifecycle requirements for medical device software ??safety classification, SDLC activities, change management, and problem resolution." },
-      { name: "ISO 27001", duration: "2 days", level: "Intermediate", description: "Information security management system implementation for medical device organisations ??asset management, access control, and incident response." },
-      { name: "GMP Compliance", duration: "1.5 days", level: "Foundation", description: "Good Manufacturing Practice fundamentals for medical device manufacturing ??documentation, environmental controls, equipment qualification, and batch record practices." },
+      { name: "ISO 13485:2016", duration: "3 days", level: "Foundation", description: "Comprehensive implementation guide for the medical device QMS standard — documentation requirements, process approach, and internal audit techniques." },
+      { name: "ISO 14971", duration: "2 days", level: "Intermediate", description: "Medical device risk management throughout the product lifecycle — hazard identification, risk analysis, risk control, and residual risk evaluation." },
+      { name: "ISO 62304", duration: "2 days", level: "Intermediate", description: "Software lifecycle requirements for medical device software — safety classification, SDLC activities, change management, and problem resolution." },
+      { name: "ISO 27001", duration: "2 days", level: "Intermediate", description: "Information security management system implementation for medical device organisations — asset management, access control, and incident response." },
+      { name: "GMP Compliance", duration: "1.5 days", level: "Foundation", description: "Good Manufacturing Practice fundamentals for medical device manufacturing — documentation, environmental controls, equipment qualification, and batch record practices." },
     ],
     outcomes: ["Regulatory framework competency", "Internal audit readiness", "QMS documentation skills", "Risk management proficiency"],
   },
@@ -66,9 +66,9 @@ const tracks: TrainingTrack[] = [
     image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",
     audience: "Medical device engineers, product development managers, R&D teams, design control leads",
     modules: [
-      { name: "Design Control & Management", duration: "3 days", level: "Intermediate", description: "Medical device design control requirements per 21 CFR 820.30 and ISO 13485 ??design inputs, design outputs, design reviews, design verification and validation, and design transfer." },
-      { name: "FMEA & DFMEA", duration: "2 days", level: "Intermediate", description: "Failure Mode and Effects Analysis (FMEA) and Design FMEA methodology for medical devices ??structured team approach, severity/occurrence/detectability scoring, and risk priority number (RPN) reduction." },
-      { name: "Healthtech Workforce Training", duration: "2 days", level: "Foundation", description: "Comprehensive introduction to the medical device industry for engineers transitioning from other sectors ??regulatory landscape, design controls, quality systems, and technical documentation." },
+      { name: "Design Control & Management", duration: "3 days", level: "Intermediate", description: "Medical device design control requirements per 21 CFR 820.30 and ISO 13485 — design inputs, design outputs, design reviews, design verification and validation, and design transfer." },
+      { name: "FMEA & DFMEA", duration: "2 days", level: "Intermediate", description: "Failure Mode and Effects Analysis (FMEA) and Design FMEA methodology for medical devices — structured team approach, severity/occurrence/detectability scoring, and risk priority number (RPN) reduction." },
+      { name: "Healthtech Workforce Training", duration: "2 days", level: "Foundation", description: "Comprehensive introduction to the medical device industry for engineers transitioning from other sectors — regulatory landscape, design controls, quality systems, and technical documentation." },
     ],
     outcomes: ["Design control implementation", "FMEA facilitation skills", "V&V planning competency", "Technical documentation proficiency"],
   },
@@ -82,9 +82,9 @@ const tracks: TrainingTrack[] = [
     image: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=800&q=80",
     audience: "Researchers, clinicians, startup founders, medical technology entrepreneurs",
     modules: [
-      { name: "Research Methodology", duration: "2 days", level: "Foundation", description: "Structured approaches to medical technology research ??study design, literature review, data collection, statistical analysis, and publication/patent strategy." },
-      { name: "Entrepreneurship in Healthtech", duration: "2 days", level: "Foundation", description: "Building a successful medical technology company from a research concept ??value proposition, market analysis, business model, funding strategy, and go-to-market planning." },
-      { name: "Business Plan & Technocommercial Feasibility", duration: "1.5 days", level: "Intermediate", description: "Developing investment-ready business plans for medical technology ventures ??market sizing, financial projections, risk analysis, regulatory pathway costing, and investor pitch preparation." },
+      { name: "Research Methodology", duration: "2 days", level: "Foundation", description: "Structured approaches to medical technology research — study design, literature review, data collection, statistical analysis, and publication/patent strategy." },
+      { name: "Entrepreneurship in Healthtech", duration: "2 days", level: "Foundation", description: "Building a successful medical technology company from a research concept — value proposition, market analysis, business model, funding strategy, and go-to-market planning." },
+      { name: "Business Plan & Technocommercial Feasibility", duration: "1.5 days", level: "Intermediate", description: "Developing investment-ready business plans for medical technology ventures — market sizing, financial projections, risk analysis, regulatory pathway costing, and investor pitch preparation." },
     ],
     outcomes: ["Research commercialisation skills", "Business plan development", "Market analysis capability", "Investment pitch readiness"],
   },
@@ -98,10 +98,10 @@ const tracks: TrainingTrack[] = [
     image: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
     audience: "Laboratory scientists, analytical chemists, pharmaceutical QC professionals, research scientists",
     modules: [
-      { name: "HPLC (High-Performance Liquid Chromatography)", duration: "3 days", level: "Intermediate", description: "Practical HPLC theory, instrument operation, method development, and method validation for pharmaceutical and medical device applications ??covering reversed-phase, ion-exchange, and size-exclusion modes." },
-      { name: "UV Spectrophotometry", duration: "1.5 days", level: "Foundation", description: "UV-Vis spectrophotometry principles and practical applications ??instrument calibration, Beer-Lambert law, quantitative analysis, and method validation for pharmaceutical QC." },
-      { name: "Drug/API Synthesis", duration: "3 days", level: "Advanced", description: "Synthetic organic chemistry techniques for active pharmaceutical ingredient synthesis ??reaction types, purification methods, characterisation, and scale-up considerations." },
-      { name: "Pharmacokinetics & Pharmacodynamics", duration: "2 days", level: "Advanced", description: "PK/PD principles and their application to drug-device combination products ??absorption, distribution, metabolism, excretion (ADME), and PK/PD modelling." },
+      { name: "HPLC (High-Performance Liquid Chromatography)", duration: "3 days", level: "Intermediate", description: "Practical HPLC theory, instrument operation, method development, and method validation for pharmaceutical and medical device applications — covering reversed-phase, ion-exchange, and size-exclusion modes." },
+      { name: "UV Spectrophotometry", duration: "1.5 days", level: "Foundation", description: "UV-Vis spectrophotometry principles and practical applications — instrument calibration, Beer-Lambert law, quantitative analysis, and method validation for pharmaceutical QC." },
+      { name: "Drug/API Synthesis", duration: "3 days", level: "Advanced", description: "Synthetic organic chemistry techniques for active pharmaceutical ingredient synthesis — reaction types, purification methods, characterisation, and scale-up considerations." },
+      { name: "Pharmacokinetics & Pharmacodynamics", duration: "2 days", level: "Advanced", description: "PK/PD principles and their application to drug-device combination products — absorption, distribution, metabolism, excretion (ADME), and PK/PD modelling." },
     ],
     outcomes: ["Advanced analytical technique proficiency", "Method development skills", "Data analysis capability", "GLP documentation competency"],
   },
@@ -113,7 +113,7 @@ export default function Training() {
 
   useSEO({
     title: "Training & Workshops",
-    description: "Professional medical device training and workshops ??regulatory compliance (ISO 13485, ISO 14971), engineering (FMEA, design control), research entrepreneurship, and laboratory skills.",
+    description: "Professional medical device training and workshops — regulatory compliance (ISO 13485, ISO 14971), engineering (FMEA, design control), research entrepreneurship, and laboratory skills.",
     keywords: "medical device training, ISO 13485 training, regulatory compliance workshop, FMEA training, GMP training, HPLC workshop",
     path: "/training",
   });
@@ -136,7 +136,7 @@ export default function Training() {
                 Training &<br /><span className="text-primary">Workshops</span>
               </h1>
               <p className="text-white/65 text-xl leading-relaxed mb-8">
-                Practical, standards-focused training programmes delivered by industry practitioners ??building the regulatory, engineering, scientific, and entrepreneurship capabilities your team needs.
+                Practical, standards-focused training programmes delivered by industry practitioners — building the regulatory, engineering, scientific, and entrepreneurship capabilities your team needs.
               </p>
               <div className="flex flex-wrap gap-4">
                 <Button asChild className="rounded-lg h-11 px-7 font-semibold">
@@ -169,7 +169,7 @@ export default function Training() {
             ))}
           </div>
 
-          {/* Active track detail ??columns style like image 2 */}
+          {/* Active track detail — columns style like image 2 */}
           <AnimatePresence mode="wait">
             <motion.div key={active} initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.22 }}>
 
@@ -204,10 +204,10 @@ export default function Training() {
                   </Button>
                 </div>
 
-                {/* Modules ??the 4-column teal table style from image 2 */}
+                {/* Modules — the 4-column teal table style from image 2 */}
                 <div className="lg:col-span-2">
                   <h3 className="font-heading text-xl font-bold text-foreground mb-4 pb-3 border-b border-border">
-                    {activeTrack.title} ??Modules
+                    {activeTrack.title} — Modules
                   </h3>
                   <div className="space-y-3">
                     {activeTrack.modules.map((module, i) => (

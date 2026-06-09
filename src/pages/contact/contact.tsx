@@ -90,7 +90,7 @@ export default function Contact() {
             </div>
             <h1 className="font-heading text-5xl md:text-7xl font-bold text-white mb-5">Contact <span className="text-primary">RMT</span></h1>
             <p className="text-white/70 text-xl max-w-2xl mx-auto leading-relaxed">
-              Ready to discuss your medical device project? Our experts are here to help ??we respond within one business day.
+              Ready to discuss your medical device project? Our experts are here to help — we respond within one business day.
             </p>
           </AnimatedSection>
         </div>
@@ -153,7 +153,7 @@ export default function Contact() {
                       <CheckCircle className="w-8 h-8 text-primary" />
                     </div>
                     <h3 className="font-heading text-2xl font-bold text-foreground mb-3">Message Sent</h3>
-                    <p className="text-muted-foreground">Thank you ??a member of our team will respond within one business day.</p>
+                    <p className="text-muted-foreground">Thank you — a member of our team will respond within one business day.</p>
                   </motion.div>
                 ) : (
                   <form onSubmit={handleSubmit(onSubmit)} className="bg-card border border-border rounded-2xl p-8 space-y-5">

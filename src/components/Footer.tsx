@@ -23,7 +23,7 @@ export const Footer = () => {
               <img src={`${BASE}rmt-logo.webp`} alt="RMT Medical Technologies Inc." className="h-12 w-auto object-contain drop-shadow-sm" />
             </Link>
             <p className="text-white/50 text-sm mb-5 leading-relaxed">
-              End-to-end medical device and technology solutions ??from design through regulatory approval and contract manufacturing.
+              End-to-end medical device and technology solutions — from design through regulatory approval and contract manufacturing.
             </p>
             <div className="flex gap-2.5">
               {[

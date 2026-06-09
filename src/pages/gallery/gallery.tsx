@@ -14,20 +14,20 @@ interface GalleryItem {
 }
 
 const items: GalleryItem[] = [
-  { id: "1", src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80", category: "Laboratory", caption: "Advanced research laboratory ??PCB design and electronics prototyping", year: "2024" },
-  { id: "2", src: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80", category: "Testing", caption: "Quality control laboratory ??analytical testing and characterisation", year: "2024" },
+  { id: "1", src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80", category: "Laboratory", caption: "Advanced research laboratory — PCB design and electronics prototyping", year: "2024" },
+  { id: "2", src: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80", category: "Testing", caption: "Quality control laboratory — analytical testing and characterisation", year: "2024" },
   { id: "3", src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80", category: "Team", caption: "R&D team collaborating on medical device formulation development", year: "2024" },
   { id: "4", src: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=600&q=80", category: "Team", caption: "Leadership team strategic planning session", year: "2023" },
   { id: "5", src: "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=600&q=80", category: "Manufacturing", caption: "ISO 13485-certified cleanroom manufacturing facility", year: "2023" },
   { id: "6", src: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=600&q=80", category: "Engineering", caption: "Mechanical engineering and product design prototyping workshop", year: "2023" },
-  { id: "7", src: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=600&q=80", category: "Laboratory", caption: "Biomedical laboratory ??cardiac device testing and characterisation", year: "2023" },
-  { id: "8", src: "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&q=80", category: "Testing", caption: "Microbiology laboratory ??sterility and endotoxin testing", year: "2022" },
+  { id: "7", src: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=600&q=80", category: "Laboratory", caption: "Biomedical laboratory — cardiac device testing and characterisation", year: "2023" },
+  { id: "8", src: "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=600&q=80", category: "Testing", caption: "Microbiology laboratory — sterility and endotoxin testing", year: "2022" },
   { id: "9", src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=600&q=80", category: "Engineering", caption: "Electronics and firmware development laboratory", year: "2022" },
   { id: "10", src: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=600&q=80", category: "Team", caption: "Regulatory affairs team documentation review session", year: "2022" },
-  { id: "11", src: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=600&q=80", category: "Events", caption: "Medical technology conference ??RMT exhibition stand", year: "2022" },
+  { id: "11", src: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=600&q=80", category: "Events", caption: "Medical technology conference — RMT exhibition stand", year: "2022" },
   { id: "12", src: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=600&q=80", category: "Manufacturing", caption: "Pharmaceutical development and drug formulation laboratory", year: "2021" },
   { id: "13", src: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=600&q=80", category: "Engineering", caption: "Wearable medical device prototype assembly", year: "2021" },
-  { id: "14", src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80", category: "Events", caption: "Annual company milestone celebration ??200+ projects achieved", year: "2023" },
+  { id: "14", src: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1560250097-0b93528c311a?w=600&q=80", category: "Events", caption: "Annual company milestone celebration —200+ projects achieved", year: "2023" },
   { id: "15", src: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=600&q=80", category: "Team", caption: "Cross-functional training workshop for new team members", year: "2024" },
   { id: "16", src: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80", category: "Events", caption: "ISO 13485 certification ceremony", year: "2021" },
 ];
@@ -40,7 +40,7 @@ export default function Gallery() {
 
   useSEO({
     title: "Gallery",
-    description: "A visual journey through RMT Medical Technologies ??our laboratories, team, manufacturing facilities, and company milestones.",
+    description: "A visual journey through RMT Medical Technologies — our laboratories, team, manufacturing facilities, and company milestones.",
     keywords: "RMT Medical Technologies gallery, medical device laboratory photos, company memories",
     path: "/gallery",
   });
