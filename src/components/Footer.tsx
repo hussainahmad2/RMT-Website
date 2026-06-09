@@ -47,6 +47,8 @@ export const Footer = () => {
                 { label: "Home", href: "/" },
                 { label: "About Us", href: "/about" },
                 { label: "Services", href: "/services" },
+                { label: "Products", href: "/products" },
+                { label: "Testimonials", href: "/testimonials" },
                 { label: "Testing", href: "/testing" },
                 { label: "Training & Workshops", href: "/training" },
                 { label: "Insights", href: "/insights" },

@@ -20,3 +20,8 @@ yarn-error.log
 .DS_Store
 Thumbs.db
 .cache
+
+# Testimonial videos — too large for GitHub; deploy separately to public/testimonials/
+/testimonials/
+public/testimonials/*.mp4
+!public/testimonials/README.md

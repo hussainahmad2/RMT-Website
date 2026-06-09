@@ -22,6 +22,8 @@ import Testing from "@/pages/testing/testing";
 import Training from "@/pages/training/training";
 import Insights from "@/pages/insights/insights";
 import Gallery from "@/pages/gallery/gallery";
+import Testimonials from "@/pages/testimonials/testimonials";
+import Products from "@/pages/products/products";
 import NotFound from "@/pages/not-found/not-found";
 
 const queryClient = new QueryClient();
@@ -40,6 +42,8 @@ function Router() {
         <Route path="/training" component={Training} />
         <Route path="/insights" component={Insights} />
         <Route path="/gallery" component={Gallery} />
+        <Route path="/testimonials" component={Testimonials} />
+        <Route path="/products" component={Products} />
         <Route path="/careers" component={Careers} />
         <Route path="/contact" component={Contact} />
         <Route component={NotFound} />

@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight, MapPin, Calendar, CheckCircle, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
-import { LogoSpinner } from "@/components/LogoSpinner";
 
 const CircuitBg = () => (
   <svg viewBox="0 0 200 200" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2">
@@ -54,14 +53,12 @@ const CATEGORIES: Category[] = ["All", "Medical Devices", "Regulatory", "Softwar
 export default function Projects() {
   const [filter, setFilter] = useState<Category>("All");
   const [selected, setSelected] = useState<Project | null>(null);
-  const [loading, setLoading] = useState(true);
-
-  useSEO({ title: "Projects", description: "RMT Medical Technologies project portfolio ??medical device development, regulatory compliance, software, and manufacturing case studies across 30+ countries.", keywords: "medical device projects portfolio, regulatory compliance case studies, ISO 13485 projects" });
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 800);
-    return () => clearTimeout(t);
-  }, []);
+  useSEO({
+    title: "Projects",
+    description: "RMT Medical Technologies project portfolio — medical device development, regulatory compliance, software, and manufacturing case studies across 30+ countries.",
+    keywords: "medical device projects portfolio, regulatory compliance case studies, ISO 13485 projects",
+    path: "/projects",
+  });
 
   const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 
@@ -116,9 +113,6 @@ export default function Projects() {
       {/* PROJECT GRID */}
       <section className="py-16">
         <div className="page-container">
-          {loading ? (
-            <div className="py-20"><LogoSpinner size="lg" label="Loading projects..." className="mx-auto" /></div>
-          ) : (
           <motion.div layout className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
             <AnimatePresence>
               {filtered.map((project, i) => (
@@ -163,7 +157,6 @@ export default function Projects() {
               ))}
             </AnimatePresence>
           </motion.div>
-          )}
         </div>
       </section>
 

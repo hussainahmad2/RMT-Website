@@ -5,8 +5,11 @@ interface AnimatedSectionProps {
   children: React.ReactNode;
   delay?: number;
   className?: string;
+  id?: string;
   animation?: "fade" | "slideUp" | "slideRight" | "slideLeft" | "scaleUp";
   duration?: number;
+  /** Animate on mount instead of waiting for scroll into view */
+  immediate?: boolean;
 }
 
 const animations = {
@@ -36,14 +39,20 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   children,
   delay = 0,
   className = "",
+  id,
   animation = "slideUp",
   duration = 0.6,
+  immediate = false,
 }) => {
+  const target = animations[animation].whileInView;
+
   return (
     <motion.div
+      id={id}
       initial={animations[animation].initial}
-      whileInView={animations[animation].whileInView}
-      viewport={{ once: true, margin: "-100px" }}
+      animate={immediate ? target : undefined}
+      whileInView={immediate ? undefined : target}
+      viewport={immediate ? undefined : { once: true, margin: "-50px" }}
       transition={{ duration, delay, ease: "easeOut" }}
       className={className}
     >

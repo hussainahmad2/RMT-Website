@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, ArrowRight, Users, TrendingUp, Shield, Heart, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
-import { LogoSpinner } from "@/components/LogoSpinner";
 
 interface Job {
   id: string;
@@ -92,19 +91,14 @@ interface FormData {
 export default function Careers() {
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
-  const [loading, setLoading] = useState(true);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
   useSEO({
     title: "Careers",
     description: "Join RMT USA's growing team of medical device experts. We are hiring regulatory affairs specialists, medical device engineers, software developers, quality engineers, and more.",
     keywords: "medical device careers, regulatory affairs jobs, medical device engineer jobs, SaMD software engineer, quality engineer medical device",
+    path: "/careers",
   });
-
-  useEffect(() => {
-    const t = setTimeout(() => setLoading(false), 700);
-    return () => clearTimeout(t);
-  }, []);
 
   const onSubmit = (data: FormData) => {
     console.log("Application submitted:", data);
@@ -186,9 +180,7 @@ export default function Careers() {
           </AnimatedSection>
 
           <div className="max-w-4xl mx-auto space-y-4">
-            {loading
-              ? <div className="py-16"><LogoSpinner size="lg" label="Loading openings..." className="mx-auto" /></div>
-              : jobs.map((job, i) => (
+            {jobs.map((job, i) => (
               <motion.div
                 key={job.id}
                 initial={{ opacity: 0, y: 16 }}

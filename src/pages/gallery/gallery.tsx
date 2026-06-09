@@ -42,6 +42,7 @@ export default function Gallery() {
     title: "Gallery",
     description: "A visual journey through RMT Medical Technologies ??our laboratories, team, manufacturing facilities, and company milestones.",
     keywords: "RMT Medical Technologies gallery, medical device laboratory photos, company memories",
+    path: "/gallery",
   });
 
   const filtered = filter === "All" ? items : items.filter((i) => i.category === filter);

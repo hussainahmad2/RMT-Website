@@ -51,6 +51,7 @@ export default function Insights() {
     title: "Insights",
     description: "Expert insights, articles, and guides on medical device development, regulatory compliance (ISO 13485, EU MDR), software & AI, and medical technology innovation.",
     keywords: "medical device insights, regulatory compliance articles, ISO 13485 guide, EU MDR updates, medical technology blog",
+    path: "/insights",
   });
 
   const featured = articles.find((a) => a.featured)!;

@@ -115,6 +115,7 @@ export default function Training() {
     title: "Training & Workshops",
     description: "Professional medical device training and workshops ??regulatory compliance (ISO 13485, ISO 14971), engineering (FMEA, design control), research entrepreneurship, and laboratory skills.",
     keywords: "medical device training, ISO 13485 training, regulatory compliance workshop, FMEA training, GMP training, HPLC workshop",
+    path: "/training",
   });
 
   return (

@@ -12,6 +12,7 @@ import { ServiceCard } from "@/components/ServiceCard";
 import { WorldMap } from "@/components/WorldMap";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
 
 /* ---- hero background carousel (cinematic zoom) ---- */
 const heroImages = [
@@ -176,6 +177,7 @@ export default function Home() {
     title: "Revive Medical Technologies Inc",
     description: "RMT Medical Technologies provides end-to-end medical device development, regulatory compliance, software & AI solutions, quality testing, and contract manufacturing globally.",
     keywords: "medical device development, regulatory compliance FDA CE, ISO 13485, contract manufacturing, pharmaceutical development",
+    path: "/",
   });
 
   useEffect(() => {
@@ -355,6 +357,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* ===== PARTNER LOGOS + QUICK ANCHOR LINKS ===== */}
+      <PartnerLogoCarousel />
 
       {/* ===== CAPABILITIES SECTION ===== */}
       <section className="py-24 bg-background relative overflow-hidden">

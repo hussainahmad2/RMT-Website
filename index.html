@@ -2,60 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Revive Medical Technologies Inc</title>
-    <meta name="description" content="Revive Medical Technologies Inc — end-to-end medical device development, regulatory compliance, and contract manufacturing." />
+    <meta name="description" content="Revive Medical Technologies Inc — end-to-end medical device development, regulatory compliance, software & AI, and contract manufacturing." />
+    <meta name="keywords" content="medical device development, regulatory compliance FDA CE, ISO 13485, contract manufacturing, SaMD, software medical device" />
     <meta name="robots" content="index, follow" />
+    <meta name="theme-color" content="#060d17" />
     <meta property="og:title" content="Revive Medical Technologies Inc" />
-    <meta property="og:description" content="Revive Medical Technologies Inc — end-to-end medical device development, regulatory compliance, and contract manufacturing." />
+    <meta property="og:description" content="End-to-end medical device development, regulatory compliance, software & AI, and contract manufacturing." />
     <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="Revive Medical Technologies Inc" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="Revive Medical Technologies Inc" />
-    <meta name="twitter:description" content="Revive Medical Technologies Inc — end-to-end medical device development, regulatory compliance, and contract manufacturing." />
+    <meta name="twitter:description" content="End-to-end medical device development, regulatory compliance, software & AI, and contract manufacturing." />
     <link rel="icon" type="image/png" href="/rmt-icon.png" />
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-      #app-loader {
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 1.25rem;
-        background: #060d17;
-        font-family: Inter, system-ui, sans-serif;
-      }
-      #app-loader .loader-icon-wrap {
-        width: 5.5rem;
-        height: 5.5rem;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        animation: rmt-spin 1.4s linear infinite;
-      }
-      #app-loader img {
-        width: 100%;
-        height: 100%;
-        object-fit: contain;
-        display: block;
-      }
-      @keyframes rmt-spin {
-        to { transform: rotate(360deg); }
-      }
-    </style>
+    <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   </head>
   <body>
-    <div id="root">
-      <div id="app-loader" aria-live="polite" aria-busy="true">
-        <div class="loader-icon-wrap">
-          <img src="/rmt-icon.png" alt="Revive Medical Technologies Inc" width="88" height="88" />
-        </div>
-      </div>
-    </div>
+    <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

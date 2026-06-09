@@ -913,10 +913,10 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
   "engineering-product-development": [{ label: "Disciplines", value: "3+", icon: Settings2 }, { label: "Methodology Steps", value: "5", icon: Target }, { label: "Deliverable Types", value: "20+", icon: PackageCheck }],
   "bmd":                     [{ label: "Research Articles", value: "40+", icon: BookOpen }, { label: "Conference Papers", value: "12+", icon: FileCheck }, { label: "Granted Patents", value: "2", icon: Award }],
   "mbl-laboratory":          [
-    { label: "Client Projects Completed", value: "10+ Projects", icon: Rocket },
-    { label: "Years of Scientific Experience", value: "10+ Years", icon: GraduationCap },
-    { label: "Laboratory Success Rate", value: ">99% Accuracy", icon: Medal },
-    { label: "Turnaround Time", value: "24–72 Hours", icon: Calendar },
+    { label: "Client Projects Completed", value: "10+", icon: Rocket },
+    { label: "Years of Scientific Experience", value: "10+", icon: GraduationCap },
+    { label: "Laboratory Success Rate", value: ">99%", icon: Medal },
+    { label: "Turnaround Time", value: "24–72h", icon: Calendar },
   ],
   "contract-manufacturing":  [{ label: "Cleanroom Grade", value: "ISO 5", icon: Factory }, { label: "Device Classes", value: "I?CIII", icon: Layers }, { label: "Lifecycle", value: "360??", icon: Target }],
 };
@@ -924,9 +924,9 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
 /** One key metric per sub-service (e.g. MBL testing programmes) */
 const SUB_SERVICE_SIDEBAR_STATS: Record<string, Record<string, { label: string; value: string; icon: React.ElementType }[]>> = {
   "mbl-laboratory": {
-    "sterility-testing": [{ label: "Sterility Tests Performed", value: "250+ Tests", icon: FlaskConical }],
-    "bacterial-endotoxin-testing": [{ label: "Endotoxin Tests Conducted", value: "300+ Tests", icon: TestTube2 }],
-    "microbial-limit-testing": [{ label: "Bioburden Assessments Completed", value: "500+ Studies", icon: Microscope }],
+    "sterility-testing": [{ label: "Sterility Tests Performed", value: "250+", icon: FlaskConical }],
+    "bacterial-endotoxin-testing": [{ label: "Endotoxin Tests Conducted", value: "300+", icon: TestTube2 }],
+    "microbial-limit-testing": [{ label: "Bioburden Assessments Completed", value: "500+", icon: Microscope }],
   },
 };
 
@@ -1059,6 +1059,7 @@ export function ServicesOverview() {
     title: "Our Services",
     description: "RMT Medical Technologies provides comprehensive medical device and BMD services ??product design, regulatory compliance, software & AI, automation, design & fabrication, engineering product development, quality testing, biomaterials, microbiology lab testing, and contract manufacturing.",
     keywords: "medical device services, regulatory compliance, product design prototyping, contract manufacturing",
+    path: "/services",
   });
 
   return (
@@ -2010,6 +2011,15 @@ function ServiceKeyMetricsBlock({
   return <KeyMetricsSection stats={stats} variant={variant} />;
 }
 
+function isRegulatoryLicence(std: string): boolean {
+  return /FDA\s*\/\s*(EU\s*MDR|CE)|^DRAP$/i.test(std.trim());
+}
+
+function standardItemLabel(std: string, standardIndex: number): string {
+  if (isRegulatoryLicence(std)) return "Licence";
+  return `Standard ${String(standardIndex).padStart(2, "0")}`;
+}
+
 /** Standards with horizontal line structure */
 function ServiceStandardsBlock({
   standards,
@@ -2019,6 +2029,8 @@ function ServiceStandardsBlock({
   variant?: "default" | "software-ai";
 }) {
   const isCyan = variant === "software-ai";
+  let standardCounter = 0;
+
   return (
     <AnimatedSection>
       <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">
@@ -2027,30 +2039,42 @@ function ServiceStandardsBlock({
       <div className="relative rounded-2xl border border-border bg-card/50 p-5 sm:p-6">
         <div className="absolute left-6 right-6 top-[2.6rem] hidden h-px bg-border sm:block" aria-hidden />
         <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-          {standards.map((std, i) => (
-            <div
-              key={std}
-              className={`relative flex flex-1 min-w-[200px] items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${
-                isCyan
-                  ? "border-cyan-500/20 bg-background hover:border-cyan-400/40"
-                  : "border-border bg-background hover:border-primary/30"
-              }`}
-            >
+          {standards.map((std) => {
+            const isLicence = isRegulatoryLicence(std);
+            if (!isLicence) standardCounter += 1;
+            const ItemIcon = isLicence ? Award : ShieldCheck;
+
+            return (
               <div
-                className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
-                  isCyan ? "bg-cyan-500/12 text-cyan-600 dark:text-cyan-400" : "bg-primary/10 text-primary"
+                key={std}
+                className={`relative flex flex-1 min-w-[200px] items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${
+                  isCyan
+                    ? "border-cyan-500/20 bg-background hover:border-cyan-400/40"
+                    : isLicence
+                      ? "border-amber-500/25 bg-background hover:border-amber-400/40"
+                      : "border-border bg-background hover:border-primary/30"
                 }`}
               >
-                <ShieldCheck className="h-4 w-4" />
+                <div
+                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
+                    isCyan
+                      ? "bg-cyan-500/12 text-cyan-600 dark:text-cyan-400"
+                      : isLicence
+                        ? "bg-amber-500/12 text-amber-600 dark:text-amber-400"
+                        : "bg-primary/10 text-primary"
+                  }`}
+                >
+                  <ItemIcon className="h-4 w-4" />
+                </div>
+                <div className="min-w-0 flex-1">
+                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+                    {standardItemLabel(std, standardCounter)}
+                  </span>
+                  <p className="text-sm font-semibold text-foreground leading-snug">{std}</p>
+                </div>
               </div>
-              <div className="min-w-0 flex-1">
-                <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                  Standard {String(i + 1).padStart(2, "0")}
-                </span>
-                <p className="text-sm font-semibold text-foreground leading-snug">{std}</p>
-              </div>
-            </div>
-          ))}
+            );
+          })}
         </div>
       </div>
     </AnimatedSection>
@@ -2185,7 +2209,7 @@ function ServicePageSidebar({ service }: { service: ServiceData }) {
   );
 }
 
-/** Full-width CTA strip above site footer — Get a Quote + Ready to Start */
+/** Full-width CTA sections above site footer — Get a Quote, then Ready to Start */
 function ServicePageFooterCta({
   service,
   isSoftwareAI = false,
@@ -2198,25 +2222,27 @@ function ServicePageFooterCta({
   const scopeLabel = subServiceName
     ? `${subServiceName.toLowerCase()} project`
     : `${service.shortName} requirements`;
+  const accentClass = isSoftwareAI ? "text-cyan-400" : "text-primary";
+  const btnClass = isSoftwareAI
+    ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300"
+    : "bg-primary text-white hover:bg-primary/90";
 
   return (
-    <section className="border-t border-white/10 bg-[#060d17] text-white">
-      <div className="page-container py-14 md:py-16">
-        <div className="grid lg:grid-cols-2 gap-10 lg:gap-14">
-          <AnimatedSection>
-            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${isSoftwareAI ? "text-cyan-400" : "text-primary"}`}>
+    <>
+      <section className="border-t border-white/10 bg-[#060d17] text-white">
+        <div className="page-container py-14 md:py-16">
+          <AnimatedSection className="max-w-3xl">
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${accentClass}`}>
               Get a Quote
             </p>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Discuss Your {subServiceName ?? service.shortName} Needs</h2>
-            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-lg">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">
+              Discuss Your {subServiceName ?? service.shortName} Needs
+            </h2>
+            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
               Speak with our specialists about your {scopeLabel} and receive a tailored proposal. We respond within one business day.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button
-                asChild
-                size="lg"
-                className={`rounded-xl font-semibold ${isSoftwareAI ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300" : "bg-primary text-white hover:bg-primary/90"}`}
-              >
+              <Button asChild size="lg" className={`rounded-xl font-semibold ${btnClass}`}>
                 <Link href="/contact">Request a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
@@ -2224,21 +2250,23 @@ function ServicePageFooterCta({
               </Button>
             </div>
           </AnimatedSection>
+        </div>
+      </section>
 
-          <AnimatedSection>
-            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${isSoftwareAI ? "text-cyan-400" : "text-primary"}`}>
+      <section className="border-t border-white/10 bg-[#0a1424] text-white">
+        <div className="page-container py-14 md:py-16">
+          <AnimatedSection className="max-w-3xl">
+            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${accentClass}`}>
               Ready to Start?
             </p>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">Work With Our {service.shortName} Team</h2>
-            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-lg">
+            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">
+              Work With Our {service.shortName} Team
+            </h2>
+            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
               Our {service.shortName} specialists are available for a free initial consultation to scope your project and answer your questions.
             </p>
             <div className="flex flex-col sm:flex-row gap-3">
-              <Button
-                asChild
-                size="lg"
-                className={`rounded-xl font-semibold ${isSoftwareAI ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300" : "bg-primary text-white hover:bg-primary/90"}`}
-              >
+              <Button asChild size="lg" className={`rounded-xl font-semibold ${btnClass}`}>
                 <Link href="/contact"><Mail className="w-4 h-4 mr-2" /> Send an Enquiry</Link>
               </Button>
               <Button asChild size="lg" variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
@@ -2247,8 +2275,8 @@ function ServicePageFooterCta({
             </div>
           </AnimatedSection>
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 }
 

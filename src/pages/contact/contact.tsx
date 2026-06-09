@@ -57,6 +57,7 @@ export default function Contact() {
     title: "Contact Us",
     description: "Contact RMT Medical Technologies for medical device development, regulatory compliance, software & AI, quality testing, and contract manufacturing enquiries. Offices in USA, Germany, Pakistan, and UAE.",
     keywords: "contact RMT medical technologies, medical device enquiry, regulatory compliance consultation",
+    path: "/contact",
   });
 
   const onSubmit = (data: FormData) => {

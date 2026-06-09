@@ -120,6 +120,7 @@ export default function Testing() {
     title: "Testing Services",
     description: "Comprehensive medical device testing services ??microbiology, physical, chemical, electrical safety (IEC 60601), biocompatibility (ISO 10993), and packaging integrity testing.",
     keywords: "medical device testing, microbiology testing, IEC 60601, ISO 10993 biocompatibility, sterility testing, electrical safety testing",
+    path: "/testing",
   });
 
   return (

@@ -125,6 +125,16 @@ export const Navbar = () => {
               </AnimatePresence>
             </div>
 
+            {/* Testimonials */}
+            <Link href="/testimonials" className={navLinkClass("/testimonials")}>
+              Testimonials
+            </Link>
+
+            {/* Products */}
+            <Link href="/products" className={navLinkClass("/products")}>
+              Products
+            </Link>
+
             {/* Testing */}
             <Link href="/testing" className={navLinkClass("/testing")}>
               Testing
@@ -229,6 +239,8 @@ export const Navbar = () => {
                 </div>
                 <div className="mt-2 border-t border-border pt-2">
                   {[
+                    { href: "/testimonials", label: "Testimonials" },
+                    { href: "/products", label: "Products" },
                     { href: "/testing", label: "Testing" },
                     { href: "/training", label: "Training & Workshops" },
                     { href: "/insights", label: "Insights" },

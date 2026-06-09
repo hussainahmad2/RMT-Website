@@ -74,6 +74,7 @@ export default function About() {
     title: "About Us",
     description: "RMT Medical Technologies is a leading medical device and technology company providing comprehensive end-to-end solutions from product design through regulatory approval and contract manufacturing. Founded 2008, serving 30+ countries.",
     keywords: "RMT Medical Technologies about, medical device company, regulatory compliance experts, ISO 13485 certified",
+    path: "/about",
   });
 
   return (
