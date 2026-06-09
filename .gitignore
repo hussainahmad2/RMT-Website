@@ -21,7 +21,5 @@ yarn-error.log
 Thumbs.db
 .cache
 
-# Testimonial videos — too large for GitHub; deploy separately to public/testimonials/
+# Raw source videos (not used in production build)
 /testimonials/
-public/testimonials/*.mp4
-!public/testimonials/README.md
