@@ -474,6 +474,374 @@ function BmdServiceExtras() {
   );
 }
 
+/* ---- Regulatory Compliance extended sections (main service page) ---- */
+function RegulatoryComplianceExtras() {
+  return (
+    <div className="space-y-0">
+      {/* ── Top Section: Standards & Documentation ── */}
+      <FullBleedBlock bgClassName="bg-secondary/30">
+        <AnimatedSection>
+          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-5 bg-background/50">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest text-[10px]">Standards & Quality Documentation</span>
+          </div>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 pb-3 border-b border-border">
+            Device Standards & Quality Documentation
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-3xl">
+            Establishing a regulatory baseline requires strict alignment with cybersecurity, software engineering, safety, and quality management standards. We support core documentation lifecycles across key clinical software and hardware integrations.
+          </p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Cyber Security Testing & Documentation */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <Lock className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground text-sm">Cyber Security Testing</h3>
+                </div>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Structured pre-market and post-market cybersecurity documentation. We prepare threat modeling dossiers, coordinate vulnerability/penetration testing, and generate safety reports to meet FDA guidelines.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-semibold uppercase tracking-wider">FDA Cyber Security Guidelines</div>
+            </div>
+
+            {/* Software Lifecycle (SDLC) IEC 62304 */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <Code2 className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground text-sm">Software SDLC (IEC 62304)</h3>
+                </div>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Full lifecycle software design and validation in compliance with <strong>IEC 62304</strong>. We assist in software classification (Class A, B, C), risk assessments, code traceability, and release management.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-semibold uppercase tracking-wider">IEC 62304 Compliant</div>
+            </div>
+
+            {/* ISO/IEC 27001:2022 */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <ShieldCheck className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground text-sm">Information Security</h3>
+                </div>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Implementation of Information Security Management Systems (ISMS) in alignment with <strong>ISO/IEC 27001:2022</strong>. Ensures secure patient data storage, HIPAA alignment, and cloud infrastructure security.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-semibold uppercase tracking-wider">ISO/IEC 27001:2022</div>
+            </div>
+
+            {/* IEC 60601-1 (Compliance Documentation / Excel sheet mapping) */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <FileText className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground text-sm">Electrical Safety (IEC 60601-1)</h3>
+                </div>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Safety and essential performance documentation for medical electrical equipment. We prepare structured compliance mappings, safety checklists, and testing excel sheets to streamline validation.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-semibold uppercase tracking-wider">Compliance Mapping & Excel Checklists</div>
+            </div>
+
+            {/* Risk Management Services / Blogs... (Content) */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <ClipboardCheck className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground text-sm">Risk Management Lifecycle</h3>
+                </div>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Full-scope ISO 14971 risk management. We build Hazard Traceability Matrices (HTM), FMEA risk files, and compile ongoing post-market risk reviews to act as a living record for safety validation.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-semibold uppercase tracking-wider">ISO 14971:2019 / Risk Files</div>
+            </div>
+
+            {/* Greenlight Guru */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <div className="flex items-center gap-3 mb-3">
+                  <div className="h-8 w-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary shrink-0">
+                    <Activity className="w-4.5 h-4.5" />
+                  </div>
+                  <h3 className="font-heading font-bold text-foreground text-sm">Greenlight Guru QMS</h3>
+                </div>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Setup, migration, and management of Design History Files (DHF) and Quality Management Systems (QMS) on medical device software platforms like <strong>Greenlight Guru</strong>. Seamlessly bridge engineering with electronic audits.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-semibold uppercase tracking-wider">eQMS Platform Setup</div>
+            </div>
+          </div>
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      {/* ── Middle Section: Technical File Preparation & Clinical Evaluation ── */}
+      <FullBleedBlock bgClassName="bg-background">
+        <AnimatedSection>
+          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-5 bg-secondary/30">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest text-[10px]">Technical File & Clinical Evidence</span>
+          </div>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 pb-3 border-b border-border">
+            Technical File & Clinical Evaluation Preparation
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-3xl">
+            Regulatory approvals depend on the quality of clinical evidence and technical dossiers. We compile, review, and validate comprehensive clinical datasets to ensure compliance with global regulators.
+          </p>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Technical File Preparation */}
+            <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 hover:shadow-md transition-all">
+              <h3 className="font-heading font-bold text-foreground mb-3 flex items-center gap-2 text-base">
+                <span className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded">DHF/DMR</span>
+                Technical File Preparation
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                We compile comprehensive Technical Documentation packages (per EU MDR Annex II/III and FDA pathways) containing device descriptions, design history files, manufacturing flowcharts, and regulatory declaration forms.
+              </p>
+              <ul className="space-y-1.5 text-xs text-muted-foreground">
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Declaration of Conformity documentation</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Device Master Records (DMR) compilation</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Labeling, instruction manuals (IFU), and packaging compliance</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Clinical Evaluation */}
+            <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 hover:shadow-md transition-all">
+              <h3 className="font-heading font-bold text-foreground mb-3 flex items-center gap-2 text-base">
+                <span className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded">CLINICAL</span>
+                Clinical Evaluation & Abstraction
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                Our clinical affairs team abstracts raw clinical research data and maps evidence from scientific publications to support your device's safety, efficacy, and performance claims.
+              </p>
+              <ul className="space-y-1.5 text-xs text-muted-foreground">
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Systematic literature searches & protocols</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Literature Search Reports & screening logs</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Equivalent product justifications and data mapping</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Clinical Evaluation Report (CER) */}
+            <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 hover:shadow-md transition-all">
+              <h3 className="font-heading font-bold text-foreground mb-3 flex items-center gap-2 text-base">
+                <span className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded">CER</span>
+                Clinical Evaluation Report (CER)
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                Writing audit-ready CER dossiers in accordance with MEDDEV 2.7/1 Rev 4 and EU MDR requirements. We document literature research protocols, evaluate predicate device equivalence, and prove safety.
+              </p>
+              <ul className="space-y-1.5 text-xs text-muted-foreground">
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Literature Research Protocols and search matrices</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Equivalence comparisons of raw materials & clinical inputs</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Benefit-risk analysis based on accumulated clinical databases</span>
+                </li>
+              </ul>
+            </div>
+
+            {/* Post Market Clinical Evaluation */}
+            <div className="bg-card border border-border rounded-xl p-6 hover:border-primary/30 hover:shadow-md transition-all">
+              <h3 className="font-heading font-bold text-foreground mb-3 flex items-center gap-2 text-base">
+                <span className="px-2 py-0.5 bg-primary/10 text-primary text-[10px] font-bold rounded">PMCF</span>
+                Post Market Clinical Evaluation
+              </h3>
+              <p className="text-muted-foreground text-sm leading-relaxed mb-4">
+                Defining continuous Post-Market Clinical Follow-up (PMCF) plans and compilation protocols. Gathering real-world safety data after market entry to continuously justify device performance.
+              </p>
+              <ul className="space-y-1.5 text-xs text-muted-foreground">
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>PMCF Plan & Survey creation</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Periodic Safety Update Report (PSUR) compilation</span>
+                </li>
+                <li className="flex items-center gap-1.5">
+                  <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0" />
+                  <span>Post-market safety data abstraction and feedback integration</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      {/* ── Bottom Section: Advantages & Roles ── */}
+      <FullBleedBlock bgClassName="bg-secondary/40">
+        <AnimatedSection>
+          <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-5 bg-background/50">
+            <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
+            <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest text-[10px]">Advantages & Collaborator Roles</span>
+          </div>
+          <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 pb-3 border-b border-border">
+            Advantages & Collaborator Roles
+          </h2>
+          <p className="text-muted-foreground text-sm md:text-base leading-relaxed mb-8 max-w-3xl">
+            Compliance is a collaborative, interdisciplinary achievement. Here is how our specialized services benefit different stakeholders and external partners across the device lifecycle.
+          </p>
+
+          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {/* Biomedical Engineer Role */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <h3 className="font-heading font-bold text-foreground text-sm mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                  Biomedical Engineers
+                </h3>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Helps design engineers map technical design inputs to regulatory standards, compile Device History Files, create Excel safety checklists, and execute seamless design transfers.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-bold uppercase tracking-wider">Design Control & Safety Alignment</div>
+            </div>
+
+            {/* Biomedical Scientist Role */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <h3 className="font-heading font-bold text-foreground text-sm mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                  Biomedical Scientists
+                </h3>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Aids in drafting biological safety justifications, chemical characterization profiles, and Toxicological Risk Assessment (TRA) files to reduce animal testing and satisfy regulators.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-bold uppercase tracking-wider">Biocompatibility & TRA Dossiers</div>
+            </div>
+
+            {/* Medical Device Manufacturer */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <h3 className="font-heading font-bold text-foreground text-sm mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                  Device Manufacturers
+                </h3>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Enables manufacturers to speed up market launch via pre-vetted QMS templates, audit-ready technical folders, and robust hazard matrix files.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-bold uppercase tracking-wider">Audit Readiness & Fast Time-to-Market</div>
+            </div>
+
+            {/* Relevant 3rd Party */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between">
+              <div>
+                <h3 className="font-heading font-bold text-foreground text-sm mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                  Relevant 3rd Parties
+                </h3>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  Coordinates and facilitates communication with Notified Bodies, Authorized Representatives, and international agents to ensure smooth certification audits and approvals.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-bold uppercase tracking-wider">Liaisons & Audit Support</div>
+            </div>
+
+            {/* Lab Testing */}
+            <div className="bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all flex flex-col justify-between md:col-span-1 lg:col-span-2">
+              <div>
+                <h3 className="font-heading font-bold text-foreground text-sm mb-2 flex items-center gap-2">
+                  <span className="w-1.5 h-1.5 bg-primary rounded-full" />
+                  Laboratory Testing Coordination
+                </h3>
+                <p className="text-muted-foreground text-xs leading-relaxed mb-4">
+                  We manage coordination with GLP/ISO-certified testing laboratories to organize biocompatibility assays, electrical safety verification, electromagnetic compatibility (EMC) tests, and functional bench performance tests, compiling all outputs into structured reports.
+                </p>
+              </div>
+              <div className="text-[10px] text-primary/80 font-bold uppercase tracking-wider">Verification Testing & Lab Coordination</div>
+            </div>
+          </div>
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      {/* ── Section 4: Relevant Standards Table ── */}
+      <FullBleedBlock bgClassName="bg-background">
+        <AnimatedSection>
+          <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">
+            Relevant Regulatory Standards
+          </h2>
+          <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+            Compliance with global consensus standards is vital for validating your medical device's safety, quality, and performance.
+          </p>
+
+          <div className="overflow-x-auto rounded-xl border border-border bg-card">
+            <table className="w-full text-sm text-left">
+              <thead className="bg-muted/50 text-foreground">
+                <tr>
+                  <th className="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-1/3">Standard / Regulation</th>
+                  <th className="px-4 py-3 font-semibold text-xs uppercase tracking-wider w-2/3">Scope & Purpose</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-border">
+                {[
+                  { std: "ISO 13485", purpose: "Medical Device Quality Management System (QMS)" },
+                  { std: "ISO 14971:2019", purpose: "Medical Device Risk Management framework and application" },
+                  { std: "ISO/TR 24971:2020", purpose: "Guidance on the implementation and transition of ISO 14971" },
+                  { std: "ISO 10993-1:2025", purpose: "Biological Evaluation of Medical Devices — framework & testing strategy" },
+                  { std: "ISO 10993-17:2023", purpose: "Toxicological Risk Assessment of medical device material constituents" },
+                  { std: "EU MDR 2017/745", purpose: "European Union Medical Device Regulation requirements for CE marking" },
+                  { std: "FDA 21 CFR", purpose: "U.S. Code of Federal Regulations for Medical Devices and QSR" }
+                ].map((item, i) => (
+                  <tr key={i} className="hover:bg-muted/30 transition-colors">
+                    <td className="px-4 py-3 text-foreground font-semibold font-mono text-xs">{item.std}</td>
+                    <td className="px-4 py-3 text-muted-foreground text-xs">{item.purpose}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </AnimatedSection>
+      </FullBleedBlock>
+    </div>
+  );
+}
+
+/* ---- Medical device manufacturing (Revive content, main service page) ---- */
+
 /* ---- Medical device manufacturing (Revive content, main service page) ---- */
 const MANUFACTURING_PRODUCT_ICONS: Record<string, LucideIcon> = {
   stethoscope: Stethoscope,
@@ -890,7 +1258,7 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
 
 /* ---- Per-service standards shown in sidebar ---- */
 const SERVICE_STANDARDS: Record<string, string[]> = {
-  "regulatory-compliance":   ["FDA 510(k)/PMA", "EU MDR 2017/745", "ISO 13485", "MEDDEV 2.7.1", "IVDR 2017/746"],
+  "regulatory-compliance":   ["ISO 13485", "ISO 14971", "ISO 10993-1:2025", "ISO 10993-17:2023", "EU MDR 2017/745", "FDA 21 CFR"],
   "software-ai":             ["IEC 62304", "FDA SaMD Guidance", "IEC 82304", "EU MDR Rule 11", "HIPAA / SOC 2"],
   "product-development":     ["ISO 13485", "ISO 14971", "IEC 62304", "IEC 60601", "FDA / CE"],
   "quality-testing":         ["ISO 13485", "ISO 10993", "IEC 60601-1", "IEC 62304", "ISO 14971"],
@@ -2308,12 +2676,26 @@ const SOFTWARE_AI_SUB_GALLERY: Record<string, string[]> = {
   ],
 };
 
-const SOFTWARE_AI_APPROACH_STEPS = [
-  { step: "01", title: "Discover", desc: "Requirements, intended use, regulatory pathway, and stakeholder alignment." },
-  { step: "02", title: "Design", desc: "Architecture, UX, security, and traceability mapped to applicable standards." },
-  { step: "03", title: "Build & Validate", desc: "Development, V&V, cybersecurity testing, and documentation for submission." },
-  { step: "04", title: "Deploy & Support", desc: "Release, cloud deployment, monitoring, and post-market change control." },
-];
+const SERVICE_APPROACH_STEPS: Record<string, { step: string; title: string; desc: string }[]> = {
+  "software-ai": [
+    { step: "01", title: "Discover", desc: "Requirements, intended use, regulatory pathway, and stakeholder alignment." },
+    { step: "02", title: "Design", desc: "Architecture, UX, security, and traceability mapped to applicable standards." },
+    { step: "03", title: "Build & Validate", desc: "Development, V&V, cybersecurity testing, and documentation for submission." },
+    { step: "04", title: "Deploy & Support", desc: "Release, cloud deployment, monitoring, and post-market change control." },
+  ],
+  "regulatory-compliance": [
+    { step: "01", title: "Gap Analysis", desc: "Evaluate existing documentation, safety files, and identify compliance pathways." },
+    { step: "02", title: "Strategy & Plan", desc: "Define submission roadmap, testing requirements, and standard alignments." },
+    { step: "03", title: "Dossier Writing", desc: "Author risk files, biological evaluation reports (BER), and technical dossiers." },
+    { step: "04", title: "Audit & Approval", desc: "Manage submissions to FDA, Notified Bodies, SFDA, or TGA through to final clearance." },
+  ],
+  "default": [
+    { step: "01", title: "Consultation", desc: "Understand requirements, project scope, and define technical specifications." },
+    { step: "02", title: "Development", desc: "Engineering design, prototyping, software coding, or process formulation." },
+    { step: "03", title: "Testing & V&V", desc: "Rigorous laboratory validation, performance testing, and quality control reviews." },
+    { step: "04", title: "Release & Scale", desc: "Design transfer, final documentation release, and commercial scale-up support." },
+  ]
+};
 
 /** Full-width breakout inside page-container */
 function FullBleedSection({ children, className = "" }: { children: React.ReactNode; className?: string }) {
@@ -2407,7 +2789,7 @@ function SubServiceImageFrame({
 }
 
 /** Rich in-depth layout for Software & AI sub-service pages */
-function SoftwareAISubServiceContent({
+function SubServiceContent({
   subService,
   service,
   subHeroImage,
@@ -2418,8 +2800,27 @@ function SoftwareAISubServiceContent({
   subHeroImage: string;
   subPageIcons: React.ElementType[];
 }) {
-  const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? (SERVICE_SCATTER_ICONS[service.slug]?.[0] ?? CheckCircle);
   const isSoftwareAI = service.slug === "software-ai";
+  const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? (SERVICE_SCATTER_ICONS[service.slug]?.[0] ?? CheckCircle);
+  const approachSteps = SERVICE_APPROACH_STEPS[service.slug] ?? SERVICE_APPROACH_STEPS.default;
+
+  // Theme-aware styles
+  const accentTextClass = isSoftwareAI ? "text-cyan-600 dark:text-cyan-400" : "text-primary";
+  const accentDotClass = isSoftwareAI ? "bg-cyan-500" : "bg-primary";
+  const accentBorderClass = isSoftwareAI ? "border-cyan-500/50" : "border-primary/50";
+  const accentCardHoverClass = isSoftwareAI 
+    ? "group-hover:border-cyan-400/50 group-hover:bg-cyan-500/4 hover:border-cyan-400/50 hover:bg-cyan-500/4" 
+    : "group-hover:border-primary/50 group-hover:bg-primary/5 hover:border-primary/50 hover:bg-primary/5";
+  const accentIconContainerClass = isSoftwareAI
+    ? "bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+    : "bg-gradient-to-br from-primary/20 to-indigo-500/10 border-primary/20 text-primary";
+  const accentDeliverableBgClass = isSoftwareAI
+    ? "bg-cyan-500/12 group-hover:bg-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+    : "bg-primary/10 group-hover:bg-primary/20 text-primary";
+  const accentLineConnectorClass = isSoftwareAI ? "bg-cyan-500/30" : "bg-primary/30";
+  const accentStepBadgeClass = isSoftwareAI
+    ? "from-cyan-500/20 to-indigo-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400"
+    : "from-primary/20 to-indigo-500/10 border-primary/20 text-primary";
 
   return (
     <div className="space-y-14">
@@ -2429,7 +2830,7 @@ function SoftwareAISubServiceContent({
         <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
           <div className="lg:col-span-3 space-y-4">
             <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
+              <span className={`w-1.5 h-1.5 rounded-full ${accentDotClass}`} />
               <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">Service Overview</span>
             </div>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-tight">{subService.name}</h2>
@@ -2438,7 +2839,7 @@ function SoftwareAISubServiceContent({
                 <p key={i} className="text-muted-foreground leading-relaxed text-[15px]">{para}</p>
               ))}
             </div>
-            <div className="pt-2 border-l-2 border-cyan-500/50 pl-4">
+            <div className={`pt-2 border-l-2 ${accentBorderClass} pl-4`}>
               <p className="text-sm font-medium text-foreground/80 italic">{subService.tagline}</p>
             </div>
           </div>
@@ -2464,7 +2865,7 @@ function SoftwareAISubServiceContent({
       {/* ── Key Features & Benefits — 2-col card grid ── */}
       <AnimatedSection>
         <div className="mb-6 pb-3 border-b border-border">
-          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Highlights</p>
+          <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Highlights</p>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Key Features & Benefits</h2>
         </div>
         <div className="grid sm:grid-cols-2 gap-4">
@@ -2474,9 +2875,9 @@ function SoftwareAISubServiceContent({
               <motion.div key={point}
                 initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }} transition={{ delay: idx * 0.06 }}
-                className="group flex items-start gap-4 p-5 rounded-2xl border border-border bg-card hover:border-cyan-400/50 hover:bg-cyan-500/4 hover:shadow-md transition-all duration-300">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border border-cyan-500/20 group-hover:scale-105 transition-transform">
-                  <HlIcon className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
+                className={`group flex items-start gap-4 p-5 rounded-2xl border border-border bg-card shadow-sm hover:shadow-md transition-all duration-300 ${accentCardHoverClass}`}>
+                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border group-hover:scale-105 transition-transform ${accentIconContainerClass}`}>
+                  <HlIcon className="h-4 w-4" />
                 </div>
                 <div className="flex-1">
                   <p className="text-sm font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">{point}</p>
@@ -2491,7 +2892,7 @@ function SoftwareAISubServiceContent({
       {SUB_SERVICE_SIDEBAR_STATS[service.slug]?.[subService.slug] ? (
         <KeyMetricsSection
           stats={SUB_SERVICE_SIDEBAR_STATS[service.slug][subService.slug]}
-          variant={service.slug === "software-ai" ? "software-ai" : "default"}
+          variant={isSoftwareAI ? "software-ai" : "default"}
         />
       ) : (
         SERVICE_SIDEBAR_STATS[service.slug] &&
@@ -2499,7 +2900,7 @@ function SoftwareAISubServiceContent({
         service.slug !== "mbl-laboratory" && (
           <KeyMetricsSection
             stats={SERVICE_SIDEBAR_STATS[service.slug]}
-            variant={service.slug === "software-ai" ? "software-ai" : "default"}
+            variant={isSoftwareAI ? "software-ai" : "default"}
           />
         )
       )}
@@ -2507,7 +2908,7 @@ function SoftwareAISubServiceContent({
       {/* ── Deliverables — styled grid ── */}
       <AnimatedSection>
         <div className="mb-6 pb-3 border-b border-border">
-          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">What You Get</p>
+          <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>What You Get</p>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Deliverables</h2>
         </div>
         <div className="grid sm:grid-cols-2 gap-3">
@@ -2515,9 +2916,9 @@ function SoftwareAISubServiceContent({
             <motion.div key={del}
               initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ delay: idx * 0.05 }}
-              className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-cyan-400/40 transition-colors group">
-              <div className="flex h-8 w-8 shrink-0 items-center justify-center rounded-lg bg-cyan-500/12 group-hover:bg-cyan-500/20 transition-colors">
-                <CheckCircle className="h-4 w-4 text-cyan-600 dark:text-cyan-400" />
+              className={`flex items-center gap-3 p-4 rounded-xl border border-border bg-card transition-colors group ${isSoftwareAI ? "hover:border-cyan-400/40" : "hover:border-primary/40"}`}>
+              <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${accentDeliverableBgClass}`}>
+                <CheckCircle className="h-4 w-4" />
               </div>
               <span className="text-sm font-medium text-foreground">{del}</span>
             </motion.div>
@@ -2533,23 +2934,23 @@ function SoftwareAISubServiceContent({
       {/* ── Our Approach ── */}
       <AnimatedSection>
         <div className="mb-6 pb-3 border-b border-border">
-          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Methodology</p>
+          <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Methodology</p>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Our Approach</h2>
         </div>
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {SOFTWARE_AI_APPROACH_STEPS.map((s, i) => (
+          {approachSteps.map((s, i) => (
             <motion.div key={s.step}
               initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-              className="relative group bg-card border border-border rounded-2xl p-5 hover:border-cyan-400/40 hover:shadow-lg transition-all">
+              className={`relative group bg-card border border-border rounded-2xl p-5 hover:shadow-lg transition-all ${isSoftwareAI ? "hover:border-cyan-400/40" : "hover:border-primary/40"}`}>
               <div className="font-heading text-5xl font-black text-primary/7 leading-none mb-3 -mt-1 select-none">{s.step}</div>
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border border-cyan-500/20 flex items-center justify-center mb-3 group-hover:scale-105 transition-transform">
-                <span className="font-bold text-cyan-600 dark:text-cyan-400 text-xs">{s.step}</span>
+              <div className={`w-10 h-10 rounded-xl border flex items-center justify-center mb-3 group-hover:scale-105 transition-transform bg-gradient-to-br ${accentStepBadgeClass}`}>
+                <span className="font-bold text-xs">{s.step}</span>
               </div>
               <h4 className="font-heading text-sm font-bold text-foreground mb-1.5">{s.title}</h4>
               <p className="text-muted-foreground text-xs leading-relaxed">{s.desc}</p>
-              {i < SOFTWARE_AI_APPROACH_STEPS.length - 1 && (
-                <div className="hidden lg:block absolute top-1/2 -right-2 w-4 h-px bg-cyan-500/30" aria-hidden />
+              {i < approachSteps.length - 1 && (
+                <div className={`hidden lg:block absolute top-1/2 -right-2 w-4 h-px ${accentLineConnectorClass}`} aria-hidden />
               )}
             </motion.div>
           ))}
@@ -2559,7 +2960,7 @@ function SoftwareAISubServiceContent({
       {/* ── Service capabilities ── */}
       <AnimatedSection>
         <div className="mb-6 pb-3 border-b border-border">
-          <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Full-Service Offering</p>
+          <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Full-Service Offering</p>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">All {service.shortName} Capabilities</h2>
         </div>
         <div className="grid sm:grid-cols-2 gap-3">
@@ -2567,8 +2968,8 @@ function SoftwareAISubServiceContent({
             <motion.div key={cap}
               initial={{ opacity: 0, x: -8 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ delay: idx * 0.04 }}
-              className="group flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-card hover:border-cyan-400/40 hover:bg-cyan-500/4 transition-all">
-              <span className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full bg-cyan-500/12 text-[10px] font-bold text-cyan-700 dark:text-cyan-300">{idx + 1}</span>
+              className={`group flex items-center gap-3 px-4 py-3 rounded-xl border border-border bg-card transition-all ${isSoftwareAI ? "hover:border-cyan-400/40 hover:bg-cyan-500/4" : "hover:border-primary/40 hover:bg-primary/5"}`}>
+              <span className={`flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[10px] font-bold ${isSoftwareAI ? "bg-cyan-500/12 text-cyan-700 dark:text-cyan-300" : "bg-primary/10 text-primary"}`}>{idx + 1}</span>
               <span className="text-sm text-foreground font-medium group-hover:text-primary transition-colors">{cap}</span>
             </motion.div>
           ))}
@@ -2610,6 +3011,7 @@ export function ServiceDetail({
   const isSoftwareAI = service.slug === "software-ai";
   const isBmd = service.slug === "bmd";
   const isMbl = service.slug === "mbl-laboratory";
+  const isRegulatoryCompliance = service.slug === "regulatory-compliance";
   const isEngineering = ENGINEERING_SERVICE_SLUGS.has(service.slug);
   const isAutomation = service.slug === "automation-services";
   const isManufacturing = service.slug === "contract-manufacturing";
@@ -2805,6 +3207,7 @@ export function ServiceDetail({
         {isManufacturing && <ManufacturingServiceExtras />}
         {isProductDevelopment && <ProductDevelopmentServiceExtras />}
         {isQualityTesting && <QualityTestingServiceExtras />}
+        {isRegulatoryCompliance && <RegulatoryComplianceExtras />}
       </section>
 
       {isSoftwareAI && (
@@ -2975,7 +3378,7 @@ export function SubServiceDetail({
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
 
             <div className="lg:col-span-2 space-y-10">
-              <SoftwareAISubServiceContent
+              <SubServiceContent
                 subService={subService}
                 service={service}
                 subHeroImage={subHeroImage}

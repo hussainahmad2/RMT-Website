@@ -2,11 +2,11 @@ import { SubServiceDetail } from "../../_shared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
-export default function ClinicalEvaluationReportPage({ params }: PageProps) {
+export default function GreenlightGuruSetupPage({ params }: PageProps) {
   return (
     <SubServiceDetail
       serviceSlug="regulatory-compliance"
-      subSlug="clinical-evaluation-report"
+      subSlug="greenlight-guru-setup"
       params={params}
     />
   );

@@ -24,7 +24,7 @@ const heroImages = [
 ];
 
 const featuredServices = [
-  { title: "Regulatory Compliance", description: "Expert guidance through FDA, CE, and global regulatory pathways — technical files, clinical evaluations, ISO certifications.", icon: <Shield className="w-6 h-6" />, slug: "regulatory-compliance", subServices: ["Technical File for FDA/CE", "Clinical Evaluation Report", "ISO 13485 Certification", "ISO 14971 Risk Management"] },
+  { title: "Regulatory Compliance", description: "Navigate global pathways, risk management, and quality standards — Risk Management (ISO 14971), Biocompatibility, QMS, and Clinical Evaluations.", icon: <Shield className="w-6 h-6" />, slug: "regulatory-compliance", subServices: ["Risk Management", "Biocompatibility", "QMS (ISO 13485)", "Technical Files & Clinicals", "Global Registrations"] },
   { title: "Software & AI Solutions", description: "Intelligent software powering next-generation medical devices — AI, cloud, SaMD, and full development lifecycle.", icon: <Brain className="w-6 h-6" />, slug: "software-ai", subServices: ["AI & Machine Learning", "DevOps/Cloud Computing", "Software as Medical Device", "UI/UX Development"] },
   { title: "Turnkey Regulatory Commissioning and Regulatory Approvals", description: "Turnkey regulatory commissioning and regulatory approvals from concept through design, V&V, and manufacturing transfer.", icon: <Layers className="w-6 h-6" />, slug: "product-development", subServices: ["Concept & Feasibility", "Design & Engineering", "Prototyping", "Regulatory Consultancy"] },
   { title: "Quality Department Services", description: "QA, production QC, SaMD software quality, and R&D design control — testing and compliance from bench to release.", icon: <FlaskConical className="w-6 h-6" />, slug: "quality-testing", subServices: ["Quality Assurance (QA)", "QC — Production", "SQA / SaMD", "QC — R&D"] },
@@ -59,25 +59,17 @@ const globalOffices = [
     city: "United States",
     label: "HQ",
     description: "North America Operations",
-    address: "Revive Medical Technologies Inc., United States of America",
-    phone: "+1 (800) 555-0199",
-    email: "usa@rmt-usa.com",
+    address: "St. Cloud Edgewater Business Centre Sartell, Minnesota, United States",
+    phone: "+1 (707) 5618 771",
+    email: "info@rmt-usa.com",
   },
   {
     city: "Pakistan",
     label: "PAK",
     description: "South Asia Office",
-    address: "Karachi, Pakistan",
-    phone: "+92 21 555 0199",
-    email: "pakistan@rmt-usa.com",
-  },
-  {
-    city: "UAE",
-    label: "ME",
-    description: "Middle East & Africa",
-    address: "Dubai, UAE",
-    phone: "+971 4 555 0199",
-    email: "me@rmt-usa.com",
+    address: "Building 2A, W1 Street, Rawat Industrial Estate, Islamabad, 46220",
+    phone: "+1 (707) 5618 771",
+    email: "info@rmt-usa.com",
   },
 ];
 
@@ -149,9 +141,8 @@ const SectionWatermark = ({
   side?: "left" | "right";
 }) => (
   <div
-    className={`absolute top-1/2 -translate-y-1/2 pointer-events-none select-none w-[min(50vw,440px)] h-[min(50vw,440px)] sm:w-[400px] sm:h-[400px] lg:w-[460px] lg:h-[460px] ${
-      side === "right" ? "right-0 translate-x-[18%]" : "left-0 -translate-x-[18%]"
-    }`}
+    className={`absolute top-1/2 -translate-y-1/2 pointer-events-none select-none w-[min(50vw,440px)] h-[min(50vw,440px)] sm:w-[400px] sm:h-[400px] lg:w-[460px] lg:h-[460px] ${side === "right" ? "right-0 translate-x-[18%]" : "left-0 -translate-x-[18%]"
+      }`}
     aria-hidden="true"
   >
     <div

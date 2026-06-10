@@ -6,8 +6,8 @@ import { ALL_SERVICES } from "@/data/services";
 const BASE = import.meta.env.BASE_URL;
 
 const offices = [
-  { city: "United States", address: "RMT USA Inc., United States of America", phone: "+1 (800) 555-0199", email: "usa@rmt-usa.com" },
-  { city: "Pakistan", address: "RMT Pakistan, Karachi, Pakistan", phone: "+92 21 555 0199", email: "pakistan@rmt-usa.com" },
+  { city: "United States", address: "St. Cloud Edgewater Business Centre Sartell, Minnesota, United States", phone: "+1 (707) 5618 771", email: "info@rmt-usa.com" },
+  { city: "Pakistan", address: "Building 2A, W1 Street, Rawat Industrial Estate, Islamabad, 46220", phone: "+1 (707) 5618 771", email: "info@rmt-usa.com" },
   { city: "UAE", address: "RMT Middle East FZ-LLC, Dubai, UAE", phone: "+971 4 555 0199", email: "me@rmt-usa.com" },
 ];
 

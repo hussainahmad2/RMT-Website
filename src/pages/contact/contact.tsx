@@ -21,9 +21,9 @@ const offices = [
   {
     city: "United States",
     label: "Headquarters",
-    address: "RMT USA Inc.\nUnited States of America",
-    phone: "+1 (800) 555-0199",
-    email: "usa@rmt-usa.com",
+    address: "St. Cloud Edgewater Business Centre\nSartell, Minnesota, United States",
+    phone: "+1 (707) 5618 771",
+    email: "info@rmt-usa.com",
   },
   {
     city: "Germany",
@@ -35,9 +35,9 @@ const offices = [
   {
     city: "Pakistan",
     label: "South Asia Office",
-    address: "RMT Pakistan\nKarachi, Pakistan",
-    phone: "+92 21 555 0199",
-    email: "pakistan@rmt-usa.com",
+    address: "Building 2A, W1 Street\nRawat Industrial Estate, Islamabad, 46220",
+    phone: "+1 (707) 5618 771",
+    email: "info@rmt-usa.com",
   },
   {
     city: "UAE",
@@ -249,7 +249,7 @@ export default function Contact() {
                 <h3 className="font-heading text-lg font-bold mb-2">Need Immediate Help?</h3>
                 <p className="text-white/80 text-sm mb-4 leading-relaxed">For urgent regulatory or technical enquiries, speak directly with one of our experts.</p>
                 <a
-                  href="tel:+18005550199"
+                  href="tel:+17075618771"
                   className="inline-flex items-center gap-2 bg-white text-primary font-semibold text-sm px-4 py-2 rounded-lg hover:bg-white/90 transition-colors"
                 >
                   <Phone className="w-4 h-4" /> Call Now

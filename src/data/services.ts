@@ -27,106 +27,410 @@ export const ALL_SERVICES: ServiceData[] = [
     slug: "regulatory-compliance",
     name: "Regulatory Compliance",
     shortName: "Regulatory",
-    tagline: "Navigate FDA, CE, and global regulatory pathways with confidence.",
-    description: "Expert regulatory affairs services covering technical file preparation, clinical evaluations, quality management system implementation, and ISO certifications for medical devices.",
+    tagline: "Navigate global regulatory pathways, risk management, and quality standards with confidence.",
+    description: "Expert regulatory affairs and quality assurance services covering risk management, biocompatibility evaluation, quality management system implementation, and global clearances (FDA, EU MDR, SFDA, TGA).",
     overview: [
-      "Regulatory compliance is the cornerstone of successful medical device commercialization. RMT USA's regulatory affairs experts have deep knowledge of FDA 510(k)/PMA, EU MDR, ISO 13485, and other international frameworks.",
+      "Regulatory compliance and quality assurance are the cornerstones of successful medical device commercialization. RMT's regulatory affairs and quality experts have deep knowledge of ISO 13485, ISO 14971, ISO 10993, FDA 21 CFR, EU MDR, SFDA, and TGA requirements.",
       "We prepare comprehensive technical documentation packages, conduct gap analyses against applicable standards, and work alongside your team to build a quality management system that satisfies both regulatory requirements and operational efficiency.",
-      "Our proven track record includes successful submissions for Class I, II, and III medical devices across multiple jurisdictions, with a regulatory approval rate exceeding 98%.",
+      "Our proven track record includes successful submissions for Class I, II, and III medical devices across multiple jurisdictions, with a regulatory approval rate exceeding 98%. We ensure your device meets all safety, performance, and biological requirements.",
     ],
     subServices: [
       {
-        slug: "technical-file-fda-ce",
-        name: "Technical File Preparation for FDA/CE",
-        tagline: "Complete technical documentation packages for FDA and EU regulatory submissions.",
+        slug: "risk-management",
+        name: "Risk Management (ISO 14971)",
+        tagline: "Systematic risk analysis, evaluation, control, and lifecycle verification.",
         overview: [
-          "A well-constructed Technical File is the foundation of any successful regulatory submission. RMT USA prepares comprehensive, audit-ready Technical Files that meet the requirements of FDA 510(k)/PMA and EU MDR Annex II/III.",
-          "Our structured approach covers device description, intended purpose, classification justification, standards compliance, design documents, risk management summary, clinical evidence summary, and post-market surveillance plan.",
-          "We tailor each Technical File to the specific device class and regulatory pathway, ensuring efficient review by regulatory authorities and minimizing requests for additional information.",
+          "A documented Risk Management Plan defines the scope of risk management activities, roles and responsibilities, risk acceptance criteria, risk evaluation methods, and risk control measures.",
+          "The Risk Management File is a collection of records containing risk analysis, risk evaluation, risk control activities, verification of controls, residual risk assessment, and post-market monitoring data.",
+          "The Hazard Traceability Matrix links hazards, hazardous situations, harms, risk controls, and verification activities. This ensures every identified hazard is tracked through mitigation and verification.",
+          "Risk Analysis involves the systematic identification and assessment of hazards, causes, probability of occurrence, severity of harm, and risk levels."
         ],
-        keyPoints: ["FDA 510(k) & PMA structures", "EU MDR Annex II/III compliant", "Structured standards mapping", "Clinical evidence summary", "Gap analysis prior to submission"],
-        deliverables: ["Complete Technical File", "Standards compliance matrix", "Regulatory strategy document", "Submission-ready documentation"],
+        keyPoints: [
+          "ISO 14971:2019 & ISO/TR 24971 compliant",
+          "Comprehensive Hazard Traceability Matrix (HTM)",
+          "Living Risk Management File (RMF)",
+          "Hazard identification & FMEA risk profiling",
+          "Post-market risk monitoring integration"
+        ],
+        deliverables: [
+          "Risk Management Plan",
+          "Risk Analysis & FMEA Report",
+          "Hazard Traceability Matrix (HTM)",
+          "Risk Management Report & File"
+        ]
+      },
+      {
+        slug: "biocompatibility-evaluation",
+        name: "Biocompatibility Evaluation (ISO 10993)",
+        tagline: "Biological safety assessment of medical devices for intended clinical body contact.",
+        overview: [
+          "Biocompatibility Documentation and Evaluation assess whether a medical device is biologically safe for its intended clinical use.",
+          "Under the ISO 10993-1:2025 standard (Biological evaluation of medical devices - Framework for biocompatibility assessment), we determine the required biological testing based on device type, nature of body contact, and contact duration."
+        ],
+        keyPoints: [
+          "ISO 10993-1:2025 biological safety framework",
+          "Testing determination based on device category",
+          "Testing need justification & gap analysis",
+          "Materials & body contact characterization"
+        ],
+        deliverables: [
+          "Biological Evaluation Plan (BEP)",
+          "Biological Evaluation Report (BER)",
+          "Biocompatibility Testing Protocols"
+        ]
+      },
+      {
+        slug: "toxicological-risk-assessment",
+        name: "Toxicological Risk Assessment (TRA)",
+        tagline: "Evaluates toxicological risks associated with device materials per ISO 10993-17.",
+        overview: [
+          "Conforming to ISO 10993-17:2023, toxicological risk assessment establishes allowable limits for leachable and extractable substances.",
+          "We evaluate toxicological risks associated with device materials, supporting biological safety justifications and reducing the need for costly animal testing."
+        ],
+        keyPoints: [
+          "ISO 10993-17:2023 compliant assessment",
+          "Extractable & leachable (E&L) substance limits",
+          "Toxicological risk profiling of materials",
+          "Biological safety justification support"
+        ],
+        deliverables: [
+          "Toxicological Risk Assessment (TRA) Report",
+          "Allowable limits calculation dossier",
+          "Chemical characterization assessment"
+        ]
+      },
+      {
+        slug: "quality-management-system",
+        name: "Quality Management System (ISO 13485)",
+        tagline: "Medical Device Quality Management System (QMS) development and compliance.",
+        overview: [
+          "Medical Device Quality Management System (QMS) implementation establishes the organizational framework necessary for compliance and quality consistency.",
+          "Key areas of our QMS integration include QMS development, implementation, training, documentation control, design controls, risk management integration, and corrective and preventive actions (CAPA)."
+        ],
+        keyPoints: [
+          "ISO 13485 compliant QMS implementation",
+          "Design controls & documentation control",
+          "CAPA system development & training",
+          "Risk management processes integration"
+        ],
+        deliverables: [
+          "QMS Manual & SOP Documentation",
+          "Design History File (DHF) templates",
+          "CAPA process dossiers",
+          "Internal audit reports & training records"
+        ]
+      },
+      {
+        slug: "fda-compliance",
+        name: "FDA Compliance",
+        tagline: "FDA registration, classification, 510(k), and PMA pathways.",
+        overview: [
+          "We support all medical device establishment requirements, including FDA Establishment Registration, Device Listing, and Device Classification.",
+          "Class I (low-risk devices, e.g., bandages, examination gloves). Requirements: Establishment Registration & Listing.",
+          "Class II (moderate-risk devices, e.g., dermatoscopes, infusion pumps). Requirements: FDA 510(k) Premarket Notification.",
+          "Class III (high-risk devices, e.g., implantable pacemakers, heart valves). Requirements: PMA (Premarket Approval)."
+        ],
+        keyPoints: [
+          "FDA Establishment Registration & Listing",
+          "Device Classification & regulatory pathway strategy",
+          "FDA 510(k) Premarket Notification preparation",
+          "Class III PMA submission support"
+        ],
+        deliverables: [
+          "FDA Regulatory Strategy Document",
+          "510(k) Submission Package / PMA dossiers",
+          "Classification Justification Report",
+          "FDA Listing confirmation files"
+        ]
+      },
+      {
+        slug: "eu-mdr-compliance",
+        name: "EU MDR Compliance",
+        tagline: "CE Marking, Clinical Evaluation, and Technical Documentation per EU MDR 2017/745.",
+        overview: [
+          "The European Medical Device Regulation (EU MDR 2017/745) governs device approval and CE marking requirements in the European Union.",
+          "We guide you through the CE Marking process, Clinical Evaluation, Post-Market Surveillance (PMS), Risk Management, and Technical Documentation compilation."
+        ],
+        keyPoints: [
+          "EU MDR 2017/745 regulatory compliance",
+          "CE Marking documentation & dossier",
+          "Clinical Evaluation Reports (CER)",
+          "Technical Documentation per Annex II/III"
+        ],
+        deliverables: [
+          "EU MDR Technical File",
+          "Clinical Evaluation Plan & Report (CEP/CER)",
+          "Post-Market Surveillance (PMS) Plan",
+          "CE Marking registration dossier"
+        ]
+      },
+      {
+        slug: "sfda-compliance",
+        name: "SFDA Compliance",
+        tagline: "Marketing authorization and registration with the Saudi Food and Drug Authority.",
+        overview: [
+          "The Saudi Food and Drug Authority (SFDA) requires Medical Device Marketing Authorization and listing registration for importing and selling devices in Saudi Arabia.",
+          "We compile all necessary files to ensure full compliance with SFDA requirements and applicable local/international standards."
+        ],
+        keyPoints: [
+          "SFDA registration and MDMA authorization",
+          "Local Authorized Representative support",
+          "Compliance with SFDA applicable standards",
+          "Saudi market entry strategy"
+        ],
+        deliverables: [
+          "SFDA MDMA Submission Dossier",
+          "Standards compliance justification",
+          "SFDA approval certificate tracking"
+        ]
+      },
+      {
+        slug: "tga-compliance",
+        name: "TGA Compliance",
+        tagline: "Inclusion in the Australian Register of Therapeutic Goods (ARTG).",
+        overview: [
+          "To market therapeutic goods in Australia, manufacturers must obtain inclusion in the Australian Register of Therapeutic Goods (ARTG) under the Therapeutic Goods Administration (TGA).",
+          "We assist in preparing the required regulatory compliance documentation for a successful TGA application."
+        ],
+        keyPoints: [
+          "TGA compliance review and ARTG inclusion",
+          "Australian Register of Therapeutic Goods submission",
+          "Sponsor liaison and regulatory documentation",
+          "Standards alignment and compliance files"
+        ],
+        deliverables: [
+          "TGA Submission Dossier",
+          "ARTG Registration Package",
+          "Australian regulatory strategy report"
+        ]
+      },
+      {
+        slug: "cybersecurity-testing",
+        name: "Cybersecurity Testing & Documentation",
+        tagline: "Pre-market and post-market cybersecurity risk management and threat modeling.",
+        overview: [
+          "Healthcare devices are increasingly connected, making cybersecurity a critical regulatory requirement for FDA clearance and CE marking.",
+          "RMT provides comprehensive cybersecurity testing and documentation services, including threat modeling, vulnerability assessments, penetration testing coordination, and post-market cybersecurity management plans."
+        ],
+        keyPoints: [
+          "FDA cybersecurity guidelines alignment",
+          "Threat modeling and vulnerability analysis",
+          "Software Bill of Materials (SBOM) preparation",
+          "Post-market cybersecurity monitoring plans"
+        ],
+        deliverables: [
+          "Cybersecurity Risk Assessment Report",
+          "Threat Modeling Dossier (STRIDE/FMEA)",
+          "Software Bill of Materials (SBOM)",
+          "Penetration Testing Summary Report"
+        ]
+      },
+      {
+        slug: "software-sdlc-iec-62304",
+        name: "Software Lifecycle (SDLC) IEC 62304",
+        tagline: "Compliant software development lifecycle documentation and verification for SaMD/SiMD.",
+        overview: [
+          "Medical device software must be developed within a structured, documented framework to ensure safety and clinical efficacy.",
+          "We establish and document your Software Development Lifecycle (SDLC) in strict compliance with IEC 62304. We assist in software safety classification (Class A, B, C), software risk assessment, software requirements management, architectural design, verification, and release protocols."
+        ],
+        keyPoints: [
+          "IEC 62304 Class A, B, C compliance mapping",
+          "Software risk assessment & mitigation",
+          "Full requirements-to-test traceability (RTM)",
+          "Release management & software configuration controls"
+        ],
+        deliverables: [
+          "Software Development Plan (SDP)",
+          "Software Architecture & Design Dossier",
+          "Software Verification Plan & Report (SVP/SVR)",
+          "Requirements Traceability Matrix (RTM)"
+        ]
+      },
+      {
+        slug: "iso-27001-compliance",
+        name: "ISO/IEC 27001:2022 Compliance",
+        tagline: "Information security management systems for secure patient data and cloud infrastructure.",
+        overview: [
+          "Securing patient health information and device data is essential for modern cloud-connected medical technologies.",
+          "We help you implement and maintain an Information Security Management System (ISMS) in alignment with ISO/IEC 27001:2022. We configure security controls, conduct risk assessments, establish security policies, and ensure compliance with HIPAA and GDPR data privacy standards."
+        ],
+        keyPoints: [
+          "ISO/IEC 27001:2022 ISMS implementation",
+          "Patient health data security (HIPAA/GDPR)",
+          "Cloud infrastructure security controls",
+          "Internal information security audits & training"
+        ],
+        deliverables: [
+          "Information Security Manual & Policies",
+          "ISMS Risk Assessment & Treatment Plan",
+          "Statement of Applicability (SoA)",
+          "Internal Audit Report & Readiness Checklist"
+        ]
+      },
+      {
+        slug: "iec-60601-1-compliance",
+        name: "IEC 60601-1 Compliance",
+        tagline: "Electrical safety and essential performance documentation for medical electrical systems.",
+        overview: [
+          "Electrical medical devices must meet strict safety and performance standards to protect patients and operators.",
+          "We prepare the compliance mapping, safety checklists, and Excel sheet matrices required for IEC 60601-1 certification. We coordinate with accredited laboratories for testing and help you resolve any non-conformities during evaluation."
+        ],
+        keyPoints: [
+          "IEC 60601-1 electrical safety checklists",
+          "Essential performance validation planning",
+          "EMC testing coordination (IEC 60601-1-2)",
+          "Safety-critical component traceability"
+        ],
+        deliverables: [
+          "IEC 60601-1 Compliance Mapping Sheet",
+          "Risk Management integration for electrical safety",
+          "EMC Test Plan & Laboratory Coordination Dossier",
+          "Safety Test Summary Report"
+        ]
+      },
+      {
+        slug: "greenlight-guru-setup",
+        name: "Greenlight Guru Setup",
+        tagline: "Configuration, migration, and management of DHFs and QMS on electronic QMS platforms.",
+        overview: [
+          "Electronic Quality Management Systems (eQMS) streamline regulatory audits and document control for fast-growing medical device companies.",
+          "We configure and manage your electronic QMS on platforms like Greenlight Guru. We migrate paper design history files (DHF) and device master records (DMR) to the digital platform, map SOP workflows, and train your team for audit readiness."
+        ],
+        keyPoints: [
+          "Greenlight Guru workspace design & setup",
+          "DHF & DMR digital migration",
+          "Standard Operating Procedures (SOP) workflow mapping",
+          "Team training & electronic audit preparation"
+        ],
+        deliverables: [
+          "eQMS Workspace Configuration Document",
+          "DHF/DMR Migration Log & Verification",
+          "Digital SOP Workflow Templates",
+          "User Training & Onboarding Dossier"
+        ]
+      },
+      {
+        slug: "technical-file-preparation",
+        name: "Technical File Preparation",
+        tagline: "Technical documentation dossiers compiled per EU MDR Annex II/III and FDA pathways.",
+        overview: [
+          "A comprehensive technical file is the key deliverable that demonstrates device conformity to regulatory bodies.",
+          "We compile technical documentation packages (per EU MDR 2017/745 Annex II/III and FDA pathways) containing device descriptions, design history files, manufacturing flowcharts, and regulatory declaration forms to support smooth clearance."
+        ],
+        keyPoints: [
+          "EU MDR Annex II/III Technical Documentation",
+          "Device Master Records (DMR) compilation",
+          "Labeling, packaging, and IFU compliance",
+          "Declaration of Conformity documentation"
+        ],
+        deliverables: [
+          "EU MDR Technical File / FDA Dossier",
+          "Device Master Record (DMR)",
+          "Labeling & IFU Compliance Dossier",
+          "Declaration of Conformity Draft"
+        ]
+      },
+      {
+        slug: "clinical-evaluation",
+        name: "Clinical Evaluation",
+        tagline: "Clinical data abstraction and evidence mapping to support safety and efficacy claims.",
+        overview: [
+          "Demonstrating clinical safety and performance is required for all medical devices entering the market.",
+          "Our clinical affairs team abstracts raw clinical research data and maps evidence from scientific publications and databases to support your device's safety, efficacy, and clinical performance claims."
+        ],
+        keyPoints: [
+          "Clinical database search and data extraction",
+          "Systematic literature searches & protocols",
+          "Equivalent product justifications",
+          "Clinical evidence gap analysis"
+        ],
+        deliverables: [
+          "Clinical Data Abstraction Report",
+          "Equivalence Justification File",
+          "Clinical Literature Screening Log",
+          "Clinical Evidence Gap Analysis"
+        ]
       },
       {
         slug: "clinical-evaluation-report",
         name: "Clinical Evaluation Report (CER)",
-        tagline: "Systematic clinical evaluations meeting EU MDR and FDA requirements.",
+        tagline: "Audit-ready CER writing aligned with MEDDEV 2.7/1 Rev 4 and EU MDR requirements.",
         overview: [
-          "A Clinical Evaluation Report (CER) is a mandatory component of EU MDR compliance, providing systematic clinical evidence to demonstrate device safety and performance. RMT USA's clinical team produces rigorous CERs following the MEDDEV 2.7.1 Rev 4 methodology.",
-          "We conduct systematic literature searches, appraise clinical data from equivalent devices and post-market sources, and produce clear benefit-risk conclusions supported by objective clinical evidence.",
-          "Our CERs are designed to withstand notified body scrutiny, and we have significant experience preparing CERs for Class IIa, IIb, and III devices across diverse therapeutic areas.",
+          "A Clinical Evaluation Report (CER) documents the assessment and analysis of clinical data to prove your device's safety.",
+          "We write audit-ready CER dossiers in accordance with MEDDEV 2.7/1 Rev 4 and EU MDR requirements. We document literature search protocols, evaluate predicate device equivalence, and prove safety using clinical databases."
         ],
-        keyPoints: ["MEDDEV 2.7.1 Rev 4 methodology", "Systematic literature search", "Equivalence assessment", "Post-market data integration", "Notified body experience"],
-        deliverables: ["Clinical Evaluation Report (CER)", "Literature search protocol & reports", "Clinical evaluation plan (CEP)", "Equivalence justification"],
+        keyPoints: [
+          "MEDDEV 2.7/1 Rev 4 compliant CER writing",
+          "Literature Research Protocols & search matrices",
+          "Benefit-risk ratio analysis based on clinical data",
+          "Notified Body audit support & query response"
+        ],
+        deliverables: [
+          "Clinical Evaluation Plan (CEP)",
+          "Clinical Evaluation Report (CER)",
+          "Literature Search Protocol & Report",
+          "Benefit-Risk Assessment File"
+        ]
       },
       {
-        slug: "biological-evaluation-report",
-        name: "Biological Evaluation Report (BER)",
-        tagline: "ISO 10993-based biocompatibility evaluations for patient-contacting devices.",
+        slug: "literature-research-protocol",
+        name: "Literature Research Protocol",
+        tagline: "Literature research protocols, search matrices, and equivalent product justifications.",
         overview: [
-          "For any medical device that contacts the patient directly or indirectly, biocompatibility evaluation is a regulatory requirement under ISO 10993 and FDA guidance. RMT USA prepares Biological Evaluation Reports (BERs) following ISO 10993-1:2018 risk-based principles.",
-          "Our BER process begins with a materials characterisation and chemical characterisation assessment to determine the extent of biocompatibility testing required. Where possible, we leverage existing published data to avoid unnecessary animal testing.",
-          "Biological evaluation plans and reports are written to satisfy FDA 510(k)/PMA and EU MDR submission requirements, and our network of accredited ISO 10993 test laboratories provides rapid turnaround of required testing.",
+          "A rigorous literature search protocol forms the foundation of clinical evidence and equivalence arguments.",
+          "We develop systematic literature search protocols and database search matrices (MEDLINE, EMBASE, PubMed). We document screening criteria, resolve data extraction queries, and map inputs to prove equivalence with predicate products."
         ],
-        keyPoints: ["ISO 10993-1:2018 framework", "Chemical characterisation strategy", "Testing need justification", "Accredited test lab network", "FDA & EU MDR submissions"],
-        deliverables: ["Biological Evaluation Plan (BEP)", "Biological Evaluation Report (BER)", "Chemical characterisation report", "Testing coordination & reports"],
+        keyPoints: [
+          "Systematic search strategy & database selection",
+          "Database search matrices (EMBASE, MEDLINE, PubMed)",
+          "Inclusion/exclusion screening logs",
+          "Predicate device raw material & clinical equivalence comparison"
+        ],
+        deliverables: [
+          "Literature Search Protocol (LSP)",
+          "Database Search Matrix & Screening Log",
+          "Equivalent Product Comparison Dossier",
+          "Literature Review Safety Report"
+        ]
       },
       {
-        slug: "qms-implementation",
-        name: "Quality Management System Implementation",
-        tagline: "Build a robust, audit-ready QMS from the ground up.",
+        slug: "post-market-clinical-evaluation",
+        name: "Post Market Clinical Evaluation",
+        tagline: "PMCF plans, survey protocols, and periodic safety reports to justify device safety.",
         overview: [
-          "Implementing an effective Quality Management System (QMS) is a prerequisite for manufacturing medical devices in any major market. RMT USA provides end-to-end QMS implementation services aligned with ISO 13485:2016.",
-          "We conduct a current-state gap assessment, design the QMS structure and documentation hierarchy, write Standard Operating Procedures (SOPs), work instructions, forms, and records, and support your team through internal audit and management review.",
-          "Our QMS implementations are designed for practical usability — we build systems that your team can actually operate, not just document for regulatory purposes.",
+          "Regulatory compliance continues after market launch through active monitoring of real-world device performance.",
+          "We define continuous Post-Market Clinical Follow-up (PMCF) plans and compilation protocols. We gather real-world safety data after market entry, conduct clinical surveys, and compile safety update reports to continuously justify device safety."
         ],
-        keyPoints: ["ISO 13485:2016 framework", "Gap assessment & roadmap", "SOP and procedure writing", "Internal audit support", "Management review facilitation"],
-        deliverables: ["QMS documentation suite", "Gap assessment report", "Implementation roadmap", "Trained internal audit team"],
-      },
-      {
-        slug: "iso-13485-certification",
-        name: "ISO 13485 Compliance & Certification",
-        tagline: "Achieve and maintain ISO 13485 certification with expert guidance.",
-        overview: [
-          "ISO 13485:2016 certification is the global standard for medical device quality management systems, required by manufacturers, distributors, and service providers in the medical device supply chain.",
-          "RMT USA guides organisations through every stage of the ISO 13485 certification journey — from initial gap assessment and QMS development through certification body selection, surveillance audit preparation, and ongoing certification maintenance.",
-          "We have supported organisations of all sizes — from early-stage startups through established manufacturers — in achieving ISO 13485 certification, and we provide ongoing support to maintain certification status.",
+        keyPoints: [
+          "PMCF Plan and Survey protocol development",
+          "Periodic Safety Update Report (PSUR) compilation",
+          "Post-market clinical data extraction",
+          "Feedback integration into risk files"
         ],
-        keyPoints: ["Full certification support", "Certification body selection", "Pre-audit mock assessments", "Ongoing surveillance support", "All organisation sizes"],
-        deliverables: ["ISO 13485 certification", "QMS documentation", "Internal audit program", "Corrective action reports"],
-      },
-      {
-        slug: "iso-14971-risk-management",
-        name: "ISO 14971 Risk Management",
-        tagline: "Systematic risk analysis and management throughout the device lifecycle.",
-        overview: [
-          "ISO 14971:2019 defines the requirements for risk management of medical devices throughout their entire lifecycle. RMT USA provides comprehensive risk management services, from initial Hazard Identification and Risk Analysis through Risk Control and post-market risk review.",
-          "Our risk management approach creates a living Risk Management File that integrates with your Design Controls, CAPA system, and post-market surveillance process — ensuring risk management remains a live, effective process rather than a one-time documentation exercise.",
-          "Risk files are prepared to withstand FDA inspection and EU MDR notified body scrutiny, with clear rationale for residual risk acceptability and overall benefit-risk conclusions.",
-        ],
-        keyPoints: ["ISO 14971:2019 compliant", "Hazard identification & FMEA", "Risk control strategy", "Residual risk evaluation", "Lifecycle integration"],
-        deliverables: ["Risk Management Plan", "Risk Management File", "Risk Analysis & Evaluation", "Risk Management Report"],
-      },
-      {
-        slug: "samd-regulatory",
-        name: "Software as a Medical Device (SaMD) Regulatory",
-        tagline: "Regulatory strategy and submissions for AI-driven and standalone software medical devices.",
-        overview: [
-          "Software as a Medical Device (SaMD) faces a rapidly evolving regulatory landscape. RMT USA's SaMD regulatory team stays at the forefront of FDA Pre-Submission meetings, De Novo pathways, and EU MDR classification guidance for software products.",
-          "We develop SaMD regulatory strategies that account for the software's risk classification, clinical intended use, and algorithm validation requirements — including AI/ML-specific considerations for adaptive algorithms.",
-          "Our SaMD submissions include full IEC 62304 software lifecycle documentation, cybersecurity risk management per FDA guidance, and algorithmic performance validation data.",
-        ],
-        keyPoints: ["FDA SaMD guidance compliance", "EU MDR Rule 11 classification", "AI/ML regulatory strategy", "IEC 62304 integration", "Cybersecurity documentation"],
-        deliverables: ["SaMD regulatory strategy", "Pre-submission meeting support", "Submission package", "Software documentation package"],
-      },
+        deliverables: [
+          "PMCF Plan & Survey Protocol",
+          "Post-Market Clinical Follow-up (PMCF) Report",
+          "Periodic Safety Update Report (PSUR)",
+          "Post-Market Surveillance (PMS) Report"
+        ]
+      }
     ],
-    capabilities: ["FDA 510(k) & PMA Submissions", "EU MDR/IVDR Technical Files", "Post-Market Surveillance Systems", "PMCF Study Design", "Notified Body Interactions", "CAPA Management Systems"],
+    capabilities: [
+      "FDA 510(k) & PMA Submissions",
+      "EU MDR CE Marking & Technical Files",
+      "SFDA Marketing Authorizations (MDMA)",
+      "TGA ARTG Inclusion",
+      "ISO 13485 QMS Implementation",
+      "ISO 14971 Risk Management Files",
+      "ISO 10993 Biocompatibility Evaluations",
+      "Toxicological Risk Assessments (TRA)"
+    ],
     whyRMT: [
-      { title: "98% Approval Rate", desc: "Our regulatory submissions have an exceptional track record across all device classes." },
-      { title: "Multi-Jurisdictional Expertise", desc: "FDA, EU MDR, Health Canada, TGA — one partner for global compliance." },
-      { title: "QMS Implementation", desc: "We don't just document your QMS — we implement and train your team to sustain it." },
+      { title: "Global Clearance Success", desc: "Proven track record with FDA, EU MDR, SFDA, and TGA approvals across 40+ countries." },
+      { title: "Risk & Bio-Safety Experts", desc: "Specialized in ISO 14971 risk files and chemical characterization/TRA under ISO 10993." },
+      { title: "Audit-Ready QMS Systems", desc: "From SOP development to training, we build fully integrated ISO 13485 environments." }
     ],
-    keywords: "regulatory compliance medical device, FDA CE approval, ISO 13485, clinical evaluation report, technical file",
+    keywords: "regulatory compliance quality assurance, FDA 510k, EU MDR CE marking, ISO 13485 QMS, ISO 14971 risk management, ISO 10993 biocompatibility, SFDA MDMA, TGA ARTG, toxicological risk assessment TRA",
     heroImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80",
     heroBg: "from-slate-900/70 to-slate-800/50",
   },
