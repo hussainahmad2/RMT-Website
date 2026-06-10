@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useMemo } from "react";
 import { Link } from "wouter";
 import {
   Cpu, Shield, Brain, FlaskConical, CircuitBoard,
@@ -19,6 +19,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import {
+  buildBreadcrumbJsonLd,
+  buildServiceJsonLd,
+  buildSubServiceDescription,
+  buildSubServiceJsonLd,
+  buildSubServiceKeywords,
+  servicePath,
+  subServicePath,
+} from "@/lib/service-seo";
 import { cn } from "@/lib/utils";
 import { ALL_SERVICES, type ServiceData, type SubServiceData } from "@/data/services";
 import {
@@ -1578,32 +1587,33 @@ export function ServicesOverview() {
                 transition={{ delay: i * 0.07 }}
                 className="group bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/50 hover:shadow-xl transition-all duration-300"
               >
-                <Link href={`/services/${svc.slug}`} className="block p-7">
-                  <div className="flex items-start gap-5">
-                    <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
-                      {SERVICE_ICONS[svc.slug]}
-                    </div>
-                    <div className="flex-1 min-w-0">
-                      <h3 className="font-heading text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-1">{svc.name}</h3>
-                      <p className="text-muted-foreground text-sm leading-relaxed mb-4">{svc.description}</p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {svc.subServices.slice(0, 3).map((sub) => (
-                          <span key={sub.slug} className="text-xs px-2.5 py-1 bg-primary/8 text-primary rounded-full font-medium border border-primary/15">
-                            {sub.name}
-                          </span>
-                        ))}
-                        {svc.subServices.length > 3 && (
-                          <span className="text-xs px-2.5 py-1 border border-border text-muted-foreground rounded-full">
-                            +{svc.subServices.length - 3} more
-                          </span>
-                        )}
+                <div className="p-7">
+                  <Link href={servicePath(svc.slug)} className="block">
+                    <div className="flex items-start gap-5">
+                      <div className="w-14 h-14 bg-primary/10 text-primary rounded-xl flex items-center justify-center shrink-0 group-hover:bg-primary group-hover:text-white transition-all duration-300">
+                        {SERVICE_ICONS[svc.slug]}
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <h3 className="font-heading text-2xl font-bold text-foreground group-hover:text-primary transition-colors mb-1">{svc.name}</h3>
+                        <p className="text-muted-foreground text-sm leading-relaxed mb-4">{svc.description}</p>
                       </div>
                     </div>
-                  </div>
-                  <div className="flex items-center gap-1.5 text-primary font-semibold text-sm mt-5 group-hover:gap-2.5 transition-all">
-                    Explore Service <ArrowRight className="w-4 h-4" />
-                  </div>
-                </Link>
+                    <div className="flex items-center gap-1.5 text-primary font-semibold text-sm mt-5 group-hover:gap-2.5 transition-all">
+                      Explore Service <ArrowRight className="w-4 h-4" />
+                    </div>
+                  </Link>
+                  <nav aria-label={`${svc.name} sub-services`} className="flex flex-wrap gap-1.5 mt-4 pt-4 border-t border-border/60">
+                    {svc.subServices.map((sub) => (
+                      <Link
+                        key={sub.slug}
+                        href={subServicePath(svc.slug, sub.slug)}
+                        className="text-xs px-2.5 py-1 bg-primary/8 text-primary rounded-full font-medium border border-primary/15 hover:bg-primary hover:text-white transition-colors"
+                      >
+                        {sub.name}
+                      </Link>
+                    ))}
+                  </nav>
+                </div>
               </motion.div>
             ))}
           </div>
@@ -2548,10 +2558,34 @@ function ServiceWhyRMTBlock({
 }
 
 /** Shared sidebar — other services only (quote CTAs live in page footer) */
-function ServicePageSidebar({ service }: { service: ServiceData }) {
+function ServicePageSidebar({ service, activeSubSlug }: { service: ServiceData; activeSubSlug?: string }) {
   return (
     <div className="space-y-5">
-      <div className="sticky top-24 z-10">
+      <div className="sticky top-24 z-10 space-y-5">
+        {service.subServices.length > 0 && (
+          <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
+            <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
+              <Layers className="w-3.5 h-3.5 text-primary" /> {service.shortName} Services
+            </h4>
+            <nav aria-label={`${service.name} sub-services`} className="flex flex-col gap-0.5">
+              {service.subServices.map((sub) => (
+                <Link
+                  key={sub.slug}
+                  href={subServicePath(service.slug, sub.slug)}
+                  className={cn(
+                    "group flex items-center gap-2.5 text-sm transition-colors py-2 border-b border-border/60 last:border-0",
+                    activeSubSlug === sub.slug
+                      ? "text-primary font-semibold"
+                      : "text-muted-foreground hover:text-primary"
+                  )}
+                >
+                  <span className="flex-1 leading-snug">{sub.name}</span>
+                  <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 group-hover:translate-x-0.5 transition-all shrink-0" />
+                </Link>
+              ))}
+            </nav>
+          </AnimatedSection>
+        )}
         <AnimatedSection className="bg-card border border-border rounded-2xl p-6">
           <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest flex items-center gap-2">
             <Globe className="w-3.5 h-3.5 text-primary" /> Other Services
@@ -2992,11 +3026,27 @@ export function ServiceDetail({
 }) {
   const slug = slugProp ?? params?.slug ?? "";
   const service = ALL_SERVICES.find((s) => s.slug === slug);
+  const path = service ? servicePath(service.slug) : undefined;
+
+  const jsonLd = useMemo(() => {
+    if (!service) return undefined;
+    return [
+      buildServiceJsonLd(service),
+      buildBreadcrumbJsonLd([
+        { name: "Services", path: "/services" },
+        { name: service.name, path: servicePath(service.slug) },
+      ]),
+    ];
+  }, [service]);
 
   useSEO({
     title: service ? service.name : "Service Not Found",
     description: service ? service.description : "Service not found.",
     keywords: service?.keywords,
+    path,
+    ogImage: service?.heroImage,
+    noIndex: !service,
+    jsonLd,
   });
 
   if (!service) {
@@ -3259,11 +3309,28 @@ export function SubServiceDetail({
   const subSlug = subSlugProp ?? params?.subSlug ?? "";
   const service = ALL_SERVICES.find((s) => s.slug === serviceSlug);
   const subService = service?.subServices.find((ss) => ss.slug === subSlug);
+  const path = service && subService ? subServicePath(service.slug, subService.slug) : undefined;
+
+  const jsonLd = useMemo(() => {
+    if (!service || !subService) return undefined;
+    return [
+      buildSubServiceJsonLd(service, subService),
+      buildBreadcrumbJsonLd([
+        { name: "Services", path: "/services" },
+        { name: service.name, path: servicePath(service.slug) },
+        { name: subService.name, path: subServicePath(service.slug, subService.slug) },
+      ]),
+    ];
+  }, [service, subService]);
 
   useSEO({
-    title: subService ? `${subService.name} — ${service?.shortName}` : "Not Found",
-    description: subService?.tagline ?? "Sub-service not found.",
-    keywords: `${subService?.name}, ${service?.name}, medical device`,
+    title: subService && service ? `${subService.name} — ${service.shortName}` : "Not Found",
+    description: service && subService ? buildSubServiceDescription(subService, service) : "Sub-service not found.",
+    keywords: service && subService ? buildSubServiceKeywords(subService, service) : undefined,
+    path,
+    ogImage: service?.heroImage,
+    noIndex: !service || !subService,
+    jsonLd,
   });
 
   if (!service || !subService) {
@@ -3386,7 +3453,7 @@ export function SubServiceDetail({
               />
             </div>
 
-            <ServicePageSidebar service={service} />
+            <ServicePageSidebar service={service} activeSubSlug={subService.slug} />
 
           </div>
         </div>

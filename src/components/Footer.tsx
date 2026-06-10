@@ -107,7 +107,8 @@ export const Footer = () => {
 
         <div className="border-t border-white/10 pt-7 flex flex-col md:flex-row items-center justify-between gap-4">
           <p className="text-white/30 text-xs">&copy; {new Date().getFullYear()} RMT Medical Technologies Inc. All rights reserved.</p>
-          <div className="flex gap-5">
+          <div className="flex flex-wrap gap-5">
+            <Link href="/sitemap" className="text-white/30 text-xs hover:text-primary transition-colors">Sitemap</Link>
             <a href="#" className="text-white/30 text-xs hover:text-primary transition-colors">Privacy Policy</a>
             <a href="#" className="text-white/30 text-xs hover:text-primary transition-colors">Terms of Service</a>
           </div>

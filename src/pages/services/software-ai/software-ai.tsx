@@ -14,6 +14,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
+import { buildBreadcrumbJsonLd, buildServiceJsonLd, servicePath } from "@/lib/service-seo";
 
 type PageProps = { params?: { slug: string } };
 type TechCategory = "Frontend" | "Backend" | "Cloud" | "AI/ML" | "DevOps" | "Standards";
@@ -208,10 +209,24 @@ function TechIconsScatter() {
 export default function SoftwareAiServicePage({ params }: PageProps) {
   const [activeTechTab, setActiveTechTab] = useState<TechCategory>("Frontend");
 
+  const jsonLd = useMemo(
+    () => [
+      buildServiceJsonLd(SERVICE),
+      buildBreadcrumbJsonLd([
+        { name: "Services", path: "/services" },
+        { name: SERVICE.name, path: servicePath(SERVICE.slug) },
+      ]),
+    ],
+    []
+  );
+
   useSEO({
-    title: "Software & AI Solutions — RMT Medical Technologies",
-    description: "Full-spectrum medical software development including AI/ML, cloud, SaMD compliance, and complete software validation lifecycle.",
-    keywords: "medical device software, AI machine learning healthcare, SaMD, IEC 62304",
+    title: SERVICE.name,
+    description: SERVICE.description,
+    keywords: SERVICE.keywords,
+    path: servicePath(SERVICE.slug),
+    ogImage: SERVICE.heroImage,
+    jsonLd,
   });
 
   return (

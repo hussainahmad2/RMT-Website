@@ -1,10 +1,28 @@
-import { defineConfig } from "vite";
+import { defineConfig, type Plugin } from "vite";
 import react from "@vitejs/plugin-react";
 import tailwindcss from "@tailwindcss/vite";
 import path from "path";
+import { writeFileSync } from "fs";
+import { buildSitemapXml } from "./src/lib/sitemap-urls";
+
+function sitemapPlugin(): Plugin {
+  const writeSitemap = (outDir: string) => {
+    writeFileSync(path.resolve(outDir, "sitemap.xml"), buildSitemapXml(), "utf-8");
+  };
+
+  return {
+    name: "generate-sitemap",
+    buildStart() {
+      writeSitemap(path.resolve(import.meta.dirname, "public"));
+    },
+    closeBundle() {
+      writeSitemap(path.resolve(import.meta.dirname, "dist"));
+    },
+  };
+}
 
 export default defineConfig({
-  plugins: [react(), tailwindcss()],
+  plugins: [react(), tailwindcss(), sitemapPlugin()],
   resolve: {
     alias: {
       "@": path.resolve(import.meta.dirname, "src"),

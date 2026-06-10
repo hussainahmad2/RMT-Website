@@ -25,6 +25,7 @@ import Gallery from "@/pages/gallery/gallery";
 import Testimonials from "@/pages/testimonials/testimonials";
 import Products from "@/pages/products/products";
 import NotFound from "@/pages/not-found/not-found";
+import SitemapPage from "@/pages/sitemap/sitemap";
 
 const queryClient = new QueryClient();
 
@@ -46,6 +47,7 @@ function Router() {
         <Route path="/products" component={Products} />
         <Route path="/careers" component={Careers} />
         <Route path="/contact" component={Contact} />
+        <Route path="/sitemap" component={SitemapPage} />
         <Route component={NotFound} />
       </Switch>
     </PageTransition>
