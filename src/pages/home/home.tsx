@@ -2,8 +2,8 @@ import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
-  Cpu, Shield, Brain, FlaskConical, CircuitBoard, Settings2, Pill, Factory, FileText, Layers,
-  MapPin, Phone, Mail,
+  Shield, Brain, FlaskConical, CircuitBoard, Settings2, Factory, Layers,
+  MapPin, Phone, Mail, ClipboardList, PenTool, FileCheck, PackageCheck,
 } from "lucide-react";
 import { RequestQuoteModal } from "@/components/RequestQuoteModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -13,15 +13,9 @@ import { WorldMap } from "@/components/WorldMap";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
-
-/* ---- hero background carousel (cinematic zoom) ---- */
-const heroImages = [
-  { src: "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=85", alt: "Medical professional using digital health technology" },
-  { src: "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&q=85", alt: "AI-powered healthcare innovation" },
-  { src: "https://images.unsplash.com/photo-1559757175-08a4f7e5bbf9?w=1920&q=85", alt: "Advanced medical imaging and diagnostics" },
-  { src: "https://images.unsplash.com/photo-1639762681485-74b7f0150504?w=1920&q=85", alt: "Futuristic medical technology interface" },
-  { src: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=85", alt: "Medical device engineering and electronics" },
-];
+import { HomeSection, SectionHeading } from "@/components/HomeSection";
+import { InnovationCard } from "@/components/InnovationCard";
+import { HOME_IMAGES } from "@/data/home-images";
 
 const featuredServices = [
   { title: "Regulatory Compliance", description: "Navigate global pathways, risk management, and quality standards — Risk Management (ISO 14971), Biocompatibility, QMS, and Clinical Evaluations.", icon: <Shield className="w-6 h-6" />, slug: "regulatory-compliance", subServices: ["Risk Management", "Biocompatibility", "QMS (ISO 13485)", "Technical Files & Clinicals", "Global Registrations"] },
@@ -40,18 +34,76 @@ const stats = [
   { value: "30+", label: "Countries Served", icon: <Globe className="w-5 h-5" /> },
 ];
 
+const innovationPillars = [
+  {
+    title: "AI-Driven Diagnostics",
+    description: "Machine learning models and SaMD platforms that accelerate clinical decision-making and regulatory clearance.",
+    image: HOME_IMAGES.innovation[0],
+    href: "/services/software-ai",
+    tag: "Software & AI",
+  },
+  {
+    title: "Biomaterials & Drug Synthesis",
+    description: "Advanced biomaterial characterization, synthesis, and validation for next-generation implantable and drug-device combinations.",
+    image: HOME_IMAGES.innovation[1],
+    href: "/services/bmd",
+    tag: "Biomaterials",
+  },
+  {
+    title: "Cleanroom Manufacturing",
+    description: "ISO 13485 certified cleanroom production from prototype to commercial scale for Class I–III medical devices.",
+    image: HOME_IMAGES.innovation[2],
+    href: "/services/contract-manufacturing",
+    tag: "Manufacturing",
+  },
+];
+
 const whyChoose = [
-  { title: "ISO 13485:2025 Certified", description: "Our quality management system meets the highest international standards for medical device manufacturing." },
-  { title: "FDA & CE Expertise", description: "Deep regulatory knowledge ensuring your product navigates approval pathways efficiently and successfully." },
-  { title: "End-to-End Partnership", description: "From initial concept through design, testing, approval, and manufacturing — we are with you every step." },
-  { title: "Global Reach", description: "Operating across the USA, Europe, Middle East, and South Asia with local regulatory expertise." },
+  { title: "ISO 13485:2025 Certified", description: "Our quality management system meets the highest international standards for medical device manufacturing.", icon: <Shield className="w-5 h-5" /> },
+  { title: "FDA & CE Expertise", description: "Deep regulatory knowledge ensuring your product navigates approval pathways efficiently and successfully.", icon: <Award className="w-5 h-5" /> },
+  { title: "End-to-End Partnership", description: "From initial concept through design, testing, approval, and manufacturing — we are with you every step.", icon: <Users className="w-5 h-5" /> },
+  { title: "Global Reach", description: "Operating across the USA, Europe, Middle East, and South Asia with local regulatory expertise.", icon: <Globe className="w-5 h-5" /> },
+];
+
+const whyStats = [
+  { value: "98%", label: "Regulatory Approval Rate" },
+  { value: "2.4x", label: "Faster Time to Market" },
+  { value: "200+", label: "Projects Delivered" },
+  { value: "30+", label: "Countries Served" },
 ];
 
 const process = [
-  { step: "01", title: "Consult", description: "We assess your product concept, market requirements, and regulatory pathway to build a tailored strategy." },
-  { step: "02", title: "Design", description: "Our engineers create and iterate on your product design, developing prototypes for testing and validation." },
-  { step: "03", title: "Validate", description: "Rigorous quality testing and regulatory documentation ensure your product meets all required standards." },
-  { step: "04", title: "Deliver", description: "We manage regulatory submissions and scale manufacturing for a successful market launch." },
+  { step: "01", title: "Consult", description: "We assess your product concept, market requirements, and regulatory pathway to build a tailored strategy.", icon: <ClipboardList className="w-5 h-5" /> },
+  { step: "02", title: "Design", description: "Our engineers create and iterate on your product design, developing prototypes for testing and validation.", icon: <PenTool className="w-5 h-5" /> },
+  { step: "03", title: "Validate", description: "Rigorous quality testing and regulatory documentation ensure your product meets all required standards.", icon: <FileCheck className="w-5 h-5" /> },
+  { step: "04", title: "Deliver", description: "We manage regulatory submissions and scale manufacturing for a successful market launch.", icon: <PackageCheck className="w-5 h-5" /> },
+];
+
+const certifications = [
+  "ISO 13485:2025",
+  "ISO 14971",
+  "IEC 62304",
+  "CE Mark / MDR",
+  "FDA 510(k)",
+  "GMP Compliance",
+];
+
+const ctaHighlights = [
+  {
+    icon: <Shield className="w-5 h-5" />,
+    title: "Regulatory Confidence",
+    description: "FDA, CE Mark, and ISO 13485 pathways handled by specialists.",
+  },
+  {
+    icon: <Factory className="w-5 h-5" />,
+    title: "Bench to Production",
+    description: "Design, validation, and cleanroom manufacturing under one roof.",
+  },
+  {
+    icon: <Globe className="w-5 h-5" />,
+    title: "Global Delivery",
+    description: "US headquarters and South Asia operations for worldwide reach.",
+  },
 ];
 
 const globalOffices = [
@@ -73,87 +125,17 @@ const globalOffices = [
   },
 ];
 
-/* ---- decorative SVG icons (medical background) ---- */
 const StethoscopeBg = () => (
   <svg viewBox="0 0 200 200" className="w-full h-full text-primary" fill="none" stroke="currentColor" strokeWidth="4">
-    <circle cx="70" cy="50" r="28" />
-    <circle cx="130" cy="50" r="28" />
+    <circle cx="70" cy="50" r="28" /><circle cx="130" cy="50" r="28" />
     <path d="M 42 50 Q 42 120 100 145 Q 158 120 158 50" />
-    <circle cx="100" cy="155" r="15" />
-    <line x1="100" y1="170" x2="100" y2="195" />
-    <circle cx="100" cy="197" r="5" />
+    <circle cx="100" cy="155" r="15" /><line x1="100" y1="170" x2="100" y2="195" /><circle cx="100" cy="197" r="5" />
   </svg>
 );
 
-const DnaBg = () => (
-  <svg viewBox="0 0 100 200" className="w-full h-full text-primary" fill="none" stroke="currentColor" strokeWidth="2.5">
-    <path d="M 20 10 Q 50 30 80 50 Q 50 70 20 90 Q 50 110 80 130 Q 50 150 20 170 Q 50 190 80 210" />
-    <path d="M 80 10 Q 50 30 20 50 Q 50 70 80 90 Q 50 110 20 130 Q 50 150 80 170 Q 50 190 20 210" />
-    <line x1="20" y1="50" x2="80" y2="50" /><line x1="20" y1="70" x2="80" y2="70" />
-    <line x1="20" y1="90" x2="80" y2="90" /><line x1="20" y1="110" x2="80" y2="110" />
-    <line x1="20" y1="130" x2="80" y2="130" /><line x1="20" y1="150" x2="80" y2="150" />
-  </svg>
-);
-
-const CircuitBg = () => (
-  <svg viewBox="0 0 200 200" className="w-full h-full text-primary" fill="none" stroke="currentColor" strokeWidth="2">
-    <rect x="30" y="30" width="40" height="40" rx="4" />
-    <rect x="130" y="30" width="40" height="40" rx="4" />
-    <rect x="80" y="110" width="40" height="40" rx="4" />
-    <rect x="30" y="130" width="30" height="30" rx="4" />
-    <rect x="140" y="130" width="30" height="30" rx="4" />
-    <line x1="70" y1="50" x2="130" y2="50" /><line x1="100" y1="70" x2="100" y2="110" />
-    <line x1="50" y1="70" x2="50" y2="130" /><line x1="150" y1="70" x2="150" y2="130" />
-    <line x1="60" y1="145" x2="80" y2="130" /><line x1="120" y1="130" x2="140" y2="145" />
-    <circle cx="50" cy="50" r="4" fill="currentColor" />
-    <circle cx="150" cy="50" r="4" fill="currentColor" />
-    <circle cx="100" cy="130" r="4" fill="currentColor" />
-  </svg>
-);
-
-/** Large watermark icon anchored to a content column — matches reference UI */
-const ColumnWatermark = ({
-  children,
-  className = "",
-}: {
-  children: React.ReactNode;
-  className?: string;
-}) => (
-  <div
-    className={`absolute inset-y-0 left-0 w-[130%] max-w-[520px] pointer-events-none select-none flex items-center ${className}`}
-    aria-hidden="true"
-  >
-    <div
-      className="w-full aspect-square opacity-[0.11] sm:opacity-[0.13] lg:opacity-[0.15] text-primary -translate-x-[6%]"
-      style={{ maskImage: "linear-gradient(to right, black 55%, transparent 92%)" }}
-    >
-      {children}
-    </div>
-  </div>
-);
-
-/** Section-edge watermark for centered layouts */
-const SectionWatermark = ({
-  children,
-  side = "right",
-}: {
-  children: React.ReactNode;
-  side?: "left" | "right";
-}) => (
-  <div
-    className={`absolute top-1/2 -translate-y-1/2 pointer-events-none select-none w-[min(50vw,440px)] h-[min(50vw,440px)] sm:w-[400px] sm:h-[400px] lg:w-[460px] lg:h-[460px] ${side === "right" ? "right-0 translate-x-[18%]" : "left-0 -translate-x-[18%]"
-      }`}
-    aria-hidden="true"
-  >
-    <div
-      className="w-full h-full opacity-[0.11] sm:opacity-[0.13] lg:opacity-[0.15] text-primary"
-      style={{
-        maskImage:
-          side === "right"
-            ? "linear-gradient(to left, black 50%, transparent 88%)"
-            : "linear-gradient(to right, black 50%, transparent 88%)",
-      }}
-    >
+const ColumnWatermark = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
+  <div className={`absolute inset-y-0 left-0 w-[130%] max-w-[520px] pointer-events-none select-none flex items-center ${className}`} aria-hidden="true">
+    <div className="w-full aspect-square opacity-[0.11] sm:opacity-[0.13] lg:opacity-[0.15] text-primary -translate-x-[6%]" style={{ maskImage: "linear-gradient(to right, black 55%, transparent 92%)" }}>
       {children}
     </div>
   </div>
@@ -173,477 +155,509 @@ export default function Home() {
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setHeroIndex((i) => (i + 1) % heroImages.length);
-    }, 4000);
+      setHeroIndex((i) => (i + 1) % HOME_IMAGES.heroSlides.length);
+    }, 5000);
     return () => clearInterval(timer);
   }, []);
 
   return (
     <div className="bg-background text-foreground">
 
-      {/* ===== HERO ===== */}
-      <section className="relative min-h-[68vh] sm:min-h-[72vh] md:min-h-[75vh] lg:min-h-[78vh] flex items-center overflow-hidden pt-16 sm:pt-[4.5rem] bg-[#060d17]">
-        {/* Full-bleed background with zoom-in (Ken Burns) */}
+      {/* ===== HERO — zoom carousel ===== */}
+      <section className="relative min-h-[72vh] sm:min-h-[78vh] lg:min-h-[85vh] flex items-center overflow-hidden pt-16 sm:pt-[4.5rem] bg-[#060d17]">
         <div className="absolute inset-0 overflow-hidden">
           <AnimatePresence mode="sync">
             <motion.div
               key={heroIndex}
               className="absolute inset-0"
               initial={{ opacity: 0, scale: 1 }}
-              animate={{ opacity: 1, scale: 1.12 }}
+              animate={{ opacity: 1, scale: 1.14 }}
               exit={{ opacity: 0 }}
               transition={{
-                opacity: { duration: 1.1, ease: "easeInOut" },
-                scale: { duration: 4, ease: "linear" },
+                opacity: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
+                scale: { duration: 5, ease: "linear" },
               }}
             >
               <img
-                src={heroImages[heroIndex].src}
-                alt={heroImages[heroIndex].alt}
-                className="w-full h-full object-cover"
+                src={HOME_IMAGES.heroSlides[heroIndex].src}
+                alt={HOME_IMAGES.heroSlides[heroIndex].alt}
+                className="w-full h-full object-cover object-center"
               />
             </motion.div>
           </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#060d17] via-[#060d17]/88 to-[#060d17]/35" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/80 via-transparent to-[#060d17]/40" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#060d17]/94 via-[#060d17]/78 to-[#060d17]/42" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/88 via-[#060d17]/20 to-[#060d17]/55" />
         </div>
 
-        {/* Orbital ring decorators */}
-        <div className="absolute top-1/2 right-0 w-[900px] h-[900px] rounded-full border border-white/[0.05] translate-x-1/3 -translate-y-1/2 pointer-events-none" aria-hidden />
-        <div className="absolute top-1/2 right-0 w-[620px] h-[620px] rounded-full border border-white/[0.07] translate-x-1/4 -translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden />
-        <div className="absolute bottom-0 left-1/3 w-[380px] h-[380px] rounded-full border border-white/[0.04] translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden />
-
-        <div className="page-container relative z-10 py-10 sm:py-12 md:py-14 lg:py-16">
+        <div className="page-container relative z-10 py-12 sm:py-16 lg:py-20">
           <motion.div
-            initial={{ opacity: 0, x: -30 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.7 }}
+            initial={{ opacity: 0, y: 28 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-xl sm:max-w-2xl"
           >
-            <motion.p
-              initial={{ opacity: 0, y: -10 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.2 }}
-              className="text-white/80 text-xs font-bold uppercase tracking-[0.2em] mb-3 sm:mb-4"
-            >
-              End-to-End Services
-            </motion.p>
+            <p className="text-sky-300 text-xs font-bold uppercase tracking-[0.18em] mb-4">End-to-End Services</p>
 
-            <h1 className="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold leading-[1.08] tracking-tight text-white mb-4 sm:mb-5">
+            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.06] tracking-tight text-white mb-5 sm:mb-6">
               Invention.<br />
               Validation.<br />
-              <span className="text-primary">Impact.</span>
+              <span className="text-sky-300">Impact.</span>
             </h1>
 
-            <p className="text-white/75 text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mb-3 sm:mb-4">
+            <p className="text-white/80 text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mb-4">
               Global healthtech partner empowering innovation, accelerating product development, and scaling expert teams.
             </p>
-
-            <p className="text-cyan-400 text-sm sm:text-base md:text-lg font-medium mb-6 sm:mb-7">
+            <p className="text-white/70 text-sm sm:text-base md:text-lg mb-8">
               AI is seamlessly woven into every innovation.
             </p>
 
             <div className="flex flex-wrap gap-3 sm:gap-4">
-              <Button asChild size="lg" className="rounded-full h-10 sm:h-11 md:h-12 px-6 sm:px-8 text-sm sm:text-base font-semibold bg-cyan-500 hover:bg-cyan-400 text-[#060d17]">
-                <Link href="/contact">
-                  Get Started <ArrowRight className="ml-2 w-4 h-4" />
-                </Link>
+              <Button asChild size="lg" className="rounded-full h-11 sm:h-12 px-7 sm:px-8 font-semibold">
+                <Link href="/contact">Get Started <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
-
               <button
                 type="button"
                 onClick={() => setVideoOpen(true)}
-                className="inline-flex items-center gap-2 sm:gap-2.5 h-10 sm:h-11 md:h-12 px-5 sm:px-7 rounded-full border border-white/25 bg-white/10 text-white font-semibold text-xs sm:text-sm hover:bg-white/20 transition-colors backdrop-blur-sm"
+                className="inline-flex items-center gap-2.5 h-11 sm:h-12 px-6 sm:px-7 rounded-full border border-white/30 bg-white/10 text-white font-semibold text-sm hover:bg-white/15 transition-colors duration-200"
               >
-                <div className="w-6 h-6 sm:w-7 sm:h-7 rounded-full bg-primary flex items-center justify-center shrink-0">
-                  <Play className="w-3 h-3 fill-white text-white ml-0.5" />
-                </div>
+                <Play className="w-4 h-4 fill-current" />
                 Watch Overview
               </button>
             </div>
 
-            <div className="mt-6 sm:mt-8 pt-5 sm:pt-6 border-t border-white/15 flex flex-wrap gap-4 sm:gap-6">
+            <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap gap-5 sm:gap-7">
               {["CE Mark Compliant", "ISO 13485:2025", "50+ Experts"].map((badge) => (
-                <div key={badge} className="flex items-center gap-2 text-sm text-white/70">
-                  <CheckCircle className="w-4 h-4 text-cyan-400" />
+                <div key={badge} className="flex items-center gap-2 text-sm text-white/75">
+                  <CheckCircle className="w-4 h-4 text-sky-300 shrink-0" />
                   {badge}
                 </div>
               ))}
             </div>
           </motion.div>
 
-          <div className="absolute bottom-4 sm:bottom-6 md:bottom-8 right-4 sm:right-6 md:right-10 flex gap-2 z-10">
-            {heroImages.map((_, i) => (
+          <div className="absolute bottom-6 sm:bottom-8 right-4 sm:right-6 md:right-10 flex gap-2 z-10">
+            {HOME_IMAGES.heroSlides.map((_, i) => (
               <button
                 key={i}
                 type="button"
                 aria-label={`Show hero image ${i + 1}`}
                 onClick={() => setHeroIndex(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${i === heroIndex ? "bg-cyan-400 w-8" : "bg-white/40 w-2 hover:bg-white/70"}`}
+                className={`h-2 rounded-full transition-all duration-300 ${i === heroIndex ? "bg-sky-300 w-8" : "bg-white/40 w-2 hover:bg-white/70"}`}
               />
             ))}
           </div>
         </div>
       </section>
 
-      {/* VIDEO MODAL — portal-style, no Dialog wrapper issues */}
+      {/* VIDEO MODAL */}
       <AnimatePresence>
         {videoOpen && (
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center p-4"
-            onClick={() => setVideoOpen(false)}
-          >
-            <motion.div
-              initial={{ scale: 0.9, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              exit={{ scale: 0.9, opacity: 0 }}
-              className="relative w-full max-w-4xl aspect-video rounded-xl overflow-hidden shadow-2xl"
-              onClick={(e) => e.stopPropagation()}
-            >
-              <iframe
-                className="w-full h-full"
-                src="https://www.youtube.com/embed/LDu3kqfqyPw?autoplay=1"
-                title="RMT Medical Technologies Company Overview"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-              />
-              <button
-                onClick={() => setVideoOpen(false)}
-                className="absolute top-3 right-3 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-black/80 transition-colors text-lg leading-none"
-              >
-                &times;
-              </button>
+          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
+            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative w-full max-w-4xl aspect-video rounded-xl overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
+              <iframe className="w-full h-full" src="https://www.youtube.com/embed/LDu3kqfqyPw?autoplay=1" title="RMT Medical Technologies Company Overview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              <button onClick={() => setVideoOpen(false)} className="absolute top-3 right-3 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-black/80 transition-colors text-lg leading-none">&times;</button>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ===== STATS BAR ===== */}
-      <section className="relative bg-primary py-14 overflow-hidden">
-        {/* Background pattern */}
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:48px_48px]" />
-        <div className="absolute top-0 right-0 w-96 h-96 rounded-full bg-white/8 -translate-y-1/2 translate-x-1/2 pointer-events-none" aria-hidden />
-        <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full bg-white/6 translate-y-1/2 -translate-x-1/2 pointer-events-none" aria-hidden />
-        <div className="page-container relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4">
-            {stats.map((stat, i) => (
-              <motion.div
-                key={stat.label}
-                initial={{ opacity: 0, y: 20 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.1 }}
-                className={`text-center text-white px-4 sm:px-8 py-3 ${i < stats.length - 1 ? "border-r border-white/15" : ""}`}
-              >
-                <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center shadow-inner">
-                  <span className="[&>svg]:w-7 [&>svg]:h-7">{stat.icon}</span>
-                </div>
-                <div className="font-heading text-4xl sm:text-5xl font-black tabular-nums leading-none mb-2">{stat.value}</div>
-                <div className="text-white/75 text-sm font-medium mt-1">{stat.label}</div>
-              </motion.div>
-            ))}
-          </div>
+      {/* ===== STATS BAR — colored section ===== */}
+      <HomeSection variant="primary" bgImage={HOME_IMAGES.stats} overlayIntensity="clear" className="py-14" innerClassName="!px-0">
+        <div className="grid grid-cols-2 lg:grid-cols-4">
+          {stats.map((stat, i) => (
+            <motion.div key={stat.label} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className={`text-center text-white px-4 sm:px-8 py-3 ${i < stats.length - 1 ? "border-r border-white/15" : ""}`}>
+              <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center">
+                <span className="[&>svg]:w-7 [&>svg]:h-7">{stat.icon}</span>
+              </div>
+              <div className="font-heading text-4xl sm:text-5xl font-black tabular-nums leading-none mb-2">{stat.value}</div>
+              <div className="text-white/80 text-sm font-medium">{stat.label}</div>
+            </motion.div>
+          ))}
         </div>
-      </section>
+      </HomeSection>
 
-      {/* ===== PARTNER LOGOS + QUICK ANCHOR LINKS ===== */}
       <PartnerLogoCarousel />
 
-      {/* ===== CAPABILITIES SECTION ===== */}
-      <section className="py-24 bg-background relative overflow-hidden">
-        {/* Grid dot pattern */}
-        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.07) 1px, transparent 1px)", backgroundSize: "28px 28px" }} aria-hidden />
-        {/* Orbital rings */}
-        <div className="absolute top-1/2 right-0 w-[680px] h-[680px] rounded-full border border-primary/[0.07] translate-x-[45%] -translate-y-1/2 pointer-events-none" aria-hidden />
-        <div className="absolute top-1/2 right-0 w-[460px] h-[460px] rounded-full border border-primary/[0.05] translate-x-[30%] -translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden />
-        <div className="absolute bottom-0 left-0 w-[300px] h-[300px] rounded-full border border-primary/[0.05] -translate-x-1/3 translate-y-1/3 pointer-events-none hidden lg:block" aria-hidden />
-        <div className="page-container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-            {/* Left — heading + large watermark (reference layout) */}
-            <AnimatedSection className="relative min-h-[220px] sm:min-h-[260px]">
-              <ColumnWatermark>
-                <StethoscopeBg />
-              </ColumnWatermark>
-              <div className="relative z-10">
-                <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-5">
-                  <span className="text-muted-foreground text-xs font-semibold uppercase tracking-widest">Our Capabilities</span>
-                </div>
-                <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground leading-tight">
-                  Empowering Innovation,<br />
-                  Delivering <span className="text-primary">Excellence</span>
-                </h2>
+      {/* ===== CAPABILITIES — white section + bg image ===== */}
+      <HomeSection variant="image-light" bgImage={HOME_IMAGES.capabilities} bgPosition="right center" overlayIntensity="clear" dots rings ringSide="right">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
+          <AnimatedSection className="relative min-h-[220px] sm:min-h-[260px]">
+            <ColumnWatermark><StethoscopeBg /></ColumnWatermark>
+            <div className="relative z-10 rounded-2xl border border-white/90 bg-white/95 backdrop-blur-md px-6 py-6 sm:px-8 sm:py-7 shadow-lg max-w-xl">
+              <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-5 bg-white">
+                <span className="text-muted-foreground text-xs font-semibold uppercase tracking-widest">Our Capabilities</span>
               </div>
-            </AnimatedSection>
+              <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                Empowering Innovation,<br />
+                Delivering <span className="text-primary">Excellence</span>
+              </h2>
+            </div>
+          </AnimatedSection>
 
-            {/* Right — description, list, CTA */}
-            <AnimatedSection delay={0.15}>
-              <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                Our multidisciplinary team brings together a wealth of knowledge across various domains, ensuring every project benefits from a holistic approach. From concept development to market-ready products, we deliver high-quality results that exceed expectations.
+          <AnimatedSection delay={0.15}>
+            <p className="text-slate-700 text-lg leading-relaxed mb-8 rounded-2xl border border-white/90 bg-white/95 backdrop-blur-md px-6 py-5 shadow-lg">
+              Our multidisciplinary team brings together a wealth of knowledge across various domains, ensuring every project benefits from a holistic approach. From concept development to market-ready products, we deliver high-quality results that exceed expectations.
+            </p>
+            <div className="divide-y divide-border border border-border mb-8 bg-white/98 rounded-xl overflow-hidden shadow-md">
+              {["Active Medical Devices", "Non-Active Medical Devices", "Biomaterials & Drug Synthesis", "AI Driven Medical Devices", "Software as a Medical Device (SaMD)"].map((cap, i) => (
+                <motion.div key={cap} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: i * 0.08, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}>
+                  <Link href="/services" className="group flex items-center justify-between px-5 py-4 text-foreground font-semibold hover:text-primary hover:bg-primary/5 transition-colors">
+                    {cap}
+                    <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                  </Link>
+                </motion.div>
+              ))}
+            </div>
+            <Button asChild size="lg" className="rounded-full">
+              <Link href="/services">Learn More <ArrowRight className="ml-2 w-4 h-4" /></Link>
+            </Button>
+          </AnimatedSection>
+        </div>
+      </HomeSection>
+
+      {/* ===== INNOVATION SHOWCASE — colored section ===== */}
+      <HomeSection variant="gradient-blue" bgImage={HOME_IMAGES.innovation[0]} overlayIntensity="clear" dots rings ringSide="both" className="py-24">
+        <AnimatedSection className="mb-14">
+          <SectionHeading
+            eyebrow="Innovation Focus"
+            title={<>Pioneering the Future of <span className="text-cyan-400">MedTech</span></>}
+            description="Three pillars of expertise driving breakthrough medical technologies from lab bench to global market."
+            light
+            panel
+          />
+        </AnimatedSection>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
+          {innovationPillars.map((pillar, i) => (
+            <InnovationCard key={pillar.title} {...pillar} delay={i * 0.12} />
+          ))}
+        </div>
+      </HomeSection>
+
+      {/* ===== SERVICES — white section ===== */}
+      <HomeSection variant="image-light" bgImage={HOME_IMAGES.services} bgPosition="center" overlayIntensity="clear" dots rings ringSide="left">
+        <AnimatedSection className="text-center mb-14">
+          <SectionHeading
+            eyebrow="What We Do"
+            title="Our Core Services"
+            description="Comprehensive solutions covering every stage of medical device development, from initial design through regulatory approval and commercialization."
+            panel
+          />
+        </AnimatedSection>
+
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
+          {featuredServices.map((svc, i) => (
+            <ServiceCard key={svc.slug} slug={svc.slug} title={svc.title} description={svc.description} icon={svc.icon} subServices={svc.subServices} delay={i * 0.08} />
+          ))}
+        </div>
+
+        <div className="text-center">
+          <Button asChild variant="outline" size="lg" className="rounded-full">
+            <Link href="/services">View All 8 Services <ArrowRight className="ml-2 w-4 h-4" /></Link>
+          </Button>
+        </div>
+      </HomeSection>
+
+      {/* ===== WHY RMT — colored section ===== */}
+      <HomeSection variant="navy" bgImage={HOME_IMAGES.whyRmt} overlayIntensity="clear" className="!py-0" innerClassName="!px-0 !max-w-none">
+      <section className="relative overflow-hidden">
+        <div className="grid lg:grid-cols-5 min-h-0">
+          {/* Left — content panel */}
+          <div className="lg:col-span-3 relative text-white py-14 sm:py-16 lg:py-20 px-6 sm:px-10 lg:px-14 xl:px-16 flex flex-col justify-center">
+            <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} aria-hidden />
+
+            <AnimatedSection className="relative z-10">
+              <p className="text-cyan-400 font-semibold text-sm uppercase tracking-widest mb-4">Why RMT</p>
+              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5">
+                Your Trusted Partner in{" "}
+                <span className="text-cyan-400">Medical Innovation</span>
+              </h2>
+              <p className="text-white/70 text-base sm:text-lg leading-relaxed mb-10 max-w-lg">
+                We combine deep regulatory expertise with cutting-edge engineering capabilities to help medical device companies bring safe, effective products to market faster.
               </p>
-              <div className="divide-y divide-border border-y border-border mb-8">
-                {[
-                  "Active Medical Devices",
-                  "Non-Active Medical Devices",
-                  "Biomaterials & Drug Synthesis",
-                  "AI Driven Medical Devices",
-                  "Software as a Medical Device (SaMD)",
-                ].map((cap, i) => (
+
+              <div className="space-y-4 mb-10">
+                {whyChoose.map((item, i) => (
                   <motion.div
-                    key={cap}
-                    initial={{ opacity: 0, x: 20 }}
+                    key={item.title}
+                    initial={{ opacity: 0, x: -24 }}
                     whileInView={{ opacity: 1, x: 0 }}
                     viewport={{ once: true }}
                     transition={{ delay: i * 0.08 }}
+                    className="group flex gap-4 rounded-xl border border-white/10 bg-white/[0.05] p-4 hover:border-white/20 hover:bg-white/[0.08] transition-all duration-300"
                   >
-                    <Link
-                      href="/services"
-                      className="group flex items-center justify-between py-4 text-foreground font-semibold hover:text-primary transition-colors"
-                    >
-                      {cap}
-                      <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                    </Link>
-                  </motion.div>
-                ))}
-              </div>
-              <Button asChild size="lg" className="rounded-lg">
-                <Link href="/services">Learn More <ArrowRight className="ml-2 w-4 h-4" /></Link>
-              </Button>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== SERVICES GRID ===== */}
-      <section className="py-24 bg-secondary/30 relative overflow-hidden">
-        {/* Grid dot pattern */}
-        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.06) 1px, transparent 1px)", backgroundSize: "32px 32px" }} aria-hidden />
-        {/* Orbital rings */}
-        <div className="absolute top-0 left-0 w-[500px] h-[500px] rounded-full border border-primary/[0.07] -translate-x-1/3 -translate-y-1/3 pointer-events-none hidden lg:block" aria-hidden />
-        <div className="absolute bottom-0 right-0 w-[360px] h-[360px] rounded-full border border-primary/[0.05] translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
-        <SectionWatermark side="right">
-          <DnaBg />
-        </SectionWatermark>
-        <div className="page-container relative z-10">
-          <AnimatedSection className="text-center mb-14">
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">What We Do</p>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">Our Core Services</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              Comprehensive solutions covering every stage of medical device development, from initial design through regulatory approval and commercialization.
-            </p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-            {featuredServices.map((svc, i) => (
-              <ServiceCard key={svc.slug} slug={svc.slug} title={svc.title} description={svc.description} icon={svc.icon} subServices={svc.subServices} delay={i * 0.08} />
-            ))}
-          </div>
-
-          <div className="text-center">
-            <Button asChild variant="outline" size="lg" className="rounded-lg">
-              <Link href="/services">View All 8 Services <ArrowRight className="ml-2 w-4 h-4" /></Link>
-            </Button>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== WHY RMT ===== */}
-      <section className="py-24 bg-background relative overflow-hidden">
-        {/* Grid dot pattern */}
-        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.07) 1px, transparent 1px)", backgroundSize: "28px 28px" }} aria-hidden />
-        {/* Orbital rings */}
-        <div className="absolute top-0 left-0 w-[720px] h-[720px] rounded-full border border-primary/[0.07] -translate-x-[40%] -translate-y-[40%] pointer-events-none hidden lg:block" aria-hidden />
-        <div className="absolute top-0 left-0 w-[480px] h-[480px] rounded-full border border-primary/[0.05] -translate-x-[25%] -translate-y-[25%] pointer-events-none hidden lg:block" aria-hidden />
-        <div className="absolute bottom-0 right-0 w-[400px] h-[400px] rounded-full border border-primary/[0.05] translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
-        <div className="page-container relative z-10">
-          <div className="grid lg:grid-cols-2 gap-10 sm:gap-12 lg:gap-16 items-start">
-            <AnimatedSection className="relative min-h-[200px]">
-              <ColumnWatermark>
-                <CircuitBg />
-              </ColumnWatermark>
-              <div className="relative z-10">
-                <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Why RMT</p>
-                <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-6">Your Trusted Partner in Medical Innovation</h2>
-                <p className="text-muted-foreground text-lg leading-relaxed mb-8">
-                  We combine deep regulatory expertise with cutting-edge engineering capabilities to help medical device companies bring safe, effective products to market faster and more efficiently.
-                </p>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-5">
-                  {whyChoose.map((item, i) => (
-                    <motion.div
-                      key={item.title}
-                      initial={{ opacity: 0, y: 20 }}
-                      whileInView={{ opacity: 1, y: 0 }}
-                      viewport={{ once: true }}
-                      transition={{ delay: i * 0.1 }}
-                      className="group relative overflow-hidden bg-card/95 border border-border rounded-2xl p-5 shadow-sm hover:shadow-xl hover:-translate-y-1 hover:border-primary/40 transition-all duration-300"
-                    >
-                      <div className="absolute inset-0 bg-gradient-to-br from-primary/[0.08] via-transparent to-cyan-500/[0.08] opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                      <div className="relative z-10 w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center mb-3 border border-primary/15">
-                        <CheckCircle className="w-5 h-5 text-primary" />
-                      </div>
-                      <h4 className="relative z-10 font-semibold text-foreground text-sm mb-1.5">{item.title}</h4>
-                      <p className="relative z-10 text-muted-foreground text-xs leading-relaxed">{item.description}</p>
-                    </motion.div>
-                  ))}
-                </div>
-              </div>
-            </AnimatedSection>
-
-            <AnimatedSection delay={0.15}>
-              <div className="relative w-full max-w-[380px] sm:max-w-[430px] md:max-w-[500px] mx-auto lg:ml-auto lg:mr-0">
-                <div className="absolute -top-5 -left-5 h-24 w-24 rounded-2xl bg-gradient-to-br from-primary/30 to-cyan-500/30 blur-2xl pointer-events-none" aria-hidden />
-                <div className="absolute -bottom-8 -right-8 h-32 w-32 rounded-full bg-primary/20 blur-3xl pointer-events-none" aria-hidden />
-                <div className="group relative rounded-3xl overflow-hidden aspect-[4/4.6] shadow-2xl border border-white/10">
-                  <img src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=90" alt="Advanced medical innovation and diagnostics environment" className="w-full h-full object-cover object-center scale-[1.03] group-hover:scale-[1.08] transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/70 via-[#071426]/20 to-transparent" />
-                  <div className="absolute top-5 left-5 inline-flex items-center gap-2 rounded-full bg-white/90 px-4 py-2 shadow-lg backdrop-blur">
-                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500" />
-                    <span className="text-[11px] font-bold tracking-wider text-slate-700 uppercase">Trusted by global med-tech teams</span>
-                  </div>
-                </div>
-
-                <div className="absolute -bottom-4 -right-4 bg-background/95 border border-border rounded-2xl p-4 sm:p-5 shadow-xl backdrop-blur">
-                  <p className="font-heading text-2xl sm:text-3xl font-bold text-primary">98%</p>
-                  <p className="text-xs text-muted-foreground mt-1">Regulatory Approval Rate</p>
-                </div>
-
-                <div className="absolute -bottom-4 left-4 bg-slate-900 text-white border border-white/15 rounded-2xl px-4 py-3 shadow-xl">
-                  <p className="text-[11px] uppercase tracking-[0.16em] text-white/70 mb-1">Speed to Market</p>
-                  <p className="font-heading text-xl leading-none">2.4x Faster</p>
-                </div>
-              </div>
-            </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* ===== PROCESS ===== */}
-      <section className="py-24 bg-secondary/30 relative overflow-hidden">
-        {/* Grid dot pattern */}
-        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.06) 1px, transparent 1px)", backgroundSize: "30px 30px" }} aria-hidden />
-        {/* Orbital rings */}
-        <div className="absolute top-1/2 right-0 w-[560px] h-[560px] rounded-full border border-primary/[0.07] translate-x-[40%] -translate-y-1/2 pointer-events-none hidden lg:block" aria-hidden />
-        <div className="absolute bottom-0 left-0 w-[320px] h-[320px] rounded-full border border-primary/[0.05] -translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
-        <SectionWatermark side="left">
-          <StethoscopeBg />
-        </SectionWatermark>
-        <div className="page-container relative z-10">
-          <AnimatedSection className="text-center mb-14">
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Our Process</p>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">How We Work</h2>
-            <p className="text-muted-foreground text-lg max-w-xl mx-auto">A structured, proven methodology that reduces risk and accelerates time-to-market.</p>
-          </AnimatedSection>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {process.map((step, i) => (
-              <motion.div key={step.step} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ delay: i * 0.1 }} className="relative bg-card border border-border rounded-xl p-6 hover:border-primary/40 transition-colors">
-                <div className="font-heading text-5xl font-bold text-primary/15 mb-4">{step.step}</div>
-                <h3 className="font-heading text-xl font-bold text-foreground mb-2">{step.title}</h3>
-                <p className="text-muted-foreground text-sm leading-relaxed">{step.description}</p>
-                {i < process.length - 1 && <div className="hidden lg:block absolute top-1/2 -right-3 w-6 h-0.5 bg-primary/30" />}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ===== GLOBAL PRESENCE + WORLD MAP ===== */}
-      <section className="py-24 bg-background relative overflow-hidden">
-        {/* Grid dot pattern */}
-        <div className="absolute inset-0 pointer-events-none" style={{ backgroundImage: "radial-gradient(circle, hsl(var(--primary) / 0.07) 1px, transparent 1px)", backgroundSize: "28px 28px" }} aria-hidden />
-        {/* Orbital rings */}
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full border border-primary/[0.07] translate-x-[35%] -translate-y-[35%] pointer-events-none hidden lg:block" aria-hidden />
-        <div className="absolute top-0 right-0 w-[400px] h-[400px] rounded-full border border-primary/[0.05] translate-x-[20%] -translate-y-[20%] pointer-events-none hidden lg:block" aria-hidden />
-        <div className="absolute bottom-0 left-0 w-[340px] h-[340px] rounded-full border border-primary/[0.05] -translate-x-1/4 translate-y-1/4 pointer-events-none hidden lg:block" aria-hidden />
-        <div className="page-container relative z-10">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Global Presence</p>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground mb-4">Operating Across 4 Continents</h2>
-            <p className="text-muted-foreground text-lg max-w-2xl mx-auto">
-              With offices in the USA, Europe, South Asia, and the Middle East, RMT Medical Technologies provides local expertise in every major medical device market.
-            </p>
-          </AnimatedSection>
-
-          <AnimatedSection>
-            <div className="grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-              <WorldMap />
-
-              <div className="space-y-4">
-                {globalOffices.map((office, i) => (
-                  <motion.div
-                    key={office.city}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.1 }}
-                    className="bg-card border border-border rounded-xl p-5 hover:border-primary/40 transition-colors"
-                  >
-                    <div className="flex items-start gap-4">
-                      <div className="w-11 h-11 bg-primary/10 rounded-lg flex items-center justify-center shrink-0">
-                        <MapPin className="w-5 h-5 text-primary" />
-                      </div>
-                      <div className="min-w-0 flex-1">
-                        <div className="flex flex-wrap items-center gap-2 mb-1">
-                          <h3 className="font-heading text-lg font-bold text-foreground">{office.city}</h3>
-                          <span className="text-xs font-bold px-2 py-0.5 bg-primary/10 text-primary rounded-full">
-                            {office.label}
-                          </span>
-                        </div>
-                        <p className="text-sm text-muted-foreground mb-3">{office.description}</p>
-                        <p className="text-sm text-foreground/80 mb-2">{office.address}</p>
-                        <div className="flex flex-col sm:flex-row sm:flex-wrap gap-2 sm:gap-4 text-sm">
-                          <a
-                            href={`tel:${office.phone.replace(/\s/g, "")}`}
-                            className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
-                          >
-                            <Phone className="w-3.5 h-3.5 shrink-0" />
-                            {office.phone}
-                          </a>
-                          <a
-                            href={`mailto:${office.email}`}
-                            className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors"
-                          >
-                            <Mail className="w-3.5 h-3.5 shrink-0" />
-                            {office.email}
-                          </a>
-                        </div>
-                      </div>
+                    <div className="w-10 h-10 shrink-0 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center text-white/90">
+                      {item.icon}
+                    </div>
+                    <div>
+                      <h4 className="font-semibold text-white text-sm sm:text-base mb-1">{item.title}</h4>
+                      <p className="text-white/60 text-xs sm:text-sm leading-relaxed">{item.description}</p>
                     </div>
                   </motion.div>
                 ))}
               </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
 
-      {/* ===== CTA ===== */}
-      <section className="py-20 bg-primary relative overflow-hidden">
-        <div
-          className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[min(70vw,520px)] h-[min(70vw,520px)] pointer-events-none select-none opacity-[0.10] text-white"
-          aria-hidden="true"
-        >
-          <DnaBg />
-        </div>
-        <div className="page-container text-center relative z-10">
-          <AnimatedSection>
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-white mb-4">Ready to Bring Your Medical Device to Market?</h2>
-            <p className="text-white/80 text-lg max-w-2xl mx-auto mb-8">
-              Partner with RMT Medical Technologies for end-to-end expertise. Our team is ready to discuss your project requirements and build a tailored solution.
-            </p>
-            <div className="flex flex-wrap justify-center gap-4">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 rounded-lg h-12 px-8 font-bold">
-                <Link href="/contact">Start a Conversation</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="border-white text-white hover:bg-white/10 rounded-lg h-12 px-8 font-bold">
-                <Link href="/services">View Our Services</Link>
-              </Button>
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+                {whyStats.map((stat, i) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.3 + i * 0.06 }}
+                    className="rounded-xl border border-white/10 bg-white/[0.06] px-3 py-4 text-center"
+                  >
+                    <p className="font-heading text-xl sm:text-2xl font-bold text-white leading-none mb-1">{stat.value}</p>
+                    <p className="text-[10px] sm:text-xs text-white/55 leading-snug">{stat.label}</p>
+                  </motion.div>
+                ))}
+              </div>
+            </AnimatedSection>
+          </div>
+
+          {/* Right — contained image (smaller) */}
+          <div className="lg:col-span-2 relative flex items-center justify-center p-6 sm:p-8 lg:p-10">
+            <div className="relative w-full max-w-[420px] mx-auto">
+              <div className="relative rounded-2xl overflow-hidden aspect-[4/3.5] border border-white/15 shadow-xl">
+                <img
+                  src={HOME_IMAGES.whyRmt}
+                  alt="Advanced medical innovation and diagnostics environment"
+                  className="w-full h-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/80 via-transparent to-transparent" />
+              </div>
+
+              <motion.div
+                initial={{ opacity: 0, y: 16 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                className="mt-4 rounded-xl border border-white/15 bg-white/[0.08] p-4 sm:p-5"
+              >
+                <div className="flex items-center gap-2.5 mb-2">
+                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
+                  <span className="text-[11px] font-bold uppercase tracking-wider text-white/75">Live Partnership</span>
+                </div>
+                <p className="text-white font-heading text-base sm:text-lg font-bold leading-snug mb-1.5">
+                  Trusted by global med-tech teams
+                </p>
+                <p className="text-white/60 text-xs sm:text-sm leading-relaxed">
+                  From startups to enterprise manufacturers — regulatory confidence at every stage.
+                </p>
+              </motion.div>
             </div>
-          </AnimatedSection>
+          </div>
         </div>
       </section>
+      </HomeSection>
+
+      {/* ===== PROCESS — white section ===== */}
+      <HomeSection variant="image-light" bgImage={HOME_IMAGES.process} bgPosition="center" overlayIntensity="clear" dots rings ringSide="both" className="py-24">
+        <AnimatedSection className="text-center mb-16">
+          <SectionHeading
+            eyebrow="Our Process"
+            title={<>How We <span className="text-primary">Work</span></>}
+            description="A structured, proven methodology that reduces risk and accelerates time-to-market."
+            panel
+          />
+        </AnimatedSection>
+
+        <div className="relative">
+          <div className="hidden lg:block absolute top-7 left-[12.5%] right-[12.5%] h-px bg-primary/20" aria-hidden />
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 items-stretch">
+            {process.map((step, i) => (
+              <motion.div
+                key={step.step}
+                initial={{ opacity: 0, y: 32 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="relative flex flex-col items-center lg:items-start text-center lg:text-left h-full"
+              >
+                <div className="relative z-10 w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-5 shrink-0">
+                  {step.icon}
+                </div>
+                <div className="relative flex flex-col flex-1 w-full min-h-[220px] rounded-2xl border border-border bg-white p-6 shadow-sm hover:border-primary/30 hover:shadow-md transition-all duration-300">
+                  <p className="text-primary text-xs font-semibold uppercase tracking-widest mb-2">Step {step.step}</p>
+                  <h3 className="font-heading text-xl font-bold text-foreground mb-3">{step.title}</h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed flex-1">{step.description}</p>
+                </div>
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </HomeSection>
+
+      {/* ===== CERTIFICATIONS — colored section ===== */}
+      <HomeSection variant="navy" bgImage={HOME_IMAGES.certifications} overlayIntensity="clear" className="py-16">
+        <AnimatedSection className="text-center mb-10">
+          <SectionHeading
+            eyebrow="Quality & Compliance"
+            title={<>Certified to the Highest <span className="text-cyan-400">Global Standards</span></>}
+            description="Our certifications and regulatory expertise ensure your products meet every requirement for safe, effective market entry."
+            light
+            panel
+          />
+        </AnimatedSection>
+        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
+          {certifications.map((cert, i) => (
+            <motion.div
+              key={cert}
+              initial={{ opacity: 0, scale: 0.9 }}
+              whileInView={{ opacity: 1, scale: 1 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white/90 hover:border-sky-300/40 hover:bg-white/15 transition-colors duration-200"
+            >
+              <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
+              {cert}
+            </motion.div>
+          ))}
+        </div>
+      </HomeSection>
+
+      {/* ===== GLOBAL PRESENCE — white section with earth bg ===== */}
+      <HomeSection variant="image-light" bgImage={HOME_IMAGES.global} bgPosition="center" overlayIntensity="clear" dots rings ringSide="right" className="py-20 sm:py-24">
+        <AnimatedSection className="text-center mb-10 sm:mb-12">
+          <SectionHeading
+            eyebrow="Global Presence"
+            title="Operating Across 2 Continents"
+            description="With offices in the United States and South Asia, RMT Medical Technologies delivers local regulatory and engineering expertise across key global medical device markets."
+            align="center"
+            panel
+          />
+        </AnimatedSection>
+
+        <AnimatedSection>
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
+            <div className="rounded-2xl border border-border bg-white p-4 sm:p-5 shadow-sm">
+              <WorldMap />
+            </div>
+            <div className="space-y-4 flex flex-col justify-center">
+              {globalOffices.map((office, i) => (
+                <motion.div
+                  key={office.city}
+                  initial={{ opacity: 0, x: 20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ delay: i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="rounded-xl border border-border bg-white p-5 shadow-sm hover:border-primary/30 hover:shadow-md transition-all duration-300"
+                >
+                  <div className="flex items-start gap-4">
+                    <div className="w-11 h-11 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
+                      <MapPin className="w-5 h-5 text-primary" />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <div className="flex flex-wrap items-center gap-2 mb-1">
+                        <h3 className="font-heading text-lg font-bold text-foreground">{office.city}</h3>
+                        <span className="text-xs font-bold px-2 py-0.5 bg-primary/10 text-primary rounded-full">{office.label}</span>
+                      </div>
+                      <p className="text-sm text-muted-foreground mb-2">{office.description}</p>
+                      <p className="text-sm text-foreground/80 mb-3">{office.address}</p>
+                      <div className="flex flex-col gap-1.5 text-sm">
+                        <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors">
+                          <Phone className="w-3.5 h-3.5 shrink-0" />{office.phone}
+                        </a>
+                        <a href={`mailto:${office.email}`} className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors">
+                          <Mail className="w-3.5 h-3.5 shrink-0" />{office.email}
+                        </a>
+                      </div>
+                    </div>
+                  </div>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </AnimatedSection>
+      </HomeSection>
+
+      {/* ===== CTA — colored section ===== */}
+      <HomeSection variant="gradient-blue" bgImage={HOME_IMAGES.cta} bgPosition="center 40%" overlayIntensity="clear" className="py-16 sm:py-20 lg:py-24">
+        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
+          <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-cyan-400/10 blur-3xl" />
+          <div className="absolute -bottom-32 -left-16 w-96 h-96 rounded-full bg-sky-300/10 blur-3xl" />
+        </div>
+
+        <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
+          <AnimatedSection animation="slideRight" className="text-center lg:text-left">
+            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm px-4 py-1.5 mb-5">
+              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
+              <span className="text-sky-200 text-xs font-bold uppercase tracking-widest">Let&apos;s Build Together</span>
+            </div>
+
+            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
+              Ready to Bring Your{" "}
+              <span className="text-cyan-300">Medical Device</span> to Market?
+            </h2>
+
+            <p className="text-white/85 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
+              Partner with RMT Medical Technologies for end-to-end expertise — from regulatory strategy and engineering to validation and commercial-scale manufacturing.
+            </p>
+
+            <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-8">
+              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 rounded-full h-12 px-8 font-bold shadow-xl shadow-black/20">
+                <Link href="/contact">
+                  Start a Conversation <ArrowRight className="ml-2 w-4 h-4" />
+                </Link>
+              </Button>
+              <Button
+                type="button"
+                size="lg"
+                variant="outline"
+                onClick={() => setQuoteOpen(true)}
+                className="border-white/50 text-white bg-white/5 hover:bg-white/15 rounded-full h-12 px-8 font-bold backdrop-blur-sm"
+              >
+                Request a Quote
+              </Button>
+            </div>
+
+            <div className="flex flex-wrap justify-center lg:justify-start gap-5 sm:gap-7 pt-6 border-t border-white/15">
+              {["CE Mark Compliant", "ISO 13485:2025", "200+ Projects"].map((badge) => (
+                <div key={badge} className="flex items-center gap-2 text-sm text-white/80">
+                  <CheckCircle className="w-4 h-4 text-cyan-300 shrink-0" />
+                  {badge}
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
+
+          <AnimatedSection animation="slideLeft" delay={0.12} className="space-y-4">
+            {ctaHighlights.map((item, i) => (
+              <motion.div
+                key={item.title}
+                initial={{ opacity: 0, x: 28 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: 0.15 + i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="group flex gap-4 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-5 sm:p-6 hover:border-cyan-300/40 hover:bg-white/15 transition-all duration-300"
+              >
+                <div className="w-11 h-11 shrink-0 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-cyan-200 group-hover:bg-cyan-400/20 group-hover:text-cyan-100 transition-colors">
+                  {item.icon}
+                </div>
+                <div className="min-w-0 text-left">
+                  <h3 className="font-heading text-lg font-bold text-white mb-1">{item.title}</h3>
+                  <p className="text-white/70 text-sm leading-relaxed">{item.description}</p>
+                </div>
+              </motion.div>
+            ))}
+
+            <motion.div
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: 0.45, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              className="rounded-2xl border border-white/15 bg-[#071426]/40 backdrop-blur-md p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
+            >
+              <div className="text-left">
+                <p className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-1">Talk to our team</p>
+                <p className="text-white font-semibold">info@rmt-usa.com</p>
+              </div>
+              <Button asChild variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 rounded-full shrink-0">
+                <Link href="/services">View All Services <ArrowRight className="ml-1.5 w-3.5 h-3.5" /></Link>
+              </Button>
+            </motion.div>
+          </AnimatedSection>
+        </div>
+      </HomeSection>
 
       <RequestQuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </div>

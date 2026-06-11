@@ -2,7 +2,7 @@ import React from "react";
 
 export const WorldMap = () => {
   return (
-    <div className="relative w-full rounded-2xl overflow-hidden border border-border bg-card">
+    <div className="relative w-full rounded-xl overflow-hidden bg-sky-50/50">
       <img
         src="/world-map-bg.webp"
         alt="Revive Medical Technologies global presence"

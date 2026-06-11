@@ -1,5 +1,5 @@
 import React from "react";
-import { motion } from "framer-motion";
+import { motion, type Transition } from "framer-motion";
 
 interface AnimatedSectionProps {
   children: React.ReactNode;
@@ -12,25 +12,27 @@ interface AnimatedSectionProps {
   immediate?: boolean;
 }
 
+const smoothEase = [0.22, 1, 0.36, 1] as const;
+
 const animations = {
   fade: {
     initial: { opacity: 0 },
     whileInView: { opacity: 1 },
   },
   slideUp: {
-    initial: { opacity: 0, y: 50 },
+    initial: { opacity: 0, y: 40 },
     whileInView: { opacity: 1, y: 0 },
   },
   slideRight: {
-    initial: { opacity: 0, x: -50 },
+    initial: { opacity: 0, x: -40 },
     whileInView: { opacity: 1, x: 0 },
   },
   slideLeft: {
-    initial: { opacity: 0, x: 50 },
+    initial: { opacity: 0, x: 40 },
     whileInView: { opacity: 1, x: 0 },
   },
   scaleUp: {
-    initial: { opacity: 0, scale: 0.9 },
+    initial: { opacity: 0, scale: 0.96 },
     whileInView: { opacity: 1, scale: 1 },
   },
 };
@@ -41,10 +43,15 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
   className = "",
   id,
   animation = "slideUp",
-  duration = 0.6,
+  duration = 0.75,
   immediate = false,
 }) => {
   const target = animations[animation].whileInView;
+  const transition: Transition = {
+    duration,
+    delay,
+    ease: smoothEase,
+  };
 
   return (
     <motion.div
@@ -52,8 +59,8 @@ export const AnimatedSection: React.FC<AnimatedSectionProps> = ({
       initial={animations[animation].initial}
       animate={immediate ? target : undefined}
       whileInView={immediate ? undefined : target}
-      viewport={immediate ? undefined : { once: true, margin: "-50px" }}
-      transition={{ duration, delay, ease: "easeOut" }}
+      viewport={immediate ? undefined : { once: true, margin: "-60px", amount: 0.2 }}
+      transition={transition}
       className={className}
     >
       {children}
