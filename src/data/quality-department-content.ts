@@ -35,8 +35,8 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
     tabLabel: "Quality Assurance (QA)",
     name: "Quality Assurance (QA)",
     description:
-      "End-to-end QMS development, compliance consulting, audit readiness, and continuous improvement for medical device and healthcare organizations — structured around ISO 13485.",
-    standards: ["ISO 13485", "Continuous Improvement"],
+      "Leverage our proven quality expertise to build, strengthen, and maintain compliant quality systems — QMS development, audit readiness, CAPA, document control, and continuous improvement structured around ISO 13485:2016.",
+    standards: ["ISO 13485:2016", "QMSR (FDA 21 CFR 820)", "ISO 14971:2019", "DRAP Compliance"],
     accent: "blue",
     sections: [
       {
@@ -45,7 +45,7 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
           {
             title: "QMS Development",
             items: [
-              "ISO 13485 compliant QMS design & implementation",
+              "ISO 13485 compliant QMS development & implementation",
               "Quality manuals, SOPs, work instructions & templates",
               "QMS restructuring & process optimization",
               "Documentation review & improvement",

@@ -1305,6 +1305,83 @@ const SUB_SERVICE_SIDEBAR_STATS: Record<string, Record<string, { label: string; 
     "bacterial-endotoxin-testing": [{ label: "Endotoxin Tests Conducted", value: "300+", icon: TestTube2 }],
     "microbial-limit-testing": [{ label: "Bioburden Assessments Completed", value: "500+", icon: Microscope }],
   },
+  "quality-testing": {
+    "quality-assurance": [
+      { label: "Successfully established and maintained an ISO 13485-certified Quality Management System", value: "Certified", icon: ShieldCheck },
+      { label: "Successfully completed regulatory audits and inspections", value: "Audited", icon: Medal },
+      { label: "Comprehensive quality processes covering design, manufacturing, documentation, and other support activities", value: "Full Scope", icon: Layers },
+      { label: "Structured CAPA, document control, and change management systems", value: "Structured", icon: ClipboardList },
+      { label: "Commitment to continuous improvement and regulatory compliance", value: "Continuous", icon: Target },
+    ],
+  },
+};
+
+/** Per sub-service compliance standards (overrides service-level list) */
+const SUB_SERVICE_STANDARDS: Record<string, Record<string, string[]>> = {
+  "quality-testing": {
+    "quality-assurance": ["ISO 13485:2016", "QMSR (FDA 21 CFR 820)", "ISO 14971:2019", "DRAP Compliance"],
+  },
+};
+
+/** Per sub-service approach methodology */
+const SUB_SERVICE_APPROACH_STEPS: Record<string, Record<string, { step: string; title: string; desc: string }[]>> = {
+  "quality-testing": {
+    "quality-assurance": [
+      { step: "01", title: "Understand", desc: "We assess your current quality processes, documentation, and compliance status." },
+      { step: "02", title: "Design", desc: "We develop scalable quality solutions tailored to your organization and regulatory needs." },
+      { step: "03", title: "Implement", desc: "We work alongside your team to establish effective quality processes and documentation." },
+      { step: "04", title: "Improve", desc: "We support continuous improvement through audits, CAPA management, training, and ongoing quality oversight." },
+    ],
+  },
+};
+
+/** Per sub-service full-service capability list */
+const SUB_SERVICE_CAPABILITIES: Record<string, Record<string, string[]>> = {
+  "quality-testing": {
+    "quality-assurance": [
+      "ISO 13485 QMS & Audit Readiness",
+      "Production Quality & Process Controls",
+      "Design Controls & Verification Support",
+      "Risk Management & Compliance",
+      "Production & Testing Support",
+    ],
+  },
+};
+
+/** Closing note shown after capabilities on specific sub-service pages */
+const SUB_SERVICE_CLOSING_NOTE: Record<string, Record<string, string>> = {
+  "quality-testing": {
+    "quality-assurance":
+      "Our QA services are designed to help organizations build robust quality systems, achieve regulatory compliance, improve operational performance, and maintain high standards of product quality and safety. We partner with clients to provide practical, efficient, and reliable quality assurance solutions tailored to their business needs.",
+  },
+};
+
+/** Per sub-service metrics section headings */
+const SUB_SERVICE_METRICS_HEADING: Record<string, Record<string, { eyebrow: string; heading: string }>> = {
+  "quality-testing": {
+    "quality-assurance": { eyebrow: "Track Record", heading: "Our Achievements" },
+  },
+};
+
+/** Per sub-service compliance strip heading */
+const SUB_SERVICE_STANDARDS_HEADING: Record<string, Record<string, string>> = {
+  "quality-testing": {
+    "quality-assurance": "Built for Medical Device Quality & Compliance",
+  },
+};
+
+/** Per sub-service hero / image badge label (overrides parent service shortName) */
+const SUB_SERVICE_BADGE_LABEL: Record<string, Record<string, string>> = {
+  "quality-testing": {
+    "quality-assurance": "Quality Assurance",
+  },
+};
+
+/** Per sub-service full-service capabilities section title */
+const SUB_SERVICE_CAPABILITIES_TITLE: Record<string, Record<string, string>> = {
+  "quality-testing": {
+    "quality-assurance": "All Quality Management Capabilities",
+  },
 };
 
 /* ---- Per-service icon scatter icons ---- */
@@ -2306,28 +2383,34 @@ function SoftwareAIDecorLayer() {
 function KeyMetricsSection({
   stats,
   variant = "default",
+  eyebrow = "Performance",
+  heading = "Key Metrics",
 }: {
   stats: { label: string; value: string; icon: React.ElementType }[];
   variant?: "default" | "software-ai";
+  eyebrow?: string;
+  heading?: string;
 }) {
   const isSoftwareAI = variant === "software-ai";
   const gridClass =
-    stats.length === 4
-      ? "sm:grid-cols-2 xl:grid-cols-4"
-      : stats.length === 3
-        ? "sm:grid-cols-3"
-        : stats.length === 1
-          ? "max-w-md mx-auto"
-          : "sm:grid-cols-2";
+    stats.length >= 5
+      ? "sm:grid-cols-2 xl:grid-cols-3"
+      : stats.length === 4
+        ? "sm:grid-cols-2 xl:grid-cols-4"
+        : stats.length === 3
+          ? "sm:grid-cols-3"
+          : stats.length === 1
+            ? "max-w-md mx-auto"
+            : "sm:grid-cols-2";
 
   return (
     <AnimatedSection>
       <div className="flex items-end justify-between gap-4 mb-6 pb-3 border-b border-border">
         <div>
           <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-1 ${isSoftwareAI ? "text-cyan-600 dark:text-cyan-400" : "text-primary"}`}>
-            Performance
+            {eyebrow}
           </p>
-          <h2 className="font-heading text-3xl font-bold text-foreground">Key Metrics</h2>
+          <h2 className="font-heading text-3xl font-bold text-foreground">{heading}</h2>
         </div>
         <BarChart3 className={`w-8 h-8 shrink-0 opacity-20 ${isSoftwareAI ? "text-cyan-600" : "text-primary"}`} />
       </div>
@@ -2753,7 +2836,13 @@ function ProminentMetricsBar({
 }
 
 /** Centered prominent standards strip */
-function ProminentStandardsSection({ standards }: { standards: string[] }) {
+function ProminentStandardsSection({
+  standards,
+  title = "Built for Regulated Healthcare Software",
+}: {
+  standards: string[];
+  title?: string;
+}) {
   return (
     <FullBleedSection>
       <section className="bg-secondary/40 border-y border-border py-10 sm:py-12">
@@ -2762,7 +2851,7 @@ function ProminentStandardsSection({ standards }: { standards: string[] }) {
             Compliance & Standards
           </p>
           <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-8">
-            Built for Regulated Healthcare Software
+            {title}
           </h3>
           <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
             {standards.map((std) => (
@@ -2836,7 +2925,22 @@ function SubServiceContent({
 }) {
   const isSoftwareAI = service.slug === "software-ai";
   const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? (SERVICE_SCATTER_ICONS[service.slug]?.[0] ?? CheckCircle);
-  const approachSteps = SERVICE_APPROACH_STEPS[service.slug] ?? SERVICE_APPROACH_STEPS.default;
+  const approachSteps =
+    SUB_SERVICE_APPROACH_STEPS[service.slug]?.[subService.slug] ??
+    SERVICE_APPROACH_STEPS[service.slug] ??
+    SERVICE_APPROACH_STEPS.default;
+  const standards =
+    SUB_SERVICE_STANDARDS[service.slug]?.[subService.slug] ?? SERVICE_STANDARDS[service.slug];
+  const standardsHeading = SUB_SERVICE_STANDARDS_HEADING[service.slug]?.[subService.slug];
+  const capabilities =
+    SUB_SERVICE_CAPABILITIES[service.slug]?.[subService.slug] ?? service.capabilities;
+  const closingNote = SUB_SERVICE_CLOSING_NOTE[service.slug]?.[subService.slug];
+  const metricsHeading = SUB_SERVICE_METRICS_HEADING[service.slug]?.[subService.slug];
+  const subServiceStats = SUB_SERVICE_SIDEBAR_STATS[service.slug]?.[subService.slug];
+  const badgeLabel = SUB_SERVICE_BADGE_LABEL[service.slug]?.[subService.slug] ?? service.shortName;
+  const capabilitiesTitle =
+    SUB_SERVICE_CAPABILITIES_TITLE[service.slug]?.[subService.slug] ??
+    `All ${service.shortName} Capabilities`;
 
   // Theme-aware styles
   const accentTextClass = isSoftwareAI ? "text-cyan-600 dark:text-cyan-400" : "text-primary";
@@ -2885,7 +2989,7 @@ function SubServiceContent({
               <div className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest ${
                 isSoftwareAI ? "bg-cyan-500/95 text-slate-900" : "bg-primary/95 text-primary-foreground"
               }`}>
-                <SubIcon className="w-3 h-3" /> {service.shortName}
+                <SubIcon className="w-3 h-3" /> {badgeLabel}
               </div>
               <div className="absolute bottom-4 left-4 right-4">
                 <h3 className="font-heading text-white text-lg font-bold leading-tight drop-shadow">{subService.name}</h3>
@@ -2922,11 +3026,13 @@ function SubServiceContent({
         </div>
       </AnimatedSection>
 
-      {/* ── Key metrics ── */}
-      {SUB_SERVICE_SIDEBAR_STATS[service.slug]?.[subService.slug] ? (
+      {/* ── Key metrics / achievements ── */}
+      {subServiceStats ? (
         <KeyMetricsSection
-          stats={SUB_SERVICE_SIDEBAR_STATS[service.slug][subService.slug]}
+          stats={subServiceStats}
           variant={isSoftwareAI ? "software-ai" : "default"}
+          eyebrow={metricsHeading?.eyebrow}
+          heading={metricsHeading?.heading}
         />
       ) : (
         SERVICE_SIDEBAR_STATS[service.slug] &&
@@ -2961,8 +3067,8 @@ function SubServiceContent({
       </AnimatedSection>
 
       {/* ── Standards ── */}
-      {SERVICE_STANDARDS[service.slug] && (
-        <ProminentStandardsSection standards={SERVICE_STANDARDS[service.slug]} />
+      {standards && (
+        <ProminentStandardsSection standards={standards} title={standardsHeading} />
       )}
 
       {/* ── Our Approach ── */}
@@ -2995,10 +3101,10 @@ function SubServiceContent({
       <AnimatedSection>
         <div className="mb-6 pb-3 border-b border-border">
           <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Full-Service Offering</p>
-          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">All {service.shortName} Capabilities</h2>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">{capabilitiesTitle}</h2>
         </div>
         <div className="grid sm:grid-cols-2 gap-3">
-          {service.capabilities.map((cap, idx) => (
+          {capabilities.map((cap, idx) => (
             <motion.div key={cap}
               initial={{ opacity: 0, x: -8 }} whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }} transition={{ delay: idx * 0.04 }}
@@ -3008,6 +3114,11 @@ function SubServiceContent({
             </motion.div>
           ))}
         </div>
+        {closingNote && (
+          <p className="mt-6 text-muted-foreground text-sm leading-relaxed border-l-2 border-primary/40 pl-4">
+            {closingNote}
+          </p>
+        )}
       </AnimatedSection>
 
     </div>
@@ -3385,18 +3496,23 @@ export function SubServiceDetail({
           <div className="max-w-4xl">
             {(() => {
               const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? Brain;
+              const heroBadgeLabel = SUB_SERVICE_BADGE_LABEL[service.slug]?.[subService.slug] ?? service.shortName;
               const trustBadges = isSoftwareAI
                 ? ["IEC 62304", "FDA SaMD", "HIPAA", "ISO 27001"]
-                : (SERVICE_STANDARDS[service.slug] ?? []).slice(0, 4);
+                : (SUB_SERVICE_STANDARDS[service.slug]?.[subService.slug] ?? SERVICE_STANDARDS[service.slug] ?? []).slice(0, 4);
               return (
                 <>
                   <div className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 backdrop-blur-sm border ${isSoftwareAI ? "bg-cyan-400/10 border-cyan-400/25" : "bg-white/8 border-white/20"}`}>
                     <span className={`w-2 h-2 rounded-full animate-pulse shrink-0 ${isSoftwareAI ? "bg-cyan-400" : "bg-primary"}`} />
                     <SubIcon className={`w-4 h-4 ${isSoftwareAI ? "text-cyan-300" : "text-white/70"}`} />
-                    <span className={`text-xs font-bold uppercase tracking-[0.18em] ${isSoftwareAI ? "text-cyan-200" : "text-white/80"}`}>{service.shortName}</span>
+                    <span className={`text-xs font-bold uppercase tracking-[0.18em] ${isSoftwareAI ? "text-cyan-200" : "text-white/80"}`}>{heroBadgeLabel}</span>
                     <span className="w-px h-3 bg-white/25" />
                     <span className={`text-xs ${isSoftwareAI ? "text-cyan-400/70" : "text-white/50"}`}>
-                      {isSoftwareAI ? "IEC 62304 Compliant" : (SERVICE_STANDARDS[service.slug]?.[0] ?? "ISO 13485")}
+                      {isSoftwareAI
+                        ? "IEC 62304 Compliant"
+                        : (SUB_SERVICE_STANDARDS[service.slug]?.[subService.slug]?.[0] ??
+                          SERVICE_STANDARDS[service.slug]?.[0] ??
+                          "ISO 13485")}
                     </span>
                   </div>
                   <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-black text-white mb-5 leading-[0.95] tracking-tight">
