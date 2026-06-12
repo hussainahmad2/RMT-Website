@@ -71,7 +71,13 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
         {person.bio}
       </p>
       {featured && person.detail && (
-        <p className="text-muted-foreground/90 leading-relaxed mt-3 text-sm">{person.detail}</p>
+        <>
+          {(Array.isArray(person.detail) ? person.detail : [person.detail]).map((paragraph, i) => (
+            <p key={i} className="text-muted-foreground/90 leading-relaxed mt-3 text-sm">
+              {paragraph}
+            </p>
+          ))}
+        </>
       )}
     </div>
   );

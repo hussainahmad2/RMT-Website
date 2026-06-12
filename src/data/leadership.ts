@@ -7,7 +7,7 @@ export type LeadershipMember = {
   role: string;
   image: string;
   bio: string;
-  detail?: string;
+  detail?: string | string[];
   /** Optional per-photo crop override */
   imageClassName?: string;
 };
@@ -18,9 +18,11 @@ export const C_LEVEL_LEADERSHIP: LeadershipMember[] = [
     name: "Dr. Murtaza Najabat Ali",
     role: "Chief Executive Officer",
     image: teamImage("c-level", "ceo.webp"),
-    bio: "Founder and CEO of RMT Medical Technologies, leading the company's vision to deliver end-to-end medical device, biomaterials, and healthtech solutions for clients worldwide.",
-    detail:
-      "With deep expertise in biomaterials, regulatory strategy, and R&D, Dr. Ali has guided 200+ projects spanning FDA and CE compliance, product development, laboratory services, software & AI, and contract manufacturing — serving partners across North America, Europe, the Middle East, and South Asia.",
+    bio: "Dr. Murtaza Najabat Ali is the Founder and Chief Executive Officer of Revive Medical Technologies Inc. (RMT), a U.S.-based medical device research, development, and manufacturing organization serving innovators worldwide. A biomedical engineer and academic leader with a PhD from the University of Sheffield and postgraduate training at Queen Mary University of London and Brunel University, he brings more than two decades of experience in biomaterials, drug delivery systems, medical device R&D, and regulatory strategy.",
+    detail: [
+      "Beyond RMT, Dr. Ali has held senior leadership roles including Professor of Biomedical Engineering, Founding Director of the Medical Devices Development Center (MDDC) at NUST, and Founding CEO of N-ovative Health Technologies — Pakistan's first UKAS-accredited medical device manufacturing facility producing cardiovascular and electromedical devices. He serves as a COMSTECH Distinguished Scholar for capacity building across OIC member states and as a Member Expert Committee at Pakistan's Drug Regulatory Authority (DRAP).",
+      "Under his leadership, RMT has grown into a cross-functional partner offering end-to-end solutions — from concept and engineering through quality systems, regulatory submissions, software & AI, and contract manufacturing — guiding 200+ projects across North America, Europe, the Middle East, and South Asia. His mission is to bridge industry and academia, empower emerging innovators, and accelerate the path from inventive healthcare ideas to safe, market-ready medical technologies.",
+    ],
   },
   {
     name: "Ali Asghar",
@@ -96,13 +98,13 @@ export const RD_WING_BIOMATERIALS: LeadershipMember[] = [
   },
   {
     name: "Nimra Shabbir",
-    role: "Junior Scientist",
+    role: "Junior Research Scientist",
     image: teamImage("rd-wing/biomaterials-department", "nimra.png"),
     bio: "Supports biomaterials research, laboratory testing, and formulation development activities",
   },
   {
-    name: "Muhammad Ali",
-    role: "Junior Scientist",
+    name: "Mohammad ALI",
+    role: "Junior Research Scientist",
     image: teamImage("rd-wing/biomaterials-department", "ali.jpeg"),
     bio: "Assists biomaterials research, analytical testing, and project documentation.",
   },
@@ -133,6 +135,12 @@ export const SOFTWARE_DEPARTMENT: LeadershipMember[] = [
     role: "AI Software Manager",
     image: teamImage("software-department", "amir.jpeg"),
     bio: "Leads AI and machine learning initiatives for clinical and healthcare software.",
+  },
+  {
+    name: "Muhammad Hussain Ahmad Bilal",
+    role: "Software Engineer",
+    image: teamImage("software-department", "hussain.png"),
+    bio: "Develops and maintains medical software applications across the software engineering lifecycle.",
   },
 ];
 
