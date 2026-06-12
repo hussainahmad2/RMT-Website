@@ -1179,7 +1179,7 @@ function QualityDepartmentPanel({ dept }: { dept: QualityDepartment }) {
         <div className="bg-primary/5 border border-primary/15 rounded-xl p-5">
           <p className="text-sm text-muted-foreground leading-relaxed">
             <strong className="text-foreground font-medium">QD Core Functions: </strong>
-            {dept.footerNote.replace(/^QD Core Functions across all R&D activities:\s*/, "")}
+            {dept.footerNote.replace(/^QD Core Functions across all Research and Development activities:\s*/, "")}
           </p>
         </div>
       )}
@@ -1202,7 +1202,7 @@ function QualityTestingServiceExtras() {
           <SectionHeading
             eyebrow="Organisation"
             title="Quality Departments"
-            description="QD leads all quality activities with collaboration across EMD, SD, BMD, PD, PRD, and Supply Chain — from R&D bench to production release."
+            description="QD leads all quality activities with collaboration across EMD, SD, BMD, PD, PRD, and Supply Chain — from Research and Development bench to production release."
             light
           />
           <div className="flex flex-wrap gap-2 mb-8">
@@ -1375,6 +1375,7 @@ const SUB_SERVICE_BADGE_LABEL: Record<string, Record<string, string>> = {
   "quality-testing": {
     "quality-assurance": "Quality Assurance",
     "sqa-samd-simd": "Software Quality Assurance",
+    "qc-rd": "QC — Research and Development",
   },
 };
 
@@ -3214,16 +3215,18 @@ export function ServiceDetail({
             </nav>
 
             <div className="max-w-4xl">
-              <div className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 backdrop-blur-sm border ${isSoftwareAI ? "bg-cyan-400/10 border-cyan-400/25" : "bg-white/8 border-white/20"}`}>
-                <span className={`w-2 h-2 rounded-full animate-pulse shrink-0 ${isSoftwareAI ? "bg-cyan-400" : "bg-primary"}`} />
-                <span className={`text-xs font-bold uppercase tracking-[0.18em] ${isSoftwareAI ? "text-cyan-200" : "text-white/85"}`}>{service.shortName}</span>
-                {SERVICE_STANDARDS[service.slug]?.[0] && (
-                  <>
-                    <span className="w-px h-3 bg-white/20" />
-                    <span className="text-white/50 text-xs">{SERVICE_STANDARDS[service.slug][0]}</span>
-                  </>
-                )}
-              </div>
+              {!isQualityTesting && (
+                <div className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 backdrop-blur-sm border ${isSoftwareAI ? "bg-cyan-400/10 border-cyan-400/25" : "bg-white/8 border-white/20"}`}>
+                  <span className={`w-2 h-2 rounded-full animate-pulse shrink-0 ${isSoftwareAI ? "bg-cyan-400" : "bg-primary"}`} />
+                  <span className={`text-xs font-bold uppercase tracking-[0.18em] ${isSoftwareAI ? "text-cyan-200" : "text-white/85"}`}>{service.shortName}</span>
+                  {SERVICE_STANDARDS[service.slug]?.[0] && (
+                    <>
+                      <span className="w-px h-3 bg-white/20" />
+                      <span className="text-white/50 text-xs">{SERVICE_STANDARDS[service.slug][0]}</span>
+                    </>
+                  )}
+                </div>
+              )}
 
               <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-black text-white mb-5 leading-[0.95] tracking-tight">
                 {isSoftwareAI ? (

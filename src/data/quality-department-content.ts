@@ -19,7 +19,7 @@ export const QUALITY_DEPARTMENT_INTRO = {
   badge: "ISO 13485 · IEC 60601 · ISO 14971",
   title: "Quality Department Services",
   description:
-    "Hands-on testing, inspection, sign-off, and compliance support across all product lines — from R&D bench to production release. QD leads all quality activities with department collaboration across EMD, SD, BMD, PD, PRD, and SC.",
+    "Hands-on testing, inspection, sign-off, and compliance support across all product lines — from Research and Development bench to production release. QD leads all quality activities with department collaboration across EMD, SD, BMD, PD, PRD, and SC.",
 } as const;
 
 export const QUALITY_WHY_CHOOSE = [
@@ -347,8 +347,8 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
   },
   {
     id: "qcrd",
-    tabLabel: "QC — R&D",
-    name: "Quality Control — R&D (PD · EMD · BMD)",
+    tabLabel: "QC — Research and Development",
+    name: "Quality Control — Research and Development (PD · EMD · BMD)",
     description:
       "Quality oversight embedded in the product development lifecycle for active and non-active medical devices — from design verification through transfer to manufacturing. QD collaborates with PD, EMD, and BMD.",
     standards: ["ISO 14971", "ISO 13485 §7.3", "IEC 60601-1", "PD · QD · BMD"],
@@ -481,6 +481,6 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
       },
     ],
     footerNote:
-      "QD Core Functions across all R&D activities: Test plan creation for all departments · Inspection reports (signed & stamped) · Module-level & system-level integration testing · Performance & usability testing · Bi-monthly QC review meetings · QC pass → CEO presentation (QD + Relevant Dept. Head)",
+      "QD Core Functions across all Research and Development activities: Test plan creation for all departments · Inspection reports (signed & stamped) · Module-level & system-level integration testing · Performance & usability testing · Bi-monthly QC review meetings · QC pass → CEO presentation (QD + Relevant Dept. Head)",
   },
 ];

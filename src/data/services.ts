@@ -619,13 +619,13 @@ export const ALL_SERVICES: ServiceData[] = [
     slug: "quality-testing",
     name: "Quality Department Services",
     shortName: "Quality Testing",
-    tagline: "Hands-on testing, inspection, sign-off, and compliance support from R&D bench to production release.",
+    tagline: "Hands-on testing, inspection, sign-off, and compliance support from Research and Development bench to production release.",
     description:
-      "Quality department services across QA, production QC, software quality (SaMD/SiMD), and R&D quality control — ISO 13485-led with advanced lab infrastructure and cross-functional collaboration.",
+      "Quality department services across QA, production QC, software quality (SaMD/SiMD), and Research and Development quality control — ISO 13485-led with advanced lab infrastructure and cross-functional collaboration.",
     overview: [
-      "Our Quality Department delivers hands-on testing, inspection, sign-off, and compliance support across all product lines — from R&D bench to production release.",
+      "Our Quality Department delivers hands-on testing, inspection, sign-off, and compliance support across all product lines — from Research and Development bench to production release.",
       "QD leads all quality activities with department collaboration across EMD, SD, BMD, PD, PRD, and Supply Chain — ensuring traceable, audit-ready quality at every stage.",
-      "Services span QMS development and audit readiness, production inspection and QC lab testing, SaMD/SiMD software quality, and embedded R&D design control and V&V.",
+      "Services span QMS development and audit readiness, production inspection and QC lab testing, SaMD/SiMD software quality, and embedded Research and Development design control and V&V.",
     ],
     subServices: [
       {
@@ -680,7 +680,7 @@ export const ALL_SERVICES: ServiceData[] = [
       },
       {
         slug: "qc-rd",
-        name: "Quality Control — R&D",
+        name: "Quality Control — Research and Development",
         tagline: "Design control, V&V, active device testing, and interventional device QC.",
         overview: [
           "Quality oversight embedded in the product development lifecycle for active and non-active medical devices — from design verification through transfer to manufacturing.",
@@ -694,7 +694,7 @@ export const ALL_SERVICES: ServiceData[] = [
       "ISO 13485 QMS & Audit Readiness",
       "Production QC & Lab Testing",
       "SaMD / SiMD Software Quality",
-      "R&D Design Control & V&V",
+      "Research and Development Design Control & V&V",
       "IEC 60601 Electrical Safety",
       "Catheter & Stent Bench Testing",
     ],
