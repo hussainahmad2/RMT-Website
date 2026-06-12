@@ -74,6 +74,12 @@ import {
   type QualityDepartment,
 } from "@/data/quality-department-content";
 import {
+  SQA_CLOSING_NOTE,
+  SQA_SERVICE_SECTIONS,
+  SQA_STANDARDS,
+  SQA_WHY_CHOOSE,
+} from "@/data/sqa-services-content";
+import {
   FullBleedBlock,
   SectionHeading,
   LifecycleRoadmap,
@@ -1321,6 +1327,7 @@ const SUB_SERVICE_STANDARDS: Record<string, Record<string, string[]>> = {
   "quality-testing": {
     "quality-assurance": ["ISO 13485:2016", "QMSR (FDA 21 CFR 820)", "ISO 14971:2019", "DRAP Compliance"],
     "qc-rd": ["ISO 14971:2019", "IEC 60601-1", "ISO 81060", "ASTM Standards", "ISO 10555", "ISO 25539"],
+    "sqa-samd-simd": [...SQA_STANDARDS],
   },
 };
 
@@ -1332,6 +1339,12 @@ const SUB_SERVICE_APPROACH_STEPS: Record<string, Record<string, { step: string; 
       { step: "02", title: "Design", desc: "We develop scalable quality solutions tailored to your organization and regulatory needs." },
       { step: "03", title: "Implement", desc: "We work alongside your team to establish effective quality processes and documentation." },
       { step: "04", title: "Improve", desc: "We support continuous improvement through audits, CAPA management, training, and ongoing quality oversight." },
+    ],
+    "sqa-samd-simd": [
+      { step: "01", title: "Assess", desc: "Understand requirements, intended use, regulatory pathway, and quality objectives across the SDLC." },
+      { step: "02", title: "Plan", desc: "Develop test strategy, plans, traceability matrices, and risk-based testing approaches." },
+      { step: "03", title: "Execute", desc: "Manual, automated, performance, and compliance testing integrated with Agile Scrum delivery." },
+      { step: "04", title: "Assure", desc: "Defect management, validation documentation, and continuous quality improvement through release." },
     ],
   },
 };
@@ -1346,6 +1359,7 @@ const SUB_SERVICE_CAPABILITIES: Record<string, Record<string, string[]>> = {
       "Risk Management & Compliance",
       "Production & Testing Support",
     ],
+    "sqa-samd-simd": SQA_SERVICE_SECTIONS.map((s) => s.label),
   },
 };
 
@@ -1354,6 +1368,14 @@ const SUB_SERVICE_CLOSING_NOTE: Record<string, Record<string, string>> = {
   "quality-testing": {
     "quality-assurance":
       "Our QA services are designed to help organizations build robust quality systems, achieve regulatory compliance, improve operational performance, and maintain high standards of product quality and safety. We partner with clients to provide practical, efficient, and reliable quality assurance solutions tailored to their business needs.",
+    "sqa-samd-simd": SQA_CLOSING_NOTE,
+  },
+};
+
+/** Per sub-service Why Choose RMT items */
+const SUB_SERVICE_WHY_RMT: Record<string, Record<string, { title: string; desc: string }[]>> = {
+  "quality-testing": {
+    "sqa-samd-simd": SQA_WHY_CHOOSE.map((item) => ({ title: item.title, desc: item.description })),
   },
 };
 
@@ -1368,6 +1390,7 @@ const SUB_SERVICE_METRICS_HEADING: Record<string, Record<string, { eyebrow: stri
 const SUB_SERVICE_STANDARDS_HEADING: Record<string, Record<string, string>> = {
   "quality-testing": {
     "quality-assurance": "Built for Medical Device Quality & Compliance",
+    "sqa-samd-simd": "Software Quality & Testing Standards Expertise",
   },
 };
 
@@ -1384,6 +1407,7 @@ const SUB_SERVICE_BADGE_LABEL: Record<string, Record<string, string>> = {
 const SUB_SERVICE_CAPABILITIES_TITLE: Record<string, Record<string, string>> = {
   "quality-testing": {
     "quality-assurance": "All Quality Management Capabilities",
+    "sqa-samd-simd": "Our Core SQA Services",
   },
 };
 
@@ -2915,6 +2939,51 @@ function SubServiceImageFrame({
   );
 }
 
+/** Detailed SQA service catalogue for the Software Quality Assurance sub-service page */
+function SqaCoreServicesBlock() {
+  return (
+    <div className="space-y-12">
+      <AnimatedSection>
+        <div className="mb-6 pb-3 border-b border-border">
+          <p className="text-xs font-bold uppercase tracking-widest mb-1 text-primary">Service Catalogue</p>
+          <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Our Core SQA Services</h2>
+        </div>
+      </AnimatedSection>
+      {SQA_SERVICE_SECTIONS.map((section, si) => (
+        <AnimatedSection key={section.label}>
+          <h3 className="font-heading text-lg font-bold text-foreground mb-3 flex items-center gap-2">
+            <span className="w-8 h-0.5 bg-primary rounded-full" />
+            {section.label}
+          </h3>
+          {section.intro && (
+            <p className="text-sm text-muted-foreground leading-relaxed mb-4">{section.intro}</p>
+          )}
+          <div className="grid sm:grid-cols-2 gap-4">
+            {section.cards.map((card, ci) => (
+              <motion.div
+                key={card.title}
+                initial={{ opacity: 0, y: 12 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: si * 0.04 + ci * 0.03 }}
+                className="group bg-card border border-border rounded-xl p-5 hover:border-primary/30 hover:shadow-md transition-all"
+              >
+                <div className="flex items-start gap-3 mb-2">
+                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors shrink-0">
+                    <CheckCircle className="w-4 h-4" />
+                  </div>
+                  <h4 className="font-semibold text-foreground text-sm leading-snug pt-1">{card.title}</h4>
+                </div>
+                <p className="text-sm text-muted-foreground leading-relaxed pl-11">{card.description}</p>
+              </motion.div>
+            ))}
+          </div>
+        </AnimatedSection>
+      ))}
+    </div>
+  );
+}
+
 /** Rich in-depth layout for Software & AI sub-service pages */
 function SubServiceContent({
   subService,
@@ -2928,6 +2997,8 @@ function SubServiceContent({
   subPageIcons: React.ElementType[];
 }) {
   const isSoftwareAI = service.slug === "software-ai";
+  const isSqa = service.slug === "quality-testing" && subService.slug === "sqa-samd-simd";
+  const whyRmt = SUB_SERVICE_WHY_RMT[service.slug]?.[subService.slug];
   const SubIcon = SOFTWARE_AI_SUB_ICONS[subService.slug] ?? (SERVICE_SCATTER_ICONS[service.slug]?.[0] ?? CheckCircle);
   const approachSteps =
     SUB_SERVICE_APPROACH_STEPS[service.slug]?.[subService.slug] ??
@@ -3030,6 +3101,10 @@ function SubServiceContent({
         </div>
       </AnimatedSection>
 
+      {isSqa && <SqaCoreServicesBlock />}
+
+      {whyRmt && <ServiceWhyRMTBlock items={whyRmt} variant={isSoftwareAI ? "software-ai" : "default"} />}
+
       {/* ── Key metrics / achievements ── */}
       {subServiceStats ? (
         <KeyMetricsSection
@@ -3039,6 +3114,7 @@ function SubServiceContent({
           heading={metricsHeading?.heading}
         />
       ) : (
+        !isSqa &&
         SERVICE_SIDEBAR_STATS[service.slug] &&
         service.slug !== "bmd" &&
         service.slug !== "mbl-laboratory" && (

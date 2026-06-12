@@ -1,3 +1,5 @@
+import { SQA_OVERVIEW, SQA_STANDARDS, sqaSectionsToQualityCards } from "./sqa-services-content";
+
 export type QualityServiceCard = {
   title: string;
   items: string[];
@@ -261,89 +263,10 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
     id: "sqa",
     tabLabel: "Software Quality Assurance",
     name: "Software Quality Assurance",
-    description:
-      "Quality oversight for device & machine firmware, web/mobile applications, and Software as/in a Medical Device — spanning IEC 62304, ISO 13485 design controls, and cybersecurity requirements. QD collaborates closely with SD.",
-    standards: ["IEC 62304", "ISO 13485", "SD · QD"],
+    description: SQA_OVERVIEW.join(" "),
+    standards: [...SQA_STANDARDS],
     accent: "purple",
-    sections: [
-      {
-        label: "Testing & Verification",
-        cards: [
-          {
-            title: "System & Integration Testing",
-            owner: "QD",
-            items: [
-              "Embedded firmware & device software testing",
-              "Unit & integration testing (SD self, prior to QD handover)",
-              "UAT / usability testing — web & mobile platforms",
-              "Regression testing after every significant build",
-            ],
-          },
-          {
-            title: "Performance & Load Testing",
-            owner: "QD",
-            items: [
-              "Application scalability & response testing",
-              "Performance baseline & threshold documentation",
-              "Requirements traceability review",
-              "Test case–to–requirement linkage (RTM)",
-            ],
-          },
-          {
-            title: "Security & Penetration Testing",
-            owner: "SD",
-            items: [
-              "IT services & infrastructure security testing",
-              "Cybersecurity risk assessment & threat modeling",
-              "STRIDE / TARA analysis for active devices",
-              "Post-market cybersecurity monitoring",
-            ],
-          },
-          {
-            title: "IT Operations",
-            owner: "SD",
-            items: [
-              "Scheduled maintenance review cycles",
-              "IT services & infrastructure maintenance",
-              "Software change & configuration management",
-              "Third-party / SOUP component controls",
-            ],
-          },
-        ],
-      },
-      {
-        label: "SaMD / SiMD Compliance",
-        cards: [
-          {
-            title: "Software Lifecycle (IEC 62304)",
-            items: [
-              "Software development plan & classification (Class A/B/C)",
-              "Architecture & detailed design review",
-              "Change management & problem resolution",
-              "Legacy software & SOUP evaluation",
-            ],
-          },
-          {
-            title: "SaMD Regulatory Dossier",
-            items: [
-              "SaMD risk classification & intended use documentation",
-              "Technical documentation preparation",
-              "Clinical evaluation support",
-              "Post-market surveillance planning",
-            ],
-          },
-          {
-            title: "Traceability & V&V",
-            items: [
-              "Requirements traceability matrix (RTM)",
-              "Design input–output linkage",
-              "Hazard-to-test traceability",
-              "V&V protocol & report review",
-            ],
-          },
-        ],
-      },
-    ],
+    sections: sqaSectionsToQualityCards(),
   },
   {
     id: "qcrd",
