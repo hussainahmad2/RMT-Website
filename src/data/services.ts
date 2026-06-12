@@ -681,12 +681,21 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "qc-rd",
         name: "Quality Control — Research and Development",
-        tagline: "Design control, V&V, active device testing, and interventional device QC.",
+        tagline:
+          "Design control, V&V, Class I–III medical device testing verification, validation, quality inspection, and interventional device QC.",
         overview: [
           "Quality oversight embedded in the product development lifecycle for active and non-active medical devices — from design verification through transfer to manufacturing.",
-          "Covers design control §7.3, ISO 14971 risk management, IEC 60601 testing, catheter/stent QC, biocompatibility coordination, and equipment qualification.",
+          "Covers design control §7.3, ISO 14971 risk management, IEC 60601 testing, cardiovascular stent delivery system testing per ISO 10555 and ISO 25539, biocompatibility coordination, and equipment qualification.",
         ],
-        keyPoints: ["Design control & DHF", "ISO 14971 risk management", "IEC 60601 & EMC testing", "Catheter & stent performance testing", "IQ/OQ/PQ qualification"],
+        keyPoints: [
+          "Design control & DHF",
+          "ISO 14971 risk management",
+          "IEC 60601 & EMC testing",
+          "Cardiovascular stent delivery system testing — ISO 10555 series & ISO 25539",
+          "Class I–III device verification, validation & quality inspection",
+          "Interventional device QC",
+          "IQ/OQ/PQ qualification",
+        ],
         deliverables: ["V&V protocols & reports", "Risk management file support", "Design review records", "Qualification documentation"],
       },
     ],

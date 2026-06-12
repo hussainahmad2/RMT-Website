@@ -351,7 +351,7 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
     name: "Quality Control — Research and Development (PD · EMD · BMD)",
     description:
       "Quality oversight embedded in the product development lifecycle for active and non-active medical devices — from design verification through transfer to manufacturing. QD collaborates with PD, EMD, and BMD.",
-    standards: ["ISO 14971", "ISO 13485 §7.3", "IEC 60601-1", "PD · QD · BMD"],
+    standards: ["ISO 14971:2019", "IEC 60601-1", "ISO 81060", "ASTM Standards", "ISO 10555", "ISO 25539"],
     accent: "coral",
     sections: [
       {
@@ -407,6 +407,7 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
             owner: "QD",
             items: [
               "IEC 60601-1 compliance — safety & essential performance",
+              "ISO 81060 — non-invasive sphygmomanometers",
               "ISO 80601-2-30 — NIBP device requirements",
               "EMC testing (electromagnetic compatibility)",
               "PCB assembly evaluation for active devices",
@@ -438,13 +439,13 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
         label: "Interventional & Implantable Device Testing",
         cards: [
           {
-            title: "Catheter Performance Testing",
+            title: "Cardiovascular Stent Delivery System Testing",
             owner: "QD",
             items: [
-              "Trackability & pushability — tortuous pathway navigation",
-              "Flexural & kink resistance (stents & guide catheters)",
+              "Testing per ISO 10555 series",
+              "Compliance with ISO 25539",
               "Stent deliverability under simulated physiological conditions",
-              "Corrosion resistance & material evaluation",
+              "Trackability, pushability & corrosion resistance evaluation",
             ],
           },
           {

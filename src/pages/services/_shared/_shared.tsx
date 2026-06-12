@@ -1320,6 +1320,7 @@ const SUB_SERVICE_SIDEBAR_STATS: Record<string, Record<string, { label: string; 
 const SUB_SERVICE_STANDARDS: Record<string, Record<string, string[]>> = {
   "quality-testing": {
     "quality-assurance": ["ISO 13485:2016", "QMSR (FDA 21 CFR 820)", "ISO 14971:2019", "DRAP Compliance"],
+    "qc-rd": ["ISO 14971:2019", "IEC 60601-1", "ISO 81060", "ASTM Standards", "ISO 10555", "ISO 25539"],
   },
 };
 
