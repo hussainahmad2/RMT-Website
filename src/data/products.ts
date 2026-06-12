@@ -1,5 +1,9 @@
 import { BMD_PRODUCTS } from "@/data/bmd-content";
-import { MANUFACTURING_PRODUCTS } from "@/data/revive-manufacturing-content";
+import {
+  MANUFACTURING_HERO_IMAGES,
+  MANUFACTURING_PRODUCTS,
+  MANUFACTURING_PRODUCTS_MADE,
+} from "@/data/revive-manufacturing-content";
 import { ENGINEERING_OTHER_PRODUCT_DESIGN } from "@/data/engineering-content";
 import { SOFTWARE_BANNER_IMAGE, SOFTWARE_DEPARTMENT_PRODUCTS } from "@/data/software-products";
 
@@ -80,15 +84,25 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     description: "ISO cleanroom-manufactured devices and validated production capabilities from our contract manufacturing division.",
     serviceSlug: "contract-manufacturing",
     serviceName: "Contract Manufacturing",
-    bannerImage: "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=1600&q=85",
-    products: MANUFACTURING_PRODUCTS.map((p, i) => ({
-      name: p.name,
-      description: p.description,
-      features: p.features,
-      image: [PRODUCT_IMAGES.catheter, PRODUCT_IMAGES.angiography, PRODUCT_IMAGES.microspheres, PRODUCT_IMAGES.cleanroom, PRODUCT_IMAGES.inflation][i],
-      tag: "Class II",
-      spec: "ISO 13485",
-    })),
+    bannerImage: MANUFACTURING_HERO_IMAGES[0],
+    products: [
+      ...MANUFACTURING_PRODUCTS.map((p) => ({
+        name: p.name,
+        description: p.description,
+        features: p.features,
+        image: p.name === "Diagnostic Catheters" ? "/mdm/angiographic-catheter.jpeg" : "/mdm/facility-1.jpeg",
+        tag: "Class II",
+        spec: "ISO 13485",
+      })),
+      ...MANUFACTURING_PRODUCTS_MADE.filter((p) => p.name !== "Angiographic Catheters").map((p) => ({
+        name: p.name,
+        description: p.description,
+        features: p.features.map((f) => `${f.title} — ${f.description}`),
+        image: p.image,
+        tag: p.category,
+        spec: p.specs.join(" · "),
+      })),
+    ],
   },
   {
     id: "biomaterials",

@@ -94,6 +94,18 @@ export const RD_WING_BIOMATERIALS: LeadershipMember[] = [
     image: teamImage("rd-wing/biomaterials-department", "waleed.webp"),
     bio: "Supports biomaterials R&D strategy, project delivery, and technical oversight.",
   },
+  {
+    name: "Nimra Shabbir",
+    role: "Junior Scientist",
+    image: teamImage("rd-wing/biomaterials-department", "nimra.png"),
+    bio: "Supports biomaterials research, laboratory testing, and formulation development activities",
+  },
+  {
+    name: "Muhammad Ali",
+    role: "Junior Scientist",
+    image: teamImage("rd-wing/biomaterials-department", "ali.jpeg"),
+    bio: "Assists biomaterials research, analytical testing, and project documentation.",
+  },
 ];
 
 /** Software Department */
@@ -173,7 +185,7 @@ export const QUALITY_CONTROL_WING: LeadershipMember[] = [
   {
     name: "Muhammad Wahaj",
     role: "Manager, QC (Production)",
-    image: teamImage("quality-control-wing", "wahaj.webp"),
+    image: teamImage("quality-control-wing", "wahaj.png"),
     bio: "Manages production QC, in-process inspection, and release testing for manufactured devices.",
   },
   {
@@ -189,13 +201,13 @@ export const SUPPLY_CHAIN_WING: LeadershipMember[] = [
   {
     name: "Syed Mir",
     role: "Manager, Supply Chain",
-    image: teamImage("supply-chain-wing", "mir.jpg"),
+    image: teamImage("supply-chain-wing", "mir.png"),
     bio: "Leads vendor management, procurement, and logistics for medical device programmes.",
   },
   {
-    name: "Muhammad Fahad",
+    name: "Muhammad Fawad Idrees",
     role: "Assistant Manager, Supply Chain",
-    image: teamImage("supply-chain-wing", "fahad.jpg"),
+    image: teamImage("supply-chain-wing", "fawad.jpeg"),
     bio: "Supports procurement, purchase orders, and supply chain coordination with production teams.",
   },
 ];
@@ -203,7 +215,7 @@ export const SUPPLY_CHAIN_WING: LeadershipMember[] = [
 /** Finance Department */
 export const FINANCE_DEPARTMENT: LeadershipMember[] = [
   {
-    name: "Farman",
+    name: "Farman Ali",
     role: "Manager, Finance",
     image: teamImage("finance-department", "farman.jpg"),
     bio: "Leads budgeting, accounts, and financial reporting across global operations.",
@@ -235,9 +247,15 @@ export const HR_ADMIN_SUPPORT_WING: LeadershipMember[] = [
 /** Product Development Wing */
 export const PRODUCT_DEVELOPMENT_WING: LeadershipMember[] = [
   {
+    name: "Asad Abdullah",
+    role: "GM Product Development",
+    image: teamImage("product-development-wing", "asad-abdullah.jpeg"),
+    bio: "Leads product development strategy, turnkey programmes, and cross-functional delivery from concept through regulatory-ready commercialization.",
+  },
+  {
     name: "Muhammad Umar Javed",
     role: "Assistant Manager, Product Development",
-    image: teamImage("product-development-wing", "umar.jpeg"),
+    image: teamImage("product-development-wing", "umar.png"),
     bio: "Supports product development from concept through design validation and manufacturing transfer.",
   },
   {

@@ -1,31 +1,41 @@
-export const PRODUCT_DEVELOPMENT_HERO_STATS = [
-  { label: "Lifecycle Coverage", value: "Concept → Market" },
-  { label: "Disciplines", value: "HW · SW · Regulatory" },
-  { label: "Engagement", value: "Turnkey & Modular" },
-  { label: "Standards", value: "ISO · IEC · FDA" },
+export const PRODUCT_DEVELOPMENT_INTRO = [
+  "At RMT Medical Technologies, we provide comprehensive turnkey product development and regulatory consulting services for medical devices. Our expertise covers the complete development lifecycle of vascular intervention and minimally invasive devices, including stents, PTCA balloon catheters, PTA balloon catheters, guide catheters, angiographic catheters, introducer sheaths, inflation devices, and other disposable medical devices.",
+  "We offer end-to-end product realization solutions, enabling our clients to focus on commercialization while we manage the technical, manufacturing, quality, and regulatory aspects of development.",
 ] as const;
+
+export const PRODUCT_DEVELOPMENT_TAGLINE =
+  "Turnkey product development and regulatory consultancy — from concept through validation, manufacturing transfer, and market registration.";
+
+export const PRODUCT_DEVELOPMENT_KEY_METRICS = [
+  { label: "Products Developed & Delivered", value: "15+" },
+  { label: "Regulatory Standards & Frameworks", value: "50+" },
+  { label: "Product Development Lifecycle Stages", value: "6+" },
+  { label: "Years Combined Industry Experience", value: "15+" },
+  { label: "Turnkey Development Services", value: "End-to-End" },
+] as const;
+
+export const PRODUCT_DEVELOPMENT_LICENCES = ["DRAP"] as const;
 
 export const PRODUCT_DEVELOPMENT_PHASES = [
   {
-    title: "Concept & Feasibility",
+    title: "Concept Development & Feasibility",
     items: [
-      "Clinical need assessment",
-      "Market and competitor analysis",
-      "Product requirement definition",
+      "User needs and market assessment",
+      "Defining design input",
       "Technical feasibility studies",
-      "Risk analysis and mitigation planning",
-      "Technology selection",
+      "Material selection",
+      "Risk assessment",
+      "Commercial viability evaluation",
     ],
   },
   {
     title: "Product Design & Engineering",
     items: [
-      "Mechanical design and CAD development",
-      "Electronic hardware and PCB design",
-      "Embedded systems development",
-      "Software and mobile application development",
+      "Product architecture development",
+      "Mechanical design and CAD modeling",
+      "Design optimization",
+      "Engineering analysis and simulations",
       "Design for Manufacturability (DFM)",
-      "Design optimization and cost reduction",
     ],
   },
   {
@@ -33,21 +43,22 @@ export const PRODUCT_DEVELOPMENT_PHASES = [
     items: [
       "Rapid prototyping",
       "Functional prototype development",
-      "Alpha and beta prototypes",
-      "3D printing and model fabrication",
-      "Hardware and software integration",
-      "Iterative product refinement",
+      "Process development",
+      "Design refinement and optimization",
+      "Packaging development",
+      "Manufacturing feasibility assessment",
     ],
   },
   {
     title: "Verification & Validation",
     items: [
       "Design verification testing",
-      "Functional and performance testing",
-      "Reliability and environmental testing",
-      "Usability and human factors engineering",
-      "Product validation studies",
-      "Packaging and sterilization validation support",
+      "Functional and performance evaluation",
+      "Reliability and durability testing",
+      "Usability assessments",
+      "Packaging validation",
+      "Sterilization validation support",
+      "Risk management activities",
     ],
   },
   {
@@ -55,10 +66,23 @@ export const PRODUCT_DEVELOPMENT_PHASES = [
     items: [
       "Manufacturing process development",
       "Production documentation",
-      "Bill of Materials (BOM) preparation",
-      "Assembly procedures and work instructions",
-      "Test fixture development",
-      "Pilot production, supplier qualification, and scale-up",
+      "Assembly and inspection procedures",
+      "Process validation support",
+      "Supplier qualification",
+      "Technology transfer",
+      "Production scale-up support",
+    ],
+  },
+  {
+    title: "Regulatory & Quality Consultancy",
+    items: [
+      "ISO 13485 implementation",
+      "ISO 14971 risk management",
+      "Design control compliance",
+      "Technical documentation preparation",
+      "Validation services (IQ/OQ/PQ)",
+      "Product registration support",
+      "Regulatory strategy and submissions",
     ],
   },
 ] as const;
@@ -78,34 +102,34 @@ export const PRODUCT_DEVELOPMENT_REGULATORY = [
   {
     title: "Regulatory Compliance",
     items: [
-      "ISO 14971 Risk Management",
-      "IEC 62304 Software Lifecycle Compliance",
-      "IEC 60601 Medical Electrical Equipment Compliance",
-      "Usability Engineering Support",
-      "Design Control Documentation",
+      "ISO 14971 risk management",
+      "IEC 62304 software lifecycle compliance",
+      "IEC 60601 medical electrical equipment compliance",
+      "Usability engineering support",
+      "Design control documentation",
       "Regulatory gap assessments",
     ],
   },
   {
     title: "Technical Documentation",
     items: [
-      "Technical File preparation",
+      "Technical file preparation",
       "Design History File (DHF)",
       "Device Master Record (DMR)",
-      "Device Technical Documentation",
-      "Essential Requirements documentation",
+      "Device technical documentation",
+      "Essential requirements documentation",
       "Product registration dossiers",
     ],
   },
   {
     title: "Validation Services",
     items: [
-      "Process Validation",
-      "Sterilization Validation",
-      "Packaging Validation",
-      "Cleaning Validation",
-      "Equipment Qualification (IQ/OQ/PQ)",
-      "Software Validation",
+      "Process validation",
+      "Sterilization validation",
+      "Packaging validation",
+      "Cleaning validation",
+      "Equipment qualification (IQ/OQ/PQ)",
+      "Software validation",
     ],
   },
   {
@@ -113,6 +137,7 @@ export const PRODUCT_DEVELOPMENT_REGULATORY = [
     items: [
       "FDA submission support",
       "CE marking documentation support",
+      "DRAP product registration support",
       "International product registration support",
       "Regulatory strategy development",
       "Change management and compliance support",
@@ -121,27 +146,62 @@ export const PRODUCT_DEVELOPMENT_REGULATORY = [
 ] as const;
 
 export const PRODUCT_DEVELOPMENT_MANUFACTURING = [
-  "Manufacturing line setup",
-  "Production process development",
-  "Vendor and supplier identification",
-  "Production equipment selection",
-  "Quality control system implementation",
-  "Manufacturing documentation",
-  "Staff training and technology transfer",
+  {
+    title: "Manufacturing Line Setup",
+    description:
+      "Design and implementation of efficient, GMP-compliant production lines tailored for medical devices.",
+  },
+  {
+    title: "Production Process Development",
+    description:
+      "Optimization of manufacturing processes for quality, efficiency, repeatability, and cost-effectiveness.",
+  },
+  {
+    title: "Vendor & Supplier Qualification",
+    description:
+      "Identification, evaluation, auditing, and qualification of reliable suppliers and contract manufacturers.",
+  },
+  {
+    title: "Production Equipment Selection",
+    description:
+      "Strategic selection, qualification, and validation of manufacturing equipment and tooling.",
+  },
+  {
+    title: "Quality Control System Implementation",
+    description:
+      "Development and deployment of robust quality management systems aligned with ISO 13485.",
+  },
+  {
+    title: "Manufacturing Documentation",
+    description:
+      "Creation of complete, audit-ready production documentation, work instructions, SOPs, and quality records.",
+  },
+  {
+    title: "Staff Training & Technology Transfer",
+    description:
+      "Comprehensive training programs and smooth knowledge transfer to your internal manufacturing team.",
+  },
+] as const;
+
+export const PRODUCT_DEVELOPMENT_CAPABILITIES = [
+  "Turnkey Product Development — complete product realization from idea to market",
+  "Design & Engineering — CAD, simulations, and DFM expertise",
+  "Prototyping to Validation — rapid prototypes, testing & regulatory-ready documentation",
+  "Regulatory Excellence — ISO, FDA, CE, DRAP, and global compliance support",
 ] as const;
 
 export const PRODUCT_DEVELOPMENT_WHY = [
   {
     title: "Complete Turnkey Solutions",
-    description: "End-to-end product realization so you can focus on business growth while we manage technical and regulatory complexity.",
+    description: "End-to-end product realization so you can focus on commercialization while we manage technical, manufacturing, quality, and regulatory complexity.",
   },
   {
-    title: "Medical Device Specialists",
-    description: "Dedicated teams across engineering, quality, regulatory, and manufacturing with deep healthcare technology experience.",
+    title: "Vascular & Interventional Expertise",
+    description: "Deep experience across stents, balloon catheters, guide catheters, angiographic catheters, introducer sheaths, and disposable devices.",
   },
   {
     title: "Regulatory Compliance Expertise",
-    description: "Structured pathways for ISO, IEC, FDA, and CE requirements — minimizing approval timelines.",
+    description: "Structured pathways for ISO, IEC, FDA, CE, and DRAP requirements — minimizing approval timelines.",
   },
   {
     title: "Proven Complex Technologies",

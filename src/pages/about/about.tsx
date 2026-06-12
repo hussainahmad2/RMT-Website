@@ -265,7 +265,7 @@ export default function About() {
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
-              Turnkey Regulatory Commissioning and Regulatory Approvals
+              Product Development Wing
             </h2>
           </AnimatedSection>
 

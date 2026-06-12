@@ -56,13 +56,19 @@ import {
   MANUFACTURING_DEVELOPMENT_PHASES,
   MANUFACTURING_DEVICE_CLASSES,
   MANUFACTURING_ENVIRONMENTAL_CONTROLS,
-  MANUFACTURING_HERO_STATS,
+  MANUFACTURING_HERO_IMAGES,
+  MANUFACTURING_KEY_METRICS,
+  MANUFACTURING_LICENCES,
   MANUFACTURING_PRODUCTS,
+  MANUFACTURING_PRODUCTS_MADE,
   MANUFACTURING_QUALITY_POINTS,
   MANUFACTURING_TESTING_SERVICES,
   MANUFACTURING_WHY_CHOOSE,
+  type ManufacturingProductMade,
 } from "@/data/revive-manufacturing-content";
 import {
+  PRODUCT_DEVELOPMENT_KEY_METRICS,
+  PRODUCT_DEVELOPMENT_LICENCES,
   PRODUCT_DEVELOPMENT_PHASES,
   PRODUCT_DEVELOPMENT_REGULATORY,
   PRODUCT_DEVELOPMENT_MANUFACTURING,
@@ -86,7 +92,6 @@ import {
   PillarGrid,
   IconFeatureStrip,
   IconCardGrid,
-  StatBadgeRow,
   WhyChooseGrid,
   VerticalTimeline,
 } from "./service-extras-visual";
@@ -868,14 +873,46 @@ const MANUFACTURING_PRODUCT_ICONS: Record<string, LucideIcon> = {
 
 const MANUFACTURING_DEVICE_ICONS = [Package, Layers, Heart, Zap, Truck, TrendingUp] as const;
 
-function ManufacturingServiceExtras() {
-  const heroStats = [
-    { label: MANUFACTURING_HERO_STATS[0].label, value: MANUFACTURING_HERO_STATS[0].value, icon: Wind },
-    { label: MANUFACTURING_HERO_STATS[1].label, value: MANUFACTURING_HERO_STATS[1].value, icon: Layers },
-    { label: MANUFACTURING_HERO_STATS[2].label, value: MANUFACTURING_HERO_STATS[2].value, icon: Medal },
-    { label: MANUFACTURING_HERO_STATS[3].label, value: MANUFACTURING_HERO_STATS[3].value, icon: Target },
-  ];
+function ManufacturingProductMadeCard({ product, reverse = false }: { product: ManufacturingProductMade; reverse?: boolean }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, y: 20 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true }}
+      className={`grid lg:grid-cols-2 gap-8 lg:gap-10 items-center ${reverse ? "lg:[direction:rtl]" : ""}`}
+    >
+      <div className={reverse ? "lg:[direction:ltr]" : ""}>
+        <p className="text-xs font-bold uppercase tracking-widest text-primary mb-2">{product.category}</p>
+        <h3 className="font-heading text-2xl font-bold text-foreground mb-3">{product.name}</h3>
+        <p className="text-muted-foreground text-sm leading-relaxed mb-5">{product.description}</p>
+        <div className="space-y-3 mb-5">
+          {product.features.map((f) => (
+            <div key={f.title} className="flex items-start gap-3">
+              <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
+              <div>
+                <p className="text-sm font-semibold text-foreground">{f.title}</p>
+                <p className="text-xs text-muted-foreground leading-relaxed">{f.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {product.specs.map((spec) => (
+            <span key={spec} className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/8 text-primary border border-primary/15">
+              {spec}
+            </span>
+          ))}
+        </div>
+      </div>
+      <div className={`relative rounded-2xl overflow-hidden aspect-[4/3] border border-border shadow-lg ${reverse ? "lg:[direction:ltr]" : ""}`}>
+        <img src={product.image} alt={product.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+        <div className="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent pointer-events-none" />
+      </div>
+    </motion.div>
+  );
+}
 
+function ManufacturingServiceExtras() {
   return (
     <div className="space-y-0">
       <FullBleedBlock bgClassName="bg-gradient-to-br from-[#0f172a] via-[#1e293b] to-[#0f172a] relative overflow-hidden">
@@ -884,11 +921,10 @@ function ManufacturingServiceExtras() {
           <SectionHeading
             eyebrow="Quality & Compliance"
             title="Built-In Quality at Every Stage"
-            description="Every device is backed by documented, validated, and auditable processes — ISO 13485 and DRAP-registered operations."
+            description="Every device is backed by documented, validated, and auditable processes — ISO 13485-certified operations in controlled cleanroom environments."
             light
           />
-          <StatBadgeRow items={heroStats} />
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
+          <div className="grid sm:grid-cols-2 gap-3">
             {MANUFACTURING_QUALITY_POINTS.map((point, i) => (
               <motion.div
                 key={point}
@@ -926,6 +962,21 @@ function ManufacturingServiceExtras() {
       </FullBleedBlock>
 
       <FullBleedBlock bgClassName="bg-secondary/40">
+        <AnimatedSection>
+          <SectionHeading
+            eyebrow="Products Made"
+            title="Clinical-Grade Devices We Manufacture"
+            description="Vascular and interventional devices engineered for precision, safety, and regulatory compliance."
+          />
+          <div className="space-y-16">
+            {MANUFACTURING_PRODUCTS_MADE.map((product, i) => (
+              <ManufacturingProductMadeCard key={product.name} product={product} reverse={i % 2 === 1} />
+            ))}
+          </div>
+        </AnimatedSection>
+      </FullBleedBlock>
+
+      <FullBleedBlock bgClassName="bg-background">
         <AnimatedSection>
           <SectionHeading
             eyebrow="Capabilities"
@@ -1040,7 +1091,7 @@ function ManufacturingServiceExtras() {
   );
 }
 
-const PD_PHASE_ICONS = [Lightbulb, PenTool, Boxes, FlaskConical, Factory] as const;
+const PD_PHASE_ICONS = [Lightbulb, PenTool, Boxes, FlaskConical, Factory, ShieldCheck] as const;
 const PD_REG_ICONS = [ShieldCheck, ScrollText, FileText, ClipboardCheck, Globe] as const;
 
 /* ---- Product Development Wing (main service page) ---- */
@@ -1054,7 +1105,7 @@ function ProductDevelopmentServiceExtras() {
           <SectionHeading
             eyebrow="Lifecycle"
             title="Product Development Lifecycle"
-            description="Structured phases from clinical need through commercial-ready design — we manage technical and regulatory complexity so you can focus on growth."
+            description="Six structured phases from concept development through regulatory and quality consultancy — end-to-end turnkey realization for vascular and interventional devices."
             light
           />
           <LifecycleRoadmap
@@ -1072,8 +1123,8 @@ function ProductDevelopmentServiceExtras() {
         <AnimatedSection>
           <SectionHeading
             eyebrow="Compliance"
-            title="Regulatory Consultancy Services"
-            description="Structured pathways for ISO, IEC, FDA, and CE requirements — minimizing approval timelines with audit-ready documentation."
+            title="Regulatory & Quality Consultancy Services"
+            description="Structured pathways for ISO, IEC, FDA, CE, and DRAP requirements — minimizing approval timelines with audit-ready documentation."
           />
           <PillarGrid
             pillars={PRODUCT_DEVELOPMENT_REGULATORY.map((block, i) => ({
@@ -1089,16 +1140,23 @@ function ProductDevelopmentServiceExtras() {
         <AnimatedSection>
           <SectionHeading
             eyebrow="Commercialization"
-            title="Turnkey Manufacturing Solutions"
-            description="Establishing sustainable manufacturing operations for long-term commercial success."
+            title="Turnkey Manufacturing Consultancy Solutions"
+            description="Establishing sustainable, GMP-aligned manufacturing operations for long-term commercial success."
           />
-          <IconFeatureStrip items={PRODUCT_DEVELOPMENT_MANUFACTURING} icon={Truck} />
+          <IconCardGrid
+            columns={2}
+            cards={PRODUCT_DEVELOPMENT_MANUFACTURING.map((svc) => ({
+              title: svc.title,
+              description: svc.description,
+              icon: Truck,
+            }))}
+          />
         </AnimatedSection>
       </FullBleedBlock>
 
       <FullBleedBlock bgClassName="bg-secondary/30">
         <AnimatedSection>
-          <SectionHeading title="Why RMT for Regulatory Commissioning & Approvals" />
+          <SectionHeading title="Why Choose RMT for Product Development" />
           <WhyChooseGrid
             items={PRODUCT_DEVELOPMENT_WHY.map((w, i) => ({
               ...w,
@@ -1275,21 +1333,27 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
 const SERVICE_STANDARDS: Record<string, string[]> = {
   "regulatory-compliance":   ["ISO 13485", "ISO 14971", "ISO 10993-1:2025", "ISO 10993-17:2023", "EU MDR 2017/745", "FDA 21 CFR"],
   "software-ai":             ["IEC 62304", "FDA SaMD Guidance", "IEC 82304", "EU MDR Rule 11", "HIPAA / SOC 2"],
-  "product-development":     ["ISO 13485", "ISO 14971", "IEC 62304", "IEC 60601", "FDA / CE"],
+  "product-development":     ["ISO 13485", "ISO 14971", "IEC 62304", "IEC 60601", "FDA", "CE"],
   "quality-testing":         ["ISO 13485", "ISO 10993", "IEC 60601-1", "IEC 62304", "ISO 14971"],
   "automation-services":       ["IEC 61131", "ISO 13849", "Modbus / Profibus", "GMP", "ISO 13485"],
   "design-fabrication":        ["SOLIDWORKS", "ANSYS", "COMSOL", "DFM / DFA", "ISO 13485"],
   "engineering-product-development": ["IEC 62304", "IPC-2221", "IEC 60601-1", "STM32 / ESP32", "ISO 13485"],
   "bmd":                     ["ISO 10993", "ISO 17025", "ICH Q1A(R2)", "ISO 13485", "FDA / EU MDR"],
   "mbl-laboratory":          ["GMP Compliance", "ISO 13485", "USP <71>", "USP <85>", "EU Pharmacopoeia"],
-  "contract-manufacturing":  ["ISO 13485", "ISO 14644", "ISO 14971", "DRAP", "ISO 10993"],
+  "contract-manufacturing":  ["ISO 13485", "ISO 14644", "ISO 14971", "ISO 10993"],
 };
 
 /* ---- Per-service key stats shown in sidebar ---- */
 const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon: React.ElementType }[]> = {
   "regulatory-compliance":   [{ label: "Approval Rate", value: "98%", icon: Medal }, { label: "Jurisdictions", value: "40+", icon: Globe }, { label: "Submissions", value: "1,200+", icon: FileCheck }],
   "software-ai":             [{ label: "AI Models Deployed", value: "80+", icon: Brain }, { label: "Platforms Supported", value: "15+", icon: LayoutDashboard }, { label: "Compliance Rate", value: "100%", icon: ShieldCheck }],
-  "product-development":     [{ label: "Lifecycle Phases", value: "6+", icon: Layers }, { label: "Regulatory Frameworks", value: "10+", icon: ShieldCheck }, { label: "Engagement Models", value: "Flexible", icon: Target }],
+  "product-development":     [
+    { label: PRODUCT_DEVELOPMENT_KEY_METRICS[0].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[0].value, icon: PackageCheck },
+    { label: PRODUCT_DEVELOPMENT_KEY_METRICS[1].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[1].value, icon: BookOpen },
+    { label: PRODUCT_DEVELOPMENT_KEY_METRICS[2].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[2].value, icon: Layers },
+    { label: PRODUCT_DEVELOPMENT_KEY_METRICS[3].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[3].value, icon: GraduationCap },
+    { label: PRODUCT_DEVELOPMENT_KEY_METRICS[4].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[4].value, icon: Rocket },
+  ],
   "quality-testing":         [{ label: "Quality Departments", value: "4", icon: FlaskConical }, { label: "Standards Covered", value: "50+", icon: BookOpen }, { label: "Cross-Functional", value: "6 Depts", icon: Users }],
   "automation-services":     [{ label: "PLC Platforms", value: "Fatek+", icon: Cog }, { label: "HMI Systems", value: "Weintek", icon: MonitorSmartphone }, { label: "Motion Axes", value: "Multi", icon: Zap }],
   "design-fabrication":      [{ label: "CAD Platforms", value: "SOLIDWORKS", icon: Layers }, { label: "3D Printers", value: "4+", icon: Boxes }, { label: "Simulations", value: "ANSYS/COMSOL", icon: Gauge }],
@@ -1301,7 +1365,13 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
     { label: "Laboratory Success Rate", value: ">99%", icon: Medal },
     { label: "Turnaround Time", value: "24–72h", icon: Calendar },
   ],
-  "contract-manufacturing":  [{ label: "Cleanroom Grade", value: "ISO 5", icon: Factory }, { label: "Device Classes", value: "I–III", icon: Layers }, { label: "Lifecycle", value: "360°", icon: Target }],
+  "contract-manufacturing":  [
+    { label: MANUFACTURING_KEY_METRICS[0].label, value: MANUFACTURING_KEY_METRICS[0].value, icon: Wind },
+    { label: MANUFACTURING_KEY_METRICS[1].label, value: MANUFACTURING_KEY_METRICS[1].value, icon: Layers },
+    { label: MANUFACTURING_KEY_METRICS[2].label, value: MANUFACTURING_KEY_METRICS[2].value, icon: Target },
+    { label: MANUFACTURING_KEY_METRICS[3].label, value: MANUFACTURING_KEY_METRICS[3].value, icon: ShieldCheck },
+    { label: MANUFACTURING_KEY_METRICS[4].label, value: MANUFACTURING_KEY_METRICS[4].value, icon: Award },
+  ],
 };
 
 /** One key metric per sub-service (e.g. MBL testing programmes) */
@@ -1484,14 +1554,7 @@ const SERVICE_GENERIC_SUB_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1581090700227-1e37b190418e?w=900&q=80",
     "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=900&q=80",
   ],
-  "contract-manufacturing": [
-    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
-    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=900&q=80",
-    "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=900&q=80",
-    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
-    "https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=900&q=80",
-    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=900&q=80",
-  ],
+  "contract-manufacturing": [...MANUFACTURING_HERO_IMAGES],
 };
 
 /* ---- Large decorative background icons per service ---- */
@@ -1774,11 +1837,7 @@ const SERVICE_CAROUSEL_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
     "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",
   ],
-  "contract-manufacturing": [
-    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
-    "https://images.unsplash.com/photo-1565008576549-57569a49371d?w=800&q=80",
-    "https://images.unsplash.com/photo-1513828583688-c52646db42da?w=800&q=80",
-  ],
+  "contract-manufacturing": [...MANUFACTURING_HERO_IMAGES],
   "bmd": [
     "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
     "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
@@ -2501,8 +2560,13 @@ function ServiceKeyMetricsBlock({
 }
 
 function isRegulatoryLicence(std: string): boolean {
-  return /FDA\s*\/\s*(EU\s*MDR|CE)|^DRAP$/i.test(std.trim());
+  return /FDA\s*\/\s*(EU\s*MDR|CE)|^DRAP/i.test(std.trim());
 }
+
+const SERVICE_LICENCES: Record<string, string[]> = {
+  "contract-manufacturing": [...MANUFACTURING_LICENCES],
+  "product-development": [...PRODUCT_DEVELOPMENT_LICENCES],
+};
 
 function standardItemLabel(std: string, standardIndex: number): string {
   if (isRegulatoryLicence(std)) return "Licence";
@@ -2512,59 +2576,76 @@ function standardItemLabel(std: string, standardIndex: number): string {
 /** Standards with horizontal line structure */
 function ServiceStandardsBlock({
   standards,
+  licences = [],
   variant = "default",
 }: {
   standards: string[];
+  licences?: string[];
   variant?: "default" | "software-ai";
 }) {
   const isCyan = variant === "software-ai";
   let standardCounter = 0;
+
+  const renderItem = (std: string, isLicence: boolean) => {
+    if (!isLicence) standardCounter += 1;
+    const ItemIcon = isLicence ? Award : ShieldCheck;
+
+    return (
+      <div
+        key={std}
+        className={`relative flex flex-1 min-w-[200px] items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${
+          isCyan
+            ? "border-cyan-500/20 bg-background hover:border-cyan-400/40"
+            : isLicence
+              ? "border-amber-500/25 bg-background hover:border-amber-400/40"
+              : "border-border bg-background hover:border-primary/30"
+        }`}
+      >
+        <div
+          className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
+            isCyan
+              ? "bg-cyan-500/12 text-cyan-600 dark:text-cyan-400"
+              : isLicence
+                ? "bg-amber-500/12 text-amber-600 dark:text-amber-400"
+                : "bg-primary/10 text-primary"
+          }`}
+        >
+          <ItemIcon className="h-4 w-4" />
+        </div>
+        <div className="min-w-0 flex-1">
+          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+            {isLicence ? "Licence" : standardItemLabel(std, standardCounter)}
+          </span>
+          <p className="text-sm font-semibold text-foreground leading-snug">{std}</p>
+        </div>
+      </div>
+    );
+  };
 
   return (
     <AnimatedSection>
       <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">
         Compliance & Standards
       </h2>
-      <div className="relative rounded-2xl border border-border bg-card/50 p-5 sm:p-6">
-        <div className="absolute left-6 right-6 top-[2.6rem] hidden h-px bg-border sm:block" aria-hidden />
-        <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-          {standards.map((std) => {
-            const isLicence = isRegulatoryLicence(std);
-            if (!isLicence) standardCounter += 1;
-            const ItemIcon = isLicence ? Award : ShieldCheck;
-
-            return (
-              <div
-                key={std}
-                className={`relative flex flex-1 min-w-[200px] items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${
-                  isCyan
-                    ? "border-cyan-500/20 bg-background hover:border-cyan-400/40"
-                    : isLicence
-                      ? "border-amber-500/25 bg-background hover:border-amber-400/40"
-                      : "border-border bg-background hover:border-primary/30"
-                }`}
-              >
-                <div
-                  className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
-                    isCyan
-                      ? "bg-cyan-500/12 text-cyan-600 dark:text-cyan-400"
-                      : isLicence
-                        ? "bg-amber-500/12 text-amber-600 dark:text-amber-400"
-                        : "bg-primary/10 text-primary"
-                  }`}
-                >
-                  <ItemIcon className="h-4 w-4" />
-                </div>
-                <div className="min-w-0 flex-1">
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-                    {standardItemLabel(std, standardCounter)}
-                  </span>
-                  <p className="text-sm font-semibold text-foreground leading-snug">{std}</p>
-                </div>
-              </div>
-            );
-          })}
-        </div>
+      <div className="relative rounded-2xl border border-border bg-card/50 p-5 sm:p-6 space-y-6">
+        {standards.length > 0 && (
+          <div>
+            {licences.length > 0 && (
+              <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Standards</p>
+            )}
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+              {standards.map((std) => renderItem(std, isRegulatoryLicence(std)))}
+            </div>
+          </div>
+        )}
+        {licences.length > 0 && (
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Licences</p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+              {licences.map((lic) => renderItem(lic, true))}
+            </div>
+          </div>
+        )}
       </div>
     </AnimatedSection>
   );
@@ -3416,6 +3497,7 @@ export function ServiceDetail({
                 ) : (
                   <ServiceStandardsBlock
                     standards={SERVICE_STANDARDS[service.slug]}
+                    licences={SERVICE_LICENCES[service.slug]}
                     variant="default"
                   />
                 )

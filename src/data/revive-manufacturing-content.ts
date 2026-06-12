@@ -1,18 +1,43 @@
-export const MANUFACTURING_HERO_STATS = [
-  { label: "Cleanroom Grade", value: "ISO 5" },
-  { label: "Device Categories", value: "Class I–III" },
-  { label: "Facility", value: "DRAP Registered" },
-  { label: "Lifecycle Support", value: "360°" },
+export const MANUFACTURING_IMAGES = {
+  angiographicCatheter: "/mdm/angiographic-catheter.jpeg",
+  guidingCatheter: "/mdm/guiding-catheter.jpeg",
+  cleanroom1: "/mdm/cleanroom-1.jpeg",
+  cleanroom2: "/mdm/cleanroom-2.jpeg",
+  cleanroom3: "/mdm/cleanroom-3.jpeg",
+  facility1: "/mdm/facility-1.jpeg",
+  facility2: "/mdm/facility-2.jpeg",
+  facility3: "/mdm/facility-3.jpeg",
+} as const;
+
+export const MANUFACTURING_HERO_IMAGES = [
+  MANUFACTURING_IMAGES.cleanroom1,
+  MANUFACTURING_IMAGES.facility1,
+  MANUFACTURING_IMAGES.cleanroom2,
+  MANUFACTURING_IMAGES.angiographicCatheter,
+  MANUFACTURING_IMAGES.guidingCatheter,
+  MANUFACTURING_IMAGES.facility2,
+  MANUFACTURING_IMAGES.cleanroom3,
+  MANUFACTURING_IMAGES.facility3,
 ] as const;
+
+export const MANUFACTURING_KEY_METRICS = [
+  { label: "Validated Aseptic Working Environment", value: "Aseptic" },
+  { label: "Class I, II, and III medical devices manufacturing capabilities", value: "Class I–III" },
+  { label: "Full lifecycle support from concept to commercialization", value: "360°" },
+  { label: "ISO 13485 certified quality management system", value: "Certified" },
+  { label: "DRAP registered manufacturing facility", value: "Registered" },
+] as const;
+
+export const MANUFACTURING_LICENCES = ["DRAP Registered Facility"] as const;
 
 export const MANUFACTURING_QUALITY_POINTS = [
-  "Process validation and advanced in-line control",
-  "Comprehensive documentation and lot traceability",
-  "Risk-based quality management (ISO 14971 framework)",
-  "Continuous process improvement and CAPA systems",
-  "Segregated, contamination-controlled production environments",
+  "Controlled Class A and Class B clean rooms",
+  "Quality Control at each process step",
+  "Stringent Inspection Criteria",
+  "ISO 2859 compliance",
 ] as const;
 
+/** Flagship portfolio — excludes items pending review (angiographic catheters, inflation device) */
 export const MANUFACTURING_PRODUCTS = [
   {
     name: "Diagnostic Catheters",
@@ -27,52 +52,93 @@ export const MANUFACTURING_PRODUCTS = [
     ],
   },
   {
-    name: "Angiographic Catheters",
-    icon: "microscope",
-    description:
-      "Purpose-built for high-fidelity angiography procedures, delivering consistent contrast injection and dependable trackability across complex anatomies.",
-    features: [
-      "High-flow lumen design for rapid contrast injection",
-      "Enhanced kink resistance and flexible shaft construction",
-      "Available in diagnostic and interventional profiles",
-      "Sterile, single-use — procedure-ready from packaging",
-    ],
-  },
-  {
     name: "Microspheres",
     icon: "atom",
     description:
-      "Precisely calibrated microspheres for embolization and drug delivery applications — manufactured under controlled conditions for batch-to-batch consistency.",
+      "Precisely calibrated biodegradable microspheres for embolization and drug delivery applications — manufactured under controlled conditions for batch-to-batch consistency.",
     features: [
       "Tight size distribution for predictable performance",
-      "Biocompatible polymer matrix",
+      "Biodegradable, biocompatible polymer matrix",
       "Available in multiple size ranges for targeted therapy",
       "Compatible with standard delivery systems",
     ],
   },
+] as const;
+
+export type ManufacturingProductMadeFeature = {
+  title: string;
+  description: string;
+};
+
+export type ManufacturingProductMade = {
+  category: string;
+  name: string;
+  description: string;
+  features: readonly ManufacturingProductMadeFeature[];
+  specs: readonly string[];
+  image: string;
+};
+
+export const MANUFACTURING_PRODUCTS_MADE: readonly ManufacturingProductMade[] = [
   {
-    name: "Cleanroom Validation",
-    icon: "shield",
+    category: "Vascular diagnostics & imaging",
+    name: "Angiographic Catheters",
     description:
-      "Cleanrooms validated per ISO 14644 — from initial qualification to ongoing environmental monitoring for the highest regulatory standards.",
+      "High-performance catheters engineered for precise vascular access and superior contrast delivery — helping clinicians see more clearly and act with confidence.",
+    image: MANUFACTURING_IMAGES.angiographicCatheter,
     features: [
-      "IQ / OQ / PQ protocols tailored to your environment",
-      "Particle count, pressure, and airflow testing",
-      "Microbial environmental monitoring programs",
-      "Full validation documentation package",
+      {
+        title: "Torque & pushability",
+        description: "Optimized torque transmission for precise distal tip control",
+      },
+      {
+        title: "Multiple tip configurations",
+        description: "Straight, angled, and pre-shaped options available",
+      },
+      {
+        title: "Soft atraumatic tip",
+        description: "Designed for easier maneuverability through tortuous anatomy",
+      },
+      {
+        title: "Biocompatible materials",
+        description: "All materials tested to ISO 10993 biological safety standards",
+      },
     ],
+    specs: ["5 and 6 Fr", "Single-use · sterile"],
   },
   {
-    name: "Inflation Device",
-    icon: "gauge",
+    category: "Interventional cardiology",
+    name: "Guiding Catheter",
     description:
-      "Precision inflation devices for reliable balloon catheter control during interventional procedures — ergonomic single-hand operation with accurate, repeatable pressure.",
+      "Large-lumen guiding catheter with 1×1 flat-wire stainless steel braid, engineered for superior backup support and reliable device delivery in complex coronary and peripheral interventions.",
+    image: MANUFACTURING_IMAGES.guidingCatheter,
     features: [
-      "Calibrated pressure gauge with high-precision readout",
-      "Ergonomic thumb-wheel mechanism for controlled inflation",
-      "Rated for standard interventional balloon pressure ranges",
-      "Sterile, single-use — CE/ISO standard-ready",
+      {
+        title: "Ribbon-profile stainless steel braid",
+        description: "Delivers high column strength, pushability, and controlled torque response",
+      },
+      {
+        title: "Large inner diameter lumen",
+        description: "Maximized ID for simultaneous delivery of balloons, stents, and imaging catheters without compromise",
+      },
+      {
+        title: "Superior backup support",
+        description: "Engineered for deep intubation and stable guide position during complex PCI procedures",
+      },
+      {
+        title: "Extensive curve library",
+        description: "JL, JR, AL, AR, EBU, XB, Amplatz, and custom configurations available",
+      },
+      {
+        title: "Hydrophilic outer coating",
+        description: "Lubricious outer surface reduces friction during advancement through the vasculature",
+      },
+      {
+        title: "Biocompatible · ISO 10993",
+        description: "All materials tested to ISO 10993 biological safety standards. Sterile, single-use.",
+      },
     ],
+    specs: ["5–7 Fr", "PTFE inner liner", "High column strength", "Single-use · sterile"],
   },
 ] as const;
 
@@ -87,17 +153,17 @@ export const MANUFACTURING_DEVICE_CLASSES = [
 
 export const MANUFACTURING_CLEANROOMS = [
   {
-    grade: "ISO 5",
+    grade: "ISO Class 05",
     description:
       "Our highest-grade controlled space — designed for critical manufacturing operations where ultra-low particulate environments are non-negotiable.",
   },
   {
-    grade: "ISO 7",
+    grade: "ISO Class 07",
     description:
       "Precision assembly and specialized device processes require an environment that balances accessibility with rigor.",
   },
   {
-    grade: "ISO 8",
+    grade: "ISO Class 08",
     description:
       "Supporting manufacturing operations, material handling, and workflow transitions under controlled conditions.",
   },
