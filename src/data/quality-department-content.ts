@@ -259,8 +259,8 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
   },
   {
     id: "sqa",
-    tabLabel: "SQA / SaMD / SiMD",
-    name: "Software Quality Assurance — SQA / SaMD / SiMD",
+    tabLabel: "Software Quality Assurance",
+    name: "Software Quality Assurance",
     description:
       "Quality oversight for device & machine firmware, web/mobile applications, and Software as/in a Medical Device — spanning IEC 62304, ISO 13485 design controls, and cybersecurity requirements. QD collaborates closely with SD.",
     standards: ["IEC 62304", "ISO 13485", "SD · QD"],

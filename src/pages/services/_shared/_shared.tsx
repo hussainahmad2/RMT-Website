@@ -1374,6 +1374,7 @@ const SUB_SERVICE_STANDARDS_HEADING: Record<string, Record<string, string>> = {
 const SUB_SERVICE_BADGE_LABEL: Record<string, Record<string, string>> = {
   "quality-testing": {
     "quality-assurance": "Quality Assurance",
+    "sqa-samd-simd": "Software Quality Assurance",
   },
 };
 
@@ -2221,6 +2222,7 @@ function RichSubServiceCard({
   variant?: "default" | "software-ai";
 }) {
   const isCyan = variant === "software-ai";
+  const badgeLabel = SUB_SERVICE_BADGE_LABEL[service.slug]?.[sub.slug] ?? sub.name;
   const badgeClass = isCyan ? "bg-cyan-500/95 text-slate-900" : "bg-primary/90 text-white";
   const tagClass = isCyan
     ? "bg-cyan-500/8 text-cyan-700 dark:text-cyan-300 border-cyan-500/20"
@@ -2254,7 +2256,7 @@ function RichSubServiceCard({
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent" />
           <div className={`absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full ${badgeClass}`}>
             <Icon className="w-3 h-3" />
-            {service.shortName}
+            {badgeLabel}
           </div>
           <div className="absolute top-4 right-4 opacity-20 group-hover:opacity-35 transition-opacity">
             <Icon className="w-12 h-12 text-white" />

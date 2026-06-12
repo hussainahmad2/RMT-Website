@@ -669,7 +669,7 @@ export const ALL_SERVICES: ServiceData[] = [
       },
       {
         slug: "sqa-samd-simd",
-        name: "Software Quality — SaMD / SiMD",
+        name: "Software Quality Assurance",
         tagline: "IEC 62304 lifecycle, integration testing, cybersecurity, and SaMD dossiers.",
         overview: [
           "Quality oversight for device firmware, web/mobile applications, and Software as/in a Medical Device — spanning IEC 62304, ISO 13485 design controls, and cybersecurity.",
