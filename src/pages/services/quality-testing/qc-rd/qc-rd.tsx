@@ -2,6 +2,7 @@
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
-export default function Page({ params }: PageProps) {
-  return <SubServiceDetail serviceSlug="quality-testing" subSlug="qc-rd" params={params} />;
+/** @deprecated Use /services/quality-testing/quality-control */
+export default function QcRdPage({ params }: PageProps) {
+  return <SubServiceDetail serviceSlug="quality-testing" subSlug="quality-control" params={params} />;
 }

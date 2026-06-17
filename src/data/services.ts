@@ -9,6 +9,12 @@ import {
   SQA_OVERVIEW,
   SQA_TAGLINE,
 } from "./sqa-services-content";
+import {
+  QC_TAGLINE,
+  QC_OVERVIEW,
+  QC_KEY_POINTS,
+  QC_DELIVERABLES,
+} from "./quality-control-content";
 
 export interface SubServiceData {
   slug: string;
@@ -622,11 +628,11 @@ export const ALL_SERVICES: ServiceData[] = [
     shortName: "Quality Testing",
     tagline: "Hands-on testing, inspection, sign-off, and compliance support from Research and Development bench to production release.",
     description:
-      "Quality department services across QA, production QC, software quality (SaMD/SiMD), and Research and Development quality control — ISO 13485-led with advanced lab infrastructure and cross-functional collaboration.",
+      "Quality department services across QA, unified Quality Control, and software quality (SaMD/SiMD) — ISO 13485-led with advanced lab infrastructure and cross-functional collaboration.",
     overview: [
       "Our Quality Department delivers hands-on testing, inspection, sign-off, and compliance support across all product lines — from Research and Development bench to production release.",
       "QD leads all quality activities with department collaboration across EMD, SD, BMD, PD, PRD, and Supply Chain — ensuring traceable, audit-ready quality at every stage.",
-      "Services span QMS development and audit readiness, production inspection and QC lab testing, SaMD/SiMD software quality, and embedded Research and Development design control and V&V.",
+      "Services span QMS development and audit readiness, unified Quality Control across R&D and production, and SaMD/SiMD software quality assurance.",
     ],
     subServices: [
       {
@@ -658,15 +664,12 @@ export const ALL_SERVICES: ServiceData[] = [
         ],
       },
       {
-        slug: "qc-production",
-        name: "Quality Control — Production",
-        tagline: "In-process inspection, QC lab services, and production release testing.",
-        overview: [
-          "In-process and final product inspection, QC lab services, and release activities for EMD and SD production lines and device batches.",
-          "Includes electrical/mechanical testing, incoming inspection, catheter bench testing, stability studies, and SPC.",
-        ],
-        keyPoints: ["In-process & final inspection", "IEC 60601 electrical safety", "QC lab — microscopy, UV, catheter bench", "Stability & SPC"],
-        deliverables: ["Inspection records", "Test reports (signed & stamped)", "Batch release documentation", "SPC charts"],
+        slug: "quality-control",
+        name: "Quality Control",
+        tagline: QC_TAGLINE,
+        overview: [...QC_OVERVIEW],
+        keyPoints: [...QC_KEY_POINTS],
+        deliverables: [...QC_DELIVERABLES],
       },
       {
         slug: "sqa-samd-simd",
@@ -676,34 +679,14 @@ export const ALL_SERVICES: ServiceData[] = [
         keyPoints: [...SQA_KEY_HIGHLIGHTS],
         deliverables: [...SQA_DELIVERABLES],
       },
-      {
-        slug: "qc-rd",
-        name: "Quality Control — Research and Development",
-        tagline:
-          "Design control, V&V, Class I–III medical device testing verification, validation, quality inspection, and interventional device QC.",
-        overview: [
-          "Quality oversight embedded in the product development lifecycle for active and non-active medical devices — from design verification through transfer to manufacturing.",
-          "Covers design control §7.3, ISO 14971 risk management, IEC 60601 testing, cardiovascular stent delivery system testing per ISO 10555 and ISO 25539, biocompatibility coordination, and equipment qualification.",
-        ],
-        keyPoints: [
-          "Design control & DHF",
-          "ISO 14971 risk management",
-          "IEC 60601 & EMC testing",
-          "Cardiovascular stent delivery system testing — ISO 10555 series & ISO 25539",
-          "Class I–III device verification, validation & quality inspection",
-          "Interventional device QC",
-          "IQ/OQ/PQ qualification",
-        ],
-        deliverables: ["V&V protocols & reports", "Risk management file support", "Design review records", "Qualification documentation"],
-      },
     ],
     capabilities: [
       "ISO 13485 QMS & Audit Readiness",
-      "Production QC & Lab Testing",
+      "Unified Quality Control — R&D & Production",
       "SaMD / SiMD Software Quality",
-      "Research and Development Design Control & V&V",
+      "Design Control, V&V & Risk Management",
       "IEC 60601 Electrical Safety",
-      "Catheter & Stent Bench Testing",
+      "Advanced QC Laboratory Infrastructure",
     ],
     whyRMT: [
       { title: "ISO 13485 Expertise", desc: "Quality management across the full medical device lifecycle." },

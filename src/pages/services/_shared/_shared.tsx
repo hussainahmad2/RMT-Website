@@ -86,6 +86,16 @@ import {
   SQA_WHY_CHOOSE,
 } from "@/data/sqa-services-content";
 import {
+  QC_STANDARDS,
+  QC_RD_APPROACH,
+  QC_CLOSING_NOTE,
+  QC_WHY_CHOOSE,
+} from "@/data/quality-control-content";
+import { QualityControlDetail } from "./QualityControlDetail";
+import { QualityAssuranceDetail } from "./QualityAssuranceDetail";
+import { SoftwareQualityAssuranceDetail } from "./SoftwareQualityAssuranceDetail";
+import { QA_APPROACH, SQA_APPROACH } from "@/data/quality-assurance-content";
+import {
   FullBleedBlock,
   SectionHeading,
   LifecycleRoadmap,
@@ -1171,9 +1181,8 @@ function ProductDevelopmentServiceExtras() {
 
 const QUALITY_TAB_ICONS: Record<string, React.ElementType> = {
   qa: ClipboardList,
-  qcprod: Microscope,
+  qc: Microscope,
   sqa: Code2,
-  qcrd: TestTube2,
 };
 
 function QualityDepartmentPanel({ dept }: { dept: QualityDepartment }) {
@@ -1242,8 +1251,8 @@ function QualityDepartmentPanel({ dept }: { dept: QualityDepartment }) {
       {dept.footerNote && (
         <div className="bg-primary/5 border border-primary/15 rounded-xl p-5">
           <p className="text-sm text-muted-foreground leading-relaxed">
-            <strong className="text-foreground font-medium">QD Core Functions: </strong>
-            {dept.footerNote.replace(/^QD Core Functions across all Research and Development activities:\s*/, "")}
+            <strong className="text-foreground font-medium">Summary: </strong>
+            {dept.footerNote}
           </p>
         </div>
       )}
@@ -1354,7 +1363,7 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
     { label: PRODUCT_DEVELOPMENT_KEY_METRICS[3].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[3].value, icon: GraduationCap },
     { label: PRODUCT_DEVELOPMENT_KEY_METRICS[4].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[4].value, icon: Rocket },
   ],
-  "quality-testing":         [{ label: "Quality Departments", value: "4", icon: FlaskConical }, { label: "Standards Covered", value: "50+", icon: BookOpen }, { label: "Cross-Functional", value: "6 Depts", icon: Users }],
+  "quality-testing":         [{ label: "Quality Departments", value: "3", icon: FlaskConical }, { label: "Standards Covered", value: "50+", icon: BookOpen }, { label: "Cross-Functional", value: "6 Depts", icon: Users }],
   "automation-services":     [{ label: "PLC Platforms", value: "Fatek+", icon: Cog }, { label: "HMI Systems", value: "Weintek", icon: MonitorSmartphone }, { label: "Motion Axes", value: "Multi", icon: Zap }],
   "design-fabrication":      [{ label: "CAD Platforms", value: "SOLIDWORKS", icon: Layers }, { label: "3D Printers", value: "4+", icon: Boxes }, { label: "Simulations", value: "ANSYS/COMSOL", icon: Gauge }],
   "engineering-product-development": [{ label: "Disciplines", value: "3+", icon: Settings2 }, { label: "Methodology Steps", value: "5", icon: Target }, { label: "Deliverable Types", value: "20+", icon: PackageCheck }],
@@ -1396,7 +1405,7 @@ const SUB_SERVICE_SIDEBAR_STATS: Record<string, Record<string, { label: string; 
 const SUB_SERVICE_STANDARDS: Record<string, Record<string, string[]>> = {
   "quality-testing": {
     "quality-assurance": ["ISO 13485:2016", "QMSR (FDA 21 CFR 820)", "ISO 14971:2019", "DRAP Compliance"],
-    "qc-rd": ["ISO 14971:2019", "IEC 60601-1", "ISO 81060", "ASTM Standards", "ISO 10555", "ISO 25539"],
+    "quality-control": [...QC_STANDARDS],
     "sqa-samd-simd": [...SQA_STANDARDS],
   },
 };
@@ -1404,18 +1413,9 @@ const SUB_SERVICE_STANDARDS: Record<string, Record<string, string[]>> = {
 /** Per sub-service approach methodology */
 const SUB_SERVICE_APPROACH_STEPS: Record<string, Record<string, { step: string; title: string; desc: string }[]>> = {
   "quality-testing": {
-    "quality-assurance": [
-      { step: "01", title: "Understand", desc: "We assess your current quality processes, documentation, and compliance status." },
-      { step: "02", title: "Design", desc: "We develop scalable quality solutions tailored to your organization and regulatory needs." },
-      { step: "03", title: "Implement", desc: "We work alongside your team to establish effective quality processes and documentation." },
-      { step: "04", title: "Improve", desc: "We support continuous improvement through audits, CAPA management, training, and ongoing quality oversight." },
-    ],
-    "sqa-samd-simd": [
-      { step: "01", title: "Assess", desc: "Understand requirements, intended use, regulatory pathway, and quality objectives across the SDLC." },
-      { step: "02", title: "Plan", desc: "Develop test strategy, plans, traceability matrices, and risk-based testing approaches." },
-      { step: "03", title: "Execute", desc: "Manual, automated, performance, and compliance testing integrated with Agile Scrum delivery." },
-      { step: "04", title: "Assure", desc: "Defect management, validation documentation, and continuous quality improvement through release." },
-    ],
+    "quality-assurance": QA_APPROACH.map((s) => ({ step: s.step, title: s.title, desc: s.desc })),
+    "sqa-samd-simd": SQA_APPROACH.map((s) => ({ step: s.step, title: s.title, desc: s.desc })),
+    "quality-control": QC_RD_APPROACH.map((s) => ({ step: s.step, title: s.title, desc: s.desc })),
   },
 };
 
@@ -1430,6 +1430,16 @@ const SUB_SERVICE_CAPABILITIES: Record<string, Record<string, string[]>> = {
       "Production & Testing Support",
     ],
     "sqa-samd-simd": SQA_SERVICE_SECTIONS.map((s) => s.label),
+    "quality-control": [
+      "Device Portfolio — Active, Non-Active & Drug Delivery Systems",
+      "Quality Planning, V&V Protocols & Traceability Documentation",
+      "Electrical Safety, EMC & Usability Engineering (IEC 60601 / IEC 62366-1)",
+      "Interventional & Cardiovascular Testing (ISO 10555 / ISO 25539)",
+      "Incoming, In-Process & Finished Product Quality Control",
+      "FAT/SAT, Metrology & Equipment Qualification",
+      "Packaging, Sterile Barrier & Stability Studies",
+      "Advanced QC Laboratory — HPLC, Microscopy, UV-Vis, Stability Chambers",
+    ],
   },
 };
 
@@ -1439,6 +1449,7 @@ const SUB_SERVICE_CLOSING_NOTE: Record<string, Record<string, string>> = {
     "quality-assurance":
       "Our QA services are designed to help organizations build robust quality systems, achieve regulatory compliance, improve operational performance, and maintain high standards of product quality and safety. We partner with clients to provide practical, efficient, and reliable quality assurance solutions tailored to their business needs.",
     "sqa-samd-simd": SQA_CLOSING_NOTE,
+    "quality-control": QC_CLOSING_NOTE,
   },
 };
 
@@ -1446,6 +1457,7 @@ const SUB_SERVICE_CLOSING_NOTE: Record<string, Record<string, string>> = {
 const SUB_SERVICE_WHY_RMT: Record<string, Record<string, { title: string; desc: string }[]>> = {
   "quality-testing": {
     "sqa-samd-simd": SQA_WHY_CHOOSE.map((item) => ({ title: item.title, desc: item.description })),
+    "quality-control": QC_WHY_CHOOSE.map((item) => ({ title: item.title, desc: item.desc })),
   },
 };
 
@@ -1460,6 +1472,7 @@ const SUB_SERVICE_METRICS_HEADING: Record<string, Record<string, { eyebrow: stri
 const SUB_SERVICE_STANDARDS_HEADING: Record<string, Record<string, string>> = {
   "quality-testing": {
     "quality-assurance": "Built for Medical Device Quality & Compliance",
+    "quality-control": "Regulatory & Standards Framework Covered",
     "sqa-samd-simd": "Software Quality & Testing Standards Expertise",
   },
 };
@@ -1468,8 +1481,8 @@ const SUB_SERVICE_STANDARDS_HEADING: Record<string, Record<string, string>> = {
 const SUB_SERVICE_BADGE_LABEL: Record<string, Record<string, string>> = {
   "quality-testing": {
     "quality-assurance": "Quality Assurance",
+    "quality-control": "Quality Control",
     "sqa-samd-simd": "Software Quality Assurance",
-    "qc-rd": "QC — Research and Development",
   },
 };
 
@@ -1477,6 +1490,7 @@ const SUB_SERVICE_BADGE_LABEL: Record<string, Record<string, string>> = {
 const SUB_SERVICE_CAPABILITIES_TITLE: Record<string, Record<string, string>> = {
   "quality-testing": {
     "quality-assurance": "All Quality Management Capabilities",
+    "quality-control": "Core Testing Capabilities & Key Services",
     "sqa-samd-simd": "Our Core SQA Services",
   },
 };
@@ -3618,6 +3632,11 @@ export function SubServiceDetail({
   }
 
   const isSoftwareAI = service.slug === "software-ai";
+  const isQualityDept = service.slug === "quality-testing";
+  const isQa = isQualityDept && subService.slug === "quality-assurance";
+  const isQc = isQualityDept && subService.slug === "quality-control";
+  const isSqa = isQualityDept && subService.slug === "sqa-samd-simd";
+  const isQualityDetail = isQa || isQc || isSqa;
   const containerClass = "page-container";
   const subHeroImage = isSoftwareAI
     ? SOFTWARE_AI_SUB_IMAGES[subService.slug] ?? service.heroImage
@@ -3666,21 +3685,62 @@ export function SubServiceDetail({
                 : (SUB_SERVICE_STANDARDS[service.slug]?.[subService.slug] ?? SERVICE_STANDARDS[service.slug] ?? []).slice(0, 4);
               return (
                 <>
-                  <div className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 backdrop-blur-sm border ${isSoftwareAI ? "bg-cyan-400/10 border-cyan-400/25" : "bg-white/8 border-white/20"}`}>
-                    <span className={`w-2 h-2 rounded-full animate-pulse shrink-0 ${isSoftwareAI ? "bg-cyan-400" : "bg-primary"}`} />
-                    <SubIcon className={`w-4 h-4 ${isSoftwareAI ? "text-cyan-300" : "text-white/70"}`} />
-                    <span className={`text-xs font-bold uppercase tracking-[0.18em] ${isSoftwareAI ? "text-cyan-200" : "text-white/80"}`}>{heroBadgeLabel}</span>
+                  <div className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 backdrop-blur-sm border ${
+                    isSoftwareAI
+                      ? "bg-cyan-400/10 border-cyan-400/25"
+                      : isQualityDept
+                        ? "bg-primary/10 border-primary/30"
+                        : "bg-white/8 border-white/20"
+                  }`}>
+                    <span className={`w-2 h-2 rounded-full animate-pulse shrink-0 ${
+                      isSoftwareAI ? "bg-cyan-400" : isQualityDept ? "bg-primary" : "bg-primary"
+                    }`} />
+                    <SubIcon className={`w-4 h-4 ${isSoftwareAI ? "text-cyan-300" : isQualityDept ? "text-sky-300" : "text-white/70"}`} />
+                    <span className={`text-xs font-bold uppercase tracking-[0.18em] ${
+                      isSoftwareAI ? "text-cyan-200" : isQualityDept ? "text-sky-200" : "text-white/80"
+                    }`}>{heroBadgeLabel}</span>
                     <span className="w-px h-3 bg-white/25" />
-                    <span className={`text-xs ${isSoftwareAI ? "text-cyan-400/70" : "text-white/50"}`}>
+                    <span className={`text-xs ${isSoftwareAI ? "text-cyan-400/70" : isQualityDept ? "text-sky-300/80" : "text-white/50"}`}>
                       {isSoftwareAI
                         ? "IEC 62304 Compliant"
-                        : (SUB_SERVICE_STANDARDS[service.slug]?.[subService.slug]?.[0] ??
-                          SERVICE_STANDARDS[service.slug]?.[0] ??
-                          "ISO 13485")}
+                        : isQc
+                          ? "R&D & Production QC"
+                          : isQa
+                            ? "ISO 13485 QMS"
+                            : isSqa
+                              ? "IEC 62304 & HIPAA"
+                              : (SUB_SERVICE_STANDARDS[service.slug]?.[subService.slug]?.[0] ??
+                                SERVICE_STANDARDS[service.slug]?.[0] ??
+                                "ISO 13485")}
                     </span>
                   </div>
-                  <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl font-black text-white mb-5 leading-[0.95] tracking-tight">
-                    {subService.name}
+                  <h1 className={`font-heading text-5xl sm:text-6xl md:text-7xl font-black text-white mb-5 leading-[0.95] tracking-tight ${
+                    isQualityDetail ? "max-w-4xl" : ""
+                  }`}>
+                    {isQc ? (
+                      <>
+                        Quality<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-primary to-sky-200">
+                          Control
+                        </span>
+                      </>
+                    ) : isQa ? (
+                      <>
+                        Quality<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-primary to-sky-200">
+                          Assurance
+                        </span>
+                      </>
+                    ) : isSqa ? (
+                      <>
+                        Software<br />
+                        <span className="text-transparent bg-clip-text bg-gradient-to-r from-sky-300 via-primary to-sky-200">
+                          Quality Assurance
+                        </span>
+                      </>
+                    ) : (
+                      subService.name
+                    )}
                   </h1>
                   <p className="text-white/65 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl">
                     {subService.tagline}
@@ -3703,7 +3763,9 @@ export function SubServiceDetail({
                 size="lg"
                 className={isSoftwareAI
                   ? "rounded-xl px-8 bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold shadow-lg shadow-cyan-500/30"
-                  : "rounded-xl px-8 bg-gradient-to-r from-primary to-primary/80 text-white hover:from-primary/90 hover:to-primary/70 font-bold shadow-lg shadow-primary/30"}
+                  : isQualityDept
+                    ? "rounded-xl px-8 bg-gradient-to-r from-sky-400 to-primary text-white hover:from-sky-300 hover:to-primary/90 font-bold shadow-lg shadow-primary/30"
+                    : "rounded-xl px-8 bg-gradient-to-r from-primary to-primary/80 text-white hover:from-primary/90 hover:to-primary/70 font-bold shadow-lg shadow-primary/30"}
               >
                 <Link href="/contact">Get a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
               </Button>
@@ -3718,26 +3780,31 @@ export function SubServiceDetail({
       </section>
 
       {/* CONTENT */}
-      <section className="relative overflow-hidden bg-background py-16">
-        {isSoftwareAI ? <SoftwareAIDecorLayer /> : null}
-        <SoftwareIconsScatterBg />
-        <div className={`${containerClass} relative z-10`}>
-          <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
-
-            <div className="lg:col-span-2 space-y-10">
-              <SubServiceContent
-                subService={subService}
-                service={service}
-                subHeroImage={subHeroImage}
-                subPageIcons={subPageIcons}
-              />
+      {isQc ? (
+        <QualityControlDetail subService={subService} />
+      ) : isQa ? (
+        <QualityAssuranceDetail subService={subService} />
+      ) : isSqa ? (
+        <SoftwareQualityAssuranceDetail subService={subService} />
+      ) : (
+        <section className="relative overflow-hidden bg-background py-16">
+          {isSoftwareAI ? <SoftwareAIDecorLayer /> : null}
+          <SoftwareIconsScatterBg />
+          <div className={`${containerClass} relative z-10`}>
+            <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
+              <div className="lg:col-span-2 space-y-10">
+                <SubServiceContent
+                  subService={subService}
+                  service={service}
+                  subHeroImage={subHeroImage}
+                  subPageIcons={subPageIcons}
+                />
+              </div>
+              <ServicePageSidebar service={service} activeSubSlug={subService.slug} />
             </div>
-
-            <ServicePageSidebar service={service} activeSubSlug={subService.slug} />
-
           </div>
-        </div>
-      </section>
+        </section>
+      )}
 
       <ServicePageFooterCta
         service={service}

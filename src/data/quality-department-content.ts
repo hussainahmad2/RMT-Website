@@ -1,4 +1,11 @@
 import { SQA_OVERVIEW, SQA_STANDARDS, sqaSectionsToQualityCards } from "./sqa-services-content";
+import {
+  QC_TAGLINE,
+  QC_STANDARDS,
+  QC_RD_APPROACH,
+  QC_PRODUCTION_APPROACH,
+  QC_CLOSING_NOTE,
+} from "./quality-control-content";
 
 export type QualityServiceCard = {
   title: string;
@@ -144,120 +151,209 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
     ],
   },
   {
-    id: "qcprod",
-    tabLabel: "QC — Production",
-    name: "Quality Control — Production (PRD)",
-    description:
-      "In-process and final product inspection, QC lab services, and release activities for EMD and SD bulk production lines and device batches. QD owns all testing and sign-off.",
-    standards: ["ISO 13485 Clause 8", "EMD · PRD · SC"],
+    id: "qc",
+    tabLabel: "Quality Control",
+    name: "Quality Control",
+    description: QC_TAGLINE,
+    standards: [...QC_STANDARDS],
     accent: "teal",
     sections: [
       {
-        label: "Production Inspection & Testing",
+        label: "Device Portfolio Expertise",
         cards: [
           {
-            title: "In-Process & Final Inspection",
-            owner: "QD",
+            title: "Active Medical Devices & Electro-Mechanical Systems",
             items: [
-              "Sample production & module-level inspection",
-              "Integration testing (HW/SW interface validation)",
-              "Performance testing — speed, torque, precision",
-              "Factory Acceptance Testing (FAT) — pre-dispatch sign-off",
+              "IEC 60601-1 series safety & essential performance testing",
+              "EMC compliance and PCB assembly evaluation",
+              "System-level integration and functional verification",
             ],
           },
           {
-            title: "Electrical & Mechanical Testing",
-            owner: "QD",
+            title: "Non-Active & Implantable Devices",
             items: [
-              "Functional / operational testing — machines & rigs",
-              "Electrical safety (IEC 60601 series — active devices)",
-              "Mechanical load & stress testing",
-              "Usability & ergonomics evaluation",
+              "Microspheres, stents, and catheter bench testing",
+              "Dimensional & mechanical performance verification",
+              "Surface morphology and structural integrity analysis",
             ],
           },
           {
-            title: "Incoming & Goods Inspection",
-            owner: "QD",
+            title: "Production & Testing Machines",
             items: [
-              "IQC of raw materials & components (with SC)",
-              "Supplier CoC & documentation verification",
-              "Sampling plans per AQL / ISO 2859",
-              "Quarantine management & goods receipt records",
+              "Factory Acceptance Testing (FAT) pre-dispatch sign-off",
+              "Site Acceptance Testing (SAT) and equipment qualification",
+              "Metrology, calibration, and process capability analysis",
             ],
           },
           {
-            title: "Non-Conformance Control",
-            owner: "QD",
+            title: "Drug Delivery Systems",
             items: [
-              "NC identification, tagging & disposition",
-              "Scrap, rework & use-as-is decisions",
-              "NC trending & reporting",
-              "Batch record review & product release",
+              "Drug elution profiling and release studies",
+              "Combination product analytical support",
+              "Formulation-related quality verification",
+            ],
+          },
+          {
+            title: "Multi-Class Regulatory Pathways",
+            items: [
+              "Comprehensive compliance across Class I, Class II, and Class III portfolios",
+              "Design controls aligned with ISO 13485 Clause 7.3",
+              "Risk management per ISO 14971 throughout the lifecycle",
             ],
           },
         ],
       },
       {
-        label: "QC Lab Services",
+        label: "Core Testing Capabilities",
         cards: [
           {
-            title: "Microscopic & Dimensional Analysis",
-            items: [
-              "Surface morphology analysis (Leica Microsystems)",
-              "Dimensional analysis — microspheres, stents, catheters",
-              "Structural evaluation & measurement verification",
-              "Biomedical component morphology assessment",
-            ],
-          },
-          {
-            title: "UV Spectroscopy Analysis",
-            items: [
-              "Drug quantification & concentration determination",
-              "Drug release studies & drug-eluting stent analysis",
-              "Calibration curve development",
-              "Analytical method support for biomaterials",
-            ],
-          },
-          {
-            title: "Ultrasonication Services",
-            items: [
-              "Sample dispersion & particle deagglomeration",
-              "Suspension / emulsion preparation",
-              "Drug extraction & dissolution enhancement",
-              "Lab instrument cleaning & formulation optimization",
-            ],
-          },
-          {
-            title: "Shelf-Life & Stability Studies",
-            items: [
-              "Real-time & accelerated stability studies (ASTM F1980)",
-              "Product integrity & performance over time",
-              "Degradation rate & profile analysis",
-              "Material stability & biomaterial performance monitoring",
-            ],
-          },
-          {
-            title: "Catheter Bench Testing",
-            items: [
-              "Air leakage under water & hub assembly aspiration",
-              "Flow rate determination through catheter lumen",
-              "Leakage under pressure testing",
-              "Corrosion resistance evaluation",
-            ],
-          },
-          {
-            title: "Statistical Process Control",
+            title: "Quality Planning & Documentation",
             owner: "QD",
             items: [
-              "SPC chart implementation",
-              "Cpk / Ppk process capability analysis",
-              "Yield & defect rate reporting",
-              "Control limit setting & trend monitoring",
+              "Quality Plan formulation & Requirements Traceability Matrix",
+              "Rigorous Verification & Validation (V&V) protocols",
+              "Quality SOPs and Work Instruction documentation",
+            ],
+          },
+          {
+            title: "Electrical Safety & Compliance",
+            owner: "QD",
+            items: [
+              "IEC 60601-1 series testing",
+              "Electromagnetic compatibility (EMC) compliance",
+              "Essential performance evaluation for active devices",
+            ],
+          },
+          {
+            title: "Usability & Ergonomic Engineering",
+            owner: "QD",
+            items: [
+              "Human factors testing per IEC 62366-1",
+              "Usability engineering thresholds and validation",
+              "Clinical / intended-use confirmation support",
+            ],
+          },
+          {
+            title: "Interventional & Cardiovascular Testing",
+            owner: "QD",
+            items: [
+              "Physical and performance testing per ISO 10555 series",
+              "ISO 25539 specialized cardiovascular requirements",
+              "Trackability, pushability & corrosion resistance evaluation",
+            ],
+          },
+          {
+            title: "Incoming Raw Materials Inspection",
+            owner: "QD",
+            items: [
+              "Inspection per ISO 2859-1:2026 sampling plans",
+              "Supplier CoC & documentation verification",
+              "Quarantine management & goods receipt records",
+            ],
+          },
+          {
+            title: "Mechanical & Physical Verification",
+            owner: "QD",
+            items: [
+              "Mechanical endurance, burst, kink, pull-force & fatigue testing",
+              "PCB stress testing and advanced simulation testing",
+              "Physical and chemical characterization",
+            ],
+          },
+          {
+            title: "Industrial Validation",
+            owner: "QD",
+            items: [
+              "Metrology & specialized calibrations",
+              "Equipment verifications (IQ / OQ / PQ)",
+              "Factory Acceptance Testing (FAT) & Site Acceptance Testing (SAT)",
+            ],
+          },
+          {
+            title: "Packaging & Sterile Barrier Validation",
+            owner: "QD",
+            items: [
+              "Transit simulation & shelf-life testing",
+              "Peel-strength verification per ISO 11607 & ASTM F88",
+              "Accelerated aging per ASTM F1980",
+            ],
+          },
+          {
+            title: "Materials Characterization Support",
+            owner: "BMD+QD",
+            items: [
+              "Biological evaluation planning per ISO 10993",
+              "Chemical characterization early in the lifecycle",
+              "SEM and FTIR analyses for structure & composition",
+            ],
+          },
+        ],
+      },
+      {
+        label: "R&D Phase-Gated Approach",
+        cards: QC_RD_APPROACH.map((s) => ({
+          title: `${s.step}. ${s.title}`,
+          owner: "QD" as const,
+          items: [s.desc],
+        })),
+      },
+      {
+        label: "Production Quality Control",
+        cards: QC_PRODUCTION_APPROACH.map((s) => ({
+          title: `${s.step}. ${s.title}`,
+          owner: "QD" as const,
+          items: [s.desc],
+        })),
+      },
+      {
+        label: "Advanced Laboratory Infrastructure",
+        cards: [
+          {
+            title: "High-Performance Liquid Chromatography (HPLC)",
+            items: [
+              "Chemical characterization & material purity assessment",
+              "Drug elution profile quantification for combination devices",
+            ],
+          },
+          {
+            title: "Leica Optical Microscopy & Snap Gauge Systems",
+            items: [
+              "Micro-structural integrity & surface morphology analysis",
+              "Ultra-precise dimensional verification of device components",
+            ],
+          },
+          {
+            title: "Ultrasonication Processing",
+            items: [
+              "Sample dispersion, homogenization & de-agglomeration",
+              "Enhanced mixing and analytical sample preparation",
+            ],
+          },
+          {
+            title: "UV-Vis Spectrophotometer",
+            items: [
+              "Quantitative chemical analysis & raw material identification",
+              "Drug release profiling & degradation rate studies",
+            ],
+          },
+          {
+            title: "Environmental Stability Chambers",
+            items: [
+              "Accelerated & real-time shelf-life studies",
+              "Environmental stress screening per ISO 11607 guidelines",
+            ],
+          },
+          {
+            title: "Advanced Materials Characterization",
+            items: [
+              "SEM and FTIR analyses for material structure & composition",
+              "Audit-ready, quantitative verification data",
             ],
           },
         ],
       },
     ],
+    footerNote: QC_CLOSING_NOTE,
   },
   {
     id: "sqa",
@@ -267,144 +363,5 @@ export const QUALITY_DEPARTMENTS: QualityDepartment[] = [
     standards: [...SQA_STANDARDS],
     accent: "purple",
     sections: sqaSectionsToQualityCards(),
-  },
-  {
-    id: "qcrd",
-    tabLabel: "QC — Research and Development",
-    name: "Quality Control — Research and Development (PD · EMD · BMD)",
-    description:
-      "Quality oversight embedded in the product development lifecycle for active and non-active medical devices — from design verification through transfer to manufacturing. QD collaborates with PD, EMD, and BMD.",
-    standards: ["ISO 14971:2019", "IEC 60601-1", "ISO 81060", "ASTM Standards", "ISO 10555", "ISO 25539"],
-    accent: "coral",
-    sections: [
-      {
-        label: "Design Control & V&V",
-        cards: [
-          {
-            title: "Design Control (§7.3)",
-            owner: "QD",
-            items: [
-              "Design input & output documentation",
-              "Design review facilitation",
-              "DHF compilation & review",
-              "Design change control management",
-            ],
-          },
-          {
-            title: "Design Verification & Validation",
-            owner: "PD+QD",
-            items: [
-              "V&V against design inputs (active & non-active)",
-              "User needs & intended use confirmation",
-              "Clinical / usability evaluation (HFE)",
-              "Pre-submission V&V protocol guidance",
-            ],
-          },
-          {
-            title: "Dimensional & Mechanical Testing",
-            owner: "QD",
-            items: [
-              "Dimensional / tolerance inspection per engineering drawings",
-              "Mechanical performance — burst, kink, pull-force, fatigue",
-              "Advanced visual inspection (Leica microscopic systems)",
-              "Mechanical safety: impact, drop & strength testing",
-            ],
-          },
-          {
-            title: "Risk Management (ISO 14971)",
-            owner: "QD",
-            items: [
-              "Hazard identification & analysis",
-              "FMEA & fault tree analysis",
-              "Residual risk evaluation",
-              "Risk management report review",
-            ],
-          },
-        ],
-      },
-      {
-        label: "Active Device Testing",
-        cards: [
-          {
-            title: "Electrical Safety & Performance",
-            owner: "QD",
-            items: [
-              "IEC 60601-1 compliance — safety & essential performance",
-              "ISO 81060 — non-invasive sphygmomanometers",
-              "ISO 80601-2-30 — NIBP device requirements",
-              "EMC testing (electromagnetic compatibility)",
-              "PCB assembly evaluation for active devices",
-            ],
-          },
-          {
-            title: "Metrology & Calibration",
-            owner: "QD",
-            items: [
-              "Calibration — temperature, pressure, volume, time",
-              "Cleanroom equipment verification (particle counters)",
-              "Measurement system analysis (MSA)",
-              "Calibration record management",
-            ],
-          },
-          {
-            title: "Equipment Qualification",
-            owner: "QD",
-            items: [
-              "Installation Qualification (IQ)",
-              "Operational Qualification (OQ)",
-              "Performance Qualification (PQ)",
-              "Validation documentation & reporting",
-            ],
-          },
-        ],
-      },
-      {
-        label: "Interventional & Implantable Device Testing",
-        cards: [
-          {
-            title: "Cardiovascular Stent Delivery System Testing",
-            owner: "QD",
-            items: [
-              "Testing per ISO 10555 series",
-              "Compliance with ISO 25539",
-              "Stent deliverability under simulated physiological conditions",
-              "Trackability, pushability & corrosion resistance evaluation",
-            ],
-          },
-          {
-            title: "Stent & Surface Quality Control",
-            owner: "QD",
-            items: [
-              "Electropolishing quality control (high-magnification)",
-              "Particulate evaluation & edge-rounding verification",
-              "Leak & package integrity testing",
-              "Corrosion & material degradation evaluation",
-            ],
-          },
-          {
-            title: "Biocompatibility & Sterilization",
-            owner: "BMD+QD",
-            items: [
-              "Biocompatibility testing per ISO 10993 (patient-contact products)",
-              "Sterilization validation — EO, gamma, e-beam",
-              "Shelf-life & packaging validation (ASTM F1980)",
-              "Regulatory dossier readiness review (PD + PRD + QD)",
-            ],
-          },
-          {
-            title: "Technical Consultancy",
-            owner: "QD",
-            items: [
-              "Design V&V strategy — design inputs to outputs mapping",
-              "Customized training — calibration & regulatory test setups",
-              "Regulatory pathway guidance & submission gap analysis",
-              "System-level & integration testing oversight",
-            ],
-          },
-        ],
-      },
-    ],
-    footerNote:
-      "QD Core Functions across all Research and Development activities: Test plan creation for all departments · Inspection reports (signed & stamped) · Module-level & system-level integration testing · Performance & usability testing · Bi-monthly QC review meetings · QC pass → CEO presentation (QD + Relevant Dept. Head)",
   },
 ];
