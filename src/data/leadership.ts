@@ -37,7 +37,7 @@ export const C_LEVEL_LEADERSHIP: LeadershipMember[] = [
     bio: "Drives product strategy from concept through design validation and commercial readiness.",
   },
   {
-    name: "Muhammad Hafeez",
+    name: "Muhammad Hafeez Khan",
     role: "Chief Growth Officer",
     image: teamImage("c-level", "hafeez.webp"),
     bio: "Leads business development, partnerships, and market expansion in medical devices and digital health.",
@@ -242,7 +242,7 @@ export const WAREHOUSE_DISTRIBUTION_WING: LeadershipMember[] = [
   },
   {
     name: "Esha Gull",
-    role: "Assistant, Store & Warehouse",
+    role: "Assistant Manager, Store & Warehouse",
     image: teamImage("warehouse-distribution-wing", "esha.jpeg"),
     bio: "Assists store and warehouse activities including stock handling, documentation, and day-to-day inventory support.",
   },
