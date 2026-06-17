@@ -6,6 +6,7 @@ import {
   Building2,
   CheckCircle,
   Dna,
+  ExternalLink,
   FileCheck,
   FlaskConical,
   GraduationCap,
@@ -285,14 +286,25 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
           <div className="grid lg:grid-cols-2 gap-4">
             {BMD_PUBLICATIONS.map((pub, i) => (
               <motion.div
-                key={i}
+                key={pub.citation.slice(0, 48)}
                 initial={{ opacity: 0, y: 8 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: (i % 6) * 0.03 }}
-                className="text-sm sm:text-base text-slate-600 leading-relaxed p-4 rounded-xl border border-border bg-card"
+                className="text-sm sm:text-base text-slate-600 leading-relaxed p-4 rounded-xl border border-border bg-card hover:border-primary/25 transition-colors"
               >
-                {pub}
+                <p>{pub.citation}</p>
+                {pub.url && (
+                  <a
+                    href={pub.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-1.5 mt-3 text-sm font-semibold text-primary hover:text-primary/80 transition-colors"
+                  >
+                    <ExternalLink className="w-3.5 h-3.5 shrink-0" />
+                    View publication
+                  </a>
+                )}
               </motion.div>
             ))}
           </div>

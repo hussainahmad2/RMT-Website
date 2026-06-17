@@ -158,6 +158,18 @@ export const PRODUCTION_WING: LeadershipMember[] = [
     image: teamImage("production-wing", "umer.jpeg"),
     bio: "Supports production planning, shop-floor coordination, and daily manufacturing operations.",
   },
+  {
+    name: "Abdullah Amjad Abbasi",
+    role: "Technical Staff",
+    image: teamImage("production-wing", "abdullah_abbasi.jpeg"),
+    bio: "Supports technical production activities and shop-floor operations for medical device manufacturing.",
+  },
+  {
+    name: "Muhammad Amjad Hussain",
+    role: "Technical Staff",
+    image: teamImage("production-wing", "amjad.jpeg"),
+    bio: "Contributes to production processes and technical support within the manufacturing wing.",
+  },
 ];
 
 /** Regulatory Department */
