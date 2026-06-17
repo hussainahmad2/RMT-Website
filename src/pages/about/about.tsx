@@ -17,6 +17,7 @@ import {
   REGULATORY_DEPARTMENT,
   QUALITY_CONTROL_WING,
   SUPPLY_CHAIN_WING,
+  WAREHOUSE_DISTRIBUTION_WING,
   FINANCE_DEPARTMENT,
   HR_ADMIN_SUPPORT_WING,
 } from "@/data/leadership";
@@ -344,8 +345,21 @@ export default function About() {
         </div>
       </section>
 
-      {/* ===== FINANCE DEPARTMENT ===== */}
+      {/* ===== WAREHOUSE & DISTRIBUTION WING ===== */}
       <section className="py-20 bg-secondary/30">
+        <div className="page-container">
+          <AnimatedSection className="text-center mb-12">
+            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
+              Warehouse & Distribution Wing
+            </h2>
+          </AnimatedSection>
+
+          <TeamMemberGrid members={WAREHOUSE_DISTRIBUTION_WING} />
+        </div>
+      </section>
+
+      {/* ===== FINANCE DEPARTMENT ===== */}
+      <section className="py-20 bg-background">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
@@ -358,7 +372,7 @@ export default function About() {
       </section>
 
       {/* ===== HR & ADMIN SUPPORT WING ===== */}
-      <section className="py-20 bg-background">
+      <section className="py-20 bg-secondary/30">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">

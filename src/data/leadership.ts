@@ -232,6 +232,22 @@ export const SUPPLY_CHAIN_WING: LeadershipMember[] = [
   },
 ];
 
+/** Warehouse & Distribution Wing */
+export const WAREHOUSE_DISTRIBUTION_WING: LeadershipMember[] = [
+  {
+    name: "Azeem Iqbal Khan",
+    role: "Assistant Manager, Warehouse & Distribution",
+    image: teamImage("warehouse-distribution-wing", "azeem.jpeg"),
+    bio: "Supports warehouse operations, inventory control, and distribution coordination across RMT programmes.",
+  },
+  {
+    name: "Esha Gull",
+    role: "Assistant, Store & Warehouse",
+    image: teamImage("warehouse-distribution-wing", "esha.jpeg"),
+    bio: "Assists store and warehouse activities including stock handling, documentation, and day-to-day inventory support.",
+  },
+];
+
 /** Finance Department */
 export const FINANCE_DEPARTMENT: LeadershipMember[] = [
   {
