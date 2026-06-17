@@ -1,6 +1,8 @@
 export const MANUFACTURING_IMAGES = {
-  angiographicCatheter: "/mdm/angiographic-catheter.jpeg",
-  guidingCatheter: "/mdm/guiding-catheter.jpeg",
+  /** Swapped per product review — angiographic product uses guiding asset path */
+  angiographicCatheter: "/mdm/guiding-catheter.jpeg",
+  guidingCatheter: "/mdm/angiographic-catheter.jpeg",
+  microspheres: "/mdm/microspheres.jpeg",
   cleanroom1: "/mdm/cleanroom-1.jpeg",
   cleanroom2: "/mdm/cleanroom-2.jpeg",
   cleanroom3: "/mdm/cleanroom-3.jpeg",
@@ -56,6 +58,7 @@ export const MANUFACTURING_PRODUCTS = [
     icon: "atom",
     description:
       "Precisely calibrated biodegradable microspheres for embolization and drug delivery applications — manufactured under controlled conditions for batch-to-batch consistency.",
+    image: MANUFACTURING_IMAGES.microspheres,
     features: [
       "Tight size distribution for predictable performance",
       "Biodegradable, biocompatible polymer matrix",

@@ -31,16 +31,6 @@ import {
 import { cn } from "@/lib/utils";
 import { ALL_SERVICES, type ServiceData, type SubServiceData } from "@/data/services";
 import {
-  BMD_ACADEMIC_PARTNERS,
-  BMD_EQUIPMENT,
-  BMD_EXPERTISE,
-  BMD_INDUSTRIAL_PARTNERS,
-  BMD_PATENTS,
-  BMD_PRODUCTS,
-  BMD_PUBLICATIONS,
-  BMD_RESEARCH_AREAS,
-} from "@/data/bmd-content";
-import {
   MBL_EQUIPMENT,
 } from "@/data/mbl-content";
 import {
@@ -94,6 +84,12 @@ import {
 import { QualityControlDetail } from "./QualityControlDetail";
 import { QualityAssuranceDetail } from "./QualityAssuranceDetail";
 import { SoftwareQualityAssuranceDetail } from "./SoftwareQualityAssuranceDetail";
+import { BmdServiceDetail } from "./BmdServiceDetail";
+import { BmdSubServiceDetail } from "./BmdSubServiceDetail";
+import { BMD_STANDARDS } from "@/data/bmd-standards";
+import { MblHeroVideoBackground } from "./MblHeroVideoBackground";
+import { MblServiceDetail } from "./MblServiceDetail";
+import { ManufacturingServiceDetail } from "./ManufacturingServiceDetail";
 import { QA_APPROACH, SQA_APPROACH } from "@/data/quality-assurance-content";
 import {
   FullBleedBlock,
@@ -370,139 +366,7 @@ function MblServiceExtras() {
   );
 }
 
-/* ---- BMD extended sections (main service page) ---- */
-function BmdServiceExtras() {
-  return (
-    <div className="space-y-10">
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Academic & Industry Partners</h2>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-6">
-          Collaboration with academic institutions, research laboratories, and industry partners plays a crucial role in accelerating innovation in biomaterials and medical technologies. Through these partnerships, RMT contributes to the development of advanced biomaterials with unique mechanical, biological, and functional properties that can be applied across drug delivery systems, regenerative medicine, implantable devices, and pharmaceutical technologies.
-        </p>
-        <div className="grid sm:grid-cols-2 gap-6">
-          <div className="bg-card border border-border rounded-xl p-5">
-            <h3 className="font-heading font-bold text-foreground mb-3">Academic Partners</h3>
-            <ul className="space-y-2">
-              {BMD_ACADEMIC_PARTNERS.map((p) => (
-                <li key={p} className="flex items-center gap-2 text-sm text-muted-foreground">
-                  <GraduationCap className="w-4 h-4 text-primary shrink-0" />
-                  {p}
-                </li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-card border border-border rounded-xl p-5">
-            <h3 className="font-heading font-bold text-foreground mb-3">Industrial Partners</h3>
-            <p className="text-muted-foreground text-xs mb-3">We collaborate with global innovators to deliver validated, market-ready biomaterial and pharmaceutical solutions.</p>
-            <div className="flex flex-wrap gap-2">
-              {BMD_INDUSTRIAL_PARTNERS.map((p) => (
-                <span key={p} className="text-xs px-3 py-1 bg-primary/8 text-primary rounded-full border border-primary/15 font-medium">{p}</span>
-              ))}
-            </div>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Research & Publications</h2>
-        <p className="text-muted-foreground text-sm leading-relaxed mb-4">
-          RMT actively contributes to scientific advancement in biomaterials, polymer science, drug delivery, and medical device development through research collaborations and peer-reviewed publications.
-        </p>
-        <div className="grid sm:grid-cols-2 gap-4 mb-6">
-          <div className="bg-primary/5 border border-primary/15 rounded-xl p-4 text-center">
-            <p className="text-2xl font-heading font-bold text-primary">40+</p>
-            <p className="text-xs text-muted-foreground mt-1">International Research & Review Articles</p>
-          </div>
-          <div className="bg-primary/5 border border-primary/15 rounded-xl p-4 text-center">
-            <p className="text-2xl font-heading font-bold text-primary">12+</p>
-            <p className="text-xs text-muted-foreground mt-1">Conference Papers Published</p>
-          </div>
-        </div>
-        <h3 className="font-heading font-semibold text-foreground mb-2">Research Focus Areas</h3>
-        <ul className="grid sm:grid-cols-2 gap-2 mb-6">
-          {BMD_RESEARCH_AREAS.map((area) => (
-            <li key={area} className="text-sm text-muted-foreground flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-              {area}
-            </li>
-          ))}
-        </ul>
-        <h3 className="font-heading font-semibold text-foreground mb-2">Areas of Expertise</h3>
-        <div className="flex flex-wrap gap-2 mb-6">
-          {BMD_EXPERTISE.map((e) => (
-            <span key={e} className="text-xs px-2.5 py-1 bg-secondary rounded-full border border-border text-muted-foreground">{e}</span>
-          ))}
-        </div>
-        <h3 className="font-heading font-semibold text-foreground mb-3">Granted Patents</h3>
-        <div className="overflow-x-auto rounded-xl border border-border mb-6">
-          <table className="w-full text-sm text-left">
-            <thead className="bg-muted/50 text-foreground">
-              <tr>
-                <th className="px-4 py-3 font-semibold">Patent Title</th>
-                <th className="px-4 py-3 font-semibold">Inventors</th>
-                <th className="px-4 py-3 font-semibold">Patent No.</th>
-              </tr>
-            </thead>
-            <tbody>
-              {BMD_PATENTS.map((pat) => (
-                <tr key={pat.patentNo} className="border-t border-border">
-                  <td className="px-4 py-3 text-muted-foreground">{pat.title}</td>
-                  <td className="px-4 py-3 text-muted-foreground">{pat.inventors}</td>
-                  <td className="px-4 py-3 text-foreground font-medium">{pat.patentNo}</td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </div>
-        <h3 className="font-heading font-semibold text-foreground mb-3">Related Journal Publications</h3>
-        <ul className="max-h-80 overflow-y-auto space-y-3 pr-2 border border-border rounded-xl p-4 bg-card">
-          {BMD_PUBLICATIONS.map((pub, i) => (
-            <li key={i} className="text-xs text-muted-foreground leading-relaxed border-b border-border/60 last:border-0 pb-3 last:pb-0">{pub}</li>
-          ))}
-        </ul>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Products</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-card border border-border rounded-xl p-5">
-            <h3 className="font-heading font-bold text-foreground mb-3">Skin Care</h3>
-            <ul className="space-y-1.5">
-              {BMD_PRODUCTS.skincare.map((item) => (
-                <li key={item} className="text-sm text-muted-foreground">{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-card border border-border rounded-xl p-5">
-            <h3 className="font-heading font-bold text-foreground mb-3">Hair Care</h3>
-            <ul className="space-y-1.5">
-              {BMD_PRODUCTS.haircare.map((item) => (
-                <li key={item} className="text-sm text-muted-foreground">{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-card border border-border rounded-xl p-5 md:col-span-1">
-            <h3 className="font-heading font-bold text-foreground mb-3">Innovative Products</h3>
-            <ul className="space-y-1.5 max-h-48 overflow-y-auto">
-              {BMD_PRODUCTS.innovative.map((item) => (
-                <li key={item} className="text-sm text-muted-foreground">{item}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </AnimatedSection>
-
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Equipment</h2>
-        <div className="flex flex-wrap gap-2">
-          {BMD_EQUIPMENT.map((eq) => (
-            <span key={eq} className="text-sm px-3 py-1.5 bg-card border border-border rounded-lg text-muted-foreground">{eq}</span>
-          ))}
-        </div>
-      </AnimatedSection>
-    </div>
-  );
-}
+/* ---- BMD extended sections moved to BmdServiceDetail.tsx ---- */
 
 /* ---- Regulatory Compliance extended sections (main service page) ---- */
 function RegulatoryComplianceExtras() {
@@ -1347,7 +1211,7 @@ const SERVICE_STANDARDS: Record<string, string[]> = {
   "automation-services":       ["IEC 61131", "ISO 13849", "Modbus / Profibus", "GMP", "ISO 13485"],
   "design-fabrication":        ["SOLIDWORKS", "ANSYS", "COMSOL", "DFM / DFA", "ISO 13485"],
   "engineering-product-development": ["IEC 62304", "IPC-2221", "IEC 60601-1", "STM32 / ESP32", "ISO 13485"],
-  "bmd":                     ["ISO 10993", "ISO 17025", "ICH Q1A(R2)", "ISO 13485", "FDA / EU MDR"],
+  "bmd":                     [...BMD_STANDARDS],
   "mbl-laboratory":          ["GMP Compliance", "ISO 13485", "USP <71>", "USP <85>", "EU Pharmacopoeia"],
   "contract-manufacturing":  ["ISO 13485", "ISO 14644", "ISO 14971", "ISO 10993"],
 };
@@ -2592,10 +2456,12 @@ function ServiceStandardsBlock({
   standards,
   licences = [],
   variant = "default",
+  showIndexLabels = true,
 }: {
   standards: string[];
   licences?: string[];
   variant?: "default" | "software-ai";
+  showIndexLabels?: boolean;
 }) {
   const isCyan = variant === "software-ai";
   let standardCounter = 0;
@@ -2627,9 +2493,11 @@ function ServiceStandardsBlock({
           <ItemIcon className="h-4 w-4" />
         </div>
         <div className="min-w-0 flex-1">
-          <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-            {isLicence ? "Licence" : standardItemLabel(std, standardCounter)}
-          </span>
+          {(showIndexLabels || isLicence) && (
+            <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
+              {isLicence ? "Licence" : standardItemLabel(std, standardCounter)}
+            </span>
+          )}
           <p className="text-sm font-semibold text-foreground leading-snug">{std}</p>
         </div>
       </div>
@@ -2961,7 +2829,7 @@ function ProminentMetricsBar({
 /** Centered prominent standards strip */
 function ProminentStandardsSection({
   standards,
-  title = "Built for Regulated Healthcare Software",
+  title,
 }: {
   standards: string[];
   title?: string;
@@ -2973,10 +2841,12 @@ function ProminentStandardsSection({
           <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-[0.2em] mb-2">
             Compliance & Standards
           </p>
-          <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-8">
-            {title}
-          </h3>
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
+          {title && (
+            <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground mb-8">
+              {title}
+            </h3>
+          )}
+          <div className={`flex flex-wrap justify-center gap-3 max-w-4xl mx-auto ${title ? "" : "mt-2"}`}>
             {standards.map((std) => (
               <span
                 key={std}
@@ -3247,6 +3117,7 @@ function SubServiceContent({
       )}
 
       {/* ── Our Approach ── */}
+      {service.slug !== "mbl-laboratory" && (
       <AnimatedSection>
         <div className="mb-6 pb-3 border-b border-border">
           <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Methodology</p>
@@ -3271,6 +3142,7 @@ function SubServiceContent({
           ))}
         </div>
       </AnimatedSection>
+      )}
 
       {/* ── Service capabilities ── */}
       <AnimatedSection>
@@ -3361,11 +3233,15 @@ export function ServiceDetail({
     <div className="bg-background min-h-screen pt-20">
 
       {/* HERO — cinematic for ALL services */}
-      <section className="relative bg-[#060d17] overflow-hidden min-h-[80vh] flex items-center py-16">
-        <CinematicHeroBackground
-          images={(SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? FALLBACK_IMAGES)}
-          alt={service.name}
-        />
+      <section className={`relative bg-[#060d17] overflow-hidden flex items-center py-16 ${isBmd || isMbl ? "min-h-[62vh] sm:min-h-[68vh]" : "min-h-[80vh]"}`}>
+        {isMbl ? (
+          <MblHeroVideoBackground />
+        ) : (
+          <CinematicHeroBackground
+            images={(SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? FALLBACK_IMAGES)}
+            alt={service.name}
+          />
+        )}
         <div className="absolute top-0 right-0 w-[640px] h-[640px] rounded-full border border-white/[0.06] -translate-y-1/2 translate-x-1/3 pointer-events-none" aria-hidden />
         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full border border-white/[0.04] translate-y-1/2 -translate-x-1/3 pointer-events-none" aria-hidden />
         <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[520px] h-[520px] rounded-full border border-white/[0.03] pointer-events-none hidden lg:block" aria-hidden />
@@ -3452,6 +3328,7 @@ export function ServiceDetail({
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
             <div className="lg:col-span-2 space-y-10">
 
+              {!isBmd && !isMbl && !isManufacturing && (
               <AnimatedSection>
                 <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Overview</h2>
                 <div className="space-y-4">
@@ -3460,6 +3337,7 @@ export function ServiceDetail({
                   ))}
                 </div>
               </AnimatedSection>
+              )}
 
               {/* SUB-SERVICES — rich image cards */}
               <AnimatedSection>
@@ -3505,7 +3383,7 @@ export function ServiceDetail({
                 />
               )}
 
-              {SERVICE_STANDARDS[service.slug] && (
+              {SERVICE_STANDARDS[service.slug] && !isBmd && (
                 isSoftwareAI ? (
                   <ProminentStandardsSection standards={SERVICE_STANDARDS[service.slug]} />
                 ) : (
@@ -3532,8 +3410,6 @@ export function ServiceDetail({
               {isAutomation && <AutomationCommunicationExtras />}
               {isDesignFabrication && <DesignFabricationExtras />}
               {isEngineeringProduct && <EngineeringProductExtras />}
-              {isBmd && <BmdServiceExtras />}
-              {isMbl && <MblServiceExtras />}
 
             </div>
 
@@ -3543,11 +3419,14 @@ export function ServiceDetail({
         </div>
 
         {/* Full-width detailed sections — below sidebar, edge-to-edge */}
-        {isManufacturing && <ManufacturingServiceExtras />}
         {isProductDevelopment && <ProductDevelopmentServiceExtras />}
         {isQualityTesting && <QualityTestingServiceExtras />}
         {isRegulatoryCompliance && <RegulatoryComplianceExtras />}
       </section>
+
+      {isBmd && <BmdServiceDetail service={service} />}
+      {isMbl && <MblServiceDetail service={service} />}
+      {isManufacturing && <ManufacturingServiceDetail service={service} />}
 
       {isSoftwareAI && (
         <section className="py-24 bg-secondary/30 border-t border-border relative overflow-hidden">
@@ -3633,10 +3512,13 @@ export function SubServiceDetail({
 
   const isSoftwareAI = service.slug === "software-ai";
   const isQualityDept = service.slug === "quality-testing";
+  const isBmdDept = service.slug === "bmd";
+  const isMblDept = service.slug === "mbl-laboratory";
   const isQa = isQualityDept && subService.slug === "quality-assurance";
   const isQc = isQualityDept && subService.slug === "quality-control";
   const isSqa = isQualityDept && subService.slug === "sqa-samd-simd";
   const isQualityDetail = isQa || isQc || isSqa;
+  const isBmdDetail = isBmdDept;
   const containerClass = "page-container";
   const subHeroImage = isSoftwareAI
     ? SOFTWARE_AI_SUB_IMAGES[subService.slug] ?? service.heroImage
@@ -3654,8 +3536,12 @@ export function SubServiceDetail({
     <div className="bg-background min-h-screen pt-20">
 
       {/* HERO — cinematic for ALL sub-service pages */}
-      <section className="relative bg-[#060d17] overflow-hidden flex items-center min-h-[80vh] py-16">
-        <CinematicHeroBackground images={subHeroCarouselImages} alt={subService.name} />
+      <section className={`relative bg-[#060d17] overflow-hidden flex items-center py-16 ${isBmdDept || isMblDept ? "min-h-[62vh] sm:min-h-[68vh]" : "min-h-[80vh]"}`}>
+        {isMblDept ? (
+          <MblHeroVideoBackground />
+        ) : (
+          <CinematicHeroBackground images={subHeroCarouselImages} alt={subService.name} />
+        )}
         <div className="absolute top-0 right-0 w-[640px] h-[640px] rounded-full border border-white/[0.06] -translate-y-1/2 translate-x-1/3 pointer-events-none" aria-hidden />
         <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full border border-white/[0.04] translate-y-1/2 -translate-x-1/3 pointer-events-none" aria-hidden />
         <div
@@ -3688,19 +3574,19 @@ export function SubServiceDetail({
                   <div className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 backdrop-blur-sm border ${
                     isSoftwareAI
                       ? "bg-cyan-400/10 border-cyan-400/25"
-                      : isQualityDept
+                      : isQualityDept || isBmdDept || isMblDept
                         ? "bg-primary/10 border-primary/30"
                         : "bg-white/8 border-white/20"
                   }`}>
                     <span className={`w-2 h-2 rounded-full animate-pulse shrink-0 ${
-                      isSoftwareAI ? "bg-cyan-400" : isQualityDept ? "bg-primary" : "bg-primary"
+                      isSoftwareAI ? "bg-cyan-400" : isQualityDept || isBmdDept || isMblDept ? "bg-primary" : "bg-primary"
                     }`} />
-                    <SubIcon className={`w-4 h-4 ${isSoftwareAI ? "text-cyan-300" : isQualityDept ? "text-sky-300" : "text-white/70"}`} />
+                    <SubIcon className={`w-4 h-4 ${isSoftwareAI ? "text-cyan-300" : isQualityDept || isBmdDept || isMblDept ? "text-sky-300" : "text-white/70"}`} />
                     <span className={`text-xs font-bold uppercase tracking-[0.18em] ${
-                      isSoftwareAI ? "text-cyan-200" : isQualityDept ? "text-sky-200" : "text-white/80"
+                      isSoftwareAI ? "text-cyan-200" : isQualityDept || isBmdDept || isMblDept ? "text-sky-200" : "text-white/80"
                     }`}>{heroBadgeLabel}</span>
                     <span className="w-px h-3 bg-white/25" />
-                    <span className={`text-xs ${isSoftwareAI ? "text-cyan-400/70" : isQualityDept ? "text-sky-300/80" : "text-white/50"}`}>
+                    <span className={`text-xs ${isSoftwareAI ? "text-cyan-400/70" : isQualityDept || isBmdDept || isMblDept ? "text-sky-300/80" : "text-white/50"}`}>
                       {isSoftwareAI
                         ? "IEC 62304 Compliant"
                         : isQc
@@ -3715,7 +3601,7 @@ export function SubServiceDetail({
                     </span>
                   </div>
                   <h1 className={`font-heading text-5xl sm:text-6xl md:text-7xl font-black text-white mb-5 leading-[0.95] tracking-tight ${
-                    isQualityDetail ? "max-w-4xl" : ""
+                    isQualityDetail || isBmdDetail ? "max-w-4xl" : ""
                   }`}>
                     {isQc ? (
                       <>
@@ -3763,7 +3649,7 @@ export function SubServiceDetail({
                 size="lg"
                 className={isSoftwareAI
                   ? "rounded-xl px-8 bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold shadow-lg shadow-cyan-500/30"
-                  : isQualityDept
+                  : isQualityDept || isBmdDept || isMblDept
                     ? "rounded-xl px-8 bg-gradient-to-r from-sky-400 to-primary text-white hover:from-sky-300 hover:to-primary/90 font-bold shadow-lg shadow-primary/30"
                     : "rounded-xl px-8 bg-gradient-to-r from-primary to-primary/80 text-white hover:from-primary/90 hover:to-primary/70 font-bold shadow-lg shadow-primary/30"}
               >
@@ -3780,7 +3666,9 @@ export function SubServiceDetail({
       </section>
 
       {/* CONTENT */}
-      {isQc ? (
+      {isBmdDetail ? (
+        <BmdSubServiceDetail subService={subService} service={service} />
+      ) : isQc ? (
         <QualityControlDetail subService={subService} />
       ) : isQa ? (
         <QualityAssuranceDetail subService={subService} />

@@ -1,6 +1,7 @@
 import { BMD_PRODUCTS } from "@/data/bmd-content";
 import {
   MANUFACTURING_HERO_IMAGES,
+  MANUFACTURING_IMAGES,
   MANUFACTURING_PRODUCTS,
   MANUFACTURING_PRODUCTS_MADE,
 } from "@/data/revive-manufacturing-content";
@@ -30,7 +31,7 @@ export interface ProductCategory {
 const PRODUCT_IMAGES = {
   catheter: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=85",
   angiography: "https://images.unsplash.com/photo-1579684385127-1ef15d508118?w=900&q=85",
-  microspheres: "https://images.unsplash.com/photo-1628595351029-c2bf17511435?w=900&q=85",
+  microspheres: "/mdm/microspheres.jpeg",
   cleanroom: "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=900&q=85",
   inflation: "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=900&q=85",
   skincare: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=900&q=85",
@@ -52,7 +53,7 @@ const BMD_IMAGE_MAP: Record<string, string> = {
   "Moisturising Sunscreen (All Skin Types)": PRODUCT_IMAGES.skincare,
   "Vitamin C Serum": PRODUCT_IMAGES.serum,
   "Hair Growth Serum (Minoxidil-Based)": PRODUCT_IMAGES.serum,
-  "Microspheres": PRODUCT_IMAGES.microspheres,
+  "Microspheres": "/mdm/microspheres.jpeg",
   "Bioresorbable Vascular Scaffold": PRODUCT_IMAGES.stent,
   "Drug Coating for 3rd Generation Drug Eluting Stent": PRODUCT_IMAGES.stent,
 };
@@ -90,7 +91,12 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
         name: p.name,
         description: p.description,
         features: p.features,
-        image: p.name === "Diagnostic Catheters" ? "/mdm/angiographic-catheter.jpeg" : "/mdm/facility-1.jpeg",
+        image:
+          "image" in p && p.image
+            ? p.image
+            : p.name === "Diagnostic Catheters"
+              ? MANUFACTURING_IMAGES.guidingCatheter
+              : "/mdm/facility-1.jpeg",
         tag: "Class II",
         spec: "ISO 13485",
       })),
@@ -112,9 +118,9 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     serviceName: "Biomaterials (BMD)",
     bannerImage: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&q=85",
     products: [
+      ...BMD_PRODUCTS.innovative.map(bmdProduct),
       ...BMD_PRODUCTS.skincare.map(bmdProduct),
       ...BMD_PRODUCTS.haircare.map(bmdProduct),
-      ...BMD_PRODUCTS.innovative.map(bmdProduct),
     ],
   },
   {
