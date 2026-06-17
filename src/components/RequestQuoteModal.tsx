@@ -32,6 +32,7 @@ const SERVICES = [
   { id: "bmd", label: "Biomaterials & Drug Innovation (BMD)", icon: <Dna className="w-4 h-4" /> },
   { id: "mbl-laboratory", label: "Microbiology Laboratory Testing", icon: <Microscope className="w-4 h-4" /> },
   { id: "contract-manufacturing", label: "Medical Device Manufacturing", icon: <Factory className="w-4 h-4" /> },
+  { id: "production-equipment-engineering", label: "Medical Equipment Manufacturing", icon: <Settings2 className="w-4 h-4" /> },
 ];
 
 const PROJECT_TYPES = [

@@ -5,6 +5,7 @@ import {
   MANUFACTURING_PRODUCTS,
   MANUFACTURING_PRODUCTS_MADE,
 } from "@/data/revive-manufacturing-content";
+import { PRODUCTION_EQUIPMENT_HERO_IMAGES, PRODUCTION_EQUIPMENT_PRODUCTS } from "@/data/production-equipment-content";
 import { ENGINEERING_OTHER_PRODUCT_DESIGN } from "@/data/engineering-content";
 import { SOFTWARE_BANNER_IMAGE, SOFTWARE_DEPARTMENT_PRODUCTS } from "@/data/software-products";
 
@@ -79,6 +80,52 @@ function engProduct(name: string, image: string): ProductItem {
 }
 
 export const PRODUCT_CATEGORIES: ProductCategory[] = [
+  {
+    id: "production-equipment",
+    title: "Medical Equipment Manufacturing",
+    description:
+      "Custom manufacturing equipment, production lines, cleanroom-compatible builds, and IQ/OQ/PQ-qualified systems from our medical equipment manufacturing division.",
+    serviceSlug: "production-equipment-engineering",
+    serviceName: "Medical Equipment Manufacturing",
+    bannerImage: PRODUCTION_EQUIPMENT_HERO_IMAGES[0],
+    products: [
+      ...PRODUCTION_EQUIPMENT_PRODUCTS.map((p) => ({
+        name: p.name,
+        description: p.description,
+        image: p.image,
+        tag: p.tag,
+        spec: p.spec,
+      })),
+      {
+        name: "Custom Equipment Design",
+        description: "Bespoke machinery engineered for your specific device, process, and regulatory requirements.",
+        image: MANUFACTURING_IMAGES.facility2,
+        tag: "Engineering",
+        spec: "URS to FAT",
+      },
+      {
+        name: "Production Line Development",
+        description: "End-to-end manufacturing line design, integration, commissioning, and throughput optimization.",
+        image: MANUFACTURING_IMAGES.facility1,
+        tag: "Lines",
+        spec: "Full integration",
+      },
+      {
+        name: "Equipment Qualification (IQ/OQ/PQ)",
+        description: "Complete qualification packages aligned with FDA 21 CFR Part 820 and ISO 13485.",
+        image: MANUFACTURING_IMAGES.cleanroom2,
+        tag: "Validation",
+        spec: "Regulatory-ready",
+      },
+      {
+        name: "Process Automation Systems",
+        description: "Validated assembly, inspection, and process monitoring with MES/QMS integration.",
+        image: MANUFACTURING_IMAGES.facility3,
+        tag: "Automation",
+        spec: "SPC enabled",
+      },
+    ],
+  },
   {
     id: "medical-devices",
     title: "Medical Devices & Manufacturing",

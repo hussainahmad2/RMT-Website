@@ -57,6 +57,10 @@ import {
   type ManufacturingProductMade,
 } from "@/data/revive-manufacturing-content";
 import {
+  PRODUCTION_EQUIPMENT_HERO_IMAGES,
+  PRODUCTION_EQUIPMENT_KEY_METRICS,
+} from "@/data/production-equipment-content";
+import {
   PRODUCT_DEVELOPMENT_KEY_METRICS,
   PRODUCT_DEVELOPMENT_LICENCES,
   PRODUCT_DEVELOPMENT_PHASES,
@@ -90,6 +94,7 @@ import { BMD_STANDARDS } from "@/data/bmd-standards";
 import { MblHeroVideoBackground } from "./MblHeroVideoBackground";
 import { MblServiceDetail } from "./MblServiceDetail";
 import { ManufacturingServiceDetail } from "./ManufacturingServiceDetail";
+import { ProductionEquipmentServiceDetail } from "./ProductionEquipmentServiceDetail";
 import { QA_APPROACH, SQA_APPROACH } from "@/data/quality-assurance-content";
 import {
   FullBleedBlock,
@@ -1200,6 +1205,7 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
   "bmd": <Dna className="w-6 h-6" />,
   "mbl-laboratory": <Microscope className="w-6 h-6" />,
   "contract-manufacturing": <Factory className="w-6 h-6" />,
+  "production-equipment-engineering": <Settings2 className="w-6 h-6" />,
 };
 
 /* ---- Per-service standards shown in sidebar ---- */
@@ -1214,6 +1220,7 @@ const SERVICE_STANDARDS: Record<string, string[]> = {
   "bmd":                     [...BMD_STANDARDS],
   "mbl-laboratory":          ["GMP Compliance", "ISO 13485", "USP <71>", "USP <85>", "EU Pharmacopoeia"],
   "contract-manufacturing":  ["ISO 13485", "ISO 14644", "ISO 14971", "ISO 10993"],
+  "production-equipment-engineering": ["ISO 13485", "ISO 14644", "FDA 21 CFR Part 820", "ISO 11607", "GHTF/IMDRF"],
 };
 
 /* ---- Per-service key stats shown in sidebar ---- */
@@ -1244,6 +1251,12 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
     { label: MANUFACTURING_KEY_METRICS[2].label, value: MANUFACTURING_KEY_METRICS[2].value, icon: Target },
     { label: MANUFACTURING_KEY_METRICS[3].label, value: MANUFACTURING_KEY_METRICS[3].value, icon: ShieldCheck },
     { label: MANUFACTURING_KEY_METRICS[4].label, value: MANUFACTURING_KEY_METRICS[4].value, icon: Award },
+  ],
+  "production-equipment-engineering": [
+    { label: PRODUCTION_EQUIPMENT_KEY_METRICS[0].label, value: PRODUCTION_EQUIPMENT_KEY_METRICS[0].value, icon: Cog },
+    { label: PRODUCTION_EQUIPMENT_KEY_METRICS[1].label, value: PRODUCTION_EQUIPMENT_KEY_METRICS[1].value, icon: ClipboardCheck },
+    { label: PRODUCTION_EQUIPMENT_KEY_METRICS[2].label, value: PRODUCTION_EQUIPMENT_KEY_METRICS[2].value, icon: Wind },
+    { label: PRODUCTION_EQUIPMENT_KEY_METRICS[3].label, value: PRODUCTION_EQUIPMENT_KEY_METRICS[3].value, icon: Wrench },
   ],
 };
 
@@ -1371,6 +1384,7 @@ const SERVICE_SCATTER_ICONS: Record<string, React.ElementType[]> = {
   "bmd":                    [Dna, Microscope, FlaskConical, Atom, Waves, Layers, Pill, ScanLine, TestTube2, Lightbulb],
   "mbl-laboratory":         [Microscope, FlaskConical, TestTube2, ShieldCheck, CheckCircle, Atom, ScanLine, PackageCheck, Waves, Bug],
   "contract-manufacturing": [Factory, Boxes, Cog, Truck, PackageCheck, Settings2, Gauge, Medal, ClipboardList, Network],
+  "production-equipment-engineering": [Cog, Factory, Wind, ClipboardList, Zap, Wrench, Gauge, Settings2, PackageCheck, Network],
 };
 
 /* ---- Generic sub-service images per service (cycled by index) ---- */
@@ -1433,6 +1447,7 @@ const SERVICE_GENERIC_SUB_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=900&q=80",
   ],
   "contract-manufacturing": [...MANUFACTURING_HERO_IMAGES],
+  "production-equipment-engineering": [...PRODUCTION_EQUIPMENT_HERO_IMAGES],
 };
 
 /* ---- Large decorative background icons per service ---- */
@@ -1716,6 +1731,7 @@ const SERVICE_CAROUSEL_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",
   ],
   "contract-manufacturing": [...MANUFACTURING_HERO_IMAGES],
+  "production-equipment-engineering": [...PRODUCTION_EQUIPMENT_HERO_IMAGES],
   "bmd": [
     "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=800&q=80",
     "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=800&q=80",
@@ -3223,6 +3239,7 @@ export function ServiceDetail({
   const isEngineering = ENGINEERING_SERVICE_SLUGS.has(service.slug);
   const isAutomation = service.slug === "automation-services";
   const isManufacturing = service.slug === "contract-manufacturing";
+  const isProductionEquipment = service.slug === "production-equipment-engineering";
   const isProductDevelopment = service.slug === "product-development";
   const isQualityTesting = service.slug === "quality-testing";
   const isDesignFabrication = service.slug === "design-fabrication";
@@ -3328,7 +3345,7 @@ export function ServiceDetail({
           <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
             <div className="lg:col-span-2 space-y-10">
 
-              {!isBmd && !isMbl && !isManufacturing && (
+              {!isBmd && !isMbl && !isManufacturing && !isProductionEquipment && (
               <AnimatedSection>
                 <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Overview</h2>
                 <div className="space-y-4">
@@ -3427,6 +3444,7 @@ export function ServiceDetail({
       {isBmd && <BmdServiceDetail service={service} />}
       {isMbl && <MblServiceDetail service={service} />}
       {isManufacturing && <ManufacturingServiceDetail service={service} />}
+      {isProductionEquipment && <ProductionEquipmentServiceDetail service={service} />}
 
       {isSoftwareAI && (
         <section className="py-24 bg-secondary/30 border-t border-border relative overflow-hidden">
