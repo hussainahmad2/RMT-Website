@@ -103,9 +103,9 @@ export const RD_WING_BIOMATERIALS: LeadershipMember[] = [
     bio: "Supports biomaterials research, laboratory testing, and formulation development activities",
   },
   {
-    name: "Mohammad ALI",
+    name: "Mohammad Ali",
     role: "Junior Research Scientist",
-    image: teamImage("rd-wing/biomaterials-department", "ali.jpeg"),
+    image: teamImage("rd-wing/biomaterials-department", "ali_bmd.jpeg"),
     bio: "Assists biomaterials research, analytical testing, and project documentation.",
   },
 ];
@@ -237,7 +237,7 @@ export const FINANCE_DEPARTMENT: LeadershipMember[] = [
   {
     name: "Farman Ali",
     role: "Manager, Finance",
-    image: teamImage("finance-department", "farman.jpg"),
+    image: teamImage("finance-department", "farman_finance.jpeg"),
     bio: "Leads budgeting, accounts, and financial reporting across global operations.",
   },
   {
@@ -295,9 +295,9 @@ export const BUSINESS_MARKETING_UNIT: LeadershipMember[] = [
     bio: "Leads business development and marketing strategy across healthcare and med-tech markets.",
   },
   {
-    name: "Adan Afsar",
-    role: "Manager, Marketing",
-    image: teamImage("business-marketing-unit", "adan.webp"),
-    bio: "Manages marketing operations, content, and channel execution for RMT's global presence.",
+    name: "Muhammad Saleem",
+    role: "Manager Coordination Business Development",
+    image: teamImage("business-marketing-unit", "saleem_business.jpeg"),
+    bio: "Coordinates business development activities and supports marketing and client engagement across RMT programmes.",
   },
 ];
