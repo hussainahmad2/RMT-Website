@@ -1074,7 +1074,7 @@ export const ALL_SERVICES: ServiceData[] = [
         tagline: "In vitro biocompatibility aligned with international safety standards.",
         overview: [
           "Testing aligned with international biocompatibility standards to ensure safety of biomaterials and medical devices.",
-          "Our in vitro suite includes cytotoxicity (NRU method), skin sensitization (GPMT method), intracutaneous reactivity, acute systemic toxicity, material mediated pyrogen, hemocompatibility studies, and cell adhesion and proliferation testing.",
+          "Our in vitro suite includes cytotoxicity (NRU method), skin sensitization (GPMT method), intracutaneous reactivity, acute systemic toxicity, material mediated pyrogen, and hemocompatibility studies.",
         ],
         keyPoints: [
           "In Vitro Cytotoxicity (NRU Method)",
@@ -1083,7 +1083,6 @@ export const ALL_SERVICES: ServiceData[] = [
           "Acute Systemic Toxicity Test",
           "Material Mediated Pyrogen Test",
           "Hemocompatibility Studies",
-          "Cell Adhesion & Proliferation Testing",
         ],
         deliverables: ["Biocompatibility test report", "ISO 10993 test matrix", "Biological evaluation support", "Regulatory summary for BER"],
       },
