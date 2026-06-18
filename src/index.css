@@ -187,10 +187,24 @@
   }
 }
 
+@keyframes partner-marquee-reverse {
+  0% {
+    transform: translateX(-50%);
+  }
+  100% {
+    transform: translateX(0);
+  }
+}
+
 .partner-marquee-track {
   display: flex;
   width: max-content;
-  animation: partner-marquee 45s linear infinite;
+  animation: partner-marquee 55s linear infinite;
+  will-change: transform;
+}
+
+.partner-marquee-track-reverse {
+  animation-name: partner-marquee-reverse;
 }
 
 .partner-marquee-track:hover {

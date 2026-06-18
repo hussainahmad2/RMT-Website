@@ -1,20 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
   Shield, Brain, FlaskConical, CircuitBoard, Settings2, Factory, Layers,
   MapPin, Phone, Mail,
 } from "lucide-react";
-import { RequestQuoteModal } from "@/components/RequestQuoteModal";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { HomeProductShowcase } from "@/components/HomeProductShowcase";
+import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
+import { RequestQuoteModal } from "@/components/RequestQuoteModal";
 import { ServiceCard } from "@/components/ServiceCard";
 import { WorldMap } from "@/components/WorldMap";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
-import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
-import { HomeSection, SectionHeading } from "@/components/HomeSection";
-import { HomeProductShowcase } from "@/components/HomeProductShowcase";
 import { HOME_IMAGES } from "@/data/home-images";
 import { HOME_PRODUCT_HERO_SLIDES } from "@/data/home-products";
 
@@ -58,6 +57,13 @@ const certifications = [
   "GMP Compliance",
 ];
 
+const heroCertifications = [
+  "ISO 13485:2025",
+  "CE Mark",
+  "ISO 14971",
+  "IEC 62304",
+];
+
 const ctaHighlights = [
   {
     icon: <Shield className="w-5 h-5" />,
@@ -84,6 +90,8 @@ const globalOffices = [
     address: "St. Cloud Edgewater Business Centre Sartell, Minnesota, United States",
     phone: "+1 (707) 5618 771",
     email: "info@rmt-usa.com",
+    latitude: 45.6216,
+    longitude: -94.2069,
   },
   {
     city: "Pakistan",
@@ -92,13 +100,27 @@ const globalOffices = [
     address: "Building 2A, W1 Street, Rawat Industrial Estate, Islamabad, 46220",
     phone: "+1 (707) 5618 771",
     email: "info@rmt-usa.com",
+    latitude: 30.3753,
+    longitude: 69.3451,
+  },
+  {
+    city: "UAE",
+    label: "ME",
+    description: "Middle East Office",
+    address: "RMT Middle East FZ-LLC, Dubai, UAE",
+    phone: "+971 4 555 0199",
+    latitude: 24.4539,
+    longitude: 54.3773,
   },
 ];
+
+const serviceTones = ["blue", "green", "red"] as const;
 
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [videoOpen, setVideoOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
+  const activeHero = HOME_PRODUCT_HERO_SLIDES[heroIndex];
 
   useSEO({
     title: "Revive Medical Technologies Inc",
@@ -116,424 +138,373 @@ export default function Home() {
 
   return (
     <div className="bg-background text-foreground">
+      <section className="relative min-h-[calc(100svh-1rem)] overflow-hidden bg-[#050b14] pt-20 text-white">
+        <AnimatePresence mode="sync">
+          <motion.img
+            key={activeHero.src}
+            src={activeHero.src}
+            alt={activeHero.alt}
+            initial={{ opacity: 0, scale: 1.02 }}
+            animate={{ opacity: 1, scale: 1.08 }}
+            exit={{ opacity: 0 }}
+            transition={{
+              opacity: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+              scale: { duration: 5, ease: "linear" },
+            }}
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+        </AnimatePresence>
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.96)_0%,rgba(5,11,20,0.82)_42%,rgba(5,11,20,0.38)_100%),linear-gradient(180deg,rgba(5,11,20,0.1)_0%,rgba(5,11,20,0.88)_100%)]" />
+        <div
+          className="absolute inset-0 opacity-[0.09]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.55) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.55) 1px, transparent 1px)",
+            backgroundSize: "72px 72px",
+          }}
+          aria-hidden
+        />
 
-      {/* ===== HERO — zoom carousel ===== */}
-      <section className="relative min-h-[72vh] sm:min-h-[78vh] lg:min-h-[85vh] flex items-center overflow-hidden pt-16 sm:pt-[4.5rem] bg-[#060d17]">
-        <div className="absolute inset-0 overflow-hidden">
-          <AnimatePresence mode="sync">
-            <motion.div
-              key={heroIndex}
-              className="absolute inset-0"
-              initial={{ opacity: 0, scale: 1 }}
-              animate={{ opacity: 1, scale: 1.14 }}
-              exit={{ opacity: 0 }}
-              transition={{
-                opacity: { duration: 1.1, ease: [0.22, 1, 0.36, 1] },
-                scale: { duration: 5, ease: "linear" },
-              }}
-            >
-              <img
-                src={HOME_PRODUCT_HERO_SLIDES[heroIndex].src}
-                alt={HOME_PRODUCT_HERO_SLIDES[heroIndex].alt}
-                className="w-full h-full object-cover object-center"
-              />
-            </motion.div>
-          </AnimatePresence>
-          <div className="absolute inset-0 bg-gradient-to-r from-[#060d17]/94 via-[#060d17]/78 to-[#060d17]/42" />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/88 via-[#060d17]/20 to-[#060d17]/55" />
-        </div>
-
-        <div className="page-container relative z-10 py-12 sm:py-16 lg:py-20">
+        <div className="page-container relative z-10 flex min-h-[calc(100svh-5rem)] flex-col justify-between py-10 sm:py-12">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            className="max-w-xl sm:max-w-2xl"
+            className="grid gap-8 pt-8 sm:pt-12 lg:grid-cols-[minmax(0,4fr)_minmax(280px,2fr)] lg:items-start"
           >
-            <p className="text-sky-300 text-xs font-bold uppercase tracking-[0.18em] mb-4">
-              {HOME_PRODUCT_HERO_SLIDES[heroIndex].label}
-            </p>
+            <div className="max-w-4xl">
+              <h1 className="font-heading text-5xl font-bold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
+                Devices &amp; Machines<br />
+                Built for <span className="text-blue-300">Clinical Impact</span>
+              </h1>
+              <p className="mt-6 max-w-2xl text-base leading-relaxed text-white/80 sm:text-lg md:text-xl">
+                From interventional catheters and biomaterial microspheres to custom production equipment and ISO-classified cleanrooms — RMT engineers technologies that are as unique as the procedures they enable.
+              </p>
+              <p className="mt-4 max-w-2xl text-sm leading-relaxed text-white/68 sm:text-base md:text-lg">
+                Every product on this page connects to deep end-to-end services — development, validation, regulatory, and manufacturing.
+              </p>
 
-            <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.06] tracking-tight text-white mb-5 sm:mb-6">
-              Devices &amp; Machines<br />
-              Built for <span className="text-sky-300">Clinical Impact</span>
-            </h1>
-
-            <p className="text-white/80 text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mb-4">
-              From interventional catheters and biomaterial microspheres to custom production equipment and ISO-classified cleanrooms — RMT engineers technologies that are as unique as the procedures they enable.
-            </p>
-            <p className="text-white/70 text-sm sm:text-base md:text-lg mb-8">
-              Every product on this page connects to deep end-to-end services — development, validation, regulatory, and manufacturing.
-            </p>
-
-            <div className="flex flex-wrap gap-3 sm:gap-4">
-              <Button asChild size="lg" className="rounded-full h-11 sm:h-12 px-7 sm:px-8 font-semibold">
-                <a href="#featured-products">Explore Our Technologies <ArrowRight className="ml-2 w-4 h-4" /></a>
-              </Button>
-              <button
-                type="button"
-                onClick={() => setVideoOpen(true)}
-                className="inline-flex items-center gap-2.5 h-11 sm:h-12 px-6 sm:px-7 rounded-full border border-white/30 bg-white/10 text-white font-semibold text-sm hover:bg-white/15 transition-colors duration-200"
-              >
-                <Play className="w-4 h-4 fill-current" />
-                Watch Overview
-              </button>
+              <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
+                <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
+                  <a href="#featured-products">Explore Our Technologies <ArrowRight className="ml-2 h-4 w-4" /></a>
+                </Button>
+                <button
+                  type="button"
+                  aria-label="Watch Overview"
+                  onClick={() => setVideoOpen(true)}
+                  className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-white/25 bg-white/8 text-white backdrop-blur-sm transition-colors hover:bg-white/12"
+                >
+                  <Play className="h-4 w-4 fill-current" />
+                </button>
+              </div>
             </div>
 
-            <div className="mt-8 pt-6 border-t border-white/15 flex flex-wrap gap-5 sm:gap-7">
-              {["CE Mark Compliant", "ISO 13485:2025", "50+ Experts"].map((badge) => (
-                <div key={badge} className="flex items-center gap-2 text-sm text-white/75">
-                  <CheckCircle className="w-4 h-4 text-sky-300 shrink-0" />
-                  {badge}
-                </div>
+            <div className="grid grid-cols-2 gap-x-6 gap-y-5 lg:justify-self-end lg:pt-8">
+              {heroCertifications.map((cert) => (
+                <span
+                  key={cert}
+                  className="inline-flex items-center gap-3 text-lg font-bold text-white/86 sm:text-xl lg:text-2xl"
+                >
+                  <CheckCircle className="h-7 w-7 shrink-0 stroke-[3] text-white/86 sm:h-8 sm:w-8 lg:h-9 lg:w-9" />
+                  {cert}
+                </span>
               ))}
             </div>
           </motion.div>
 
-          <div className="absolute bottom-6 sm:bottom-8 right-4 sm:right-6 md:right-10 flex gap-2 z-10">
-            {HOME_PRODUCT_HERO_SLIDES.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                aria-label={`Show hero image ${i + 1}`}
-                onClick={() => setHeroIndex(i)}
-                className={`h-2 rounded-full transition-all duration-300 ${i === heroIndex ? "bg-sky-300 w-8" : "bg-white/40 w-2 hover:bg-white/70"}`}
-              />
-            ))}
+          <div className="mt-10 space-y-4 sm:space-y-5">
+            <PartnerLogoCarousel variant="hero" />
+
+            <div className="grid grid-cols-2 gap-0 overflow-hidden rounded-2xl border border-white/12 bg-white/8 backdrop-blur-md sm:grid-cols-4">
+              {stats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 18 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: 0.25 + i * 0.08, duration: 0.55 }}
+                  className={`p-4 sm:p-5 ${i < stats.length - 1 ? "sm:border-r border-white/12" : ""} ${i < 2 ? "border-b sm:border-b-0 border-white/12" : ""}`}
+                >
+                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-blue-200">
+                    {stat.icon}
+                  </div>
+                  <p className="font-heading text-3xl font-bold leading-none text-white sm:text-4xl">{stat.value}</p>
+                  <p className="mt-2 text-xs font-medium leading-snug text-white/65">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
-      {/* VIDEO MODAL */}
       <AnimatePresence>
         {videoOpen && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-[9999] bg-black/80 flex items-center justify-center p-4" onClick={() => setVideoOpen(false)}>
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} className="relative w-full max-w-4xl aspect-video rounded-xl overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
-              <iframe className="w-full h-full" src="https://www.youtube.com/embed/LDu3kqfqyPw?autoplay=1" title="RMT Medical Technologies Company Overview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
-              <button onClick={() => setVideoOpen(false)} className="absolute top-3 right-3 w-8 h-8 bg-black/50 text-white rounded-full flex items-center justify-center hover:bg-black/80 transition-colors text-lg leading-none">&times;</button>
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-4"
+            onClick={() => setVideoOpen(false)}
+          >
+            <motion.div
+              initial={{ scale: 0.94, opacity: 0 }}
+              animate={{ scale: 1, opacity: 1 }}
+              exit={{ scale: 0.94, opacity: 0 }}
+              className="relative aspect-video w-full max-w-4xl overflow-hidden rounded-2xl shadow-2xl"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <iframe className="h-full w-full" src="https://www.youtube.com/embed/LDu3kqfqyPw?autoplay=1" title="RMT Medical Technologies Company Overview" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowFullScreen />
+              <button onClick={() => setVideoOpen(false)} className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-black/55 text-lg leading-none text-white transition-colors hover:bg-black/80">&times;</button>
             </motion.div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* ===== 1. TRUST STATS ===== */}
-      <HomeSection variant="primary" bgImage={HOME_IMAGES.stats} overlayIntensity="clear" className="py-14" innerClassName="!px-0">
-        <div className="grid grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat, i) => (
-            <motion.div key={stat.label} initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }} className={`text-center text-white px-4 sm:px-8 py-3 ${i < stats.length - 1 ? "border-r border-white/15" : ""}`}>
-              <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center">
-                <span className="[&>svg]:w-7 [&>svg]:h-7">{stat.icon}</span>
-              </div>
-              <div className="font-heading text-4xl sm:text-5xl font-black tabular-nums leading-none mb-2">{stat.value}</div>
-              <div className="text-white/80 text-sm font-medium">{stat.label}</div>
-            </motion.div>
-          ))}
+      <section id="featured-products" className="relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <AnimatedSection className="mb-10 max-w-3xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">What We Build</p>
+            <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
+              Flagship Devices &amp; <span className="text-primary">Production Machines</span>
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              Six technologies engineered for specific clinical and manufacturing outcomes — each alternating left and right, each opening the full service behind it.
+            </p>
+          </AnimatedSection>
+          <HomeProductShowcase />
         </div>
-      </HomeSection>
+      </section>
 
-      {/* ===== 2. PRODUCTS — zigzag left / right showcase ===== */}
-      <HomeSection
-        id="featured-products"
-        variant="image-light"
-        bgImage={HOME_IMAGES.process}
-        bgPosition="center"
-        overlayIntensity="clear"
-        dots
-        rings
-        ringSide="both"
-        className="py-20 sm:py-24 lg:py-28"
-      >
-        <AnimatedSection className="text-center mb-12 sm:mb-16">
-          <SectionHeading
-            eyebrow="What We Build"
-            title={<>Flagship Devices &amp; <span className="text-primary">Production Machines</span></>}
-            description="Six technologies engineered for specific clinical and manufacturing outcomes — each alternating left and right, each opening the full service behind it."
-            align="center"
-            panel
-          />
-        </AnimatedSection>
-
-        <HomeProductShowcase />
-
-        <AnimatedSection className="mt-14 sm:mt-16 text-center">
-          <Button asChild size="lg" className="rounded-full">
-            <Link href="/products">View Full Product Portfolio <ArrowRight className="ml-2 w-4 h-4" /></Link>
-          </Button>
-        </AnimatedSection>
-      </HomeSection>
-
-      {/* ===== 3. SERVICES — powers every product above ===== */}
-      <HomeSection variant="muted" dots className="py-20 sm:py-24">
-        <AnimatedSection className="text-center mb-14">
-          <SectionHeading
-            eyebrow="What We Do"
-            title="Services Behind Every Product"
-            description="Regulatory strategy, engineering, quality, and manufacturing — unified under one roof so your device moves from concept to market without handoffs."
-            panel
-          />
-        </AnimatedSection>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-10">
-          {featuredServices.map((svc, i) => (
-            <ServiceCard key={svc.slug} slug={svc.slug} title={svc.title} description={svc.description} icon={svc.icon} subServices={svc.subServices} delay={i * 0.08} />
-          ))}
-        </div>
-
-        <div className="text-center">
-          <Button asChild variant="outline" size="lg" className="rounded-full">
-            <Link href="/services">View All Services <ArrowRight className="ml-2 w-4 h-4" /></Link>
-          </Button>
-        </div>
-      </HomeSection>
-
-      {/* ===== 4. WHY RMT + certifications ===== */}
-      <HomeSection variant="navy" bgImage={HOME_IMAGES.whyRmt} overlayIntensity="clear" className="!py-0" innerClassName="!px-0 !max-w-none">
-      <section className="relative overflow-hidden">
-        <div className="grid lg:grid-cols-5 min-h-0">
-          <div className="lg:col-span-3 relative text-white py-14 sm:py-16 lg:py-20 px-6 sm:px-10 lg:px-14 xl:px-16 flex flex-col justify-center">
-            <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} aria-hidden />
-
-            <AnimatedSection className="relative z-10">
-              <p className="text-cyan-400 font-semibold text-sm uppercase tracking-widest mb-4">Why RMT</p>
-              <h2 className="font-heading text-3xl sm:text-4xl lg:text-5xl font-bold leading-tight mb-5">
-                Your Trusted Partner in{" "}
-                <span className="text-cyan-400">Medical Innovation</span>
+      <section className="border-y border-border bg-secondary/25 py-16 sm:py-20">
+        <div className="page-container">
+          <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
+            <AnimatedSection className="lg:sticky lg:top-28">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">What We Do</p>
+              <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+                Services Behind Every Product
               </h2>
-              <p className="text-white/70 text-base sm:text-lg leading-relaxed mb-10 max-w-lg">
+              <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+                Regulatory strategy, engineering, quality, and manufacturing — unified under one roof so your device moves from concept to market without handoffs.
+              </p>
+              <Button asChild variant="outline" size="lg" className="mt-8">
+                <Link href="/services">View All Services <ArrowRight className="ml-2 h-4 w-4" /></Link>
+              </Button>
+            </AnimatedSection>
+
+            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
+              {featuredServices.map((svc, i) => (
+                <ServiceCard
+                  key={svc.slug}
+                  slug={svc.slug}
+                  title={svc.title}
+                  description={svc.description}
+                  icon={svc.icon}
+                  subServices={svc.subServices}
+                  delay={i * 0.06}
+                  tone={serviceTones[i % serviceTones.length]}
+                />
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[#050b14] py-16 text-white sm:py-20 lg:py-24">
+        <img src={HOME_IMAGES.whyRmt} alt="" className="absolute inset-0 h-full w-full object-cover opacity-35" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.95),rgba(5,11,20,0.82),rgba(5,11,20,0.72))]" />
+        <div className="page-container relative z-10">
+          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
+            <AnimatedSection>
+              <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-200">Why RMT</p>
+              <h2 className="font-heading text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
+                Your Trusted Partner in <span className="text-blue-300">Medical Innovation</span>
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg">
                 Deep regulatory expertise and cutting-edge engineering — helping medical device companies bring safe, effective products to market faster.
               </p>
-
-              <div className="space-y-4 mb-10">
-                {whyChoose.map((item, i) => (
-                  <motion.div
-                    key={item.title}
-                    initial={{ opacity: 0, x: -24 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: i * 0.08 }}
-                    className="group flex gap-4 rounded-xl border border-white/10 bg-white/[0.05] p-4 hover:border-white/20 hover:bg-white/[0.08] transition-all duration-300"
-                  >
-                    <div className="w-10 h-10 shrink-0 rounded-lg bg-white/10 border border-white/15 flex items-center justify-center text-white/90">
-                      {item.icon}
-                    </div>
-                    <div>
-                      <h4 className="font-semibold text-white text-sm sm:text-base mb-1">{item.title}</h4>
-                      <p className="text-white/60 text-xs sm:text-sm leading-relaxed">{item.description}</p>
-                    </div>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
-                {whyStats.map((stat, i) => (
-                  <motion.div
-                    key={stat.label}
-                    initial={{ opacity: 0, y: 16 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    viewport={{ once: true }}
-                    transition={{ delay: 0.3 + i * 0.06 }}
-                    className="rounded-xl border border-white/10 bg-white/[0.06] px-3 py-4 text-center"
-                  >
-                    <p className="font-heading text-xl sm:text-2xl font-bold text-white leading-none mb-1">{stat.value}</p>
-                    <p className="text-[10px] sm:text-xs text-white/55 leading-snug">{stat.label}</p>
-                  </motion.div>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap gap-2">
+              <div className="mt-8 flex flex-wrap gap-2">
                 {certifications.map((cert) => (
-                  <span
-                    key={cert}
-                    className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white/85"
-                  >
-                    <CheckCircle className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                  <span key={cert} className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold text-white/82">
+                    <CheckCircle className="h-3.5 w-3.5 shrink-0 text-blue-300" />
                     {cert}
                   </span>
                 ))}
               </div>
             </AnimatedSection>
-          </div>
 
-          <div className="lg:col-span-2 relative flex items-center justify-center p-6 sm:p-8 lg:p-10">
-            <div className="relative w-full max-w-[420px] mx-auto">
-              <div className="relative rounded-2xl overflow-hidden aspect-[4/3.5] border border-white/15 shadow-xl">
-                <img
-                  src={HOME_IMAGES.whyRmt}
-                  alt="Advanced medical innovation and diagnostics environment"
-                  className="w-full h-full object-cover"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#071426]/80 via-transparent to-transparent" />
+            <div className="grid gap-4 sm:grid-cols-2">
+              {whyChoose.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="rounded-2xl border border-white/12 bg-white/8 p-5 backdrop-blur-sm transition-colors hover:bg-white/12"
+                >
+                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-blue-200">
+                    {item.icon}
+                  </div>
+                  <h3 className="font-heading text-lg font-bold text-white">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-white/62">{item.description}</p>
+                </motion.div>
+              ))}
+              {whyStats.map((stat, i) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 24 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.25 + i * 0.06 }}
+                  className="rounded-2xl border border-white/12 bg-white/8 p-5 backdrop-blur-sm"
+                >
+                  <p className="font-heading text-3xl font-bold text-white">{stat.value}</p>
+                  <p className="mt-1 text-sm text-white/58">{stat.label}</p>
+                </motion.div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section className="bg-background py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <AnimatedSection className="mb-10 max-w-3xl">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">Global Presence</p>
+            <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
+              Operating Across 2 Continents
+            </h2>
+            <p className="mt-4 text-lg leading-relaxed text-muted-foreground">
+              With offices in the United States and South Asia, RMT Medical Technologies delivers local regulatory and engineering expertise across key global medical device markets.
+            </p>
+          </AnimatedSection>
+
+          <AnimatedSection>
+            <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
+              <div className="overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-sm">
+                <WorldMap offices={globalOffices} />
               </div>
+              <div className="grid gap-4">
+                {globalOffices.map((office, i) => (
+                  <motion.div
+                    key={office.city}
+                    initial={{ opacity: 0, x: 20 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true, margin: "-40px" }}
+                    transition={{ delay: i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                    className="rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md"
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary">
+                        <MapPin className="h-5 w-5" />
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <div className="mb-1 flex flex-wrap items-center gap-2">
+                          <h3 className="font-heading text-lg font-bold text-foreground">{office.city}</h3>
+                          <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-bold text-primary">{office.label}</span>
+                        </div>
+                        <p className="mb-2 text-sm text-muted-foreground">{office.description}</p>
+                        <p className="mb-3 text-sm text-foreground/80">{office.address}</p>
+                        <div className="flex flex-col gap-1.5 text-sm">
+                          <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-primary">
+                            <Phone className="h-3.5 w-3.5 shrink-0" />{office.phone}
+                          </a>
+                          {office.email && (
+                            <a href={`mailto:${office.email}`} className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-primary">
+                              <Mail className="h-3.5 w-3.5 shrink-0" />{office.email}
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </div>
+          </AnimatedSection>
+        </div>
+      </section>
+
+      <section className="relative overflow-hidden bg-[#050b14] py-16 text-white sm:py-20 lg:py-24">
+        <img src={HOME_IMAGES.cta} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.94),rgba(5,11,20,0.8),rgba(5,11,20,0.7))]" />
+        <div className="page-container relative z-10">
+          <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-center">
+            <AnimatedSection animation="slideRight">
+              <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/18 bg-white/8 px-4 py-1.5 backdrop-blur-sm">
+                <span className="h-2 w-2 rounded-full bg-green-400" />
+                <span className="text-xs font-bold uppercase tracking-widest text-blue-200">Let&apos;s Build Together</span>
+              </div>
+              <h2 className="font-heading text-3xl font-bold leading-tight text-white sm:text-4xl md:text-5xl">
+                Ready to Bring Your <span className="text-blue-300">Medical Device</span> to Market?
+              </h2>
+              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/82 sm:text-lg">
+                Partner with RMT Medical Technologies for end-to-end expertise — from regulatory strategy and engineering to validation and commercial-scale manufacturing.
+              </p>
+              <div className="mt-8 flex flex-wrap gap-3 sm:gap-4">
+                <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
+                  <Link href="/contact">
+                    Start a Conversation <ArrowRight className="ml-2 h-4 w-4" />
+                  </Link>
+                </Button>
+                <Button
+                  type="button"
+                  size="lg"
+                  variant="outline"
+                  onClick={() => setQuoteOpen(true)}
+                  className="border-white/40 bg-white/5 text-white hover:bg-white/12"
+                >
+                  Request a Quote
+                </Button>
+              </div>
+              <div className="mt-8 flex flex-wrap gap-5 border-t border-white/15 pt-6 sm:gap-7">
+                {["CE Mark Compliant", "ISO 13485:2025", "200+ Projects"].map((badge) => (
+                  <div key={badge} className="flex items-center gap-2 text-sm text-white/78">
+                    <CheckCircle className="h-4 w-4 shrink-0 text-blue-300" />
+                    {badge}
+                  </div>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection animation="slideLeft" delay={0.12} className="space-y-4">
+              {ctaHighlights.map((item, i) => (
+                <motion.div
+                  key={item.title}
+                  initial={{ opacity: 0, x: 28 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, margin: "-40px" }}
+                  transition={{ delay: 0.15 + i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  className="flex gap-4 rounded-2xl border border-white/16 bg-white/8 p-5 backdrop-blur-sm transition-colors hover:bg-white/12 sm:p-6"
+                >
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/18 bg-white/10 text-blue-200">
+                    {item.icon}
+                  </div>
+                  <div className="min-w-0 text-left">
+                    <h3 className="font-heading text-lg font-bold text-white">{item.title}</h3>
+                    <p className="mt-1 text-sm leading-relaxed text-white/68">{item.description}</p>
+                  </div>
+                </motion.div>
+              ))}
 
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                className="mt-4 rounded-xl border border-white/15 bg-white/[0.08] p-4 sm:p-5"
+                transition={{ delay: 0.45, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                className="flex flex-col gap-4 rounded-2xl border border-white/16 bg-white/8 p-5 backdrop-blur-sm sm:flex-row sm:items-center sm:justify-between"
               >
-                <div className="flex items-center gap-2.5 mb-2">
-                  <span className="w-2 h-2 rounded-full bg-emerald-400" />
-                  <span className="text-[11px] font-bold uppercase tracking-wider text-white/75">Live Partnership</span>
+                <div className="text-left">
+                  <p className="mb-1 text-xs font-semibold uppercase tracking-wider text-white/55">Talk to our team</p>
+                  <p className="font-semibold text-white">info@rmt-usa.com</p>
                 </div>
-                <p className="text-white font-heading text-base sm:text-lg font-bold leading-snug mb-1.5">
-                  Trusted by global med-tech teams
-                </p>
-                <p className="text-white/60 text-xs sm:text-sm leading-relaxed">
-                  From startups to enterprise manufacturers — regulatory confidence at every stage.
-                </p>
+                <Button asChild variant="outline" size="sm" className="shrink-0 border-white/30 text-white hover:bg-white/10">
+                  <Link href="/services">View All Services <ArrowRight className="ml-1.5 h-3.5 w-3.5" /></Link>
+                </Button>
               </motion.div>
-            </div>
+            </AnimatedSection>
           </div>
         </div>
       </section>
-      </HomeSection>
-
-      <PartnerLogoCarousel />
-
-      {/* ===== 5. GLOBAL PRESENCE ===== */}
-      <HomeSection variant="image-light" bgImage={HOME_IMAGES.global} bgPosition="center" overlayIntensity="clear" dots rings ringSide="right" className="py-20 sm:py-24">
-        <AnimatedSection className="text-center mb-10 sm:mb-12">
-          <SectionHeading
-            eyebrow="Global Presence"
-            title="Operating Across 2 Continents"
-            description="With offices in the United States and South Asia, RMT Medical Technologies delivers local regulatory and engineering expertise across key global medical device markets."
-            align="center"
-            panel
-          />
-        </AnimatedSection>
-
-        <AnimatedSection>
-          <div className="grid lg:grid-cols-2 gap-8 lg:gap-12 items-stretch">
-            <div className="rounded-2xl border border-border bg-white p-4 sm:p-5 shadow-sm">
-              <WorldMap />
-            </div>
-            <div className="space-y-4 flex flex-col justify-center">
-              {globalOffices.map((office, i) => (
-                <motion.div
-                  key={office.city}
-                  initial={{ opacity: 0, x: 20 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ delay: i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                  className="rounded-xl border border-border bg-white p-5 shadow-sm hover:border-primary/30 hover:shadow-md transition-all duration-300"
-                >
-                  <div className="flex items-start gap-4">
-                    <div className="w-11 h-11 bg-primary/10 rounded-xl flex items-center justify-center shrink-0">
-                      <MapPin className="w-5 h-5 text-primary" />
-                    </div>
-                    <div className="min-w-0 flex-1">
-                      <div className="flex flex-wrap items-center gap-2 mb-1">
-                        <h3 className="font-heading text-lg font-bold text-foreground">{office.city}</h3>
-                        <span className="text-xs font-bold px-2 py-0.5 bg-primary/10 text-primary rounded-full">{office.label}</span>
-                      </div>
-                      <p className="text-sm text-muted-foreground mb-2">{office.description}</p>
-                      <p className="text-sm text-foreground/80 mb-3">{office.address}</p>
-                      <div className="flex flex-col gap-1.5 text-sm">
-                        <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors">
-                          <Phone className="w-3.5 h-3.5 shrink-0" />{office.phone}
-                        </a>
-                        <a href={`mailto:${office.email}`} className="inline-flex items-center gap-1.5 text-muted-foreground hover:text-primary transition-colors">
-                          <Mail className="w-3.5 h-3.5 shrink-0" />{office.email}
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </AnimatedSection>
-      </HomeSection>
-
-      {/* ===== 6. CTA — final conversion ===== */}
-      <HomeSection variant="gradient-blue" bgImage={HOME_IMAGES.cta} bgPosition="center 40%" overlayIntensity="clear" className="py-16 sm:py-20 lg:py-24">
-        <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
-          <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-cyan-400/10 blur-3xl" />
-          <div className="absolute -bottom-32 -left-16 w-96 h-96 rounded-full bg-sky-300/10 blur-3xl" />
-        </div>
-
-        <div className="relative z-10 grid lg:grid-cols-2 gap-10 lg:gap-14 items-center">
-          <AnimatedSection animation="slideRight" className="text-center lg:text-left">
-            <div className="inline-flex items-center gap-2 rounded-full border border-white/25 bg-white/10 backdrop-blur-sm px-4 py-1.5 mb-5">
-              <span className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse" />
-              <span className="text-sky-200 text-xs font-bold uppercase tracking-widest">Let&apos;s Build Together</span>
-            </div>
-
-            <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-white leading-tight mb-4">
-              Ready to Bring Your{" "}
-              <span className="text-cyan-300">Medical Device</span> to Market?
-            </h2>
-
-            <p className="text-white/85 text-base sm:text-lg leading-relaxed mb-8 max-w-xl mx-auto lg:mx-0">
-              Partner with RMT Medical Technologies for end-to-end expertise — from regulatory strategy and engineering to validation and commercial-scale manufacturing.
-            </p>
-
-            <div className="flex flex-wrap justify-center lg:justify-start gap-3 sm:gap-4 mb-8">
-              <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90 rounded-full h-12 px-8 font-bold shadow-xl shadow-black/20">
-                <Link href="/contact">
-                  Start a Conversation <ArrowRight className="ml-2 w-4 h-4" />
-                </Link>
-              </Button>
-              <Button
-                type="button"
-                size="lg"
-                variant="outline"
-                onClick={() => setQuoteOpen(true)}
-                className="border-white/50 text-white bg-white/5 hover:bg-white/15 rounded-full h-12 px-8 font-bold backdrop-blur-sm"
-              >
-                Request a Quote
-              </Button>
-            </div>
-
-            <div className="flex flex-wrap justify-center lg:justify-start gap-5 sm:gap-7 pt-6 border-t border-white/15">
-              {["CE Mark Compliant", "ISO 13485:2025", "200+ Projects"].map((badge) => (
-                <div key={badge} className="flex items-center gap-2 text-sm text-white/80">
-                  <CheckCircle className="w-4 h-4 text-cyan-300 shrink-0" />
-                  {badge}
-                </div>
-              ))}
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection animation="slideLeft" delay={0.12} className="space-y-4">
-            {ctaHighlights.map((item, i) => (
-              <motion.div
-                key={item.title}
-                initial={{ opacity: 0, x: 28 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: 0.15 + i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="group flex gap-4 rounded-2xl border border-white/20 bg-white/10 backdrop-blur-md p-5 sm:p-6 hover:border-cyan-300/40 hover:bg-white/15 transition-all duration-300"
-              >
-                <div className="w-11 h-11 shrink-0 rounded-xl bg-white/15 border border-white/20 flex items-center justify-center text-cyan-200 group-hover:bg-cyan-400/20 group-hover:text-cyan-100 transition-colors">
-                  {item.icon}
-                </div>
-                <div className="min-w-0 text-left">
-                  <h3 className="font-heading text-lg font-bold text-white mb-1">{item.title}</h3>
-                  <p className="text-white/70 text-sm leading-relaxed">{item.description}</p>
-                </div>
-              </motion.div>
-            ))}
-
-            <motion.div
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: 0.45, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              className="rounded-2xl border border-white/15 bg-[#071426]/40 backdrop-blur-md p-5 flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4"
-            >
-              <div className="text-left">
-                <p className="text-white/60 text-xs font-semibold uppercase tracking-wider mb-1">Talk to our team</p>
-                <p className="text-white font-semibold">info@rmt-usa.com</p>
-              </div>
-              <Button asChild variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 rounded-full shrink-0">
-                <Link href="/services">View All Services <ArrowRight className="ml-1.5 w-3.5 h-3.5" /></Link>
-              </Button>
-            </motion.div>
-          </AnimatedSection>
-        </div>
-      </HomeSection>
 
       <RequestQuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
     </div>

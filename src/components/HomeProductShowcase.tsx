@@ -8,35 +8,133 @@ import {
   HOME_PRODUCTION_LINE,
   type HomeFeaturedProduct,
 } from "@/data/home-products";
+import { HOME_IMAGES } from "@/data/home-images";
 
 const accentStyles = {
   sky: {
-    badge: "bg-sky-500/15 text-sky-600 border-sky-400/30 dark:text-sky-300",
-    line: "bg-sky-400",
-    stat: "border-sky-400/25 bg-sky-500/10 text-sky-700 dark:text-sky-200",
-    glow: "from-sky-500/20",
+    border: "border-blue-500/25",
+    bg: "bg-blue-500/10",
+    text: "text-blue-700 dark:text-blue-200",
+    line: "bg-blue-500",
   },
   cyan: {
-    badge: "bg-cyan-500/15 text-cyan-600 border-cyan-400/30 dark:text-cyan-300",
-    line: "bg-cyan-400",
-    stat: "border-cyan-400/25 bg-cyan-500/10 text-cyan-700 dark:text-cyan-200",
-    glow: "from-cyan-500/20",
+    border: "border-green-500/25",
+    bg: "bg-green-500/10",
+    text: "text-green-700 dark:text-green-200",
+    line: "bg-green-500",
   },
   emerald: {
-    badge: "bg-emerald-500/15 text-emerald-600 border-emerald-400/35 dark:text-emerald-300",
-    line: "bg-emerald-400",
-    stat: "border-emerald-400/25 bg-emerald-500/10 text-emerald-700 dark:text-emerald-200",
-    glow: "from-emerald-500/20",
+    border: "border-red-500/25",
+    bg: "bg-red-500/10",
+    text: "text-red-700 dark:text-red-200",
+    line: "bg-red-500",
   },
   violet: {
-    badge: "bg-violet-500/15 text-violet-600 border-violet-400/30 dark:text-violet-300",
-    line: "bg-violet-400",
-    stat: "border-violet-400/25 bg-violet-500/10 text-violet-700 dark:text-violet-200",
-    glow: "from-violet-500/20",
+    border: "border-blue-500/25",
+    bg: "bg-blue-500/10",
+    text: "text-blue-700 dark:text-blue-200",
+    line: "bg-blue-500",
   },
 } as const;
 
-function ProductZigzagRow({
+function ProductionLineStrip() {
+  return (
+    <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-4 shadow-sm sm:p-5">
+      <div
+        className="absolute inset-x-8 top-[3.55rem] hidden h-px bg-gradient-to-r from-blue-500/20 via-green-500/35 to-red-500/20 sm:block"
+        aria-hidden
+      />
+      <div className="grid gap-3 sm:grid-cols-5">
+        {HOME_PRODUCTION_LINE.map((stage, index) => (
+          <div
+            key={stage.step}
+            className="relative rounded-2xl border border-border bg-background/80 px-4 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-md"
+          >
+            <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-card font-heading text-base font-bold text-primary shadow-sm">
+              {stage.step}
+            </div>
+            <p className="mt-1 text-sm font-bold text-foreground sm:text-base">{stage.label}</p>
+            <p className="mt-1 text-xs font-medium leading-snug text-muted-foreground sm:text-sm">{stage.sub}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
+}
+
+function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
+  const accent = accentStyles[product.accent];
+  const productsHref = product.productsAnchor ? `/products#${product.productsAnchor}` : "/products";
+
+  return (
+    <motion.article
+      initial={{ opacity: 0, y: 32 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      className="grid overflow-hidden rounded-[2rem] border border-border bg-card shadow-xl lg:grid-cols-[1.05fr_0.95fr]"
+    >
+      <div className="relative min-h-[380px] overflow-hidden lg:min-h-[560px]">
+        <img
+          src={product.image}
+          alt={product.imageAlt}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/85 via-[#060d17]/18 to-transparent" />
+        <div className="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
+          {product.specs.slice(0, 3).map((spec) => (
+            <span key={spec} className="rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
+              {spec}
+            </span>
+          ))}
+        </div>
+      </div>
+
+      <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
+        <div className={`mb-5 inline-flex w-fit items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${accent.border} ${accent.bg} ${accent.text}`}>
+          {product.category}
+        </div>
+        <h3 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+          {product.name}
+        </h3>
+        <p className="mt-3 text-lg font-semibold leading-snug text-foreground/90">
+          {product.headline}
+        </p>
+        <div className={`my-5 h-0.5 w-16 ${accent.line}`} />
+        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+          {product.description}
+        </p>
+        <div className="mt-5 rounded-2xl border border-border bg-background/70 p-4">
+          <div className="flex items-start gap-3">
+            <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+            <p className="text-sm italic leading-relaxed text-foreground/80">{product.uniqueAngle}</p>
+          </div>
+        </div>
+        <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
+          {product.highlights.map((highlight) => (
+            <div key={highlight.label} className={`rounded-xl border px-3 py-3 ${accent.border} ${accent.bg}`}>
+              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">{highlight.label}</p>
+              <p className={`mt-1 text-xs font-bold ${accent.text}`}>{highlight.value}</p>
+            </div>
+          ))}
+        </div>
+        <div className="mt-7 flex flex-wrap gap-3">
+          <Button asChild className="h-11 px-6 font-semibold">
+            <Link href={`/services/${product.serviceSlug}`}>
+              {product.serviceName} <ArrowRight className="ml-2 h-4 w-4" />
+            </Link>
+          </Button>
+          <Button asChild variant="outline" className="h-11 px-6 font-semibold">
+            <Link href={productsHref}>Product Details</Link>
+          </Button>
+        </div>
+      </div>
+    </motion.article>
+  );
+}
+
+function ProductIndexCard({
   product,
   index,
 }: {
@@ -44,154 +142,114 @@ function ProductZigzagRow({
   index: number;
 }) {
   const accent = accentStyles[product.accent];
-  const imageOnLeft = index % 2 === 0;
-  const productsHref = product.productsAnchor
-    ? `/products#${product.productsAnchor}`
-    : "/products";
+  const productsHref = product.productsAnchor ? `/products#${product.productsAnchor}` : "/products";
 
   return (
     <motion.article
       id={product.id}
-      initial={{ opacity: 0, y: 48 }}
+      initial={{ opacity: 0, y: 28 }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-      className={`relative scroll-mt-28 max-w-6xl w-full ${
-        imageOnLeft ? "mr-auto" : "ml-auto"
-      }`}
+      transition={{ duration: 0.65, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
+      className="group grid overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl md:grid-cols-[0.42fr_0.58fr]"
     >
-      <div
-        className={`hidden lg:block absolute top-1/2 -translate-y-1/2 w-8 h-px ${accent.line} opacity-50 ${
-          imageOnLeft ? "-right-10" : "-left-10"
-        }`}
-        aria-hidden
-      />
+      <div className="relative min-h-[220px] overflow-hidden">
+        <img
+          src={product.image}
+          alt={product.imageAlt}
+          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          loading="lazy"
+        />
+        <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/72 via-transparent to-transparent" />
+      </div>
 
-      <div
-        className={`relative rounded-2xl border border-border bg-card shadow-xl overflow-hidden ${
-          imageOnLeft ? "lg:rounded-r-3xl" : "lg:rounded-l-3xl"
-        }`}
-      >
-        <div className="flex items-center gap-4 px-5 sm:px-6 py-3 border-b border-border bg-muted/40">
-          <span className={`font-heading text-3xl font-black tabular-nums ${imageOnLeft ? "text-primary" : "text-primary/80"}`}>
-            {String(index + 1).padStart(2, "0")}
-          </span>
-          <div className={`h-8 w-px ${accent.line} opacity-40`} />
-          <div className="min-w-0 flex-1">
-            <span className={`inline-flex items-center rounded-full border px-2.5 py-0.5 text-[10px] font-bold uppercase tracking-[0.14em] ${accent.badge}`}>
-              {product.category}
+      <div className="p-5 sm:p-6">
+        <span className={`inline-flex rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] ${accent.border} ${accent.bg} ${accent.text}`}>
+          {product.category}
+        </span>
+        <h3 className="mt-4 font-heading text-xl font-bold leading-tight text-foreground">
+          {product.name}
+        </h3>
+        <p className="mt-2 text-sm font-semibold leading-snug text-foreground/85">{product.headline}</p>
+        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{product.description}</p>
+        <div className="mt-4 flex flex-wrap gap-2">
+          {product.specs.slice(0, 3).map((spec) => (
+            <span key={spec} className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] text-muted-foreground">
+              {spec}
             </span>
-            <p className="font-heading font-bold text-foreground truncate mt-1">{product.name}</p>
-          </div>
-          <div className="hidden md:flex items-center gap-2 shrink-0">
-            {product.highlights.map((h) => (
-              <div key={h.label} className={`rounded-lg border px-2 py-1.5 text-center min-w-[68px] ${accent.stat}`}>
-                <p className="text-[8px] uppercase tracking-wider opacity-70">{h.label}</p>
-                <p className="text-[10px] font-bold">{h.value}</p>
-              </div>
-            ))}
-          </div>
+          ))}
         </div>
-
-        <div className={`grid lg:grid-cols-2 ${imageOnLeft ? "" : "lg:[direction:rtl]"}`}>
-          <div className={`relative min-h-[280px] sm:min-h-[340px] lg:min-h-[380px] ${imageOnLeft ? "lg:border-r" : "lg:border-l lg:[direction:ltr]"} border-border`}>
-            <div className={`absolute -inset-1 bg-gradient-to-br ${accent.glow} to-transparent blur-xl opacity-50 pointer-events-none`} aria-hidden />
-            <img
-              src={product.image}
-              alt={product.imageAlt}
-              className="absolute inset-0 w-full h-full object-cover"
-              loading="lazy"
-            />
-            <div className={`absolute inset-0 bg-gradient-to-t from-[#060d17]/80 via-[#060d17]/20 to-transparent ${
-              imageOnLeft ? "lg:bg-gradient-to-r lg:from-transparent lg:via-transparent lg:to-[#060d17]/10" : "lg:bg-gradient-to-l lg:from-transparent lg:via-transparent lg:to-[#060d17]/10"
-            }`} />
-            <div className={`absolute bottom-0 ${imageOnLeft ? "left-0" : "right-0 lg:left-auto"} p-5 sm:p-6 lg:[direction:ltr]`}>
-              <div className="flex flex-wrap gap-2">
-                {product.specs.slice(0, 2).map((spec) => (
-                  <span key={spec} className="text-[10px] font-semibold px-2.5 py-1 rounded-full bg-black/50 text-white border border-white/20 backdrop-blur-sm">
-                    {spec}
-                  </span>
-                ))}
-              </div>
-            </div>
-          </div>
-
-          <div className="p-6 sm:p-8 lg:p-10 flex flex-col justify-center lg:[direction:ltr]">
-            <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground leading-tight mb-2">
-              {product.name}
-            </h3>
-            <p className="text-base sm:text-lg font-semibold text-foreground/90 leading-snug mb-4">
-              {product.headline}
-            </p>
-            <div className={`h-0.5 w-12 mb-4 ${accent.line}`} />
-            <p className="text-sm sm:text-base text-muted-foreground leading-relaxed mb-4">
-              {product.description}
-            </p>
-            <div className="rounded-xl border border-primary/15 bg-primary/[0.04] p-4 mb-5">
-              <div className="flex items-start gap-2">
-                <Sparkles className="w-4 h-4 shrink-0 mt-0.5 text-primary" />
-                <p className="text-sm italic text-foreground/80 leading-relaxed">{product.uniqueAngle}</p>
-              </div>
-            </div>
-            <div className="flex flex-wrap gap-2 mb-6">
-              {product.specs.map((spec) => (
-                <span key={spec} className="text-[11px] font-medium px-2.5 py-1 rounded-full border border-border bg-muted/40 text-muted-foreground">
-                  {spec}
-                </span>
-              ))}
-            </div>
-            <div className="flex flex-wrap gap-3">
-              <Button asChild className="rounded-full h-11 px-6 font-semibold">
-                <Link href={`/services/${product.serviceSlug}`}>
-                  {product.serviceName} <ArrowRight className="ml-2 w-4 h-4" />
-                </Link>
-              </Button>
-              <Button asChild variant="outline" className="rounded-full h-11 px-6 font-semibold">
-                <Link href={productsHref}>Product Details</Link>
-              </Button>
-            </div>
-          </div>
+        <div className="mt-5 border-t border-border pt-4">
+          <Link href={`/services/${product.serviceSlug}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
+            {product.serviceName} <ArrowRight className="h-4 w-4" />
+          </Link>
+          <div className="my-3 h-px w-full bg-border/80" aria-hidden />
+          <Link href={productsHref} className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">
+            Product Details
+          </Link>
         </div>
       </div>
     </motion.article>
   );
 }
 
-function ProductionLineStrip() {
+function PortfolioIndexCard() {
   return (
-    <div className="relative mb-14 sm:mb-16 rounded-2xl border border-border bg-card/90 backdrop-blur-sm overflow-hidden">
-      <div className="px-4 sm:px-6 py-5 sm:py-6">
-        <p className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary text-center mb-6">
-          Concept → Engineer → Validate → Manufacture → Deliver
-        </p>
-        <div className="relative max-w-4xl mx-auto">
-          <div className="hidden sm:block absolute top-5 left-[6%] right-[6%] h-px bg-gradient-to-r from-transparent via-primary/40 to-transparent" aria-hidden />
-          <div className="grid grid-cols-2 sm:grid-cols-5 gap-4">
-            {HOME_PRODUCTION_LINE.map((stage) => (
-              <div key={stage.step} className="flex flex-col items-center text-center">
-                <div className="relative z-10 w-10 h-10 rounded-full border-2 border-primary/30 bg-background flex items-center justify-center mb-2 shadow-sm">
-                  <span className="text-[10px] font-bold text-primary">{stage.step}</span>
-                </div>
-                <p className="text-xs font-bold text-foreground">{stage.label}</p>
-                <p className="text-[10px] text-muted-foreground mt-0.5 leading-tight">{stage.sub}</p>
-              </div>
-            ))}
-          </div>
+    <motion.div
+      initial={{ opacity: 0, y: 28 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-60px" }}
+      transition={{ duration: 0.65, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
+    >
+      <Link
+        href="/products"
+        className="group grid h-full overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl md:grid-cols-[0.42fr_0.58fr]"
+      >
+        <div className="relative min-h-[220px] overflow-hidden bg-[#050b14]">
+          <img
+            src={HOME_IMAGES.process}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover opacity-72 transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.88),rgba(5,11,20,0.45)),linear-gradient(180deg,rgba(5,11,20,0.1),rgba(5,11,20,0.82))]" />
+          <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
+            Portfolio
+          </span>
         </div>
-      </div>
-    </div>
+
+        <div className="flex items-center justify-between gap-5 p-5 sm:p-6">
+          <span className="font-heading text-xl font-bold leading-tight text-foreground">
+            View Full Product Portfolio
+          </span>
+          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:border-primary/30 group-hover:bg-primary group-hover:text-primary-foreground">
+            <ArrowRight className="h-4 w-4" />
+          </span>
+        </div>
+      </Link>
+    </motion.div>
   );
 }
 
 export function HomeProductShowcase() {
+  const [featured, ...rest] = HOME_FEATURED_PRODUCTS;
+
   return (
     <div className="relative">
       <ProductionLineStrip />
-      <div className="hidden lg:block absolute left-1/2 top-32 bottom-8 w-px -translate-x-1/2 bg-gradient-to-b from-primary/5 via-primary/25 to-primary/5 pointer-events-none" aria-hidden />
-      <div className="relative space-y-16 sm:space-y-20 lg:space-y-24">
-        {HOME_FEATURED_PRODUCTS.map((product, index) => (
-          <ProductZigzagRow key={product.id} product={product} index={index} />
+      <div className="mt-10 sm:mt-12">
+        <FeaturedProductPanel product={featured} />
+      </div>
+      <div className="my-10 flex items-center gap-4 sm:my-12" aria-hidden>
+        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-border" />
+        <div className="h-2 w-2 rounded-full bg-primary/50" />
+        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-border" />
+      </div>
+      <div className="grid gap-6 xl:grid-cols-2">
+        {rest.map((product, index) => (
+          <ProductIndexCard key={product.id} product={product} index={index} />
         ))}
+        <PortfolioIndexCard />
       </div>
     </div>
   );

@@ -1,0 +1,43 @@
+
+> rmt-usa@0.0.0 dev
+> vite --host 127.0.0.1
+
+
+  [32m[1mVITE[22m v7.3.3[39m  [2mready in [0m[1m1675[22m[2m[0m ms[22m
+
+  [32m➜[39m  [1mLocal[22m:   [36mhttp://127.0.0.1:[1m5000[22m/[39m
+[2m[32m  ➜[39m[22m[2m  press [22m[1mh + enter[22m[2m to show help[22m
+[2m4:46:18 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/PartnerLogoCarousel.tsx, /src/index.css[22m
+[2m4:46:32 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/index.css[22m
+[2m4:56:03 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/PartnerLogoCarousel.tsx, /src/index.css[22m
+[2m4:56:13 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m4:59:17 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/PartnerLogoCarousel.tsx, /src/index.css[22m
+[2m6:54:20 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m7:01:15 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/HomeProductShowcase.tsx, /src/index.css[22m
+[2m7:01:26 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m7:09:39 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/HomeProductShowcase.tsx, /src/index.css[22m
+[2m7:09:39 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/HomeProductShowcase.tsx, /src/index.css[22m
+[2m7:14:21 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/HomeProductShowcase.tsx, /src/index.css[22m
+[2m7:17:39 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/HomeProductShowcase.tsx, /src/index.css[22m
+[2m7:23:12 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/WorldMap.tsx, /src/index.css[22m
+[2m7:23:19 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m7:27:38 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/WorldMap.tsx, /src/index.css[22m
+[2m7:27:47 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m7:32:00 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/WorldMap.tsx, /src/index.css[22m
+[2m7:39:34 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/WorldMap.tsx, /src/index.css[22m
+[2m7:39:41 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m7:41:42 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/WorldMap.tsx, /src/index.css[22m
+[2m7:45:22 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/WorldMap.tsx, /src/index.css[22m
+[2m7:50:03 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/WorldMap.tsx, /src/index.css[22m
+[2m7:53:01 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/WorldMap.tsx, /src/index.css[22m
+[2m7:56:37 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/PartnerLogoCarousel.tsx, /src/index.css[22m
+[2m7:59:08 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/PartnerLogoCarousel.tsx, /src/index.css[22m
+[2m8:02:25 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m8:05:59 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/PartnerLogoCarousel.tsx, /src/index.css[22m
+[2m8:08:28 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m8:11:30 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/PartnerLogoCarousel.tsx, /src/index.css[22m
+[2m8:14:55 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m8:17:20 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m8:20:16 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/components/HomeProductShowcase.tsx, /src/index.css[22m
+[2m8:23:17 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
+[2m8:26:11 pm[22m [36m[1m[vite][22m[39m [90m[2m(client)[22m[39m [32mhmr update [39m[2m/src/pages/home/home.tsx, /src/index.css[22m
