@@ -96,11 +96,11 @@ export function PartnerLogoCarousel({ items = MARQUEE_ITEMS, variant = "default"
                     href={item.href}
                     title={item.name}
                     className={cn(
-                      "inline-flex shrink-0 items-center gap-2.5 whitespace-nowrap font-heading text-2xl font-bold leading-none transition-colors sm:gap-3 sm:text-4xl lg:text-5xl",
+                      "inline-flex shrink-0 items-center gap-2 whitespace-nowrap font-heading text-lg font-bold leading-none transition-colors sm:gap-2.5 sm:text-2xl lg:text-3xl",
                       isHero ? "text-white/32 hover:text-white" : "text-foreground/30 hover:text-primary"
                     )}
                   >
-                    <item.icon className="h-5 w-5 shrink-0 stroke-[1.8] sm:h-7 sm:w-7 lg:h-8 lg:w-8" />
+                    <item.icon className="h-4 w-4 shrink-0 stroke-[1.8] sm:h-5 sm:w-5 lg:h-6 lg:w-6" />
                     {item.name}
                   </Link>
                 ))}

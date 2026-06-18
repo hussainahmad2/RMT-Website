@@ -103,15 +103,6 @@ const globalOffices = [
     latitude: 30.3753,
     longitude: 69.3451,
   },
-  {
-    city: "UAE",
-    label: "ME",
-    description: "Middle East Office",
-    address: "RMT Middle East FZ-LLC, Dubai, UAE",
-    phone: "+971 4 555 0199",
-    latitude: 24.4539,
-    longitude: 54.3773,
-  },
 ];
 
 const serviceTones = ["blue", "green", "red"] as const;
@@ -197,6 +188,24 @@ export default function Home() {
                   <Play className="h-4 w-4 fill-current" />
                 </button>
               </div>
+
+              <div className="mt-8 grid grid-cols-2 gap-0 overflow-hidden rounded-2xl border border-white/12 bg-white/8 backdrop-blur-md sm:grid-cols-4">
+                {stats.map((stat, i) => (
+                  <motion.div
+                    key={stat.label}
+                    initial={{ opacity: 0, y: 18 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ delay: 0.25 + i * 0.08, duration: 0.55 }}
+                    className={`p-4 sm:p-5 ${i < stats.length - 1 ? "sm:border-r border-white/12" : ""} ${i < 2 ? "border-b sm:border-b-0 border-white/12" : ""}`}
+                  >
+                    <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-blue-200">
+                      {stat.icon}
+                    </div>
+                    <p className="font-heading text-3xl font-bold leading-none text-white sm:text-4xl">{stat.value}</p>
+                    <p className="mt-2 text-xs font-medium leading-snug text-white/65">{stat.label}</p>
+                  </motion.div>
+                ))}
+              </div>
             </div>
 
             <div className="grid grid-cols-2 gap-x-6 gap-y-5 lg:justify-self-end lg:pt-8">
@@ -214,24 +223,6 @@ export default function Home() {
 
           <div className="mt-10 space-y-4 sm:space-y-5">
             <PartnerLogoCarousel variant="hero" />
-
-            <div className="grid grid-cols-2 gap-0 overflow-hidden rounded-2xl border border-white/12 bg-white/8 backdrop-blur-md sm:grid-cols-4">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25 + i * 0.08, duration: 0.55 }}
-                  className={`p-4 sm:p-5 ${i < stats.length - 1 ? "sm:border-r border-white/12" : ""} ${i < 2 ? "border-b sm:border-b-0 border-white/12" : ""}`}
-                >
-                  <div className="mb-3 inline-flex h-9 w-9 items-center justify-center rounded-full border border-white/15 bg-white/10 text-blue-200">
-                    {stat.icon}
-                  </div>
-                  <p className="font-heading text-3xl font-bold leading-none text-white sm:text-4xl">{stat.value}</p>
-                  <p className="mt-2 text-xs font-medium leading-snug text-white/65">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
           </div>
         </div>
       </section>
