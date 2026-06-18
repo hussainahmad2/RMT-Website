@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
   Shield, Brain, FlaskConical, CircuitBoard, Settings2, Factory, Layers,
-  MapPin, Phone, Mail, ClipboardList, PenTool, FileCheck, PackageCheck,
+  MapPin, Phone, Mail,
 } from "lucide-react";
 import { RequestQuoteModal } from "@/components/RequestQuoteModal";
 import { motion, AnimatePresence } from "framer-motion";
@@ -14,8 +14,9 @@ import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
 import { HomeSection, SectionHeading } from "@/components/HomeSection";
-import { InnovationCard } from "@/components/InnovationCard";
+import { HomeProductShowcase } from "@/components/HomeProductShowcase";
 import { HOME_IMAGES } from "@/data/home-images";
+import { HOME_PRODUCT_HERO_SLIDES } from "@/data/home-products";
 
 const featuredServices = [
   { title: "Regulatory Compliance", description: "Navigate global pathways, risk management, and quality standards — Risk Management (ISO 14971), Biocompatibility, QMS, and Clinical Evaluations.", icon: <Shield className="w-6 h-6" />, slug: "regulatory-compliance", subServices: ["Risk Management", "Biocompatibility", "QMS (ISO 13485)", "Technical Files & Clinicals", "Global Registrations"] },
@@ -34,30 +35,6 @@ const stats = [
   { value: "30+", label: "Countries Served", icon: <Globe className="w-5 h-5" /> },
 ];
 
-const innovationPillars = [
-  {
-    title: "AI-Driven Diagnostics",
-    description: "Machine learning models and SaMD platforms that accelerate clinical decision-making and regulatory clearance.",
-    image: HOME_IMAGES.innovation[0],
-    href: "/services/software-ai",
-    tag: "Software & AI",
-  },
-  {
-    title: "Biomaterials & Drug Synthesis",
-    description: "Advanced biomaterial characterization, synthesis, and validation for next-generation implantable and drug-device combinations.",
-    image: HOME_IMAGES.innovation[1],
-    href: "/services/bmd",
-    tag: "Biomaterials",
-  },
-  {
-    title: "Cleanroom Manufacturing",
-    description: "ISO 13485 certified cleanroom production from prototype to commercial scale for Class I–III medical devices.",
-    image: HOME_IMAGES.innovation[2],
-    href: "/services/contract-manufacturing",
-    tag: "Manufacturing",
-  },
-];
-
 const whyChoose = [
   { title: "ISO 13485:2025 Certified", description: "Our quality management system meets the highest international standards for medical device manufacturing.", icon: <Shield className="w-5 h-5" /> },
   { title: "FDA & CE Expertise", description: "Deep regulatory knowledge ensuring your product navigates approval pathways efficiently and successfully.", icon: <Award className="w-5 h-5" /> },
@@ -70,13 +47,6 @@ const whyStats = [
   { value: "2.4x", label: "Faster Time to Market" },
   { value: "200+", label: "Projects Delivered" },
   { value: "30+", label: "Countries Served" },
-];
-
-const process = [
-  { step: "01", title: "Consult", description: "We assess your product concept, market requirements, and regulatory pathway to build a tailored strategy.", icon: <ClipboardList className="w-5 h-5" /> },
-  { step: "02", title: "Design", description: "Our engineers create and iterate on your product design, developing prototypes for testing and validation.", icon: <PenTool className="w-5 h-5" /> },
-  { step: "03", title: "Validate", description: "Rigorous quality testing and regulatory documentation ensure your product meets all required standards.", icon: <FileCheck className="w-5 h-5" /> },
-  { step: "04", title: "Deliver", description: "We manage regulatory submissions and scale manufacturing for a successful market launch.", icon: <PackageCheck className="w-5 h-5" /> },
 ];
 
 const certifications = [
@@ -125,22 +95,6 @@ const globalOffices = [
   },
 ];
 
-const StethoscopeBg = () => (
-  <svg viewBox="0 0 200 200" className="w-full h-full text-primary" fill="none" stroke="currentColor" strokeWidth="4">
-    <circle cx="70" cy="50" r="28" /><circle cx="130" cy="50" r="28" />
-    <path d="M 42 50 Q 42 120 100 145 Q 158 120 158 50" />
-    <circle cx="100" cy="155" r="15" /><line x1="100" y1="170" x2="100" y2="195" /><circle cx="100" cy="197" r="5" />
-  </svg>
-);
-
-const ColumnWatermark = ({ children, className = "" }: { children: React.ReactNode; className?: string }) => (
-  <div className={`absolute inset-y-0 left-0 w-[130%] max-w-[520px] pointer-events-none select-none flex items-center ${className}`} aria-hidden="true">
-    <div className="w-full aspect-square opacity-[0.11] sm:opacity-[0.13] lg:opacity-[0.15] text-primary -translate-x-[6%]" style={{ maskImage: "linear-gradient(to right, black 55%, transparent 92%)" }}>
-      {children}
-    </div>
-  </div>
-);
-
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [videoOpen, setVideoOpen] = useState(false);
@@ -148,14 +102,14 @@ export default function Home() {
 
   useSEO({
     title: "Revive Medical Technologies Inc",
-    description: "RMT Medical Technologies provides end-to-end medical device development, regulatory compliance, software & AI solutions, quality testing, and contract manufacturing globally.",
+    description: "RMT designs and manufactures interventional catheters, microspheres, cleanroom medical devices, and custom production equipment — with end-to-end regulatory, development, and manufacturing services.",
     keywords: "medical device development, regulatory compliance FDA CE, ISO 13485, contract manufacturing, pharmaceutical development",
     path: "/",
   });
 
   useEffect(() => {
     const timer = setInterval(() => {
-      setHeroIndex((i) => (i + 1) % HOME_IMAGES.heroSlides.length);
+      setHeroIndex((i) => (i + 1) % HOME_PRODUCT_HERO_SLIDES.length);
     }, 5000);
     return () => clearInterval(timer);
   }, []);
@@ -179,8 +133,8 @@ export default function Home() {
               }}
             >
               <img
-                src={HOME_IMAGES.heroSlides[heroIndex].src}
-                alt={HOME_IMAGES.heroSlides[heroIndex].alt}
+                src={HOME_PRODUCT_HERO_SLIDES[heroIndex].src}
+                alt={HOME_PRODUCT_HERO_SLIDES[heroIndex].alt}
                 className="w-full h-full object-cover object-center"
               />
             </motion.div>
@@ -196,24 +150,25 @@ export default function Home() {
             transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
             className="max-w-xl sm:max-w-2xl"
           >
-            <p className="text-sky-300 text-xs font-bold uppercase tracking-[0.18em] mb-4">End-to-End Services</p>
+            <p className="text-sky-300 text-xs font-bold uppercase tracking-[0.18em] mb-4">
+              {HOME_PRODUCT_HERO_SLIDES[heroIndex].label}
+            </p>
 
             <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.06] tracking-tight text-white mb-5 sm:mb-6">
-              Invention.<br />
-              Validation.<br />
-              <span className="text-sky-300">Impact.</span>
+              Devices &amp; Machines<br />
+              Built for <span className="text-sky-300">Clinical Impact</span>
             </h1>
 
             <p className="text-white/80 text-base sm:text-lg md:text-xl leading-relaxed max-w-xl mb-4">
-              Global healthtech partner empowering innovation, accelerating product development, and scaling expert teams.
+              From interventional catheters and biomaterial microspheres to custom production equipment and ISO-classified cleanrooms — RMT engineers technologies that are as unique as the procedures they enable.
             </p>
             <p className="text-white/70 text-sm sm:text-base md:text-lg mb-8">
-              AI is seamlessly woven into every innovation.
+              Every product on this page connects to deep end-to-end services — development, validation, regulatory, and manufacturing.
             </p>
 
             <div className="flex flex-wrap gap-3 sm:gap-4">
               <Button asChild size="lg" className="rounded-full h-11 sm:h-12 px-7 sm:px-8 font-semibold">
-                <Link href="/contact">Get Started <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                <a href="#featured-products">Explore Our Technologies <ArrowRight className="ml-2 w-4 h-4" /></a>
               </Button>
               <button
                 type="button"
@@ -236,7 +191,7 @@ export default function Home() {
           </motion.div>
 
           <div className="absolute bottom-6 sm:bottom-8 right-4 sm:right-6 md:right-10 flex gap-2 z-10">
-            {HOME_IMAGES.heroSlides.map((_, i) => (
+            {HOME_PRODUCT_HERO_SLIDES.map((_, i) => (
               <button
                 key={i}
                 type="button"
@@ -261,7 +216,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      {/* ===== STATS BAR — colored section ===== */}
+      {/* ===== 1. TRUST STATS ===== */}
       <HomeSection variant="primary" bgImage={HOME_IMAGES.stats} overlayIntensity="clear" className="py-14" innerClassName="!px-0">
         <div className="grid grid-cols-2 lg:grid-cols-4">
           {stats.map((stat, i) => (
@@ -276,70 +231,44 @@ export default function Home() {
         </div>
       </HomeSection>
 
-      <PartnerLogoCarousel />
-
-      {/* ===== CAPABILITIES — white section + bg image ===== */}
-      <HomeSection variant="image-light" bgImage={HOME_IMAGES.capabilities} bgPosition="right center" overlayIntensity="clear" dots rings ringSide="right">
-        <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-start">
-          <AnimatedSection className="relative min-h-[220px] sm:min-h-[260px]">
-            <ColumnWatermark><StethoscopeBg /></ColumnWatermark>
-            <div className="relative z-10 rounded-2xl border border-white/90 bg-white/95 backdrop-blur-md px-6 py-6 sm:px-8 sm:py-7 shadow-lg max-w-xl">
-              <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-5 bg-white">
-                <span className="text-muted-foreground text-xs font-semibold uppercase tracking-widest">Our Capabilities</span>
-              </div>
-              <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground leading-tight">
-                Empowering Innovation,<br />
-                Delivering <span className="text-primary">Excellence</span>
-              </h2>
-            </div>
-          </AnimatedSection>
-
-          <AnimatedSection delay={0.15}>
-            <p className="text-slate-700 text-lg leading-relaxed mb-8 rounded-2xl border border-white/90 bg-white/95 backdrop-blur-md px-6 py-5 shadow-lg">
-              Our multidisciplinary team brings together a wealth of knowledge across various domains, ensuring every project benefits from a holistic approach. From concept development to market-ready products, we deliver high-quality results that exceed expectations.
-            </p>
-            <div className="divide-y divide-border border border-border mb-8 bg-white/98 rounded-xl overflow-hidden shadow-md">
-              {["Active Medical Devices", "Non-Active Medical Devices", "Biomaterials & Drug Synthesis", "AI Driven Medical Devices", "Software as a Medical Device (SaMD)"].map((cap, i) => (
-                <motion.div key={cap} initial={{ opacity: 0, x: 20 }} whileInView={{ opacity: 1, x: 0 }} viewport={{ once: true, margin: "-40px" }} transition={{ delay: i * 0.08, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}>
-                  <Link href="/services" className="group flex items-center justify-between px-5 py-4 text-foreground font-semibold hover:text-primary hover:bg-primary/5 transition-colors">
-                    {cap}
-                    <ArrowRight className="w-4 h-4 text-muted-foreground opacity-0 group-hover:opacity-100 group-hover:text-primary group-hover:translate-x-1 transition-all" />
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
-            <Button asChild size="lg" className="rounded-full">
-              <Link href="/services">Learn More <ArrowRight className="ml-2 w-4 h-4" /></Link>
-            </Button>
-          </AnimatedSection>
-        </div>
-      </HomeSection>
-
-      {/* ===== INNOVATION SHOWCASE — colored section ===== */}
-      <HomeSection variant="gradient-blue" bgImage={HOME_IMAGES.innovation[0]} overlayIntensity="clear" dots rings ringSide="both" className="py-24">
-        <AnimatedSection className="mb-14">
+      {/* ===== 2. PRODUCTS — zigzag left / right showcase ===== */}
+      <HomeSection
+        id="featured-products"
+        variant="image-light"
+        bgImage={HOME_IMAGES.process}
+        bgPosition="center"
+        overlayIntensity="clear"
+        dots
+        rings
+        ringSide="both"
+        className="py-20 sm:py-24 lg:py-28"
+      >
+        <AnimatedSection className="text-center mb-12 sm:mb-16">
           <SectionHeading
-            eyebrow="Innovation Focus"
-            title={<>Pioneering the Future of <span className="text-cyan-400">MedTech</span></>}
-            description="Three pillars of expertise driving breakthrough medical technologies from lab bench to global market."
-            light
+            eyebrow="What We Build"
+            title={<>Flagship Devices &amp; <span className="text-primary">Production Machines</span></>}
+            description="Six technologies engineered for specific clinical and manufacturing outcomes — each alternating left and right, each opening the full service behind it."
+            align="center"
             panel
           />
         </AnimatedSection>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 lg:gap-8">
-          {innovationPillars.map((pillar, i) => (
-            <InnovationCard key={pillar.title} {...pillar} delay={i * 0.12} />
-          ))}
-        </div>
+
+        <HomeProductShowcase />
+
+        <AnimatedSection className="mt-14 sm:mt-16 text-center">
+          <Button asChild size="lg" className="rounded-full">
+            <Link href="/products">View Full Product Portfolio <ArrowRight className="ml-2 w-4 h-4" /></Link>
+          </Button>
+        </AnimatedSection>
       </HomeSection>
 
-      {/* ===== SERVICES — white section ===== */}
-      <HomeSection variant="image-light" bgImage={HOME_IMAGES.services} bgPosition="center" overlayIntensity="clear" dots rings ringSide="left">
+      {/* ===== 3. SERVICES — powers every product above ===== */}
+      <HomeSection variant="muted" dots className="py-20 sm:py-24">
         <AnimatedSection className="text-center mb-14">
           <SectionHeading
             eyebrow="What We Do"
-            title="Our Core Services"
-            description="Comprehensive solutions covering every stage of medical device development, from initial design through regulatory approval and commercialization."
+            title="Services Behind Every Product"
+            description="Regulatory strategy, engineering, quality, and manufacturing — unified under one roof so your device moves from concept to market without handoffs."
             panel
           />
         </AnimatedSection>
@@ -352,16 +281,15 @@ export default function Home() {
 
         <div className="text-center">
           <Button asChild variant="outline" size="lg" className="rounded-full">
-            <Link href="/services">View All 8 Services <ArrowRight className="ml-2 w-4 h-4" /></Link>
+            <Link href="/services">View All Services <ArrowRight className="ml-2 w-4 h-4" /></Link>
           </Button>
         </div>
       </HomeSection>
 
-      {/* ===== WHY RMT — colored section ===== */}
+      {/* ===== 4. WHY RMT + certifications ===== */}
       <HomeSection variant="navy" bgImage={HOME_IMAGES.whyRmt} overlayIntensity="clear" className="!py-0" innerClassName="!px-0 !max-w-none">
       <section className="relative overflow-hidden">
         <div className="grid lg:grid-cols-5 min-h-0">
-          {/* Left — content panel */}
           <div className="lg:col-span-3 relative text-white py-14 sm:py-16 lg:py-20 px-6 sm:px-10 lg:px-14 xl:px-16 flex flex-col justify-center">
             <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle, white 1px, transparent 1px)", backgroundSize: "24px 24px" }} aria-hidden />
 
@@ -372,7 +300,7 @@ export default function Home() {
                 <span className="text-cyan-400">Medical Innovation</span>
               </h2>
               <p className="text-white/70 text-base sm:text-lg leading-relaxed mb-10 max-w-lg">
-                We combine deep regulatory expertise with cutting-edge engineering capabilities to help medical device companies bring safe, effective products to market faster.
+                Deep regulatory expertise and cutting-edge engineering — helping medical device companies bring safe, effective products to market faster.
               </p>
 
               <div className="space-y-4 mb-10">
@@ -396,7 +324,7 @@ export default function Home() {
                 ))}
               </div>
 
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mb-10">
                 {whyStats.map((stat, i) => (
                   <motion.div
                     key={stat.label}
@@ -411,10 +339,21 @@ export default function Home() {
                   </motion.div>
                 ))}
               </div>
+
+              <div className="flex flex-wrap gap-2">
+                {certifications.map((cert) => (
+                  <span
+                    key={cert}
+                    className="inline-flex items-center gap-1.5 rounded-full border border-white/20 bg-white/10 px-3 py-1.5 text-xs font-semibold text-white/85"
+                  >
+                    <CheckCircle className="w-3.5 h-3.5 text-cyan-400 shrink-0" />
+                    {cert}
+                  </span>
+                ))}
+              </div>
             </AnimatedSection>
           </div>
 
-          {/* Right — contained image (smaller) */}
           <div className="lg:col-span-2 relative flex items-center justify-center p-6 sm:p-8 lg:p-10">
             <div className="relative w-full max-w-[420px] mx-auto">
               <div className="relative rounded-2xl overflow-hidden aspect-[4/3.5] border border-white/15 shadow-xl">
@@ -450,72 +389,9 @@ export default function Home() {
       </section>
       </HomeSection>
 
-      {/* ===== PROCESS — white section ===== */}
-      <HomeSection variant="image-light" bgImage={HOME_IMAGES.process} bgPosition="center" overlayIntensity="clear" dots rings ringSide="both" className="py-24">
-        <AnimatedSection className="text-center mb-16">
-          <SectionHeading
-            eyebrow="Our Process"
-            title={<>How We <span className="text-primary">Work</span></>}
-            description="A structured, proven methodology that reduces risk and accelerates time-to-market."
-            panel
-          />
-        </AnimatedSection>
+      <PartnerLogoCarousel />
 
-        <div className="relative">
-          <div className="hidden lg:block absolute top-7 left-[12.5%] right-[12.5%] h-px bg-primary/20" aria-hidden />
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 lg:gap-5 items-stretch">
-            {process.map((step, i) => (
-              <motion.div
-                key={step.step}
-                initial={{ opacity: 0, y: 32 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, margin: "-40px" }}
-                transition={{ delay: i * 0.12, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-                className="relative flex flex-col items-center lg:items-start text-center lg:text-left h-full"
-              >
-                <div className="relative z-10 w-12 h-12 rounded-lg bg-primary/10 border border-primary/20 flex items-center justify-center text-primary mb-5 shrink-0">
-                  {step.icon}
-                </div>
-                <div className="relative flex flex-col flex-1 w-full min-h-[220px] rounded-2xl border border-border bg-white p-6 shadow-sm hover:border-primary/30 hover:shadow-md transition-all duration-300">
-                  <p className="text-primary text-xs font-semibold uppercase tracking-widest mb-2">Step {step.step}</p>
-                  <h3 className="font-heading text-xl font-bold text-foreground mb-3">{step.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed flex-1">{step.description}</p>
-                </div>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </HomeSection>
-
-      {/* ===== CERTIFICATIONS — colored section ===== */}
-      <HomeSection variant="navy" bgImage={HOME_IMAGES.certifications} overlayIntensity="clear" className="py-16">
-        <AnimatedSection className="text-center mb-10">
-          <SectionHeading
-            eyebrow="Quality & Compliance"
-            title={<>Certified to the Highest <span className="text-cyan-400">Global Standards</span></>}
-            description="Our certifications and regulatory expertise ensure your products meet every requirement for safe, effective market entry."
-            light
-            panel
-          />
-        </AnimatedSection>
-        <div className="flex flex-wrap justify-center gap-3 sm:gap-4">
-          {certifications.map((cert, i) => (
-            <motion.div
-              key={cert}
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className="inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/10 px-5 py-2.5 text-sm font-semibold text-white/90 hover:border-sky-300/40 hover:bg-white/15 transition-colors duration-200"
-            >
-              <CheckCircle className="w-4 h-4 text-cyan-400 shrink-0" />
-              {cert}
-            </motion.div>
-          ))}
-        </div>
-      </HomeSection>
-
-      {/* ===== GLOBAL PRESENCE — white section with earth bg ===== */}
+      {/* ===== 5. GLOBAL PRESENCE ===== */}
       <HomeSection variant="image-light" bgImage={HOME_IMAGES.global} bgPosition="center" overlayIntensity="clear" dots rings ringSide="right" className="py-20 sm:py-24">
         <AnimatedSection className="text-center mb-10 sm:mb-12">
           <SectionHeading
@@ -570,7 +446,7 @@ export default function Home() {
         </AnimatedSection>
       </HomeSection>
 
-      {/* ===== CTA — colored section ===== */}
+      {/* ===== 6. CTA — final conversion ===== */}
       <HomeSection variant="gradient-blue" bgImage={HOME_IMAGES.cta} bgPosition="center 40%" overlayIntensity="clear" className="py-16 sm:py-20 lg:py-24">
         <div className="absolute inset-0 pointer-events-none overflow-hidden" aria-hidden>
           <div className="absolute -top-24 -right-24 w-80 h-80 rounded-full bg-cyan-400/10 blur-3xl" />
