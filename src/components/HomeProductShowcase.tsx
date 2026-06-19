@@ -102,13 +102,13 @@ function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
           {product.headline}
         </p>
         <div className={`my-5 h-0.5 w-16 ${accent.line}`} />
-        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base">
+        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
           {product.description}
         </p>
         <div className="mt-5 rounded-2xl border border-border bg-background/70 p-4">
           <div className="flex items-start gap-3">
             <Sparkles className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-            <p className="text-sm italic leading-relaxed text-foreground/80">{product.uniqueAngle}</p>
+            <p className="text-sm italic leading-relaxed text-foreground/80 lg:text-base">{product.uniqueAngle}</p>
           </div>
         </div>
         <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
@@ -170,8 +170,8 @@ function ProductIndexCard({
         <h3 className="mt-4 font-heading text-xl font-bold leading-tight text-foreground">
           {product.name}
         </h3>
-        <p className="mt-2 text-sm font-semibold leading-snug text-foreground/85">{product.headline}</p>
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground">{product.description}</p>
+        <p className="mt-2 text-sm font-semibold leading-snug text-foreground/85 lg:text-base">{product.headline}</p>
+        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground lg:text-base">{product.description}</p>
         <div className="mt-4 flex flex-wrap gap-2">
           {product.specs.slice(0, 3).map((spec) => (
             <span key={spec} className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] text-muted-foreground">
