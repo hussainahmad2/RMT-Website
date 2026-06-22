@@ -2,60 +2,27 @@ import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
-  Shield, BrainCircuit, ClipboardCheck, DraftingCompass, Factory, FileCheck2,
-  Microscope, Route, Workflow,
+  Shield, Factory,
   MapPin, Phone, Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
-import { HomeProductShowcase } from "@/components/HomeProductShowcase";
+import { HomeProductShowcase, HomeCapabilitiesSection } from "@/components/HomeProductShowcase";
 import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
+import { HomeServicesSection } from "@/components/HomeServicesSection";
+import { HomeWhyRmtSection } from "@/components/HomeWhyRmtSection";
 import { RequestQuoteModal } from "@/components/RequestQuoteModal";
-import { ServiceCard } from "@/components/ServiceCard";
 import { WorldMap } from "@/components/WorldMap";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { HOME_IMAGES } from "@/data/home-images";
 import { HOME_PRODUCT_HERO_SLIDES } from "@/data/home-products";
 
-const featuredServices = [
-  { title: "Regulatory Compliance", description: "Navigate global pathways, risk management, and quality standards — Risk Management (ISO 14971), Biocompatibility, QMS, and Clinical Evaluations.", icon: <FileCheck2 className="w-7 h-7" />, slug: "regulatory-compliance", subServices: ["Risk Management", "Biocompatibility", "QMS (ISO 13485)", "Technical Files & Clinicals", "Global Registrations"] },
-  { title: "Software & AI Solutions", description: "Intelligent software powering next-generation medical devices — AI, cloud, SaMD, and full development lifecycle.", icon: <BrainCircuit className="w-7 h-7" />, slug: "software-ai", subServices: ["AI & Machine Learning", "DevOps/Cloud Computing", "Software as Medical Device", "UI/UX Development"] },
-  { title: "Turnkey Regulatory Commissioning and Regulatory Approvals", description: "Turnkey regulatory commissioning and regulatory approvals from concept through design, V&V, and manufacturing transfer.", icon: <Route className="w-7 h-7" />, slug: "product-development", subServices: ["Concept & Feasibility", "Design & Engineering", "Prototyping", "Regulatory Consultancy"] },
-  { title: "Quality Department Services", description: "QA, unified Quality Control, and SaMD software quality — testing and compliance from bench to release.", icon: <ClipboardCheck className="w-7 h-7" />, slug: "quality-testing", subServices: ["Quality Assurance (QA)", "Quality Control", "Software Quality Assurance"] },
-  { title: "Automation Services", description: "PLC, HMI/SCADA, motion control, and industrial communication for manufacturing and biomedical automation.", icon: <Workflow className="w-7 h-7" />, slug: "automation-services", subServices: ["PLC Programming", "HMI & SCADA", "Motion Control", "Industrial Communication"] },
-  { title: "Design & Fabrication", description: "Mechanical design, thermal engineering, ANSYS/COMSOL simulation, and FDM/SLA rapid prototyping.", icon: <DraftingCompass className="w-7 h-7" />, slug: "design-fabrication", subServices: ["Mechanical Design", "Thermal Engineering", "Simulation & Analysis", "3D Printing"] },
-  { title: "Medical Device Manufacturing", description: "ISO cleanroom manufacturing from Class I–III devices — quality systems, development journey, testing, and scale-up.", icon: <Microscope className="w-7 h-7" />, slug: "contract-manufacturing", subServices: ["Quality & Compliance", "Manufacturing Capabilities", "Cleanroom Infrastructure", "Development Journey"] },
-];
-
 const stats = [
   { value: "15+", label: "Years of Experience", icon: <Clock className="w-5 h-5" /> },
   { value: "200+", label: "Projects Delivered", icon: <Award className="w-5 h-5" /> },
   { value: "50+", label: "Expert Professionals", icon: <Users className="w-5 h-5" /> },
   { value: "30+", label: "Countries Served", icon: <Globe className="w-5 h-5" /> },
-];
-
-const whyChoose = [
-  { title: "ISO 13485:2025 Certified", description: "Our quality management system meets the highest international standards for medical device manufacturing.", icon: <Shield className="w-5 h-5" /> },
-  { title: "FDA & CE Expertise", description: "Deep regulatory knowledge ensuring your product navigates approval pathways efficiently and successfully.", icon: <Award className="w-5 h-5" /> },
-  { title: "End-to-End Partnership", description: "From initial concept through design, testing, approval, and manufacturing — we are with you every step.", icon: <Users className="w-5 h-5" /> },
-  { title: "Global Reach", description: "Operating across the USA, Europe, Middle East, and South Asia with local regulatory expertise.", icon: <Globe className="w-5 h-5" /> },
-];
-
-const whyStats = [
-  { value: "98%", label: "Regulatory Approval Rate" },
-  { value: "2.4x", label: "Faster Time to Market" },
-  { value: "200+", label: "Projects Delivered" },
-  { value: "30+", label: "Countries Served" },
-];
-
-const certifications = [
-  "ISO 13485:2025",
-  "ISO 14971",
-  "IEC 62304",
-  "CE Mark / MDR",
-  "FDA 510(k)",
-  "GMP Compliance",
 ];
 
 const heroCertifications = [
@@ -106,8 +73,6 @@ const globalOffices = [
   },
 ];
 
-const serviceTones = ["blue", "green", "red"] as const;
-
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [videoOpen, setVideoOpen] = useState(false);
@@ -157,7 +122,7 @@ export default function Home() {
           aria-hidden
         />
 
-        <div className="page-container relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-between py-6 sm:min-h-[calc(100svh-5rem)] sm:py-12">
+        <div className="page-container relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-center py-6 sm:min-h-[calc(100svh-5rem)] sm:py-12">
           <motion.div
             initial={{ opacity: 0, y: 28 }}
             animate={{ opacity: 1, y: 0 }}
@@ -224,12 +189,12 @@ export default function Home() {
               ))}
             </div>
           </motion.div>
-
-          <div className="mt-7 space-y-4 sm:mt-5 sm:space-y-5">
-            <PartnerLogoCarousel variant="hero" />
-          </div>
         </div>
       </section>
+
+      <div className="bg-white">
+        <PartnerLogoCarousel variant="hero" />
+      </div>
 
       <AnimatePresence>
         {videoOpen && (
@@ -262,115 +227,18 @@ export default function Home() {
               Flagship Devices &amp; <span className="text-primary">Production Machines</span>
             </h2>
             <p className="mt-4 text-lg leading-relaxed text-muted-foreground lg:text-xl">
-              Six technologies engineered for specific clinical and manufacturing outcomes — each alternating left and right, each opening the full service behind it.
+              A curated look at our flagship interventional device — plus the three product lines that define RMT&apos;s engineering and manufacturing footprint.
             </p>
           </AnimatedSection>
           <HomeProductShowcase />
         </div>
       </section>
 
-      <section className="border-y border-border bg-secondary/25 py-16 sm:py-20">
-        <div className="page-container">
-          <div className="grid gap-10 lg:grid-cols-[0.72fr_1.28fr] lg:items-start">
-            <AnimatedSection className="lg:sticky lg:top-28">
-              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">What We Do</p>
-              <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
-                Services Behind Every Product
-              </h2>
-              <p className="mt-4 text-lg leading-relaxed text-muted-foreground lg:text-xl">
-                Regulatory strategy, engineering, quality, and manufacturing — unified under one roof so your device moves from concept to market without handoffs.
-              </p>
-              <Link
-                href="/services"
-                className="group mt-8 block rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
-              >
-                <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-2xl border border-blue-500/15 bg-blue-500/10 text-blue-700 transition-all duration-300 group-hover:bg-blue-500 group-hover:text-white group-hover:shadow-lg group-hover:shadow-blue-500/20">
-                  <ArrowRight className="h-6 w-6 transition-transform duration-300 group-hover:translate-x-1" />
-                </div>
-                <h3 className="font-heading text-2xl font-bold leading-tight text-foreground transition-colors group-hover:text-blue-700">
-                  View all our services
-                </h3>
-                <p className="mt-3 text-base leading-relaxed text-muted-foreground lg:text-lg">
-                  Explore the full service portfolio across regulatory, engineering, automation, quality, and manufacturing support.
-                </p>
-              </Link>
-            </AnimatedSection>
+      <HomeCapabilitiesSection />
 
-            <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
-              {featuredServices.map((svc, i) => (
-                <ServiceCard
-                  key={svc.slug}
-                  slug={svc.slug}
-                  title={svc.title}
-                  description={svc.description}
-                  icon={svc.icon}
-                  subServices={svc.subServices}
-                  delay={i * 0.06}
-                  tone={serviceTones[i % serviceTones.length]}
-                />
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <HomeServicesSection />
 
-      <section className="relative overflow-hidden bg-[#050b14] py-16 text-white sm:py-20 lg:py-24">
-        <img src={HOME_IMAGES.whyRmt} alt="" className="absolute inset-0 h-full w-full object-cover opacity-35" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.95),rgba(5,11,20,0.82),rgba(5,11,20,0.72))]" />
-        <div className="page-container relative z-10">
-          <div className="grid gap-10 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
-            <AnimatedSection>
-              <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-blue-200">Why RMT</p>
-              <h2 className="font-heading text-3xl font-bold leading-tight text-white sm:text-4xl lg:text-5xl">
-                Your Trusted Partner in <span className="text-blue-300">Medical Innovation</span>
-              </h2>
-              <p className="mt-5 max-w-xl text-base leading-relaxed text-white/70 sm:text-lg lg:text-xl">
-                Deep regulatory expertise and cutting-edge engineering — helping medical device companies bring safe, effective products to market faster.
-              </p>
-              <div className="mt-8 flex flex-wrap gap-2">
-                {certifications.map((cert) => (
-                  <span key={cert} className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold text-white/82">
-                    <CheckCircle className="h-3.5 w-3.5 shrink-0 text-blue-300" />
-                    {cert}
-                  </span>
-                ))}
-              </div>
-            </AnimatedSection>
-
-            <div className="grid gap-4 sm:grid-cols-2">
-              {whyChoose.map((item, i) => (
-                <motion.div
-                  key={item.title}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.08 }}
-                  className="rounded-2xl border border-white/12 bg-white/8 p-5 backdrop-blur-sm transition-colors hover:bg-white/12"
-                >
-                  <div className="mb-4 flex h-11 w-11 items-center justify-center rounded-full border border-white/15 bg-white/10 text-blue-200">
-                    {item.icon}
-                  </div>
-                  <h3 className="font-heading text-lg font-bold text-white">{item.title}</h3>
-                  <p className="mt-2 text-base leading-relaxed text-white/62 lg:text-lg">{item.description}</p>
-                </motion.div>
-              ))}
-              {whyStats.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 24 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: 0.25 + i * 0.06 }}
-                  className="rounded-2xl border border-white/12 bg-white/8 p-5 backdrop-blur-sm"
-                >
-                  <p className="font-heading text-3xl font-bold text-white">{stat.value}</p>
-                  <p className="mt-1 text-sm text-white/58">{stat.label}</p>
-                </motion.div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
+      <HomeWhyRmtSection />
 
       <section className="bg-background py-16 sm:py-20 lg:py-24">
         <div className="page-container">

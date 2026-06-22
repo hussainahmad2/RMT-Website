@@ -8,6 +8,7 @@ import {
   HOME_PRODUCTION_LINE,
   type HomeFeaturedProduct,
 } from "@/data/home-products";
+import { MANUFACTURING_IMAGES } from "@/data/revive-manufacturing-content";
 import { HOME_IMAGES } from "@/data/home-images";
 
 const accentStyles = {
@@ -37,30 +38,32 @@ const accentStyles = {
   },
 } as const;
 
-function ProductionLineStrip() {
-  return (
-    <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-4 shadow-sm sm:p-5">
-      <div
-        className="absolute inset-x-8 top-[3.55rem] hidden h-px bg-gradient-to-r from-blue-500/20 via-green-500/35 to-red-500/20 sm:block"
-        aria-hidden
-      />
-      <div className="grid gap-3 sm:grid-cols-5">
-        {HOME_PRODUCTION_LINE.map((stage, index) => (
-          <div
-            key={stage.step}
-            className="relative rounded-2xl border border-border bg-background/80 px-4 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-md"
-          >
-            <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-card font-heading text-base font-bold text-primary shadow-sm">
-              {stage.step}
-            </div>
-            <p className="mt-1 text-sm font-bold text-foreground sm:text-base">{stage.label}</p>
-            <p className="mt-1 text-xs font-medium leading-snug text-muted-foreground sm:text-sm">{stage.sub}</p>
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-}
+const productCategories = [
+  {
+    title: "Interventional Catheters",
+    description: "Guiding, angiographic, and diagnostic catheters engineered for tortuous anatomy and multi-device delivery.",
+    image: MANUFACTURING_IMAGES.angiographicCatheter,
+    href: "/products#medical-devices",
+    count: "3+ device families",
+    accent: "sky" as const,
+  },
+  {
+    title: "Biomaterials & Microspheres",
+    description: "Calibrated embolization spheres and biomaterial platforms with tight size distribution and batch release criteria.",
+    image: MANUFACTURING_IMAGES.microspheres,
+    href: "/products#biomaterials",
+    count: "Multi-range sizing",
+    accent: "emerald" as const,
+  },
+  {
+    title: "Cleanroom & Production Equipment",
+    description: "ISO-classified manufacturing and custom catheter forming, bonding, and validation-ready production lines.",
+    image: MANUFACTURING_IMAGES.facility2,
+    href: "/products#production-equipment",
+    count: "Class I–III + bespoke lines",
+    accent: "violet" as const,
+  },
+] as const;
 
 function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
   const accent = accentStyles[product.accent];
@@ -74,7 +77,7 @@ function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
       transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
       className="grid overflow-hidden rounded-[2rem] border border-border bg-card shadow-xl lg:grid-cols-[1.05fr_0.95fr]"
     >
-      <div className="relative min-h-[380px] overflow-hidden lg:min-h-[560px]">
+      <div className="relative min-h-[320px] overflow-hidden lg:min-h-[480px]">
         <img
           src={product.image}
           alt={product.imageAlt}
@@ -92,8 +95,8 @@ function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
       </div>
 
       <div className="flex flex-col justify-center p-6 sm:p-8 lg:p-10">
-        <div className={`mb-5 inline-flex w-fit items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${accent.border} ${accent.bg} ${accent.text}`}>
-          {product.category}
+        <div className={`mb-4 inline-flex w-fit items-center rounded-full border px-3 py-1 text-[11px] font-bold uppercase tracking-[0.18em] ${accent.border} ${accent.bg} ${accent.text}`}>
+          Flagship Device
         </div>
         <h3 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
           {product.name}
@@ -102,7 +105,7 @@ function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
           {product.headline}
         </p>
         <div className={`my-5 h-0.5 w-16 ${accent.line}`} />
-        <p className="text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
+        <p className="line-clamp-4 text-sm leading-relaxed text-muted-foreground sm:text-base lg:text-lg">
           {product.description}
         </p>
         <div className="mt-5 rounded-2xl border border-border bg-background/70 p-4">
@@ -111,22 +114,12 @@ function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
             <p className="text-sm italic leading-relaxed text-foreground/80 lg:text-base">{product.uniqueAngle}</p>
           </div>
         </div>
-        <div className="mt-6 grid grid-cols-1 gap-2 sm:grid-cols-3">
-          {product.highlights.map((highlight) => (
-            <div key={highlight.label} className={`rounded-xl border px-3 py-3 ${accent.border} ${accent.bg}`}>
-              <p className="text-[10px] font-bold uppercase tracking-[0.16em] text-muted-foreground">{highlight.label}</p>
-              <p className={`mt-1 text-xs font-bold ${accent.text}`}>{highlight.value}</p>
-            </div>
-          ))}
-        </div>
         <div className="mt-7 flex flex-wrap gap-3">
           <Button asChild className="h-11 px-6 font-semibold">
-            <Link href={`/services/${product.serviceSlug}`}>
-              {product.serviceName} <ArrowRight className="ml-2 h-4 w-4" />
-            </Link>
+            <Link href={productsHref}>Explore Products <ArrowRight className="ml-2 h-4 w-4" /></Link>
           </Button>
           <Button asChild variant="outline" className="h-11 px-6 font-semibold">
-            <Link href={productsHref}>Product Details</Link>
+            <Link href={`/services/${product.serviceSlug}`}>{product.serviceName}</Link>
           </Button>
         </div>
       </div>
@@ -134,123 +127,165 @@ function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
   );
 }
 
-function ProductIndexCard({
-  product,
+function CategoryCard({
+  category,
   index,
 }: {
-  product: HomeFeaturedProduct;
+  category: (typeof productCategories)[number];
   index: number;
 }) {
-  const accent = accentStyles[product.accent];
-  const productsHref = product.productsAnchor ? `/products#${product.productsAnchor}` : "/products";
+  const accent = accentStyles[category.accent];
 
   return (
     <motion.article
-      id={product.id}
-      initial={{ opacity: 0, y: 28 }}
+      initial={{ opacity: 0, y: 24 }}
       whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.65, delay: index * 0.04, ease: [0.22, 1, 0.36, 1] }}
-      className="group grid overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl md:grid-cols-[0.42fr_0.58fr]"
+      viewport={{ once: true, margin: "-40px" }}
+      transition={{ delay: index * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
     >
-      <div className="relative min-h-[220px] overflow-hidden">
-        <img
-          src={product.image}
-          alt={product.imageAlt}
-          className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
-        />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/72 via-transparent to-transparent" />
-      </div>
-
-      <div className="p-5 sm:p-6">
-        <span className={`inline-flex rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] ${accent.border} ${accent.bg} ${accent.text}`}>
-          {product.category}
-        </span>
-        <h3 className="mt-4 font-heading text-xl font-bold leading-tight text-foreground">
-          {product.name}
-        </h3>
-        <p className="mt-2 text-sm font-semibold leading-snug text-foreground/85 lg:text-base">{product.headline}</p>
-        <p className="mt-3 line-clamp-3 text-sm leading-relaxed text-muted-foreground lg:text-base">{product.description}</p>
-        <div className="mt-4 flex flex-wrap gap-2">
-          {product.specs.slice(0, 3).map((spec) => (
-            <span key={spec} className="rounded-full border border-border bg-background px-2.5 py-1 text-[11px] text-muted-foreground">
-              {spec}
-            </span>
-          ))}
+      <Link
+        href={category.href}
+        className="group flex h-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-xl"
+      >
+        <div className="relative h-44 overflow-hidden sm:h-48">
+          <img
+            src={category.image}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            loading="lazy"
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/80 via-[#060d17]/20 to-transparent" />
+          <span className={`absolute left-4 top-4 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] ${accent.border} ${accent.bg} ${accent.text}`}>
+            {category.count}
+          </span>
         </div>
-        <div className="mt-5 border-t border-border pt-4">
-          <Link href={`/services/${product.serviceSlug}`} className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
-            {product.serviceName} <ArrowRight className="h-4 w-4" />
-          </Link>
-          <div className="my-3 h-px w-full bg-border/80" aria-hidden />
-          <Link href={productsHref} className="inline-flex items-center gap-1.5 text-sm font-semibold text-muted-foreground transition-colors hover:text-primary">
-            Product Details
-          </Link>
+        <div className="flex flex-1 flex-col p-5 sm:p-6">
+          <h3 className="font-heading text-xl font-bold leading-tight text-foreground transition-colors group-hover:text-primary sm:text-2xl">
+            {category.title}
+          </h3>
+          <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground lg:text-base">
+            {category.description}
+          </p>
+          <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
+            View category <ArrowRight className="h-4 w-4" />
+          </span>
         </div>
-      </div>
+      </Link>
     </motion.article>
   );
 }
 
-function PortfolioIndexCard() {
+export function HomeCapabilitiesSection() {
   return (
-    <motion.div
-      initial={{ opacity: 0, y: 28 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.65, delay: 0.24, ease: [0.22, 1, 0.36, 1] }}
-    >
-      <Link
-        href="/products"
-        className="group grid h-full overflow-hidden rounded-2xl border border-border bg-card shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl md:grid-cols-[0.42fr_0.58fr]"
-      >
-        <div className="relative min-h-[220px] overflow-hidden bg-[#050b14]">
-          <img
-            src={HOME_IMAGES.process}
-            alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-72 transition-transform duration-700 group-hover:scale-105"
-            loading="lazy"
-          />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.88),rgba(5,11,20,0.45)),linear-gradient(180deg,rgba(5,11,20,0.1),rgba(5,11,20,0.82))]" />
-          <span className="absolute left-4 top-4 rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-white backdrop-blur-sm">
-            Portfolio
-          </span>
+    <section className="border-y border-border bg-secondary/30 py-16 sm:py-20">
+      <div className="page-container">
+        <div className="mx-auto mb-10 max-w-3xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">How We Deliver</p>
+          <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+            Concept to Market, <span className="text-primary">Under One Roof</span>
+          </h2>
+          <p className="mt-4 text-lg leading-relaxed text-muted-foreground lg:text-xl">
+            RMT is a full-stack medical technology partner — not just a manufacturer. Every stage of your product journey is covered in-house.
+          </p>
         </div>
 
-        <div className="flex items-center justify-between gap-5 p-5 sm:p-6">
-          <span className="font-heading text-xl font-bold leading-tight text-foreground">
-            View Full Product Portfolio
-          </span>
-          <span className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-border bg-background text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:border-primary/30 group-hover:bg-primary group-hover:text-primary-foreground">
-            <ArrowRight className="h-4 w-4" />
-          </span>
+        <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-4 shadow-sm sm:p-6">
+          <div
+            className="absolute inset-x-10 top-[3.6rem] hidden h-px bg-gradient-to-r from-blue-500/15 via-green-500/30 to-red-500/15 sm:block"
+            aria-hidden
+          />
+          <div className="grid gap-3 sm:grid-cols-5">
+            {HOME_PRODUCTION_LINE.map((stage) => (
+              <div
+                key={stage.step}
+                className="rounded-2xl border border-border bg-background/80 px-4 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-md"
+              >
+                <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-card font-heading text-base font-bold text-primary shadow-sm">
+                  {stage.step}
+                </div>
+                <p className="text-sm font-bold text-foreground sm:text-base">{stage.label}</p>
+                <p className="mt-1 text-xs font-medium leading-snug text-muted-foreground sm:text-sm">{stage.sub}</p>
+              </div>
+            ))}
+          </div>
         </div>
-      </Link>
-    </motion.div>
+
+        <div className="mt-8 grid gap-4 sm:grid-cols-3">
+          {[
+            { value: "15+", label: "Years in medtech" },
+            { value: "ISO 13485", label: "Certified QMS" },
+            { value: "2 Continents", label: "US & South Asia ops" },
+          ].map((stat, i) => (
+            <motion.div
+              key={stat.label}
+              initial={{ opacity: 0, y: 16 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.06 }}
+              className="rounded-2xl border border-border bg-card px-5 py-4 text-center shadow-sm"
+            >
+              <p className="font-heading text-2xl font-bold text-primary sm:text-3xl">{stat.value}</p>
+              <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
+            </motion.div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
 export function HomeProductShowcase() {
-  const [featured, ...rest] = HOME_FEATURED_PRODUCTS;
+  const featured = HOME_FEATURED_PRODUCTS[0];
 
   return (
     <div className="relative">
-      <ProductionLineStrip />
-      <div className="mt-10 sm:mt-12">
-        <FeaturedProductPanel product={featured} />
-      </div>
+      <FeaturedProductPanel product={featured} />
+
       <div className="my-10 flex items-center gap-4 sm:my-12" aria-hidden>
         <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-border" />
-        <div className="h-2 w-2 rounded-full bg-primary/50" />
+        <p className="shrink-0 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Product Lines</p>
         <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-border" />
       </div>
-      <div className="grid gap-6 xl:grid-cols-2">
-        {rest.map((product, index) => (
-          <ProductIndexCard key={product.id} product={product} index={index} />
+
+      <div className="grid gap-5 md:grid-cols-3">
+        {productCategories.map((category, index) => (
+          <CategoryCard key={category.title} category={category} index={index} />
         ))}
-        <PortfolioIndexCard />
       </div>
+
+      <motion.div
+        initial={{ opacity: 0, y: 20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        viewport={{ once: true }}
+        transition={{ delay: 0.2, duration: 0.65 }}
+        className="mt-8"
+      >
+        <Link
+          href="/products"
+          className="group relative flex items-center justify-between gap-6 overflow-hidden rounded-2xl border border-border bg-[#050b14] p-6 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl sm:p-8"
+        >
+          <img
+            src={HOME_IMAGES.process}
+            alt=""
+            className="absolute inset-0 h-full w-full object-cover opacity-20"
+            loading="lazy"
+            aria-hidden
+          />
+          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.95),rgba(5,11,20,0.75))]" aria-hidden />
+          <div className="relative z-10 min-w-0 flex-1">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">Full Portfolio</p>
+            <h3 className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
+              Explore All Devices &amp; Production Equipment
+            </h3>
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/60 sm:text-base">
+              Six flagship technologies and a growing portfolio of interventional devices, biomaterials, cleanroom manufacturing, and custom production lines.
+            </p>
+          </div>
+          <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300 group-hover:translate-x-1 group-hover:bg-white group-hover:text-primary">
+            <ArrowRight className="h-5 w-5" />
+          </span>
+        </Link>
+      </motion.div>
     </div>
   );
 }

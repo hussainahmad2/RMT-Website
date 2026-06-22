@@ -198,9 +198,17 @@
 
 .partner-marquee-track {
   display: flex;
+  flex-wrap: nowrap;
   width: max-content;
-  animation: partner-marquee 55s linear infinite;
+  gap: 2.25rem;
+  animation: partner-marquee 46s linear infinite;
   will-change: transform;
+}
+
+@media (min-width: 640px) {
+  .partner-marquee-track {
+    gap: 3.5rem;
+  }
 }
 
 .partner-marquee-track-reverse {
@@ -217,5 +225,9 @@
     flex-wrap: wrap;
     width: 100%;
     justify-content: center;
+  }
+
+  .partner-marquee-track > div[aria-hidden="true"] {
+    display: none;
   }
 }
