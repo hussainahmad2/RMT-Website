@@ -26,7 +26,7 @@ const stats = [
 ];
 
 const heroCertifications = [
-  "ISO 13485:2025",
+  "ISO 13485:2016",
   "CE Mark",
   "ISO 14971",
   "IEC 62304",
@@ -108,7 +108,7 @@ export default function Home() {
               opacity: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
               scale: { duration: 5, ease: "linear" },
             }}
-            className="absolute inset-0 h-full w-full object-cover"
+            className="absolute inset-0 h-full w-full object-cover object-center"
           />
         </AnimatePresence>
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.96)_0%,rgba(5,11,20,0.82)_42%,rgba(5,11,20,0.38)_100%),linear-gradient(180deg,rgba(5,11,20,0.1)_0%,rgba(5,11,20,0.88)_100%)]" />
@@ -219,29 +219,64 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <section id="featured-products" className="relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
-        <div className="page-container">
-          <AnimatedSection className="mb-10 max-w-3xl">
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">What We Build</p>
-            <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
-              Flagship Devices &amp; <span className="text-primary">Production Machines</span>
-            </h2>
-            <p className="mt-4 text-lg leading-relaxed text-muted-foreground lg:text-xl">
-              A curated look at our flagship interventional device — plus the three product lines that define RMT&apos;s engineering and manufacturing footprint.
-            </p>
-          </AnimatedSection>
-          <HomeProductShowcase />
+      <section className="shared-gradient-section relative overflow-hidden py-16 sm:py-20 lg:py-24">
+        <div className="shared-gradient-shell shared-gradient-shell-light dark:shared-gradient-shell-dark" aria-hidden />
+        <div className="shared-gradient-layer shared-gradient-layer-1" aria-hidden />
+        <div className="shared-gradient-layer shared-gradient-layer-2" aria-hidden />
+        <div className="shared-gradient-layer shared-gradient-layer-3" aria-hidden />
+        <div className="shared-gradient-layer shared-gradient-layer-4" aria-hidden />
+        <div className="shared-gradient-layer shared-gradient-layer-5" aria-hidden />
+        <div className="page-container relative z-10">
+          <section id="featured-products" className="scroll-mt-28">
+            <AnimatedSection className="mb-10 max-w-3xl">
+              <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">What We Build</p>
+              <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
+                Flagship Devices &amp; <span className="text-primary">Production Machines</span>
+              </h2>
+              <p className="mt-4 text-lg leading-relaxed text-muted-foreground lg:text-xl">
+                A curated look at our flagship interventional device — plus the three product lines that define RMT&apos;s engineering and manufacturing footprint.
+              </p>
+            </AnimatedSection>
+            <HomeProductShowcase />
+          </section>
+
+          <div className="my-14 h-px w-full bg-gradient-to-r from-transparent via-border/60 to-transparent sm:my-16" aria-hidden />
+
+          <HomeCapabilitiesSection />
         </div>
       </section>
-
-      <HomeCapabilitiesSection />
 
       <HomeServicesSection />
 
       <HomeWhyRmtSection />
 
-      <section className="bg-background py-16 sm:py-20 lg:py-24">
-        <div className="page-container">
+      <section className="global-presence-gradient relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
+        <div className="global-presence-gradient-layer global-presence-gradient-layer-a" aria-hidden />
+        <div className="global-presence-gradient-layer global-presence-gradient-layer-b" aria-hidden />
+        <div className="global-presence-gradient-layer global-presence-gradient-layer-c" aria-hidden />
+        <div className="global-presence-gradient-layer global-presence-gradient-layer-d" aria-hidden />
+        <div className="global-presence-gradient-layer global-presence-gradient-layer-e" aria-hidden />
+        <div className="global-presence-gradient-layer global-presence-gradient-layer-f" aria-hidden />
+        <div className="global-presence-gradient-layer global-presence-gradient-layer-g" aria-hidden />
+        <div
+          className="pointer-events-none absolute right-[-10rem] top-1/2 z-0 hidden -translate-y-1/2 lg:block"
+          aria-hidden
+        >
+          <div
+            className="h-[38rem] w-[38rem] bg-primary/8 dark:bg-white/8"
+            style={{
+              WebkitMaskImage: "url('/bg-icons/globe.png')",
+              maskImage: "url('/bg-icons/globe.png')",
+              WebkitMaskRepeat: "no-repeat",
+              maskRepeat: "no-repeat",
+              WebkitMaskPosition: "center",
+              maskPosition: "center",
+              WebkitMaskSize: "contain",
+              maskSize: "contain",
+            }}
+          />
+        </div>
+        <div className="page-container relative z-10">
           <AnimatedSection className="mb-10 max-w-3xl">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">Global Presence</p>
             <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
@@ -331,7 +366,7 @@ export default function Home() {
                 </Button>
               </div>
               <div className="mt-8 flex flex-wrap gap-5 border-t border-white/15 pt-6 sm:gap-7">
-                {["CE Mark Compliant", "ISO 13485:2025", "200+ Projects"].map((badge) => (
+                {["CE Mark Compliant", "ISO 13485:2016", "200+ Projects"].map((badge) => (
                   <div key={badge} className="flex items-center gap-2 text-sm text-white/78">
                     <CheckCircle className="h-4 w-4 shrink-0 text-blue-300" />
                     {badge}

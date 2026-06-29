@@ -40,7 +40,7 @@ export const HOME_IMAGES = {
   ],
   industry: [
     {
-      src: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=800&q=85",
+      src: "https://media.istockphoto.com/id/2269449990/photo/camera-slides-by-a-business-certification-of-iso-13485.jpg?s=612x612&w=0&k=20&c=0IvP4_VUbq_WgMeS9-ym2fNNVyhxsXv8otkolMwchzQ=",
       alt: "Modern hospital and clinical environment",
       title: "Clinical Environments",
     },
@@ -50,8 +50,8 @@ export const HOME_IMAGES = {
       title: "Device Engineering",
     },
     {
-      src: "https://images.unsplash.com/photo-1579684385127-1ef15d558a9a?w=800&q=85",
-      alt: "Pharmaceutical and biomaterial production",
+      src: "https://plus.unsplash.com/premium_photo-1723773736797-8d05f469c6df?q=80&w=753&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      alt: "Medical equipment in a clinical setting",
       title: "Biomaterials",
     },
     {
@@ -73,7 +73,7 @@ export const HOME_IMAGES = {
   stats: "https://images.unsplash.com/photo-1532187863486-abf9db8811ee?w=1600&q=80",
   capabilities: "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&q=80",
   services: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1600&q=80",
-  whyRmt: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=90",
+  whyRmt: "https://thumbs.dreamstime.com/b/doctor-medical-healthcare-icon-interface-medical-healthcare-concept-doctor-hospital-medical-icons-modern-interface-109106306.jpg",
   process: "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=1600&q=80",
   certifications: "https://images.unsplash.com/photo-1579684385127-1ef15d558a9a?w=1600&q=80",
   global: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=1600&q=80&fit=crop",

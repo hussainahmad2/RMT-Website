@@ -259,7 +259,7 @@ export default function Contact() {
               <AnimatedSection delay={0.2} className="bg-card border border-border rounded-2xl p-6">
                 <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">Our Certifications</h4>
                 <div className="flex flex-wrap gap-2">
-                  {["ISO 13485:2025", "FDA Registered", "CE Mark", "ISO 14971", "IEC 62304"].map((cert) => (
+                  {["ISO 13485:2016", "FDA Registered", "CE Mark", "ISO 14971", "IEC 62304"].map((cert) => (
                     <span key={cert} className="text-xs px-3 py-1.5 border border-primary/30 bg-primary/5 text-primary rounded-lg font-medium">
                       {cert}
                     </span>

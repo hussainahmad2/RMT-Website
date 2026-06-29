@@ -190,28 +190,28 @@ export const HOME_PRODUCTION_LINE = [
 
 export const HOME_PRODUCT_HERO_SLIDES = [
   {
-    src: MANUFACTURING_IMAGES.guidingCatheter,
-    alt: "RMT guiding catheter — interventional cardiology device",
-    label: "Guiding Catheter",
+    src: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Medical laboratory setting with clinical equipment",
+    label: "Clinical Lab",
   },
   {
-    src: MANUFACTURING_IMAGES.angiographicCatheter,
-    alt: "RMT angiographic catheter for vascular imaging",
-    label: "Angiographic Catheters",
+    src: "https://plus.unsplash.com/premium_photo-1661963979841-82a90d9ffa08?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Medical professional in a clinical environment",
+    label: "Clinical Care",
   },
   {
-    src: MANUFACTURING_IMAGES.microspheres,
-    alt: "RMT biodegradable microspheres",
-    label: "Microspheres",
+    src: "https://images.unsplash.com/photo-1745420052527-a75fcc6aba58?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Modern medical technology environment",
+    label: "MedTech",
   },
   {
-    src: MANUFACTURING_IMAGES.cleanroom1,
-    alt: "RMT ISO-classified cleanroom manufacturing",
-    label: "Cleanroom Production",
+    src: "https://plus.unsplash.com/premium_photo-1682145087898-319a01ef61dc?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Sterile medical work environment",
+    label: "Sterile Workflow",
   },
   {
-    src: MANUFACTURING_IMAGES.facility2,
-    alt: "RMT custom medical device production equipment",
-    label: "Production Equipment",
+    src: "https://plus.unsplash.com/premium_photo-1661881879851-d55c96b9abe1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    alt: "Healthcare and medical imaging setting",
+    label: "Healthcare Imaging",
   },
 ] as const;

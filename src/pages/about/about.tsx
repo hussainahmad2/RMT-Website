@@ -60,7 +60,7 @@ const values = [
 ];
 
 const certifications = [
-  { name: "ISO 13485:2025", description: "Medical Device Quality Management Systems" },
+  { name: "ISO 13485:2016", description: "Medical Device Quality Management Systems" },
   { name: "CE Mark Specialist", description: "EU Medical Device Regulation (MDR) Expertise" },
   { name: "ISO 14971", description: "Medical Device Risk Management" },
   { name: "IEC 62304", description: "Medical Device Software Lifecycle" },

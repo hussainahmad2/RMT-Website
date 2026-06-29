@@ -177,8 +177,28 @@ function CategoryCard({
 
 export function HomeCapabilitiesSection() {
   return (
-    <section className="border-y border-border bg-secondary/30 py-16 sm:py-20">
-      <div className="page-container">
+    <section className="relative overflow-hidden border-y border-border/60 bg-transparent py-16 sm:py-20">
+      <div
+        className="pointer-events-none absolute right-0 top-[-2rem] z-30 hidden lg:block"
+        aria-hidden
+      >
+        <div
+          className="h-[49rem] w-[49rem] bg-primary/8 dark:bg-white/8"
+          style={{
+            WebkitMaskImage: "url('/bg-icons/stethoscope.png')",
+            maskImage: "url('/bg-icons/stethoscope.png')",
+            WebkitMaskRepeat: "no-repeat",
+            maskRepeat: "no-repeat",
+            WebkitMaskPosition: "center",
+            maskPosition: "center",
+            WebkitMaskSize: "contain",
+            maskSize: "contain",
+            transform: "rotate(-90deg)",
+            transformOrigin: "center center",
+          }}
+        />
+      </div>
+      <div className="page-container relative z-10">
         <div className="mx-auto mb-10 max-w-3xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">How We Deliver</p>
           <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
@@ -190,10 +210,6 @@ export function HomeCapabilitiesSection() {
         </div>
 
         <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-4 shadow-sm sm:p-6">
-          <div
-            className="absolute inset-x-10 top-[3.6rem] hidden h-px bg-gradient-to-r from-blue-500/15 via-green-500/30 to-red-500/15 sm:block"
-            aria-hidden
-          />
           <div className="grid gap-3 sm:grid-cols-5">
             {HOME_PRODUCTION_LINE.map((stage) => (
               <div
@@ -262,26 +278,35 @@ export function HomeProductShowcase() {
       >
         <Link
           href="/products"
-          className="group relative flex items-center justify-between gap-6 overflow-hidden rounded-2xl border border-border bg-[#050b14] p-6 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-xl sm:p-8"
+          className="group relative flex items-center justify-between gap-6 overflow-hidden rounded-2xl border border-border bg-card p-6 shadow-sm transition-all duration-300 hover:-translate-y-0.5 hover:border-primary/30 hover:shadow-xl dark:border-white/10 dark:bg-[#0b1322] sm:p-8"
         >
           <img
             src={HOME_IMAGES.process}
             alt=""
-            className="absolute inset-0 h-full w-full object-cover opacity-20"
+            className="absolute inset-0 h-full w-full object-cover opacity-10 dark:opacity-20"
             loading="lazy"
             aria-hidden
           />
-          <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.95),rgba(5,11,20,0.75))]" aria-hidden />
+          <div
+            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.96),rgba(255,255,255,0.9))] dark:bg-[linear-gradient(90deg,rgba(11,19,34,0.96),rgba(11,19,34,0.84))]"
+            aria-hidden
+          />
+          <div
+            className="absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(59,130,246,0.08)_0%,transparent_30%),radial-gradient(circle_at_82%_70%,rgba(239,68,68,0.08)_0%,transparent_28%)] dark:bg-[radial-gradient(circle_at_18%_30%,rgba(59,130,246,0.16)_0%,transparent_30%),radial-gradient(circle_at_82%_70%,rgba(239,68,68,0.14)_0%,transparent_28%)]"
+            aria-hidden
+          />
           <div className="relative z-10 min-w-0 flex-1">
-            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-300">Full Portfolio</p>
-            <h3 className="mt-2 font-heading text-2xl font-bold text-white sm:text-3xl">
+            <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700 dark:text-blue-300">
+              Full Portfolio
+            </p>
+            <h3 className="mt-2 font-heading text-2xl font-bold text-foreground sm:text-3xl dark:text-white">
               Explore All Devices &amp; Production Equipment
             </h3>
-            <p className="mt-2 max-w-xl text-sm leading-relaxed text-white/60 sm:text-base">
+            <p className="mt-2 max-w-xl text-sm leading-relaxed text-muted-foreground sm:text-base dark:text-white/68">
               Six flagship technologies and a growing portfolio of interventional devices, biomaterials, cleanroom manufacturing, and custom production lines.
             </p>
           </div>
-          <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-white/20 bg-white/10 text-white transition-all duration-300 group-hover:translate-x-1 group-hover:bg-white group-hover:text-primary">
+          <span className="relative z-10 flex h-14 w-14 shrink-0 items-center justify-center rounded-full border border-border bg-background text-primary transition-all duration-300 group-hover:translate-x-1 group-hover:border-primary/30 group-hover:bg-primary group-hover:text-white dark:border-white/12 dark:bg-white/10 dark:text-white dark:group-hover:bg-white dark:group-hover:text-primary">
             <ArrowRight className="h-5 w-5" />
           </span>
         </Link>
