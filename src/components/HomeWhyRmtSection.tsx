@@ -65,8 +65,7 @@ export function HomeWhyRmtSection() {
           className="absolute inset-0 h-full w-full object-cover object-center scale-125 opacity-[0.26] dark:opacity-[0.24]"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-[linear-gradient(120deg,rgba(239,68,68,0.14)_0%,rgba(59,130,246,0.2)_42%,rgba(239,68,68,0.12)_78%,rgba(59,130,246,0.16)_100%)] dark:bg-[linear-gradient(120deg,rgba(239,68,68,0.3)_0%,rgba(59,130,246,0.34)_42%,rgba(239,68,68,0.24)_78%,rgba(59,130,246,0.28)_100%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_18%_28%,rgba(59,130,246,0.18)_0%,transparent_30%),radial-gradient(circle_at_82%_68%,rgba(239,68,68,0.15)_0%,transparent_28%),radial-gradient(circle_at_52%_52%,rgba(59,130,246,0.1)_0%,transparent_24%)] opacity-[0.45] dark:opacity-[0.6]" />
+        <div className="absolute inset-0 bg-white/20 dark:bg-[#08111f]/28" />
       </div>
 
       <div className="page-container relative z-10">
@@ -122,7 +121,7 @@ export function HomeWhyRmtSection() {
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-white via-white/20 to-transparent dark:from-[#08111f] dark:via-[#08111f]/30 dark:to-transparent" />
+                    <div className="absolute inset-0 bg-white/20 dark:bg-[#08111f]/28" />
                     <div className={`absolute left-4 top-4 flex h-10 w-10 items-center justify-center rounded-xl border ${item.accent} dark:border-white/10`}>
                       <Icon className="h-5 w-5" />
                     </div>
@@ -149,22 +148,14 @@ export function HomeWhyRmtSection() {
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="relative mt-14 overflow-hidden rounded-[1.75rem] border border-border/70 shadow-lg sm:mt-16 dark:border-white/10"
         >
-          <div
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(59,130,246,0.18)_0%,rgba(255,255,255,0.92)_50%,rgba(239,68,68,0.18)_100%)] dark:bg-[linear-gradient(90deg,rgba(59,130,246,0.18)_0%,rgba(10,22,44,0.96)_50%,rgba(239,68,68,0.18)_100%)]"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0 bg-[radial-gradient(circle_at_18%_24%,rgba(59,130,246,0.22)_0%,transparent_30%),radial-gradient(circle_at_82%_24%,rgba(239,68,68,0.2)_0%,transparent_28%),radial-gradient(circle_at_52%_78%,rgba(59,130,246,0.12)_0%,transparent_26%)] opacity-70 dark:opacity-55"
-            aria-hidden
-          />
-          <div className="absolute inset-0 bg-white/8 backdrop-blur-[1px] dark:bg-black/10" aria-hidden />
+          <div className="absolute inset-0 bg-white/90 backdrop-blur-[1px] dark:bg-[#08111f]/92" aria-hidden />
           <div className="relative grid grid-cols-2 divide-border/40 sm:grid-cols-4 sm:divide-x">
             {whyStats.map((stat, i) => (
               <div
                 key={stat.label}
                 className={`px-5 py-7 text-center sm:px-6 sm:py-9 ${i < 2 ? "border-b border-white/35 sm:border-b-0" : ""} ${i % 2 === 0 ? "border-r border-white/35 sm:border-r-0" : ""}`}
               >
-                <p className="font-heading text-3xl font-bold text-sky-600 drop-shadow-[0_1px_0_rgba(255,255,255,0.35)] dark:text-sky-300 dark:drop-shadow-none sm:text-4xl">
+                <p className="font-heading text-3xl font-bold text-sky-600 dark:text-sky-300 sm:text-4xl">
                   {stat.value}
                 </p>
                 <p className="mt-1.5 text-xs font-medium uppercase tracking-wider text-rose-700/85 dark:text-rose-300/85 sm:text-sm">

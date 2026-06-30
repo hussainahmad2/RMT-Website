@@ -201,7 +201,7 @@
   flex-wrap: nowrap;
   width: max-content;
   gap: 2.25rem;
-  animation: partner-marquee 180s linear infinite;
+  animation: partner-marquee 320s linear infinite;
   will-change: transform;
 }
 

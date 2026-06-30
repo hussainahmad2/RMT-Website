@@ -261,31 +261,6 @@ export function PartnerLogoCarousel({ items, variant = "default" }: PartnerLogoC
       )}
       aria-label="University logos"
     >
-      {isHero && (
-        <>
-          <div className="partner-carousel-bg partner-carousel-bg-shell partner-carousel-bg-shell-light dark:partner-carousel-bg-shell-dark" aria-hidden />
-          <div className="partner-carousel-bg partner-carousel-bg-layer partner-carousel-bg-layer-1" aria-hidden />
-          <div className="partner-carousel-bg partner-carousel-bg-layer partner-carousel-bg-layer-2" aria-hidden />
-          <div className="partner-carousel-bg partner-carousel-bg-layer partner-carousel-bg-layer-3" aria-hidden />
-          <div className="partner-carousel-bg partner-carousel-bg-layer partner-carousel-bg-layer-4" aria-hidden />
-        </>
-      )}
-      <div
-        className={cn(
-          "pointer-events-none absolute left-0 z-20 bg-gradient-to-r to-transparent",
-          isHero
-            ? "-inset-y-0 w-10 from-white dark:from-black sm:w-24 lg:w-40"
-            : "-bottom-20 -top-20 w-24 from-background sm:w-44 lg:w-64"
-        )}
-      />
-      <div
-        className={cn(
-          "pointer-events-none absolute right-0 z-20 bg-gradient-to-l to-transparent",
-          isHero
-            ? "-inset-y-0 w-10 from-white dark:from-black sm:w-24 lg:w-40"
-            : "-bottom-20 -top-20 w-24 from-background sm:w-44 lg:w-64"
-        )}
-      />
       <div className="relative z-10 overflow-hidden">
         <div className="space-y-4 sm:space-y-5">
           <MarqueeRow items={rows[0]} isHero={isHero} />

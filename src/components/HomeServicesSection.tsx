@@ -13,7 +13,7 @@ const servicePillars = [
     description:
       "FDA, CE Mark, ISO 13485, risk management, biocompatibility, and clinical evaluations — handled by specialists who speak the language of notified bodies.",
     services: ["Risk Management", "Biocompatibility", "QMS (ISO 13485)", "Global Registrations", "Quality Assurance"],
-    accent: "from-blue-600/90 to-blue-800/95",
+    accent: "bg-blue-700",
     iconBg: "bg-blue-400/20",
     textAccent: "text-blue-200",
   },
@@ -24,7 +24,7 @@ const servicePillars = [
     description:
       "Mechanical design, software & AI, automation, simulation, and turnkey product development — one integrated engineering team for devices and production equipment.",
     services: ["Product Development", "Software & AI", "Design & Fabrication", "Automation Services", "UI/UX Development"],
-    accent: "from-emerald-600/90 to-emerald-800/95",
+    accent: "bg-emerald-700",
     iconBg: "bg-emerald-400/20",
     textAccent: "text-emerald-200",
   },
@@ -35,7 +35,7 @@ const servicePillars = [
     description:
       "ISO-classified cleanroom production for Class I–III devices, contract manufacturing, validation, and scale-up — without handoffs between teams.",
     services: ["Contract Manufacturing", "Cleanroom Infrastructure", "Quality Control", "Process Validation", "Scale-Up"],
-    accent: "from-violet-600/90 to-violet-800/95",
+    accent: "bg-violet-700",
     iconBg: "bg-violet-400/20",
     textAccent: "text-violet-200",
   },
@@ -44,15 +44,6 @@ const servicePillars = [
 export function HomeServicesSection() {
   return (
     <section className="relative overflow-hidden bg-[#050b14] py-16 text-white sm:py-20 lg:py-24">
-      <div
-        className="absolute inset-0 opacity-[0.06]"
-        style={{
-          backgroundImage:
-            "linear-gradient(rgba(255,255,255,0.5) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.5) 1px, transparent 1px)",
-          backgroundSize: "64px 64px",
-        }}
-        aria-hidden
-      />
       <div className="page-container relative z-10">
         <AnimatedSection className="mx-auto mb-12 max-w-3xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-200">What We Do</p>
@@ -74,7 +65,7 @@ export function HomeServicesSection() {
               transition={{ delay: i * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
               className="group flex flex-col overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:border-white/22 hover:bg-white/[0.07]"
             >
-              <div className={`bg-gradient-to-br ${pillar.accent} px-6 py-7 sm:px-7`}>
+              <div className={`${pillar.accent} px-6 py-7 sm:px-7`}>
                 <span className={`inline-block rounded-full px-3 py-1 text-[10px] font-bold uppercase tracking-[0.18em] ${pillar.iconBg} ${pillar.textAccent}`}>
                   Pillar {i + 1}
                 </span>

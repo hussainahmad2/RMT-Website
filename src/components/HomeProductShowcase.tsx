@@ -84,7 +84,7 @@ function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
           className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
           loading="lazy"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/85 via-[#060d17]/18 to-transparent" />
+        <div className="absolute inset-0 bg-[#060d17]/72" />
         <div className="absolute bottom-5 left-5 right-5 flex flex-wrap gap-2">
           {product.specs.slice(0, 3).map((spec) => (
             <span key={spec} className="rounded-full border border-white/20 bg-black/45 px-3 py-1 text-[11px] font-semibold text-white backdrop-blur-sm">
@@ -154,8 +154,8 @@ function CategoryCard({
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#060d17]/80 via-[#060d17]/20 to-transparent" />
-          <span className={`absolute left-4 top-4 rounded-full border px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] ${accent.border} ${accent.bg} ${accent.text}`}>
+          <div className="absolute inset-0 bg-[#060d17]/66" />
+          <span className="absolute left-4 top-4 rounded-full border border-border/80 bg-background/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-[0.16em] text-foreground/70 shadow-sm backdrop-blur-sm dark:border-white/12 dark:bg-white/10 dark:text-white/72">
             {category.count}
           </span>
         </div>
@@ -258,9 +258,9 @@ export function HomeProductShowcase() {
       <FeaturedProductPanel product={featured} />
 
       <div className="my-10 flex items-center gap-4 sm:my-12" aria-hidden>
-        <div className="h-px flex-1 bg-gradient-to-r from-transparent via-border to-border" />
+        <div className="h-px flex-1 bg-border" />
         <p className="shrink-0 text-xs font-bold uppercase tracking-[0.2em] text-muted-foreground">Product Lines</p>
-        <div className="h-px flex-1 bg-gradient-to-l from-transparent via-border to-border" />
+        <div className="h-px flex-1 bg-border" />
       </div>
 
       <div className="grid gap-5 md:grid-cols-3">
@@ -287,14 +287,7 @@ export function HomeProductShowcase() {
             loading="lazy"
             aria-hidden
           />
-          <div
-            className="absolute inset-0 bg-[linear-gradient(90deg,rgba(255,255,255,0.96),rgba(255,255,255,0.9))] dark:bg-[linear-gradient(90deg,rgba(11,19,34,0.96),rgba(11,19,34,0.84))]"
-            aria-hidden
-          />
-          <div
-            className="absolute inset-0 bg-[radial-gradient(circle_at_18%_30%,rgba(59,130,246,0.08)_0%,transparent_30%),radial-gradient(circle_at_82%_70%,rgba(239,68,68,0.08)_0%,transparent_28%)] dark:bg-[radial-gradient(circle_at_18%_30%,rgba(59,130,246,0.16)_0%,transparent_30%),radial-gradient(circle_at_82%_70%,rgba(239,68,68,0.14)_0%,transparent_28%)]"
-            aria-hidden
-          />
+          <div className="absolute inset-0 bg-background/88 dark:bg-[#0b1322]/88" aria-hidden />
           <div className="relative z-10 min-w-0 flex-1">
             <p className="text-xs font-bold uppercase tracking-[0.18em] text-blue-700 dark:text-blue-300">
               Full Portfolio

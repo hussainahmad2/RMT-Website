@@ -26,10 +26,10 @@ const stats = [
 ];
 
 const heroCertifications = [
-  "ISO 13485:2016",
-  "CE Mark",
-  "ISO 14971",
-  "IEC 62304",
+  { label: "ISO 13485:2016", icon: "/badges/iso-logo.png", iconType: "badge" as const },
+  { label: "CE Mark", icon: "/badges/ce-mark.png", iconType: "badge" as const },
+  { label: "ISO 14971", icon: "/badges/iso-logo.png", iconType: "badge" as const },
+  { label: "IEC 62304", icon: "/badges/iec-logo.png", iconType: "badge" as const },
 ];
 
 const ctaHighlights = [
@@ -111,16 +111,7 @@ export default function Home() {
             className="absolute inset-0 h-full w-full object-cover object-center"
           />
         </AnimatePresence>
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.96)_0%,rgba(5,11,20,0.82)_42%,rgba(5,11,20,0.38)_100%),linear-gradient(180deg,rgba(5,11,20,0.1)_0%,rgba(5,11,20,0.88)_100%)]" />
-        <div
-          className="absolute inset-0 opacity-[0.09]"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.55) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.55) 1px, transparent 1px)",
-            backgroundSize: "72px 72px",
-          }}
-          aria-hidden
-        />
+        <div className="absolute inset-0 bg-[#050b14]/82" />
 
         <div className="page-container relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-center py-6 sm:min-h-[calc(100svh-5rem)] sm:py-12">
           <motion.div
@@ -160,11 +151,28 @@ export default function Home() {
             <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:gap-x-6 sm:gap-y-5 lg:justify-self-end lg:pt-8">
               {heroCertifications.map((cert) => (
                 <span
-                  key={cert}
+                  key={cert.label}
                   className="inline-flex min-w-0 items-center gap-2 text-sm font-bold text-white/86 sm:gap-3 sm:text-xl lg:text-2xl"
                 >
-                  <CheckCircle className="h-5 w-5 shrink-0 stroke-[3] text-white/86 sm:h-8 sm:w-8 lg:h-9 lg:w-9" />
-                  <span className="truncate">{cert}</span>
+                  {cert.iconType === "badge" ? (
+                    <span
+                      aria-hidden
+                      className="block h-8 w-8 shrink-0 bg-white sm:h-10 sm:w-10 lg:h-11 lg:w-11"
+                      style={{
+                        WebkitMaskImage: `url('${cert.icon}')`,
+                        maskImage: `url('${cert.icon}')`,
+                        WebkitMaskRepeat: "no-repeat",
+                        maskRepeat: "no-repeat",
+                        WebkitMaskPosition: "center",
+                        maskPosition: "center",
+                        WebkitMaskSize: "contain",
+                        maskSize: "contain",
+                      }}
+                    />
+                  ) : (
+                    <CheckCircle className="h-5 w-5 shrink-0 stroke-[3] text-white/86 sm:h-8 sm:w-8 lg:h-9 lg:w-9" />
+                  )}
+                  <span className="truncate">{cert.label}</span>
                 </span>
               ))}
             </div>
@@ -219,13 +227,7 @@ export default function Home() {
         )}
       </AnimatePresence>
 
-      <section className="shared-gradient-section relative overflow-hidden py-16 sm:py-20 lg:py-24">
-        <div className="shared-gradient-shell shared-gradient-shell-light dark:shared-gradient-shell-dark" aria-hidden />
-        <div className="shared-gradient-layer shared-gradient-layer-1" aria-hidden />
-        <div className="shared-gradient-layer shared-gradient-layer-2" aria-hidden />
-        <div className="shared-gradient-layer shared-gradient-layer-3" aria-hidden />
-        <div className="shared-gradient-layer shared-gradient-layer-4" aria-hidden />
-        <div className="shared-gradient-layer shared-gradient-layer-5" aria-hidden />
+      <section className="relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
         <div className="page-container relative z-10">
           <section id="featured-products" className="scroll-mt-28">
             <AnimatedSection className="mb-10 max-w-3xl">
@@ -240,7 +242,7 @@ export default function Home() {
             <HomeProductShowcase />
           </section>
 
-          <div className="my-14 h-px w-full bg-gradient-to-r from-transparent via-border/60 to-transparent sm:my-16" aria-hidden />
+          <div className="my-14 h-px w-full bg-border/60 sm:my-16" aria-hidden />
 
           <HomeCapabilitiesSection />
         </div>
@@ -250,14 +252,7 @@ export default function Home() {
 
       <HomeWhyRmtSection />
 
-      <section className="global-presence-gradient relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
-        <div className="global-presence-gradient-layer global-presence-gradient-layer-a" aria-hidden />
-        <div className="global-presence-gradient-layer global-presence-gradient-layer-b" aria-hidden />
-        <div className="global-presence-gradient-layer global-presence-gradient-layer-c" aria-hidden />
-        <div className="global-presence-gradient-layer global-presence-gradient-layer-d" aria-hidden />
-        <div className="global-presence-gradient-layer global-presence-gradient-layer-e" aria-hidden />
-        <div className="global-presence-gradient-layer global-presence-gradient-layer-f" aria-hidden />
-        <div className="global-presence-gradient-layer global-presence-gradient-layer-g" aria-hidden />
+      <section className="relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
         <div
           className="pointer-events-none absolute right-[-10rem] top-1/2 z-0 hidden -translate-y-1/2 lg:block"
           aria-hidden
@@ -335,7 +330,7 @@ export default function Home() {
 
       <section className="relative overflow-hidden bg-[#050b14] py-16 text-white sm:py-20 lg:py-24">
         <img src={HOME_IMAGES.cta} alt="" className="absolute inset-0 h-full w-full object-cover opacity-40" />
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(5,11,20,0.94),rgba(5,11,20,0.8),rgba(5,11,20,0.7))]" />
+        <div className="absolute inset-0 bg-[#050b14]/88" />
         <div className="page-container relative z-10">
           <div className="grid gap-10 lg:grid-cols-[1fr_0.85fr] lg:items-center">
             <AnimatedSection animation="slideRight">
