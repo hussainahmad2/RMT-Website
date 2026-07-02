@@ -1,11 +1,15 @@
 import React from "react";
 import { Link } from "wouter";
+import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
+import { useTheme } from "@/components/ThemeProvider";
 
 export interface MarqueeItem {
   name: string;
   href: string;
   logo: string;
+  lightLogo?: string;
+  darkLogo?: string;
 }
 
 const UNIVERSITY_LOGOS = [
@@ -93,6 +97,8 @@ const UNIVERSITY_LOGOS = [
     name: "MOST",
     href: "/about",
     logo: "/partner-logos/most-logo.jpg",
+    lightLogo: "/partner-logos/most-light-logo.png",
+    darkLogo: "/partner-logos/most-dark-logo.png",
   },
   {
     name: "Neureveal",
@@ -182,16 +188,26 @@ function buildDenseItems(repeatCount: number): MarqueeItem[] {
   return items;
 }
 
-const HERO_MARQUEE_ITEMS = buildDenseItems(10);
+const HERO_MARQUEE_ITEMS = buildDenseItems(6);
+const HERO_MARQUEE_ITEMS_ROW_2 = buildDenseItems(6).slice().reverse();
 const DEFAULT_MARQUEE_ITEMS = buildDenseItems(6);
 
 function MarqueeRow({
   items,
   isHero,
+  reverse = false,
 }: {
   items: MarqueeItem[];
   isHero: boolean;
+  reverse?: boolean;
 }) {
+  const { theme } = useTheme();
+
+  const resolveLogo = (item: MarqueeItem) => {
+    if (item.name !== "MOST") return item.logo;
+    return theme === "dark" ? item.darkLogo ?? item.logo : item.lightLogo ?? item.logo;
+  };
+
   const renderSet = (setIndex: number, ariaHidden?: boolean) =>
     items.map((item, i) => (
       <Link
@@ -201,21 +217,18 @@ function MarqueeRow({
         aria-label={item.name}
         aria-hidden={ariaHidden}
         tabIndex={ariaHidden ? -1 : undefined}
-        className={cn(
-          "inline-flex shrink-0 items-center px-2 transition-opacity sm:px-3",
-          isHero ? "opacity-70 hover:opacity-100" : "opacity-60 hover:opacity-100"
-        )}
+        className="group inline-flex shrink-0 items-center px-2 sm:px-3"
       >
         <span
           className={cn(
-            "flex h-14 w-[160px] items-center justify-center rounded-2xl bg-transparent px-3 py-2 sm:h-16 sm:w-[190px]",
+            "flex h-14 w-[150px] items-center justify-center rounded-xl bg-transparent px-3 py-2 transition-transform duration-300 group-hover:-translate-y-0.5 sm:h-16 sm:w-[180px]",
             isHero ? "backdrop-blur-[2px]" : "bg-transparent"
           )}
         >
           <img
-            src={item.logo}
+            src={resolveLogo(item)}
             alt={item.name}
-            className="max-h-full max-w-full object-contain object-center"
+            className="max-h-full max-w-full object-contain object-center opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
             loading="lazy"
             decoding="async"
           />
@@ -224,7 +237,10 @@ function MarqueeRow({
     ));
 
   return (
-    <div className="partner-marquee-track items-center">
+    <div
+      className="partner-marquee-track items-center"
+      style={reverse ? { animationName: "partner-marquee-reverse" } : undefined}
+    >
       <div className="flex shrink-0 items-center gap-6 sm:gap-10">{renderSet(0)}</div>
       <div className="flex shrink-0 items-center gap-6 sm:gap-10" aria-hidden>
         {renderSet(1, true)}
@@ -236,24 +252,51 @@ function MarqueeRow({
 interface PartnerLogoCarouselProps {
   items?: MarqueeItem[];
   variant?: "default" | "hero";
+  eyebrow?: string;
+  heading?: string;
 }
 
-export function PartnerLogoCarousel({ items, variant = "default" }: PartnerLogoCarouselProps) {
+export function PartnerLogoCarousel({
+  items,
+  variant = "default",
+  eyebrow = "Trusted Across Borders",
+  heading = "Institutions & Partners We Work With",
+}: PartnerLogoCarouselProps) {
   const isHero = variant === "hero";
   const marqueeItems = items ?? (isHero ? HERO_MARQUEE_ITEMS : DEFAULT_MARQUEE_ITEMS);
+  const marqueeItemsRow2 = items ?? HERO_MARQUEE_ITEMS_ROW_2;
 
   return (
     <section
       className={cn(
         "partner-carousel-surface relative border-y group",
         isHero
-          ? "w-full overflow-hidden border-border bg-white py-5 sm:py-6 dark:bg-[#08111f]"
+          ? "w-full overflow-hidden border-border bg-white py-8 sm:py-10 dark:bg-[#08111f]"
           : "overflow-hidden border-border bg-background py-8 sm:py-10"
       )}
-      aria-label="University logos"
+      aria-label="University and partner logos"
     >
-      <div className="relative z-10 overflow-hidden">
+      {isHero && (
+        <div className="page-container relative z-10 mb-6 flex flex-col items-center gap-1.5 text-center sm:mb-8">
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">{eyebrow}</p>
+          <h3 className="font-heading text-lg font-bold text-foreground sm:text-xl">{heading}</h3>
+        </div>
+      )}
+
+      <div
+        className="relative z-10 overflow-hidden"
+        style={{
+          WebkitMaskImage:
+            "linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%)",
+          maskImage: "linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%)",
+        }}
+      >
         <MarqueeRow items={marqueeItems} isHero={isHero} />
+        {isHero && (
+          <div className="mt-5 sm:mt-7">
+            <MarqueeRow items={marqueeItemsRow2} isHero={isHero} reverse />
+          </div>
+        )}
       </div>
     </section>
   );

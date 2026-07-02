@@ -174,7 +174,7 @@
 
 /* Consistent horizontal gutters for page content */
 .page-container {
-  @apply container mx-auto px-3 sm:px-4 md:px-5 lg:px-6;
+  @apply w-full mx-auto px-[0.5cm];
 }
 
 /* Horizontal partner / product logo marquee */

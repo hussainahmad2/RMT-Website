@@ -65,16 +65,16 @@ export function HomeWhyRmtSection() {
         <img
           src={HOME_IMAGES.whyRmt}
           alt=""
-          className="absolute inset-0 h-full w-full object-cover object-center scale-125 opacity-[0.26] dark:opacity-[0.24]"
+          className="absolute inset-0 hidden h-full w-full object-cover object-center scale-125 opacity-[0.26] dark:opacity-[0.24] sm:block"
           loading="lazy"
         />
         <div className="absolute inset-0 bg-white/20 dark:bg-[#08111f]/28" />
       </div>
 
       <div className="page-container relative z-10">
-        <div className="grid items-start gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:gap-16">
+        <div className="grid items-start gap-10 lg:grid-cols-[0.88fr_1.12fr] lg:gap-16">
           {/* Left — headline & certs */}
-          <AnimatedSection className="lg:sticky lg:top-28" animation="slideRight" delay={0.5} duration={0.85}>
+          <AnimatedSection className="lg:sticky lg:top-28" animation="slideRight" delay={0.1} duration={0.95}>
             <div className="mb-6 flex items-center gap-3">
               <span className="h-px w-10 bg-primary" aria-hidden />
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">Why RMT</p>
@@ -91,14 +91,18 @@ export function HomeWhyRmtSection() {
             </p>
 
             <div className="mt-8 grid grid-cols-2 gap-2.5 sm:gap-3">
-              {certifications.map((cert) => (
-                <span
+              {certifications.map((cert, i) => (
+                <motion.span
                   key={cert}
+                  initial={{ opacity: 0, x: -24 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true, amount: 0.4 }}
+                  transition={{ delay: i * 0.06, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                   className="inline-flex items-center gap-2 rounded-xl border border-border/80 bg-background/80 px-3 py-2.5 text-xs font-semibold text-foreground shadow-sm backdrop-blur-sm dark:border-white/12 dark:bg-white/6 dark:text-white sm:text-sm"
                 >
                   <CheckCircle className="h-3.5 w-3.5 shrink-0 text-primary" />
                   {cert}
-                </span>
+                </motion.span>
               ))}
             </div>
           </AnimatedSection>
@@ -111,11 +115,11 @@ export function HomeWhyRmtSection() {
               return (
                 <motion.article
                   key={item.title}
-                  initial={{ opacity: 0, y: 30, rotate: i % 2 === 0 ? -3 : 3, scale: 0.95 }}
-                  whileInView={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
-                  viewport={{ once: true, margin: "-40px" }}
-                  transition={{ delay: i * 0.12, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-                  className={`group overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-xl dark:border-white/10 dark:bg-white/6 dark:shadow-black/20 ${offset}`}
+                  initial={{ opacity: 0, x: i % 2 === 0 ? -70 : 70, y: 24, rotate: i % 2 === 0 ? -3 : 3, scale: 0.94 }}
+                  whileInView={{ opacity: 1, x: 0, y: 0, rotate: 0, scale: 1 }}
+                  viewport={{ once: true, margin: "-40px", amount: 0.2 }}
+                  transition={{ delay: i * 0.13, duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                  className={`group overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1.5 hover:border-primary/25 hover:shadow-xl dark:border-white/10 dark:bg-white/6 dark:shadow-black/20 ${offset}`}
                 >
                   <div className="relative h-28 overflow-hidden sm:h-32">
                     <img
@@ -145,19 +149,19 @@ export function HomeWhyRmtSection() {
 
         {/* Stats band with gradient background */}
         <motion.div
-          initial={{ opacity: 0, y: 24 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
+          initial={{ opacity: 0, y: 60, scale: 0.95 }}
+          whileInView={{ opacity: 1, y: 0, scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
           onViewportEnter={() => setStatsInView(true)}
-          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
           className="relative mt-14 overflow-hidden rounded-[1.75rem] border border-border/70 shadow-lg sm:mt-16 dark:border-white/10"
         >
           <div className="absolute inset-0 bg-white/90 backdrop-blur-[1px] dark:bg-[#08111f]/92" aria-hidden />
-          <div className="relative grid grid-cols-2 divide-border/40 sm:grid-cols-4 sm:divide-x">
+          <div className="relative grid grid-cols-1 divide-y divide-border/40 sm:grid-cols-4 sm:divide-y-0 sm:divide-x">
             {whyStats.map((stat, i) => (
               <div
                 key={stat.label}
-                className={`px-5 py-7 text-center sm:px-6 sm:py-9 ${i < 2 ? "border-b border-white/35 sm:border-b-0" : ""} ${i % 2 === 0 ? "border-r border-white/35 sm:border-r-0" : ""}`}
+                className="px-5 py-7 text-center sm:px-6 sm:py-9"
               >
                 <p className="font-heading text-3xl font-bold text-sky-600 dark:text-sky-300 sm:text-4xl">
                   <AnimatedCounter
