@@ -187,11 +187,9 @@ const DEFAULT_MARQUEE_ITEMS = buildDenseItems(6);
 
 function MarqueeRow({
   items,
-  reverse,
   isHero,
 }: {
   items: MarqueeItem[];
-  reverse?: boolean;
   isHero: boolean;
 }) {
   const renderSet = (setIndex: number, ariaHidden?: boolean) =>
@@ -226,12 +224,7 @@ function MarqueeRow({
     ));
 
   return (
-    <div
-      className={cn(
-        "partner-marquee-track items-center",
-        reverse && "partner-marquee-track-reverse"
-      )}
-    >
+    <div className="partner-marquee-track items-center">
       <div className="flex shrink-0 items-center gap-6 sm:gap-10">{renderSet(0)}</div>
       <div className="flex shrink-0 items-center gap-6 sm:gap-10" aria-hidden>
         {renderSet(1, true)}
@@ -248,8 +241,6 @@ interface PartnerLogoCarouselProps {
 export function PartnerLogoCarousel({ items, variant = "default" }: PartnerLogoCarouselProps) {
   const isHero = variant === "hero";
   const marqueeItems = items ?? (isHero ? HERO_MARQUEE_ITEMS : DEFAULT_MARQUEE_ITEMS);
-  const midpoint = Math.ceil(marqueeItems.length / 2);
-  const rows = [marqueeItems.slice(0, midpoint), marqueeItems.slice(midpoint)];
 
   return (
     <section
@@ -262,10 +253,7 @@ export function PartnerLogoCarousel({ items, variant = "default" }: PartnerLogoC
       aria-label="University logos"
     >
       <div className="relative z-10 overflow-hidden">
-        <div className="space-y-4 sm:space-y-5">
-          <MarqueeRow items={rows[0]} isHero={isHero} />
-          <MarqueeRow items={rows[1]} reverse isHero={isHero} />
-        </div>
+        <MarqueeRow items={marqueeItems} isHero={isHero} />
       </div>
     </section>
   );

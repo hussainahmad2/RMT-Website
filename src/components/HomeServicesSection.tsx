@@ -45,7 +45,7 @@ export function HomeServicesSection() {
   return (
     <section className="relative overflow-hidden bg-[#050b14] py-16 text-white sm:py-20 lg:py-24">
       <div className="page-container relative z-10">
-        <AnimatedSection className="mx-auto mb-12 max-w-3xl text-center">
+        <AnimatedSection className="mx-auto mb-12 max-w-3xl text-center" animation="slideLeft" delay={0.5} duration={0.85}>
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-blue-200">What We Do</p>
           <h2 className="font-heading text-3xl font-bold leading-tight sm:text-4xl md:text-5xl">
             Three Pillars. <span className="text-blue-300">One Partner.</span>
@@ -59,10 +59,10 @@ export function HomeServicesSection() {
           {servicePillars.map((pillar, i) => (
             <motion.article
               key={pillar.slug}
-              initial={{ opacity: 0, y: 28 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 30, scale: 0.93 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true, margin: "-40px" }}
-              transition={{ delay: i * 0.1, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+              transition={{ delay: i * 0.13, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               className="group flex flex-col overflow-hidden rounded-[1.75rem] border border-white/12 bg-white/[0.04] backdrop-blur-sm transition-all duration-300 hover:border-white/22 hover:bg-white/[0.07]"
             >
               <div className={`${pillar.accent} px-6 py-7 sm:px-7`}>
@@ -70,16 +70,16 @@ export function HomeServicesSection() {
                   Pillar {i + 1}
                 </span>
                 <h3 className="mt-4 font-heading text-2xl font-bold leading-tight">{pillar.title}</h3>
-                <p className={`mt-2 text-sm font-semibold ${pillar.textAccent}`}>{pillar.tagline}</p>
+                <p className={`mt-2 text-base font-semibold ${pillar.textAccent}`}>{pillar.tagline}</p>
               </div>
 
               <div className="flex flex-1 flex-col p-6 sm:p-7">
-                <p className="text-sm leading-relaxed text-white/62 lg:text-base">{pillar.description}</p>
+                <p className="text-base leading-relaxed text-white/62 lg:text-lg">{pillar.description}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {pillar.services.map((svc) => (
                     <span
                       key={svc}
-                      className="rounded-full border border-white/12 bg-white/6 px-3 py-1 text-xs font-medium text-white/75"
+                      className="rounded-full border border-white/12 bg-white/6 px-3 py-1 text-sm font-medium text-white/75"
                     >
                       {svc}
                     </span>
@@ -97,7 +97,7 @@ export function HomeServicesSection() {
           ))}
         </div>
 
-        <AnimatedSection className="mt-10 text-center" delay={0.15}>
+        <AnimatedSection className="mt-10 text-center" delay={0.2} animation="scaleUp" duration={0.7}>
           <Button asChild size="lg" className="bg-white text-primary hover:bg-white/90">
             <Link href="/services">
               View Full Service Portfolio <ArrowRight className="ml-2 h-4 w-4" />

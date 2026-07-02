@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "wouter";
 import { ArrowRight, Sparkles } from "lucide-react";
 import { motion } from "framer-motion";
+import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import {
   HOME_FEATURED_PRODUCTS,
@@ -71,10 +72,10 @@ function FeaturedProductPanel({ product }: { product: HomeFeaturedProduct }) {
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 32 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, x: -60, scale: 0.97 }}
+      whileInView={{ opacity: 1, x: 0, scale: 1 }}
       viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
       className="grid overflow-hidden rounded-[2rem] border border-border bg-card shadow-xl lg:grid-cols-[1.05fr_0.95fr]"
     >
       <div className="relative min-h-[320px] overflow-hidden lg:min-h-[480px]">
@@ -138,10 +139,10 @@ function CategoryCard({
 
   return (
     <motion.article
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
+      initial={{ opacity: 0, y: 36, scale: 0.93 }}
+      whileInView={{ opacity: 1, y: 0, scale: 1 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ delay: index * 0.08, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      transition={{ delay: index * 0.13, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
     >
       <Link
         href={category.href}
@@ -199,7 +200,7 @@ export function HomeCapabilitiesSection() {
         />
       </div>
       <div className="page-container relative z-10">
-        <div className="mx-auto mb-10 max-w-3xl text-center">
+        <AnimatedSection className="mx-auto mb-10 max-w-3xl text-center" animation="scaleUp" delay={0.5} duration={0.8}>
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">How We Deliver</p>
           <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
             Concept to Market, <span className="text-primary">Under One Roof</span>
@@ -207,21 +208,25 @@ export function HomeCapabilitiesSection() {
           <p className="mt-4 text-lg leading-relaxed text-muted-foreground lg:text-xl">
             RMT is a full-stack medical technology partner — not just a manufacturer. Every stage of your product journey is covered in-house.
           </p>
-        </div>
+        </AnimatedSection>
 
         <div className="relative overflow-hidden rounded-[2rem] border border-border bg-card p-4 shadow-sm sm:p-6">
           <div className="grid gap-3 sm:grid-cols-5">
-            {HOME_PRODUCTION_LINE.map((stage) => (
-              <div
+            {HOME_PRODUCTION_LINE.map((stage, i) => (
+              <motion.div
                 key={stage.step}
+                initial={{ opacity: 0, x: -18, scale: 0.92 }}
+                whileInView={{ opacity: 1, x: 0, scale: 1 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ delay: i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="rounded-2xl border border-border bg-background/80 px-4 py-5 text-center transition-all duration-300 hover:-translate-y-1 hover:border-primary/30 hover:shadow-md"
               >
                 <div className="mx-auto mb-3 flex h-11 w-11 items-center justify-center rounded-full border border-primary/20 bg-card font-heading text-base font-bold text-primary shadow-sm">
                   {stage.step}
                 </div>
-                <p className="text-sm font-bold text-foreground sm:text-base">{stage.label}</p>
-                <p className="mt-1 text-xs font-medium leading-snug text-muted-foreground sm:text-sm">{stage.sub}</p>
-              </div>
+                <p className="text-base font-bold text-foreground sm:text-lg">{stage.label}</p>
+                <p className="mt-1 text-sm font-medium leading-snug text-muted-foreground sm:text-base">{stage.sub}</p>
+              </motion.div>
             ))}
           </div>
         </div>
@@ -234,14 +239,14 @@ export function HomeCapabilitiesSection() {
           ].map((stat, i) => (
             <motion.div
               key={stat.label}
-              initial={{ opacity: 0, y: 16 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, y: 16, scale: 0.95 }}
+              whileInView={{ opacity: 1, y: 0, scale: 1 }}
               viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
+              transition={{ delay: 0.1 + i * 0.1, duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
               className="rounded-2xl border border-border bg-card px-5 py-4 text-center shadow-sm"
             >
-              <p className="font-heading text-2xl font-bold text-primary sm:text-3xl">{stat.value}</p>
-              <p className="mt-1 text-sm text-muted-foreground">{stat.label}</p>
+              <p className="font-heading text-3xl font-bold text-primary sm:text-4xl">{stat.value}</p>
+              <p className="mt-1 text-base text-muted-foreground">{stat.label}</p>
             </motion.div>
           ))}
         </div>

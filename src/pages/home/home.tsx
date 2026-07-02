@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { HomeProductShowcase, HomeCapabilitiesSection } from "@/components/HomeProductShowcase";
 import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
 import { HomeServicesSection } from "@/components/HomeServicesSection";
@@ -19,18 +20,16 @@ import { HOME_IMAGES } from "@/data/home-images";
 import { HOME_PRODUCT_HERO_SLIDES } from "@/data/home-products";
 
 const stats = [
-  { value: "15+", label: "Years of Experience", icon: <Clock className="w-5 h-5" /> },
-  { value: "200+", label: "Projects Delivered", icon: <Award className="w-5 h-5" /> },
-  { value: "50+", label: "Expert Professionals", icon: <Users className="w-5 h-5" /> },
-  { value: "30+", label: "Countries Served", icon: <Globe className="w-5 h-5" /> },
+  { value: 15, step: 1, suffix: "+", label: "Years of Experience", icon: <Clock className="w-5 h-5" /> },
+  { value: 200, step: 5, suffix: "+", label: "Projects Delivered", icon: <Award className="w-5 h-5" /> },
+  { value: 50, step: 1, suffix: "+", label: "Expert Professionals", icon: <Users className="w-5 h-5" /> },
+  { value: 30, step: 1, suffix: "+", label: "Countries Served", icon: <Globe className="w-5 h-5" /> },
 ];
 
-const heroCertifications = [
-  { label: "ISO 13485:2016", icon: "/badges/iso-logo.png", iconType: "badge" as const },
-  { label: "CE Mark", icon: "/badges/ce-mark.png", iconType: "badge" as const },
-  { label: "ISO 14971", icon: "/badges/iso-logo.png", iconType: "badge" as const },
-  { label: "IEC 62304", icon: "/badges/iec-logo.png", iconType: "badge" as const },
-];
+const heroCertificationMarks = [
+  { label: "ISO 13485:2016", icon: "/badges/iso-13485-badge.png" },
+  { label: "DRAP", icon: "/badges/drap-badge.png" },
+] as const;
 
 const ctaHighlights = [
   {
@@ -95,108 +94,141 @@ export default function Home() {
 
   return (
     <div className="bg-background text-foreground">
-      <section className="relative min-h-screen overflow-hidden bg-[#050b14] pt-16 text-white sm:pt-20">
-        <AnimatePresence mode="sync">
-          <motion.img
-            key={activeHero.src}
-            src={activeHero.src}
-            alt={activeHero.alt}
-            initial={{ opacity: 0, scale: 1.02 }}
-            animate={{ opacity: 1, scale: 1.08 }}
-            exit={{ opacity: 0 }}
-            transition={{
-              opacity: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
-              scale: { duration: 5, ease: "linear" },
-            }}
-            className="absolute inset-0 h-full w-full object-cover object-center"
-          />
-        </AnimatePresence>
-        <div className="absolute inset-0 bg-[#050b14]/82" />
+      <section className="relative overflow-hidden bg-background pt-14 text-white sm:pt-16 lg:pt-20">
+        <div className="relative z-10 mx-auto w-full max-w-[1800px] px-1.5 pb-8 sm:px-2 lg:px-3">
+          <div className="rounded-[2rem] border border-slate-200 bg-white p-2 shadow-[0_28px_80px_rgba(15,23,42,0.12)] dark:border-white/10 dark:bg-[#0b1322] dark:shadow-[0_28px_80px_rgba(2,6,23,0.45)]">
+            <div className="relative overflow-hidden rounded-[1.6rem] bg-[#07111d]">
+              <AnimatePresence mode="sync">
+                <motion.img
+                  key={activeHero.src}
+                  src={activeHero.src}
+                  alt={activeHero.alt}
+                  initial={{ opacity: 0, scale: 1.02 }}
+                  animate={{ opacity: 1, scale: 1.08 }}
+                  exit={{ opacity: 0 }}
+                  transition={{
+                    opacity: { duration: 0.9, ease: [0.22, 1, 0.36, 1] },
+                    scale: { duration: 5, ease: "linear" },
+                  }}
+                  className="absolute inset-0 h-full w-full object-cover object-center"
+                />
+              </AnimatePresence>
+              <div className="absolute inset-0 bg-[#07111d]/74 dark:bg-[#040a12]/80" />
+              <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(7,17,29,0.92)_0%,rgba(7,17,29,0.78)_38%,rgba(7,17,29,0.26)_100%)] dark:bg-[linear-gradient(90deg,rgba(4,10,18,0.94)_0%,rgba(4,10,18,0.82)_38%,rgba(4,10,18,0.32)_100%)]" />
 
-        <div className="page-container relative z-10 flex min-h-[calc(100svh-4rem)] flex-col justify-center py-6 sm:min-h-[calc(100svh-5rem)] sm:py-12">
-          <motion.div
-            initial={{ opacity: 0, y: 28 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
-            className="grid gap-5 pt-4 sm:gap-8 sm:pt-12 lg:grid-cols-[minmax(0,4fr)_minmax(280px,2fr)] lg:items-start"
-          >
-            <div className="max-w-4xl">
-              <h1 className="font-heading text-4xl font-bold leading-[1.02] text-white sm:text-6xl lg:text-7xl">
-                Devices &amp; Machines<br />
-                Built for <span className="text-blue-300">Clinical Impact</span>
-              </h1>
-              <p className="mt-6 hidden max-w-2xl text-base leading-relaxed text-white/80 sm:block sm:text-lg md:text-xl">
-                From interventional catheters and biomaterial microspheres to custom production equipment and ISO-classified cleanrooms — RMT engineers technologies that are as unique as the procedures they enable.
-              </p>
-              <p className="mt-4 hidden max-w-2xl text-sm leading-relaxed text-white/68 sm:block sm:text-base md:text-lg">
-                Every product on this page connects to deep end-to-end services — development, validation, regulatory, and manufacturing.
-              </p>
+              <div className="relative min-h-[620px] px-4 py-8 sm:px-5 sm:py-10 md:px-6 lg:min-h-[680px] lg:px-8 lg:py-16">
+                <div className="page-container grid w-full items-center gap-10 lg:grid-cols-[minmax(0,1.15fr)_minmax(320px,0.85fr)]">
+                  <motion.div
+                    initial={{ opacity: 0, x: 260 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1.8, ease: [0.16, 1, 0.3, 1] }}
+                    className="max-w-3xl"
+                  >
+                  <motion.h1
+                    initial={{ opacity: 0, x: 320 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ duration: 1.95, ease: [0.16, 1, 0.3, 1] }}
+                    className="font-heading text-4xl font-bold leading-[0.98] text-white sm:text-6xl lg:text-[5.2rem]"
+                  >
+                    Devices &amp; Machines<br />
+                    Built for <span className="text-blue-300">Clinical Impact</span>
+                  </motion.h1>
+                  <motion.p
+                    initial={{ opacity: 0, x: 250 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.42, duration: 1.5, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-6 max-w-2xl text-base leading-relaxed text-white/84 sm:text-lg md:text-xl"
+                  >
+                    From interventional catheters and biomaterial microspheres to custom production equipment and ISO-classified cleanrooms — RMT engineers technologies that are as unique as the procedures they enable.
+                  </motion.p>
+                  <motion.p
+                    initial={{ opacity: 0, x: 220 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.56, duration: 1.45, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-4 max-w-2xl text-sm leading-relaxed text-white/70 sm:text-base md:text-lg"
+                  >
+                    Every product on this page connects to deep end-to-end services — development, validation, regulatory, and manufacturing.
+                  </motion.p>
 
-              <div className="mt-6 flex flex-wrap gap-3 sm:mt-8 sm:gap-4">
-                <Button asChild size="lg" className="bg-white text-base font-bold text-primary hover:bg-white/90">
-                  <a href="#featured-products">Explore Our Technologies <ArrowRight className="ml-2 h-4 w-4" /></a>
-                </Button>
-                <button
-                  type="button"
-                  aria-label="Watch Overview"
-                  onClick={() => setVideoOpen(true)}
-                  className="inline-flex h-12 w-12 items-center justify-center rounded-md border border-white/25 bg-white/8 text-white backdrop-blur-sm transition-colors hover:bg-white/12"
-                >
-                  <Play className="h-4 w-4 fill-current" />
-                </button>
-              </div>
+                  <motion.div
+                    initial={{ opacity: 0, x: -140 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.18, duration: 1.95, ease: [0.16, 1, 0.3, 1] }}
+                    className="mt-7 flex flex-wrap gap-3 sm:mt-8 sm:gap-4"
+                  >
+                    <Button asChild size="lg" className="h-12 rounded-xl bg-white px-6 text-base font-bold text-primary hover:bg-white/92">
+                      <a href="#featured-products">Explore Our Technologies <ArrowRight className="ml-2 h-4 w-4" /></a>
+                    </Button>
+                    <button
+                      type="button"
+                      aria-label="Watch Overview"
+                      onClick={() => setVideoOpen(true)}
+                      className="inline-flex h-12 items-center justify-center rounded-xl border border-white/28 bg-white/10 px-5 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/16 sm:px-6"
+                    >
+                      <Play className="mr-2 h-4 w-4 fill-current" />
+                      Watch Overview
+                    </button>
+                  </motion.div>
+                  </motion.div>
 
-            </div>
-
-            <div className="grid grid-cols-2 gap-x-4 gap-y-3 sm:gap-x-6 sm:gap-y-5 lg:justify-self-end lg:pt-8">
-              {heroCertifications.map((cert) => (
-                <span
-                  key={cert.label}
-                  className="inline-flex min-w-0 items-center gap-2 text-sm font-bold text-white/86 sm:gap-3 sm:text-xl lg:text-2xl"
-                >
-                  {cert.iconType === "badge" ? (
-                    <span
-                      aria-hidden
-                      className="block h-8 w-8 shrink-0 bg-white sm:h-10 sm:w-10 lg:h-11 lg:w-11"
-                      style={{
-                        WebkitMaskImage: `url('${cert.icon}')`,
-                        maskImage: `url('${cert.icon}')`,
-                        WebkitMaskRepeat: "no-repeat",
-                        maskRepeat: "no-repeat",
-                        WebkitMaskPosition: "center",
-                        maskPosition: "center",
-                        WebkitMaskSize: "contain",
-                        maskSize: "contain",
-                      }}
-                    />
-                  ) : (
-                    <CheckCircle className="h-5 w-5 shrink-0 stroke-[3] text-white/86 sm:h-8 sm:w-8 lg:h-9 lg:w-9" />
-                  )}
-                  <span className="truncate">{cert.label}</span>
-                </span>
-              ))}
-            </div>
-
-            <div className="mx-auto mt-3 grid w-full max-w-4xl grid-cols-2 gap-3 rounded-[1.75rem] border border-white/12 bg-white/[0.055] p-3 shadow-2xl shadow-black/15 backdrop-blur-md sm:mt-5 sm:grid-cols-4 lg:col-span-2">
-              {stats.map((stat, i) => (
-                <motion.div
-                  key={stat.label}
-                  initial={{ opacity: 0, y: 18 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ delay: 0.25 + i * 0.08, duration: 0.55 }}
-                  className="rounded-2xl border border-white/10 bg-[#050b14]/38 p-4 transition-colors duration-300 hover:bg-white/8 sm:p-5"
-                >
-                  <div className="flex items-center gap-3">
-                    <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-blue-300/18 bg-blue-300/10 text-blue-200 sm:h-12 sm:w-12 [&>svg]:h-5 [&>svg]:w-5 sm:[&>svg]:h-6 sm:[&>svg]:w-6">
-                      {stat.icon}
+                  <motion.div
+                    initial={{ opacity: 0, x: 90 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.32, duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                    className="flex items-start justify-start lg:justify-end lg:self-start lg:pt-4"
+                  >
+                    <div className="grid w-full max-w-[30rem] grid-cols-2 gap-4">
+                      {heroCertificationMarks.map((mark) => (
+                        <div
+                          key={mark.label}
+                          className="flex min-h-[11rem] items-center justify-center p-2"
+                        >
+                          <span
+                            aria-hidden
+                            className="block h-28 w-28 bg-white sm:h-32 sm:w-32"
+                            style={{
+                              WebkitMaskImage: `url('${mark.icon}')`,
+                              maskImage: `url('${mark.icon}')`,
+                              WebkitMaskRepeat: "no-repeat",
+                              maskRepeat: "no-repeat",
+                              WebkitMaskPosition: "center",
+                              maskPosition: "center",
+                              WebkitMaskSize: "contain",
+                              maskSize: "contain",
+                            }}
+                          />
+                        </div>
+                      ))}
                     </div>
-                    <p className="font-heading text-4xl font-bold leading-none text-white sm:text-5xl">{stat.value}</p>
+                  </motion.div>
+
+                  <div className="lg:col-span-2">
+                    <div className="grid gap-3 rounded-[1.6rem] border border-white/10 bg-black/18 p-3 backdrop-blur-md sm:grid-cols-2 lg:grid-cols-4">
+                      {stats.map((stat, i) => (
+                        <motion.div
+                          key={stat.label}
+                          initial={{ opacity: 0, y: 18 }}
+                          animate={{ opacity: 1, y: 0 }}
+                          transition={{ delay: 0.22 + i * 0.08, duration: 0.55 }}
+                          className="rounded-2xl border border-white/10 bg-white/6 p-4 transition-colors duration-300 hover:bg-white/10 sm:p-5"
+                        >
+                          <div className="flex items-center gap-3">
+                            <div className="inline-flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/14 bg-white/10 text-cyan-100 sm:h-12 sm:w-12 [&>svg]:h-5 [&>svg]:w-5 sm:[&>svg]:h-6 sm:[&>svg]:w-6">
+                              {stat.icon}
+                            </div>
+                            <p className="font-heading text-4xl font-bold leading-none text-white sm:text-5xl">
+                              <AnimatedCounter value={stat.value} suffix={stat.suffix} duration={1.9} delay={0.55 + i * 0.1} />
+                            </p>
+                          </div>
+                          <p className="mt-4 text-left text-sm font-semibold leading-snug text-white/72 sm:text-base">{stat.label}</p>
+                        </motion.div>
+                      ))}
+                    </div>
                   </div>
-                  <p className="mt-4 text-left text-sm font-semibold leading-snug text-white/72 sm:text-base">{stat.label}</p>
-                </motion.div>
-              ))}
+                </div>
+              </div>
             </div>
-          </motion.div>
+          </div>
         </div>
       </section>
 
@@ -230,7 +262,7 @@ export default function Home() {
       <section className="relative overflow-hidden bg-background py-16 sm:py-20 lg:py-24">
         <div className="page-container relative z-10">
           <section id="featured-products" className="scroll-mt-28">
-            <AnimatedSection className="mb-10 max-w-3xl">
+            <AnimatedSection className="mb-10 max-w-3xl" animation="slideDown" delay={0.55} duration={0.85}>
               <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">What We Build</p>
               <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
                 Flagship Devices &amp; <span className="text-primary">Production Machines</span>
@@ -272,7 +304,7 @@ export default function Home() {
           />
         </div>
         <div className="page-container relative z-10">
-          <AnimatedSection className="mb-10 max-w-3xl">
+          <AnimatedSection className="mb-10 max-w-3xl" animation="blurFade" delay={0.1} duration={0.9}>
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">Global Presence</p>
             <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl md:text-5xl">
               Operating Across 2 Continents
@@ -282,19 +314,25 @@ export default function Home() {
             </p>
           </AnimatedSection>
 
-          <AnimatedSection>
+          <AnimatedSection animation="scaleUp" delay={0.15} duration={0.8}>
             <div className="grid gap-6 lg:grid-cols-[1.15fr_0.85fr] lg:items-stretch">
-              <div className="overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-sm">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.96, x: -24 }}
+                whileInView={{ opacity: 1, scale: 1, x: 0 }}
+                viewport={{ once: true, margin: "-40px" }}
+                transition={{ duration: 0.85, ease: [0.22, 1, 0.36, 1] }}
+                className="overflow-hidden rounded-2xl border border-border bg-card p-4 shadow-sm"
+              >
                 <WorldMap offices={globalOffices} />
-              </div>
+              </motion.div>
               <div className="grid gap-4">
                 {globalOffices.map((office, i) => (
                   <motion.div
                     key={office.city}
-                    initial={{ opacity: 0, x: 20 }}
-                    whileInView={{ opacity: 1, x: 0 }}
+                    initial={{ opacity: 0, scale: 0.92, y: 18 }}
+                    whileInView={{ opacity: 1, scale: 1, y: 0 }}
                     viewport={{ once: true, margin: "-40px" }}
-                    transition={{ delay: i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                    transition={{ delay: 0.2 + i * 0.14, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
                     className="rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-md"
                   >
                     <div className="flex items-start gap-4">
@@ -306,9 +344,9 @@ export default function Home() {
                           <h3 className="font-heading text-lg font-bold text-foreground">{office.city}</h3>
                           <span className="rounded-full bg-primary/10 px-2 py-0.5 text-xs font-bold text-primary">{office.label}</span>
                         </div>
-                        <p className="mb-2 text-base text-muted-foreground">{office.description}</p>
-                        <p className="mb-3 text-base text-foreground/80">{office.address}</p>
-                        <div className="flex flex-col gap-1.5 text-base">
+                        <p className="mb-2 text-lg text-muted-foreground">{office.description}</p>
+                        <p className="mb-3 text-lg text-foreground/80">{office.address}</p>
+                        <div className="flex flex-col gap-1.5 text-lg">
                           <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-primary">
                             <Phone className="h-3.5 w-3.5 shrink-0" />{office.phone}
                           </a>
@@ -361,11 +399,18 @@ export default function Home() {
                 </Button>
               </div>
               <div className="mt-8 flex flex-wrap gap-5 border-t border-white/15 pt-6 sm:gap-7">
-                {["CE Mark Compliant", "ISO 13485:2016", "200+ Projects"].map((badge) => (
-                  <div key={badge} className="flex items-center gap-2 text-sm text-white/78">
+                {["CE Mark Compliant", "ISO 13485:2016", "200+ Projects"].map((badge, i) => (
+                  <motion.div
+                    key={badge}
+                    initial={{ opacity: 0, y: 10 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: 0.6 + i * 0.1, duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
+                    className="flex items-center gap-2 text-base text-white/78"
+                  >
                     <CheckCircle className="h-4 w-4 shrink-0 text-blue-300" />
                     {badge}
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             </AnimatedSection>
@@ -374,10 +419,10 @@ export default function Home() {
               {ctaHighlights.map((item, i) => (
                 <motion.div
                   key={item.title}
-                  initial={{ opacity: 0, x: 28 }}
-                  whileInView={{ opacity: 1, x: 0 }}
+                  initial={{ opacity: 0, x: 30, rotate: 2, scale: 0.94 }}
+                  whileInView={{ opacity: 1, x: 0, rotate: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ delay: 0.15 + i * 0.1, duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: 0.2 + i * 0.13, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                   className="flex gap-4 rounded-2xl border border-white/16 bg-white/8 p-5 backdrop-blur-sm transition-colors hover:bg-white/12 sm:p-6"
                 >
                   <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full border border-white/18 bg-white/10 text-blue-200">
@@ -385,7 +430,7 @@ export default function Home() {
                   </div>
                   <div className="min-w-0 text-left">
                     <h3 className="font-heading text-lg font-bold text-white">{item.title}</h3>
-                    <p className="mt-1 text-base leading-relaxed text-white/68 lg:text-lg">{item.description}</p>
+                    <p className="mt-1 text-lg leading-relaxed text-white/68">{item.description}</p>
                   </div>
                 </motion.div>
               ))}

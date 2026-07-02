@@ -6,7 +6,7 @@ interface AnimatedSectionProps {
   delay?: number;
   className?: string;
   id?: string;
-  animation?: "fade" | "slideUp" | "slideRight" | "slideLeft" | "scaleUp";
+  animation?: "fade" | "slideUp" | "slideRight" | "slideLeft" | "scaleUp" | "slideDown" | "blurFade";
   duration?: number;
   /** Animate on mount instead of waiting for scroll into view */
   immediate?: boolean;
@@ -34,6 +34,14 @@ const animations = {
   scaleUp: {
     initial: { opacity: 0, scale: 0.96 },
     whileInView: { opacity: 1, scale: 1 },
+  },
+  slideDown: {
+    initial: { opacity: 0, y: -40 },
+    whileInView: { opacity: 1, y: 0 },
+  },
+  blurFade: {
+    initial: { opacity: 0, y: 18, filter: "blur(10px)" },
+    whileInView: { opacity: 1, y: 0, filter: "blur(0px)" },
   },
 };
 

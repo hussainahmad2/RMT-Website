@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useState } from "react";
 import { CheckCircle, Shield, Award, Users, Globe } from "lucide-react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedCounter } from "@/components/AnimatedCounter";
 import { HOME_IMAGES } from "@/data/home-images";
 
 const whyChoose = [
@@ -40,10 +41,10 @@ const whyChoose = [
 ] as const;
 
 const whyStats = [
-  { value: "98%", label: "Regulatory Approval Rate" },
-  { value: "2.4x", label: "Faster Time to Market" },
-  { value: "200+", label: "Projects Delivered" },
-  { value: "30+", label: "Countries Served" },
+  { value: 98, decimals: 0, suffix: "%", label: "Regulatory Approval Rate" },
+  { value: 2.4, decimals: 1, suffix: "x", label: "Faster Time to Market" },
+  { value: 200, decimals: 0, suffix: "+", label: "Projects Delivered" },
+  { value: 30, decimals: 0, suffix: "+", label: "Countries Served" },
 ] as const;
 
 const certifications = [
@@ -56,6 +57,8 @@ const certifications = [
 ] as const;
 
 export function HomeWhyRmtSection() {
+  const [statsInView, setStatsInView] = useState(false);
+
   return (
     <section className="relative overflow-hidden bg-white py-16 sm:py-20 lg:py-28 dark:bg-[#08111f]">
       <div className="pointer-events-none absolute inset-0" aria-hidden>
@@ -71,7 +74,7 @@ export function HomeWhyRmtSection() {
       <div className="page-container relative z-10">
         <div className="grid items-start gap-12 lg:grid-cols-[0.88fr_1.12fr] lg:gap-16">
           {/* Left — headline & certs */}
-          <AnimatedSection className="lg:sticky lg:top-28">
+          <AnimatedSection className="lg:sticky lg:top-28" animation="slideRight" delay={0.5} duration={0.85}>
             <div className="mb-6 flex items-center gap-3">
               <span className="h-px w-10 bg-primary" aria-hidden />
               <p className="text-sm font-semibold uppercase tracking-[0.22em] text-primary">Why RMT</p>
@@ -108,10 +111,10 @@ export function HomeWhyRmtSection() {
               return (
                 <motion.article
                   key={item.title}
-                  initial={{ opacity: 0, y: 28 }}
-                  whileInView={{ opacity: 1, y: 0 }}
+                  initial={{ opacity: 0, y: 30, rotate: i % 2 === 0 ? -3 : 3, scale: 0.95 }}
+                  whileInView={{ opacity: 1, y: 0, rotate: 0, scale: 1 }}
                   viewport={{ once: true, margin: "-40px" }}
-                  transition={{ delay: i * 0.08, duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+                  transition={{ delay: i * 0.12, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
                   className={`group overflow-hidden rounded-2xl border border-border bg-white shadow-sm transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-xl dark:border-white/10 dark:bg-white/6 dark:shadow-black/20 ${offset}`}
                 >
                   <div className="relative h-28 overflow-hidden sm:h-32">
@@ -127,10 +130,10 @@ export function HomeWhyRmtSection() {
                     </div>
                   </div>
                   <div className="p-5 sm:p-6">
-                    <h3 className="font-heading text-lg font-bold leading-tight text-foreground dark:text-white sm:text-xl">
+                    <h3 className="font-heading text-xl font-bold leading-tight text-foreground dark:text-white sm:text-2xl">
                       {item.title}
                     </h3>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground dark:text-white/68 sm:text-base">
+                    <p className="mt-2 text-base leading-relaxed text-muted-foreground dark:text-white/68 sm:text-lg">
                       {item.description}
                     </p>
                   </div>
@@ -145,6 +148,7 @@ export function HomeWhyRmtSection() {
           initial={{ opacity: 0, y: 24 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
+          onViewportEnter={() => setStatsInView(true)}
           transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           className="relative mt-14 overflow-hidden rounded-[1.75rem] border border-border/70 shadow-lg sm:mt-16 dark:border-white/10"
         >
@@ -156,9 +160,16 @@ export function HomeWhyRmtSection() {
                 className={`px-5 py-7 text-center sm:px-6 sm:py-9 ${i < 2 ? "border-b border-white/35 sm:border-b-0" : ""} ${i % 2 === 0 ? "border-r border-white/35 sm:border-r-0" : ""}`}
               >
                 <p className="font-heading text-3xl font-bold text-sky-600 dark:text-sky-300 sm:text-4xl">
-                  {stat.value}
+                  <AnimatedCounter
+                    value={stat.value}
+                    decimals={stat.decimals}
+                    suffix={stat.suffix}
+                    duration={1.8}
+                    delay={i * 0.15}
+                    start={statsInView}
+                  />
                 </p>
-                <p className="mt-1.5 text-xs font-medium uppercase tracking-wider text-rose-700/85 dark:text-rose-300/85 sm:text-sm">
+                <p className="mt-1.5 text-sm font-medium uppercase tracking-wider text-rose-700/85 dark:text-rose-300/85 sm:text-base">
                   {stat.label}
                 </p>
               </div>

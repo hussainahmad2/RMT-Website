@@ -201,7 +201,7 @@
   flex-wrap: nowrap;
   width: max-content;
   gap: 2.25rem;
-  animation: partner-marquee 320s linear infinite;
+  animation: partner-marquee 720s linear infinite;
   will-change: transform;
 }
 
@@ -209,10 +209,6 @@
   .partner-marquee-track {
     gap: 3.5rem;
   }
-}
-
-.partner-marquee-track-reverse {
-  animation-name: partner-marquee-reverse;
 }
 
 .partner-marquee-track:hover {
