@@ -99,7 +99,7 @@ export default function Home() {
   return (
     <div className="bg-background text-foreground">
       {/* ============================= HERO ============================= */}
-      <section className="relative overflow-hidden bg-background pb-2 pt-12 text-white sm:pb-3 sm:pt-14 lg:pt-16">
+      <section className="relative overflow-hidden bg-background pb-2 pt-20 text-white sm:pb-3 sm:pt-22 lg:pt-24">
         <div className="page-container">
           <div className="relative isolate overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.12)] dark:border-white/10 dark:bg-[#0b1322] dark:shadow-[0_28px_80px_rgba(2,6,23,0.45)] sm:rounded-[2rem]">
             <div className="relative min-h-[480px] overflow-hidden rounded-[1.5rem] bg-[#07111d] sm:min-h-[560px] sm:rounded-[2rem] lg:h-[calc(100svh-7rem)] lg:min-h-0">
@@ -121,8 +121,8 @@ export default function Home() {
               <div className="absolute inset-0 bg-[#07111d]/74 dark:bg-[#040a12]/80" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,29,0.9)_0%,rgba(7,17,29,0.55)_46%,rgba(7,17,29,0.88)_100%)] lg:bg-[linear-gradient(90deg,rgba(7,17,29,0.92)_0%,rgba(7,17,29,0.78)_38%,rgba(7,17,29,0.26)_100%)] dark:bg-[linear-gradient(180deg,rgba(4,10,18,0.92)_0%,rgba(4,10,18,0.6)_46%,rgba(4,10,18,0.9)_100%)] dark:lg:bg-[linear-gradient(90deg,rgba(4,10,18,0.94)_0%,rgba(4,10,18,0.82)_38%,rgba(4,10,18,0.32)_100%)]" />
 
-              <div className="relative flex min-h-[480px] flex-col justify-center gap-6 px-4 py-8 sm:min-h-[560px] sm:px-6 sm:py-10 md:px-8 lg:h-[calc(100svh-7rem)] lg:min-h-0 lg:flex-row lg:items-center lg:gap-8 lg:px-12 lg:py-10 xl:px-16">
-                <div className="mb-3 flex justify-end sm:mb-4 lg:absolute lg:right-12 lg:top-8 lg:z-20 lg:w-auto">
+              <div className="relative flex min-h-[480px] flex-col justify-center gap-6 px-4 py-6 sm:min-h-[560px] sm:px-6 sm:py-8 md:px-8 lg:h-[calc(100svh-7rem)] lg:min-h-0 lg:flex-row lg:items-center lg:gap-8 lg:px-12 lg:pb-0 lg:pt-8 xl:px-16">
+                <div className="mb-3 flex justify-end sm:mb-4 lg:absolute lg:right-12 lg:top-6 lg:z-20 lg:w-auto">
                   <div className="flex items-center gap-2 sm:gap-2.5">
                     {heroCertificationMarks.map((mark) => (
                       <div key={mark.label} className="flex items-center justify-center">
@@ -206,18 +206,18 @@ export default function Home() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.25, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative flex min-h-[7rem] w-full shrink-0 flex-col items-center gap-3 sm:min-h-[9rem] sm:gap-4 md:min-h-[12rem] lg:min-h-0 lg:flex-1 lg:flex-row-reverse lg:items-end lg:justify-start lg:gap-6"
+                  className="relative flex min-h-[7rem] w-full shrink-0 flex-col items-center gap-3 sm:min-h-[9rem] sm:gap-4 md:min-h-[12rem] lg:min-h-0 lg:flex-1 lg:flex-row-reverse lg:items-end lg:justify-start lg:gap-6 lg:self-end lg:pb-0"
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.4, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="hidden md:flex md:flex-1 md:justify-center"
+                    className="hidden md:flex md:flex-1 md:items-end md:justify-center lg:items-end"
                   >
                     <img
                       src="/hero/doctor-cutout.png"
                       alt="Medical professional"
-                      className="h-[14rem] w-auto max-w-[80vw] object-contain object-bottom sm:h-[18rem] sm:max-w-full md:h-[22rem] lg:h-[26rem] xl:h-[30rem]"
+                      className="h-[14rem] w-auto max-w-[80vw] object-contain object-bottom sm:h-[18rem] sm:max-w-full md:h-[22rem] lg:h-[26rem] xl:h-[30rem] lg:translate-y-6"
                       loading="eager"
                       decoding="async"
                     />
