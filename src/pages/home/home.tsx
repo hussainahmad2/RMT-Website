@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
@@ -72,14 +72,14 @@ const globalOffices = [
   },
 ];
 
-/** Easily swappable — production-floor image used behind the pinned "What We Build" section */
-const PRODUCTION_BG_IMAGE = HOME_IMAGES.capabilities;
-
 export default function Home() {
   const [heroIndex, setHeroIndex] = useState(0);
   const [videoOpen, setVideoOpen] = useState(false);
   const [quoteOpen, setQuoteOpen] = useState(false);
   const [statsInView, setStatsInView] = useState(false);
+  const [heroScale, setHeroScale] = useState(1);
+  const [isCompactHero, setIsCompactHero] = useState(false);
+  const heroFrameRef = useRef<HTMLDivElement | null>(null);
   const activeHero = HOME_PRODUCT_HERO_SLIDES[heroIndex];
 
   useSEO({
@@ -96,12 +96,50 @@ export default function Home() {
     return () => clearInterval(timer);
   }, []);
 
+  useEffect(() => {
+    const frame = heroFrameRef.current;
+    if (!frame) return;
+
+    const updateHeroScale = () => {
+      const { width, height } = frame.getBoundingClientRect();
+      if (!width || !height) return;
+
+      const compactHero = width <= 980 && height <= 520;
+      const widthScale = width / 1418;
+      const heightScale = height / 663;
+      const rawScale = (widthScale * 0.7) + (heightScale * 0.3);
+      const easedScale = rawScale >= 1
+        ? 1 + (rawScale - 1) * 1.45
+        : 1 - (1 - rawScale) * 0.8;
+      const nextScale = compactHero
+        ? Math.max(0.68, Math.min(easedScale * 0.82, 0.98))
+        : Math.max(0.9, Math.min(easedScale, 1.72));
+      setIsCompactHero(compactHero);
+      setHeroScale(nextScale);
+    };
+
+    updateHeroScale();
+
+    const observer = new ResizeObserver(updateHeroScale);
+    observer.observe(frame);
+    window.addEventListener("resize", updateHeroScale);
+
+    return () => {
+      observer.disconnect();
+      window.removeEventListener("resize", updateHeroScale);
+    };
+  }, []);
+
   return (
     <div className="bg-background text-foreground">
       {/* ============================= HERO ============================= */}
-      <section className="relative overflow-hidden bg-background pb-2 pt-20 text-white sm:pb-3 sm:pt-22 lg:pt-24">
+      <section className={`relative overflow-hidden bg-background pb-2 text-white ${isCompactHero ? "pt-12 sm:pt-14 lg:pt-16" : "pt-20 sm:pt-22 lg:pt-24"}`}>
         <div className="page-container">
-          <div className="relative isolate overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.12)] dark:border-white/10 dark:bg-[#0b1322] dark:shadow-[0_28px_80px_rgba(2,6,23,0.45)] sm:rounded-[2rem]">
+          <div
+            ref={heroFrameRef}
+            className="relative isolate overflow-hidden rounded-[1.5rem] border border-slate-200 bg-white shadow-[0_28px_80px_rgba(15,23,42,0.12)] dark:border-white/10 dark:bg-[#0b1322] dark:shadow-[0_28px_80px_rgba(2,6,23,0.45)] sm:rounded-[2rem]"
+            style={{ "--hero-scale": heroScale } as React.CSSProperties}
+          >
             <div className="relative min-h-[480px] overflow-hidden rounded-[1.5rem] bg-[#07111d] sm:min-h-[560px] sm:rounded-[2rem] lg:h-[calc(100svh-7rem)] lg:min-h-0">
               <AnimatePresence mode="sync">
                 <motion.img
@@ -121,14 +159,14 @@ export default function Home() {
               <div className="absolute inset-0 bg-[#07111d]/74 dark:bg-[#040a12]/80" />
               <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(7,17,29,0.9)_0%,rgba(7,17,29,0.55)_46%,rgba(7,17,29,0.88)_100%)] lg:bg-[linear-gradient(90deg,rgba(7,17,29,0.92)_0%,rgba(7,17,29,0.78)_38%,rgba(7,17,29,0.26)_100%)] dark:bg-[linear-gradient(180deg,rgba(4,10,18,0.92)_0%,rgba(4,10,18,0.6)_46%,rgba(4,10,18,0.9)_100%)] dark:lg:bg-[linear-gradient(90deg,rgba(4,10,18,0.94)_0%,rgba(4,10,18,0.82)_38%,rgba(4,10,18,0.32)_100%)]" />
 
-              <div className="relative flex min-h-[480px] flex-col justify-center gap-6 px-4 py-6 sm:min-h-[560px] sm:px-6 sm:py-8 md:px-8 lg:h-[calc(100svh-7rem)] lg:min-h-0 lg:flex-row lg:items-center lg:gap-8 lg:px-12 lg:pb-0 lg:pt-8 xl:px-16">
-                <div className="mb-3 flex justify-end sm:mb-4 lg:absolute lg:right-12 lg:top-6 lg:z-20 lg:w-auto">
-                  <div className="flex items-center gap-2 sm:gap-2.5">
+              <div className={`relative flex min-h-[480px] flex-col justify-center gap-6 px-4 py-6 sm:min-h-[560px] sm:px-6 sm:py-8 md:px-8 lg:h-[calc(100svh-7rem)] lg:min-h-0 lg:flex-row lg:items-center lg:gap-8 lg:px-12 lg:pb-0 lg:pt-8 xl:px-16 ${isCompactHero ? "py-4 sm:py-5 lg:py-6 lg:gap-6" : ""}`}>
+                <div className={`mb-3 flex justify-end sm:mb-4 lg:absolute lg:right-12 lg:z-20 lg:w-auto ${isCompactHero ? "lg:top-4" : "lg:top-6"}`}>
+                  <div className="flex items-center gap-2 sm:gap-2.5 lg:gap-[calc(0.7rem*var(--hero-scale))]">
                     {heroCertificationMarks.map((mark) => (
                       <div key={mark.label} className="flex items-center justify-center">
                         <span
                           aria-hidden
-                          className="block h-8 w-8 shrink-0 bg-white sm:h-10 sm:w-10 lg:h-12 lg:w-12"
+                          className="block h-8 w-8 shrink-0 bg-white sm:h-10 sm:w-10 lg:h-[calc(3rem*var(--hero-scale))] lg:w-[calc(3rem*var(--hero-scale))]"
                           style={{
                             WebkitMaskImage: `url('${mark.icon}')`,
                             maskImage: `url('${mark.icon}')`,
@@ -146,18 +184,18 @@ export default function Home() {
                 </div>
 
                 {/* ---- Text block ---- */}
-                <motion.div
-                  initial={{ opacity: 0, x: -140 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
-                  className="max-w-xl lg:flex-1 lg:max-w-2xl"
-                >
+                  <motion.div
+                    initial={{ opacity: 0, x: -140 }}
+                    whileInView={{ opacity: 1, x: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
+                    className={`max-w-xl lg:flex-1 lg:max-w-2xl ${isCompactHero ? "max-w-lg" : ""}`}
+                  >
                   <motion.h1
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                    className="max-w-[18ch] font-heading text-[clamp(1.25rem,4vw,2.7rem)] font-bold leading-[0.92] tracking-[-0.045em] text-white sm:max-w-[17ch] md:max-w-[18ch]"
+                    className={`max-w-[18ch] font-heading font-bold tracking-[-0.045em] text-white sm:max-w-[17ch] md:max-w-[18ch] ${isCompactHero ? "text-[calc(1.6rem*var(--hero-scale))] leading-[0.95]" : "text-[clamp(1.25rem,4vw,2.7rem)] leading-[0.92] lg:text-[calc(2.7rem*var(--hero-scale))]"}`}
                   >
                     Devices &amp; Machines<br />
                     Built for <span className="text-blue-300">Clinical Impact</span>
@@ -166,7 +204,9 @@ export default function Home() {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.32, duration: 1, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-3 hidden max-w-2xl text-[clamp(0.8rem,1.25vw,1rem)] leading-relaxed text-white/84 sm:mt-4 sm:block"
+                    className={isCompactHero
+                      ? "mt-2 hidden max-w-xl text-[calc(0.75rem*var(--hero-scale))] leading-relaxed text-white/84 sm:mt-3 sm:block"
+                      : "mt-3 hidden max-w-2xl text-[clamp(0.8rem,1.25vw,1rem)] leading-relaxed text-white/84 sm:mt-4 sm:block lg:text-[calc(1rem*var(--hero-scale))]"}
                   >
                     From interventional catheters and biomaterial microspheres to custom production equipment and ISO-classified cleanrooms — RMT engineers technologies that are as unique as the procedures they enable.
                   </motion.p>
@@ -174,7 +214,9 @@ export default function Home() {
                     initial={{ opacity: 0, y: 26 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.44, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-2 hidden max-w-2xl text-[clamp(0.7rem,1vw,0.85rem)] leading-relaxed text-white/70 md:mt-2 md:block"
+                    className={isCompactHero
+                      ? "mt-1 hidden max-w-xl text-[calc(0.64rem*var(--hero-scale))] leading-relaxed text-white/70 md:mt-1 md:block"
+                      : "mt-2 hidden max-w-2xl text-[clamp(0.7rem,1vw,0.85rem)] leading-relaxed text-white/70 md:mt-2 md:block lg:text-[calc(0.85rem*var(--hero-scale))]"}
                   >
                     Every product on this page connects to deep end-to-end services — development, validation, regulatory, and manufacturing.
                   </motion.p>
@@ -183,16 +225,18 @@ export default function Home() {
                     initial={{ opacity: 0, y: 24 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.56, duration: 0.95, ease: [0.16, 1, 0.3, 1] }}
-                    className="mt-5 flex flex-wrap gap-2.5 sm:mt-6 sm:gap-3"
+                    className={isCompactHero
+                      ? "mt-4 flex flex-wrap gap-2 sm:mt-5 sm:gap-2.5"
+                      : "mt-5 flex flex-wrap gap-2.5 sm:mt-6 sm:gap-3 lg:mt-[calc(1.25rem*var(--hero-scale))] lg:gap-[calc(0.75rem*var(--hero-scale))]"}
                   >
-                    <Button asChild size="lg" className="h-10 rounded-xl bg-white px-4 text-sm font-bold text-primary hover:bg-white/92 sm:h-11 sm:px-5 sm:text-sm">
+                    <Button asChild size="lg" className={isCompactHero ? "h-9 rounded-xl bg-white px-3.5 text-xs font-bold text-primary hover:bg-white/92 sm:h-10 sm:px-4 sm:text-xs" : "h-10 rounded-xl bg-white px-4 text-sm font-bold text-primary hover:bg-white/92 sm:h-11 sm:px-5 sm:text-sm lg:h-[calc(2.75rem*var(--hero-scale))] lg:px-[calc(1.5rem*var(--hero-scale))] lg:text-[calc(0.9rem*var(--hero-scale))]"}>
                       <a href="#featured-products">Explore Our Technologies <ArrowRight className="ml-2 h-4 w-4" /></a>
                     </Button>
                     <button
                       type="button"
                       aria-label="Watch Overview"
                       onClick={() => setVideoOpen(true)}
-                      className="inline-flex h-10 items-center justify-center rounded-xl border border-white/28 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/16 sm:h-11 sm:px-5"
+                      className={isCompactHero ? "inline-flex h-9 items-center justify-center rounded-xl border border-white/28 bg-white/10 px-3.5 text-xs font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/16 sm:h-10 sm:px-4 sm:text-xs" : "inline-flex h-10 items-center justify-center rounded-xl border border-white/28 bg-white/10 px-4 text-sm font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/16 sm:h-11 sm:px-5 lg:h-[calc(2.75rem*var(--hero-scale))] lg:px-[calc(1.5rem*var(--hero-scale))] lg:text-[calc(0.9rem*var(--hero-scale))]"}
                     >
                       <Play className="mr-2 h-4 w-4 fill-current" />
                       Watch Overview
@@ -206,7 +250,7 @@ export default function Home() {
                   whileInView={{ opacity: 1, x: 0 }}
                   viewport={{ once: true }}
                   transition={{ delay: 0.25, duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
-                  className="relative flex min-h-[7rem] w-full shrink-0 flex-col items-center gap-3 sm:min-h-[9rem] sm:gap-4 md:min-h-[12rem] lg:min-h-0 lg:flex-1 lg:flex-row-reverse lg:items-end lg:justify-start lg:gap-6 lg:self-end lg:pb-0"
+                  className={isCompactHero ? "hidden" : "relative flex min-h-[7rem] w-full shrink-0 flex-col items-center gap-3 sm:min-h-[9rem] sm:gap-4 md:min-h-[12rem] lg:min-h-0 lg:flex-1 lg:flex-row-reverse lg:items-end lg:justify-start lg:gap-6 lg:self-end lg:pb-0"}
                 >
                   <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -217,7 +261,7 @@ export default function Home() {
                     <img
                       src="/hero/doctor-cutout.png"
                       alt="Medical professional"
-                      className="h-[14rem] w-auto max-w-[80vw] object-contain object-bottom sm:h-[18rem] sm:max-w-full md:h-[22rem] lg:h-[26rem] xl:h-[30rem] lg:translate-y-6"
+                      className="h-[14rem] w-auto max-w-[80vw] object-contain object-bottom sm:h-[18rem] sm:max-w-full md:h-[22rem] lg:h-[calc(26rem*var(--hero-scale))] xl:h-[calc(30rem*var(--hero-scale))] lg:translate-y-[calc(1.5rem*var(--hero-scale))]"
                       loading="eager"
                       decoding="async"
                     />
@@ -230,7 +274,7 @@ export default function Home() {
       </section>
 
       {/* ===================== COMPANY SNAPSHOT ===================== */}
-      <section className="relative overflow-hidden bg-background py-14 sm:py-16 lg:min-h-[calc(100svh-8rem)] lg:py-20">
+      <section className="relative overflow-hidden bg-background py-12 sm:py-14 lg:min-h-[calc(100svh-8rem)] lg:py-16">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[24rem] bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.10),transparent_58%)] sm:h-[28rem]"
           aria-hidden
@@ -245,15 +289,12 @@ export default function Home() {
         >
           <div className="mx-auto max-w-3xl text-center">
             <p className="mb-3 text-sm font-semibold uppercase tracking-[0.24em] text-primary">Company Snapshot</p>
-            <h2 className="font-heading text-2xl font-bold leading-tight text-foreground sm:text-3xl md:text-4xl lg:text-5xl">
-              Numbers That Speak for Themselves
-            </h2>
             <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg lg:text-xl">
               A track record built across two continents and thirty-plus countries.
             </p>
           </div>
 
-          <div className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 xl:grid-cols-4">
+          <div className="mt-7 grid grid-cols-1 gap-3 sm:grid-cols-2 xl:grid-cols-4">
             {stats.map((stat, i) => (
               <motion.div
                 key={stat.label}
@@ -261,15 +302,18 @@ export default function Home() {
                 whileInView={{ opacity: 1, y: 0, scale: 1 }}
                 viewport={{ once: true, margin: "-40px", amount: 0.3 }}
                 transition={{ delay: 0.1 + i * 0.1, duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
-                className="group relative overflow-hidden rounded-[2rem] border border-border/70 bg-card p-6 shadow-[0_18px_45px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_24px_60px_rgba(15,23,42,0.12)] sm:min-h-[260px] sm:p-8 lg:min-h-[360px] lg:p-10"
+                className="group relative mb-2 overflow-hidden rounded-[1.5rem] border border-border/70 bg-card/95 px-4 py-4 shadow-[0_18px_45px_rgba(15,23,42,0.08)] transition-all duration-300 hover:-translate-y-1 hover:border-primary/25 hover:shadow-[0_24px_60px_rgba(15,23,42,0.12)] sm:mb-3 sm:px-5 sm:py-4.5 lg:px-6 lg:py-5"
               >
-                <div className="absolute inset-0 bg-[linear-gradient(180deg,rgba(255,255,255,0.38)_0%,rgba(255,255,255,0)_28%)] opacity-60 dark:opacity-20" aria-hidden />
-                <div className="relative flex h-full min-h-[190px] flex-col justify-between sm:min-h-[210px] lg:min-h-[260px]">
-                  <div className="inline-flex h-14 w-14 items-center justify-center rounded-[1.2rem] border border-primary/12 bg-primary/8 text-primary shadow-sm sm:h-16 sm:w-16 lg:h-20 lg:w-20 [&>svg]:h-6 [&>svg]:w-6 sm:[&>svg]:h-7 sm:[&>svg]:w-7 lg:[&>svg]:h-8 lg:[&>svg]:w-8">
+                <div className="absolute inset-0 bg-[linear-gradient(135deg,rgba(255,255,255,0.58)_0%,rgba(255,255,255,0.16)_18%,rgba(255,255,255,0)_42%)] opacity-50 dark:opacity-15" aria-hidden />
+                <div className="relative flex h-full items-center gap-4 sm:min-h-[114px] lg:min-h-[122px] lg:gap-5">
+                  <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl border border-primary/12 bg-primary/10 text-primary shadow-sm sm:h-13 sm:w-13 lg:h-14 lg:w-14 [&>svg]:h-4.5 [&>svg]:w-4.5 sm:[&>svg]:h-5 sm:[&>svg]:w-5 lg:[&>svg]:h-5.5 lg:[&>svg]:w-5.5">
                     {stat.icon}
                   </div>
-                  <div className="mt-7">
-                    <p className="font-heading text-4xl font-bold leading-none text-foreground sm:text-5xl lg:text-6xl xl:text-7xl">
+                  <div className="min-w-0 text-left">
+                    <p className="text-[0.62rem] font-bold uppercase tracking-[0.2em] text-primary/65 sm:text-[0.68rem]">
+                      Snapshot
+                    </p>
+                    <p className="mt-1 font-heading text-[2rem] font-bold leading-none text-foreground sm:text-[2.25rem] lg:text-[2.6rem] xl:text-[2.9rem]">
                       <AnimatedCounter
                         value={stat.value}
                         suffix={stat.suffix}
@@ -278,7 +322,8 @@ export default function Home() {
                         start={statsInView}
                       />
                     </p>
-                    <p className="mt-4 max-w-[16rem] text-left text-sm font-semibold leading-snug text-muted-foreground sm:text-base lg:text-lg xl:text-xl">
+                    <div className="mt-2 h-px w-14 bg-gradient-to-r from-primary/40 to-transparent" aria-hidden />
+                    <p className="mt-2 max-w-[14rem] text-sm font-semibold leading-snug text-muted-foreground sm:text-[0.82rem] lg:text-[0.88rem]">
                       {stat.label}
                     </p>
                   </div>
@@ -288,8 +333,12 @@ export default function Home() {
           </div>
         </motion.div>
 
-        <div className="mt-10 bg-white dark:bg-[#08111f]">
-          <PartnerLogoCarousel variant="hero" />
+        <div className="mt-0 bg-white dark:bg-[#08111f]">
+          <PartnerLogoCarousel
+            variant="hero"
+            rows={1}
+            heading="Institutions & Partners We Have Worked With"
+          />
         </div>
       </section>
 
@@ -318,29 +367,19 @@ export default function Home() {
 
       {/* ===================== WHAT WE BUILD (pinned bg) ===================== */}
       <section className="relative overflow-hidden bg-background">
-        {/* pinned production-floor background — stays fixed while the cards below scroll over it,
-            then releases naturally once this section's content has fully passed */}
-        <div className="hidden lg:sticky lg:top-0 lg:-z-10 lg:block lg:h-screen lg:w-full lg:overflow-hidden">
-          <img src={PRODUCTION_BG_IMAGE} alt="" className="absolute inset-0 h-full w-full object-cover" loading="lazy" aria-hidden />
-          <div className="absolute inset-0 bg-[#040a12]/86" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_20%,rgba(59,130,246,0.18),transparent_55%)]" />
-        </div>
-
-        <div className="relative z-10 lg:-mt-[100vh]">
-          <div className="page-container py-14 sm:py-16 lg:py-32">
-            <section id="featured-products" className="scroll-mt-28">
-              <AnimatedSection className="mb-8 max-w-3xl lg:mb-10" animation="slideDown" delay={0.1} duration={0.9}>
-                <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-sky-300">What We Build</p>
-                <h2 className="font-heading text-2xl font-bold leading-tight text-white sm:text-3xl md:text-4xl lg:text-5xl">
-                  Flagship Devices &amp; <span className="text-sky-300">Production Machines</span>
+        <div className="page-container pt-0 pb-6 sm:pb-8 lg:py-12">
+          <section id="featured-products" className="scroll-mt-28">
+              <AnimatedSection className="mb-4 max-w-3xl lg:mb-6" animation="slideDown" delay={0.1} duration={0.9}>
+                <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary lg:text-[#0c447c] dark:lg:text-sky-300">What We Build</p>
+                <h2 className="font-heading text-2xl font-bold leading-tight text-[#0c447c] dark:text-white sm:text-3xl md:text-4xl lg:text-5xl">
+                  Flagship Devices &amp; <span className="text-[#0c447c] dark:text-sky-300">Production Machines</span>
                 </h2>
-                <p className="mt-4 text-base leading-relaxed text-white/70 sm:text-lg lg:text-xl">
+                <p className="mt-3 text-base leading-relaxed text-muted-foreground dark:text-white/70 sm:text-lg lg:text-xl">
                   A curated look at our flagship interventional device — plus the three product lines that define RMT&apos;s engineering and manufacturing footprint.
                 </p>
               </AnimatedSection>
-              <HomeProductShowcase />
-            </section>
-          </div>
+            <HomeProductShowcase />
+          </section>
         </div>
       </section>
 

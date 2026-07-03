@@ -21,7 +21,9 @@ const UNIVERSITY_LOGOS = [
   {
     name: "Aga Khan University",
     href: "/about",
-    logo: "/partner-logos/agha-khan-university-logo.jpg",
+    logo: "/partner-logos/aku-light-logo.webp",
+    lightLogo: "/partner-logos/aku-light-logo.webp",
+    darkLogo: "/partner-logos/aku-dark-logo.webp",
   },
   {
     name: "Alsons",
@@ -108,7 +110,9 @@ const UNIVERSITY_LOGOS = [
   {
     name: "NIC",
     href: "/about",
-    logo: "/partner-logos/nic-logo.webp",
+    logo: "/partner-logos/nic-light-logo.webp",
+    lightLogo: "/partner-logos/nic-light-logo.webp",
+    darkLogo: "/partner-logos/nic-dark-logo.webp",
   },
   {
     name: "NOMW Health",
@@ -204,7 +208,9 @@ function MarqueeRow({
   const { theme } = useTheme();
 
   const resolveLogo = (item: MarqueeItem) => {
-    if (item.name !== "MOST") return item.logo;
+    if (item.lightLogo || item.darkLogo) {
+      return theme === "dark" ? item.darkLogo ?? item.logo : item.lightLogo ?? item.logo;
+    }
     return theme === "dark" ? item.darkLogo ?? item.logo : item.lightLogo ?? item.logo;
   };
 
@@ -222,6 +228,7 @@ function MarqueeRow({
         <span
           className={cn(
             "flex h-14 w-[150px] items-center justify-center rounded-xl bg-transparent px-3 py-2 transition-transform duration-300 group-hover:-translate-y-0.5 sm:h-16 sm:w-[180px]",
+            isHero ? "h-16 w-[180px] px-4 py-2.5 sm:h-20 sm:w-[220px] sm:px-5" : "",
             isHero ? "backdrop-blur-[2px]" : "bg-transparent"
           )}
         >
@@ -252,6 +259,7 @@ function MarqueeRow({
 interface PartnerLogoCarouselProps {
   items?: MarqueeItem[];
   variant?: "default" | "hero";
+  rows?: 1 | 2;
   eyebrow?: string;
   heading?: string;
 }
@@ -259,12 +267,14 @@ interface PartnerLogoCarouselProps {
 export function PartnerLogoCarousel({
   items,
   variant = "default",
+  rows,
   eyebrow = "Trusted Across Borders",
-  heading = "Institutions & Partners We Work With",
+  heading = "Institutions & Partners We Have Worked With",
 }: PartnerLogoCarouselProps) {
   const isHero = variant === "hero";
   const marqueeItems = items ?? (isHero ? HERO_MARQUEE_ITEMS : DEFAULT_MARQUEE_ITEMS);
   const marqueeItemsRow2 = items ?? HERO_MARQUEE_ITEMS_ROW_2;
+  const displayRows = rows ?? (isHero ? 2 : 1);
 
   return (
     <section
@@ -276,10 +286,10 @@ export function PartnerLogoCarousel({
       )}
       aria-label="University and partner logos"
     >
-      {isHero && (
-        <div className="page-container relative z-10 mb-6 flex flex-col items-center gap-1.5 text-center sm:mb-8">
-          <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">{eyebrow}</p>
-          <h3 className="font-heading text-lg font-bold text-foreground sm:text-xl">{heading}</h3>
+      {isHero && (eyebrow || heading) && (
+        <div className="page-container relative z-10 mb-5 flex flex-col items-center gap-1.5 text-center sm:mb-6">
+          {eyebrow ? <p className="text-xs font-bold uppercase tracking-[0.24em] text-primary">{eyebrow}</p> : null}
+          {heading ? <h3 className="font-heading text-lg font-bold text-foreground sm:text-xl">{heading}</h3> : null}
         </div>
       )}
 
@@ -290,9 +300,9 @@ export function PartnerLogoCarousel({
             "linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%)",
           maskImage: "linear-gradient(90deg, transparent 0%, black 6%, black 94%, transparent 100%)",
         }}
-      >
+        >
         <MarqueeRow items={marqueeItems} isHero={isHero} />
-        {isHero && (
+        {isHero && displayRows === 2 && (
           <div className="mt-5 sm:mt-7">
             <MarqueeRow items={marqueeItemsRow2} isHero={isHero} reverse />
           </div>
