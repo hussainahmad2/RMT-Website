@@ -7,7 +7,7 @@ import {
   Database, Server, Lock, Network, Binary, Fingerprint,
   Layers, Zap, Smartphone, Boxes, ScanLine, CircuitBoard, Cog,
   Globe, Phone, Mail, Users, Star, Award, BarChart3,
-  Gauge, FileCheck, Rocket,
+  Gauge, FileCheck, Rocket, Medal, Microscope, ShieldAlert,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -98,6 +98,8 @@ const HERO_IMAGES = [
   "https://images.unsplash.com/photo-1581093577421-f561a654a353?w=1920&q=85",
   "https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=1920&q=85",
 ];
+
+const WHY_RMT_ICONS: React.ElementType[] = [ShieldCheck, Sparkles, Rocket];
 
 function HeroBackground() {
   const [idx, setIdx] = useState(0);
@@ -230,55 +232,47 @@ export default function SoftwareAiServicePage({ params }: PageProps) {
   });
 
   return (
-    <div className="bg-background min-h-screen pt-20">
-
+    <div className="bg-background min-h-screen">
       {/* HERO */}
-      <section className="relative bg-[#020617] overflow-hidden min-h-[88vh] flex items-center py-16">
+      <section className="relative flex min-h-[100svh] items-center overflow-hidden bg-[#020617] pt-20 pb-8 sm:pb-10 lg:pb-12">
         <HeroBackground />
-        <div className="absolute top-0 right-0 w-[600px] h-[600px] rounded-full border border-cyan-400/8 -translate-y-1/2 translate-x-1/3 pointer-events-none" aria-hidden />
-        <div className="absolute bottom-0 left-0 w-96 h-96 rounded-full border border-indigo-400/8 translate-y-1/2 -translate-x-1/3 pointer-events-none" aria-hidden />
-
+        <div className="pointer-events-none absolute right-0 top-0 h-[600px] w-[600px] -translate-y-1/2 translate-x-1/3 rounded-full border border-cyan-400/8" aria-hidden />
+        <div className="pointer-events-none absolute bottom-0 left-0 h-96 w-96 translate-y-1/2 -translate-x-1/3 rounded-full border border-indigo-400/8" aria-hidden />
         <div className="page-container relative z-10">
           <AnimatedSection>
-            <nav className="flex items-center gap-2 text-sm text-white/40 mb-10">
-              <Link href="/services" className="hover:text-white/70 transition-colors">Services</Link>
-              <ChevronRight className="w-3.5 h-3.5" />
+            <nav className="mb-6 flex items-center gap-2 text-sm text-white/40 sm:mb-8">
+              <Link href="/services" className="transition-colors hover:text-white/70">Services</Link>
+              <ChevronRight className="h-3.5 w-3.5" />
               <span className="text-white/70">Software & AI Solutions</span>
             </nav>
-
-            <div className="max-w-4xl">
-              <div className="inline-flex items-center gap-2.5 bg-cyan-400/10 border border-cyan-400/25 rounded-full px-5 py-2 mb-8 backdrop-blur-sm">
-                <span className="w-2 h-2 rounded-full bg-cyan-400 animate-pulse shrink-0" />
-                <span className="text-cyan-300 text-xs font-bold uppercase tracking-[0.18em]">Software & AI Solutions</span>
-                <span className="w-px h-3 bg-cyan-400/30" />
-                <span className="text-cyan-400/70 text-xs">IEC 62304 Compliant</span>
+            <div className="max-w-3xl">
+              <div className="mb-5 inline-flex items-center gap-2.5 rounded-full border border-cyan-400/25 bg-cyan-400/10 px-4 py-1.5 backdrop-blur-sm sm:mb-6">
+                <span className="h-2 w-2 shrink-0 animate-pulse rounded-full bg-cyan-400" />
+                <span className="text-xs font-bold uppercase tracking-[0.18em] text-cyan-300">Software & AI Solutions</span>
+                <span className="h-3 w-px bg-cyan-400/30" />
+                <span className="text-xs text-cyan-400/70">IEC 62304 Compliant</span>
               </div>
-
-              <h1 className="font-heading text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black text-white mb-6 leading-[0.95] tracking-tight">
-                Intelligent<br />
+              <h1 className="mb-4 font-heading text-[clamp(3rem,5vw,5.75rem)] font-black leading-[0.92] tracking-tight text-white sm:mb-5">
+                Intelligent{" "}
                 <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-400 to-indigo-400">Software</span>
                 <br />for Healthcare
               </h1>
-
-              <p className="text-white/65 text-lg sm:text-xl leading-relaxed mb-10 max-w-2xl">
-                Full-spectrum software development — AI/ML, cloud, SaMD compliance, and complete
-                validation lifecycle for next-generation medical technology.
+              <p className="mb-6 max-w-2xl text-[clamp(0.98rem,1.25vw,1.15rem)] leading-relaxed text-white/65 sm:mb-8">
+                Full-spectrum software development - AI/ML, cloud, SaMD compliance, and complete validation lifecycle for next-generation medical technology.
               </p>
-
-              <div className="flex flex-wrap gap-2.5 mb-10">
+              <div className="mb-6 flex flex-wrap gap-2 sm:mb-8">
                 {["IEC 62304", "FDA SaMD", "HIPAA", "ISO 27001", "FHIR R4"].map((b) => (
-                  <span key={b} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-white/8 border border-white/15 text-white/70 text-xs font-semibold backdrop-blur-sm">
-                    <CheckCircle className="w-3 h-3 text-cyan-400 shrink-0" />{b}
+                  <span key={b} className="inline-flex items-center gap-1.5 rounded-full border border-white/15 bg-white/8 px-3 py-1.5 text-xs font-semibold text-white/70 backdrop-blur-sm">
+                    <CheckCircle className="h-3 w-3 shrink-0 text-cyan-400" />{b}
                   </span>
                 ))}
               </div>
-
               <div className="flex flex-wrap gap-3">
-                <Button asChild size="lg" className="rounded-xl px-8 bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold shadow-lg shadow-cyan-500/30">
-                  <Link href="/contact">Get a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                <Button asChild size="lg" className="rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 px-8 font-bold text-slate-900 shadow-lg shadow-cyan-500/30 hover:from-cyan-300 hover:to-cyan-400">
+                  <Link href="/contact">Get a Quote <ArrowRight className="ml-2 h-4 w-4" /></Link>
                 </Button>
-                <Button asChild size="lg" variant="outline" className="rounded-xl px-8 border-white/20 text-white hover:bg-white/10 hover:text-white font-semibold">
-                  <Link href="/services"><ArrowLeft className="mr-2 w-4 h-4" /> All Services</Link>
+                <Button asChild size="lg" variant="outline" className="rounded-xl border-white/20 px-8 font-semibold text-white hover:bg-white/10 hover:text-white">
+                  <Link href="/services"><ArrowLeft className="mr-2 h-4 w-4" /> All Services</Link>
                 </Button>
               </div>
             </div>
@@ -287,23 +281,36 @@ export default function SoftwareAiServicePage({ params }: PageProps) {
       </section>
 
       {/* KEY METRICS */}
-      <section className="relative bg-gradient-to-r from-[#205897] via-[#2a6ba8] to-[#1a4d78] py-14 overflow-hidden">
+      <section className="relative overflow-hidden bg-gradient-to-r from-[#205897] via-[#2a6ba8] to-[#1a4d78] py-14">
         <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.05)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.05)_1px,transparent_1px)] bg-[size:48px_48px]" />
-        <div className="absolute top-0 right-0 w-80 h-80 rounded-full bg-white/8 -translate-y-1/2 translate-x-1/3 pointer-events-none" aria-hidden />
+        <div className="pointer-events-none absolute right-0 top-0 h-80 w-80 -translate-y-1/2 translate-x-1/3 rounded-full bg-white/8" aria-hidden />
         <div className="page-container relative z-10">
-          <div className="grid grid-cols-2 lg:grid-cols-4 gap-px">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-4 sm:gap-4">
             {METRICS.map((m, i) => {
               const Icon = m.icon;
               return (
-                <motion.div key={m.label}
-                  initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.08 }}
-                  className="text-center text-white px-4 sm:px-8 py-4">
-                  <div className="w-14 h-14 mx-auto mb-4 rounded-2xl bg-white/15 border border-white/20 flex items-center justify-center shadow-inner">
-                    <Icon className="w-7 h-7" />
+                <motion.div
+                  key={m.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.08 }}
+                  className="relative overflow-hidden rounded-3xl border border-white/18 bg-white/10 px-5 py-4 text-white backdrop-blur-sm shadow-[0_10px_30px_rgba(2,6,23,0.12)] sm:px-6 sm:py-5"
+                >
+                  <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/70 to-transparent" aria-hidden />
+                  <div className="flex items-center justify-between gap-4">
+                    <div className="min-w-0">
+                      <div className="font-heading text-3xl font-black leading-none tracking-tight tabular-nums sm:text-[2.15rem]">
+                        {m.value}
+                      </div>
+                      <div className="mt-1 text-[11px] font-medium uppercase tracking-[0.18em] text-white/78 sm:text-xs">
+                        {m.label}
+                      </div>
+                    </div>
+                    <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl border border-white/20 bg-white/15 shadow-inner">
+                      <Icon className="h-5 w-5 sm:h-6 sm:w-6" />
+                    </div>
                   </div>
-                  <div className="font-heading text-4xl sm:text-5xl font-black tabular-nums leading-none mb-2">{m.value}</div>
-                  <div className="text-white/75 text-sm font-medium">{m.label}</div>
                 </motion.div>
               );
             })}
@@ -311,79 +318,86 @@ export default function SoftwareAiServicePage({ params }: PageProps) {
         </div>
       </section>
 
-      {/* MAIN CONTENT */}
-      <section className="relative py-24 bg-background overflow-hidden">
+      {/* CONTENT + SIDEBAR */}
+      <section className="relative overflow-visible py-24">
         <TechIconsScatter />
         <div className="page-container relative z-10">
-          <div className="grid lg:grid-cols-3 gap-10 lg:gap-12">
-
-            <div className="lg:col-span-2 space-y-16">
-
-              {/* Overview */}
+          <div className="grid items-start gap-10 lg:grid-cols-[minmax(0,1fr)_22rem] lg:gap-12">
+            <div className="space-y-16">
               <AnimatedSection>
-                <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 mb-5">
-                  <span className="w-1.5 h-1.5 rounded-full bg-cyan-500" />
-                  <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">Overview</span>
+                <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-border bg-background/75 px-4 py-1.5 backdrop-blur-sm dark:bg-[#08111f]/45">
+                  <span className="h-1.5 w-1.5 rounded-full bg-cyan-500" />
+                  <span className="text-xs font-bold uppercase tracking-widest text-slate-600 dark:text-slate-300">Overview</span>
                 </div>
-                <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-6 leading-tight">
+                <h2 className="mb-6 font-heading text-3xl font-bold leading-tight text-slate-900 dark:text-white sm:text-4xl">
                   Software at the Heart of<br />
                   <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-600 to-indigo-600">Modern Medical Devices</span>
                 </h2>
-                <div className="space-y-4">
+                <div className="space-y-4 rounded-2xl border border-border/60 bg-background/72 p-5 backdrop-blur-md dark:border-white/10 dark:bg-[#08111f]/45">
                   {SERVICE.overview.map((para, i) => (
-                    <p key={i} className="text-muted-foreground leading-relaxed">{para}</p>
+                    <p key={i} className="leading-relaxed text-slate-700 dark:text-slate-200">{para}</p>
                   ))}
                 </div>
               </AnimatedSection>
 
-              {/* Sub-services */}
               <div>
-                <AnimatedSection className="flex items-end justify-between mb-7 pb-3 border-b border-border">
-                  <div>
-                    <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-1">Services Included</p>
-                    <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">What We Offer</h2>
+                <AnimatedSection className="mb-7 flex items-end justify-between border-b border-border pb-3">
+                  <div className="rounded-2xl border border-border/50 bg-background/72 px-4 py-3 backdrop-blur-sm dark:border-white/10 dark:bg-[#08111f]/45">
+                    <p className="mb-1 text-xs font-bold uppercase tracking-widest text-cyan-700 dark:text-cyan-300">Services Included</p>
+                    <h2 className="font-heading text-2xl font-bold text-slate-900 dark:text-white sm:text-3xl">What We Offer</h2>
                   </div>
-                  <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold text-cyan-600 bg-cyan-500/10 px-3 py-1.5 rounded-full border border-cyan-500/20 shrink-0">
+                  <span className="hidden shrink-0 items-center gap-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1.5 text-[11px] font-bold text-cyan-600 sm:inline-flex">
                     {SERVICE.subServices.length} services
                   </span>
                 </AnimatedSection>
-
-                <div className="grid sm:grid-cols-2 gap-5">
+                <div className="grid gap-5 sm:grid-cols-2">
                   {SERVICE.subServices.map((sub, i) => {
                     const Icon = SUB_ICONS[sub.slug] ?? CheckCircle;
                     const img = SUB_IMAGES[sub.slug];
                     return (
-                      <motion.div key={sub.slug}
-                        initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                        viewport={{ once: true, margin: "-30px" }} transition={{ delay: i * 0.07 }}>
-                        <Link href={`/services/software-ai/${sub.slug}`}
-                          className="group block rounded-2xl overflow-hidden border border-border bg-card hover:border-cyan-400/60 hover:shadow-2xl hover:shadow-cyan-500/8 transition-all duration-300">
+                      <motion.div
+                        key={sub.slug}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true, margin: "-30px" }}
+                        transition={{ delay: i * 0.07 }}
+                      >
+                        <Link
+                          href={`/services/software-ai/${sub.slug}`}
+                          className="group block overflow-hidden rounded-2xl border border-border bg-white/95 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/60 hover:shadow-2xl hover:shadow-cyan-500/8 dark:bg-[#0a1628]/80"
+                        >
                           <div className="relative aspect-[16/9] overflow-hidden bg-[#060d17]">
-                            <img src={img} alt={sub.name} loading="lazy"
-                              className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
+                            <img
+                              src={img}
+                              alt={sub.name}
+                              loading="lazy"
+                              className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                            />
                             <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                            <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-cyan-500/95 text-slate-900 text-[10px] font-bold uppercase tracking-widest">
-                              <Icon className="w-3 h-3" />Software & AI
+                            <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-cyan-500/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-900">
+                              <Icon className="h-3 w-3" />Software & AI
                             </div>
-                            <div className="absolute top-3 right-3 opacity-20 group-hover:opacity-40 transition-opacity">
-                              <Icon className="w-10 h-10 text-white" />
+                            <div className="absolute right-3 top-3 opacity-20 transition-opacity group-hover:opacity-40">
+                              <Icon className="h-10 w-10 text-white" />
                             </div>
-                            <h3 className="absolute bottom-3 left-4 right-4 font-heading text-white text-lg font-bold leading-tight drop-shadow group-hover:text-cyan-200 transition-colors">
+                            <h3 className="absolute bottom-3 left-4 right-4 font-heading text-lg font-bold leading-tight text-white drop-shadow transition-colors group-hover:text-cyan-200">
                               {sub.name}
                             </h3>
                           </div>
                           <div className="p-5">
-                            <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">{sub.tagline}</p>
-                            <div className="flex flex-wrap gap-1.5 mb-4">
+                            <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{sub.tagline}</p>
+                            <div className="mb-4 flex flex-wrap gap-1.5">
                               {sub.keyPoints.slice(0, 3).map((kp) => (
-                                <span key={kp} className="text-[11px] px-2.5 py-1 rounded-full bg-cyan-500/8 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">{kp}</span>
+                                <span key={kp} className="rounded-full border border-cyan-500/20 bg-cyan-500/8 px-2.5 py-1 text-[11px] text-cyan-700 dark:text-cyan-300">
+                                  {kp}
+                                </span>
                               ))}
                             </div>
                             <div className="flex items-center justify-between">
-                              <span className="inline-flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 font-semibold text-sm group-hover:gap-3 transition-all">
-                                Explore <ArrowRight className="w-4 h-4" />
+                              <span className="inline-flex items-center gap-1.5 text-sm font-semibold text-cyan-600 transition-all group-hover:gap-3 dark:text-cyan-400">
+                                Explore <ArrowRight className="h-4 w-4" />
                               </span>
-                              <span className="text-[10px] text-muted-foreground bg-secondary/60 px-2 py-0.5 rounded-full border border-border/60">
+                              <span className="rounded-full border border-border/60 bg-secondary/60 px-2 py-0.5 text-[10px] text-slate-600 dark:text-slate-300">
                                 {sub.deliverables.length} deliverables
                               </span>
                             </div>
@@ -395,305 +409,335 @@ export default function SoftwareAiServicePage({ params }: PageProps) {
                 </div>
               </div>
 
+              <section className="relative overflow-hidden border-t border-border py-20">
+                <div className="page-container relative z-10">
+                  <AnimatedSection className="mb-12 text-center">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-cyan-700 dark:text-cyan-300">Expertise</p>
+                    <h2 className="mb-3 font-heading text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Core Capabilities</h2>
+                    <p className="mx-auto max-w-2xl rounded-2xl border border-border/50 bg-background/70 px-5 py-4 text-slate-700 backdrop-blur-sm dark:border-white/10 dark:bg-[#08111f]/45 dark:text-slate-200">
+                      From regulated SaMD development to cloud-native AI platforms, our team brings deep technical and compliance expertise to every engagement.
+                    </p>
+                  </AnimatedSection>
+                  <div className="mx-auto grid max-w-5xl gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                    {SERVICE.capabilities.map((cap, i) => (
+                      <motion.div
+                        key={cap}
+                        initial={{ opacity: 0, y: 16 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.05 }}
+                        className="group flex items-start gap-4 rounded-2xl border border-border bg-white/95 p-5 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/50 hover:bg-cyan-500/4 hover:shadow-lg dark:bg-[#0a1628]/72"
+                      >
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 transition-transform group-hover:scale-105">
+                          <span className="font-heading text-sm font-bold text-cyan-600 dark:text-cyan-400">{String(i + 1).padStart(2, "0")}</span>
+                        </div>
+                        <p className="mt-1.5 text-sm font-medium leading-snug text-slate-800 transition-colors group-hover:text-primary dark:text-slate-100">{cap}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section className="relative overflow-hidden border-y border-border py-20">
+                <div className="page-container relative z-10">
+                  <AnimatedSection className="mb-12 text-center">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-cyan-700 dark:text-cyan-300">Why RMT</p>
+                    <h2 className="mb-3 font-heading text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Why Choose RMT</h2>
+                    <p className="mx-auto max-w-2xl rounded-2xl border border-border/50 bg-background/70 px-5 py-4 text-slate-700 backdrop-blur-sm dark:border-white/10 dark:bg-[#08111f]/45 dark:text-slate-200">
+                      We combine medical device domain expertise with modern software engineering practices to deliver compliant, high-performance solutions.
+                    </p>
+                  </AnimatedSection>
+                  <div className="mx-auto grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {SERVICE.whyRMT.map((item, i) => (
+                      <motion.div
+                        key={item.title}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.1 }}
+                        className="group relative flex flex-col overflow-hidden rounded-2xl border border-border bg-white/95 p-8 text-center backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-500/5 dark:bg-[#0a1628]/72"
+                      >
+                        <div className="pointer-events-none absolute inset-0 rounded-2xl bg-gradient-to-br from-cyan-500/0 to-indigo-500/0 transition-all duration-500 group-hover:from-cyan-500/4 group-hover:to-indigo-500/3" />
+                        <div className="relative mb-6 flex justify-center">
+                          <div className="flex h-20 w-20 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/15 to-indigo-500/10 ring-2 ring-cyan-500/20 transition-all group-hover:ring-cyan-400/40">
+                            <div className="flex h-12 w-12 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500/25 to-indigo-500/15">
+                              {(() => {
+                                const Icon = WHY_RMT_ICONS[i] ?? ShieldCheck;
+                                return <Icon className="h-6 w-6 text-cyan-600 dark:text-cyan-400" />;
+                              })()}
+                            </div>
+                          </div>
+                        </div>
+                        <h4 className="mb-3 font-heading text-base font-bold text-slate-900 transition-colors group-hover:text-primary dark:text-white">{item.title}</h4>
+                        <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{item.desc}</p>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section className="relative overflow-hidden border-t border-border py-20">
+                <div className="page-container relative z-10">
+                  <AnimatedSection className="mb-10 text-center">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-cyan-700 dark:text-cyan-300">Tech Stack</p>
+                    <h2 className="mb-3 font-heading text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Technologies & Platforms We Use</h2>
+                    <p className="mx-auto max-w-xl rounded-2xl border border-border/50 bg-background/70 px-5 py-4 text-base text-slate-700 backdrop-blur-sm dark:border-white/10 dark:bg-[#08111f]/45 dark:text-slate-200">
+                      We select the right tool for every challenge - proven stacks with healthcare-grade security and compliance.
+                    </p>
+                  </AnimatedSection>
+                  <div className="mb-10 flex flex-wrap justify-center gap-2">
+                    {TECH_TABS.map((tab) => (
+                      <button
+                        key={tab}
+                        onClick={() => setActiveTechTab(tab)}
+                        className={`rounded-full border px-5 py-2 text-sm font-semibold transition-all duration-200 ${
+                          activeTechTab === tab
+                            ? "border-cyan-500 bg-cyan-500 text-white shadow-lg shadow-cyan-500/25"
+                            : "border-border bg-card text-slate-600 hover:border-cyan-400/40 hover:text-slate-900 dark:text-slate-300 dark:hover:text-white"
+                        }`}
+                      >
+                        {tab}
+                      </button>
+                    ))}
+                  </div>
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={activeTechTab}
+                      initial={{ opacity: 0, y: 12 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      exit={{ opacity: 0, y: -8 }}
+                      transition={{ duration: 0.22 }}
+                      className="mx-auto grid max-w-4xl grid-cols-3 gap-4 sm:grid-cols-4 md:grid-cols-6"
+                    >
+                      {TECH_ITEMS[activeTechTab].map((tech, i) => {
+                        const TechIcon = tech.icon;
+                        return (
+                          <motion.div
+                            key={tech.name}
+                            initial={{ opacity: 0, scale: 0.88 }}
+                            animate={{ opacity: 1, scale: 1 }}
+                            transition={{ delay: i * 0.05 }}
+                            className="group flex cursor-default flex-col items-center gap-3 rounded-xl border border-border bg-white/95 p-4 backdrop-blur-sm transition-all duration-200 hover:border-cyan-400/50 hover:bg-cyan-500/5 hover:shadow-lg dark:bg-[#0a1628]/72"
+                          >
+                            <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/8 transition-colors group-hover:bg-cyan-500/15">
+                              <TechIcon className="h-6 w-6 text-primary transition-colors group-hover:text-cyan-600 dark:group-hover:text-cyan-400" />
+                            </div>
+                            <span className="text-center text-xs font-semibold leading-tight text-slate-600 transition-colors group-hover:text-slate-900 dark:text-slate-300 dark:group-hover:text-white">
+                              {tech.name}
+                            </span>
+                          </motion.div>
+                        );
+                      })}
+                    </motion.div>
+                  </AnimatePresence>
+                </div>
+              </section>
+
+              <section className="relative overflow-hidden py-20">
+                <div className="page-container relative z-10">
+                  <AnimatedSection className="mb-14 text-center">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-cyan-700 dark:text-cyan-300">Methodology</p>
+                    <h2 className="mb-3 font-heading text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Our Approach</h2>
+                    <p className="mx-auto max-w-xl rounded-2xl border border-border/50 bg-background/70 px-5 py-4 text-slate-700 backdrop-blur-sm dark:border-white/10 dark:bg-[#08111f]/45 dark:text-slate-200">A structured, audit-ready process delivering compliant, production-quality healthcare software.</p>
+                  </AnimatedSection>
+                  <div className="grid items-stretch gap-5 sm:grid-cols-2 lg:grid-cols-4">
+                    {APPROACH_STEPS.map((s, i) => {
+                      const StepIcon = s.icon;
+                      return (
+                        <motion.div
+                          key={s.step}
+                          initial={{ opacity: 0, y: 24 }}
+                          whileInView={{ opacity: 1, y: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.1 }}
+                          className="group relative flex h-full flex-col rounded-2xl border border-border bg-white/95 p-6 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/40 hover:shadow-xl hover:shadow-cyan-500/5 dark:bg-[#0a1628]/72"
+                        >
+                          <div className="mb-4 flex items-center gap-3">
+                            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-xl border border-cyan-500/20 bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 transition-transform group-hover:scale-105">
+                              <StepIcon className="h-6 w-6 text-cyan-600 dark:text-cyan-400" />
+                            </div>
+                            <h3 className="min-w-0 font-heading text-lg font-bold leading-tight text-slate-900 dark:text-white">{s.title}</h3>
+                          </div>
+                          <p className="text-sm leading-relaxed text-slate-600 dark:text-slate-300">{s.desc}</p>
+                          {i < APPROACH_STEPS.length - 1 && (
+                            <div className="absolute -right-2.5 top-1/2 hidden h-px w-5 bg-gradient-to-r from-cyan-500/40 to-transparent lg:block" aria-hidden />
+                          )}
+                        </motion.div>
+                      );
+                    })}
+                  </div>
+                </div>
+              </section>
+
+              <section className="relative overflow-hidden border-y border-border py-16">
+                <div className="page-container relative z-10">
+                  <AnimatedSection className="mb-10 text-center">
+                    <p className="mb-3 text-xs font-bold uppercase tracking-widest text-cyan-700 dark:text-cyan-300">Regulatory</p>
+                    <h2 className="mb-2 font-heading text-3xl font-bold text-slate-900 dark:text-white">Built for Regulated Healthcare Software</h2>
+                    <p className="mx-auto max-w-lg rounded-2xl border border-border/50 bg-background/70 px-5 py-4 text-sm text-slate-700 backdrop-blur-sm dark:border-white/10 dark:bg-[#08111f]/45 dark:text-slate-200">Every line of code satisfies the most rigorous health IT frameworks.</p>
+                  </AnimatedSection>
+                  <div className="mx-auto flex max-w-4xl flex-wrap justify-center gap-3">
+                    {STANDARDS.map((std, i) => (
+                      <motion.span
+                        key={std}
+                        initial={{ opacity: 0, scale: 0.9 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.07 }}
+                        className="inline-flex cursor-default items-center gap-2.5 rounded-full border border-cyan-500/25 bg-background/75 px-5 py-3 text-sm font-semibold text-slate-800 shadow-sm backdrop-blur-sm transition-all hover:border-cyan-400/50 hover:bg-cyan-500/5 hover:shadow-md dark:bg-[#08111f]/55 dark:text-slate-100"
+                      >
+                        <ShieldCheck className="h-4 w-4 shrink-0 text-cyan-600 dark:text-cyan-400" />
+                        {std}
+                      </motion.span>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section className="relative overflow-hidden py-24">
+                <div className="page-container relative z-10">
+                  <AnimatedSection className="mb-10 flex items-end justify-between gap-4 border-b border-border pb-3">
+                    <div className="rounded-2xl border border-border/50 bg-background/70 px-5 py-4 backdrop-blur-sm dark:border-white/10 dark:bg-[#08111f]/45">
+                      <p className="mb-2 text-xs font-bold uppercase tracking-widest text-cyan-700 dark:text-cyan-300">Portfolio</p>
+                      <h2 className="font-heading text-3xl font-bold text-slate-900 dark:text-white sm:text-4xl">Our Projects</h2>
+                      <p className="mt-2 max-w-xl text-sm text-slate-700 dark:text-slate-200">Software and AI platforms delivered for healthcare and digital health clients.</p>
+                    </div>
+                    <span className="hidden shrink-0 items-center gap-1.5 rounded-full border border-cyan-500/20 bg-cyan-500/10 px-3 py-1.5 text-[11px] font-bold text-cyan-600 sm:inline-flex">
+                      {PORTFOLIO.length} projects
+                    </span>
+                  </AnimatedSection>
+                  <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+                    {PORTFOLIO.map((p, i) => (
+                      <motion.article
+                        key={p.name}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: i * 0.07 }}
+                        className="group overflow-hidden rounded-2xl border border-border bg-white/95 backdrop-blur-sm transition-all duration-300 hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/6 dark:bg-[#0a1628]/72"
+                      >
+                        <div className="relative aspect-[16/10] overflow-hidden bg-[#060d17]">
+                          <img
+                            src={p.image}
+                            alt={p.name}
+                            loading="lazy"
+                            className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                          />
+                          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
+                          <div className="absolute left-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-cyan-500/95 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-slate-900">
+                            <Brain className="h-3 w-3" />{p.tags[0]}
+                          </div>
+                          <h3 className="absolute bottom-3 left-4 right-4 font-heading text-lg font-bold text-white drop-shadow">
+                            {p.name}
+                          </h3>
+                        </div>
+                        <div className="p-5">
+                          <p className="mb-4 line-clamp-2 text-sm leading-relaxed text-slate-600 dark:text-slate-300">{p.description}</p>
+                          <div className="mb-4 flex flex-wrap gap-1.5">
+                            {p.tags.map((t) => (
+                              <span key={t} className="rounded-full border border-cyan-500/20 bg-cyan-500/8 px-2 py-0.5 text-[11px] text-cyan-700 dark:text-cyan-300">
+                                {t}
+                              </span>
+                            ))}
+                          </div>
+                          <Link href="/contact" className="flex items-center gap-1.5 text-sm font-semibold text-cyan-600 transition-all group-hover:gap-3 dark:text-cyan-400">
+                            Explore Project <ArrowRight className="h-4 w-4" />
+                          </Link>
+                        </div>
+                      </motion.article>
+                    ))}
+                  </div>
+                </div>
+              </section>
+
+              <section className="relative overflow-hidden border-t border-border py-16">
+                <div className="page-container relative z-10">
+                  <AnimatedSection>
+                    <div className="relative w-full overflow-hidden rounded-3xl border border-cyan-500/20 bg-gradient-to-br from-[#020617] via-[#050d1f] to-[#0a1628] p-8 shadow-2xl md:p-12">
+                      <div className="pointer-events-none absolute right-0 top-0 h-72 w-72 translate-x-1/2 -translate-y-1/2 rounded-full bg-cyan-500/5" />
+                      <div className="pointer-events-none absolute bottom-0 left-0 h-48 w-48 -translate-x-1/2 translate-y-1/2 rounded-full bg-indigo-500/5" />
+                      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.03)_1px,transparent_1px)] bg-[size:48px_48px]" />
+                      <div className="relative flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
+                        <div className="max-w-2xl">
+                          <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-cyan-400/20 bg-cyan-400/10 px-4 py-1.5">
+                            <Rocket className="h-3.5 w-3.5 text-cyan-400" />
+                            <span className="text-xs font-bold uppercase tracking-wider text-cyan-300">Ready to Start?</span>
+                          </div>
+                          <h2 className="mb-3 font-heading text-2xl font-bold leading-tight text-white md:text-3xl lg:text-4xl">
+                            Let's Build Your Healthcare<br />Software Together
+                          </h2>
+                          <p className="text-sm leading-relaxed text-white/60 md:text-base">
+                            Our Software & AI specialists are available for a free initial consultation. Tell us about your project and we'll respond within one business day.
+                          </p>
+                        </div>
+                        <div className="flex shrink-0 flex-col gap-3 sm:flex-row lg:min-w-[320px]">
+                          <Button asChild size="lg" className="flex-1 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 font-bold text-slate-900 shadow-lg shadow-cyan-500/25 hover:from-cyan-300 hover:to-cyan-400">
+                            <Link href="/contact"><Mail className="mr-2 h-4 w-4" /> Send Enquiry</Link>
+                          </Button>
+                          <Button asChild size="lg" variant="outline" className="flex-1 rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
+                            <Link href="/about"><Users className="mr-2 h-4 w-4" /> Meet the Team</Link>
+                          </Button>
+                        </div>
+                      </div>
+                    </div>
+                  </AnimatedSection>
+                </div>
+              </section>
             </div>
 
-            {/* Sidebar */}
-            <div>
-              <div className="sticky top-24 space-y-5">
-                <AnimatedSection className="rounded-2xl p-6 bg-gradient-to-br from-[#020617] to-[#0a1628] border border-cyan-500/25 shadow-xl text-white">
-                  <div className="w-10 h-10 bg-cyan-400/15 rounded-xl flex items-center justify-center mb-4">
-                    <Brain className="w-5 h-5 text-cyan-400" />
+            <aside className="hidden lg:sticky lg:top-24 lg:block lg:self-start lg:h-fit lg:justify-self-end">
+              <div className="space-y-5">
+                <AnimatedSection className="rounded-2xl border border-cyan-500/25 bg-gradient-to-br from-[#020617] to-[#0a1628] p-6 text-white shadow-xl">
+                  <div className="mb-4 flex h-10 w-10 items-center justify-center rounded-xl bg-cyan-400/15">
+                    <Brain className="h-5 w-5 text-cyan-400" />
                   </div>
-                  <h3 className="font-heading text-xl font-bold mb-2">Get a Quote</h3>
-                  <p className="text-white/65 text-sm leading-relaxed mb-5">
+                  <h3 className="mb-2 font-heading text-xl font-bold">Get a Quote</h3>
+                  <p className="mb-5 text-sm leading-relaxed text-white/65">
                     Discuss your software or AI project with our specialists and receive a tailored proposal within one business day.
                   </p>
-                  <Button asChild className="w-full rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold mb-3">
+                  <Button asChild className="mb-3 w-full rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 font-bold text-slate-900 hover:from-cyan-300 hover:to-cyan-400">
                     <Link href="/contact">Request a Quote</Link>
                   </Button>
-                  <a href="tel:+15551234567" className="flex items-center justify-center gap-2 text-white/50 text-xs hover:text-white transition-colors">
-                    <Phone className="w-3.5 h-3.5" />Schedule a Call
+                  <a href="tel:+15551234567" className="flex items-center justify-center gap-2 text-xs text-white/50 transition-colors hover:text-white">
+                    <Phone className="h-3.5 w-3.5" />Schedule a Call
                   </a>
                 </AnimatedSection>
 
-                <AnimatedSection className="rounded-2xl border border-border bg-card p-5">
-                  <h4 className="font-semibold text-foreground text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <ShieldCheck className="w-3.5 h-3.5 text-cyan-500" />Compliance Standards
+                <AnimatedSection className="rounded-2xl border border-border bg-white/95 p-5 dark:bg-card">
+                  <h4 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-900 dark:text-white">
+                    <ShieldCheck className="h-3.5 w-3.5 text-cyan-500" />Compliance Standards
                   </h4>
                   <div className="flex flex-wrap gap-2">
                     {STANDARDS.map((s) => (
-                      <span key={s} className="inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-lg text-xs font-medium bg-secondary/60 text-foreground border border-border hover:border-cyan-400/40 transition-colors">
-                        <ShieldCheck className="w-3 h-3 text-cyan-500 shrink-0" />{s}
+                      <span key={s} className="inline-flex items-center gap-1.5 rounded-lg border border-border bg-secondary/60 px-2.5 py-1.5 text-xs font-medium text-slate-800 transition-colors hover:border-cyan-400/40 dark:text-slate-100">
+                        <ShieldCheck className="h-3 w-3 shrink-0 text-cyan-500" />{s}
                       </span>
                     ))}
                   </div>
                 </AnimatedSection>
 
-                <AnimatedSection className="rounded-2xl border border-border bg-card p-5">
-                  <h4 className="font-semibold text-foreground text-xs uppercase tracking-widest mb-4 flex items-center gap-2">
-                    <Globe className="w-3.5 h-3.5 text-primary" />Other Services
+                <AnimatedSection className="rounded-2xl border border-border bg-white/95 p-5 dark:bg-card">
+                  <h4 className="mb-4 flex items-center gap-2 text-xs font-semibold uppercase tracking-widest text-slate-900 dark:text-white">
+                    <Globe className="h-3.5 w-3.5 text-primary" />Other Services
                   </h4>
                   <div className="flex flex-col gap-0.5">
                     {ALL_SERVICES.filter((s) => s.slug !== "software-ai").map((s) => (
-                      <Link key={s.slug} href={`/services/${s.slug}`}
-                        className="group flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors py-2 border-b border-border/60 last:border-0">
+                      <Link
+                        key={s.slug}
+                        href={`/services/${s.slug}`}
+                        className="group flex items-center gap-2 border-b border-border/60 py-2 text-sm text-slate-600 transition-colors hover:text-primary last:border-0 dark:text-slate-300"
+                      >
                         <span className="flex-1">{s.shortName}</span>
-                        <ArrowRight className="w-3.5 h-3.5 opacity-0 group-hover:opacity-100 transition-all" />
+                        <ArrowRight className="h-3.5 w-3.5 opacity-0 transition-all group-hover:opacity-100" />
                       </Link>
                     ))}
                   </div>
                 </AnimatedSection>
               </div>
-            </div>
+            </aside>
           </div>
         </div>
       </section>
-
-      {/* CORE CAPABILITIES — full-width centered */}
-      <section className="py-20 bg-background border-t border-border">
-        <div className="page-container">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Expertise</p>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Core Capabilities</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              From regulated SaMD development to cloud-native AI platforms, our team brings deep technical and compliance expertise to every engagement.
-            </p>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 max-w-5xl mx-auto">
-            {SERVICE.capabilities.map((cap, i) => (
-              <motion.div key={cap}
-                initial={{ opacity: 0, y: 16 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.05 }}
-                className="group flex items-start gap-4 p-5 rounded-2xl border border-border bg-card hover:border-cyan-400/50 hover:bg-cyan-500/4 hover:shadow-lg transition-all duration-300">
-                <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border border-cyan-500/20 group-hover:scale-105 transition-transform">
-                  <span className="font-heading text-sm font-bold text-cyan-600 dark:text-cyan-400">{String(i + 1).padStart(2, "0")}</span>
-                </div>
-                <p className="text-sm font-medium text-foreground leading-snug mt-1.5 group-hover:text-primary transition-colors">{cap}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* WHY CHOOSE RMT — full-width centered */}
-      <section className="py-20 bg-secondary/30 border-y border-border">
-        <div className="page-container">
-          <AnimatedSection className="text-center mb-12">
-            <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Why RMT</p>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Why Choose RMT</h2>
-            <p className="text-muted-foreground max-w-2xl mx-auto">
-              We combine medical device domain expertise with modern software engineering practices to deliver compliant, high-performance solutions.
-            </p>
-          </AnimatedSection>
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6 max-w-5xl mx-auto">
-            {SERVICE.whyRMT.map((item, i) => (
-              <motion.div key={item.title}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                className="group relative flex flex-col items-center text-center p-8 rounded-2xl border border-border bg-card hover:border-cyan-400/50 hover:shadow-xl hover:shadow-cyan-500/5 transition-all duration-300 overflow-hidden">
-                {/* Subtle bg gradient on hover */}
-                <div className="absolute inset-0 bg-gradient-to-br from-cyan-500/0 to-indigo-500/0 group-hover:from-cyan-500/4 group-hover:to-indigo-500/3 transition-all duration-500 pointer-events-none rounded-2xl" />
-                {/* Icon ring */}
-                <div className="relative mb-6">
-                  <div className="w-20 h-20 rounded-full bg-gradient-to-br from-cyan-500/15 to-indigo-500/10 ring-2 ring-cyan-500/20 flex items-center justify-center group-hover:ring-cyan-400/40 transition-all">
-                    <div className="w-12 h-12 rounded-full bg-gradient-to-br from-cyan-500/25 to-indigo-500/15 flex items-center justify-center">
-                      <CheckCircle className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />
-                    </div>
-                  </div>
-                  <span className="absolute -bottom-1 -right-1 flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-br from-cyan-500 to-indigo-500 text-white text-[10px] font-bold shadow-lg">{i + 1}</span>
-                </div>
-                <h4 className="font-heading text-base font-bold text-foreground mb-3 group-hover:text-primary transition-colors">{item.title}</h4>
-                <p className="text-muted-foreground text-sm leading-relaxed">{item.desc}</p>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* TECHNOLOGIES */}
-      <section className="py-20 bg-background border-t border-border relative overflow-hidden">
-        <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.025)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.025)_1px,transparent_1px)] bg-[size:48px_48px]" />
-        <div className="page-container relative z-10">
-          <AnimatedSection className="text-center mb-10">
-            <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Tech Stack</p>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Technologies & Platforms We Use</h2>
-            <p className="text-muted-foreground text-base max-w-xl mx-auto">
-              We select the right tool for every challenge — proven stacks with healthcare-grade security and compliance.
-            </p>
-          </AnimatedSection>
-
-          <div className="flex flex-wrap justify-center gap-2 mb-10">
-            {TECH_TABS.map((tab) => (
-              <button key={tab} onClick={() => setActiveTechTab(tab)}
-                className={`px-5 py-2 rounded-full text-sm font-semibold border transition-all duration-200 ${
-                  activeTechTab === tab
-                    ? "bg-cyan-500 text-white border-cyan-500 shadow-lg shadow-cyan-500/25"
-                    : "bg-card text-muted-foreground border-border hover:border-cyan-400/40 hover:text-foreground"
-                }`}>
-                {tab}
-              </button>
-            ))}
-          </div>
-
-          <AnimatePresence mode="wait">
-            <motion.div key={activeTechTab}
-              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -8 }}
-              transition={{ duration: 0.22 }}
-              className="grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-4 max-w-4xl mx-auto">
-              {TECH_ITEMS[activeTechTab].map((tech, i) => {
-                const TechIcon = tech.icon;
-                return (
-                  <motion.div key={tech.name}
-                    initial={{ opacity: 0, scale: 0.88 }} animate={{ opacity: 1, scale: 1 }}
-                    transition={{ delay: i * 0.05 }}
-                    className="group flex flex-col items-center gap-3 p-4 rounded-xl border border-border bg-card hover:border-cyan-400/50 hover:bg-cyan-500/5 hover:shadow-lg transition-all duration-200 cursor-default">
-                    <div className="w-12 h-12 rounded-xl bg-primary/8 flex items-center justify-center group-hover:bg-cyan-500/15 transition-colors">
-                      <TechIcon className="w-6 h-6 text-primary group-hover:text-cyan-600 dark:group-hover:text-cyan-400 transition-colors" />
-                    </div>
-                    <span className="text-xs font-semibold text-muted-foreground group-hover:text-foreground transition-colors text-center leading-tight">{tech.name}</span>
-                  </motion.div>
-                );
-              })}
-            </motion.div>
-          </AnimatePresence>
-        </div>
-      </section>
-
-      {/* OUR APPROACH */}
-      <section className="py-20 bg-background">
-        <div className="page-container">
-          <AnimatedSection className="text-center mb-14">
-            <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Methodology</p>
-            <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground mb-3">Our Approach</h2>
-            <p className="text-muted-foreground max-w-xl mx-auto">A structured, audit-ready process delivering compliant, production-quality healthcare software.</p>
-          </AnimatedSection>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-5">
-            {APPROACH_STEPS.map((s, i) => {
-              const StepIcon = s.icon;
-              return (
-                <motion.div key={s.step}
-                  initial={{ opacity: 0, y: 24 }} whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }} transition={{ delay: i * 0.1 }}
-                  className="relative group bg-card border border-border rounded-2xl p-6 hover:border-cyan-400/40 hover:shadow-xl hover:shadow-cyan-500/5 transition-all duration-300">
-                  <div className="font-heading text-7xl font-black text-primary/7 leading-none mb-4 -mt-1 select-none">{s.step}</div>
-                  <div className="w-12 h-12 rounded-xl bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border border-cyan-500/20 flex items-center justify-center mb-4 group-hover:scale-105 transition-transform">
-                    <StepIcon className="w-6 h-6 text-cyan-600 dark:text-cyan-400" />
-                  </div>
-                  <h3 className="font-heading text-lg font-bold text-foreground mb-2">{s.title}</h3>
-                  <p className="text-muted-foreground text-sm leading-relaxed">{s.desc}</p>
-                  {i < APPROACH_STEPS.length - 1 && (
-                    <div className="hidden lg:block absolute top-1/2 -right-2.5 w-5 h-px bg-gradient-to-r from-cyan-500/40 to-transparent" aria-hidden />
-                  )}
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
-
-      {/* COMPLIANCE STANDARDS */}
-      <section className="py-16 bg-secondary/30 border-y border-border">
-        <div className="page-container">
-          <AnimatedSection className="text-center mb-10">
-            <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-3">Regulatory</p>
-            <h2 className="font-heading text-3xl font-bold text-foreground mb-2">Built for Regulated Healthcare Software</h2>
-            <p className="text-muted-foreground max-w-lg mx-auto text-sm">Every line of code satisfies the most rigorous health IT frameworks.</p>
-          </AnimatedSection>
-          <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
-            {STANDARDS.map((std, i) => (
-              <motion.span key={std}
-                initial={{ opacity: 0, scale: 0.9 }} whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                className="inline-flex items-center gap-2.5 px-5 py-3 rounded-full border border-cyan-500/25 bg-background text-sm font-semibold text-foreground shadow-sm hover:border-cyan-400/50 hover:bg-cyan-500/5 hover:shadow-md transition-all cursor-default">
-                <ShieldCheck className="w-4 h-4 text-cyan-600 dark:text-cyan-400 shrink-0" />{std}
-              </motion.span>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* PORTFOLIO */}
-      <section className="py-24 bg-background">
-        <div className="page-container">
-          <AnimatedSection className="flex items-end justify-between gap-4 mb-10 pb-3 border-b border-border">
-            <div>
-              <p className="text-cyan-600 dark:text-cyan-400 text-xs font-bold uppercase tracking-widest mb-2">Portfolio</p>
-              <h2 className="font-heading text-3xl sm:text-4xl font-bold text-foreground">Our Projects</h2>
-              <p className="text-muted-foreground text-sm mt-2 max-w-xl">Software and AI platforms delivered for healthcare and digital health clients.</p>
-            </div>
-            <span className="hidden sm:inline-flex items-center gap-1.5 text-[11px] font-bold text-cyan-600 bg-cyan-500/10 px-3 py-1.5 rounded-full border border-cyan-500/20 shrink-0">
-              {PORTFOLIO.length} projects
-            </span>
-          </AnimatedSection>
-
-          <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
-            {PORTFOLIO.map((p, i) => (
-              <motion.article key={p.name}
-                initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: i * 0.07 }}
-                className="group rounded-2xl overflow-hidden border border-border bg-card hover:border-cyan-400/50 hover:shadow-2xl hover:shadow-cyan-500/6 transition-all duration-300">
-                <div className="relative aspect-[16/10] overflow-hidden bg-[#060d17]">
-                  <img src={p.image} alt={p.name} loading="lazy"
-                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-700" />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" />
-                  <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest rounded-full bg-cyan-500/95 text-slate-900">
-                    <Brain className="w-3 h-3" />{p.tags[0]}
-                  </div>
-                  <h3 className="absolute bottom-3 left-4 right-4 font-heading text-white text-lg font-bold drop-shadow">{p.name}</h3>
-                </div>
-                <div className="p-5">
-                  <p className="text-muted-foreground text-sm leading-relaxed mb-4 line-clamp-2">{p.description}</p>
-                  <div className="flex flex-wrap gap-1.5 mb-4">
-                    {p.tags.map((t) => (
-                      <span key={t} className="text-[11px] px-2 py-0.5 rounded-full bg-cyan-500/8 text-cyan-700 dark:text-cyan-300 border border-cyan-500/20">{t}</span>
-                    ))}
-                  </div>
-                  <Link href="/contact" className="flex items-center gap-1.5 text-cyan-600 dark:text-cyan-400 font-semibold text-sm group-hover:gap-3 transition-all">
-                    Explore Project <ArrowRight className="w-4 h-4" />
-                  </Link>
-                </div>
-              </motion.article>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* CTA */}
-      <section className="py-16 bg-background border-t border-border">
-        <div className="page-container">
-          <AnimatedSection>
-            <div className="relative w-full bg-gradient-to-br from-[#020617] via-[#050d1f] to-[#0a1628] rounded-3xl p-8 md:p-12 border border-cyan-500/20 shadow-2xl overflow-hidden">
-              <div className="absolute top-0 right-0 w-72 h-72 rounded-full bg-cyan-500/5 -translate-y-1/2 translate-x-1/2 pointer-events-none" />
-              <div className="absolute bottom-0 left-0 w-48 h-48 rounded-full bg-indigo-500/5 translate-y-1/2 -translate-x-1/2 pointer-events-none" />
-              <div className="absolute inset-0 bg-[linear-gradient(rgba(56,189,248,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(56,189,248,0.03)_1px,transparent_1px)] bg-[size:48px_48px] pointer-events-none" />
-              <div className="relative flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
-                <div className="max-w-2xl">
-                  <div className="inline-flex items-center gap-2 bg-cyan-400/10 border border-cyan-400/20 rounded-full px-4 py-1.5 mb-5">
-                    <Rocket className="w-3.5 h-3.5 text-cyan-400" />
-                    <span className="text-cyan-300 text-xs font-bold uppercase tracking-wider">Ready to Start?</span>
-                  </div>
-                  <h2 className="font-heading text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-3 leading-tight">
-                    Let's Build Your Healthcare<br />Software Together
-                  </h2>
-                  <p className="text-white/60 text-sm md:text-base leading-relaxed">
-                    Our Software & AI specialists are available for a free initial consultation. Tell us about your project and we'll respond within one business day.
-                  </p>
-                </div>
-                <div className="flex flex-col sm:flex-row gap-3 lg:min-w-[320px] shrink-0">
-                  <Button asChild size="lg" className="flex-1 rounded-xl bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold shadow-lg shadow-cyan-500/25">
-                    <Link href="/contact"><Mail className="w-4 h-4 mr-2" /> Send Enquiry</Link>
-                  </Button>
-                  <Button asChild size="lg" variant="outline" className="flex-1 rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
-                    <Link href="/about"><Users className="w-4 h-4 mr-2" /> Meet the Team</Link>
-                  </Button>
-                </div>
-              </div>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
     </div>
   );
 }

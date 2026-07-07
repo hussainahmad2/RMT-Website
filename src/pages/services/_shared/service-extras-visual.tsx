@@ -15,8 +15,8 @@ export function FullBleedBlock({
   className?: string;
 }) {
   return (
-    <div className={cn("relative w-screen left-1/2 -translate-x-1/2", className)}>
-      <div className={cn("py-14 md:py-16", bgClassName)}>
+    <div className={cn("relative w-screen left-1/2 -translate-x-1/2 overflow-hidden", className)}>
+      <div className={cn("relative z-10 py-14 md:py-16", bgClassName)}>
         <div className="page-container">{children}</div>
       </div>
     </div>

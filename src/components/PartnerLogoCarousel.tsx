@@ -235,7 +235,7 @@ function MarqueeRow({
           <img
             src={resolveLogo(item)}
             alt={item.name}
-            className="max-h-full max-w-full object-contain object-center opacity-60 grayscale transition-all duration-300 group-hover:opacity-100 group-hover:grayscale-0"
+            className="max-h-full max-w-full object-contain object-center transition-transform duration-300"
             loading="lazy"
             decoding="async"
           />
