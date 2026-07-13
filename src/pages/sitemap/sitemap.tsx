@@ -7,6 +7,7 @@ const MAIN_PAGES = [
   { label: "Home", href: "/" },
   { label: "About Us", href: "/about" },
   { label: "Services", href: "/services" },
+  { label: "Pharmaceutical", href: "/pharmaceutical" },
   { label: "Products", href: "/products" },
   { label: "Projects", href: "/projects" },
   { label: "Testimonials", href: "/testimonials" },

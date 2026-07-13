@@ -24,6 +24,7 @@ import Insights from "@/pages/insights/insights";
 import Gallery from "@/pages/gallery/gallery";
 import Testimonials from "@/pages/testimonials/testimonials";
 import Products from "@/pages/products/products";
+import Pharmaceutical from "@/pages/pharmaceutical/pharmaceutical";
 import NotFound from "@/pages/not-found/not-found";
 import SitemapPage from "@/pages/sitemap/sitemap";
 
@@ -45,6 +46,7 @@ function Router() {
         <Route path="/gallery" component={Gallery} />
         <Route path="/testimonials" component={Testimonials} />
         <Route path="/products" component={Products} />
+        <Route path="/pharmaceutical" component={Pharmaceutical} />
         <Route path="/careers" component={Careers} />
         <Route path="/contact" component={Contact} />
         <Route path="/sitemap" component={SitemapPage} />

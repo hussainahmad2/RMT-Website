@@ -79,7 +79,7 @@ export const Navbar = () => {
 
             {/* Company dropdown */}
             <div className="relative" onMouseEnter={() => setOpenDropdown("company")} onMouseLeave={() => setOpenDropdown(null)}>
-              <button className={dropdownBtnClass(isActive("/about") || isActive("/gallery"))}>
+              <button className={dropdownBtnClass(isActive("/about") || isActive("/gallery") || isActive("/careers"))}>
                 Company <ChevronDown className={`w-3.5 h-3.5 transition-transform ${openDropdown === "company" ? "rotate-180" : ""}`} />
               </button>
               <AnimatePresence>
@@ -87,7 +87,7 @@ export const Navbar = () => {
                   <motion.div initial={{ opacity: 0, y: 6 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: 6 }} transition={{ duration: 0.14 }}
                     className="absolute top-full left-0 pt-2 w-52">
                     <div className="bg-background border border-border shadow-xl rounded-xl py-2 overflow-hidden">
-                      {[{ href: "/about", label: "About Us" }, { href: "/gallery", label: "Gallery" }].map(({ href, label }) => (
+                      {[{ href: "/about", label: "About Us" }, { href: "/gallery", label: "Gallery" }, { href: "/careers", label: "Careers" }].map(({ href, label }) => (
                         <Link key={href} href={href} className="block px-4 py-2.5 text-sm text-foreground/75 hover:text-primary hover:bg-muted transition-colors">{label}</Link>
                       ))}
                     </div>
@@ -124,6 +124,11 @@ export const Navbar = () => {
                 )}
               </AnimatePresence>
             </div>
+
+            {/* Pharmaceutical */}
+            <Link href="/pharmaceutical" className={navLinkClass("/pharmaceutical")}>
+              Pharmaceutical
+            </Link>
 
             {/* Testimonials */}
             <Link href="/testimonials" className={navLinkClass("/testimonials")}>
@@ -175,11 +180,6 @@ export const Navbar = () => {
               Insights
             </Link>
 
-            {/* Careers */}
-            <Link href="/careers" className={navLinkClass("/careers")}>
-              Careers
-            </Link>
-
             {/* Contact */}
             <Link href="/contact" className={navLinkClass("/contact")}>
               Contact
@@ -223,6 +223,7 @@ export const Navbar = () => {
                   { href: "/", label: "Home" },
                   { href: "/about", label: "About Us" },
                   { href: "/gallery", label: "Gallery" },
+                  { href: "/careers", label: "Careers" },
                 ].map(({ href, label }) => (
                   <Link key={href} href={href} className={`px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(href) ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"}`}>
                     {label}
@@ -235,6 +236,9 @@ export const Navbar = () => {
                       {s.name}
                     </Link>
                   ))}
+                  <Link href="/pharmaceutical" className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors mt-1 ${isActive("/pharmaceutical") ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"}`}>
+                    Pharmaceutical
+                  </Link>
                 </div>
                 <div className="mt-2 border-t border-border pt-2">
                   {[
@@ -243,7 +247,6 @@ export const Navbar = () => {
                     { href: "/testing", label: "Testing" },
                     { href: "/training", label: "Training & Workshops" },
                     { href: "/insights", label: "Insights" },
-                    { href: "/careers", label: "Careers" },
                     { href: "/contact", label: "Contact" },
                   ].map(({ href, label }) => (
                     <Link key={href} href={href} className={`block px-3 py-2.5 rounded-lg text-sm font-medium transition-colors ${isActive(href) ? "text-primary bg-primary/5" : "text-foreground hover:bg-muted"}`}>

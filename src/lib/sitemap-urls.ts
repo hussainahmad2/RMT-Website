@@ -11,6 +11,7 @@ const STATIC_PAGES: SitemapEntry[] = [
   { path: "/", priority: "1.0", changefreq: "weekly" },
   { path: "/about", priority: "0.8", changefreq: "monthly" },
   { path: "/services", priority: "0.9", changefreq: "weekly" },
+  { path: "/pharmaceutical", priority: "0.9", changefreq: "monthly" },
   { path: "/products", priority: "0.9", changefreq: "weekly" },
   { path: "/testimonials", priority: "0.8", changefreq: "monthly" },
   { path: "/projects", priority: "0.8", changefreq: "monthly" },
