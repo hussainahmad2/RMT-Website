@@ -4,7 +4,7 @@ export const PRODUCT_DEVELOPMENT_INTRO = [
 ] as const;
 
 export const PRODUCT_DEVELOPMENT_TAGLINE =
-  "Turnkey product development and regulatory consultancy — from concept through validation, manufacturing transfer, and market registration.";
+  "Turnkey product development and regulatory consultancy — from concept through validation, manufacturing transfer, and product registration.";
 
 export const PRODUCT_DEVELOPMENT_KEY_METRICS = [
   { label: "Products Developed & Delivered", value: "15+" },
@@ -14,6 +14,8 @@ export const PRODUCT_DEVELOPMENT_KEY_METRICS = [
 ] as const;
 
 export const PRODUCT_DEVELOPMENT_LICENCES = ["DRAP"] as const;
+
+export const PRODUCT_DEVELOPMENT_REGISTRATION = ["FDA", "CE"] as const;
 
 export const PRODUCT_DEVELOPMENT_PHASES = [
   {

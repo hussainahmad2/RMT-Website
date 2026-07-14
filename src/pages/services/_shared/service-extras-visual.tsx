@@ -86,11 +86,6 @@ export function LifecycleRoadmap({
     ? "bg-white/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground"
     : "bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground";
 
-  const detailGridClass =
-    steps.length >= 5
-      ? "hidden lg:grid lg:grid-cols-2 xl:grid-cols-5 gap-5"
-      : "hidden lg:grid lg:grid-cols-2 xl:grid-cols-3 gap-5";
-
   return (
     <div className="space-y-12">
       {/* Horizontal lifecycle — desktop */}
@@ -109,16 +104,14 @@ export function LifecycleRoadmap({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="flex flex-col items-center text-center px-1"
+                className="group flex flex-col items-center text-center px-1"
               >
                 <div
                   className={cn(
-                    "w-[4.75rem] h-[4.75rem] rounded-2xl rotate-45 flex items-center justify-center shadow-xl mb-5 transition-transform hover:scale-110",
-                    i === 0
-                      ? "bg-primary text-primary-foreground shadow-primary/40 ring-4 ring-primary/20"
-                      : isDark
-                        ? "bg-white/10 border-2 border-primary/40 text-primary shadow-primary/15"
-                        : "bg-card border-2 border-primary/30 text-primary shadow-primary/10"
+                    "w-[4.75rem] h-[4.75rem] rounded-2xl rotate-45 flex items-center justify-center shadow-xl mb-5 transition-all hover:scale-110",
+                    isDark
+                      ? "bg-white/10 border-2 border-primary/40 text-primary shadow-primary/15 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-primary/40 group-hover:ring-4 group-hover:ring-primary/20"
+                      : "bg-card border-2 border-primary/30 text-primary shadow-primary/10 group-hover:bg-primary group-hover:text-primary-foreground group-hover:shadow-primary/40 group-hover:ring-4 group-hover:ring-primary/20"
                   )}
                 >
                   <Icon className="w-7 h-7 -rotate-45" />
@@ -127,9 +120,21 @@ export function LifecycleRoadmap({
                   Phase {String(i + 1).padStart(2, "0")}
                 </span>
                 <p className={cn("text-xs font-semibold leading-snug px-1", titleClass)}>{step.title}</p>
-                {i < steps.length - 1 && (
-                  <ChevronRight className="w-5 h-5 text-primary/30 absolute hidden" aria-hidden />
-                )}
+                <div
+                  className={cn(
+                    "mt-4 w-full rounded-2xl border px-4 py-3 text-left transition-all duration-300 opacity-0 -translate-y-2 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:translate-y-0 group-hover:max-h-80",
+                    cardClass
+                  )}
+                >
+                  <ul className="space-y-1.5">
+                    {step.items.map((item) => (
+                      <li key={item} className={cn("text-xs flex items-start gap-2", textClass)}>
+                        <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
+                        {item}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               </motion.div>
             );
           })}
@@ -154,11 +159,9 @@ export function LifecycleRoadmap({
                 <div
                   className={cn(
                     "relative z-10 w-14 h-14 rounded-2xl rotate-45 flex items-center justify-center shrink-0 shadow-lg",
-                    i === 0
-                      ? "bg-primary text-primary-foreground shadow-primary/30"
-                      : isDark
-                        ? "bg-white/10 border-2 border-primary/35 text-primary"
-                        : "bg-card border-2 border-primary/25 text-primary"
+                    isDark
+                      ? "bg-white/10 border-2 border-primary/35 text-primary"
+                      : "bg-card border-2 border-primary/25 text-primary"
                   )}
                 >
                   <Icon className="w-6 h-6 -rotate-45" />
@@ -183,46 +186,6 @@ export function LifecycleRoadmap({
         </div>
       </div>
 
-      {/* Detail cards — full width on desktop */}
-      <div className={detailGridClass}>
-        {steps.map((step, i) => {
-          const Icon = step.icon;
-          return (
-            <motion.div
-              key={step.title}
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.06 }}
-              className={cn(
-                "group relative rounded-2xl border p-6 overflow-hidden transition-all hover:shadow-xl",
-                cardClass
-              )}
-            >
-              <div className="absolute top-0 right-0 w-36 h-36 bg-primary/5 rounded-full -translate-y-1/2 translate-x-1/2 group-hover:bg-primary/10 transition-colors" />
-              <div className="relative flex items-start gap-4 mb-4">
-                <div className={cn("w-12 h-12 rounded-xl flex items-center justify-center shrink-0 transition-colors", iconBoxClass)}>
-                  <Icon className="w-6 h-6" />
-                </div>
-                <div>
-                  <span className="text-[10px] font-bold uppercase tracking-widest text-primary">
-                    Phase {String(i + 1).padStart(2, "0")}
-                  </span>
-                  <h3 className={cn("font-heading font-bold text-base mt-0.5", titleClass)}>{step.title}</h3>
-                </div>
-              </div>
-              <ul className="relative space-y-2">
-                {step.items.map((item) => (
-                  <li key={item} className={cn("text-sm flex items-start gap-2", textClass)}>
-                    <CheckCircle className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
-                    {item}
-                  </li>
-                ))}
-              </ul>
-            </motion.div>
-          );
-        })}
-      </div>
     </div>
   );
 }

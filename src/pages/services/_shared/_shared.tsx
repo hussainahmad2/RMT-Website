@@ -65,6 +65,7 @@ import {
   PRODUCT_DEVELOPMENT_KEY_METRICS,
   PRODUCT_DEVELOPMENT_LICENCES,
   PRODUCT_DEVELOPMENT_PHASES,
+  PRODUCT_DEVELOPMENT_REGISTRATION,
   PRODUCT_DEVELOPMENT_REGULATORY,
   PRODUCT_DEVELOPMENT_MANUFACTURING,
   PRODUCT_DEVELOPMENT_WHY,
@@ -1213,7 +1214,7 @@ const SERVICE_ICONS: Record<string, React.ReactNode> = {
 const SERVICE_STANDARDS: Record<string, string[]> = {
   "regulatory-compliance":   ["ISO 13485", "ISO 14971", "ISO 10993-1:2025", "ISO 10993-17:2023", "EU MDR 2017/745", "FDA 21 CFR"],
   "software-ai":             ["IEC 62304", "FDA SaMD Guidance", "IEC 82304", "EU MDR Rule 11", "HIPAA / SOC 2"],
-  "product-development":     ["ISO 13485", "ISO 14971", "IEC 62304", "IEC 60601", "FDA", "CE"],
+  "product-development":     ["ISO 13485", "ISO 14971", "IEC 62304", "IEC 60601"],
   "quality-testing":         ["ISO 13485", "ISO 10993", "IEC 60601-1", "IEC 62304", "ISO 14971"],
   "automation-services":       ["IEC 61131", "ISO 13849", "Modbus / Profibus", "GMP", "ISO 13485"],
   "design-fabrication":        ["SOLIDWORKS", "ANSYS", "COMSOL", "DFM / DFA", "ISO 13485"],
@@ -2491,11 +2492,13 @@ function standardItemLabel(std: string, standardIndex: number): string {
 /** Standards with horizontal line structure */
 function ServiceStandardsBlock({
   standards,
+  registrations = [],
   licences = [],
   variant = "default",
   showIndexLabels = true,
 }: {
   standards: string[];
+  registrations?: readonly string[];
   licences?: string[];
   variant?: "default" | "software-ai";
   showIndexLabels?: boolean;
@@ -2503,9 +2506,9 @@ function ServiceStandardsBlock({
   const isCyan = variant === "software-ai";
   let standardCounter = 0;
 
-  const renderItem = (std: string, isLicence: boolean) => {
-    if (!isLicence) standardCounter += 1;
-    const ItemIcon = isLicence ? Award : ShieldCheck;
+  const renderItem = (std: string, kind: "standard" | "licence" | "registration") => {
+    if (kind === "standard") standardCounter += 1;
+    const ItemIcon = kind === "licence" ? Award : ShieldCheck;
 
     return (
       <div
@@ -2513,7 +2516,7 @@ function ServiceStandardsBlock({
         className={`relative flex flex-1 min-w-[200px] items-center gap-3 rounded-xl border px-4 py-3 transition-colors ${
           isCyan
             ? "border-cyan-500/20 bg-background hover:border-cyan-400/40"
-            : isLicence
+            : kind === "licence"
               ? "border-amber-500/25 bg-background hover:border-amber-400/40"
               : "border-border bg-background hover:border-primary/30"
         }`}
@@ -2522,7 +2525,7 @@ function ServiceStandardsBlock({
           className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
             isCyan
               ? "bg-cyan-500/12 text-cyan-600 dark:text-cyan-400"
-              : isLicence
+              : kind === "licence"
                 ? "bg-amber-500/12 text-amber-600 dark:text-amber-400"
                 : "bg-primary/10 text-primary"
           }`}
@@ -2530,9 +2533,13 @@ function ServiceStandardsBlock({
           <ItemIcon className="h-4 w-4" />
         </div>
         <div className="min-w-0 flex-1">
-          {(showIndexLabels || isLicence) && (
+          {(showIndexLabels || kind !== "standard") && (
             <span className="text-[10px] font-bold uppercase tracking-widest text-muted-foreground">
-              {isLicence ? "Licence" : standardItemLabel(std, standardCounter)}
+              {kind === "licence"
+                ? "Licence"
+                : kind === "registration"
+                  ? "Registration"
+                  : standardItemLabel(std, standardCounter)}
             </span>
           )}
           <p className="text-sm font-semibold text-foreground leading-snug">{std}</p>
@@ -2549,11 +2556,19 @@ function ServiceStandardsBlock({
       <div className="relative rounded-2xl border border-border bg-card/50 p-5 sm:p-6 space-y-6">
         {standards.length > 0 && (
           <div>
-            {licences.length > 0 && (
+            {(registrations.length > 0 || licences.length > 0) && (
               <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Standards</p>
             )}
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-              {standards.map((std) => renderItem(std, isRegulatoryLicence(std)))}
+              {standards.map((std) => renderItem(std, isRegulatoryLicence(std) ? "licence" : "standard"))}
+            </div>
+          </div>
+        )}
+        {registrations.length > 0 && (
+          <div>
+            <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Product Registration</p>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
+              {registrations.map((reg) => renderItem(reg, "registration"))}
             </div>
           </div>
         )}
@@ -2561,7 +2576,7 @@ function ServiceStandardsBlock({
           <div>
             <p className="text-xs font-bold uppercase tracking-widest text-muted-foreground mb-3">Licences</p>
             <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-              {licences.map((lic) => renderItem(lic, true))}
+              {licences.map((lic) => renderItem(lic, "licence"))}
             </div>
           </div>
         )}
@@ -3825,19 +3840,16 @@ export function ServiceDetail({
                 ) : (
                   <ServiceStandardsBlock
                     standards={SERVICE_STANDARDS[service.slug]}
+                    registrations={isProductDevelopment ? PRODUCT_DEVELOPMENT_REGISTRATION : []}
                     licences={SERVICE_LICENCES[service.slug]}
                     variant="default"
+                    showIndexLabels={!isProductDevelopment}
                   />
                 )
               )}
 
               <ServiceCapabilitiesBlock
                 capabilities={service.capabilities}
-                variant={isSoftwareAI ? "software-ai" : "default"}
-              />
-
-              <ServiceWhyRMTBlock
-                items={service.whyRMT}
                 variant={isSoftwareAI ? "software-ai" : "default"}
               />
 
