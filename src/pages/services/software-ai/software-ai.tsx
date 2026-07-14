@@ -54,12 +54,13 @@ export default function SoftwareAiServicePage() {
   });
 
   return (
-    <div className="bg-background min-h-screen pt-20">
+    <div className="bg-background min-h-screen">
       <CinematicPageHero
         eyebrow="Software & AI Solutions"
         title="Intelligent Software for Healthcare"
         description="Full-spectrum software development — AI/ML, cloud, SaMD compliance, and complete validation lifecycle for next-generation medical technology."
         backgroundImage={SOFTWARE_AI_HERO_IMAGE}
+        fullHeight
       >
         <Button asChild size="lg" className="rounded-xl font-semibold">
           <Link href="/contact">Start Your Project <ArrowRight className="ml-2 w-4 h-4" /></Link>
@@ -129,8 +130,17 @@ export default function SoftwareAiServicePage() {
       </section>
 
       {/* Expertise */}
-      <section className="py-20 md:py-24 bg-secondary/20 border-b border-border">
-        <div className="page-container">
+      <section className="relative overflow-hidden py-20 md:py-24 border-b border-border">
+        <div className="absolute inset-0">
+          <img
+            src="/assets/software-ai-expertise-bg.webp"
+            alt=""
+            aria-hidden="true"
+            className="h-full w-full object-cover object-center"
+          />
+          <div className="absolute inset-0 bg-white/70 dark:bg-black/78" />
+        </div>
+        <div className="page-container relative z-10">
           <AnimatedSection className="text-center max-w-3xl mx-auto mb-12">
             <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">Our Expertise</p>
             <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
@@ -165,7 +175,7 @@ export default function SoftwareAiServicePage() {
             </div>
 
             <AnimatedSection key={activeExpertise} immediate>
-              <div className="rounded-2xl border border-border bg-card p-6 sm:p-8 h-full">
+              <div className="rounded-2xl border border-border bg-card/95 p-6 sm:p-8 h-full">
                 <div className="flex items-center gap-3 mb-5">
                   <div className="flex h-11 w-11 items-center justify-center rounded-xl bg-primary/10 text-primary">
                     <ActiveIcon className="h-5 w-5" />
@@ -190,38 +200,6 @@ export default function SoftwareAiServicePage() {
                 )}
               </div>
             </AnimatedSection>
-          </div>
-        </div>
-      </section>
-
-      {/* Services */}
-      <section className="py-20 md:py-24 border-b border-border">
-        <div className="page-container">
-          <AnimatedSection className="mb-12">
-            <p className="text-primary text-xs font-bold uppercase tracking-widest mb-3">Our Services</p>
-            <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4">
-              End-to-End Software & AI Development Services
-            </h2>
-            <div className="h-px w-16 bg-primary/50 mb-4" />
-          </AnimatedSection>
-
-          <div className="grid sm:grid-cols-2 gap-5 sm:gap-6">
-            {SOFTWARE_AI_SERVICES.map((service, i) => {
-              const Icon = service.icon;
-              return (
-                <AnimatedSection key={service.title} delay={i * 0.05}>
-                  <Link href={`/services/software-ai/${service.slug}`} className="block h-full">
-                    <article className="group h-full rounded-2xl border border-border bg-card p-6 sm:p-7 hover:border-primary/35 hover:shadow-xl transition-all duration-300">
-                      <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary mb-5 group-hover:bg-primary group-hover:text-primary-foreground transition-colors">
-                        <Icon className="h-6 w-6" />
-                      </div>
-                      <h3 className="font-heading text-lg font-bold text-foreground mb-3">{service.title}</h3>
-                      <p className="text-sm text-muted-foreground leading-relaxed">{service.description}</p>
-                    </article>
-                  </Link>
-                </AnimatedSection>
-              );
-            })}
           </div>
         </div>
       </section>

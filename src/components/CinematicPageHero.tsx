@@ -8,6 +8,7 @@ interface CinematicPageHeroProps {
   backgroundImage: string;
   children?: React.ReactNode;
   align?: "left" | "center";
+  fullHeight?: boolean;
 }
 
 export function CinematicPageHero({
@@ -17,11 +18,14 @@ export function CinematicPageHero({
   backgroundImage,
   children,
   align = "left",
+  fullHeight = false,
 }: CinematicPageHeroProps) {
   const isCenter = align === "center";
 
   return (
-    <section className="relative min-h-[52vh] md:min-h-[58vh] flex items-end overflow-hidden bg-[#060d17]">
+    <section
+      className={`relative overflow-hidden bg-[#060d17] flex ${fullHeight ? "min-h-screen items-center" : "min-h-[52vh] md:min-h-[58vh] items-end"}`}
+    >
       <div className="absolute inset-0">
         <img
           src={backgroundImage}
@@ -43,7 +47,7 @@ export function CinematicPageHero({
         aria-hidden
       />
 
-      <div className={`page-container relative z-10 pb-14 md:pb-16 pt-28 w-full ${isCenter ? "text-center" : ""}`}>
+      <div className={`page-container relative z-10 w-full ${fullHeight ? "py-28 md:py-32" : "pb-14 md:pb-16 pt-28"} ${isCenter ? "text-center" : ""}`}>
         <AnimatedSection immediate className={isCenter ? "max-w-3xl mx-auto" : "max-w-3xl"}>
           <div className={`inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-1.5 mb-5 backdrop-blur-sm ${isCenter ? "mx-auto" : ""}`}>
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />

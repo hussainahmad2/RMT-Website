@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
+import { CinematicPageHero } from "@/components/CinematicPageHero";
 import { useSEO } from "@/lib/seo";
 import {
   buildBreadcrumbJsonLd,
@@ -1232,7 +1233,6 @@ const SERVICE_SIDEBAR_STATS: Record<string, { label: string; value: string; icon
     { label: PRODUCT_DEVELOPMENT_KEY_METRICS[1].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[1].value, icon: BookOpen },
     { label: PRODUCT_DEVELOPMENT_KEY_METRICS[2].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[2].value, icon: Layers },
     { label: PRODUCT_DEVELOPMENT_KEY_METRICS[3].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[3].value, icon: GraduationCap },
-    { label: PRODUCT_DEVELOPMENT_KEY_METRICS[4].label, value: PRODUCT_DEVELOPMENT_KEY_METRICS[4].value, icon: Rocket },
   ],
   "quality-testing":         [{ label: "Quality Departments", value: "3", icon: FlaskConical }, { label: "Standards Covered", value: "50+", icon: BookOpen }, { label: "Cross-Functional", value: "6 Depts", icon: Users }],
   "automation-services":     [{ label: "PLC Platforms", value: "Fatek+", icon: Cog }, { label: "HMI Systems", value: "Weintek", icon: MonitorSmartphone }, { label: "Motion Axes", value: "Multi", icon: Zap }],
@@ -2386,7 +2386,7 @@ function KeyMetricsSection({
 
   return (
     <AnimatedSection>
-      <div className="flex items-end justify-between gap-4 mb-6 pb-3 border-b border-border">
+      <div className="flex items-end justify-between gap-4 mb-8 pb-4 border-b border-border">
         <div>
           <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-1 ${isSoftwareAI ? "text-cyan-600 dark:text-cyan-400" : "text-primary"}`}>
             {eyebrow}
@@ -2395,7 +2395,7 @@ function KeyMetricsSection({
         </div>
         <BarChart3 className={`w-8 h-8 shrink-0 opacity-20 ${isSoftwareAI ? "text-cyan-600" : "text-primary"}`} />
       </div>
-      <div className={`grid gap-4 ${gridClass}`}>
+      <div className={`grid gap-5 ${gridClass}`}>
         {stats.map((stat, i) => {
           const StatIcon = stat.icon;
           return (
@@ -2405,7 +2405,7 @@ function KeyMetricsSection({
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.07 }}
-              className={`group relative overflow-hidden rounded-2xl border p-5 transition-all hover:shadow-lg ${
+              className={`group relative overflow-hidden rounded-2xl border p-6 sm:p-7 min-h-[160px] transition-all hover:shadow-lg ${
                 isSoftwareAI
                   ? "border-cyan-500/20 bg-gradient-to-br from-cyan-500/5 via-card to-card hover:border-cyan-400/40"
                   : "border-border bg-gradient-to-br from-primary/5 via-card to-secondary/20 hover:border-primary/35"
@@ -2419,19 +2419,19 @@ function KeyMetricsSection({
               />
               <div className="relative flex items-start gap-4">
                 <div
-                  className={`flex h-12 w-12 shrink-0 items-center justify-center rounded-xl transition-colors ${
+                  className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-xl transition-colors ${
                     isSoftwareAI
                       ? "bg-cyan-500/15 text-cyan-600 dark:text-cyan-400 group-hover:bg-cyan-500 group-hover:text-slate-900"
                       : "bg-primary/10 text-primary group-hover:bg-primary group-hover:text-primary-foreground"
                   }`}
                 >
-                  <StatIcon className="h-5 w-5" />
+                  <StatIcon className="h-6 w-6" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="font-heading text-2xl sm:text-[1.65rem] font-bold text-foreground leading-tight tracking-tight">
+                  <p className="font-heading text-2xl sm:text-3xl font-bold text-foreground leading-tight tracking-tight">
                     {stat.value}
                   </p>
-                  <p className="mt-1.5 text-sm text-muted-foreground leading-snug">{stat.label}</p>
+                  <p className="mt-2 text-sm sm:text-base text-muted-foreground leading-snug">{stat.label}</p>
                 </div>
               </div>
             </motion.div>
@@ -2439,6 +2439,27 @@ function KeyMetricsSection({
         })}
       </div>
     </AnimatedSection>
+  );
+}
+
+function ProductDevelopmentMetricsStrip() {
+  const stats = SERVICE_SIDEBAR_STATS["product-development"] ?? [];
+
+  if (!stats.length) return null;
+
+  return (
+    <section className="border-b border-white/10 bg-primary">
+      <div className="page-container py-8">
+        <div className="grid grid-cols-2 sm:grid-cols-4 divide-x divide-white/15">
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center text-white px-4 py-2">
+              <p className="font-heading text-2xl sm:text-3xl font-bold">{stat.value}</p>
+              <p className="text-white/70 text-xs uppercase tracking-wider mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -2560,34 +2581,82 @@ function ServiceCapabilitiesBlock({
   title?: string;
 }) {
   const isCyan = variant === "software-ai";
+  const count = capabilities.length;
   return (
-    <AnimatedSection>
-      <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">{title}</h2>
-      <div className="divide-y divide-border rounded-2xl border border-border bg-card/40 overflow-hidden">
-        {capabilities.map((cap, i) => (
-          <div
-            key={cap}
-            className={`group flex items-center gap-4 px-5 py-4 transition-colors hover:bg-muted/40 ${
-              isCyan ? "hover:bg-cyan-500/5" : ""
-            }`}
-          >
+    <AnimatedSection className="mb-0 pb-0">
+      <div className="relative mx-auto h-[560px] w-full max-w-4xl sm:h-[600px] lg:h-[620px]">
+        <div className={`absolute left-1/2 top-1/2 h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 ${isCyan ? "border-cyan-400/25 shadow-[0_0_0_1px_rgba(34,211,238,0.10),0_0_24px_rgba(34,211,238,0.08)]" : "border-primary/20 shadow-[0_0_0_1px_rgba(59,130,246,0.08),0_0_24px_rgba(59,130,246,0.06)]"}`} />
+        <div className={`absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-dashed ${isCyan ? "border-cyan-500/35" : "border-primary/25"}`} />
+        <div
+          className={`absolute left-1/2 top-1/2 z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border-2 bg-background/95 text-center shadow-lg sm:h-32 sm:w-32 ${
+            isCyan ? "border-cyan-400/70 shadow-cyan-500/10" : "border-primary/70 shadow-primary/10"
+          }`}
+        >
+          <span className={`text-[10px] font-bold uppercase tracking-[0.28em] ${isCyan ? "text-cyan-600 dark:text-cyan-300" : "text-primary"}`}>
+            Core
+          </span>
+          <span className="mt-1 text-base font-heading font-bold leading-none text-foreground sm:text-lg">
+            Capabilities
+          </span>
+        </div>
+        {capabilities.map((cap, i) => {
+          const angleMap =
+            count === 6
+              ? [-90, -30, 30, 90, 150, -150]
+              : Array.from({ length: count }, (_, idx) => (360 / count) * idx - 90);
+          const angle = angleMap[i] ?? ((360 / count) * i - 90);
+          const rad = (angle * Math.PI) / 180;
+          const radius = count <= 5 ? 29 : count <= 7 ? 31 : 34;
+          const x = 50 + radius * Math.cos(rad);
+          const y = 50 + radius * Math.sin(rad);
+          const yOffset = i === 0 ? -4 : i === 3 ? 4 : 0;
+          const itemWidth = cap.length <= 24
+            ? "clamp(180px, 18vw, 220px)"
+            : cap.length <= 34
+              ? "clamp(220px, 24vw, 280px)"
+              : "clamp(260px, 30vw, 340px)";
+          const itemMinHeight = cap.length <= 24 ? "4.25rem" : cap.length <= 34 ? "4.75rem" : "5.5rem";
+          return (
             <div
-              className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full text-xs font-bold ${
-                isCyan
-                  ? "bg-cyan-500/12 text-cyan-700 dark:text-cyan-300"
-                  : "bg-primary/10 text-primary"
-              }`}
+              key={cap}
+              className="absolute z-20"
+              style={{
+                left: `${x}%`,
+                top: `${y + yOffset}%`,
+              }}
             >
-              {String(i + 1).padStart(2, "0")}
+              <div
+                className={`group flex items-center gap-3 rounded-full border px-4 py-3 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${
+                  isCyan
+                    ? "border-cyan-500/20 bg-white/90 text-slate-900 hover:border-cyan-400/40 dark:bg-slate-950/75 dark:text-cyan-50"
+                    : "border-border/80 bg-background/90 text-foreground hover:border-primary/30"
+                }`}
+                style={{
+                  transform: `translate(-50%, -50%)`,
+                  width: itemWidth,
+                  minHeight: itemMinHeight,
+                }}
+              >
+                <div
+                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-sm font-bold shadow-sm ${
+                    isCyan
+                      ? "border-cyan-400/40 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300"
+                      : "border-primary/15 bg-primary/8 text-primary"
+                  }`}
+                >
+                  {String(i + 1).padStart(2, "0")}
+                </div>
+                <span
+                  className={`min-w-0 flex-1 text-left text-sm sm:text-base font-semibold leading-tight break-words ${
+                    isCyan ? "group-hover:text-cyan-700 dark:group-hover:text-cyan-200" : "group-hover:text-primary"
+                  }`}
+                >
+                  {cap}
+                </span>
+              </div>
             </div>
-            <span className="flex-1 text-sm font-medium text-foreground group-hover:text-primary transition-colors">{cap}</span>
-            <ArrowRight
-              className={`h-4 w-4 shrink-0 opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-0.5 ${
-                isCyan ? "text-cyan-600 dark:text-cyan-400" : "text-primary"
-              }`}
-            />
-          </div>
-        ))}
+          );
+        })}
       </div>
     </AnimatedSection>
   );
@@ -2602,6 +2671,7 @@ function ServiceWhyRMTBlock({
   variant?: "default" | "software-ai";
 }) {
   const isCyan = variant === "software-ai";
+  if (!items.length) return null;
   return (
     <AnimatedSection>
       <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">Why Choose RMT</h2>
@@ -2698,77 +2768,6 @@ function ServicePageSidebar({ service, activeSubSlug }: { service: ServiceData; 
         </AnimatedSection>
       </div>
     </div>
-  );
-}
-
-/** Full-width CTA sections above site footer — Get a Quote, then Ready to Start */
-function ServicePageFooterCta({
-  service,
-  isSoftwareAI = false,
-  subServiceName,
-}: {
-  service: ServiceData;
-  isSoftwareAI?: boolean;
-  subServiceName?: string;
-}) {
-  const scopeLabel = subServiceName
-    ? `${subServiceName.toLowerCase()} project`
-    : `${service.shortName} requirements`;
-  const accentClass = isSoftwareAI ? "text-cyan-400" : "text-primary";
-  const btnClass = isSoftwareAI
-    ? "bg-cyan-400 text-slate-900 hover:bg-cyan-300"
-    : "bg-primary text-white hover:bg-primary/90";
-
-  return (
-    <>
-      <section className="border-t border-white/10 bg-[#060d17] text-white">
-        <div className="page-container py-14 md:py-16">
-          <AnimatedSection className="max-w-3xl">
-            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${accentClass}`}>
-              Get a Quote
-            </p>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">
-              Discuss Your {subServiceName ?? service.shortName} Needs
-            </h2>
-            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
-              Speak with our specialists about your {scopeLabel} and receive a tailored proposal. We respond within one business day.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className={`rounded-xl font-semibold ${btnClass}`}>
-                <Link href="/contact">Request a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
-                <a href="tel:+15551234567"><Phone className="w-4 h-4 mr-2" /> Schedule a Call</a>
-              </Button>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      <section className="border-t border-white/10 bg-[#0a1424] text-white">
-        <div className="page-container py-14 md:py-16">
-          <AnimatedSection className="max-w-3xl">
-            <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${accentClass}`}>
-              Ready to Start?
-            </p>
-            <h2 className="font-heading text-2xl md:text-3xl font-bold mb-3">
-              Work With Our {service.shortName} Team
-            </h2>
-            <p className="text-white/60 text-sm md:text-base leading-relaxed mb-6 max-w-2xl">
-              Our {service.shortName} specialists are available for a free initial consultation to scope your project and answer your questions.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Button asChild size="lg" className={`rounded-xl font-semibold ${btnClass}`}>
-                <Link href="/contact"><Mail className="w-4 h-4 mr-2" /> Send an Enquiry</Link>
-              </Button>
-              <Button asChild size="lg" variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
-                <Link href="/about"><Users className="w-4 h-4 mr-2" /> Meet the Team</Link>
-              </Button>
-            </div>
-          </AnimatedSection>
-        </div>
-      </section>
-    </>
   );
 }
 
@@ -2876,6 +2875,208 @@ function ProminentStandardsSection({
         </div>
       </section>
     </FullBleedSection>
+  );
+}
+
+function getStandardSummary(standard: string) {
+  const value = standard.toLowerCase();
+
+  if (value.includes("iso 13485")) {
+    return "Defines the quality management controls used to keep medical device work documented, traceable, and consistent. It anchors how procedures, records, and design controls are maintained across the service.";
+  }
+  if (value.includes("qmsr") || value.includes("21 cfr 820")) {
+    return "Aligns the quality system with FDA expectations for device design, production, and recordkeeping. It helps ensure the workflow can stand up to inspection, audit, and traceability demands.";
+  }
+  if (value.includes("iso 14971")) {
+    return "Provides the risk management structure for identifying hazards, evaluating impact, and controlling residual risk. It keeps risk decisions visible, repeatable, and tied to design evidence.";
+  }
+  if (value.includes("drap")) {
+    return "Supports local regulatory submissions and the evidence trail needed for market approval. It is used to align documentation, registration, and product release expectations with Pakistan’s regulator.";
+  }
+  if (value.includes("iec 62304")) {
+    return "Defines the software lifecycle controls used to build and verify safe, maintainable medical software. It shapes how software requirements, testing, and release evidence are organized.";
+  }
+  if (value.includes("iec 60601")) {
+    return "Covers essential safety and performance expectations for electrically powered medical equipment. It is commonly used as the benchmark for electrical safety, essential performance, and system-level verification.";
+  }
+  if (value.includes("gdpr")) {
+    return "Guides privacy handling, consent, and data protection obligations for regulated digital systems. It is especially relevant where patient, user, or customer data is collected and processed.";
+  }
+  if (value.includes("hipaa")) {
+    return "Sets the baseline for protecting patient health information in software workflows and integrations. It informs access control, data handling, and security safeguards in healthcare software.";
+  }
+  if (value.includes("iso 17025")) {
+    return "Establishes testing and calibration controls so results remain reliable and auditable. It is the reference point for technical competence in laboratory testing and calibration.";
+  }
+  if (value.includes("gmp")) {
+    return "Applies manufacturing discipline to reduce variation and preserve product quality at scale. It supports controlled processes, repeatability, and ongoing quality oversight.";
+  }
+  if (value.includes("ce") || value.includes("mdr")) {
+    return "Supports European market readiness through conformity and documentation requirements. It connects safety, performance, and technical documentation to market access.";
+  }
+
+  return "A supporting compliance requirement used to document controls, evidence, and approval readiness for this service. It helps define what needs to be demonstrated, recorded, and checked before release.";
+}
+
+function getStandardOfficialLinks(standard: string) {
+  const value = standard.toLowerCase();
+
+  if (value.includes("iec 62304 / iec 62366-1")) {
+    return [
+      { label: "IEC 62304", href: "https://www.iso.org/standard/38421.html" },
+      { label: "IEC 62366-1", href: "https://www.iso.org/standard/63179.html" },
+    ];
+  }
+  if (value.includes("iso 10555 / iso 25539")) {
+    return [
+      { label: "ISO 10555-1", href: "https://www.iso.org/standard/76494.html" },
+      { label: "ISO 25539-1", href: "https://www.iso.org/standard/66925.html" },
+    ];
+  }
+  if (value.includes("wcag 2.1 / 2.2")) {
+    return [
+      { label: "WCAG Overview", href: "https://www.w3.org/WAI/standards-guidelines/wcag/" },
+      { label: "WCAG 2.2", href: "https://www.w3.org/TR/WCAG22/" },
+    ];
+  }
+  if (value.includes("ieee 829 / ieee 29119")) {
+    return [
+      { label: "IEEE 829", href: "https://standards.ieee.org/standard/829-2008.html" },
+      { label: "IEEE 29119", href: "https://standards.ieee.org/standard/29119-3-2013.html" },
+    ];
+  }
+  if (value.includes("iec 60601-1 series")) {
+    return [{ label: "IEC 60601-1 Series", href: "https://webstore.iec.ch/en/publication/2603" }];
+  }
+  if (value.includes("iec 62304")) {
+    return [{ label: "IEC 62304", href: "https://www.iso.org/standard/38421.html" }];
+  }
+  if (value.includes("iso 13485")) {
+    return [{ label: "ISO 13485", href: "https://www.iso.org/iso-13485-medical-devices.html" }];
+  }
+  if (value.includes("iso 14971")) {
+    return [{ label: "ISO 14971", href: "https://www.iso.org/standard/72704.html" }];
+  }
+  if (value.includes("fda software validation guidance")) {
+    return [{ label: "FDA Guidance", href: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/general-principles-software-validation" }];
+  }
+  if (value.includes("onc health it certification")) {
+    return [{ label: "ONC Certification", href: "https://healthit.gov/certification-health-it/" }];
+  }
+  if (value.includes("hipaa")) {
+    return [{ label: "HHS HIPAA", href: "https://www.hhs.gov/hipaa/index.html" }];
+  }
+  if (value.includes("istqb")) {
+    return [{ label: "ISTQB", href: "https://istqb.org/" }];
+  }
+  if (value.includes("qmsr")) {
+    return [{ label: "FDA QMSR", href: "https://www.fda.gov/regulatory-information/search-fda-guidance-documents/general-principles-software-validation" }];
+  }
+  if (value.includes("drap")) {
+    return [{ label: "DRAP", href: "https://www.dra.gov.pk/" }];
+  }
+  if (value.includes("iso 10993")) {
+    return [{ label: "ISO 10993-1", href: "https://www.iso.org/standard/68936.html" }];
+  }
+  if (value.includes("iso 17025")) {
+    return [{ label: "ISO/IEC 17025", href: "https://www.iso.org/ISO-IEC-17025-testing-and-calibration-laboratories.html" }];
+  }
+  if (value.includes("ich q1a")) {
+    return [{ label: "ICH Q1A(R2)", href: "https://www.ich.org/page/quality-guidelines" }];
+  }
+  if (value.includes("eu mdr")) {
+    return [{ label: "EU MDR", href: "https://health.ec.europa.eu/medical-devices-new-regulations_en" }];
+  }
+  if (value === "fda") {
+    return [{ label: "FDA", href: "https://www.fda.gov/" }];
+  }
+  if (value.includes("wcag")) {
+    return [{ label: "WCAG", href: "https://www.w3.org/WAI/standards-guidelines/wcag/" }];
+  }
+
+  return [];
+}
+
+function ServiceHighlightsCurve({
+  points,
+  icons,
+  variant = "default",
+}: {
+  points: string[];
+  icons: React.ElementType[];
+  variant?: "default" | "software-ai";
+}) {
+  const isSoftwareAI = variant === "software-ai";
+  const cardTone = isSoftwareAI
+    ? [
+        "bg-cyan-500/12 border-cyan-500/25 text-cyan-950 dark:bg-cyan-500/18 dark:text-cyan-50",
+        "bg-sky-500/12 border-sky-500/25 text-sky-950 dark:bg-sky-500/18 dark:text-sky-50",
+      ]
+    : [
+        "bg-primary/10 border-primary/20 text-foreground",
+        "bg-indigo-500/10 border-indigo-500/20 text-foreground",
+      ];
+
+  return (
+    <div className="relative mx-auto max-w-6xl px-4 sm:px-8 lg:px-12">
+      <div className="pointer-events-none absolute left-1/2 top-0 hidden h-full w-24 -translate-x-1/2 lg:block" aria-hidden="true">
+        <svg viewBox="0 0 96 1000" className="h-full w-full" preserveAspectRatio="none">
+          <path
+            d="M48 0 C 12 100, 84 180, 48 280 S 12 460, 48 560 S 84 740, 48 840 S 12 920, 48 1000"
+            fill="none"
+            stroke={isSoftwareAI ? "rgba(34,211,238,0.72)" : "rgba(59,130,246,0.68)"}
+            strokeWidth="3.5"
+            strokeLinecap="round"
+            strokeDasharray="2 14"
+          />
+        </svg>
+      </div>
+      <div className="space-y-6 sm:space-y-7">
+        {points.map((point, idx) => {
+          const Icon = icons[idx % icons.length];
+          const alignLeft = idx % 2 === 0;
+          const tone = cardTone[idx % cardTone.length];
+          return (
+            <motion.div
+              key={point}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: idx * 0.06 }}
+              className="relative grid grid-cols-1 items-center gap-4 lg:grid-cols-[1fr_96px_1fr] lg:gap-6"
+            >
+              <div className={`${alignLeft ? "lg:col-start-1" : "lg:col-start-3"} ${alignLeft ? "order-2" : "order-2 lg:order-3"}`}>
+                <div className={`flex items-center gap-5 rounded-[1.5rem] border px-5 py-4 shadow-sm ${
+                  isSoftwareAI
+                    ? "bg-white border-4 border-[#4cdef4] text-slate-900 shadow-black/5 dark:bg-slate-950/30 dark:border-slate-700/40 dark:text-cyan-50"
+                    : `${tone} bg-white/95 border-primary/30 text-slate-900 shadow-black/5 dark:bg-slate-950/28 dark:border-slate-700/40 dark:text-foreground`
+                } ${alignLeft ? "" : "lg:ml-auto"}`}>
+                  <div className={`flex h-14 w-14 shrink-0 items-center justify-center rounded-2xl border shadow-sm ${
+                    isSoftwareAI
+                      ? "border-4 border-[#4cdef4] bg-white text-[#4cdef4] dark:bg-cyan-950/30 dark:text-cyan-200 dark:border-slate-700/40"
+                      : "border-primary/20 bg-white text-primary dark:bg-slate-950/30"
+                  }`}>
+                    <Icon className="h-6 w-6" />
+                  </div>
+                  <p className={`min-w-0 text-lg sm:text-xl font-semibold leading-tight ${
+                    isSoftwareAI ? "text-slate-900 dark:text-cyan-50" : "text-slate-900 dark:text-foreground"
+                  }`}>
+                    {point}
+                  </p>
+                </div>
+              </div>
+              <div className="order-1 flex justify-start lg:order-2 lg:col-start-2 lg:justify-center">
+                <div className={`flex h-14 w-14 items-center justify-center rounded-full border-4 bg-background shadow-md ${
+                  isSoftwareAI ? "border-cyan-400/70" : "border-primary/70"
+                }`}>
+                  <span className={`h-3 w-3 rounded-full ${isSoftwareAI ? "bg-cyan-500" : "bg-primary"}`} />
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
   );
 }
 
@@ -2988,6 +3189,8 @@ function SubServiceContent({
   const standards =
     SUB_SERVICE_STANDARDS[service.slug]?.[subService.slug] ?? SERVICE_STANDARDS[service.slug];
   const standardsHeading = SUB_SERVICE_STANDARDS_HEADING[service.slug]?.[subService.slug];
+  const deliverablesVisualSrc = "/assets/preparation.png";
+  const [activeStandard, setActiveStandard] = useState(standards?.[0] ?? "");
   const capabilities =
     SUB_SERVICE_CAPABILITIES[service.slug]?.[subService.slug] ?? service.capabilities;
   const closingNote = SUB_SERVICE_CLOSING_NOTE[service.slug]?.[subService.slug];
@@ -3003,8 +3206,8 @@ function SubServiceContent({
   const accentDotClass = isSoftwareAI ? "bg-cyan-500" : "bg-primary";
   const accentBorderClass = isSoftwareAI ? "border-cyan-500/50" : "border-primary/50";
   const accentCardHoverClass = isSoftwareAI 
-    ? "group-hover:border-cyan-400/50 group-hover:bg-cyan-500/4 hover:border-cyan-400/50 hover:bg-cyan-500/4" 
-    : "group-hover:border-primary/50 group-hover:bg-primary/5 hover:border-primary/50 hover:bg-primary/5";
+    ? "group-hover:border-cyan-400/50 hover:border-cyan-400/50" 
+    : "group-hover:border-primary/50 hover:border-primary/50";
   const accentIconContainerClass = isSoftwareAI
     ? "bg-gradient-to-br from-cyan-500/20 to-indigo-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400"
     : "bg-gradient-to-br from-primary/20 to-indigo-500/10 border-primary/20 text-primary";
@@ -3015,6 +3218,259 @@ function SubServiceContent({
   const accentStepBadgeClass = isSoftwareAI
     ? "from-cyan-500/20 to-indigo-500/10 border-cyan-500/20 text-cyan-600 dark:text-cyan-400"
     : "from-primary/20 to-indigo-500/10 border-primary/20 text-primary";
+
+  useEffect(() => {
+    setActiveStandard(standards?.[0] ?? "");
+  }, [standards]);
+
+  const activeStandardDescription = activeStandard ? getStandardSummary(activeStandard) : "";
+
+  if (isSoftwareAI) {
+    return (
+      <div className="space-y-0">
+        <section className="relative overflow-hidden bg-background py-16 md:py-24 border-b border-border min-h-screen flex items-center">
+          <div className="page-container relative z-10">
+            <AnimatedSection>
+              <div className="grid lg:grid-cols-5 gap-8 lg:gap-10 items-start">
+                <div className="lg:col-span-3 space-y-4">
+                  <div className="inline-flex items-center gap-2 border border-border rounded-full px-4 py-1.5 bg-card">
+                    <span className={`w-1.5 h-1.5 rounded-full ${accentDotClass}`} />
+                    <span className="text-muted-foreground text-xs font-bold uppercase tracking-widest">Service Overview</span>
+                  </div>
+                  <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-tight">{subService.name}</h2>
+                  <div className="space-y-3">
+                    {subService.overview.map((para, i) => (
+                      <p key={i} className="text-muted-foreground leading-relaxed text-[15px]">{para}</p>
+                    ))}
+                  </div>
+                  <div className={`pt-2 border-l-2 ${accentBorderClass} pl-4`}>
+                    <p className="text-sm font-medium text-foreground/80 italic">{subService.tagline}</p>
+                  </div>
+                </div>
+                <div className="lg:col-span-2">
+                  <div className="relative rounded-2xl overflow-hidden aspect-[4/3] shadow-2xl shadow-black/20 border border-border">
+                    <img src={subHeroImage} alt={subService.name} loading="lazy" className="absolute inset-0 w-full h-full object-cover" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+                    <div className="absolute top-3 left-3 inline-flex items-center gap-1.5 px-2.5 py-1.5 rounded-full text-[10px] font-bold uppercase tracking-widest bg-cyan-500/95 text-slate-900">
+                      <SubIcon className="w-3 h-3" /> {badgeLabel}
+                    </div>
+                    <div className="absolute bottom-4 left-4 right-4">
+                      <h3 className="font-heading text-white text-lg font-bold leading-tight drop-shadow">{subService.name}</h3>
+                      <p className="text-white/70 text-xs mt-1 line-clamp-2">{subService.tagline}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden py-16 md:py-24 border-b border-border">
+          <div className="absolute inset-0">
+            <img
+              src="/assets/highlights-bg.jfif"
+              alt=""
+              aria-hidden="true"
+              className="h-full w-full object-cover object-center"
+            />
+            <div className="absolute inset-0 bg-white/68 dark:bg-slate-950/78" />
+            <div className="absolute inset-0 bg-gradient-to-b from-white/12 via-white/6 to-white/18 dark:from-slate-950/35 dark:via-slate-950/28 dark:to-black/48" />
+          </div>
+          <div className="page-container relative z-10">
+            <AnimatedSection>
+              <div className="mb-6 pb-3 border-b border-border">
+                <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Highlights</p>
+                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Key Features & Benefits</h2>
+              </div>
+              <ServiceHighlightsCurve points={subService.keyPoints} icons={subPageIcons} variant={isSoftwareAI ? "software-ai" : "default"} />
+            </AnimatedSection>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-background py-16 md:py-24 border-b border-border">
+          <div className="page-container relative z-10">
+            <AnimatedSection>
+              <div className="mb-6">
+                <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>What You Get</p>
+                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Deliverables</h2>
+              </div>
+              <div className="grid gap-8 lg:grid-cols-[360px_minmax(0,1fr)] lg:items-start">
+                <div className="flex h-full flex-col items-center justify-center rounded-[2rem] border border-border bg-card/80 p-10 text-center shadow-sm">
+                  <div className="flex items-center justify-center">
+                    <img
+                      src={deliverablesVisualSrc}
+                      alt="Deliverables icon"
+                      className="h-28 w-28 object-contain"
+                      style={{ filter: "grayscale(1) brightness(0.68) invert(0.5)" }}
+                    />
+                  </div>
+                  <div className="mt-6">
+                  </div>
+                  <p className="mt-4 max-w-xs text-base sm:text-lg leading-relaxed text-muted-foreground">
+                    A clear breakdown of what’s included, so you know exactly what you’ll receive.
+                  </p>
+                </div>
+                <div className="rounded-[2rem] border border-border bg-card/80 p-6 shadow-sm">
+                  <div className="grid gap-3">
+                    {subService.deliverables.map((del, idx) => (
+                      <motion.div
+                        key={del}
+                        initial={{ opacity: 0, x: -10 }}
+                        whileInView={{ opacity: 1, x: 0 }}
+                      viewport={{ once: true }}
+                      transition={{ delay: idx * 0.05 }}
+                      className={`flex items-center gap-3 p-4 rounded-xl border border-border bg-card transition-colors group ${isSoftwareAI ? "hover:border-cyan-400/40" : "hover:border-primary/40"}`}
+                    >
+                        <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors ${accentDeliverableBgClass}`}>
+                          <span className="text-sm font-bold leading-none">{String(idx + 1).padStart(2, "0")}</span>
+                        </div>
+                        <span className="text-base sm:text-lg font-medium text-foreground">{del}</span>
+                      </motion.div>
+                    ))}
+                  </div>
+                </div>
+              </div>
+              <div className="mt-8 border-b border-border" />
+            </AnimatedSection>
+
+            {standards && (
+              <AnimatedSection className="mt-14">
+                <section className="relative overflow-hidden rounded-[2.5rem] border border-border">
+                  <div className="absolute inset-0">
+                    <img
+                      src="/assets/compliance-bg.webp"
+                      alt=""
+                      aria-hidden="true"
+                      className="h-full w-full object-cover object-center"
+                    />
+                    <div className="absolute inset-0 bg-white/68 dark:bg-slate-950/78" />
+                    <div className="absolute inset-0 bg-gradient-to-b from-white/18 via-white/8 to-white/24 dark:from-slate-950/40 dark:via-slate-950/35 dark:to-black/55" />
+                  </div>
+                  <div className="relative z-10 px-5 py-8 sm:px-8 sm:py-10">
+                    <div className="mb-6 text-center">
+                      <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Compliance</p>
+                      <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">{standardsHeading ?? "Standards"}</h2>
+                      <p className="mx-auto mt-2 max-w-2xl text-sm sm:text-base leading-relaxed text-muted-foreground">
+                        Built around the standards that keep medical software safe, reliable, and compliant.
+                      </p>
+                    </div>
+                    <div className="min-h-[60vh] flex flex-col justify-center gap-6">
+                      <div className="flex flex-wrap justify-center gap-4">
+                        {standards.map((std) => {
+                          const selected = std === activeStandard;
+                          return (
+                            <div key={std} className="flex flex-col items-center gap-2">
+                              <button
+                                type="button"
+                                onClick={() => setActiveStandard(std)}
+                                className={`inline-flex items-center gap-2 px-4 py-2.5 rounded-full border text-sm font-semibold shadow-sm transition-all ${
+                                  selected
+                                    ? "border-cyan-400/60 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300"
+                                    : "border-cyan-500/25 bg-background/90 text-foreground hover:border-cyan-400/50 hover:bg-cyan-500/5"
+                                }`}
+                              >
+                                <ShieldCheck className={`w-4 h-4 shrink-0 ${selected ? "text-cyan-600 dark:text-cyan-300" : "text-cyan-600 dark:text-cyan-400"}`} />
+                                {std}
+                              </button>
+                            </div>
+                          );
+                        })}
+                      </div>
+                      {activeStandard && (
+                        <div className="rounded-[2rem] border border-border bg-card/90 p-6 sm:p-8 shadow-sm">
+                          <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
+                            <div className="max-w-3xl">
+                              <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground">{activeStandard}</h3>
+                              <p className="mt-4 text-sm sm:text-base leading-relaxed text-foreground/85">
+                                {activeStandardDescription}
+                              </p>
+                              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                                This reference helps define the evidence trail, verification depth, and documentation quality expected for the service.
+                              </p>
+                            </div>
+                            <div className="flex flex-wrap gap-2 self-start">
+                              {getStandardOfficialLinks(activeStandard).map((link) => (
+                                <a
+                                  key={link.href}
+                                  href={link.href}
+                                  target="_blank"
+                                  rel="noreferrer"
+                                  className="inline-flex items-center gap-1 rounded-full border border-cyan-500/25 bg-cyan-500/5 px-3 py-1.5 text-xs font-semibold text-cyan-700 dark:text-cyan-300 hover:border-cyan-400/50 hover:bg-cyan-500/10 transition-colors"
+                                >
+                                  View Doc
+                                  <ArrowRight className="h-3.5 w-3.5" />
+                                </a>
+                              ))}
+                            </div>
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </section>
+              </AnimatedSection>
+            )}
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-secondary/20 py-16 md:py-24 border-b border-border">
+          <div className="page-container relative z-10">
+            <AnimatedSection>
+              <div className="mb-6 pb-3 border-b border-border">
+                <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Methodology</p>
+                <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Our Approach</h2>
+              </div>
+              <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                {approachSteps.map((s, i) => (
+                  <motion.div
+                    key={s.step}
+                    initial={{ opacity: 0, y: 16 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ delay: i * 0.08 }}
+                    className={`relative group bg-card border border-border rounded-2xl p-5 hover:shadow-lg transition-all ${isSoftwareAI ? "hover:border-cyan-400/40" : "hover:border-primary/40"}`}
+                  >
+                    <div className="flex items-start gap-4">
+                      <div className="font-heading text-6xl font-black text-primary/7 leading-none select-none shrink-0 -mt-2">
+                        {s.step}
+                      </div>
+                      <div className="min-w-0 flex-1">
+                        <h4 className="font-heading text-base sm:text-lg font-bold text-foreground mb-2">{s.title}</h4>
+                        <p className="text-muted-foreground text-sm sm:text-base leading-relaxed">{s.desc}</p>
+                      </div>
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection className="mt-14">
+              <ServiceCapabilitiesBlock
+                capabilities={capabilities}
+                variant="software-ai"
+              />
+            </AnimatedSection>
+
+            <AnimatedSection className="mt-14">
+              <ServiceWhyRMTBlock items={whyRmt ?? []} variant="software-ai" />
+            </AnimatedSection>
+          </div>
+        </section>
+
+        {closingNote && (
+          <section className="bg-background py-16 md:py-20">
+            <div className="page-container">
+              <AnimatedSection>
+                <p className="max-w-3xl text-muted-foreground text-sm leading-relaxed border-l-2 border-cyan-400/40 pl-4">
+                  {closingNote}
+                </p>
+              </AnimatedSection>
+            </div>
+          </section>
+        )}
+      </div>
+    );
+  }
 
   return (
     <div className="space-y-14">
@@ -3062,24 +3518,7 @@ function SubServiceContent({
           <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>Highlights</p>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Key Features & Benefits</h2>
         </div>
-        <div className="grid sm:grid-cols-2 gap-4">
-          {subService.keyPoints.map((point, idx) => {
-            const HlIcon = subPageIcons[idx % subPageIcons.length];
-            return (
-              <motion.div key={point}
-                initial={{ opacity: 0, y: 14 }} whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }} transition={{ delay: idx * 0.06 }}
-                className={`group flex items-start gap-4 p-5 rounded-2xl border border-border bg-card shadow-sm hover:shadow-md transition-all duration-300 ${accentCardHoverClass}`}>
-                <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border group-hover:scale-105 transition-transform ${accentIconContainerClass}`}>
-                  <HlIcon className="h-4 w-4" />
-                </div>
-                <div className="flex-1">
-                  <p className="text-sm font-semibold text-foreground leading-snug group-hover:text-primary transition-colors">{point}</p>
-                </div>
-              </motion.div>
-            );
-          })}
-        </div>
+        <ServiceHighlightsCurve points={subService.keyPoints} icons={subPageIcons} variant={isSoftwareAI ? "software-ai" : "default"} />
       </AnimatedSection>
 
       {isSqa && <SqaCoreServicesBlock />}
@@ -3087,44 +3526,66 @@ function SubServiceContent({
       {whyRmt && <ServiceWhyRMTBlock items={whyRmt} variant={isSoftwareAI ? "software-ai" : "default"} />}
 
       {/* ── Key metrics / achievements ── */}
-      {subServiceStats ? (
-        <KeyMetricsSection
-          stats={subServiceStats}
-          variant={isSoftwareAI ? "software-ai" : "default"}
-          eyebrow={metricsHeading?.eyebrow}
-          heading={metricsHeading?.heading}
-        />
-      ) : (
-        !isSqa &&
-        SERVICE_SIDEBAR_STATS[service.slug] &&
-        service.slug !== "bmd" &&
-        service.slug !== "mbl-laboratory" && (
+      {!isSoftwareAI && (
+        subServiceStats ? (
           <KeyMetricsSection
-            stats={SERVICE_SIDEBAR_STATS[service.slug]}
-            variant={isSoftwareAI ? "software-ai" : "default"}
+            stats={subServiceStats}
+            variant="default"
+            eyebrow={metricsHeading?.eyebrow}
+            heading={metricsHeading?.heading}
           />
+        ) : (
+          !isSqa &&
+          SERVICE_SIDEBAR_STATS[service.slug] &&
+          service.slug !== "bmd" &&
+          service.slug !== "mbl-laboratory" && (
+            <KeyMetricsSection
+              stats={SERVICE_SIDEBAR_STATS[service.slug]}
+              variant="default"
+            />
+          )
         )
       )}
 
       {/* ── Deliverables — styled grid ── */}
       <AnimatedSection>
-        <div className="mb-6 pb-3 border-b border-border">
+        <div className="mb-6">
           <p className={`text-xs font-bold uppercase tracking-widest mb-1 ${accentTextClass}`}>What You Get</p>
           <h2 className="font-heading text-2xl sm:text-3xl font-bold text-foreground">Deliverables</h2>
         </div>
-        <div className="grid sm:grid-cols-2 gap-3">
-          {subService.deliverables.map((del, idx) => (
-            <motion.div key={del}
-              initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
-              viewport={{ once: true }} transition={{ delay: idx * 0.05 }}
-              className={`flex items-center gap-3 p-4 rounded-xl border border-border bg-card transition-colors group ${isSoftwareAI ? "hover:border-cyan-400/40" : "hover:border-primary/40"}`}>
-              <div className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-lg transition-colors ${accentDeliverableBgClass}`}>
-                <CheckCircle className="h-4 w-4" />
-              </div>
-              <span className="text-sm font-medium text-foreground">{del}</span>
-            </motion.div>
-          ))}
+        <div className="grid gap-8 lg:grid-cols-[360px_minmax(0,1fr)] lg:items-start">
+          <div className="flex h-full flex-col items-center justify-center rounded-[2rem] border border-border bg-card/80 p-10 text-center shadow-sm">
+            <div className="flex items-center justify-center">
+              <img
+                src={deliverablesVisualSrc}
+                alt="Deliverables icon"
+                className="h-28 w-28 object-contain"
+                style={{ filter: "grayscale(1) brightness(0.68) invert(0.5)" }}
+              />
+            </div>
+            <div className="mt-6">
+            </div>
+            <p className="mt-4 max-w-xs text-base sm:text-lg leading-relaxed text-muted-foreground">
+              A clear breakdown of what’s included, so you know exactly what you’ll receive.
+            </p>
+          </div>
+          <div className="rounded-[2rem] border border-border bg-card/80 p-6 shadow-sm">
+            <div className="grid gap-3">
+              {subService.deliverables.map((del, idx) => (
+                <motion.div key={del}
+                  initial={{ opacity: 0, x: -10 }} whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }} transition={{ delay: idx * 0.05 }}
+                  className={`flex items-center gap-3 p-4 rounded-xl border border-border bg-card transition-colors group ${isSoftwareAI ? "hover:border-cyan-400/40" : "hover:border-primary/40"}`}>
+                  <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full transition-colors ${accentDeliverableBgClass}`}>
+                    <span className="text-sm font-bold leading-none">{String(idx + 1).padStart(2, "0")}</span>
+                  </div>
+                  <span className="text-base sm:text-lg font-medium text-foreground">{del}</span>
+                </motion.div>
+              ))}
+            </div>
+          </div>
         </div>
+        <div className="mt-8 border-b border-border" />
       </AnimatedSection>
 
       {/* ── Standards ── */}
@@ -3250,7 +3711,7 @@ export function ServiceDetail({
     <div className="bg-background min-h-screen pt-20">
 
       {/* HERO — cinematic for ALL services */}
-      <section className={`relative bg-[#060d17] overflow-hidden flex items-center py-16 ${isBmd || isMbl ? "min-h-[62vh] sm:min-h-[68vh]" : "min-h-[80vh]"}`}>
+      <section className={`relative bg-[#060d17] overflow-hidden flex items-center ${isProductDevelopment ? "min-h-[calc(100vh-5rem)] py-0" : `py-16 ${isBmd || isMbl ? "min-h-[62vh] sm:min-h-[68vh]" : "min-h-[80vh]"}`}`}>
         {isMbl ? (
           <MblHeroVideoBackground />
         ) : (
@@ -3273,12 +3734,6 @@ export function ServiceDetail({
 
         <div className={`${containerClass} relative z-10`}>
           <AnimatedSection>
-            <nav className="flex items-center gap-2 text-sm text-white/50 mb-8">
-              <Link href="/services" className="hover:text-white transition-colors">Services</Link>
-              <ChevronRight className="w-4 h-4" />
-              <span className="text-white">{service.name}</span>
-            </nav>
-
             <div className="max-w-4xl">
               {!isQualityTesting && (
                 <div className={`inline-flex items-center gap-2.5 rounded-full px-5 py-2 mb-8 backdrop-blur-sm border ${isSoftwareAI ? "bg-cyan-400/10 border-cyan-400/25" : "bg-white/8 border-white/20"}`}>
@@ -3337,13 +3792,14 @@ export function ServiceDetail({
         </div>
       </section>
 
+      {isProductDevelopment && <ProductDevelopmentMetricsStrip />}
+
       {/* OVERVIEW */}
-      <section className="relative overflow-x-clip bg-background py-16">
+      <section className="relative overflow-x-clip bg-background pt-10 pb-16">
         {isSoftwareAI ? <SoftwareAIDecorLayer /> : null}
         <SoftwareIconsScatterBg />
         <div className={`${containerClass} relative z-10`}>
-          <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
-            <div className="lg:col-span-2 space-y-10">
+          <div className="space-y-10">
 
               {!isBmd && !isMbl && !isManufacturing && !isProductionEquipment && (
               <AnimatedSection>
@@ -3356,44 +3812,7 @@ export function ServiceDetail({
               </AnimatedSection>
               )}
 
-              {/* SUB-SERVICES — rich image cards */}
-              <AnimatedSection>
-                <div className="flex items-end justify-between gap-4 mb-5 pb-3 border-b border-border">
-                  <h2 className="font-heading text-3xl font-bold text-foreground">Services Included</h2>
-                  <span className={`hidden sm:inline-flex text-[11px] font-bold px-2.5 py-1 rounded-full border shrink-0 ${
-                    isSoftwareAI
-                      ? "text-cyan-600 bg-cyan-500/10 border-cyan-500/20"
-                      : "text-primary/70 bg-primary/8 border-primary/15"
-                  }`}>
-                    {service.subServices.length} services
-                  </span>
-                </div>
-                <div className="grid sm:grid-cols-2 gap-5">
-                  {service.subServices.map((sub, i) => {
-                    const img = isSoftwareAI
-                      ? SOFTWARE_AI_SUB_IMAGES[sub.slug]
-                      : (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? [])[i % Math.max(1, (SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? []).length)];
-                    const SubIcon = isSoftwareAI
-                      ? (SOFTWARE_AI_SUB_ICONS[sub.slug] ?? CheckCircle)
-                      : (SERVICE_SCATTER_ICONS[service.slug]?.[i % (SERVICE_SCATTER_ICONS[service.slug]?.length ?? 1)] ?? CheckCircle);
-
-                    return (
-                      <RichSubServiceCard
-                        key={sub.slug}
-                        sub={sub}
-                        service={service}
-                        href={`/services/${service.slug}/${sub.slug}`}
-                        image={img}
-                        Icon={SubIcon}
-                        delay={i * 0.06}
-                        variant={isSoftwareAI ? "software-ai" : "default"}
-                      />
-                    );
-                  })}
-                </div>
-              </AnimatedSection>
-
-              {SERVICE_SIDEBAR_STATS[service.slug] && (
+              {SERVICE_SIDEBAR_STATS[service.slug] && !isProductDevelopment && (
                 <KeyMetricsSection
                   stats={SERVICE_SIDEBAR_STATS[service.slug]}
                   variant={isSoftwareAI ? "software-ai" : "default"}
@@ -3428,10 +3847,6 @@ export function ServiceDetail({
               {isDesignFabrication && <DesignFabricationExtras />}
               {isEngineeringProduct && <EngineeringProductExtras />}
 
-            </div>
-
-            {/* SIDEBAR — other services only */}
-            <ServicePageSidebar service={service} />
           </div>
         </div>
 
@@ -3472,8 +3887,6 @@ export function ServiceDetail({
           </div>
         </section>
       )}
-
-      <ServicePageFooterCta service={service} isSoftwareAI={isSoftwareAI} />
 
     </div>
   );
@@ -3549,6 +3962,63 @@ export function SubServiceDetail({
   const subHeroCarouselImages = isSoftwareAI
     ? [subHeroImage, ...SOFTWARE_AI_HERO_IMAGES.filter((img) => img !== subHeroImage).slice(0, 4)]
     : [subHeroImage, ...(SERVICE_GENERIC_SUB_IMAGES[service.slug] ?? FALLBACK_IMAGES).filter((img) => img !== subHeroImage).slice(0, 3)];
+
+  if (isSoftwareAI) {
+    const softwareAiStats = SERVICE_SIDEBAR_STATS["software-ai"] ?? [];
+
+    return (
+      <div className="bg-background min-h-screen">
+        <CinematicPageHero
+          eyebrow="Software & AI Solutions"
+          title={subService.name}
+          description={subService.tagline}
+          backgroundImage={subHeroImage}
+          fullHeight
+        >
+          <Button
+            asChild
+            size="lg"
+            className="rounded-xl px-8 bg-gradient-to-r from-cyan-400 to-cyan-500 text-slate-900 hover:from-cyan-300 hover:to-cyan-400 font-bold shadow-lg shadow-cyan-500/30"
+          >
+            <Link href="/contact">Get a Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
+          </Button>
+          <Button
+            asChild
+            size="lg"
+            variant="outline"
+            className="rounded-xl px-8 border-white/20 text-white hover:bg-white/10 hover:text-white"
+          >
+            <Link href={`/services/${service.slug}`}>Back to Software & AI</Link>
+          </Button>
+        </CinematicPageHero>
+
+        <section className="border-b border-white/10 bg-primary">
+          <div className="page-container py-6 md:py-8">
+            <div className="grid grid-cols-3 divide-x divide-white/15">
+              {softwareAiStats.map((stat) => (
+                <div key={stat.label} className="text-center text-white px-3 py-2.5">
+                  <p className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold leading-none">{stat.value}</p>
+                  <p className="text-white/70 text-[10px] sm:text-xs uppercase tracking-wider mt-1">{stat.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative overflow-hidden bg-background py-16">
+          <SoftwareAIDecorLayer />
+          <SoftwareIconsScatterBg />
+          <SubServiceContent
+            subService={subService}
+            service={service}
+            subHeroImage={subHeroImage}
+            subPageIcons={subPageIcons}
+          />
+        </section>
+
+      </div>
+    );
+  }
 
   return (
     <div className="bg-background min-h-screen pt-20">
@@ -3697,26 +4167,17 @@ export function SubServiceDetail({
           {isSoftwareAI ? <SoftwareAIDecorLayer /> : null}
           <SoftwareIconsScatterBg />
           <div className={`${containerClass} relative z-10`}>
-            <div className="grid lg:grid-cols-3 gap-8 lg:gap-10">
-              <div className="lg:col-span-2 space-y-10">
-                <SubServiceContent
-                  subService={subService}
-                  service={service}
-                  subHeroImage={subHeroImage}
-                  subPageIcons={subPageIcons}
-                />
-              </div>
-              <ServicePageSidebar service={service} activeSubSlug={subService.slug} />
+            <div className="space-y-10">
+              <SubServiceContent
+                subService={subService}
+                service={service}
+                subHeroImage={subHeroImage}
+                subPageIcons={subPageIcons}
+              />
             </div>
           </div>
         </section>
       )}
-
-      <ServicePageFooterCta
-        service={service}
-        isSoftwareAI={isSoftwareAI}
-        subServiceName={subService.name}
-      />
 
     </div>
   );

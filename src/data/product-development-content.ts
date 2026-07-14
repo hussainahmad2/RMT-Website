@@ -11,7 +11,6 @@ export const PRODUCT_DEVELOPMENT_KEY_METRICS = [
   { label: "Regulatory Standards & Frameworks", value: "50+" },
   { label: "Product Development Lifecycle Stages", value: "6+" },
   { label: "Years Combined Industry Experience", value: "15+" },
-  { label: "Turnkey Development Services", value: "End-to-End" },
 ] as const;
 
 export const PRODUCT_DEVELOPMENT_LICENCES = ["DRAP"] as const;
