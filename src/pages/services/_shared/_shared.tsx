@@ -975,11 +975,160 @@ function ManufacturingServiceExtras() {
 const PD_PHASE_ICONS = [Lightbulb, PenTool, Boxes, FlaskConical, Factory, ShieldCheck] as const;
 const PD_REG_ICONS = [ShieldCheck, ScrollText, FileText, ClipboardCheck, Globe] as const;
 
+function ProductDevelopmentCommercializationList() {
+  return (
+    <div className="relative mx-auto max-w-5xl">
+      {/* Continuous spine — desktop: centered, mobile: left rail */}
+      <div className="pointer-events-none absolute inset-y-3 left-5 w-px bg-gradient-to-b from-primary/0 via-primary/30 to-primary/0 lg:left-1/2 lg:-translate-x-1/2" />
+
+      <div className="space-y-6 lg:space-y-3">
+        {PRODUCT_DEVELOPMENT_MANUFACTURING.map((svc, i) => {
+          const isEven = i % 2 === 0;
+          const num = String(i + 1).padStart(2, "0");
+
+          const header = (
+            <div className="flex items-center gap-4">
+              <div className="relative flex h-16 w-16 shrink-0 items-center justify-center">
+                <div className="absolute inset-0 rounded-full bg-primary/12 ring-1 ring-primary/20 shadow-[0_0_0_10px_rgba(59,130,246,0.08)] transition-all duration-300 group-hover/card:bg-primary/18 group-hover/card:shadow-[0_0_0_12px_rgba(59,130,246,0.12)]" />
+                <div className="absolute inset-[0.38rem] rounded-full border border-primary/20 bg-background/70 transition-colors duration-300 group-hover/card:border-primary/30" />
+                <span className="relative z-10 font-heading text-lg font-bold text-primary">{num}</span>
+              </div>
+              <h3 className="font-heading text-xl font-bold leading-tight text-foreground">{svc.title}</h3>
+            </div>
+          );
+
+          const card = (
+            <div className="relative w-full">
+              {/* Invisible sizer: reserves the fully-expanded footprint so this slot's
+                  height never changes, which means siblings never move. */}
+              <div className="invisible rounded-2xl border p-6 sm:p-7" aria-hidden="true">
+                {header}
+                <p className="mt-3 text-sm leading-relaxed">{svc.description}</p>
+              </div>
+
+              {/* Visible card, pinned to the top of the reserved box. It genuinely
+                  grows/shrinks in its own flow — it just never needs more room
+                  than the sizer already reserved. */}
+              <motion.div
+                whileHover={{ y: -2 }}
+                className="group/card absolute inset-x-0 top-0 rounded-2xl border border-border bg-card/90 p-6 shadow-sm transition-all duration-300 hover:border-primary/30 hover:shadow-lg sm:p-7"
+              >
+                {header}
+                <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover/card:grid-rows-[1fr]">
+                  <div className="overflow-hidden">
+                    <p className="mt-3 text-sm leading-relaxed text-muted-foreground opacity-0 transition-opacity duration-300 delay-100 ease-out group-hover/card:opacity-100">
+                      {svc.description}
+                    </p>
+                  </div>
+                </div>
+              </motion.div>
+            </div>
+          );
+
+          return (
+            <motion.div
+              key={svc.title}
+              initial={{ opacity: 0, y: 18 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className="relative grid grid-cols-[2.5rem_1fr] items-start gap-4 lg:grid-cols-[1fr_3.5rem_1fr] lg:items-center lg:gap-0"
+            >
+              {/* Mobile node, sits on the rail */}
+              <div className="relative z-10 flex justify-center lg:hidden">
+                <div className="mt-6 h-3 w-3 rounded-full bg-primary shadow-[0_0_0_6px_rgba(59,130,246,0.12)]" />
+              </div>
+
+              {/* Mobile card */}
+              <div className="lg:hidden">{card}</div>
+
+              {/* Desktop: left slot */}
+              <div className="hidden lg:block lg:col-start-1">
+                {isEven && <div className="ml-auto max-w-md pr-8">{card}</div>}
+              </div>
+
+              {/* Desktop: center node + connector stub */}
+              <div className="relative hidden lg:col-start-2 lg:flex lg:items-center lg:justify-center">
+                <div
+                  className={`absolute top-1/2 h-px w-full -translate-y-1/2 bg-primary/25 ${
+                    isEven ? "right-1/2" : "left-1/2"
+                  }`}
+                />
+                <div className="relative z-10 h-3 w-3 rounded-full bg-primary shadow-[0_0_0_6px_rgba(59,130,246,0.12)]" />
+              </div>
+
+              {/* Desktop: right slot */}
+              <div className="hidden lg:block lg:col-start-3">
+                {!isEven && <div className="mr-auto max-w-md pl-8">{card}</div>}
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function ProductDevelopmentWhyChooseSection() {
+  const staggerClasses = [
+    "lg:translate-y-0",
+    "lg:translate-y-8",
+    "lg:translate-y-16",
+    "lg:translate-y-0",
+    "lg:translate-y-8",
+    "lg:translate-y-16",
+  ] as const;
+
+  return (
+    <div className="mb-4 grid gap-8 lg:grid-cols-[minmax(0,0.3fr)_minmax(0,0.7fr)] lg:items-start">
+      <div className="lg:sticky lg:top-24">
+        <p className="text-xs font-bold uppercase tracking-widest mb-2 text-primary">Why Choose RMT</p>
+        <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground leading-tight">
+          Why Choose RMT for Product Development
+        </h2>
+        <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
+          A focused team for regulated product realization, combining engineering, compliance, and commercialization support in one workflow.
+        </p>
+      </div>
+
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-5">
+        {PRODUCT_DEVELOPMENT_WHY.map((item, i) => {
+          const Icon = [Rocket, Users, ShieldCheck, Cpu, SlidersHorizontal, Zap][i] ?? CheckCircle;
+          return (
+            <motion.div
+              key={item.title}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.05 }}
+              className={`group relative overflow-hidden rounded-2xl border border-border bg-card p-5 shadow-sm transition-all duration-300 hover:border-primary/35 hover:shadow-lg ${staggerClasses[i]}`}
+            >
+              <div className="absolute -right-10 -top-10 h-28 w-28 rounded-full bg-primary/8 blur-2xl transition-opacity group-hover:opacity-80" aria-hidden />
+              <div className="flex items-start gap-3">
+                <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-primary/10 text-primary transition-colors group-hover:bg-primary group-hover:text-primary-foreground">
+                  <Icon className="h-5 w-5" />
+                </div>
+                <div className="min-w-0">
+                  <h3 className="font-heading text-base font-bold text-foreground">{item.title}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.description}</p>
+                </div>
+              </div>
+            </motion.div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
 /* ---- Product Development Wing (main service page) ---- */
 function ProductDevelopmentServiceExtras() {
   return (
     <div className="space-y-0">
-      <FullBleedBlock bgClassName="bg-gradient-to-br from-sky-950/90 via-slate-900 to-blue-950/90 relative overflow-hidden">
+      <FullBleedBlock
+        bgClassName="bg-gradient-to-br from-sky-950/90 via-slate-900 to-blue-950/90 relative overflow-hidden"
+        innerClassName="pb-8 md:pb-10"
+      >
         <div className="absolute top-0 left-1/4 w-96 h-96 bg-sky-500/10 rounded-full blur-3xl" aria-hidden />
         <div className="absolute bottom-0 right-1/4 w-80 h-80 bg-blue-500/10 rounded-full blur-3xl" aria-hidden />
         <AnimatedSection className="relative">
@@ -1024,26 +1173,13 @@ function ProductDevelopmentServiceExtras() {
             title="Turnkey Manufacturing Consultancy Solutions"
             description="Establishing sustainable, GMP-aligned manufacturing operations for long-term commercial success."
           />
-          <IconCardGrid
-            columns={2}
-            cards={PRODUCT_DEVELOPMENT_MANUFACTURING.map((svc) => ({
-              title: svc.title,
-              description: svc.description,
-              icon: Truck,
-            }))}
-          />
+          <ProductDevelopmentCommercializationList />
         </AnimatedSection>
       </FullBleedBlock>
 
       <FullBleedBlock bgClassName="bg-secondary/30">
         <AnimatedSection>
-          <SectionHeading title="Why Choose RMT for Product Development" />
-          <WhyChooseGrid
-            items={PRODUCT_DEVELOPMENT_WHY.map((w, i) => ({
-              ...w,
-              icon: [Rocket, Users, ShieldCheck, Cpu, SlidersHorizontal, Zap][i] ?? CheckCircle,
-            }))}
-          />
+          <ProductDevelopmentWhyChooseSection />
         </AnimatedSection>
       </FullBleedBlock>
     </div>

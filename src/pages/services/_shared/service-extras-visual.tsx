@@ -9,14 +9,16 @@ export function FullBleedBlock({
   bgClassName,
   children,
   className,
+  innerClassName,
 }: {
   bgClassName: string;
   children: React.ReactNode;
   className?: string;
+  innerClassName?: string;
 }) {
   return (
     <div className={cn("relative w-screen left-1/2 -translate-x-1/2 overflow-hidden", className)}>
-      <div className={cn("relative z-10 py-14 md:py-16", bgClassName)}>
+      <div className={cn("relative z-10 py-14 md:py-16", bgClassName, innerClassName)}>
         <div className="page-container">{children}</div>
       </div>
     </div>
@@ -39,7 +41,7 @@ export function SectionHeading({
       {eyebrow && (
         <p
           className={cn(
-            "text-xs font-bold uppercase tracking-[0.2em] mb-2",
+            "text-xs font-bold uppercase tracking-[0.2em] mb-2 whitespace-nowrap",
             light ? "text-white/60" : "text-primary"
           )}
         >
@@ -55,7 +57,7 @@ export function SectionHeading({
         {title}
       </h2>
       {description && (
-        <p className={cn("text-sm md:text-base leading-relaxed", light ? "text-white/70" : "text-muted-foreground")}>
+        <p className={cn("text-sm md:text-base leading-relaxed whitespace-normal sm:whitespace-nowrap", light ? "text-white/70" : "text-muted-foreground")}>
           {description}
         </p>
       )}
@@ -104,7 +106,7 @@ export function LifecycleRoadmap({
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="group flex flex-col items-center text-center px-1"
+                className="group flex h-full flex-col items-center text-center px-1"
               >
                 <div
                   className={cn(
@@ -119,10 +121,12 @@ export function LifecycleRoadmap({
                 <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-primary mb-1.5">
                   Phase {String(i + 1).padStart(2, "0")}
                 </span>
-                <p className={cn("text-xs font-semibold leading-snug px-1", titleClass)}>{step.title}</p>
+                <div className="min-h-[3.5rem] flex items-start justify-center px-1">
+                  <p className={cn("text-xs font-semibold leading-snug", titleClass)}>{step.title}</p>
+                </div>
                 <div
                   className={cn(
-                    "mt-4 w-full rounded-2xl border px-4 py-3 text-left transition-all duration-300 opacity-0 -translate-y-2 max-h-0 overflow-hidden group-hover:opacity-100 group-hover:translate-y-0 group-hover:max-h-80",
+                    "mt-4 w-full min-h-[10rem] rounded-2xl border px-4 pt-3 pb-2.5 text-left transition-all duration-300",
                     cardClass
                   )}
                 >
