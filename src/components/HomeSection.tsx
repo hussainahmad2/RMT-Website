@@ -25,6 +25,7 @@ interface HomeSectionProps {
   dots?: boolean;
   rings?: boolean;
   ringSide?: "left" | "right" | "both";
+  darkOverlay?: boolean;
   id?: string;
   as?: "section" | "div";
 }
@@ -59,6 +60,7 @@ export function HomeSection({
   dots = false,
   rings = false,
   ringSide = "right",
+  darkOverlay = false,
   id,
   as: Tag = "section",
 }: HomeSectionProps) {
@@ -129,6 +131,13 @@ export function HomeSection({
             />
           )}
         </div>
+      )}
+
+      {darkOverlay && (
+        <div
+          className="absolute inset-0 bg-transparent dark:bg-black/40 pointer-events-none"
+          aria-hidden
+        />
       )}
 
       {dots && (

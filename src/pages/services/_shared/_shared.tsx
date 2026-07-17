@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CinematicPageHero } from "@/components/CinematicPageHero";
 import { useSEO } from "@/lib/seo";
 import {
@@ -114,6 +115,79 @@ const ENGINEERING_SERVICE_SLUGS = new Set([
   "design-fabrication",
   "engineering-product-development",
 ]);
+
+const SUBSERVICE_SUMMARY_SERVICE_SLUGS = new Set([
+  "quality-testing",
+  "automation-services",
+  "design-fabrication",
+  "engineering-product-development",
+  "bmd",
+  "mbl-laboratory",
+  "contract-manufacturing",
+  "production-equipment-engineering",
+]);
+
+const FULL_FRAME_SERVICE_SLUGS = new Set([
+  "quality-testing",
+  "automation-services",
+  "design-fabrication",
+  "engineering-product-development",
+  "bmd",
+  "mbl-laboratory",
+  "contract-manufacturing",
+  "production-equipment-engineering",
+]);
+
+const SUBSERVICE_SUMMARY_META: Record<string, { eyebrow: string; heading: string; description: string }> = {
+  "quality-testing": {
+    eyebrow: "Service Breakdown",
+    heading: "Quality services",
+    description:
+      "QA, QC, and software quality are presented together so the full scope of the department is visible without opening separate subpages.",
+  },
+  "automation-services": {
+    eyebrow: "Service Breakdown",
+    heading: "Automation capabilities by discipline",
+    description:
+      "PLC, HMI/SCADA, motion control, and communication are summarized here as one integrated automation stack.",
+  },
+  "design-fabrication": {
+    eyebrow: "Service Breakdown",
+    heading: "Design and fabrication workstreams",
+    description:
+      "Mechanical design, thermal engineering, simulation, and prototyping are grouped into one engineering workflow.",
+  },
+  "engineering-product-development": {
+    eyebrow: "Service Breakdown",
+    heading: "Cross-disciplinary engineering focus areas",
+    description:
+      "Biomedical systems, R&D engineering, and industrial safety are shown together as a single product-development capability set.",
+  },
+  "bmd": {
+    eyebrow: "Service Breakdown",
+    heading: "Biomaterials and drug innovation scope",
+    description:
+      "Material science, chemistry, testing, and validation are grouped into one research and development view.",
+  },
+  "mbl-laboratory": {
+    eyebrow: "Service Breakdown",
+    heading: "Microbiology lab services at a glance",
+    description:
+      "Sterility, endotoxin, microbial limit, and pathogen testing are collected into a single laboratory summary.",
+  },
+  "contract-manufacturing": {
+    eyebrow: "Service Breakdown",
+    heading: "Manufacturing capabilities by stage",
+    description:
+      "Quality, cleanroom infrastructure, validation, and scale-up are summarized as a production readiness path.",
+  },
+  "production-equipment-engineering": {
+    eyebrow: "Service Breakdown",
+    heading: "Equipment engineering lifecycle summary",
+    description:
+      "Custom equipment design, line development, validation, automation, and support are shown in one consolidated view.",
+  },
+};
 
 /* ---- Engineering methodology (automation, design & product development) ---- */
 function EngineeringMethodology() {
@@ -228,35 +302,7 @@ function EngineeringProductExtras() {
         </div>
       </AnimatedSection>
 
-      <AnimatedSection>
-        <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Specialized Engineering Areas</h2>
-        <div className="grid md:grid-cols-3 gap-6">
-          <div className="bg-card border border-border rounded-xl p-5">
-            <h3 className="font-heading font-bold text-foreground mb-3">Biomedical Systems</h3>
-            <ul className="space-y-1.5">
-              {ENGINEERING_SPECIALIZED_AREAS.biomedical.map((item) => (
-                <li key={item} className="text-xs text-muted-foreground">{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-card border border-border rounded-xl p-5">
-            <h3 className="font-heading font-bold text-foreground mb-3">Research & Development</h3>
-            <ul className="space-y-1.5">
-              {ENGINEERING_SPECIALIZED_AREAS.researchDevelopment.map((item) => (
-                <li key={item} className="text-xs text-muted-foreground">{item}</li>
-              ))}
-            </ul>
-          </div>
-          <div className="bg-card border border-border rounded-xl p-5">
-            <h3 className="font-heading font-bold text-foreground mb-3">Industrial Safety</h3>
-            <ul className="space-y-1.5">
-              {ENGINEERING_SPECIALIZED_AREAS.industrialSafety.map((item) => (
-                <li key={item} className="text-xs text-muted-foreground">{item}</li>
-              ))}
-            </ul>
-          </div>
-        </div>
-      </AnimatedSection>
+      <ServiceSubServiceSummarySection service={ALL_SERVICES.find((svc) => svc.slug === "engineering-product-development")!} />
 
       <AnimatedSection>
         <h2 className="font-heading text-3xl font-bold text-foreground mb-4 pb-3 border-b border-border">Other Product Design Services</h2>
@@ -1197,16 +1243,16 @@ function QualityDepartmentPanel({ dept }: { dept: QualityDepartment }) {
 
   return (
     <div className="space-y-8">
-      <div className="flex items-start gap-4 p-6 rounded-2xl border border-border bg-card shadow-sm">
-        <div className="w-14 h-14 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 text-primary">
+      <div className="flex items-start gap-4 p-6 rounded-2xl border border-white/15 bg-white/8 backdrop-blur-md shadow-lg shadow-black/10">
+        <div className="w-14 h-14 rounded-xl bg-white/10 flex items-center justify-center shrink-0 text-sky-200 border border-white/15">
           <Icon className="w-7 h-7" />
         </div>
         <div>
-          <h3 className="font-heading font-bold text-foreground text-lg mb-1">{dept.name}</h3>
-          <p className="text-sm text-muted-foreground leading-relaxed">{dept.description}</p>
+          <h3 className="font-heading font-bold text-white text-lg mb-1">{dept.name}</h3>
+          <p className="text-sm text-white/75 leading-relaxed">{dept.description}</p>
           <div className="flex flex-wrap gap-2 mt-3">
             {dept.standards.map((s) => (
-              <span key={s} className="text-xs font-medium px-2.5 py-1 rounded-full bg-primary/8 text-primary border border-primary/15">
+              <span key={s} className="text-xs font-medium px-2.5 py-1 rounded-full bg-white/10 text-sky-100 border border-white/15">
                 {s}
               </span>
             ))}
@@ -1216,8 +1262,8 @@ function QualityDepartmentPanel({ dept }: { dept: QualityDepartment }) {
 
       {dept.sections.map((section) => (
         <div key={section.label}>
-          <h4 className="font-heading font-semibold text-foreground mb-4 flex items-center gap-2">
-            <span className="w-8 h-0.5 bg-primary rounded-full" />
+          <h4 className="font-heading font-semibold text-white mb-4 flex items-center gap-2">
+            <span className="w-8 h-0.5 bg-sky-300 rounded-full" />
             {section.label}
           </h4>
           <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
@@ -1228,23 +1274,23 @@ function QualityDepartmentPanel({ dept }: { dept: QualityDepartment }) {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: ci * 0.04 }}
-                className="group bg-card border border-border rounded-xl p-4 hover:border-primary/30 hover:shadow-md transition-all"
+                className="group rounded-xl border border-white/15 bg-white/8 backdrop-blur-md p-4 hover:border-sky-300/40 hover:bg-white/12 hover:shadow-lg shadow-black/10 transition-all"
               >
                 <div className="flex items-center gap-2 mb-3 flex-wrap">
-                  <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary group-hover:bg-primary group-hover:text-primary-foreground transition-colors shrink-0">
+                  <div className="w-8 h-8 rounded-lg bg-white/10 flex items-center justify-center text-sky-200 border border-white/10 group-hover:bg-sky-300/20 group-hover:text-white transition-colors shrink-0">
                     <CheckCircle className="w-4 h-4" />
                   </div>
-                  <h5 className="font-semibold text-foreground text-sm">{card.title}</h5>
+                  <h5 className="font-semibold text-white text-sm">{card.title}</h5>
                   {card.owner && (
-                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-primary/10 text-primary">
+                    <span className="text-[10px] font-bold px-2 py-0.5 rounded-full bg-white/10 text-sky-100 border border-white/10">
                       {card.owner}
                     </span>
                   )}
                 </div>
                 <ul className="space-y-1.5">
                   {card.items.map((item) => (
-                    <li key={item} className="text-xs text-muted-foreground flex items-start gap-2 leading-relaxed">
-                      <span className="w-1 h-1 rounded-full bg-primary mt-1.5 shrink-0" />
+                    <li key={item} className="text-xs text-white/72 flex items-start gap-2 leading-relaxed">
+                      <span className="w-1 h-1 rounded-full bg-sky-300 mt-1.5 shrink-0" />
                       {item}
                     </li>
                   ))}
@@ -1256,9 +1302,9 @@ function QualityDepartmentPanel({ dept }: { dept: QualityDepartment }) {
       ))}
 
       {dept.footerNote && (
-        <div className="bg-primary/5 border border-primary/15 rounded-xl p-5">
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            <strong className="text-foreground font-medium">Summary: </strong>
+        <div className="rounded-xl border border-white/15 bg-white/8 backdrop-blur-md p-5">
+          <p className="text-sm text-white/75 leading-relaxed">
+            <strong className="text-white font-medium">Summary: </strong>
             {dept.footerNote}
           </p>
         </div>
@@ -1272,47 +1318,49 @@ const QUALITY_WHY_ICONS = [Award, SlidersHorizontal, Microscope, Users] as const
 /* ---- Quality Department Services (main service page) ---- */
 function QualityTestingServiceExtras() {
   const [activeId, setActiveId] = useState(QUALITY_DEPARTMENTS[0].id);
-  const activeDept = QUALITY_DEPARTMENTS.find((d) => d.id === activeId) ?? QUALITY_DEPARTMENTS[0];
 
   return (
     <div className="space-y-0">
       <FullBleedBlock bgClassName="bg-gradient-to-br from-teal-950/90 via-slate-900 to-emerald-950/80 relative overflow-hidden">
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "radial-gradient(circle at 2px 2px, white 1px, transparent 0)", backgroundSize: "28px 28px" }} aria-hidden />
         <AnimatedSection className="relative">
-          <SectionHeading
-            eyebrow="Organisation"
-            title="Quality Departments"
-            description="QD leads all quality activities with collaboration across EMD, SD, BMD, PD, PRD, and Supply Chain — from Research and Development bench to production release."
-            light
-          />
-          <div className="flex flex-wrap gap-2 mb-8">
-            {QUALITY_DEPARTMENTS.map((dept) => {
-              const TabIcon = QUALITY_TAB_ICONS[dept.id] ?? ShieldCheck;
-              const isActive = dept.id === activeId;
-              return (
-                <button
-                  key={dept.id}
-                  type="button"
-                  onClick={() => setActiveId(dept.id)}
-                  className={cn(
-                    "inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-medium transition-all",
-                    isActive
-                      ? "bg-primary text-primary-foreground border-primary shadow-lg shadow-primary/25"
-                      : "bg-white/5 text-white/70 border-white/15 hover:bg-white/10 hover:text-white"
-                  )}
-                >
-                  <TabIcon className="w-4 h-4" />
-                  {dept.tabLabel}
-                </button>
-              );
-            })}
-          </div>
-        </AnimatedSection>
-      </FullBleedBlock>
+          <div className="rounded-[2rem] border border-white/10 bg-white/5 backdrop-blur-md p-5 sm:p-8 shadow-xl shadow-black/10">
+            <SectionHeading
+              eyebrow="Organisation"
+              title="Quality Departments"
+              description="QD leads all quality activities with collaboration across EMD, SD, BMD, PD, PRD, and Supply Chain — from Research and Development bench to production release."
+              light
+            />
 
-      <FullBleedBlock bgClassName="bg-background">
-        <AnimatedSection>
-          <QualityDepartmentPanel dept={activeDept} />
+            <Tabs value={activeId} onValueChange={setActiveId} className="mt-8">
+              <TabsList className="flex h-auto w-full flex-wrap justify-center gap-2 bg-transparent p-0">
+                {QUALITY_DEPARTMENTS.map((dept) => {
+                  const TabIcon = QUALITY_TAB_ICONS[dept.id] ?? ShieldCheck;
+                  return (
+                    <TabsTrigger
+                      key={dept.id}
+                      value={dept.id}
+                      className={cn(
+                        "inline-flex items-center gap-2 px-5 py-2.5 rounded-full border text-sm font-medium transition-all data-[state=active]:shadow-lg data-[state=active]:shadow-primary/25",
+                        "bg-white/5 text-white/70 border-white/15 hover:bg-white/10 hover:text-white data-[state=active]:bg-primary data-[state=active]:text-primary-foreground data-[state=active]:border-primary"
+                      )}
+                    >
+                      <TabIcon className="w-4 h-4" />
+                      {dept.tabLabel}
+                    </TabsTrigger>
+                  );
+                })}
+              </TabsList>
+
+              {QUALITY_DEPARTMENTS.map((dept) => (
+                <TabsContent key={dept.id} value={dept.id} className="mt-8">
+                  <div className="rounded-[1.75rem] border border-white/10 bg-white/5 p-4 sm:p-6">
+                    <QualityDepartmentPanel dept={dept} />
+                  </div>
+                </TabsContent>
+              ))}
+            </Tabs>
+          </div>
         </AnimatedSection>
       </FullBleedBlock>
 
@@ -1604,6 +1652,136 @@ const ServiceBgIcon = ({ slug }: { slug: string }) => {
     </div>
   );
 };
+
+export function ServiceSubServiceSummarySection({ service }: { service: ServiceData }) {
+  const meta = SUBSERVICE_SUMMARY_META[service.slug];
+  if (!meta) return null;
+
+  const [activeIndex, setActiveIndex] = useState(0);
+  const serviceIcons = SERVICE_SCATTER_ICONS[service.slug] ?? [CheckCircle, Layers, Zap, Shield, Star, Globe];
+  const activeSub = service.subServices[activeIndex] ?? service.subServices[0];
+  const ActiveIcon = serviceIcons[activeIndex % serviceIcons.length] ?? CheckCircle;
+
+  useEffect(() => {
+    setActiveIndex(0);
+  }, [service.slug]);
+
+  return (
+    <AnimatedSection className="space-y-8">
+      <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
+        <div className="max-w-3xl space-y-2">
+          {service.slug !== "quality-testing" && (
+            <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">{meta.eyebrow}</p>
+          )}
+          <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">{meta.heading}</h2>
+        </div>
+      </div>
+
+      <div className="flex justify-center">
+        <div className="flex max-w-full flex-wrap justify-center gap-2">
+          {service.subServices.map((sub, index) => {
+            const isActive = index === activeIndex;
+            const TabIcon = serviceIcons[index % serviceIcons.length] ?? CheckCircle;
+
+            return (
+              <button
+                key={sub.slug}
+                type="button"
+                onClick={() => setActiveIndex(index)}
+                aria-pressed={isActive}
+                className={cn(
+                  "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
+                  isActive
+                    ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/15"
+                    : "border-border bg-background/90 text-muted-foreground hover:border-primary/30 hover:text-primary"
+                )}
+              >
+                <TabIcon className="h-4 w-4 shrink-0" />
+                <span className="whitespace-nowrap">{sub.name}</span>
+              </button>
+            );
+          })}
+        </div>
+      </div>
+
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={activeSub.slug}
+          initial={{ opacity: 0, y: 14 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0, y: -10 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          className="overflow-hidden rounded-3xl border border-border bg-background/90 shadow-sm"
+        >
+          <div className="h-1 bg-gradient-to-r from-primary via-primary/60 to-transparent" />
+          <div className="p-5 sm:p-7 lg:p-8">
+            <div className="flex flex-col gap-3 md:flex-row md:items-start md:justify-between">
+              <div className="min-w-0">
+                <h3 className="font-heading text-2xl sm:text-3xl font-bold text-foreground leading-tight">
+                  {activeSub.name}
+                </h3>
+                <p className="mt-3 text-sm sm:text-base font-medium text-foreground/80 leading-relaxed max-w-4xl">
+                  {activeSub.tagline}
+                </p>
+              </div>
+              <div className="grid grid-cols-3 gap-2 sm:gap-3 shrink-0 w-full md:w-auto md:min-w-[300px]">
+                <div className="rounded-2xl border border-border bg-secondary/35 px-4 py-4 text-center">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Overview</p>
+                  <p className="mt-2 font-heading text-2xl font-bold text-foreground">{activeSub.overview.length}</p>
+                </div>
+                <div className="rounded-2xl border border-border bg-secondary/35 px-4 py-4 text-center">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Points</p>
+                  <p className="mt-2 font-heading text-2xl font-bold text-foreground">{activeSub.keyPoints.length}</p>
+                </div>
+                <div className="rounded-2xl border border-border bg-secondary/35 px-4 py-4 text-center">
+                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Deliverables</p>
+                  <p className="mt-2 font-heading text-2xl font-bold text-foreground">{activeSub.deliverables.length}</p>
+                </div>
+              </div>
+            </div>
+
+            <div className="mt-8 space-y-8">
+              <div>
+                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Overview</p>
+                <div className="space-y-3">
+                  {activeSub.overview.map((para, paraIndex) => (
+                    <p key={paraIndex} className="text-sm sm:text-base leading-relaxed text-muted-foreground max-w-5xl">
+                      {para}
+                    </p>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Key Points</p>
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  {activeSub.keyPoints.map((point) => (
+                    <div key={point} className="flex items-start gap-3 rounded-2xl border border-border bg-secondary/20 px-4 py-3">
+                      <CheckCircle className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span className="text-sm sm:text-base leading-relaxed text-foreground/85">{point}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              <div>
+                <p className="mb-3 text-[10px] font-bold uppercase tracking-[0.2em] text-primary">Deliverables</p>
+                <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
+                  {activeSub.deliverables.map((item) => (
+                    <div key={item} className="flex items-start gap-3 rounded-2xl border border-border bg-secondary/20 px-4 py-3">
+                      <Layers className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                      <span className="text-sm sm:text-base leading-relaxed text-foreground/85">{item}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </div>
+        </motion.div>
+      </AnimatePresence>
+    </AnimatedSection>
+  );
+}
 
 /* ---- Stethoscope outline SVG ---- */
 const StethoBg = () => (
@@ -2600,6 +2778,32 @@ function ProductDevelopmentMetricsStrip() {
   );
 }
 
+function ServiceMetricsStrip({ stats }: { stats: { label: string; value: string; icon: React.ElementType }[] }) {
+  const gridClass =
+    stats.length >= 5
+      ? "grid-cols-2 sm:grid-cols-3 lg:grid-cols-5"
+      : stats.length === 4
+        ? "grid-cols-2 lg:grid-cols-4"
+        : stats.length === 3
+          ? "grid-cols-3"
+          : "grid-cols-2";
+
+  return (
+    <section className="border-b border-white/10 bg-primary">
+      <div className="page-container py-8">
+        <div className={`grid ${gridClass} divide-x divide-white/15`}>
+          {stats.map((stat) => (
+            <div key={stat.label} className="text-center text-white px-4 py-2">
+              <p className="font-heading text-2xl sm:text-3xl font-bold leading-none">{stat.value}</p>
+              <p className="text-white/70 text-xs uppercase tracking-wider mt-1">{stat.label}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
 /** @deprecated Use KeyMetricsSection */
 function ServiceKeyMetricsBlock({
   stats,
@@ -2722,7 +2926,7 @@ function ServiceStandardsBlock({
 }
 
 /** Core capabilities — divider line list */
-function ServiceCapabilitiesBlock({
+export function ServiceCapabilitiesBlock({
   capabilities,
   variant = "default",
   title = "Core Capabilities",
@@ -2733,11 +2937,26 @@ function ServiceCapabilitiesBlock({
 }) {
   const isCyan = variant === "software-ai";
   const count = capabilities.length;
+  const isCompact = count > 6;
+  // Ring is h-[76%]/w-[76%] centered => its radius is 38% of the container.
+  // Placing item centers exactly here makes them sit "on" the ring instead of floating above/below it.
+  const RING_RADIUS = 38;
+
   return (
     <AnimatedSection className="mb-0 pb-0">
       <div className="relative mx-auto h-[560px] w-full max-w-4xl sm:h-[600px] lg:h-[620px]">
-        <div className={`absolute left-1/2 top-1/2 h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 ${isCyan ? "border-cyan-400/25 shadow-[0_0_0_1px_rgba(34,211,238,0.10),0_0_24px_rgba(34,211,238,0.08)]" : "border-primary/20 shadow-[0_0_0_1px_rgba(59,130,246,0.08),0_0_24px_rgba(59,130,246,0.06)]"}`} />
-        <div className={`absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-dashed ${isCyan ? "border-cyan-500/35" : "border-primary/25"}`} />
+        <div
+          className={`absolute left-1/2 top-1/2 h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 ${
+            isCyan
+              ? "border-cyan-400/25 shadow-[0_0_0_1px_rgba(34,211,238,0.10),0_0_24px_rgba(34,211,238,0.08)]"
+              : "border-primary/20 shadow-[0_0_0_1px_rgba(59,130,246,0.08),0_0_24px_rgba(59,130,246,0.06)]"
+          }`}
+        />
+        <div
+          className={`absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-dashed ${
+            isCyan ? "border-cyan-500/35" : "border-primary/25"
+          }`}
+        />
         <div
           className={`absolute left-1/2 top-1/2 z-10 flex h-28 w-28 -translate-x-1/2 -translate-y-1/2 flex-col items-center justify-center rounded-full border-2 bg-background/95 text-center shadow-lg sm:h-32 sm:w-32 ${
             isCyan ? "border-cyan-400/70 shadow-cyan-500/10" : "border-primary/70 shadow-primary/10"
@@ -2750,61 +2969,91 @@ function ServiceCapabilitiesBlock({
             Capabilities
           </span>
         </div>
+
         {capabilities.map((cap, i) => {
-          const angleMap =
-            count === 6
-              ? [-90, -30, 30, 90, 150, -150]
-              : Array.from({ length: count }, (_, idx) => (360 / count) * idx - 90);
-          const angle = angleMap[i] ?? ((360 / count) * i - 90);
+          const angle = (360 / count) * i - 90;
           const rad = (angle * Math.PI) / 180;
-          const radius = count <= 5 ? 29 : count <= 7 ? 31 : 34;
-          const x = 50 + radius * Math.cos(rad);
-          const y = 50 + radius * Math.sin(rad);
-          const yOffset = i === 0 ? -4 : i === 3 ? 4 : 0;
-          const itemWidth = cap.length <= 24
-            ? "clamp(180px, 18vw, 220px)"
-            : cap.length <= 34
-              ? "clamp(220px, 24vw, 280px)"
-              : "clamp(260px, 30vw, 340px)";
-          const itemMinHeight = cap.length <= 24 ? "4.25rem" : cap.length <= 34 ? "4.75rem" : "5.5rem";
+          const x = 50 + RING_RADIUS * Math.cos(rad);
+          const y = 50 + RING_RADIUS * Math.sin(rad);
+
+          // In compact mode, expand the label away from the center circle
+          // (left half of the ring expands leftward, right half expands rightward)
+          const expandLeft = Math.cos(rad) < 0;
+
+          const itemWidth = !isCompact
+            ? cap.length <= 24
+              ? "clamp(180px, 18vw, 220px)"
+              : cap.length <= 34
+                ? "clamp(220px, 24vw, 280px)"
+                : "clamp(260px, 30vw, 340px)"
+            : undefined;
+          const itemMinHeight = !isCompact
+            ? cap.length <= 24
+              ? "4.25rem"
+              : cap.length <= 34
+                ? "4.75rem"
+                : "5.5rem"
+            : undefined;
+
+          const badge = (
+            <div
+              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-sm font-bold shadow-sm ${
+                isCyan
+                  ? "border-cyan-400/40 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300"
+                  : "border-primary/15 bg-primary/8 text-primary"
+              }`}
+            >
+              {String(i + 1).padStart(2, "0")}
+            </div>
+          );
+
           return (
             <div
               key={cap}
-              className="absolute z-20"
-              style={{
-                left: `${x}%`,
-                top: `${y + yOffset}%`,
-              }}
+              className="group absolute z-20 hover:z-40"
+              style={{ left: `${x}%`, top: `${y}%` }}
             >
-              <div
-                className={`group flex items-center gap-3 rounded-full border px-4 py-3 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${
-                  isCyan
-                    ? "border-cyan-500/20 bg-white/90 text-slate-900 hover:border-cyan-400/40 dark:bg-slate-950/75 dark:text-cyan-50"
-                    : "border-border/80 bg-background/90 text-foreground hover:border-primary/30"
-                }`}
-                style={{
-                  transform: `translate(-50%, -50%)`,
-                  width: itemWidth,
-                  minHeight: itemMinHeight,
-                }}
-              >
+              {isCompact ? (
                 <div
-                  className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-sm font-bold shadow-sm ${
+                  className={`flex items-center rounded-full border shadow-sm backdrop-blur-sm transition-all duration-300 ${
                     isCyan
-                      ? "border-cyan-400/40 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300"
-                      : "border-primary/15 bg-primary/8 text-primary"
-                  }`}
+                      ? "border-cyan-500/20 bg-white/90 text-slate-900 hover:border-cyan-400/40 dark:bg-slate-950/75 dark:text-cyan-50"
+                      : "border-border/80 bg-background/90 text-foreground hover:border-primary/30"
+                  } ${expandLeft ? "flex-row-reverse" : "flex-row"}`}
+                  style={{ transform: "translate(-50%, -50%)" }}
                 >
-                  {String(i + 1).padStart(2, "0")}
+                  {badge}
+                  <span
+                    className={`max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-all duration-300 ease-out group-hover:max-w-[240px] group-hover:opacity-100 ${
+                      expandLeft ? "group-hover:pr-3 group-hover:pl-1" : "group-hover:pl-3 group-hover:pr-1"
+                    } ${isCyan ? "group-hover:text-cyan-700 dark:group-hover:text-cyan-200" : "group-hover:text-primary"}`}
+                  >
+                    {cap}
+                  </span>
                 </div>
-                <span
-                  className={`min-w-0 flex-1 text-left text-sm sm:text-base font-semibold leading-tight break-words ${
-                    isCyan ? "group-hover:text-cyan-700 dark:group-hover:text-cyan-200" : "group-hover:text-primary"
+              ) : (
+                <div
+                  className={`flex items-center gap-3 rounded-full border px-4 py-3 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${
+                    isCyan
+                      ? "border-cyan-500/20 bg-white/90 text-slate-900 hover:border-cyan-400/40 dark:bg-slate-950/75 dark:text-cyan-50"
+                      : "border-border/80 bg-background/90 text-foreground hover:border-primary/30"
                   }`}
+                  style={{
+                    transform: "translate(-50%, -50%)",
+                    width: itemWidth,
+                    minHeight: itemMinHeight,
+                  }}
                 >
-                  {cap}
-                </span>
-              </div>
+                  {badge}
+                  <span
+                    className={`min-w-0 flex-1 text-left text-sm sm:text-base font-semibold leading-tight break-words ${
+                      isCyan ? "group-hover:text-cyan-700 dark:group-hover:text-cyan-200" : "group-hover:text-primary"
+                    }`}
+                  >
+                    {cap}
+                  </span>
+                </div>
+              )}
             </div>
           );
         })}
@@ -3856,13 +4105,14 @@ export function ServiceDetail({
   const isQualityTesting = service.slug === "quality-testing";
   const isDesignFabrication = service.slug === "design-fabrication";
   const isEngineeringProduct = service.slug === "engineering-product-development";
+  const isFullFrameService = FULL_FRAME_SERVICE_SLUGS.has(service.slug);
   const containerClass = "page-container";
 
   return (
-    <div className="bg-background min-h-screen pt-20">
+    <div className={`bg-background min-h-screen ${isFullFrameService ? "pt-0" : "pt-20"}`}>
 
       {/* HERO — cinematic for ALL services */}
-      <section className={`relative bg-[#060d17] overflow-hidden flex items-center ${isProductDevelopment ? "min-h-[calc(100vh-5rem)] py-0" : `py-16 ${isBmd || isMbl ? "min-h-[62vh] sm:min-h-[68vh]" : "min-h-[80vh]"}`}`}>
+      <section className={`relative bg-[#060d17] overflow-hidden flex items-center ${isFullFrameService ? "min-h-screen py-0" : isProductDevelopment ? "min-h-[calc(100vh-5rem)] py-0" : `py-16 ${isBmd || isMbl ? "min-h-[62vh] sm:min-h-[68vh]" : "min-h-[80vh]"}`}`}>
         {isMbl ? (
           <MblHeroVideoBackground />
         ) : (
@@ -3883,7 +4133,7 @@ export function ServiceDetail({
           aria-hidden
         />
 
-        <div className={`${containerClass} relative z-10`}>
+        <div className={`${containerClass} relative z-10 ${isFullFrameService ? "py-28 md:py-32" : ""}`}>
           <AnimatedSection>
             <div className="max-w-4xl">
               {!isQualityTesting && (
@@ -3944,6 +4194,9 @@ export function ServiceDetail({
       </section>
 
       {isProductDevelopment && <ProductDevelopmentMetricsStrip />}
+      {isFullFrameService && SERVICE_SIDEBAR_STATS[service.slug] && (
+        <ServiceMetricsStrip stats={SERVICE_SIDEBAR_STATS[service.slug]} />
+      )}
 
       {/* OVERVIEW */}
       <section className="relative overflow-x-clip bg-background pt-10 pb-16">
@@ -3963,7 +4216,7 @@ export function ServiceDetail({
               </AnimatedSection>
               )}
 
-              {SERVICE_SIDEBAR_STATS[service.slug] && !isProductDevelopment && (
+              {SERVICE_SIDEBAR_STATS[service.slug] && !isProductDevelopment && !isFullFrameService && (
                 <KeyMetricsSection
                   stats={SERVICE_SIDEBAR_STATS[service.slug]}
                   variant={isSoftwareAI ? "software-ai" : "default"}
@@ -3979,7 +4232,7 @@ export function ServiceDetail({
                     registrations={isProductDevelopment ? PRODUCT_DEVELOPMENT_REGISTRATION : []}
                     licences={SERVICE_LICENCES[service.slug]}
                     variant="default"
-                    showIndexLabels={!isProductDevelopment}
+                    showIndexLabels={!isProductDevelopment && !isFullFrameService}
                   />
                 )
               )}
@@ -3994,6 +4247,10 @@ export function ServiceDetail({
               {isAutomation && <AutomationCommunicationExtras />}
               {isDesignFabrication && <DesignFabricationExtras />}
               {isEngineeringProduct && <EngineeringProductExtras />}
+
+              {SUBSERVICE_SUMMARY_SERVICE_SLUGS.has(service.slug) && !isQualityTesting && !isEngineeringProduct && (
+                <ServiceSubServiceSummarySection service={service} />
+              )}
 
           </div>
         </div>
