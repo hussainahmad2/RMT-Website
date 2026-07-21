@@ -181,6 +181,30 @@ export const REGULATORY_DEPARTMENT: LeadershipMember[] = [
     image: teamImage("regulatory-department", "nida.webp"),
     bio: "Leads regulatory affairs across FDA, CE, and international device submissions.",
   },
+  {
+    name: "Ms. Fehmida Hamza",
+    role: "Director, Clinical Affairs",
+    image: teamImage("regulatory-department", "fehmida-hamza.webp"),
+    bio: "Directs clinical affairs programmes including evaluation planning, evidence generation, and clinical documentation for regulatory submissions.",
+  },
+  {
+    name: "Ms. Saleha Ali",
+    role: "Managing Director",
+    image: teamImage("regulatory-department", "saleha-ali.webp"),
+    bio: "Leads regulatory strategy and operations, aligning clinical, compliance, and market-access priorities across RMT programmes.",
+  },
+  {
+    name: "Ms. Sundleen Jannat",
+    role: "Manager, Regulatory Affairs",
+    image: teamImage("regulatory-department", "sundleen-jannat.webp"),
+    bio: "Manages regulatory submissions, technical documentation, and compliance activities across device programmes.",
+  },
+  {
+    name: "Ms. Zarqa Iqbal",
+    role: "Senior Research Specialist",
+    image: teamImage("regulatory-department", "zarqa-iqbal.webp"),
+    bio: "Supports regulatory research, literature review, and evidence compilation for clinical and compliance dossiers.",
+  },
 ];
 
 /** Quality Control Wing */
