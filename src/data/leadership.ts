@@ -55,7 +55,7 @@ export const RD_WING_MICROBIOLOGY_LABORATORY: LeadershipMember[] = [
   {
     name: "Hamza",
     role: "Microbiology Laboratory Lead",
-    image: teamImage("rd-wing/microbiology-laboratory", "hamza.jpeg"),
+    image: teamImage("rd-wing/microbiology-laboratory", "hamza.jpg"),
     bio: "Leads microbiology lab operations for sterility, microbial limit, and pathogen testing.",
   },
   {
@@ -259,7 +259,7 @@ export const FINANCE_DEPARTMENT: LeadershipMember[] = [
   {
     name: "Aneel Kumar",
     role: "Assistant Manager, Finance",
-    image: teamImage("finance-department", "aneel.jpeg"),
+    image: teamImage("finance-department", "aneel.png"),
     bio: "Supports finance operations, bookkeeping, payroll, and accounts payable/receivable.",
   },
 ];
@@ -315,5 +315,17 @@ export const BUSINESS_MARKETING_UNIT: LeadershipMember[] = [
     role: "Manager Coordination Business Development",
     image: teamImage("business-marketing-unit", "saleem_business.jpeg"),
     bio: "Coordinates business development activities and supports marketing and client engagement across RMT programmes.",
+  },
+  {
+    name: "Hamna",
+    role: "Business Development Associate",
+    image: teamImage("business-marketing-unit", "hamna.png"),
+    bio: "Supports business development outreach, client engagement, and marketing coordination across RMT programmes.",
+  },
+  {
+    name: "Laraib",
+    role: "Business Development Associate",
+    image: teamImage("business-marketing-unit", "laraib.png"),
+    bio: "Supports marketing initiatives, client coordination, and business development activities across RMT markets.",
   },
 ];
