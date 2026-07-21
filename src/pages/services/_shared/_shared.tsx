@@ -2943,31 +2943,147 @@ export function ServiceCapabilitiesBlock({
 }) {
   const isCyan = variant === "software-ai";
   const count = capabilities.length;
-  const isCompact = count > 6;
-  // Ring is h-[76%]/w-[76%] centered => its radius is 38% of the container.
-  // Placing item centers exactly here makes them sit "on" the ring instead of floating above/below it.
-  const RING_RADIUS = 38;
+  const isCompact = count > 8;
+
+  // --- geometry constants ---------------------------------------------
+  const ROW_H = isCompact ? 78 : 100; // px, vertical slot per label row
+  const V_PAD = 120; // px, breathing room above/below for the hub
+
+  // Alternate items across two columns by original index so numbering
+  // reads left-to-right per row as 1,2 / 3,4 / 5,6 ...
+  const left = capabilities
+    .map((cap, i) => ({ cap, i }))
+    .filter((_, idx) => idx % 2 === 0); // 0-based idx → numbers 1,3,5...
+  const right = capabilities
+    .map((cap, i) => ({ cap, i }))
+    .filter((_, idx) => idx % 2 === 1); // 0-based idx → numbers 2,4,6...
+
+  const maxCount = Math.max(right.length, left.length, 1);
+  const containerHeight = Math.max(300, maxCount * ROW_H + V_PAD);
+  const rowHPercent = (ROW_H / containerHeight) * 100;
+
+  const rowY = (rowIndex: number, colLen: number) =>
+    50 + (rowIndex - (colLen - 1) / 2) * rowHPercent;
+
+  // Split the hub title into up to two lines.
+  const titleWords = title.trim().split(/\s+/);
+  const hubLines =
+    titleWords.length <= 1
+      ? [title]
+      : [
+          titleWords.slice(0, Math.ceil(titleWords.length / 2)).join(" "),
+          titleWords.slice(Math.ceil(titleWords.length / 2)).join(" "),
+        ];
+
+  const strokeClass = isCyan ? "stroke-cyan-500/25" : "stroke-primary/20";
+  const dotClass = isCyan ? "fill-cyan-500/40" : "fill-primary/35";
+
+  const badgeSize = isCompact ? "h-9 w-9 text-xs" : "h-11 w-11 text-sm";
+  const labelText = isCompact ? "text-xs sm:text-sm" : "text-sm sm:text-base";
+
+  const renderBadge = (i: number) => (
+    <div
+      className={`flex ${badgeSize} shrink-0 items-center justify-center rounded-full border font-bold shadow-sm ${
+        isCyan
+          ? "border-cyan-400/40 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300"
+          : "border-primary/15 bg-primary/8 text-primary"
+      }`}
+    >
+      {String(i + 1).padStart(2, "0")}
+    </div>
+  );
+
+const renderColumn = (
+    items: { cap: string; i: number }[],
+    side: "left" | "right"
+  ) =>
+    items.map((item, rowIndex) => (
+      <div
+        key={item.cap}
+        className="absolute"
+        style={{
+          top: `${rowY(rowIndex, items.length)}%`,
+          [side]: 0,
+          width: "34%",
+          transform: "translateY(-50%)",
+        }}
+      >
+        <div
+          className={`flex items-center gap-3 rounded-2xl border px-3 py-2.5 shadow-sm backdrop-blur-sm ${
+            isCyan
+              ? "border-cyan-500/20 bg-white/90 dark:bg-slate-950/70"
+              : "border-border/70 bg-background/80"
+          } ${side === "left" ? "flex-row-reverse text-right" : ""}`}
+        >
+          {renderBadge(item.i)}
+          <span
+            className={`${labelText} font-semibold leading-snug text-foreground break-words`}
+          >
+            {item.cap}
+          </span>
+        </div>
+      </div>
+    ));
+    
+  const renderSpokes = (items: { cap: string; i: number }[], side: "left" | "right") => {
+    const hubX = side === "right" ? 57 : 43;
+    const ctrlX = side === "right" ? 63 : 37;
+    const labelX = side === "right" ? 66 : 34;
+    return items.map((item, rowIndex) => {
+      const y = rowY(rowIndex, items.length);
+      return (
+        <g key={item.cap}>
+          <path
+            d={`M ${hubX} 50 Q ${ctrlX} ${y}, ${labelX} ${y}`}
+            fill="none"
+            className={strokeClass}
+            strokeWidth={0.6}
+          />
+          <circle cx={labelX} cy={y} r={0.9} className={dotClass} />
+        </g>
+      );
+    });
+  };
 
   return (
     <AnimatedSection className="mb-0 pb-0">
-      <div className="mb-6 pb-4 border-b border-border">
-        <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${isCyan ? "text-cyan-600 dark:text-cyan-400" : "text-primary"}`}>
+      <div className="mb-3 pb-3 border-b border-border">
+        <p
+          className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${
+            isCyan ? "text-cyan-600 dark:text-cyan-400" : "text-primary"
+          }`}
+        >
           Capabilities
         </p>
         <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
           {title}
         </h2>
       </div>
-      <div className="relative mx-auto h-[560px] w-full max-w-4xl sm:h-[600px] lg:h-[620px]">
+
+      {/* Desktop / tablet: hub-and-spoke diagram */}
+      <div
+        className="relative mx-auto hidden w-full max-w-5xl sm:block"
+        style={{ height: containerHeight }}
+      >
+        <svg
+          viewBox="0 0 100 100"
+          preserveAspectRatio="none"
+          className="absolute inset-0 h-full w-full"
+        >
+          {renderSpokes(right, "right")}
+          {renderSpokes(left, "left")}
+        </svg>
+
+        {/* decorative rings */}
         <div
-          className={`absolute left-1/2 top-1/2 h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 ${
+          className={`absolute left-1/2 top-1/2 h-56 w-56 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 sm:h-60 sm:w-60 ${
             isCyan
               ? "border-cyan-400/25 shadow-[0_0_0_1px_rgba(34,211,238,0.10),0_0_24px_rgba(34,211,238,0.08)]"
               : "border-primary/20 shadow-[0_0_0_1px_rgba(59,130,246,0.08),0_0_24px_rgba(59,130,246,0.06)]"
           }`}
         />
         <div
-          className={`absolute left-1/2 top-1/2 h-[72%] w-[72%] -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-dashed ${
+          className={`absolute left-1/2 top-1/2 h-48 w-48 -translate-x-1/2 -translate-y-1/2 rounded-full border-4 border-dashed sm:h-52 sm:w-52 ${
             isCyan ? "border-cyan-500/35" : "border-primary/25"
           }`}
         />
@@ -2976,101 +3092,43 @@ export function ServiceCapabilitiesBlock({
             isCyan ? "border-cyan-400/70 shadow-cyan-500/10" : "border-primary/70 shadow-primary/10"
           }`}
         >
-          <span className={`text-[10px] font-bold uppercase tracking-[0.28em] ${isCyan ? "text-cyan-600 dark:text-cyan-300" : "text-primary"}`}>
-            Core
-          </span>
-          <span className="mt-1 text-base font-heading font-bold leading-none text-foreground sm:text-lg">
-            Capabilities
-          </span>
+          {hubLines.map((line, idx) => (
+            <span
+              key={idx}
+              className={
+                idx === 0
+                  ? `text-[10px] font-bold uppercase tracking-[0.28em] ${
+                      isCyan ? "text-cyan-600 dark:text-cyan-300" : "text-primary"
+                    }`
+                  : "mt-1 text-base font-heading font-bold leading-none text-foreground sm:text-lg"
+              }
+            >
+              {line}
+            </span>
+          ))}
         </div>
 
-        {capabilities.map((cap, i) => {
-          const angle = (360 / count) * i - 90;
-          const rad = (angle * Math.PI) / 180;
-          const x = 50 + RING_RADIUS * Math.cos(rad);
-          const y = 50 + RING_RADIUS * Math.sin(rad);
+        {renderColumn(right, "right")}
+        {renderColumn(left, "left")}
+      </div>
 
-          // In compact mode, expand the label away from the center circle
-          // (left half of the ring expands leftward, right half expands rightward)
-          const expandLeft = Math.cos(rad) < 0;
-
-          const itemWidth = !isCompact
-            ? cap.length <= 24
-              ? "clamp(180px, 18vw, 220px)"
-              : cap.length <= 34
-                ? "clamp(220px, 24vw, 280px)"
-                : "clamp(260px, 30vw, 340px)"
-            : undefined;
-          const itemMinHeight = !isCompact
-            ? cap.length <= 24
-              ? "4.25rem"
-              : cap.length <= 34
-                ? "4.75rem"
-                : "5.5rem"
-            : undefined;
-
-          const badge = (
-            <div
-              className={`flex h-11 w-11 shrink-0 items-center justify-center rounded-full border text-sm font-bold shadow-sm ${
-                isCyan
-                  ? "border-cyan-400/40 bg-cyan-500/10 text-cyan-700 dark:text-cyan-300"
-                  : "border-primary/15 bg-primary/8 text-primary"
-              }`}
-            >
-              {String(i + 1).padStart(2, "0")}
-            </div>
-          );
-
-          return (
-            <div
-              key={cap}
-              className="group absolute z-20 hover:z-40"
-              style={{ left: `${x}%`, top: `${y}%` }}
-            >
-              {isCompact ? (
-                <div
-                  className={`flex items-center rounded-full border shadow-sm backdrop-blur-sm transition-all duration-300 ${
-                    isCyan
-                      ? "border-cyan-500/20 bg-white/90 text-slate-900 hover:border-cyan-400/40 dark:bg-slate-950/75 dark:text-cyan-50"
-                      : "border-border/80 bg-background/90 text-foreground hover:border-primary/30"
-                  } ${expandLeft ? "flex-row-reverse" : "flex-row"}`}
-                  style={{ transform: "translate(-50%, -50%)" }}
-                >
-                  {badge}
-                  <span
-                    className={`max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-all duration-300 ease-out group-hover:max-w-[240px] group-hover:opacity-100 ${
-                      expandLeft ? "group-hover:pr-3 group-hover:pl-1" : "group-hover:pl-3 group-hover:pr-1"
-                    } ${isCyan ? "group-hover:text-cyan-700 dark:group-hover:text-cyan-200" : "group-hover:text-primary"}`}
-                  >
-                    {cap}
-                  </span>
-                </div>
-              ) : (
-                <div
-                  className={`flex items-center gap-3 rounded-full border px-4 py-3 shadow-sm backdrop-blur-sm transition-all duration-300 hover:-translate-y-0.5 hover:shadow-md ${
-                    isCyan
-                      ? "border-cyan-500/20 bg-white/90 text-slate-900 hover:border-cyan-400/40 dark:bg-slate-950/75 dark:text-cyan-50"
-                      : "border-border/80 bg-background/90 text-foreground hover:border-primary/30"
-                  }`}
-                  style={{
-                    transform: "translate(-50%, -50%)",
-                    width: itemWidth,
-                    minHeight: itemMinHeight,
-                  }}
-                >
-                  {badge}
-                  <span
-                    className={`min-w-0 flex-1 text-left text-sm sm:text-base font-semibold leading-tight break-words ${
-                      isCyan ? "group-hover:text-cyan-700 dark:group-hover:text-cyan-200" : "group-hover:text-primary"
-                    }`}
-                  >
-                    {cap}
-                  </span>
-                </div>
-              )}
-            </div>
-          );
-        })}
+      {/* Mobile: vertical timeline fallback */}
+      <div className="relative sm:hidden">
+        <div
+          className={`absolute left-[1.375rem] top-2 bottom-2 w-px ${
+            isCyan ? "bg-cyan-400/25" : "bg-primary/20"
+          }`}
+        />
+        <ul className="space-y-5">
+          {capabilities.map((cap, i) => (
+            <li key={cap} className="relative flex items-start gap-4">
+              <div className="relative z-10 bg-background">{renderBadge(i)}</div>
+              <span className="pt-2 text-sm font-semibold leading-snug text-foreground break-words">
+                {cap}
+              </span>
+            </li>
+          ))}
+        </ul>
       </div>
     </AnimatedSection>
   );

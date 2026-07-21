@@ -37,7 +37,7 @@ export function SectionHeading({
   light?: boolean;
 }) {
   return (
-    <div className="mb-10 max-w-3xl">
+    <div className="mb-8 max-w-3xl">
       {eyebrow && (
         <p
           className={cn(

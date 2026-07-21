@@ -4,6 +4,8 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { CinematicPageHero } from "@/components/CinematicPageHero";
 import { useSEO } from "@/lib/seo";
+import { INSIGHT_ARTICLES } from "@/data/insights-content";
+import { getInsightPostDetail } from "@/data/insights-posts";
 
 interface GalleryItem {
   id: string;
@@ -14,7 +16,7 @@ interface GalleryItem {
   year: string;
 }
 
-const items: GalleryItem[] = [
+const coreItems: GalleryItem[] = [
   { id: "1", src: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=600&q=80", category: "Laboratory", caption: "Advanced research laboratory — PCB design and electronics prototyping", year: "2024" },
   { id: "2", src: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=600&q=80", category: "Testing", caption: "Quality control laboratory — analytical testing and characterisation", year: "2024" },
   { id: "3", src: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=600&q=80", category: "Team", caption: "R&D team collaborating on medical device formulation development", year: "2024" },
@@ -33,7 +35,51 @@ const items: GalleryItem[] = [
   { id: "16", src: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=1200&q=85", thumb: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=600&q=80", category: "Events", caption: "ISO 13485 certification ceremony", year: "2021" },
 ];
 
-const CATEGORIES = ["All", "Laboratory", "Testing", "Team", "Manufacturing", "Engineering", "Events"];
+const BMD_GALLERY_ITEMS: GalleryItem[] = [
+  { id: "bmd-1", src: encodeURI("/bmd-products/TOPICAL ANTIFUNGAL CREAM.jpeg"), thumb: encodeURI("/bmd-products/TOPICAL ANTIFUNGAL CREAM.jpeg"), category: "BMD", caption: "Topical Antifungal Cream", year: "BMD" },
+  { id: "bmd-2", src: encodeURI("/bmd-products/HYALURONIC ACID SERUM.jpeg"), thumb: encodeURI("/bmd-products/HYALURONIC ACID SERUM.jpeg"), category: "BMD", caption: "Hyaluronic Acid Serum", year: "BMD" },
+  { id: "bmd-3", src: encodeURI("/bmd-products/MOISTURIZING SUNSCREEN (ALL SKIN TYPES).jpeg"), thumb: encodeURI("/bmd-products/MOISTURIZING SUNSCREEN (ALL SKIN TYPES).jpeg"), category: "BMD", caption: "Moisturising Sunscreen", year: "BMD" },
+  { id: "bmd-4", src: encodeURI("/bmd-products/VITAMIN C SERUM.jpeg"), thumb: encodeURI("/bmd-products/VITAMIN C SERUM.jpeg"), category: "BMD", caption: "Vitamin C Serum", year: "BMD" },
+  { id: "bmd-5", src: encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg"), thumb: encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg"), category: "BMD", caption: "Lidocaine Topical Spray", year: "BMD" },
+  { id: "bmd-6", src: encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg"), thumb: encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg"), category: "BMD", caption: "PLGA Microspheres", year: "BMD" },
+  { id: "bmd-7", src: encodeURI("/bmd-products/GLYCOLIC ACID SERUM.jpeg"), thumb: encodeURI("/bmd-products/GLYCOLIC ACID SERUM.jpeg"), category: "BMD", caption: "Glycolic Acid Serum", year: "BMD" },
+  { id: "bmd-8", src: encodeURI("/bmd-products/RETINOL SERUM.jpeg"), thumb: encodeURI("/bmd-products/RETINOL SERUM.jpeg"), category: "BMD", caption: "Retinol Serum", year: "BMD" },
+  { id: "bmd-9", src: encodeURI("/bmd-products/HAIR GROWTH SERUM (MINOXIDIL-BASED).jpeg"), thumb: encodeURI("/bmd-products/HAIR GROWTH SERUM (MINOXIDIL-BASED).jpeg"), category: "BMD", caption: "Hair Growth Serum", year: "BMD" },
+  { id: "bmd-10", src: encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg"), thumb: encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg"), category: "BMD", caption: "Polymer-Based Coating", year: "BMD" },
+  { id: "bmd-11", src: encodeURI("/bmd-products/POLYMER-FREE COATING (DRUG ELUTING STENT).jpeg"), thumb: encodeURI("/bmd-products/POLYMER-FREE COATING (DRUG ELUTING STENT).jpeg"), category: "BMD", caption: "Polymer-Free Coating", year: "BMD" },
+  { id: "bmd-12", src: encodeURI("/bmd-products/TOPICAL PAIN RELIEF EMULGEL.jpeg"), thumb: encodeURI("/bmd-products/TOPICAL PAIN RELIEF EMULGEL.jpeg"), category: "BMD", caption: "Topical Pain Relief Emulgel", year: "BMD" },
+];
+
+const INSIGHT_GALLERY_ITEMS: GalleryItem[] = INSIGHT_ARTICLES.flatMap((article) => {
+  const detail = getInsightPostDetail(article.id);
+  if (!detail) return [];
+
+  const hero = [
+    {
+      id: `insight-${article.id}-hero`,
+      src: detail.heroImage,
+      thumb: detail.heroImage,
+      category: "Insights",
+      caption: article.title,
+      year: article.date,
+    },
+  ];
+
+  const extras = detail.galleryImages.map((image, index) => ({
+    id: `insight-${article.id}-${index + 1}`,
+    src: image,
+    thumb: image,
+    category: "Insights",
+    caption: `${article.title} - Image ${index + 2}`,
+    year: article.date,
+  }));
+
+  return [...hero, ...extras];
+});
+
+const items: GalleryItem[] = [...coreItems, ...BMD_GALLERY_ITEMS, ...INSIGHT_GALLERY_ITEMS];
+
+const CATEGORIES = ["All", "Laboratory", "Testing", "Team", "Manufacturing", "Engineering", "Events", "BMD", "Insights"];
 
 export default function Gallery() {
   const [filter, setFilter] = useState("All");
@@ -55,7 +101,7 @@ export default function Gallery() {
         eyebrow="Our Story in Pictures"
         title="Gallery"
         description="Explore our laboratories, manufacturing facilities, team, and the milestones that have shaped RMT Medical Technologies."
-        backgroundImage="https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1920&q=85"
+        backgroundImage="https://img.magnific.com/free-vector/isometric-cinema-elements-concept_1284-18690.jpg?semt=ais_hybrid&w=740&q=80"
         fullHeight
       />
 

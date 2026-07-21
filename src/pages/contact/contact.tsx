@@ -62,7 +62,7 @@ export default function Contact() {
       <section className="relative min-h-[380px] flex items-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1497366754035-f200968a6e72?w=1600&q=80')" }}
+          style={{ backgroundImage: "url('https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR8fhB8TId2hQbaX3OSbNQn1h_kqezihZdsrVXa-ZFvOg&s=10')" }}
         />
         <div className="absolute inset-0 bg-gradient-to-br from-black/90 via-black/82 to-primary/50" />
         <div className="absolute inset-0 opacity-[0.03]" style={{ backgroundImage: "radial-gradient(circle, rgba(255,255,255,0.6) 1px, transparent 1px)", backgroundSize: "40px 40px" }} />

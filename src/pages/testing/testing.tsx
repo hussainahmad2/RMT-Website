@@ -157,17 +157,17 @@ export default function Testing() {
       {/* CATEGORY TABS + ACTIVE DETAIL */}
       <section className="py-16">
         <div className="page-container">
-          <div className="overflow-hidden rounded-[2rem] border border-border bg-card/95 shadow-sm">
-            <div className="border-b border-border bg-muted/20 px-4 py-4 sm:px-6">
+          <div className="overflow-hidden rounded-[2rem] border border-border bg-card/95 shadow-sm dark:border-white/10 dark:bg-slate-950/55">
+            <div className="border-b border-border bg-muted/20 px-4 py-4 sm:px-6 dark:border-white/10 dark:bg-white/5">
               <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-2">
                 {testCategories.map((cat) => (
                   <button
                     key={cat.id}
                     onClick={() => setActive(cat.id)}
-                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                    className={`inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-medium transition-all ${
                       active === cat.id
-                        ? "bg-primary text-white shadow-sm"
-                        : "bg-background text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                        ? "border-primary bg-primary text-white shadow-sm dark:border-primary dark:bg-primary dark:text-white"
+                        : "border-border bg-background text-muted-foreground hover:border-primary/35 hover:bg-primary/10 hover:text-primary dark:border-white/10 dark:bg-slate-950/60 dark:hover:border-cyan-300/35 dark:hover:bg-cyan-400/10 dark:hover:text-cyan-200"
                     }`}
                   >
                     {cat.icon}

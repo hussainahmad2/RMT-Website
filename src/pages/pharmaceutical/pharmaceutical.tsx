@@ -306,7 +306,7 @@ export default function Pharmaceutical() {
               <div className="grid lg:grid-cols-5">
                 <div className="lg:col-span-2 relative min-h-[240px]">
                   <img
-                    src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=900&q=80"
+                    src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5SMihTJ9cRqAJITol-v9D-yF92297NeMS7IoMbQWYJN6iUj-zIJhPXXc&s=10"
                     alt="Quality assurance in pharmaceutical development"
                     className="absolute inset-0 h-full w-full object-cover"
                     loading="lazy"

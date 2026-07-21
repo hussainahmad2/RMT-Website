@@ -75,8 +75,6 @@ const BMD_PRODUCTS_WITHOUT_IMAGES = [
   "Drug Eluting Coatings",
 ] as const;
 
-const BMD_PORTFOLIO_LOOP = [...BMD_PORTFOLIO, ...BMD_PORTFOLIO, ...BMD_PORTFOLIO];
-
 function PartnerCard({
   name,
   type,
@@ -138,80 +136,68 @@ function WhyCard({
 }
 
 function PortfolioCarousel() {
-  const trackRef = useRef<HTMLDivElement | null>(null);
-  const recenterTimerRef = useRef<number | null>(null);
-
-  useEffect(() => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    track.scrollLeft = track.scrollWidth / 3;
-  }, []);
-
-  useEffect(() => {
-    return () => {
-      if (recenterTimerRef.current !== null) {
-        window.clearTimeout(recenterTimerRef.current);
-      }
-    };
-  }, []);
-
-  const recenterIfNeeded = () => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    const thirdWidth = track.scrollWidth / 3;
-    if (track.scrollLeft < thirdWidth * 0.5) {
-      track.scrollLeft += thirdWidth;
-    } else if (track.scrollLeft > thirdWidth * 1.5) {
-      track.scrollLeft -= thirdWidth;
-    }
-  };
+  const [startIndex, setStartIndex] = useState(0);
+  const visibleItems = Array.from({ length: 4 }, (_, offset) => {
+    const index = (startIndex + offset) % BMD_PORTFOLIO.length;
+    return BMD_PORTFOLIO[index];
+  });
 
   const slide = (direction: -1 | 1) => {
-    const track = trackRef.current;
-    if (!track) return;
-
-    track.scrollBy({
-      left: direction * (track.clientWidth / 2),
-      behavior: "smooth",
-    });
-
-    if (recenterTimerRef.current !== null) {
-      window.clearTimeout(recenterTimerRef.current);
-    }
-
-    recenterTimerRef.current = window.setTimeout(recenterIfNeeded, 380);
+    const step = direction * 2;
+    setStartIndex((current) => (current + step + BMD_PORTFOLIO.length) % BMD_PORTFOLIO.length);
   };
 
   return (
-    <div className="relative">
-      <div
-        ref={trackRef}
-        className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
-      >
-        {BMD_PORTFOLIO_LOOP.map((item, i) => (
-          <motion.article
-            key={`${item.title}-${i}`}
-            initial={{ opacity: 0, y: 14 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: (i % BMD_PORTFOLIO.length) * 0.03 }}
-            className="group flex h-[19rem] w-[calc(50%-0.5rem)] min-w-[calc(50%-0.5rem)] max-w-[calc(50%-0.5rem)] flex-none snap-start flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/8 backdrop-blur-sm shadow-sm transition-all hover:border-primary/35 hover:shadow-lg sm:h-[20rem] sm:w-[calc(33.333%-0.875rem)] sm:min-w-[calc(33.333%-0.875rem)] sm:max-w-[calc(33.333%-0.875rem)] lg:h-[20.5rem] lg:w-[calc((100%-2rem)/3)] lg:min-w-[calc((100%-2rem)/3)] lg:max-w-[calc((100%-2rem)/3)] xl:w-[calc((100%-3rem)/4)] xl:min-w-[calc((100%-3rem)/4)] xl:max-w-[calc((100%-3rem)/4)]"
-          >
-            <div className="relative flex-1 overflow-hidden bg-white/95 p-2.5 sm:p-3">
-              <img
-                src={item.image}
-                alt={item.title}
-                loading="lazy"
-                className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
-              />
-            </div>
-            <div className="min-h-[4.5rem] border-t border-white/10 p-3.5">
-              <h3 className="line-clamp-2 font-heading text-sm sm:text-base font-bold leading-snug text-white">{item.title}</h3>
-            </div>
-          </motion.article>
-        ))}
+    <div className="grid gap-5 lg:grid-cols-[4.75rem_minmax(0,1fr)_4.75rem] lg:items-center lg:gap-6">
+      <div className="hidden lg:flex items-center justify-center">
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          onClick={() => slide(-1)}
+          aria-label="Scroll product row left"
+          className="h-16 w-16 rounded-full border border-slate-300/80 bg-white/95 text-slate-900 shadow-xl shadow-black/10 backdrop-blur-md transition-all hover:border-cyan-400 hover:bg-cyan-50 hover:text-cyan-950 dark:border-white/15 dark:bg-slate-950/90 dark:text-white dark:shadow-black/40 dark:hover:border-cyan-300 dark:hover:bg-cyan-400/15 dark:hover:text-cyan-100"
+        >
+          <ArrowLeft className="h-6 w-6" />
+        </Button>
+      </div>
+      <div className="min-w-0">
+        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-4">
+          {visibleItems.map((item, i) => (
+            <motion.article
+              key={`${item.title}-${startIndex + i}`}
+              initial={{ opacity: 0, y: 14 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: i * 0.04 }}
+              className="group flex h-[18rem] flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/8 backdrop-blur-sm shadow-sm transition-all hover:border-primary/35 hover:shadow-lg sm:h-[18.5rem] xl:h-[19rem]"
+            >
+              <div className="relative flex-1 overflow-hidden bg-white/95 p-2.5 sm:p-3">
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  loading="lazy"
+                  className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+                />
+              </div>
+              <div className="min-h-[4.5rem] border-t border-white/10 p-3.5">
+                <h3 className="line-clamp-2 font-heading text-sm sm:text-base font-bold leading-snug text-white">{item.title}</h3>
+              </div>
+            </motion.article>
+          ))}
+        </div>
+      </div>
+      <div className="hidden lg:flex items-center justify-center">
+        <Button
+          type="button"
+          variant="outline"
+          size="icon"
+          onClick={() => slide(1)}
+          aria-label="Scroll product row right"
+          className="h-16 w-16 rounded-full border border-slate-300/80 bg-white/95 text-slate-900 shadow-xl shadow-black/10 backdrop-blur-md transition-all hover:border-cyan-400 hover:bg-cyan-50 hover:text-cyan-950 dark:border-white/15 dark:bg-slate-950/90 dark:text-white dark:shadow-black/40 dark:hover:border-cyan-300 dark:hover:bg-cyan-400/15 dark:hover:text-cyan-100"
+        >
+          <ArrowRight className="h-6 w-6" />
+        </Button>
       </div>
     </div>
   );
@@ -538,9 +524,13 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
         </div>
       </HomeSection>
 
-      {/* Capabilities & Why */}
-      <HomeSection variant="image-light" bgImage={BMD_SECTION_IMAGES.capabilities} overlayIntensity="clear" darkOverlay dots rings ringSide="left" className="py-14 sm:py-16">
+      {/* Capabilities */}
+      <HomeSection variant="light" dots className="py-14 sm:py-16">
         <ServiceCapabilitiesBlock capabilities={service.capabilities} />
+      </HomeSection>
+
+      {/* Why RMT */}
+      <HomeSection variant="image-light" bgImage={BMD_SECTION_IMAGES.whyRmt} overlayIntensity="clear" darkOverlay dots rings ringSide="left" className="py-14 sm:py-16">
         <SectionHeading eyebrow="Why RMT" title="Why Partner With RMT" align="left" className="mb-10" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {service.whyRMT.map((item, i) => (

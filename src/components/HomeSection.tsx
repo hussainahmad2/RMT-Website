@@ -197,7 +197,7 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className={cn("font-heading text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4", light ? "text-white" : "text-foreground")}>
+      <h2 className={cn("font-heading text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-3", light ? "text-white" : "text-foreground")}>
         {title}
       </h2>
       {description && (

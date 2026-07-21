@@ -40,20 +40,17 @@ function ProductDetailCard({
           loading="lazy"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-        {product.tag && (
-          <span className="absolute top-3 left-3 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-primary text-primary-foreground">
-            {product.tag}
+        <div className="absolute left-3 top-3 z-10 flex flex-col items-start gap-2">
+          <span className="inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-white/20 bg-black/55 px-2 text-xs font-bold text-white backdrop-blur-sm">
+            {index + 1}
           </span>
-        )}
+        </div>
         {product.spec && (
           <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/50 text-white border border-white/15">
             {product.spec}
           </span>
         )}
         <div className="absolute bottom-0 left-0 right-0 p-4">
-          <span className="text-white/60 text-[10px] font-bold uppercase tracking-widest">
-            Product {String(index + 1).padStart(2, "0")}
-          </span>
           <h3 className="font-heading font-bold text-white text-lg leading-snug mt-1">{product.name}</h3>
         </div>
       </div>

@@ -23,6 +23,7 @@ import {
 } from "@/data/leadership";
 import { LeadershipCard } from "@/components/LeadershipCard";
 import { TeamWingSection, TeamMemberGrid } from "@/components/TeamDepartmentSection";
+import { INSIGHT_ARTICLES } from "@/data/insights-content";
 
 /* Decorative SVG backgrounds */
 const StethoBg = () => (
@@ -69,6 +70,8 @@ const certifications = [
 ];
 
 const [ceo, ...executiveTeam] = C_LEVEL_LEADERSHIP;
+const RPM_CARD_IMAGE =
+  "https://www.mygreatlearning.com/blog/wp-content/uploads/2021/12/iStock-1189916627.jpg";
 
 export default function About() {
   useSEO({
@@ -85,7 +88,7 @@ export default function About() {
       <section className="relative min-h-[480px] flex items-center overflow-hidden">
         <div
           className="absolute inset-0 bg-cover bg-center bg-no-repeat"
-          style={{ backgroundImage: "url('https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1600&q=80')" }}
+          style={{ backgroundImage: `url('${RPM_CARD_IMAGE}')` }}
         />
         <div className="absolute inset-0 bg-gradient-to-r from-black/92 via-black/80 to-primary/40" />
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)", backgroundSize: "80px 80px" }} />

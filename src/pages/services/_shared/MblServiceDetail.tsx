@@ -79,13 +79,13 @@ function WhyCard({ title, desc, icon: Icon, index }: { title: string; desc: stri
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.06 }}
-      className="rounded-2xl border border-white/90 bg-white/95 backdrop-blur-md p-6 shadow-md h-full"
+      className="h-full rounded-2xl border border-border bg-card/95 p-6 shadow-sm backdrop-blur-md transition-colors dark:border-white/10 dark:bg-slate-950/45 dark:shadow-black/20"
     >
-      <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center text-primary mb-4">
+      <div className="mb-4 flex h-12 w-12 items-center justify-center rounded-xl bg-primary/10 text-primary dark:bg-primary/15 dark:text-cyan-300">
         <Icon className="w-6 h-6" />
       </div>
-      <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground mb-2">{title}</h3>
-      <p className="text-base text-slate-600 leading-relaxed">{desc}</p>
+      <h3 className="mb-2 font-heading text-lg font-bold text-foreground dark:text-white sm:text-xl">{title}</h3>
+      <p className="text-base leading-relaxed text-muted-foreground dark:text-white/75">{desc}</p>
     </motion.div>
   );
 }

@@ -18,6 +18,7 @@ import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
 import { buildBreadcrumbJsonLd, buildServiceJsonLd, servicePath, subServicePath } from "@/lib/service-seo";
+import { ServiceCapabilitiesBlock } from "../_shared/_shared";
 
 const SERVICE = ALL_SERVICES.find((s) => s.slug === "regulatory-compliance")!;
 
@@ -77,12 +78,10 @@ function StatStrip() {
 
 function SubServiceCard({
   index,
-  slug,
   name,
   tagline,
 }: {
   index: number;
-  slug: string;
   name: string;
   tagline: string;
 }) {
@@ -102,30 +101,28 @@ function SubServiceCard({
   const accent = accentClasses[index % accentClasses.length];
 
   return (
-    <Link href={subServicePath(SERVICE.slug, slug)} className="group block h-full">
-      <motion.article
-        initial={{ opacity: 0, y: 18 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, margin: "-12% 0px -12% 0px" }}
-        transition={{ duration: 0.5, delay: index * 0.05 }}
-        className="relative h-full min-h-[210px] overflow-hidden rounded-[1.8rem] border border-border/80 bg-card/90 p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl"
-      >
-        <div className={`absolute inset-0 bg-gradient-to-br ${theme} opacity-100`} />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.55),transparent_34%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_34%)]" />
-        <div className="relative flex h-full flex-col">
-          <div className="flex items-start justify-between gap-4">
-            <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-xs font-bold shadow-sm ${accent}`}>
-              {String(index + 1).padStart(2, "0")}
-            </div>
-          </div>
-
-          <div className="mt-6">
-            <h3 className="font-heading text-xl sm:text-[1.4rem] font-bold text-foreground leading-tight">{name}</h3>
-            <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground">{tagline}</p>
+    <motion.article
+      initial={{ opacity: 0, y: 18 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-12% 0px -12% 0px" }}
+      transition={{ duration: 0.5, delay: index * 0.05 }}
+      className="group relative h-full min-h-[210px] overflow-hidden rounded-[1.8rem] border border-border/80 bg-card/90 p-5 sm:p-6 shadow-sm transition-all duration-300 hover:-translate-y-1 hover:shadow-2xl cursor-default"
+    >
+      <div className={`absolute inset-0 bg-gradient-to-br ${theme} opacity-100 transition-opacity duration-300 group-hover:opacity-90`} />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.55),transparent_34%)] dark:bg-[radial-gradient(circle_at_top_right,rgba(255,255,255,0.06),transparent_34%)]" />
+      <div className="relative flex h-full flex-col">
+        <div className="flex items-start justify-between gap-4">
+          <div className={`flex h-10 w-10 shrink-0 items-center justify-center rounded-full border text-xs font-bold shadow-sm ${accent}`}>
+            {String(index + 1).padStart(2, "0")}
           </div>
         </div>
-      </motion.article>
-    </Link>
+
+        <div className="mt-6">
+          <h3 className="font-heading text-xl sm:text-[1.4rem] font-bold text-foreground leading-tight">{name}</h3>
+          <p className="mt-2 text-xs sm:text-sm leading-relaxed text-muted-foreground">{tagline}</p>
+        </div>
+      </div>
+    </motion.article>
   );
 }
 
@@ -234,7 +231,7 @@ export default function RegulatoryComplianceServicePage() {
   });
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="bg-background min-h-screen pt-16">
       <CinematicPageHero
         eyebrow="Regulatory Affairs"
         title={SERVICE.name}
@@ -325,24 +322,25 @@ export default function RegulatoryComplianceServicePage() {
         </div>
         <div className="page-container relative z-10">
           <div className="grid gap-10 lg:grid-cols-[minmax(280px,0.92fr)_minmax(0,1.08fr)] lg:items-start">
-            <div className="lg:sticky lg:top-28 lg:self-start space-y-8">
+            <div className="lg:sticky lg:top-28 lg:self-start space-y-8 overflow-hidden">
               <AnimatedSection className="max-w-2xl">
-                <SectionIntro
-                  eyebrow=""
-                  title=""
-                  description=""
-                />
+                <div className="max-w-xl">
+                  <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">SUB-SERVICES</p>
+                  <h2 className="font-heading text-3xl sm:text-4xl md:text-5xl font-bold text-foreground leading-tight">
+                    What you get
+                  </h2>
+                </div>
               </AnimatedSection>
 
               <img
                 src="/assets/regulatory-stack-visual-light.png"
                 alt="Regulatory compliance visual"
-                className="w-[115%] max-w-none mx-auto h-auto object-contain drop-shadow-2xl sm:w-[120%] lg:w-[125%] dark:hidden"
+                className="w-full max-w-full mx-auto h-auto object-contain drop-shadow-2xl dark:hidden"
               />
               <img
                 src="/assets/regulatory-stack-visual-dark.png"
                 alt="Regulatory compliance visual"
-                className="hidden w-[115%] max-w-none mx-auto h-auto object-contain drop-shadow-2xl sm:w-[120%] lg:w-[125%] dark:block"
+                className="hidden w-full max-w-full mx-auto h-auto object-contain drop-shadow-2xl dark:block"
               />
             </div>
 
@@ -354,13 +352,12 @@ export default function RegulatoryComplianceServicePage() {
                   <motion.div key={columnIndex} style={{ y: columnY }} className={columnIndex === 1 ? "md:pt-10" : columnIndex === 2 ? "md:pt-20" : ""}>
                     <div className="space-y-5">
                       {cards.map((sub, cardIndex) => (
-                        <SubServiceCard
-                          key={sub.slug}
-                          index={columnIndex + cardIndex * 3}
-                          slug={sub.slug}
-                          name={sub.name}
-                          tagline={sub.tagline}
-                        />
+                      <SubServiceCard
+                        key={sub.slug}
+                        index={columnIndex + cardIndex * 3}
+                        name={sub.name}
+                        tagline={sub.tagline}
+                      />
                       ))}
                     </div>
                   </motion.div>
@@ -374,23 +371,9 @@ export default function RegulatoryComplianceServicePage() {
       <section className="py-20 md:py-24 border-b border-border">
         <div className="page-container">
           <div className="space-y-16">
-            <div>
-              <SectionIntro
-                eyebrow="Capabilities"
-                title="Everything needed to support a submission from strategy through approval."
-                description="These capabilities are the working tools behind the regulatory process, and they stay aligned with the content already defined for this service."
-              />
-              <div className="grid sm:grid-cols-2 gap-3 mt-8">
-                {SERVICE.capabilities.map((cap, i) => (
-                  <div key={cap} className="flex items-center gap-3 rounded-xl border border-border bg-card px-4 py-3">
-                    <span className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-primary/10 text-primary text-xs font-bold">
-                      {String(i + 1).padStart(2, "0")}
-                    </span>
-                    <span className="text-sm font-medium text-foreground">{cap}</span>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <AnimatedSection>
+              <ServiceCapabilitiesBlock capabilities={SERVICE.capabilities} />
+            </AnimatedSection>
 
             <div>
               <SectionIntro

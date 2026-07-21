@@ -23,7 +23,6 @@ import { HomeSection, SectionHeading } from "@/components/HomeSection";
 import type { ServiceData } from "@/data/services";
 import type { ManufacturingProductMade } from "@/data/revive-manufacturing-content";
 import {
-  MANUFACTURING_CAPACITY_BUILDING,
   MANUFACTURING_CLEANROOMS,
   MANUFACTURING_DEVELOPMENT_PHASES,
   MANUFACTURING_ENVIRONMENTAL_CONTROLS,
@@ -258,18 +257,6 @@ export function ManufacturingServiceDetail({ service }: { service: ServiceData }
               <h3 className="font-heading text-lg font-bold text-foreground mb-2 dark:text-white">{svc.title}</h3>
               <p className="text-base text-slate-600 leading-relaxed dark:text-slate-300">{svc.description}</p>
             </motion.div>
-          ))}
-        </div>
-      </HomeSection>
-
-      <HomeSection variant="muted" className="py-12 sm:py-14">
-        <SectionHeading eyebrow="Scale" title="Capacity Building" align="left" className="mb-8" />
-        <div className="grid sm:grid-cols-2 gap-3">
-          {MANUFACTURING_CAPACITY_BUILDING.map((item) => (
-            <div key={item} className="flex items-center gap-3 p-4 rounded-xl border border-border bg-card dark:border-white/10 dark:bg-slate-950/60">
-              <Building2 className="w-5 h-5 text-primary shrink-0" />
-              <span className="text-base font-medium text-foreground dark:text-white">{item}</span>
-            </div>
           ))}
         </div>
       </HomeSection>

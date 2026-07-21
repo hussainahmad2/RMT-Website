@@ -10,6 +10,7 @@ export const BMD_SECTION_IMAGES = {
   equipment: "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1600&q=80",
   standards: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1600&q=80",
   capabilities: HOME_IMAGES.capabilities,
+  whyRmt: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT5SMihTJ9cRqAJITol-v9D-yF92297NeMS7IoMbQWYJN6iUj-zIJhPXXc&s=10",
 } as const;
 
 export const DnaWatermark = () => (

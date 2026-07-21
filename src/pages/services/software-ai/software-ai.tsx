@@ -54,7 +54,7 @@ export default function SoftwareAiServicePage() {
   });
 
   return (
-    <div className="bg-background min-h-screen">
+    <div className="bg-background min-h-screen pt-16">
       <CinematicPageHero
         eyebrow="Software & AI Solutions"
         title="Intelligent Software for Healthcare"

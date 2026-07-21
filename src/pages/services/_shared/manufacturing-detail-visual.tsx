@@ -8,7 +8,7 @@ export const MDM_SECTION_IMAGES = {
   capabilities: MANUFACTURING_HERO_IMAGES[1],
   cleanroom: MANUFACTURING_HERO_IMAGES[0],
   process: MANUFACTURING_HERO_IMAGES[4],
-  validation: MANUFACTURING_HERO_IMAGES[5],
+  validation: "https://www.mygreatlearning.com/blog/wp-content/uploads/2021/12/iStock-1189916627.jpg",
   why: MANUFACTURING_HERO_IMAGES[6],
 } as const;
 

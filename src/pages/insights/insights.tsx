@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { Link } from "wouter";
 import { Clock, ArrowRight, Calendar, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -12,8 +13,32 @@ import {
   type ArticleCategory,
 } from "@/data/insights-content";
 
+const INSIGHTS_SCROLL_KEY = "insights:scroll-y";
+const INSIGHTS_RESTORE_KEY = "insights:restore-scroll";
+
 export default function Insights() {
   const [filter, setFilter] = useState<ArticleCategory>("All");
+
+  useEffect(() => {
+    if (window.sessionStorage.getItem(INSIGHTS_RESTORE_KEY) !== "1") {
+      return;
+    }
+
+    const saved = Number(window.sessionStorage.getItem(INSIGHTS_SCROLL_KEY) ?? "0");
+    const scrollY = Number.isFinite(saved) && saved > 0 ? saved : 0;
+
+    const frame = window.requestAnimationFrame(() => {
+      window.scrollTo(0, scrollY);
+      window.sessionStorage.removeItem(INSIGHTS_RESTORE_KEY);
+      window.sessionStorage.removeItem(INSIGHTS_SCROLL_KEY);
+    });
+
+    return () => window.cancelAnimationFrame(frame);
+  }, []);
+
+  const saveScrollPosition = () => {
+    window.sessionStorage.setItem(INSIGHTS_SCROLL_KEY, String(window.scrollY));
+  };
 
   useSEO({
     title: "Insights",
@@ -44,7 +69,11 @@ export default function Insights() {
       <section className="py-12 bg-background">
         <div className="page-container">
           <AnimatedSection>
-            <div className="group grid overflow-hidden rounded-[1.75rem] border border-border bg-card transition-all duration-300 hover:border-primary/40 hover:shadow-2xl lg:grid-cols-2">
+            <Link
+              href={`/insights/${featured.id}`}
+              onClick={saveScrollPosition}
+              className="group grid overflow-hidden rounded-[1.75rem] border border-border bg-card transition-all duration-300 hover:border-primary/40 hover:shadow-2xl lg:grid-cols-2"
+            >
               <div className="relative aspect-video overflow-hidden lg:aspect-auto">
                 <img
                   src={featured.image}
@@ -91,7 +120,7 @@ export default function Insights() {
                   </span>
                 </div>
               </div>
-            </div>
+            </Link>
           </AnimatedSection>
         </div>
       </section>
@@ -122,7 +151,8 @@ export default function Insights() {
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {filtered.map((article, i) => (
-              <motion.article
+              <Link href={`/insights/${article.id}`} onClick={saveScrollPosition} className="block">
+                <motion.article
                 key={article.id}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
@@ -173,7 +203,8 @@ export default function Insights() {
                     </span>
                   </div>
                 </div>
-              </motion.article>
+                </motion.article>
+              </Link>
             ))}
           </div>
 

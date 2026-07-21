@@ -48,6 +48,26 @@ const PRODUCT_IMAGES = {
   default: "https://images.unsplash.com/photo-1582719508461-905c673771fd?w=900&q=85",
 };
 
+const ENGINEERING_PRODUCT_IMAGES: Record<string, string> = {
+  "Machine Design & Development": "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=85",
+  "Enclosure Design (Industrial & Medical)": "https://images.unsplash.com/photo-1565688534245-05d6b5be184a?w=900&q=85",
+  "Sheet Metal Design": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=85",
+  "Precision Mechanical Assemblies": "https://images.unsplash.com/photo-1584308666744-24d5c474f2ae?w=900&q=85",
+  "Ergonomic Product Design": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=85",
+  "Temperature Control Systems (Up to 350°C+ Applications)": "https://images.unsplash.com/photo-1581092160562-40aa08e78837?w=900&q=85",
+  "Thermal Optimization Systems": "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=85",
+  "Precision Heating Modules": "https://images.unsplash.com/photo-1555255707-c07966088b7b?w=900&q=85",
+  "PLC-Based Machines": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPVEwfA3OUf1o3Hc2EJznV0cTO-IZw0nX_LRxRoq_Tuxs7hLgHS0wZt3VL&s=10",
+  "Heater-Based Systems (Band Heaters, Cartridge Heaters)": "https://tempsens.com/wp-content/uploads/2025/02/MicrosoftTeams-image-3-1024x810-1.png",
+  "Automated Sorting Systems": "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=85",
+  "Industrial Process Control Machines": "https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=900&q=85",
+  "Conveyor & Motion Systems": "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=85",
+  "Safety Interlock Systems": "https://images.unsplash.com/photo-1551434678-e076c223a692?w=900&q=85",
+  "Controlled Thermal Biomedical Devices": "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=900&q=85",
+  "Laboratory Automation Equipment": "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=85",
+  "Experimental Medical Prototypes": "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=900&q=85",
+};
+
 const BMD_IMAGE_MAP: Record<string, string> = {
   "Hyaluronic Acid Serum": PRODUCT_IMAGES.serum,
   "Retinol Serum": PRODUCT_IMAGES.serum,
@@ -180,10 +200,10 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     serviceName: "Engineering & Product Development",
     bannerImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=1600&q=85",
     products: [
-      ...ENGINEERING_OTHER_PRODUCT_DESIGN.mechanical.map((n) => engProduct(n, PRODUCT_IMAGES.mechanical)),
-      ...ENGINEERING_OTHER_PRODUCT_DESIGN.thermalControl.map((n) => engProduct(n, PRODUCT_IMAGES.thermal)),
-      ...ENGINEERING_OTHER_PRODUCT_DESIGN.automationProducts.map((n) => engProduct(n, PRODUCT_IMAGES.automation)),
-      ...ENGINEERING_OTHER_PRODUCT_DESIGN.biomedicalProducts.map((n) => engProduct(n, PRODUCT_IMAGES.biomedical)),
+      ...ENGINEERING_OTHER_PRODUCT_DESIGN.mechanical.map((n) => engProduct(n, ENGINEERING_PRODUCT_IMAGES[n] ?? PRODUCT_IMAGES.mechanical)),
+      ...ENGINEERING_OTHER_PRODUCT_DESIGN.thermalControl.map((n) => engProduct(n, ENGINEERING_PRODUCT_IMAGES[n] ?? PRODUCT_IMAGES.thermal)),
+      ...ENGINEERING_OTHER_PRODUCT_DESIGN.automationProducts.map((n) => engProduct(n, ENGINEERING_PRODUCT_IMAGES[n] ?? PRODUCT_IMAGES.automation)),
+      ...ENGINEERING_OTHER_PRODUCT_DESIGN.biomedicalProducts.map((n) => engProduct(n, ENGINEERING_PRODUCT_IMAGES[n] ?? PRODUCT_IMAGES.biomedical)),
     ],
   },
   {
@@ -214,4 +234,4 @@ export const PRODUCT_HIGHLIGHTS = [
 ] as const;
 
 export const PRODUCTS_HERO_IMAGE =
-  "https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=1920&q=85";
+  "/products-hero.png";
