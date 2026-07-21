@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
-import { MapPin, Phone, Mail, Clock, ArrowRight, CheckCircle } from "lucide-react";
+import { MapPin, Mail, Clock, ArrowRight, CheckCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
@@ -22,29 +22,13 @@ const offices = [
     city: "United States",
     label: "Headquarters",
     address: "St. Cloud Edgewater Business Centre\nSartell, Minnesota, United States",
-    phone: "+1 (707) 5618 771",
     email: "info@rmt-usa.com",
-  },
-  {
-    city: "Germany",
-    label: "European Office",
-    address: "RMT Europe GmbH\nGermany",
-    phone: "+49 (0) 89 555 0199",
-    email: "europe@rmt-usa.com",
   },
   {
     city: "Pakistan",
     label: "South Asia Office",
     address: "Building 2A, W1 Street\nRawat Industrial Estate, Islamabad, 46220",
-    phone: "+1 (707) 5618 771",
     email: "info@rmt-usa.com",
-  },
-  {
-    city: "UAE",
-    label: "Middle East Office",
-    address: "RMT Middle East FZ-LLC\nDubai, UAE",
-    phone: "+971 4 555 0199",
-    email: "me@rmt-usa.com",
   },
 ];
 
@@ -55,7 +39,7 @@ export default function Contact() {
 
   useSEO({
     title: "Contact Us",
-    description: "Contact RMT Medical Technologies for medical device development, regulatory compliance, software & AI, quality testing, and contract manufacturing enquiries. Offices in USA, Germany, Pakistan, and UAE.",
+    description: "Contact RMT Medical Technologies for medical device development, regulatory compliance, software & AI, quality testing, and contract manufacturing enquiries. Offices in USA and Pakistan.",
     keywords: "contact RMT medical technologies, medical device enquiry, regulatory compliance consultation",
     path: "/contact",
   });
@@ -99,7 +83,7 @@ export default function Contact() {
       {/* OFFICE CARDS */}
       <section className="py-12 bg-secondary/30 border-b border-border">
         <div className="page-container">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 max-w-4xl mx-auto">
             {offices.map((office, i) => (
               <motion.div
                 key={office.city}
@@ -107,22 +91,18 @@ export default function Contact() {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: i * 0.08 }}
-                className="bg-card border border-border rounded-xl p-5"
+                className="bg-card border border-border rounded-xl p-5 text-center"
               >
-                <div className="flex items-center gap-2 mb-3">
+                <div className="flex justify-center mb-3">
                   <span className="text-xs font-bold px-2 py-0.5 bg-primary/10 text-primary rounded-full">{office.label}</span>
                 </div>
                 <h3 className="font-heading text-lg font-bold text-foreground mb-3">{office.city}</h3>
                 <ul className="space-y-2">
-                  <li className="flex items-start gap-2">
+                  <li className="flex items-start justify-center gap-2">
                     <MapPin className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                    <span className="text-muted-foreground text-xs whitespace-pre-line">{office.address}</span>
+                    <span className="text-muted-foreground text-xs whitespace-pre-line text-center">{office.address}</span>
                   </li>
-                  <li className="flex items-center gap-2">
-                    <Phone className="w-4 h-4 text-primary shrink-0" />
-                    <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="text-muted-foreground text-xs hover:text-primary transition-colors">{office.phone}</a>
-                  </li>
-                  <li className="flex items-center gap-2">
+                  <li className="flex items-center justify-center gap-2">
                     <Mail className="w-4 h-4 text-primary shrink-0" />
                     <a href={`mailto:${office.email}`} className="text-muted-foreground text-xs hover:text-primary transition-colors">{office.email}</a>
                   </li>
@@ -136,7 +116,7 @@ export default function Contact() {
       {/* FORM + SIDEBAR */}
       <section className="py-20">
         <div className="page-container">
-          <div className="grid lg:grid-cols-3 gap-10">
+          <div className="grid lg:grid-cols-3 gap-10 items-stretch">
 
             {/* FORM */}
             <div className="lg:col-span-2">
@@ -234,7 +214,7 @@ export default function Contact() {
             </div>
 
             {/* SIDEBAR */}
-            <div className="space-y-5">
+            <div className="grid gap-5 h-full content-stretch">
               <AnimatedSection delay={0.1} className="bg-card border border-border rounded-2xl p-6">
                 <div className="flex items-center gap-2.5 mb-4">
                   <Clock className="w-5 h-5 text-primary" />
@@ -249,10 +229,10 @@ export default function Contact() {
                 <h3 className="font-heading text-lg font-bold mb-2">Need Immediate Help?</h3>
                 <p className="text-white/80 text-sm mb-4 leading-relaxed">For urgent regulatory or technical enquiries, speak directly with one of our experts.</p>
                 <a
-                  href="tel:+17075618771"
+                  href="mailto:info@rmt-usa.com"
                   className="inline-flex items-center gap-2 bg-white text-primary font-semibold text-sm px-4 py-2 rounded-lg hover:bg-white/90 transition-colors"
                 >
-                  <Phone className="w-4 h-4" /> Call Now
+                  <Mail className="w-4 h-4" /> Email Now
                 </a>
               </AnimatedSection>
 

@@ -24,7 +24,7 @@ export function CinematicPageHero({
 
   return (
     <section
-      className={`relative overflow-hidden bg-[#060d17] flex ${fullHeight ? "min-h-screen items-center" : "min-h-[52vh] md:min-h-[58vh] items-end"}`}
+      className={`relative overflow-hidden bg-[#060d17] flex ${fullHeight ? "min-h-[calc(100svh-5rem)] items-center" : "min-h-[52vh] md:min-h-[58vh] items-end"}`}
     >
       <div className="absolute inset-0">
         <img
@@ -47,7 +47,7 @@ export function CinematicPageHero({
         aria-hidden
       />
 
-      <div className={`page-container relative z-10 w-full ${fullHeight ? "py-28 md:py-32" : "pb-14 md:pb-16 pt-28"} ${isCenter ? "text-center" : ""}`}>
+      <div className={`page-container relative z-10 w-full ${fullHeight ? "py-24 md:py-28 pt-24" : "pb-14 md:pb-16 pt-28"} ${isCenter ? "text-center" : ""}`}>
         <AnimatedSection immediate className={isCenter ? "max-w-3xl mx-auto" : "max-w-3xl"}>
           <div className={`inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-1.5 mb-5 backdrop-blur-sm ${isCenter ? "mx-auto" : ""}`}>
             <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />

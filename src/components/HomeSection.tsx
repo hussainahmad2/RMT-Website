@@ -197,11 +197,11 @@ export function SectionHeading({
           {eyebrow}
         </p>
       )}
-      <h2 className={cn("font-heading text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4", light ? "text-white" : "text-slate-900")}>
+      <h2 className={cn("font-heading text-3xl sm:text-4xl md:text-5xl font-bold leading-tight mb-4", light ? "text-white" : "text-foreground")}>
         {title}
       </h2>
       {description && (
-        <p className={cn("text-lg max-w-2xl leading-relaxed", align === "center" && "mx-auto", light ? "text-white/90" : "text-slate-600")}>
+        <p className={cn("text-lg max-w-2xl leading-relaxed", align === "center" && "mx-auto", light ? "text-white/90" : "text-muted-foreground")}>
           {description}
         </p>
       )}

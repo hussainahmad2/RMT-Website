@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Clock, ArrowRight, Calendar, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
+import { CinematicPageHero } from "@/components/CinematicPageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import {
@@ -29,24 +30,15 @@ export default function Insights() {
   );
 
   return (
-    <div className="bg-background min-h-screen pt-20">
+    <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
       {/* HERO */}
-      <section className="relative overflow-hidden bg-[#060d17] py-20 sm:py-24">
-        <div className="pointer-events-none absolute inset-x-0 top-0 h-64 bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.12),transparent_65%)]" aria-hidden />
-        <div className="pointer-events-none absolute right-0 top-0 h-80 w-80 -translate-y-1/2 translate-x-1/3 rounded-full bg-primary/10" aria-hidden />
-        <div className="page-container relative z-10 text-center">
-          <AnimatedSection>
-            <div className="mb-5 inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-1.5 backdrop-blur-sm">
-              <span className="h-2 w-2 animate-pulse rounded-full bg-primary" />
-              <span className="text-xs font-bold uppercase tracking-widest text-primary">Knowledge & Expertise</span>
-            </div>
-            <h1 className="font-heading text-5xl font-bold text-white mb-5 md:text-6xl">Insights</h1>
-            <p className="mx-auto max-w-2xl text-xl leading-relaxed text-white/65">
-              Company updates, product milestones, regulatory guidance, and industry analysis from the RMT team.
-            </p>
-          </AnimatedSection>
-        </div>
-      </section>
+      <CinematicPageHero
+        eyebrow="Knowledge & Expertise"
+        title="Insights"
+        description="Company updates, product milestones, regulatory guidance, and industry analysis from the RMT team."
+        backgroundImage="https://images.unsplash.com/photo-1507668077129-56e32842fceb?w=1920&q=85"
+        fullHeight
+      />
 
       {/* FEATURED */}
       <section className="py-12 bg-background">

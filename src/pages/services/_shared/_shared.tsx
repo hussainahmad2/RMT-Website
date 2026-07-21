@@ -18,6 +18,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { Button } from "@/components/ui/button";
+import { HomeSection, SectionHeading as PageSectionHeading } from "@/components/HomeSection";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { CinematicPageHero } from "@/components/CinematicPageHero";
 import { useSEO } from "@/lib/seo";
@@ -98,6 +99,8 @@ import { MblHeroVideoBackground } from "./MblHeroVideoBackground";
 import { MblServiceDetail } from "./MblServiceDetail";
 import { ManufacturingServiceDetail } from "./ManufacturingServiceDetail";
 import { ProductionEquipmentServiceDetail } from "./ProductionEquipmentServiceDetail";
+import { MDM_SECTION_IMAGES } from "./manufacturing-detail-visual";
+import { PE_SECTION_IMAGES } from "./production-equipment-detail-visual";
 import { QA_APPROACH, SQA_APPROACH } from "@/data/quality-assurance-content";
 import {
   FullBleedBlock,
@@ -2890,6 +2893,9 @@ function ServiceStandardsBlock({
 
   return (
     <AnimatedSection>
+        <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${isCyan ? "text-cyan-600 dark:text-cyan-400" : "text-primary"}`}>
+          Compliance
+        </p>
       <h2 className="font-heading text-3xl font-bold text-foreground mb-5 pb-3 border-b border-border">
         Compliance & Standards
       </h2>
@@ -2944,6 +2950,14 @@ export function ServiceCapabilitiesBlock({
 
   return (
     <AnimatedSection className="mb-0 pb-0">
+      <div className="mb-6 pb-4 border-b border-border">
+        <p className={`text-xs font-bold uppercase tracking-[0.2em] mb-2 ${isCyan ? "text-cyan-600 dark:text-cyan-400" : "text-primary"}`}>
+          Capabilities
+        </p>
+        <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground">
+          {title}
+        </h2>
+      </div>
       <div className="relative mx-auto h-[560px] w-full max-w-4xl sm:h-[600px] lg:h-[620px]">
         <div
           className={`absolute left-1/2 top-1/2 h-[76%] w-[76%] -translate-x-1/2 -translate-y-1/2 rounded-full border-2 ${
@@ -4196,6 +4210,121 @@ export function ServiceDetail({
       {isProductDevelopment && <ProductDevelopmentMetricsStrip />}
       {isFullFrameService && SERVICE_SIDEBAR_STATS[service.slug] && (
         <ServiceMetricsStrip stats={SERVICE_SIDEBAR_STATS[service.slug]} />
+      )}
+
+      {isMbl && (
+        <HomeSection variant="light" className="py-20 md:py-24 border-b border-border">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
+            <AnimatedSection className="max-w-3xl">
+              <PageSectionHeading
+                eyebrow="Overview"
+                title="Microbiology Laboratory Testing"
+                align="left"
+                className="mb-8"
+              />
+              <div className="space-y-4">
+                {service.overview.map((para, i) => (
+                  <p key={i} className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.1}>
+              <div className="relative rounded-2xl overflow-hidden border border-border aspect-[4/3] bg-card shadow-md">
+                <img
+                  src="https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&q=80"
+                  alt="Microbiology laboratory testing"
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Our Mission</p>
+                  <p className="text-white text-sm leading-relaxed">
+                    Reliable microbiology testing that supports product quality, safety, and compliance.
+                  </p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </HomeSection>
+      )}
+
+      {isManufacturing && (
+        <HomeSection variant="light" dots className="py-20 md:py-24 border-b border-border">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
+            <AnimatedSection className="max-w-3xl">
+              <PageSectionHeading
+                eyebrow="Overview"
+                title={service.name}
+                align="left"
+                className="mb-8"
+              />
+              <div className="space-y-4">
+                {service.overview.map((para, i) => (
+                  <p key={i} className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.1}>
+              <div className="relative rounded-2xl overflow-hidden border border-border aspect-[4/3] bg-card shadow-md">
+                <img
+                  src={MDM_SECTION_IMAGES.overview}
+                  alt={service.name}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Manufacturing Focus</p>
+                  <p className="text-white text-sm leading-relaxed">
+                    End-to-end manufacturing capability aligned to quality, scale, and regulatory expectations.
+                  </p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </HomeSection>
+      )}
+
+      {isProductionEquipment && (
+        <HomeSection variant="light" className="py-20 md:py-24 border-b border-border">
+          <div className="grid lg:grid-cols-[1.05fr_0.95fr] gap-12 lg:gap-16 items-center">
+            <AnimatedSection className="max-w-3xl">
+              <PageSectionHeading eyebrow="Overview" title={service.name} align="left" className="mb-8" />
+              <div className="space-y-4">
+                {service.overview.map((para, i) => (
+                  <p key={i} className="text-muted-foreground text-base sm:text-lg leading-relaxed">
+                    {para}
+                  </p>
+                ))}
+              </div>
+            </AnimatedSection>
+
+            <AnimatedSection delay={0.1}>
+              <div className="relative rounded-2xl overflow-hidden border border-border aspect-[4/3] bg-card shadow-md">
+                <img
+                  src={PE_SECTION_IMAGES.overview}
+                  alt={service.name}
+                  className="h-full w-full object-cover"
+                  loading="lazy"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent" />
+                <div className="absolute bottom-0 left-0 right-0 p-6">
+                  <p className="text-white/70 text-xs font-bold uppercase tracking-widest mb-1">Engineering Focus</p>
+                  <p className="text-white text-sm leading-relaxed">
+                    Precision-built equipment engineered for cleanroom performance, validation, and scale.
+                  </p>
+                </div>
+              </div>
+            </AnimatedSection>
+          </div>
+        </HomeSection>
       )}
 
       {/* OVERVIEW */}

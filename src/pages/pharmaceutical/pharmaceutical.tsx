@@ -36,12 +36,13 @@ export default function Pharmaceutical() {
   });
 
   return (
-    <div className="bg-background min-h-screen pt-20">
+    <div className="bg-background min-h-screen">
       <CinematicPageHero
         eyebrow="Pharmaceutical Domain"
         title="Transforming Molecules into Market-Ready Medicines"
         description="From pre-formulation research and formulation development to scale-up, regulatory submission, technology transfer, and commercial manufacturing support — we help pharmaceutical innovators accelerate development while reducing risk."
         backgroundImage={PHARMA_HERO_IMAGE}
+        fullHeight
       >
         <Button asChild size="lg" className="rounded-xl font-semibold">
           <Link href="/contact">Start Your Project <ArrowRight className="ml-2 w-4 h-4" /></Link>
@@ -59,7 +60,7 @@ export default function Pharmaceutical() {
       {/* Highlights */}
       <section className="border-b border-white/10 bg-primary">
         <div className="page-container py-8">
-          <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/15">
+          <div className="grid grid-cols-1 sm:grid-cols-3 divide-y sm:divide-y-0 sm:divide-x divide-white/15">
             {PHARMA_HIGHLIGHTS.map((h) => (
               <div key={h.label} className="text-center text-white px-4 py-2">
                 <p className="font-heading text-2xl sm:text-3xl font-bold">{h.value}</p>
@@ -125,8 +126,8 @@ export default function Pharmaceutical() {
             </p>
           </AnimatedSection>
 
-          <div className="grid lg:grid-cols-[280px_1fr] gap-6 lg:gap-8">
-            <div className="flex lg:flex-col gap-2 overflow-x-auto pb-2 lg:pb-0 lg:overflow-visible">
+          <div className="flex flex-col gap-6 lg:gap-8">
+            <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-2 pb-2 lg:pb-0">
               {PHARMA_EXPERTISE.map((area) => {
                 const Icon = area.icon;
                 const isActive = area.id === activeExpertise;

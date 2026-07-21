@@ -154,88 +154,106 @@ export default function Testing() {
         </div>
       </section>
 
-      {/* CATEGORY TABS */}
-      <section className="sticky top-16 bg-background/95 backdrop-blur border-b border-border z-30 py-3">
-        <div className="page-container overflow-x-auto">
-          <div className="flex gap-2 min-w-max">
-            {testCategories.map((cat) => (
-              <button key={cat.id} onClick={() => setActive(cat.id)}
-                className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium transition-all whitespace-nowrap ${active === cat.id ? "bg-primary text-white shadow-sm" : "bg-muted text-muted-foreground hover:bg-primary/10 hover:text-primary"}`}>
-                {cat.icon}
-                {cat.title}
-              </button>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ACTIVE CATEGORY DETAIL */}
+      {/* CATEGORY TABS + ACTIVE DETAIL */}
       <section className="py-16">
         <div className="page-container">
-          <AnimatePresence mode="wait">
-            <motion.div key={active} initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -16 }} transition={{ duration: 0.25 }}>
+          <div className="overflow-hidden rounded-[2rem] border border-border bg-card/95 shadow-sm">
+            <div className="border-b border-border bg-muted/20 px-4 py-4 sm:px-6">
+              <div className="mx-auto flex max-w-5xl flex-wrap justify-center gap-2">
+                {testCategories.map((cat) => (
+                  <button
+                    key={cat.id}
+                    onClick={() => setActive(cat.id)}
+                    className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition-all ${
+                      active === cat.id
+                        ? "bg-primary text-white shadow-sm"
+                        : "bg-background text-muted-foreground hover:bg-primary/10 hover:text-primary"
+                    }`}
+                  >
+                    {cat.icon}
+                    <span>{cat.title}</span>
+                  </button>
+                ))}
+              </div>
+            </div>
 
-              <div className="grid lg:grid-cols-2 gap-12 items-start">
-                <div>
-                  <div className="w-14 h-14 bg-primary/10 text-primary rounded-2xl flex items-center justify-center mb-5">
-                    {activeCategory.icon}
-                  </div>
-                  <h2 className="font-heading text-4xl font-bold text-foreground mb-3">{activeCategory.title}</h2>
-                  <p className="text-muted-foreground text-lg leading-relaxed mb-6">{activeCategory.tagline}</p>
+            <div className="p-5 sm:p-8">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={active}
+                  initial={{ opacity: 0, y: 16 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -16 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <div className="grid lg:grid-cols-2 gap-10 lg:gap-12 items-start">
+                    <div>
+                      <h2 className="font-heading text-4xl font-bold text-foreground mb-3">{activeCategory.title}</h2>
+                      <p className="text-muted-foreground text-lg leading-relaxed mb-6">{activeCategory.tagline}</p>
 
-                  {/* Standards */}
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {activeCategory.standards.map((std) => (
-                      <span key={std} className="text-xs px-3 py-1.5 bg-primary/8 border border-primary/20 text-primary rounded-lg font-medium">{std}</span>
-                    ))}
-                  </div>
+                      <div className="flex flex-wrap gap-2 mb-8">
+                        {activeCategory.standards.map((std) => (
+                          <span key={std} className="text-xs px-3 py-1.5 bg-primary/8 border border-primary/20 text-primary rounded-lg font-medium">
+                            {std}
+                          </span>
+                        ))}
+                      </div>
 
-                  {/* Test List */}
-                  <div className="space-y-3">
-                    {activeCategory.tests.map((test, i) => (
-                      <motion.div key={test.name} initial={{ opacity: 0, x: -16 }} animate={{ opacity: 1, x: 0 }} transition={{ delay: i * 0.07 }}
-                        className="flex items-start gap-3 bg-card border border-border rounded-xl p-4 hover:border-primary/35 transition-colors">
-                        <div className="w-7 h-7 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                          <span className="text-primary text-xs font-bold">{i + 1}</span>
-                        </div>
-                        <div>
-                          <p className="font-semibold text-foreground text-sm">{test.name}</p>
-                          <p className="text-muted-foreground text-xs mt-1 leading-relaxed">{test.description}</p>
-                        </div>
+                      <div className="space-y-3">
+                        {activeCategory.tests.map((test, i) => (
+                          <motion.div
+                            key={test.name}
+                            initial={{ opacity: 0, x: -16 }}
+                            animate={{ opacity: 1, x: 0 }}
+                            transition={{ delay: i * 0.07 }}
+                            className="flex items-start gap-3 rounded-xl border border-border bg-background p-4 transition-colors hover:border-primary/35"
+                          >
+                            <div className="w-7 h-7 bg-primary/10 rounded-lg flex items-center justify-center shrink-0 mt-0.5">
+                              <span className="text-primary text-xs font-bold">{i + 1}</span>
+                            </div>
+                            <div>
+                              <p className="font-semibold text-foreground text-sm">{test.name}</p>
+                              <p className="text-muted-foreground text-xs mt-1 leading-relaxed">{test.description}</p>
+                            </div>
+                          </motion.div>
+                        ))}
+                      </div>
+
+                      <div className="mt-8">
+                        <Button asChild className="rounded-lg">
+                          <Link href="/contact">Request {activeCategory.title} Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
+                        </Button>
+                      </div>
+                    </div>
+
+                    <div className="lg:sticky lg:top-28">
+                      <motion.div
+                        key={activeCategory.image}
+                        initial={{ opacity: 0, scale: 0.97 }}
+                        animate={{ opacity: 1, scale: 1 }}
+                        transition={{ duration: 0.3 }}
+                        className="overflow-hidden rounded-2xl shadow-2xl aspect-[4/3]"
+                      >
+                        <img src={activeCategory.image} alt={activeCategory.title} className="w-full h-full object-cover" />
                       </motion.div>
-                    ))}
-                  </div>
 
-                  <div className="mt-8">
-                    <Button asChild className="rounded-lg">
-                      <Link href="/contact">Request {activeCategory.title} Quote <ArrowRight className="ml-2 w-4 h-4" /></Link>
-                    </Button>
-                  </div>
-                </div>
-
-                {/* IMAGE */}
-                <div className="sticky top-28">
-                  <motion.div key={activeCategory.image} initial={{ opacity: 0, scale: 0.97 }} animate={{ opacity: 1, scale: 1 }} transition={{ duration: 0.3 }}
-                    className="rounded-2xl overflow-hidden shadow-2xl aspect-[4/3]">
-                    <img src={activeCategory.image} alt={activeCategory.title} className="w-full h-full object-cover" />
-                  </motion.div>
-
-                  <div className="mt-5 bg-card border border-border rounded-2xl p-6">
-                    <h4 className="font-semibold text-foreground mb-4 text-xs uppercase tracking-widest">Why Choose RMT for Testing</h4>
-                    <div className="space-y-3">
-                      {["Accredited laboratory network", "Regulatory-grade test reports", "Fast turnaround times", "Standards-compliant protocols", "Complete test documentation"].map((item) => (
-                        <div key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground">
-                          <CheckCircle className="w-4 h-4 text-primary shrink-0" />
-                          {item}
+                      <div className="mt-5 rounded-2xl border border-border bg-background p-6">
+                        <h4 className="mb-4 text-xs font-semibold uppercase tracking-widest text-foreground">Why Choose RMT for Testing</h4>
+                        <div className="space-y-3">
+                          {["Accredited laboratory network", "Regulatory-grade test reports", "Fast turnaround times", "Standards-compliant protocols", "Complete test documentation"].map((item) => (
+                            <div key={item} className="flex items-center gap-2.5 text-sm text-muted-foreground">
+                              <CheckCircle className="w-4 h-4 text-primary shrink-0" />
+                              {item}
+                            </div>
+                          ))}
                         </div>
-                      ))}
+                      </div>
                     </div>
                   </div>
-                </div>
-              </div>
-
-            </motion.div>
-          </AnimatePresence>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+          </div>
         </div>
       </section>
 

@@ -3,7 +3,7 @@ import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
   Shield, Factory,
-  MapPin, Phone, Mail,
+  MapPin, Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
@@ -55,7 +55,6 @@ const globalOffices = [
     label: "HQ",
     description: "North America Operations",
     address: "St. Cloud Edgewater Business Centre Sartell, Minnesota, United States",
-    phone: "+1 (707) 5618 771",
     email: "info@rmt-usa.com",
     latitude: 45.6216,
     longitude: -94.2069,
@@ -65,10 +64,11 @@ const globalOffices = [
     label: "PAK",
     description: "South Asia Office",
     address: "Building 2A, W1 Street, Rawat Industrial Estate, Islamabad, 46220",
-    phone: "+1 (707) 5618 771",
     email: "info@rmt-usa.com",
     latitude: 30.3753,
     longitude: 69.3451,
+    markerOffsetX: -42,
+    markerOffsetY: 28,
   },
 ];
 
@@ -454,16 +454,11 @@ export default function Home() {
                       </div>
                       <p className="mb-2 text-base text-muted-foreground sm:text-lg">{office.description}</p>
                       <p className="mb-3 text-base text-foreground/80 sm:text-lg">{office.address}</p>
-                      <div className="flex flex-col gap-1.5 text-base sm:text-lg">
-                        <a href={`tel:${office.phone.replace(/\s/g, "")}`} className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-primary">
-                          <Phone className="h-3.5 w-3.5 shrink-0" />{office.phone}
+                      {office.email && (
+                        <a href={`mailto:${office.email}`} className="inline-flex items-center gap-1.5 text-base text-muted-foreground transition-colors hover:text-primary sm:text-lg">
+                          <Mail className="h-3.5 w-3.5 shrink-0" />{office.email}
                         </a>
-                        {office.email && (
-                          <a href={`mailto:${office.email}`} className="inline-flex items-center gap-1.5 text-muted-foreground transition-colors hover:text-primary">
-                            <Mail className="h-3.5 w-3.5 shrink-0" />{office.email}
-                          </a>
-                        )}
-                      </div>
+                      )}
                     </div>
                   </div>
                 </motion.div>

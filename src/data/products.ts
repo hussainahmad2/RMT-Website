@@ -4,6 +4,7 @@ import {
   MANUFACTURING_IMAGES,
   MANUFACTURING_PRODUCTS,
   MANUFACTURING_PRODUCTS_MADE,
+  type ManufacturingProductMade,
 } from "@/data/revive-manufacturing-content";
 import { PRODUCTION_EQUIPMENT_HERO_IMAGES, PRODUCTION_EQUIPMENT_PRODUCTS } from "@/data/production-equipment-content";
 import { ENGINEERING_OTHER_PRODUCT_DESIGN } from "@/data/engineering-content";
@@ -138,16 +139,17 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
         name: p.name,
         description: p.description,
         features: p.features,
-        image:
-          "image" in p && p.image
-            ? p.image
-            : p.name === "Diagnostic Catheters"
-              ? MANUFACTURING_IMAGES.guidingCatheter
-              : "/mdm/facility-1.jpeg",
+        image: (() => {
+          const hasImage = "image" in p && Boolean(p.image);
+          const isDiagnosticCatheter = p.name === "Diagnostic Catheters";
+          if (hasImage) return p.image;
+          if (isDiagnosticCatheter) return MANUFACTURING_IMAGES.guidingCatheter;
+          return "/mdm/facility-1.jpeg";
+        })(),
         tag: "Class II",
         spec: "ISO 13485",
       })),
-      ...MANUFACTURING_PRODUCTS_MADE.filter((p) => p.name !== "Angiographic Catheters").map((p) => ({
+      ...MANUFACTURING_PRODUCTS_MADE.filter((p: ManufacturingProductMade) => p.name !== "Angiographic Catheters").map((p) => ({
         name: p.name,
         description: p.description,
         features: p.features.map((f) => `${f.title} — ${f.description}`),
