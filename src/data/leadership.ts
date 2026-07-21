@@ -18,6 +18,7 @@ export const C_LEVEL_LEADERSHIP: LeadershipMember[] = [
     name: "Dr. Murtaza Najabat Ali",
     role: "Chief Executive Officer",
     image: teamImage("c-level", "ceo.webp"),
+    imageClassName: "object-contain object-center",
     bio: "Dr. Murtaza Najabat Ali is the Founder and Chief Executive Officer of Revive Medical Technologies Inc. (RMT), a U.S.-based medical device research, development, and manufacturing organization serving innovators worldwide. A biomedical engineer and academic leader with a PhD from the University of Sheffield and postgraduate training at Queen Mary University of London and Brunel University, he brings more than two decades of experience in biomaterials, drug delivery systems, medical device R&D, and regulatory strategy.",
     detail: [
       "Beyond RMT, Dr. Ali has held senior leadership roles including Professor of Biomedical Engineering, Founding Director of the Medical Devices Development Center (MDDC) at NUST, and Founding CEO of N-ovative Health Technologies — Pakistan's first UKAS-accredited medical device manufacturing facility producing cardiovascular and electromedical devices. He serves as a COMSTECH Distinguished Scholar for capacity building across OIC member states and as a Member Expert Committee at Pakistan's Drug Regulatory Authority (DRAP).",
@@ -318,13 +319,13 @@ export const BUSINESS_MARKETING_UNIT: LeadershipMember[] = [
   },
   {
     name: "Hamna Imtiaz",
-    role: "AM, Business Development",
+    role: "Assistant Manager, Business Development",
     image: teamImage("business-marketing-unit", "hamna.webp"),
     bio: "Supports business development outreach, client engagement, and partnership growth across RMT programmes.",
   },
   {
     name: "Laraib Hussain Malik",
-    role: "AM, Marketing",
+    role: "Assistant Manager, Marketing",
     image: teamImage("business-marketing-unit", "laraib.webp"),
     bio: "Supports marketing initiatives, brand communications, and market engagement across RMT programmes.",
   },

@@ -90,8 +90,8 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true }}
       transition={{ delay: index * 0.08 }}
-      className={`bg-card border border-border rounded-2xl overflow-hidden hover:border-primary/40 hover:shadow-lg transition-all group ${
-        featured ? "" : "h-full flex flex-col"
+      className={`bg-card border border-border rounded-2xl overflow-hidden transition-all group ${
+        featured ? "" : "h-full flex flex-col hover:border-primary/40 hover:shadow-lg"
       }`}
     >
       {featured ? (
