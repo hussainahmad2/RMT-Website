@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState, lazy, Suspense } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight, Play, CheckCircle, Globe, Users, Award, Clock,
@@ -12,12 +12,15 @@ import { HomeProductShowcase, HomeCapabilitiesSection } from "@/components/HomeP
 import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
 import { HomeServicesSection } from "@/components/HomeServicesSection";
 import { HomeWhyRmtSection } from "@/components/HomeWhyRmtSection";
-import { RequestQuoteModal } from "@/components/RequestQuoteModal";
 import { WorldMap } from "@/components/WorldMap";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { HOME_IMAGES } from "@/data/home-images";
 import { HOME_PRODUCT_HERO_SLIDES } from "@/data/home-products";
+
+const RequestQuoteModal = lazy(() =>
+  import("@/components/RequestQuoteModal").then((m) => ({ default: m.RequestQuoteModal }))
+);
 
 const stats = [
   { value: 15, step: 1, suffix: "+", label: "Years of Experience", icon: <Clock className="w-5 h-5" /> },
@@ -264,6 +267,7 @@ export default function Home() {
                       className="h-[14rem] w-auto max-w-[80vw] object-contain object-bottom sm:h-[18rem] sm:max-w-full md:h-[22rem] lg:h-[calc(26rem*var(--hero-scale))] xl:h-[calc(30rem*var(--hero-scale))] lg:translate-y-[calc(1.5rem*var(--hero-scale))]"
                       loading="eager"
                       decoding="async"
+                      fetchPriority="high"
                     />
                   </motion.div>
                 </motion.div>
@@ -586,7 +590,11 @@ export default function Home() {
         </div>
       </section>
 
-      <RequestQuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
+      {quoteOpen && (
+        <Suspense fallback={null}>
+          <RequestQuoteModal open={quoteOpen} onClose={() => setQuoteOpen(false)} />
+        </Suspense>
+      )}
     </div>
   );
 }

@@ -1,6 +1,6 @@
 /** Medical industry imagery — equipment, labs, manufacturing, diagnostics */
 
-import heroIndustry from "@/assets/hero-bg.png";
+import heroIndustry from "@/assets/hero-bg.webp";
 import innovationBiomaterials from "@/assets/innovation-biomaterials.jpg";
 
 export const HOME_IMAGES = {

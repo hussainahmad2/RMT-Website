@@ -55,13 +55,13 @@ export const RD_WING_MICROBIOLOGY_LABORATORY: LeadershipMember[] = [
   {
     name: "Hamza",
     role: "Microbiology Laboratory Lead",
-    image: teamImage("rd-wing/microbiology-laboratory", "hamza.jpg"),
+    image: teamImage("rd-wing/microbiology-laboratory", "hamza.webp"),
     bio: "Leads microbiology lab operations for sterility, microbial limit, and pathogen testing.",
   },
   {
     name: "Syed Ali Hassan",
     role: "Assistant, Microbiology",
-    image: teamImage("rd-wing/microbiology-laboratory", "ali.jpg"),
+    image: teamImage("rd-wing/microbiology-laboratory", "ali.webp"),
     bio: "Supports microbiology testing, sample handling, and laboratory documentation.",
   },
 ];
@@ -99,7 +99,7 @@ export const RD_WING_BIOMATERIALS: LeadershipMember[] = [
   {
     name: "Nimra Shabbir",
     role: "Junior Research Scientist",
-    image: teamImage("rd-wing/biomaterials-department", "nimra.png"),
+    image: teamImage("rd-wing/biomaterials-department", "nimra.webp"),
     bio: "Supports biomaterials research, laboratory testing, and formulation development activities",
   },
   {
@@ -139,7 +139,7 @@ export const SOFTWARE_DEPARTMENT: LeadershipMember[] = [
   {
     name: "Muhammad Hussain Ahmad Bilal",
     role: "Software Engineer",
-    image: teamImage("software-department", "hussain.png"),
+    image: teamImage("software-department", "hussain.webp"),
     bio: "Develops and maintains medical software applications across the software engineering lifecycle.",
   },
 ];
@@ -205,7 +205,7 @@ export const QUALITY_CONTROL_WING: LeadershipMember[] = [
   {
     name: "Muhammad Wahaj",
     role: "Manager, QC (Production)",
-    image: teamImage("quality-control-wing", "wahaj.png"),
+    image: teamImage("quality-control-wing", "wahaj.webp"),
     bio: "Manages production QC, in-process inspection, and release testing for manufactured devices.",
   },
   {
@@ -221,7 +221,7 @@ export const SUPPLY_CHAIN_WING: LeadershipMember[] = [
   {
     name: "Syed Mir",
     role: "Manager, Supply Chain",
-    image: teamImage("supply-chain-wing", "mir.png"),
+    image: teamImage("supply-chain-wing", "mir.webp"),
     bio: "Leads vendor management, procurement, and logistics for medical device programmes.",
   },
   {
@@ -259,7 +259,7 @@ export const FINANCE_DEPARTMENT: LeadershipMember[] = [
   {
     name: "Aneel Kumar",
     role: "Assistant Manager, Finance",
-    image: teamImage("finance-department", "aneel.png"),
+    image: teamImage("finance-department", "aneel.webp"),
     bio: "Supports finance operations, bookkeeping, payroll, and accounts payable/receivable.",
   },
 ];
@@ -291,7 +291,7 @@ export const PRODUCT_DEVELOPMENT_WING: LeadershipMember[] = [
   {
     name: "Muhammad Umar Javed",
     role: "Assistant Manager, Product Development",
-    image: teamImage("product-development-wing", "umar.png"),
+    image: teamImage("product-development-wing", "umar.webp"),
     bio: "Supports product development from concept through design validation and manufacturing transfer.",
   },
   {
@@ -317,15 +317,15 @@ export const BUSINESS_MARKETING_UNIT: LeadershipMember[] = [
     bio: "Coordinates business development activities and supports marketing and client engagement across RMT programmes.",
   },
   {
-    name: "Hamna",
-    role: "Business Development Associate",
-    image: teamImage("business-marketing-unit", "hamna.png"),
-    bio: "Supports business development outreach, client engagement, and marketing coordination across RMT programmes.",
+    name: "Hamna Imtiaz",
+    role: "AM, Business Development",
+    image: teamImage("business-marketing-unit", "hamna.webp"),
+    bio: "Supports business development outreach, client engagement, and partnership growth across RMT programmes.",
   },
   {
-    name: "Laraib",
-    role: "Business Development Associate",
-    image: teamImage("business-marketing-unit", "laraib.png"),
-    bio: "Supports marketing initiatives, client coordination, and business development activities across RMT markets.",
+    name: "Laraib Hussain Malik",
+    role: "AM, Marketing",
+    image: teamImage("business-marketing-unit", "laraib.webp"),
+    bio: "Supports marketing initiatives, brand communications, and market engagement across RMT programmes.",
   },
 ];

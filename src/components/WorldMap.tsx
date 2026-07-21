@@ -29,7 +29,7 @@ export const WorldMap = ({ offices }: WorldMapProps) => {
       }`}
     >
       <img
-        src="/world_map.png"
+        src="/world_map.webp"
         alt="Global strategic presence — United States headquarters and Pakistan South Asia office"
         className={`block h-auto w-full object-contain ${isDark ? "opacity-95" : ""}`}
         loading="lazy"

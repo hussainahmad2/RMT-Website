@@ -32,6 +32,20 @@ export default defineConfig({
   build: {
     outDir: "dist",
     emptyOutDir: true,
+    cssCodeSplit: true,
+    rollupOptions: {
+      output: {
+        manualChunks(id) {
+          if (id.includes("node_modules")) {
+            if (id.includes("framer-motion")) return "motion";
+            if (id.includes("@tanstack")) return "query";
+            if (id.includes("lucide-react") || id.includes("react-icons")) return "icons";
+            if (id.includes("recharts")) return "charts";
+            return "vendor";
+          }
+        },
+      },
+    },
   },
   server: {
     port: 5000,

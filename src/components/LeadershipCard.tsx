@@ -35,6 +35,8 @@ export function LeadershipCard({ person, index = 0, featured = false }: Leadersh
         <img
           src={person.image}
           alt={person.name}
+          loading="lazy"
+          decoding="async"
           className={`absolute inset-0 w-full h-full transition-transform duration-500 ${
             person.imageClassName
               ? `${person.imageClassName} ${tightCrop ? "group-hover:scale-[1.12]" : "group-hover:scale-[1.02]"}`
