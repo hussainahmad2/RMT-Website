@@ -278,7 +278,7 @@ export default function Home() {
       </section>
 
       {/* ===================== COMPANY SNAPSHOT ===================== */}
-      <section className="relative overflow-hidden bg-background py-12 sm:py-14 lg:min-h-[calc(100svh-8rem)] lg:py-16">
+      <section className="relative overflow-hidden bg-background py-12 sm:py-14 lg:py-16">
         <div
           className="pointer-events-none absolute inset-x-0 top-0 z-0 h-[24rem] bg-[radial-gradient(circle_at_top,rgba(59,130,246,0.10),transparent_58%)] sm:h-[28rem]"
           aria-hidden
@@ -371,7 +371,7 @@ export default function Home() {
 
       {/* ===================== WHAT WE BUILD (pinned bg) ===================== */}
       <section className="relative overflow-hidden bg-background">
-        <div className="page-container pt-0 pb-6 sm:pb-8 lg:py-12">
+        <div className="page-container pt-3 pb-6 sm:pt-4 sm:pb-8 lg:pt-5 lg:pb-12">
           <section id="featured-products" className="scroll-mt-28">
               <AnimatedSection className="mb-4 max-w-3xl lg:mb-6" animation="slideDown" delay={0.1} duration={0.9}>
                 <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary lg:text-[#0c447c] dark:lg:text-sky-300">What We Build</p>

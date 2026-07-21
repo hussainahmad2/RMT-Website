@@ -156,7 +156,7 @@ export const PRODUCTION_WING: LeadershipMember[] = [
   {
     name: "Umer Shahid",
     role: "Assistant Manager, Production",
-    image: teamImage("production-wing", "umer.jpeg"),
+    image: teamImage("production-wing", "umer.webp"),
     bio: "Supports production planning, shop-floor coordination, and daily manufacturing operations.",
   },
   {
