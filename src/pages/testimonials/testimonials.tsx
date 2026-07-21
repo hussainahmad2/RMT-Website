@@ -211,9 +211,9 @@ export default function Testimonials() {
   const goNext = () => setActive((i) => (i + 1) % TESTIMONIAL_VIDEOS.length);
 
   return (
-    <div className="bg-background min-h-screen pt-20">
+    <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
       {/* Hero with rotating background */}
-      <section className="relative min-h-[55vh] flex items-end overflow-hidden bg-[#060d17]">
+      <section className="relative min-h-[calc(100svh-4rem)] flex items-center overflow-hidden bg-[#060d17]">
         <div className="absolute inset-0">
           <AnimatePresence mode="sync">
             <motion.img
@@ -232,18 +232,18 @@ export default function Testimonials() {
           <div className="absolute inset-0 bg-gradient-to-t from-[#060d17] via-transparent to-[#060d17]/60" />
         </div>
 
-        <div className="page-container relative z-10 pb-14 pt-28 w-full text-center">
+        <div className="page-container relative z-10 w-full py-24 md:py-28 text-left">
           <AnimatedSection immediate>
             <div className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/8 px-4 py-1.5 mb-5 backdrop-blur-sm">
               <Star className="w-4 h-4 text-primary" fill="currentColor" />
               <span className="text-white/80 text-xs font-bold uppercase tracking-[0.18em]">Client Voices</span>
             </div>
             <h1 className="font-heading text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-4">Testimonials</h1>
-            <div className="h-px w-16 bg-primary mx-auto mb-5" />
-            <p className="text-white/65 text-lg max-w-2xl mx-auto leading-relaxed">
+            <div className="h-px w-16 bg-primary mb-5" />
+            <p className="text-white/65 text-lg max-w-2xl leading-relaxed">
               Hear directly from the partners who trust RMT across regulatory, manufacturing, and software delivery.
             </p>
-            <div className="flex justify-center gap-3 mt-8">
+            <div className="flex flex-wrap gap-3 mt-8">
               <Button asChild size="lg" className="rounded-xl font-semibold">
                 <a href="#spotlight">Watch Stories</a>
               </Button>

@@ -21,7 +21,6 @@ export const PHARMA_HIGHLIGHTS = [
   { label: "Lifecycle Stages", value: "8" },
   { label: "Dosage Form Types", value: "10+" },
   { label: "Therapeutic Areas", value: "10" },
-  { label: "Regulatory Markets", value: "Global" },
 ];
 
 export interface ExpertiseArea {

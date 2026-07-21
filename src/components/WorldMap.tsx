@@ -12,6 +12,8 @@ export interface WorldMapOffice {
   email?: string;
   latitude: number;
   longitude: number;
+  markerOffsetX?: number;
+  markerOffsetY?: number;
 }
 
 interface WorldMapProps {
@@ -32,10 +34,14 @@ export const WorldMap = ({ offices }: WorldMapProps) => {
   const { theme } = useTheme();
   const [activeIndex, setActiveIndex] = useState<number | null>(null);
 
-  const points = offices.map((office) => ({
-    office,
-    ...project(office.latitude, office.longitude),
-  }));
+  const points = offices.map((office) => {
+    const projected = project(office.latitude, office.longitude);
+    return {
+      office,
+      x: projected.x + (office.markerOffsetX ?? 0),
+      y: projected.y + (office.markerOffsetY ?? 0),
+    };
+  });
 
   const isDark = theme === "dark";
 

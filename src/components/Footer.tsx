@@ -1,14 +1,13 @@
 import React from "react";
 import { Link } from "wouter";
-import { MapPin, Phone, Mail, Linkedin, Youtube, Facebook } from "lucide-react";
+import { MapPin, Mail, Linkedin, Youtube, Facebook } from "lucide-react";
 import { ALL_SERVICES } from "@/data/services";
 
 const BASE = import.meta.env.BASE_URL;
 
 const offices = [
-  { city: "United States", address: "St. Cloud Edgewater Business Centre Sartell, Minnesota, United States", phone: "+1 (707) 5618 771", email: "info@rmt-usa.com" },
-  { city: "Pakistan", address: "Building 2A, W1 Street, Rawat Industrial Estate, Islamabad, 46220", phone: "+1 (707) 5618 771", email: "info@rmt-usa.com" },
-  { city: "UAE", address: "RMT Middle East FZ-LLC, Dubai, UAE", phone: "+971 4 555 0199", email: "me@rmt-usa.com" },
+  { city: "United States", address: "St. Cloud Edgewater Business Centre Sartell, Minnesota, United States", email: "info@rmt-usa.com" },
+  { city: "Pakistan", address: "Building 2A, W1 Street, Rawat Industrial Estate, Islamabad, 46220", email: "info@rmt-usa.com" },
 ];
 
 export const Footer = () => {
@@ -87,7 +86,7 @@ export const Footer = () => {
                   <div>
                     <p className="text-white text-xs font-semibold mb-0.5">{office.city}</p>
                     <p className="text-white/40 text-xs leading-relaxed">{office.address}</p>
-                    <a href={`tel:${office.phone}`} className="block text-white/40 text-xs hover:text-primary transition-colors mt-0.5">{office.phone}</a>
+                    {office.email && <a href={`mailto:${office.email}`} className="block text-white/40 text-xs hover:text-primary transition-colors mt-0.5">{office.email}</a>}
                   </div>
                 </li>
               ))}

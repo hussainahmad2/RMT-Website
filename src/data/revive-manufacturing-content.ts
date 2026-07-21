@@ -46,6 +46,7 @@ export const MANUFACTURING_PRODUCTS = [
     icon: "stethoscope",
     description:
       "High-performance catheters engineered for precise vascular access and superior contrast delivery — helping clinicians see more clearly and act with confidence.",
+    image: MANUFACTURING_IMAGES.angiographicCatheter,
     features: [
       "Optimized torque transmission and pushability",
       "Multiple tip configurations (straight, angled, shaped)",

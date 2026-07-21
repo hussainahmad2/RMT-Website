@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import {
   ArrowLeft,
@@ -75,6 +75,8 @@ const BMD_PRODUCTS_WITHOUT_IMAGES = [
   "Drug Eluting Coatings",
 ] as const;
 
+const BMD_PORTFOLIO_LOOP = [...BMD_PORTFOLIO, ...BMD_PORTFOLIO, ...BMD_PORTFOLIO];
+
 function PartnerCard({
   name,
   type,
@@ -132,6 +134,86 @@ function WhyCard({
       <h3 className="font-heading text-lg sm:text-xl font-bold text-foreground dark:text-white mb-2">{title}</h3>
       <p className="text-base text-slate-600 dark:text-white/75 leading-relaxed">{desc}</p>
     </motion.div>
+  );
+}
+
+function PortfolioCarousel() {
+  const trackRef = useRef<HTMLDivElement | null>(null);
+  const recenterTimerRef = useRef<number | null>(null);
+
+  useEffect(() => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    track.scrollLeft = track.scrollWidth / 3;
+  }, []);
+
+  useEffect(() => {
+    return () => {
+      if (recenterTimerRef.current !== null) {
+        window.clearTimeout(recenterTimerRef.current);
+      }
+    };
+  }, []);
+
+  const recenterIfNeeded = () => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    const thirdWidth = track.scrollWidth / 3;
+    if (track.scrollLeft < thirdWidth * 0.5) {
+      track.scrollLeft += thirdWidth;
+    } else if (track.scrollLeft > thirdWidth * 1.5) {
+      track.scrollLeft -= thirdWidth;
+    }
+  };
+
+  const slide = (direction: -1 | 1) => {
+    const track = trackRef.current;
+    if (!track) return;
+
+    track.scrollBy({
+      left: direction * (track.clientWidth / 2),
+      behavior: "smooth",
+    });
+
+    if (recenterTimerRef.current !== null) {
+      window.clearTimeout(recenterTimerRef.current);
+    }
+
+    recenterTimerRef.current = window.setTimeout(recenterIfNeeded, 380);
+  };
+
+  return (
+    <div className="relative">
+      <div
+        ref={trackRef}
+        className="flex gap-4 overflow-x-auto scroll-smooth snap-x snap-mandatory [scrollbar-width:none] [-ms-overflow-style:none] [&::-webkit-scrollbar]:hidden"
+      >
+        {BMD_PORTFOLIO_LOOP.map((item, i) => (
+          <motion.article
+            key={`${item.title}-${i}`}
+            initial={{ opacity: 0, y: 14 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: (i % BMD_PORTFOLIO.length) * 0.03 }}
+            className="group flex h-[19rem] w-[calc(50%-0.5rem)] min-w-[calc(50%-0.5rem)] max-w-[calc(50%-0.5rem)] flex-none snap-start flex-col overflow-hidden rounded-2xl border border-white/15 bg-white/8 backdrop-blur-sm shadow-sm transition-all hover:border-primary/35 hover:shadow-lg sm:h-[20rem] sm:w-[calc(33.333%-0.875rem)] sm:min-w-[calc(33.333%-0.875rem)] sm:max-w-[calc(33.333%-0.875rem)] lg:h-[20.5rem] lg:w-[calc((100%-2rem)/3)] lg:min-w-[calc((100%-2rem)/3)] lg:max-w-[calc((100%-2rem)/3)] xl:w-[calc((100%-3rem)/4)] xl:min-w-[calc((100%-3rem)/4)] xl:max-w-[calc((100%-3rem)/4)]"
+          >
+            <div className="relative flex-1 overflow-hidden bg-white/95 p-2.5 sm:p-3">
+              <img
+                src={item.image}
+                alt={item.title}
+                loading="lazy"
+                className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-105"
+              />
+            </div>
+            <div className="min-h-[4.5rem] border-t border-white/10 p-3.5">
+              <h3 className="line-clamp-2 font-heading text-sm sm:text-base font-bold leading-snug text-white">{item.title}</h3>
+            </div>
+          </motion.article>
+        ))}
+      </div>
+    </div>
   );
 }
 
@@ -394,30 +476,7 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
           light
           className="mb-12"
         />
-        <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-4 gap-4">
-          {BMD_PORTFOLIO.map((item, i) => (
-            <motion.article
-              key={item.title}
-              initial={{ opacity: 0, y: 14 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.03 }}
-              className="group overflow-hidden rounded-2xl border border-white/15 bg-white/8 backdrop-blur-sm shadow-sm hover:border-primary/35 hover:shadow-lg transition-all"
-            >
-              <div className="relative aspect-[1/1] overflow-hidden bg-white/95 p-3">
-                <img
-                  src={item.image}
-                  alt={item.title}
-                  loading="lazy"
-                  className="h-full w-full object-contain group-hover:scale-105 transition-transform duration-500"
-                />
-              </div>
-              <div className="border-t border-white/10 p-3.5">
-                <h3 className="font-heading text-sm sm:text-base font-bold text-white leading-snug">{item.title}</h3>
-              </div>
-            </motion.article>
-          ))}
-        </div>
+        <PortfolioCarousel />
         <SectionHeading
           title="Other Products"
           light
@@ -481,7 +540,6 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
 
       {/* Capabilities & Why */}
       <HomeSection variant="image-light" bgImage={BMD_SECTION_IMAGES.capabilities} overlayIntensity="clear" darkOverlay dots rings ringSide="left" className="py-14 sm:py-16">
-        <SectionHeading eyebrow="Capabilities" title="Core Capabilities" align="left" className="mb-10" />
         <ServiceCapabilitiesBlock capabilities={service.capabilities} />
         <SectionHeading eyebrow="Why RMT" title="Why Partner With RMT" align="left" className="mb-10" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">

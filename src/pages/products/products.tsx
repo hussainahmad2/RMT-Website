@@ -173,12 +173,13 @@ export default function Products() {
       : PRODUCT_CATEGORIES.filter((c) => c.id === activeCategory);
 
   return (
-    <div className="bg-background min-h-screen pt-20">
+    <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
       <CinematicPageHero
         eyebrow="Product Portfolio"
         title="Our Products"
         description="ISO-certified devices, biomaterials, and engineering solutions — engineered with depth, validated for regulated markets."
         backgroundImage={PRODUCTS_HERO_IMAGE}
+        fullHeight
       >
         <Button asChild size="lg" className="rounded-xl font-semibold">
           <a href="#medical-devices">Browse Portfolio</a>
