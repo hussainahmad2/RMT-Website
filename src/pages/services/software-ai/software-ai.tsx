@@ -3,7 +3,6 @@ import { Link } from "wouter";
 import {
   ArrowRight,
   CheckCircle,
-  ChevronRight,
   Code2,
   Shield,
 } from "lucide-react";
@@ -190,14 +189,6 @@ export default function SoftwareAiServicePage() {
                     </li>
                   ))}
                 </ul>
-                {activeArea.slug && (
-                  <Link
-                    href={`/services/software-ai/${activeArea.slug}`}
-                    className="mt-6 inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
-                  >
-                    Explore {activeArea.title} <ChevronRight className="w-4 h-4" />
-                  </Link>
-                )}
               </div>
             </AnimatedSection>
           </div>
@@ -283,7 +274,7 @@ export default function SoftwareAiServicePage() {
                 href="/contact"
                 className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
               >
-                Discuss your software project <ChevronRight className="w-4 h-4" />
+                Discuss your software project <ArrowRight className="w-4 h-4" />
               </Link>
             </AnimatedSection>
             <AnimatedSection delay={0.1}>

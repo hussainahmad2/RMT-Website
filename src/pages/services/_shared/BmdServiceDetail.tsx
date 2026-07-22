@@ -56,19 +56,18 @@ const BMD_PORTFOLIO = [
   { title: "Hyaluronic Acid Serum", image: encodeURI("/bmd-products/HYALURONIC ACID SERUM.jpeg") },
   { title: "Moisturising Sunscreen", image: encodeURI("/bmd-products/MOISTURIZING SUNSCREEN (ALL SKIN TYPES).jpeg") },
   { title: "Vitamin C Serum", image: encodeURI("/bmd-products/VITAMIN C SERUM.jpeg") },
-  { title: "Lidocaine Topical Spray", image: encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg") },
-  { title: "PLGA Microspheres", image: encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg") },
+  { title: "10% Lidocaine Topical Spray", image: encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg") },
+  { title: "Drug Loaded Microspheres", image: encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg") },
   { title: "Glycolic Acid Serum", image: encodeURI("/bmd-products/GLYCOLIC ACID SERUM.jpeg") },
   { title: "Retinol Serum", image: encodeURI("/bmd-products/RETINOL SERUM.jpeg") },
   { title: "Hair Growth Serum", image: encodeURI("/bmd-products/HAIR GROWTH SERUM (MINOXIDIL-BASED).jpeg") },
-  { title: "Polymer-Based Coating", image: encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg") },
-  { title: "Polymer-Free Coating", image: encodeURI("/bmd-products/POLYMER-FREE COATING (DRUG ELUTING STENT).jpeg") },
+  { title: "3rd Gen DES Coating", image: encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg") },
   { title: "Topical Pain Relief Emulgel", image: encodeURI("/bmd-products/TOPICAL PAIN RELIEF EMULGEL.jpeg") },
 ] as const;
 const BMD_PRODUCTS_WITHOUT_IMAGES = [
   "Microspheres",
   "Bioresorbable Vascular Scaffold",
-  "Drug Coating for 3rd Generation Drug Eluting Stent",
+  "3rd Gen DES Coating",
   "Hydrophilic Coatings",
   "Anti-inflammatory Coatings",
   "Surface Modified Coatings",
@@ -559,7 +558,6 @@ function BmdServiceSubServiceSummarySection({ service }: { service: ServiceData 
       <AnimatedSection className="space-y-8">
         <div className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
           <div className="max-w-3xl space-y-2">
-            <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary">Service Breakdown</p>
             <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">
               Biomaterials and drug innovation scope
             </h2>
@@ -581,11 +579,12 @@ function BmdServiceSubServiceSummarySection({ service }: { service: ServiceData 
                   type="button"
                   onClick={() => setActiveIndex(index)}
                   aria-pressed={isActive}
+                  title={`Explore ${sub.name}`}
                   className={cn(
-                    "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
+                    "inline-flex cursor-pointer select-none items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:scale-[0.98]",
                     isActive
-                      ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/15"
-                      : "border-border bg-background/90 text-muted-foreground hover:border-primary/30 hover:text-primary"
+                      ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/15 ring-1 ring-primary/20"
+                      : "border-border bg-background/90 text-muted-foreground hover:border-primary/30 hover:bg-background hover:text-primary"
                   )}
                 >
                   <TabIcon className="h-4 w-4 shrink-0" />

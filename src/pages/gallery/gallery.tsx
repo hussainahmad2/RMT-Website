@@ -40,13 +40,12 @@ const BMD_GALLERY_ITEMS: GalleryItem[] = [
   { id: "bmd-2", src: encodeURI("/bmd-products/HYALURONIC ACID SERUM.jpeg"), thumb: encodeURI("/bmd-products/HYALURONIC ACID SERUM.jpeg"), category: "BMD", caption: "Hyaluronic Acid Serum", year: "BMD" },
   { id: "bmd-3", src: encodeURI("/bmd-products/MOISTURIZING SUNSCREEN (ALL SKIN TYPES).jpeg"), thumb: encodeURI("/bmd-products/MOISTURIZING SUNSCREEN (ALL SKIN TYPES).jpeg"), category: "BMD", caption: "Moisturising Sunscreen", year: "BMD" },
   { id: "bmd-4", src: encodeURI("/bmd-products/VITAMIN C SERUM.jpeg"), thumb: encodeURI("/bmd-products/VITAMIN C SERUM.jpeg"), category: "BMD", caption: "Vitamin C Serum", year: "BMD" },
-  { id: "bmd-5", src: encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg"), thumb: encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg"), category: "BMD", caption: "Lidocaine Topical Spray", year: "BMD" },
-  { id: "bmd-6", src: encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg"), thumb: encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg"), category: "BMD", caption: "PLGA Microspheres", year: "BMD" },
+  { id: "bmd-5", src: encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg"), thumb: encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg"), category: "BMD", caption: "10% Lidocaine Topical Spray", year: "BMD" },
+  { id: "bmd-6", src: encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg"), thumb: encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg"), category: "BMD", caption: "Drug Loaded Microspheres", year: "BMD" },
   { id: "bmd-7", src: encodeURI("/bmd-products/GLYCOLIC ACID SERUM.jpeg"), thumb: encodeURI("/bmd-products/GLYCOLIC ACID SERUM.jpeg"), category: "BMD", caption: "Glycolic Acid Serum", year: "BMD" },
   { id: "bmd-8", src: encodeURI("/bmd-products/RETINOL SERUM.jpeg"), thumb: encodeURI("/bmd-products/RETINOL SERUM.jpeg"), category: "BMD", caption: "Retinol Serum", year: "BMD" },
   { id: "bmd-9", src: encodeURI("/bmd-products/HAIR GROWTH SERUM (MINOXIDIL-BASED).jpeg"), thumb: encodeURI("/bmd-products/HAIR GROWTH SERUM (MINOXIDIL-BASED).jpeg"), category: "BMD", caption: "Hair Growth Serum", year: "BMD" },
-  { id: "bmd-10", src: encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg"), thumb: encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg"), category: "BMD", caption: "Polymer-Based Coating", year: "BMD" },
-  { id: "bmd-11", src: encodeURI("/bmd-products/POLYMER-FREE COATING (DRUG ELUTING STENT).jpeg"), thumb: encodeURI("/bmd-products/POLYMER-FREE COATING (DRUG ELUTING STENT).jpeg"), category: "BMD", caption: "Polymer-Free Coating", year: "BMD" },
+  { id: "bmd-10", src: encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg"), thumb: encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg"), category: "BMD", caption: "3rd Gen DES Coating", year: "BMD" },
   { id: "bmd-12", src: encodeURI("/bmd-products/TOPICAL PAIN RELIEF EMULGEL.jpeg"), thumb: encodeURI("/bmd-products/TOPICAL PAIN RELIEF EMULGEL.jpeg"), category: "BMD", caption: "Topical Pain Relief Emulgel", year: "BMD" },
 ];
 

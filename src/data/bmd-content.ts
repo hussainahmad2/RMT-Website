@@ -52,14 +52,14 @@ export const BMD_PRODUCTS = {
   innovative: [
     "Microspheres",
     "Bioresorbable Vascular Scaffold",
-    "Drug Coating for 3rd Generation Drug Eluting Stent",
+    "3rd Gen DES Coating",
     "Hydrophilic Coatings",
     "Anti-inflammatory Coatings",
     "Surface Modified Coatings",
     "Drug Eluting Coatings",
     "Topical Pain Relief Emulgel",
     "Topical Antifungal Cream",
-    "Lidocaine Topical Spray",
+    "10% Lidocaine Topical Spray",
   ],
 };
 

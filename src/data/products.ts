@@ -69,15 +69,18 @@ const ENGINEERING_PRODUCT_IMAGES: Record<string, string> = {
 };
 
 const BMD_IMAGE_MAP: Record<string, string> = {
-  "Hyaluronic Acid Serum": PRODUCT_IMAGES.serum,
-  "Retinol Serum": PRODUCT_IMAGES.serum,
-  "Glycolic Acid Serum": PRODUCT_IMAGES.skincare,
-  "Moisturising Sunscreen (All Skin Types)": PRODUCT_IMAGES.skincare,
-  "Vitamin C Serum": PRODUCT_IMAGES.serum,
-  "Hair Growth Serum (Minoxidil-Based)": PRODUCT_IMAGES.serum,
-  "Microspheres": "/mdm/microspheres.jpeg",
-  "Bioresorbable Vascular Scaffold": PRODUCT_IMAGES.stent,
-  "Drug Coating for 3rd Generation Drug Eluting Stent": PRODUCT_IMAGES.stent,
+  "Hyaluronic Acid Serum": encodeURI("/bmd-products/HYALURONIC ACID SERUM.jpeg"),
+  "Retinol Serum": encodeURI("/bmd-products/RETINOL SERUM.jpeg"),
+  "Glycolic Acid Serum": encodeURI("/bmd-products/GLYCOLIC ACID SERUM.jpeg"),
+  "Moisturising Sunscreen (All Skin Types)": encodeURI("/bmd-products/MOISTURIZING SUNSCREEN (ALL SKIN TYPES).jpeg"),
+  "Vitamin C Serum": encodeURI("/bmd-products/VITAMIN C SERUM.jpeg"),
+  "Hair Growth Serum (Minoxidil-Based)": encodeURI("/bmd-products/HAIR GROWTH SERUM (MINOXIDIL-BASED).jpeg"),
+  "Microspheres": encodeURI("/bmd-products/PLGA MICROSPHERES.jpeg"),
+  "Bioresorbable Vascular Scaffold": PRODUCT_IMAGES.biomaterial,
+  "3rd Gen DES Coating": encodeURI("/bmd-products/POLYMER-BASED COATING (DRUG ELUTING STENT).jpeg"),
+  "Topical Antifungal Cream": encodeURI("/bmd-products/TOPICAL ANTIFUNGAL CREAM.jpeg"),
+  "Topical Pain Relief Emulgel": encodeURI("/bmd-products/TOPICAL PAIN RELIEF EMULGEL.jpeg"),
+  "10% Lidocaine Topical Spray": encodeURI("/bmd-products/LIDOCAINE TOPICAL SPRAY.jpeg"),
 };
 
 function bmdProduct(name: string): ProductItem {
