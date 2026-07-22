@@ -5,7 +5,7 @@ import {
   MANUFACTURING_PRODUCTS,
   MANUFACTURING_PRODUCTS_MADE,
   type ManufacturingProductMade,
-} from "@/data/revive-manufacturing-content";
+} from "@/data/manufacturing-content";
 import { PRODUCTION_EQUIPMENT_HERO_IMAGES, PRODUCTION_EQUIPMENT_PRODUCTS } from "@/data/production-equipment-content";
 import { ENGINEERING_OTHER_PRODUCT_DESIGN } from "@/data/engineering-content";
 import { SOFTWARE_BANNER_IMAGE, SOFTWARE_DEPARTMENT_PRODUCTS } from "@/data/software-products";

@@ -1,4 +1,4 @@
 import { ServicesOverview } from "./_shared";
 
-/** Services listing â€?edit at src/pages/services/index.tsx */
+/** Services listing â€” edit this file or the shared templates. */
 export default ServicesOverview;

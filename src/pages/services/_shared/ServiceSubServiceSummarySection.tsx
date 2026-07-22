@@ -50,7 +50,7 @@ import {
   Workflow,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import type { ServiceData } from "@/data/services";
 
 const SUBSERVICE_SUMMARY_META: Record<string, { eyebrow: string; heading: string; description: string }> = {

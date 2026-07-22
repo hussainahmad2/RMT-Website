@@ -1,4 +1,4 @@
-import { MANUFACTURING_IMAGES } from "@/data/revive-manufacturing-content";
+import { MANUFACTURING_IMAGES } from "@/data/manufacturing-content";
 
 export type HomeProductLayout =
   | "editorial-right"

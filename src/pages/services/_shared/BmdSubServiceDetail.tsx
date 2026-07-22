@@ -12,12 +12,12 @@ import {
   Target,
   TrendingUp,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { HomeSection, SectionHeading } from "@/components/HomeSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageSection, SectionHeading } from "@/components/shared/PageSection";
 import type { ServiceData, SubServiceData } from "@/data/services";
 import { BMD_STANDARDS } from "@/data/bmd-standards";
-import { LifecycleRoadmap } from "./service-extras-visual";
-import { BMD_SECTION_IMAGES, ColumnWatermark, DnaWatermark } from "./bmd-detail-visual";
+import { LifecycleRoadmap } from "./ServiceExtrasVisual";
+import { BMD_SECTION_IMAGES, ColumnWatermark, DnaWatermark } from "./BmdVisuals";
 
 const APPROACH_STEPS = [
   { title: "Consultation", items: ["Understand requirements, project scope, and define technical specifications."], icon: Search },
@@ -38,7 +38,7 @@ export function BmdSubServiceDetail({
 }) {
   return (
     <div className="space-y-0">
-      <HomeSection
+      <PageSection
         variant="image-light"
         bgImage={BMD_SECTION_IMAGES.overview}
         overlayIntensity="clear"
@@ -76,9 +76,9 @@ export function BmdSubServiceDetail({
             </div>
           </AnimatedSection>
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="muted" dots className="py-14 sm:py-16">
+      <PageSection variant="muted" dots className="py-14 sm:py-16">
         <SectionHeading eyebrow="Capabilities" title="Key Services & Highlights" align="left" className="mb-10" />
         <div className="grid sm:grid-cols-2 gap-5">
           {subService.keyPoints.map((point, idx) => {
@@ -100,14 +100,14 @@ export function BmdSubServiceDetail({
             );
           })}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="gradient-blue" bgImage={BMD_SECTION_IMAGES.research} overlayIntensity="clear" dots rings ringSide="both" className="py-14 sm:py-16">
+      <PageSection variant="gradient-blue" bgImage={BMD_SECTION_IMAGES.research} overlayIntensity="clear" dots rings ringSide="both" className="py-14 sm:py-16">
         <SectionHeading eyebrow="Methodology" title="Our Approach" light align="left" className="mb-10" />
         <LifecycleRoadmap steps={APPROACH_STEPS} variant="dark" />
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="light" className="py-14 sm:py-16">
+      <PageSection variant="light" className="py-14 sm:py-16">
         <SectionHeading eyebrow="Outputs" title="Deliverables" align="left" className="mb-10" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5">
           {subService.deliverables.map((del, i) => (
@@ -126,9 +126,9 @@ export function BmdSubServiceDetail({
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="navy" bgImage={BMD_SECTION_IMAGES.standards} overlayIntensity="medium" dots className="py-14 sm:py-16">
+      <PageSection variant="navy" bgImage={BMD_SECTION_IMAGES.standards} overlayIntensity="medium" dots className="py-14 sm:py-16">
         <SectionHeading eyebrow="Compliance" title="Compliance & Standards" light className="mb-10" />
         <div className="grid grid-cols-3 gap-4 max-w-2xl mx-auto mb-10">
           {[
@@ -168,9 +168,9 @@ export function BmdSubServiceDetail({
             </motion.span>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="image-light" bgImage={BMD_SECTION_IMAGES.capabilities} overlayIntensity="clear" dots className="py-14 sm:py-16">
+      <PageSection variant="image-light" bgImage={BMD_SECTION_IMAGES.capabilities} overlayIntensity="clear" dots className="py-14 sm:py-16">
         <SectionHeading eyebrow="Full-Service Offering" title={`All ${service.shortName} Capabilities`} align="left" className="mb-10" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-5 mb-14">
           {service.capabilities.map((cap, i) => {
@@ -208,7 +208,7 @@ export function BmdSubServiceDetail({
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
     </div>
   );
 }

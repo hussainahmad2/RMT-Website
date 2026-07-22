@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "wouter";
 import { ArrowLeft, Calendar, Clock, BookOpen, ExternalLink } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { INSIGHT_ARTICLES, INSIGHT_CATEGORY_COLORS } from "@/data/insights-content";

@@ -13,7 +13,7 @@ import {
   TrendingUp,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import type { SubServiceData } from "@/data/services";
 import { QUALITY_DEPARTMENTS } from "@/data/quality-department-content";
 import {
@@ -29,7 +29,7 @@ import {
   LifecycleRoadmap,
   IconFeatureStrip,
   StatBadgeRow,
-} from "./service-extras-visual";
+} from "./ServiceExtrasVisual";
 import {
   QD_DARK_SECTION,
   QD_DARK_SECTION_ALT,
@@ -37,7 +37,7 @@ import {
   QD_PILL,
   QdDarkDecor,
   QdGridOverlay,
-} from "./quality-dept-detail-theme";
+} from "./QualityDeptTheme";
 
 const QA_DEPT = QUALITY_DEPARTMENTS.find((d) => d.id === "qa")!;
 

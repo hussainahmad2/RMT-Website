@@ -6,20 +6,20 @@ import {
   MapPin, Mail,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { AnimatedCounter } from "@/components/AnimatedCounter";
-import { HomeProductShowcase, HomeCapabilitiesSection } from "@/components/HomeProductShowcase";
-import { PartnerLogoCarousel } from "@/components/PartnerLogoCarousel";
-import { HomeServicesSection } from "@/components/HomeServicesSection";
-import { HomeWhyRmtSection } from "@/components/HomeWhyRmtSection";
-import { WorldMap } from "@/components/WorldMap";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { AnimatedCounter } from "@/components/shared/AnimatedCounter";
+import { ProductShowcase, CapabilitiesSection } from "@/components/home/ProductShowcase";
+import { PartnerLogos } from "@/components/home/PartnerLogos";
+import { ServicesSection } from "@/components/home/ServicesSection";
+import { WhyRmtSection } from "@/components/home/WhyRmtSection";
+import { WorldMap } from "@/components/shared/WorldMap";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { HOME_IMAGES } from "@/data/home-images";
 import { HOME_PRODUCT_HERO_SLIDES } from "@/data/home-products";
 
 const RequestQuoteModal = lazy(() =>
-  import("@/components/RequestQuoteModal").then((m) => ({ default: m.RequestQuoteModal }))
+  import("@/components/shared/RequestQuoteModal").then((m) => ({ default: m.RequestQuoteModal }))
 );
 
 const stats = [
@@ -338,7 +338,7 @@ export default function Home() {
         </motion.div>
 
         <div className="mt-0 bg-white dark:bg-[#08111f]">
-          <PartnerLogoCarousel
+          <PartnerLogos
             variant="hero"
             rows={1}
             heading="Institutions & Partners We Have Worked With"
@@ -382,19 +382,19 @@ export default function Home() {
                   A curated look at our flagship interventional device — plus the three product lines that define RMT&apos;s engineering and manufacturing footprint.
                 </p>
               </AnimatedSection>
-            <HomeProductShowcase />
+            <ProductShowcase />
           </section>
         </div>
       </section>
 
       {/* ===================== HOW WE DELIVER ===================== */}
-      <HomeCapabilitiesSection />
+      <CapabilitiesSection />
 
       {/* ===================== WHAT WE DO ===================== */}
-      <HomeServicesSection />
+      <ServicesSection />
 
       {/* ===================== WHY RMT ===================== */}
-      <HomeWhyRmtSection />
+      <WhyRmtSection />
 
       {/* ===================== GLOBAL PRESENCE ===================== */}
       <section className="relative overflow-hidden bg-background py-16 sm:py-20 lg:py-28">

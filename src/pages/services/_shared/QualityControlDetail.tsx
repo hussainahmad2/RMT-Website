@@ -20,7 +20,7 @@ import {
   Target,
   Zap,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import type { SubServiceData } from "@/data/services";
 import {
   QC_OVERVIEW,
@@ -43,7 +43,7 @@ import {
   PillarGrid,
   IconCardGrid,
   StatBadgeRow,
-} from "./service-extras-visual";
+} from "./ServiceExtrasVisual";
 import {
   QD_DARK_SECTION,
   QD_DARK_SECTION_ALT,
@@ -51,7 +51,7 @@ import {
   QD_PILL,
   QdDarkDecor,
   QdGridOverlay,
-} from "./quality-dept-detail-theme";
+} from "./QualityDeptTheme";
 
 const PORTFOLIO_ICONS = [CircuitBoard, HeartPulse, Factory, Pill, ShieldCheck] as const;
 const CAPABILITY_ICONS = [

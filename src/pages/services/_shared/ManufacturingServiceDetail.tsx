@@ -18,10 +18,10 @@ import {
   Atom,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { HomeSection, SectionHeading } from "@/components/HomeSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageSection, SectionHeading } from "@/components/shared/PageSection";
 import type { ServiceData } from "@/data/services";
-import type { ManufacturingProductMade } from "@/data/revive-manufacturing-content";
+import type { ManufacturingProductMade } from "@/data/manufacturing-content";
 import {
   MANUFACTURING_CLEANROOMS,
   MANUFACTURING_DEVELOPMENT_PHASES,
@@ -31,8 +31,8 @@ import {
   MANUFACTURING_QUALITY_POINTS,
   MANUFACTURING_TESTING_SERVICES,
   MANUFACTURING_WHY_CHOOSE,
-} from "@/data/revive-manufacturing-content";
-import { MDM_SECTION_IMAGES } from "./manufacturing-detail-visual";
+} from "@/data/manufacturing-content";
+import { MDM_SECTION_IMAGES } from "./ManufacturingVisuals";
 
 const PRODUCT_ICONS: Record<string, LucideIcon> = {
   stethoscope: Stethoscope,
@@ -94,7 +94,7 @@ function ProductMadeCard({ product, reverse = false }: { product: ManufacturingP
 export function ManufacturingServiceDetail({ service }: { service: ServiceData }) {
   return (
     <div className="space-y-0">
-      <HomeSection variant="gradient-blue" bgImage={MDM_SECTION_IMAGES.quality} overlayIntensity="clear" dots rings ringSide="both" className="py-14 sm:py-16">
+      <PageSection variant="gradient-blue" bgImage={MDM_SECTION_IMAGES.quality} overlayIntensity="clear" dots rings ringSide="both" className="py-14 sm:py-16">
         <SectionHeading eyebrow="Quality & Compliance" title="Built-In Quality at Every Stage" description="ISO 13485-certified operations in controlled cleanroom environments with documented, validated, and auditable processes." light align="left" className="mb-8" />
         <div className="grid sm:grid-cols-2 gap-4">
           {MANUFACTURING_QUALITY_POINTS.map((point, i) => (
@@ -104,9 +104,9 @@ export function ManufacturingServiceDetail({ service }: { service: ServiceData }
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="muted" dots className="py-14 sm:py-16">
+      <PageSection variant="muted" dots className="py-14 sm:py-16">
         <SectionHeading
           eyebrow="Portfolio"
           title="Flagship Products & Technologies"
@@ -170,18 +170,18 @@ export function ManufacturingServiceDetail({ service }: { service: ServiceData }
             );
           })}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="navy" bgImage={MDM_SECTION_IMAGES.products} overlayIntensity="clear" dots className="py-16 sm:py-20">
+      <PageSection variant="navy" bgImage={MDM_SECTION_IMAGES.products} overlayIntensity="clear" dots className="py-16 sm:py-20">
         <SectionHeading eyebrow="Products Made" title="Clinical-Grade Devices We Manufacture" description="Vascular and interventional devices engineered for precision, safety, and regulatory compliance." light className="mb-14" />
         <div className="space-y-20">
           {MANUFACTURING_PRODUCTS_MADE.map((product, i) => (
             <ProductMadeCard key={product.name} product={product} reverse={i % 2 === 1} />
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="gradient-blue" bgImage={MDM_SECTION_IMAGES.cleanroom} overlayIntensity="clear" dots rings ringSide="both" className="py-14 sm:py-16">
+      <PageSection variant="gradient-blue" bgImage={MDM_SECTION_IMAGES.cleanroom} overlayIntensity="clear" dots rings ringSide="both" className="py-14 sm:py-16">
         <SectionHeading eyebrow="Infrastructure" title="World-Class Cleanroom Environments" light align="left" className="mb-10" />
         <div className="grid sm:grid-cols-3 gap-5 mb-10">
           {MANUFACTURING_CLEANROOMS.map((room, i) => (
@@ -201,9 +201,9 @@ export function ManufacturingServiceDetail({ service }: { service: ServiceData }
             </div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="light" dots className="py-14 sm:py-16">
+      <PageSection variant="light" dots className="py-14 sm:py-16">
         <SectionHeading eyebrow="Process" title="Development Journey" description="From your idea to the patient's bedside — bridging technical, regulatory, and operational hurdles." align="left" className="mb-10" />
         <div className="grid lg:grid-cols-3 gap-6">
           {MANUFACTURING_DEVELOPMENT_PHASES.map((phase, i) => {
@@ -232,9 +232,9 @@ export function ManufacturingServiceDetail({ service }: { service: ServiceData }
             );
           })}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection
+      <PageSection
         variant="image-blue"
         bgImage={MDM_SECTION_IMAGES.validation}
         overlayIntensity="clear"
@@ -259,9 +259,9 @@ export function ManufacturingServiceDetail({ service }: { service: ServiceData }
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="gradient-blue" bgImage={MDM_SECTION_IMAGES.why} overlayIntensity="medium" dots className="py-14 sm:py-16">
+      <PageSection variant="gradient-blue" bgImage={MDM_SECTION_IMAGES.why} overlayIntensity="medium" dots className="py-14 sm:py-16">
         <SectionHeading title="Why Choose Us for Manufacturing" light className="mb-10" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {MANUFACTURING_WHY_CHOOSE.map((item, i) => {
@@ -282,7 +282,7 @@ export function ManufacturingServiceDetail({ service }: { service: ServiceData }
             );
           })}
         </div>
-      </HomeSection>
+      </PageSection>
     </div>
   );
 }

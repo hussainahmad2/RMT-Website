@@ -3,8 +3,8 @@ import { Link } from "wouter";
 import {
   ArrowRight, Brain, CheckCircle, Factory, FlaskConical, Package, Settings2, ShieldCheck, Sparkles,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { CinematicPageHero } from "@/components/CinematicPageHero";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { cn } from "@/lib/utils";
@@ -177,7 +177,7 @@ export default function Products() {
 
   return (
     <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
-      <CinematicPageHero
+      <PageHero
         eyebrow="Product Portfolio"
         title="Our Products"
         description="ISO-certified devices, biomaterials, and engineering solutions — engineered with depth, validated for regulated markets."
@@ -190,7 +190,7 @@ export default function Products() {
         <Button asChild size="lg" variant="outline" className="rounded-xl border-white/20 text-white hover:bg-white/10 hover:text-white">
           <Link href="/services">See All Services <ArrowRight className="ml-2 w-4 h-4" /></Link>
         </Button>
-      </CinematicPageHero>
+      </PageHero>
 
       {/* Highlights */}
       <section className="border-b border-white/10 bg-primary">

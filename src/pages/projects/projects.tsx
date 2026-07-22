@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "wouter";
 import { ArrowRight, MapPin, Calendar, CheckCircle, X, ExternalLink } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 

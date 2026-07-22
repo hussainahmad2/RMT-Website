@@ -2,7 +2,7 @@ import { Link } from "wouter";
 import { AlertCircle } from "lucide-react";
 import { Card, CardContent } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { PageContainer } from "@/components/PageContainer";
+import { PageContainer } from "@/components/layout/PageContainer";
 import { useSEO } from "@/lib/seo";
 
 export default function NotFound() {

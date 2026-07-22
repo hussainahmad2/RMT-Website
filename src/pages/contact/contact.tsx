@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { MapPin, Mail, Clock, ArrowRight, CheckCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
-import { LogoSpinner } from "@/components/LogoSpinner";
+import { LogoSpinner } from "@/components/shared/LogoSpinner";
 import { sendFormEmail } from "@/lib/email";
 
 interface FormData {

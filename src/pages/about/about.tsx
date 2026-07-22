@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "wouter";
 import { CheckCircle, Globe, Users, Award, Target, Eye, Heart, ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import {
@@ -21,8 +21,8 @@ import {
   FINANCE_DEPARTMENT,
   HR_ADMIN_SUPPORT_WING,
 } from "@/data/leadership";
-import { LeadershipCard } from "@/components/LeadershipCard";
-import { TeamWingSection, TeamMemberGrid } from "@/components/TeamDepartmentSection";
+import { LeadershipCard } from "@/components/shared/LeadershipCard";
+import { TeamWingSection, TeamMemberGrid } from "@/components/shared/TeamSection";
 import { INSIGHT_ARTICLES } from "@/data/insights-content";
 
 /* Decorative SVG backgrounds */

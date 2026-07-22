@@ -1,4 +1,4 @@
-import { SQA_OVERVIEW, SQA_STANDARDS, sqaSectionsToQualityCards } from "./sqa-services-content";
+import { SQA_OVERVIEW, SQA_STANDARDS, sqaSectionsToQualityCards } from "./software-qa-content";
 import {
   QC_TAGLINE,
   QC_STANDARDS,

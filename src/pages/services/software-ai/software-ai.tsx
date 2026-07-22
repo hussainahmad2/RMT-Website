@@ -6,8 +6,8 @@ import {
   Code2,
   Shield,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { CinematicPageHero } from "@/components/CinematicPageHero";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
@@ -54,7 +54,7 @@ export default function SoftwareAiServicePage() {
 
   return (
     <div className="bg-background min-h-screen pt-16">
-      <CinematicPageHero
+      <PageHero
         eyebrow="Software & AI Solutions"
         title="Intelligent Software for Healthcare"
         description="Full-spectrum software development — AI/ML, cloud, SaMD compliance, and complete validation lifecycle for next-generation medical technology."
@@ -72,7 +72,7 @@ export default function SoftwareAiServicePage() {
         >
           <Link href="/contact">Speak With Our Experts</Link>
         </Button>
-      </CinematicPageHero>
+      </PageHero>
 
       {/* Highlights */}
       <section className="border-b border-white/10 bg-primary">

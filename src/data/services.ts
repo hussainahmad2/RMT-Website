@@ -8,7 +8,7 @@ import {
   SQA_KEY_HIGHLIGHTS,
   SQA_OVERVIEW,
   SQA_TAGLINE,
-} from "./sqa-services-content";
+} from "./software-qa-content";
 import {
   QC_TAGLINE,
   QC_OVERVIEW,

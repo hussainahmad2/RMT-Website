@@ -12,13 +12,13 @@ import {
   Globe,
   Medal,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { CinematicPageHero } from "@/components/CinematicPageHero";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
 import { buildBreadcrumbJsonLd, buildServiceJsonLd, servicePath, subServicePath } from "@/lib/service-seo";
-import { ServiceCapabilitiesBlock } from "../_shared/_shared";
+import { ServiceCapabilitiesBlock } from "../_shared/ServiceTemplates";
 
 const SERVICE = ALL_SERVICES.find((s) => s.slug === "regulatory-compliance")!;
 
@@ -232,7 +232,7 @@ export default function RegulatoryComplianceServicePage() {
 
   return (
     <div className="bg-background min-h-screen pt-16">
-      <CinematicPageHero
+      <PageHero
         eyebrow="Regulatory Affairs"
         title={SERVICE.name}
         description={SERVICE.tagline}
@@ -250,7 +250,7 @@ export default function RegulatoryComplianceServicePage() {
         >
           <Link href="/contact">Speak With Our Experts</Link>
         </Button>
-      </CinematicPageHero>
+      </PageHero>
 
       <StatStrip />
 

@@ -2,8 +2,8 @@ import React, { useEffect, useState } from "react";
 import { Link } from "wouter";
 import { Clock, ArrowRight, Calendar, BookOpen } from "lucide-react";
 import { motion } from "framer-motion";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { CinematicPageHero } from "@/components/CinematicPageHero";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import {
@@ -63,7 +63,7 @@ export default function Insights() {
   return (
     <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
       {/* HERO */}
-      <CinematicPageHero
+      <PageHero
         eyebrow="Knowledge & Expertise"
         title="Insights"
         description="Company updates, product milestones, regulatory guidance, and industry analysis from the RMT team."

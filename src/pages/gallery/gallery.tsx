@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { X, ZoomIn } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { CinematicPageHero } from "@/components/CinematicPageHero";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageHero } from "@/components/shared/PageHero";
 import { useSEO } from "@/lib/seo";
 import { INSIGHT_GALLERY_ITEMS } from "@/data/insight-gallery";
 
@@ -68,7 +68,7 @@ export default function Gallery() {
   return (
     <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
       {/* HERO */}
-      <CinematicPageHero
+      <PageHero
         eyebrow="Our Story in Pictures"
         title="Gallery"
         description="Explore our laboratories, manufacturing facilities, team, and the milestones that have shaped RMT Medical Technologies."

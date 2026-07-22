@@ -22,8 +22,8 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { HomeSection, SectionHeading } from "@/components/HomeSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageSection, SectionHeading } from "@/components/shared/PageSection";
 import { Button } from "@/components/ui/button";
 import type { ServiceData } from "@/data/services";
 import {
@@ -37,8 +37,8 @@ import {
   BMD_RESEARCH_AREAS,
 } from "@/data/bmd-content";
 import { BMD_STANDARDS } from "@/data/bmd-standards";
-import { BMD_SECTION_IMAGES, ColumnWatermark, DnaWatermark, FlaskWatermark } from "./bmd-detail-visual";
-import { ServiceCapabilitiesBlock } from "./_shared";
+import { BMD_SECTION_IMAGES, ColumnWatermark, DnaWatermark, FlaskWatermark } from "./BmdVisuals";
+import { ServiceCapabilitiesBlock } from "./ServiceTemplates";
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 
@@ -287,7 +287,7 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
       </section>
 
       {/* Partners — prominent */}
-      <HomeSection
+      <PageSection
         variant="gradient-blue"
         bgImage={BMD_SECTION_IMAGES.partners}
         overlayIntensity="clear"
@@ -335,10 +335,10 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
         <p className="mt-6 text-white/75 text-base sm:text-lg leading-relaxed max-w-4xl break-words">
           Through these partnerships, RMT contributes to advanced biomaterials with unique mechanical, biological, and functional properties for drug delivery, regenerative medicine, implantable devices, and pharmaceutical technologies.
         </p>
-      </HomeSection>
+      </PageSection>
 
       {/* Research */}
-      <HomeSection variant="muted" dots className="py-10 sm:py-12 relative overflow-hidden dark:bg-[#0b1320]">
+      <PageSection variant="muted" dots className="py-10 sm:py-12 relative overflow-hidden dark:bg-[#0b1320]">
         <ColumnWatermark className="right-0 left-auto translate-x-[20%]">
           <FlaskWatermark />
         </ColumnWatermark>
@@ -443,10 +443,10 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
             </div>
           )}
         </div>
-      </HomeSection>
+      </PageSection>
 
       {/* Products */}
-      <HomeSection
+      <PageSection
         variant="navy"
         bgImage={BMD_SECTION_IMAGES.products}
         overlayIntensity="clear"
@@ -481,10 +481,10 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
             </div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
       {/* Equipment */}
-      <HomeSection variant="image-blue" bgImage={BMD_SECTION_IMAGES.equipment} overlayIntensity="clear" darkOverlay dots className="py-12 sm:py-14">
+      <PageSection variant="image-blue" bgImage={BMD_SECTION_IMAGES.equipment} overlayIntensity="clear" darkOverlay dots className="py-12 sm:py-14">
         <SectionHeading eyebrow="Infrastructure" title="Laboratory Equipment" align="left" className="mb-8" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {BMD_EQUIPMENT.map((eq, i) => (
@@ -501,10 +501,10 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
       {/* Standards */}
-      <HomeSection variant="gradient-blue" bgImage={BMD_SECTION_IMAGES.standards} overlayIntensity="medium" darkOverlay dots className="py-12 sm:py-14">
+      <PageSection variant="gradient-blue" bgImage={BMD_SECTION_IMAGES.standards} overlayIntensity="medium" darkOverlay dots className="py-12 sm:py-14">
         <SectionHeading eyebrow="Compliance" title="Compliance & Standards" light className="mb-10" />
         <div className="flex flex-wrap justify-center gap-3 max-w-4xl mx-auto">
           {BMD_STANDARDS.map((std, i) => (
@@ -521,22 +521,22 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
             </motion.span>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
       {/* Capabilities */}
-      <HomeSection variant="light" dots className="py-14 sm:py-16">
+      <PageSection variant="light" dots className="py-14 sm:py-16">
         <ServiceCapabilitiesBlock capabilities={service.capabilities} />
-      </HomeSection>
+      </PageSection>
 
       {/* Why RMT */}
-      <HomeSection variant="image-light" bgImage={BMD_SECTION_IMAGES.whyRmt} overlayIntensity="clear" darkOverlay dots rings ringSide="left" className="py-14 sm:py-16">
+      <PageSection variant="image-light" bgImage={BMD_SECTION_IMAGES.whyRmt} overlayIntensity="clear" darkOverlay dots rings ringSide="left" className="py-14 sm:py-16">
         <SectionHeading eyebrow="Why RMT" title="Why Partner With RMT" align="left" className="mb-10" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {service.whyRMT.map((item, i) => (
             <WhyCard key={item.title} title={item.title} desc={item.desc} icon={WHY_ICONS[i] ?? CheckCircle} index={i} />
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
       <BmdServiceSubServiceSummarySection service={service} />
     </div>

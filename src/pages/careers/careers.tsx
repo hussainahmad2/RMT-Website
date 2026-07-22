@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { CinematicPageHero } from "@/components/CinematicPageHero";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { MapPin, Clock, ArrowRight, Users, TrendingUp, Shield, Heart, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { useForm } from "react-hook-form";
@@ -135,7 +135,7 @@ export default function Careers() {
     <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
 
       {/* HERO */}
-      <CinematicPageHero
+      <PageHero
         eyebrow="We Are Hiring"
         title="Careers at RMT USA"
         description="Build your career at the intersection of medical technology, regulatory science, and engineering excellence. Help us bring life-changing devices to market."
@@ -148,7 +148,7 @@ export default function Careers() {
             {b}
           </div>
         ))}
-      </CinematicPageHero>
+      </PageHero>
 
       {/* WHY JOIN */}
       <section className="py-20 bg-background">

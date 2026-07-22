@@ -1,4 +1,4 @@
-import { MANUFACTURING_HERO_IMAGES, MANUFACTURING_IMAGES } from "./revive-manufacturing-content";
+import { MANUFACTURING_HERO_IMAGES, MANUFACTURING_IMAGES } from "./manufacturing-content";
 
 export const PRODUCTION_EQUIPMENT_HERO_IMAGES = [
   MANUFACTURING_IMAGES.facility2,

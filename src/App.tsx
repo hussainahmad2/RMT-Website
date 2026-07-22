@@ -5,10 +5,10 @@ import { Loader2 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
-import { ThemeProvider } from "@/components/ThemeProvider";
-import { Navbar } from "@/components/Navbar";
-import { Footer } from "@/components/Footer";
-import { ScrollToTop } from "@/components/ScrollToTop";
+import { ThemeProvider } from "@/components/layout/ThemeProvider";
+import { Navbar } from "@/components/layout/Navbar";
+import { Footer } from "@/components/layout/Footer";
+import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 /** Home stays eager for instant first paint; other routes load on demand */
 import Home from "@/pages/home/home";

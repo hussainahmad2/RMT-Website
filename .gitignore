@@ -20,11 +20,14 @@ node_modules
 *.sublime-workspace
 
 # Logs & cache
+*.log
 npm-debug.log
 yarn-error.log
 .DS_Store
 Thumbs.db
 .cache
+tmp/
+.local/
 
 # Raw source videos (not used in production build)
 /testimonials/

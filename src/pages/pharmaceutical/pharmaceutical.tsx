@@ -7,8 +7,8 @@ import {
   FlaskConical,
   Shield,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { CinematicPageHero } from "@/components/CinematicPageHero";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import {
@@ -37,7 +37,7 @@ export default function Pharmaceutical() {
 
   return (
     <div className="bg-background min-h-screen">
-      <CinematicPageHero
+      <PageHero
         eyebrow="Pharmaceutical Domain"
         title="Transforming Molecules into Market-Ready Medicines"
         description="From pre-formulation research and formulation development to scale-up, regulatory submission, technology transfer, and commercial manufacturing support — we help pharmaceutical innovators accelerate development while reducing risk."
@@ -55,7 +55,7 @@ export default function Pharmaceutical() {
         >
           <Link href="/contact">Speak With Our Experts</Link>
         </Button>
-      </CinematicPageHero>
+      </PageHero>
 
       {/* Highlights */}
       <section className="border-b border-white/10 bg-primary">

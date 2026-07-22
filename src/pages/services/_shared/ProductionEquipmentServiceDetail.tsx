@@ -15,8 +15,8 @@ import {
   Wrench,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { HomeSection, SectionHeading } from "@/components/HomeSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageSection, SectionHeading } from "@/components/shared/PageSection";
 import type { ServiceData } from "@/data/services";
 import {
   PRODUCTION_EQUIPMENT_AUTOMATION,
@@ -31,7 +31,7 @@ import {
   PRODUCTION_EQUIPMENT_SUPPORT,
   PRODUCTION_EQUIPMENT_WHY_CHOOSE,
 } from "@/data/production-equipment-content";
-import { PE_SECTION_IMAGES } from "./production-equipment-detail-visual";
+import { PE_SECTION_IMAGES } from "./ProductionEquipmentVisuals";
 
 const LINE_ICONS = [Map, Cog, Gauge, Package] as const;
 const WHY_ICONS = [Factory, ShieldCheck, Lightbulb, Handshake] as const;
@@ -129,7 +129,7 @@ function SectionBand({
 export function ProductionEquipmentServiceDetail({ service }: { service: ServiceData }) {
   return (
     <div className="space-y-0">
-      <HomeSection
+      <PageSection
         variant="image-light"
         dots
         rings
@@ -191,9 +191,9 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             </div>
           </div>
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="dark" bgImage={PE_SECTION_IMAGES.lines} overlayIntensity="medium" dots className="py-16 sm:py-20">
+      <PageSection variant="dark" bgImage={PE_SECTION_IMAGES.lines} overlayIntensity="medium" dots className="py-16 sm:py-20">
         <AnimatedSection className="mb-10 max-w-4xl">
           <SectionHeading
             eyebrow="Production Lines"
@@ -215,9 +215,9 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             />
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection
+      <PageSection
         variant="image-light"
         bgImage={PE_SECTION_IMAGES.cleanroom}
         overlayIntensity="clear"
@@ -273,9 +273,9 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             ))}
           </ul>
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="dark" bgImage={PE_SECTION_IMAGES.qualification} overlayIntensity="medium" dots className="py-16 sm:py-20">
+      <PageSection variant="dark" bgImage={PE_SECTION_IMAGES.qualification} overlayIntensity="medium" dots className="py-16 sm:py-20">
         <AnimatedSection className="mb-10 max-w-4xl">
           <SectionHeading
             eyebrow="Qualification & Validation"
@@ -306,9 +306,9 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             ))}
           </ul>
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection
+      <PageSection
         variant="image-light"
         bgImage={PE_SECTION_IMAGES.automation}
         overlayIntensity="clear"
@@ -345,9 +345,9 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             />
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="dark" bgImage={PE_SECTION_IMAGES.specialist} overlayIntensity="medium" dots className="py-16 sm:py-20">
+      <PageSection variant="dark" bgImage={PE_SECTION_IMAGES.specialist} overlayIntensity="medium" dots className="py-16 sm:py-20">
         <AnimatedSection className="mb-12 max-w-4xl">
           <SectionHeading
             eyebrow="Specialist Equipment"
@@ -390,9 +390,9 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection
+      <PageSection
         variant="image-light"
         bgImage={PE_SECTION_IMAGES.support}
         overlayIntensity="clear"
@@ -436,9 +436,9 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection variant="dark" bgImage={PE_SECTION_IMAGES.process} overlayIntensity="medium" dots className="py-16 sm:py-20">
+      <PageSection variant="dark" bgImage={PE_SECTION_IMAGES.process} overlayIntensity="medium" dots className="py-16 sm:py-20">
         <AnimatedSection className="mb-12 max-w-4xl">
           <div className="max-w-3xl text-left">
             <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-sky-300">
@@ -469,9 +469,9 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
-      <HomeSection
+      <PageSection
         variant="image-light"
         bgImage={PE_SECTION_IMAGES.why}
         overlayIntensity="clear"
@@ -500,7 +500,7 @@ export function ProductionEquipmentServiceDetail({ service }: { service: Service
             />
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
     </div>
   );
 }

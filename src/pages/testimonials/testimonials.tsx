@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   ArrowRight, ChevronLeft, ChevronRight, Maximize2, Play, Quote, Star, X,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import {

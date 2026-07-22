@@ -15,7 +15,7 @@ import {
   TestTube2,
   Zap,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import type { SubServiceData } from "@/data/services";
 import {
   SQA_CLOSING_NOTE,
@@ -26,7 +26,7 @@ import {
   SQA_STANDARDS,
   SQA_TAGLINE,
   SQA_WHY_CHOOSE,
-} from "@/data/sqa-services-content";
+} from "@/data/software-qa-content";
 import { SQA_APPROACH } from "@/data/quality-assurance-content";
 import {
   FullBleedBlock,
@@ -34,7 +34,7 @@ import {
   LifecycleRoadmap,
   IconCardGrid,
   StatBadgeRow,
-} from "./service-extras-visual";
+} from "./ServiceExtrasVisual";
 import {
   QD_DARK_SECTION,
   QD_DARK_SECTION_ALT,
@@ -42,7 +42,7 @@ import {
   QD_PILL,
   QdDarkDecor,
   QdGridOverlay,
-} from "./quality-dept-detail-theme";
+} from "./QualityDeptTheme";
 
 const SECTION_ICONS = [TestTube2, Zap, Target, HeartPulse, MonitorSmartphone] as const;
 const CARD_ICONS = [

@@ -11,8 +11,8 @@ import {
   TestTube2,
   type LucideIcon,
 } from "lucide-react";
-import { AnimatedSection } from "@/components/AnimatedSection";
-import { HomeSection, SectionHeading } from "@/components/HomeSection";
+import { AnimatedSection } from "@/components/shared/AnimatedSection";
+import { PageSection, SectionHeading } from "@/components/shared/PageSection";
 import type { ServiceData } from "@/data/services";
 import {
   MBL_BET_METHODS,
@@ -93,7 +93,7 @@ function WhyCard({ title, desc, icon: Icon, index }: { title: string; desc: stri
 export function MblServiceDetail({ service }: { service: ServiceData }) {
   return (
     <div className="space-y-0">
-      <HomeSection variant="muted" dots className="py-14 sm:py-16">
+      <PageSection variant="muted" dots className="py-14 sm:py-16">
         <SectionHeading eyebrow="Infrastructure" title="Laboratory Equipment" align="left" className="mb-8" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
           {MBL_EQUIPMENT.map((eq, i) => (
@@ -110,7 +110,7 @@ export function MblServiceDetail({ service }: { service: ServiceData }) {
             </motion.div>
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
 
       {PROGRAMMES.map((programme, pi) => {
         const programmeBg =
@@ -119,7 +119,7 @@ export function MblServiceDetail({ service }: { service: ServiceData }) {
             : "https://images.unsplash.com/photo-1576086213369-97a306d36557?w=1600&q=80";
         const isRightAligned = pi % 2 === 0;
         return (
-          <HomeSection
+          <PageSection
             key={programme.title}
             variant={pi % 2 === 0 ? "gradient-blue" : "navy"}
             bgImage={programmeBg}
@@ -149,18 +149,18 @@ export function MblServiceDetail({ service }: { service: ServiceData }) {
                 />
               ))}
             </div>
-          </HomeSection>
+          </PageSection>
         );
       })}
 
-      <HomeSection variant="image-light" dots className="py-14 sm:py-16">
+      <PageSection variant="image-light" dots className="py-14 sm:py-16">
         <SectionHeading eyebrow="Why RMT" title="Why Partner With RMT" align="left" className="mb-8" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {service.whyRMT.map((item, i) => (
             <WhyCard key={item.title} title={item.title} desc={item.desc} icon={WHY_ICONS[i] ?? ShieldCheck} index={i} />
           ))}
         </div>
-      </HomeSection>
+      </PageSection>
     </div>
   );
 }
