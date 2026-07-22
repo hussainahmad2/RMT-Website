@@ -7,6 +7,7 @@ import { AnimatedSection } from "@/components/AnimatedSection";
 import { CinematicPageHero } from "@/components/CinematicPageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { cn } from "@/lib/utils";
 import {
   PRODUCT_CATEGORIES,
   PRODUCT_HIGHLIGHTS,
@@ -31,14 +32,19 @@ function ProductDetailCard({
   index: number;
 }) {
   return (
-    <article className="group overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/35 hover:shadow-2xl transition-all duration-500">
-      <div className="relative aspect-[4/3] overflow-hidden bg-muted">
-        <img
-          src={product.image}
-          alt={product.name}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-          loading="lazy"
-        />
+      <article className="group overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/35 hover:shadow-2xl transition-all duration-500">
+        <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+          <img
+            src={product.image}
+            alt={product.name}
+            className={cn(
+              "h-full w-full transition-transform duration-700 group-hover:scale-105",
+              product.tag === "BMD"
+                ? "object-contain p-4 sm:p-5 bg-white/90"
+                : "object-cover"
+            )}
+            loading="lazy"
+          />
         <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
         <div className="absolute left-3 top-3 z-10 flex flex-col items-start gap-2">
           <span className="inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-white/20 bg-black/55 px-2 text-xs font-bold text-white backdrop-blur-sm">

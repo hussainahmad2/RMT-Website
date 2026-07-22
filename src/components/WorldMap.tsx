@@ -1,5 +1,6 @@
 import React from "react";
 import { useTheme } from "@/components/ThemeProvider";
+import darkWorldMap from "@/assets/world_map_dark.png";
 
 export interface WorldMapOffice {
   city: string;
@@ -31,7 +32,13 @@ export const WorldMap = ({ offices }: WorldMapProps) => {
       <img
         src="/world_map.webp"
         alt="Global strategic presence — United States headquarters and Pakistan South Asia office"
-        className={`block h-auto w-full object-contain ${isDark ? "opacity-95" : ""}`}
+        className="block h-auto w-full object-contain dark:hidden"
+        loading="lazy"
+      />
+      <img
+        src={darkWorldMap}
+        alt="Global strategic presence — United States headquarters and Pakistan South Asia office"
+        className="hidden h-auto w-full object-contain dark:block"
         loading="lazy"
       />
       <span className="sr-only">

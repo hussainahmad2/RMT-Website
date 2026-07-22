@@ -1692,11 +1692,12 @@ export function ServiceSubServiceSummarySection({ service }: { service: ServiceD
                 type="button"
                 onClick={() => setActiveIndex(index)}
                 aria-pressed={isActive}
+                title={`Explore ${sub.name}`}
                 className={cn(
-                  "inline-flex items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all",
+                  "inline-flex cursor-pointer select-none items-center gap-2 rounded-full border px-4 py-2 text-sm font-semibold transition-all duration-200 ease-out focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary/40 focus-visible:ring-offset-2 focus-visible:ring-offset-background hover:-translate-y-0.5 hover:shadow-md active:translate-y-0 active:scale-[0.98]",
                   isActive
-                    ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/15"
-                    : "border-border bg-background/90 text-muted-foreground hover:border-primary/30 hover:text-primary"
+                    ? "border-primary bg-primary text-primary-foreground shadow-md shadow-primary/15 ring-1 ring-primary/20"
+                    : "border-border bg-background/90 text-muted-foreground hover:border-primary/30 hover:bg-background hover:text-primary"
                 )}
               >
                 <TabIcon className="h-4 w-4 shrink-0" />
@@ -1727,20 +1728,7 @@ export function ServiceSubServiceSummarySection({ service }: { service: ServiceD
                   {activeSub.tagline}
                 </p>
               </div>
-              <div className="grid grid-cols-3 gap-2 sm:gap-3 shrink-0 w-full md:w-auto md:min-w-[300px]">
-                <div className="rounded-2xl border border-border bg-secondary/35 px-4 py-4 text-center">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Overview</p>
-                  <p className="mt-2 font-heading text-2xl font-bold text-foreground">{activeSub.overview.length}</p>
-                </div>
-                <div className="rounded-2xl border border-border bg-secondary/35 px-4 py-4 text-center">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Points</p>
-                  <p className="mt-2 font-heading text-2xl font-bold text-foreground">{activeSub.keyPoints.length}</p>
-                </div>
-                <div className="rounded-2xl border border-border bg-secondary/35 px-4 py-4 text-center">
-                  <p className="text-[10px] font-bold uppercase tracking-[0.18em] text-muted-foreground">Deliverables</p>
-                  <p className="mt-2 font-heading text-2xl font-bold text-foreground">{activeSub.deliverables.length}</p>
-                </div>
-              </div>
+
             </div>
 
             <div className="mt-8 space-y-8">

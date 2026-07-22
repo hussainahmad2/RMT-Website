@@ -1,4 +1,4 @@
-import { lazy, Suspense, type ComponentType, type LazyExoticComponent } from "react";
+import { lazy, type ComponentType, type LazyExoticComponent } from "react";
 
 const modules = import.meta.glob<{
   default: ComponentType<{ params: { slug: string; subSlug: string } }>;
@@ -32,17 +32,13 @@ export function SubServiceRoute({ params }: SubServiceRouteProps) {
   const key = `./${params.slug}/${params.subSlug}/${params.subSlug}.tsx`;
   const Custom = getCustomPage(key);
 
-  return (
-    <Suspense fallback={null}>
-      {Custom ? (
-        <Custom params={params} />
-      ) : (
-        <SubServiceDetail
-          params={params}
-          serviceSlug={params.slug}
-          subSlug={params.subSlug}
-        />
-      )}
-    </Suspense>
+  return Custom ? (
+    <Custom params={params} />
+  ) : (
+    <SubServiceDetail
+      params={params}
+      serviceSlug={params.slug}
+      subSlug={params.subSlug}
+    />
   );
 }

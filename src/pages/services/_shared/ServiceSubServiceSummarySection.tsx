@@ -134,7 +134,6 @@ export function ServiceSubServiceSummarySection({ service }: { service: ServiceD
     <AnimatedSection className="rounded-[2rem] border border-border bg-gradient-to-br from-card via-card to-secondary/20 p-5 sm:p-8 shadow-sm">
       <div className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between pb-5 mb-6 border-b border-border">
         <div className="max-w-3xl">
-          <p className="text-xs font-bold uppercase tracking-[0.22em] text-primary mb-2">{meta.eyebrow}</p>
           <h2 className="font-heading text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">{meta.heading}</h2>
           <p className="mt-3 text-sm sm:text-base text-muted-foreground leading-relaxed">{meta.description}</p>
         </div>
