@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Clock, ArrowRight, Users, TrendingUp, Shield, Heart, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
+import { sendFormEmail } from "@/lib/email";
 
 interface Job {
   id: string;
@@ -92,6 +93,8 @@ interface FormData {
 export default function Careers() {
   const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
   useSEO({
@@ -101,11 +104,31 @@ export default function Careers() {
     path: "/careers",
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("Application submitted:", data);
-    setSubmitted(true);
-    reset();
-    setTimeout(() => setSubmitted(false), 6000);
+  const onSubmit = async (data: FormData) => {
+    setSubmitError(null);
+    setSubmitting(true);
+    try {
+      await sendFormEmail("career", {
+        name: data.name,
+        email: data.email,
+        phone: data.phone || "Not provided",
+        position: data.position,
+        message: data.message,
+        subject: `Career Application: ${data.position} — ${data.name}`,
+      });
+      setSubmitted(true);
+      reset();
+      setTimeout(() => setSubmitted(false), 6000);
+    } catch (err) {
+      console.error("Career email failed:", err);
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : "Failed to send application. Please try again or email hr@rmt-pk.com."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -315,11 +338,17 @@ export default function Careers() {
                 </div>
 
                 <p className="text-xs text-muted-foreground">
-                  Please email your CV/resume to <a href="mailto:careers@rmt-usa.com" className="text-primary hover:underline">careers@rmt-usa.com</a> along with your application.
+                  Please email your CV/resume to <a href="mailto:hr@rmt-pk.com" className="text-primary hover:underline">hr@rmt-pk.com</a> along with your application.
                 </p>
 
-                <Button type="submit" className="w-full rounded-lg h-11 font-semibold" data-testid="button-submit-application">
-                  Submit Application <ArrowRight className="ml-2 w-4 h-4" />
+                {submitError && (
+                  <p className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg px-3 py-2">
+                    {submitError}
+                  </p>
+                )}
+
+                <Button type="submit" disabled={submitting} className="w-full rounded-lg h-11 font-semibold" data-testid="button-submit-application">
+                  {submitting ? "Sending…" : "Submit Application"} <ArrowRight className="ml-2 w-4 h-4" />
                 </Button>
               </form>
             )}

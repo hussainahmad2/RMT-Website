@@ -4,8 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/AnimatedSection";
 import { CinematicPageHero } from "@/components/CinematicPageHero";
 import { useSEO } from "@/lib/seo";
-import { INSIGHT_ARTICLES } from "@/data/insights-content";
-import { getInsightPostDetail } from "@/data/insights-posts";
+import { INSIGHT_GALLERY_ITEMS } from "@/data/insight-gallery";
 
 interface GalleryItem {
   id: string;
@@ -49,33 +48,6 @@ const BMD_GALLERY_ITEMS: GalleryItem[] = [
   { id: "bmd-11", src: encodeURI("/bmd-products/POLYMER-FREE COATING (DRUG ELUTING STENT).jpeg"), thumb: encodeURI("/bmd-products/POLYMER-FREE COATING (DRUG ELUTING STENT).jpeg"), category: "BMD", caption: "Polymer-Free Coating", year: "BMD" },
   { id: "bmd-12", src: encodeURI("/bmd-products/TOPICAL PAIN RELIEF EMULGEL.jpeg"), thumb: encodeURI("/bmd-products/TOPICAL PAIN RELIEF EMULGEL.jpeg"), category: "BMD", caption: "Topical Pain Relief Emulgel", year: "BMD" },
 ];
-
-const INSIGHT_GALLERY_ITEMS: GalleryItem[] = INSIGHT_ARTICLES.flatMap((article) => {
-  const detail = getInsightPostDetail(article.id);
-  if (!detail) return [];
-
-  const hero = [
-    {
-      id: `insight-${article.id}-hero`,
-      src: detail.heroImage,
-      thumb: detail.heroImage,
-      category: "Insights",
-      caption: article.title,
-      year: article.date,
-    },
-  ];
-
-  const extras = detail.galleryImages.map((image, index) => ({
-    id: `insight-${article.id}-${index + 1}`,
-    src: image,
-    thumb: image,
-    category: "Insights",
-    caption: `${article.title} - Image ${index + 2}`,
-    year: article.date,
-  }));
-
-  return [...hero, ...extras];
-});
 
 const items: GalleryItem[] = [...coreItems, ...BMD_GALLERY_ITEMS, ...INSIGHT_GALLERY_ITEMS];
 

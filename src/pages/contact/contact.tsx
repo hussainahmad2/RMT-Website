@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
 import { LogoSpinner } from "@/components/LogoSpinner";
+import { sendFormEmail } from "@/lib/email";
 
 interface FormData {
   name: string;
@@ -35,6 +36,7 @@ const offices = [
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
   useSEO({
@@ -44,15 +46,32 @@ export default function Contact() {
     path: "/contact",
   });
 
-  const onSubmit = (data: FormData) => {
-    console.log("Contact form:", data);
+  const onSubmit = async (data: FormData) => {
+    setSubmitError(null);
     setSubmitting(true);
-    setTimeout(() => {
-      setSubmitting(false);
+    try {
+      await sendFormEmail("contact", {
+        name: data.name,
+        company: data.company || "Not provided",
+        email: data.email,
+        phone: data.phone || "Not provided",
+        service: data.service,
+        message: data.message,
+        subject: `Contact Enquiry: ${data.service} — ${data.name}`,
+      });
       setSubmitted(true);
       reset();
       setTimeout(() => setSubmitted(false), 8000);
-    }, 1200);
+    } catch (err) {
+      console.error("Contact email failed:", err);
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : "Failed to send message. Please try again or email hr@rmt-pk.com."
+      );
+    } finally {
+      setSubmitting(false);
+    }
   };
 
   return (
@@ -205,7 +224,13 @@ export default function Contact() {
                       {errors.message && <p className="text-destructive text-xs mt-1">{errors.message.message}</p>}
                     </div>
 
-                    <Button type="submit" size="lg" className="w-full rounded-lg h-11 font-semibold">
+                    {submitError && (
+                      <p className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg px-3 py-2">
+                        {submitError}
+                      </p>
+                    )}
+
+                    <Button type="submit" size="lg" disabled={submitting} className="w-full rounded-lg h-11 font-semibold">
                       Send Message <ArrowRight className="ml-2 w-4 h-4" />
                     </Button>
                   </form>

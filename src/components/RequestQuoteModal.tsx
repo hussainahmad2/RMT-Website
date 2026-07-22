@@ -7,6 +7,7 @@ import {
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LogoSpinner } from "@/components/LogoSpinner";
+import { sendFormEmail } from "@/lib/email";
 
 interface QuoteFormData {
   services: string[];
@@ -80,6 +81,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
   const [step, setStep] = useState(0);
   const [submitted, setSubmitted] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
+  const [submitError, setSubmitError] = useState<string | null>(null);
   const [form, setForm] = useState<QuoteFormData>({
     services: [],
     projectType: "",
@@ -126,13 +128,39 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
     }, 400);
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = async () => {
+    setSubmitError(null);
     setTransitioning(true);
-    setTimeout(() => {
-      console.log("Quote request submitted:", form);
-      setTransitioning(false);
+    try {
+      const serviceLabels = form.services
+        .map((id) => SERVICES.find((s) => s.id === id)?.label ?? id)
+        .join(", ");
+
+      await sendFormEmail("quote", {
+        name: form.name,
+        email: form.email,
+        phone: form.phone || "Not provided",
+        company: form.company || "Not provided",
+        services: serviceLabels,
+        project_type: form.projectType,
+        project_scope: form.projectScope,
+        budget: form.budget,
+        timeline: form.timeline,
+        message: form.message || "None",
+        subject: `Quote Request from ${form.name}`,
+      });
+
       setSubmitted(true);
-    }, 800);
+    } catch (err) {
+      console.error("Quote email failed:", err);
+      setSubmitError(
+        err instanceof Error
+          ? err.message
+          : "Failed to send quote request. Please try again or email hr@rmt-pk.com."
+      );
+    } finally {
+      setTransitioning(false);
+    }
   };
 
   const handleClose = () => {
@@ -141,6 +169,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
       setStep(0);
       setSubmitted(false);
       setTransitioning(false);
+      setSubmitError(null);
       setForm({ services: [], projectType: "", projectScope: "", budget: "", timeline: "", name: "", email: "", phone: "", company: "", message: "" });
     }, 350);
   };
@@ -432,6 +461,11 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                       <p className="text-xs text-muted-foreground">
                         By submitting, you agree that RMT USA may contact you regarding your enquiry. We respect your privacy and never share your data.
                       </p>
+                      {submitError && (
+                        <p className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-xl px-3 py-2">
+                          {submitError}
+                        </p>
+                      )}
                     </motion.div>
                   )}
                 </AnimatePresence>

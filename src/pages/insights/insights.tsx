@@ -12,9 +12,14 @@ import {
   INSIGHT_CATEGORY_COLORS,
   type ArticleCategory,
 } from "@/data/insights-content";
+import { getInsightPostDetail } from "@/data/insights-posts";
 
 const INSIGHTS_SCROLL_KEY = "insights:scroll-y";
 const INSIGHTS_RESTORE_KEY = "insights:restore-scroll";
+
+function articleImage(articleId: string, fallback: string) {
+  return getInsightPostDetail(articleId)?.heroImage ?? fallback;
+}
 
 export default function Insights() {
   const [filter, setFilter] = useState<ArticleCategory>("All");
@@ -50,6 +55,7 @@ export default function Insights() {
   });
 
   const featured = INSIGHT_ARTICLES.find((a) => a.featured)!;
+  const featuredImage = articleImage(featured.id, featured.image);
   const filtered = (filter === "All" ? INSIGHT_ARTICLES : INSIGHT_ARTICLES.filter((a) => a.category === filter)).filter(
     (a) => !a.featured
   );
@@ -66,57 +72,57 @@ export default function Insights() {
       />
 
       {/* FEATURED */}
-      <section className="py-12 bg-background">
+      <section className="py-8 bg-background">
         <div className="page-container">
           <AnimatedSection>
             <Link
               href={`/insights/${featured.id}`}
               onClick={saveScrollPosition}
-              className="group grid overflow-hidden rounded-[1.75rem] border border-border bg-card transition-all duration-300 hover:border-primary/40 hover:shadow-2xl lg:grid-cols-2"
+              className="group mx-auto grid max-w-4xl overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:border-primary/40 hover:shadow-xl md:grid-cols-[240px_1fr]"
             >
-              <div className="relative aspect-video overflow-hidden lg:aspect-auto">
+              <div className="relative aspect-[16/10] overflow-hidden md:aspect-auto md:min-h-[180px]">
                 <img
-                  src={featured.image}
+                  src={featuredImage}
                   alt={featured.title}
                   className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                   loading="lazy"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                <span className={`absolute top-4 left-4 rounded-full px-2.5 py-1 text-xs font-semibold ${INSIGHT_CATEGORY_COLORS[featured.category]}`}>
+                <span className={`absolute top-3 left-3 rounded-full px-2 py-0.5 text-[10px] font-semibold ${INSIGHT_CATEGORY_COLORS[featured.category]}`}>
                   {featured.category}
                 </span>
               </div>
-              <div className="flex flex-col justify-center p-8">
-                <div className="mb-4 flex flex-wrap items-center gap-3 text-xs text-muted-foreground">
+              <div className="flex flex-col justify-center p-5 md:p-6">
+                <div className="mb-2 flex flex-wrap items-center gap-2.5 text-xs text-muted-foreground">
                   <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{featured.readTime} read</span>
                   <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{featured.date}</span>
-                  <span className="rounded-full bg-primary/10 px-2 py-0.5 font-medium text-primary">Featured</span>
+                  <span className="rounded-full bg-primary/10 px-2 py-0.5 text-[10px] font-medium text-primary">Featured</span>
                 </div>
-                <h2 className="font-heading text-3xl font-bold leading-tight text-foreground mb-4 transition-colors group-hover:text-primary">
+                <h2 className="font-heading text-xl md:text-2xl font-bold leading-snug text-foreground mb-2 transition-colors group-hover:text-primary">
                   {featured.title}
                 </h2>
-                <p className="mb-6 leading-relaxed text-muted-foreground">{featured.excerpt}</p>
+                <p className="mb-3 line-clamp-2 text-sm leading-relaxed text-muted-foreground">{featured.excerpt}</p>
                 {featured.tags && (
-                  <div className="mb-6 flex flex-wrap gap-2">
-                    {featured.tags.map((tag) => (
-                      <span key={tag} className="rounded-full border border-border bg-secondary/50 px-2.5 py-1 text-xs font-medium text-muted-foreground">
+                  <div className="mb-3 flex flex-wrap gap-1.5">
+                    {featured.tags.slice(0, 3).map((tag) => (
+                      <span key={tag} className="rounded-full border border-border bg-secondary/50 px-2 py-0.5 text-[10px] font-medium text-muted-foreground">
                         {tag}
                       </span>
                     ))}
                   </div>
                 )}
                 <div className="flex items-center justify-between">
-                  <div className="flex items-center gap-3">
-                    <div className={`flex h-9 w-9 items-center justify-center rounded-full ${featured.author.color} text-xs font-bold text-white`}>
+                  <div className="flex items-center gap-2">
+                    <div className={`flex h-7 w-7 items-center justify-center rounded-full ${featured.author.color} text-[10px] font-bold text-white`}>
                       {featured.author.initials}
                     </div>
                     <div>
-                      <p className="text-sm font-semibold text-foreground">{featured.author.name}</p>
-                      <p className="text-xs text-muted-foreground">{featured.author.role}</p>
+                      <p className="text-xs font-semibold text-foreground">{featured.author.name}</p>
+                      <p className="text-[10px] text-muted-foreground">{featured.author.role}</p>
                     </div>
                   </div>
-                  <span className="flex items-center gap-1.5 text-sm font-semibold text-primary transition-all group-hover:gap-2.5">
-                    Read Article <ArrowRight className="h-4 w-4" />
+                  <span className="flex items-center gap-1 text-xs font-semibold text-primary transition-all group-hover:gap-2">
+                    Read Article <ArrowRight className="h-3.5 w-3.5" />
                   </span>
                 </div>
               </div>
@@ -151,58 +157,57 @@ export default function Insights() {
 
           <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
             {filtered.map((article, i) => (
-              <Link href={`/insights/${article.id}`} onClick={saveScrollPosition} className="block">
+              <Link key={article.id} href={`/insights/${article.id}`} onClick={saveScrollPosition} className="block">
                 <motion.article
-                key={article.id}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: i * 0.04 }}
-                className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl"
-              >
-                <div className="relative aspect-video overflow-hidden">
-                  <img
-                    src={article.image}
-                    alt={article.title}
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                    loading="lazy"
-                  />
-                  <span className={`absolute top-3 left-3 rounded-full px-2.5 py-1 text-xs font-semibold ${INSIGHT_CATEGORY_COLORS[article.category]}`}>
-                    {article.category}
-                  </span>
-                </div>
-                <div className="p-5">
-                  <div className="mb-3 flex items-center gap-3 text-xs text-muted-foreground">
-                    <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{article.readTime}</span>
-                    <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{article.date}</span>
-                  </div>
-                  <h3 className="mb-2 text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
-                    {article.title}
-                  </h3>
-                  <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">{article.excerpt}</p>
-                  {article.tags && (
-                    <div className="mt-3 flex flex-wrap gap-1.5">
-                      {article.tags.slice(0, 3).map((tag) => (
-                        <span key={tag} className="rounded-full bg-primary/8 px-2 py-0.5 text-[10px] font-medium text-primary">
-                          {tag}
-                        </span>
-                      ))}
-                    </div>
-                  )}
-                  <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
-                    <div className="flex items-center gap-2">
-                      <div className={`flex h-7 w-7 items-center justify-center rounded-full ${article.author.color} text-xs font-bold text-white`}>
-                        {article.author.initials}
-                      </div>
-                      <div>
-                        <p className="text-xs font-semibold leading-none text-foreground">{article.author.name.split(" ").slice(-1)[0]}</p>
-                        <p className="mt-0.5 text-xs leading-none text-muted-foreground">{article.date}</p>
-                      </div>
-                    </div>
-                    <span className="flex items-center gap-1 text-xs font-semibold text-primary transition-all group-hover:gap-2">
-                      Read <ArrowRight className="h-3 w-3" />
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ delay: i * 0.04 }}
+                  className="group cursor-pointer overflow-hidden rounded-2xl border border-border bg-card transition-all duration-300 hover:-translate-y-1 hover:border-primary/40 hover:shadow-xl"
+                >
+                  <div className="relative aspect-video overflow-hidden">
+                    <img
+                      src={articleImage(article.id, article.image)}
+                      alt={article.title}
+                      className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+                      loading="lazy"
+                    />
+                    <span className={`absolute top-3 left-3 rounded-full px-2.5 py-1 text-xs font-semibold ${INSIGHT_CATEGORY_COLORS[article.category]}`}>
+                      {article.category}
                     </span>
                   </div>
-                </div>
+                  <div className="p-5">
+                    <div className="mb-3 flex items-center gap-3 text-xs text-muted-foreground">
+                      <span className="flex items-center gap-1"><Clock className="h-3 w-3" />{article.readTime}</span>
+                      <span className="flex items-center gap-1"><Calendar className="h-3 w-3" />{article.date}</span>
+                    </div>
+                    <h3 className="mb-2 text-sm font-semibold leading-snug text-foreground transition-colors group-hover:text-primary">
+                      {article.title}
+                    </h3>
+                    <p className="line-clamp-3 text-xs leading-relaxed text-muted-foreground">{article.excerpt}</p>
+                    {article.tags && (
+                      <div className="mt-3 flex flex-wrap gap-1.5">
+                        {article.tags.slice(0, 3).map((tag) => (
+                          <span key={tag} className="rounded-full bg-primary/8 px-2 py-0.5 text-[10px] font-medium text-primary">
+                            {tag}
+                          </span>
+                        ))}
+                      </div>
+                    )}
+                    <div className="mt-4 flex items-center justify-between border-t border-border pt-3">
+                      <div className="flex items-center gap-2">
+                        <div className={`flex h-7 w-7 items-center justify-center rounded-full ${article.author.color} text-xs font-bold text-white`}>
+                          {article.author.initials}
+                        </div>
+                        <div>
+                          <p className="text-xs font-semibold leading-none text-foreground">{article.author.name.split(" ").slice(-1)[0]}</p>
+                          <p className="mt-0.5 text-xs leading-none text-muted-foreground">{article.date}</p>
+                        </div>
+                      </div>
+                      <span className="flex items-center gap-1 text-xs font-semibold text-primary transition-all group-hover:gap-2">
+                        Read <ArrowRight className="h-3 w-3" />
+                      </span>
+                    </div>
+                  </div>
                 </motion.article>
               </Link>
             ))}
