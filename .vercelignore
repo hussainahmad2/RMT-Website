@@ -1,0 +1,15 @@
+.git
+.github
+node_modules
+dist
+.cache
+tmp
+.local
+.idea
+.vscode
+*.log
+.env
+.env.local
+.env.*.local
+/public/testimonials
+/testimonials

@@ -31,3 +31,4 @@ tmp/
 
 # Raw source videos (not used in production build)
 /testimonials/
+.vercel
