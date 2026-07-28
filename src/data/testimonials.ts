@@ -14,7 +14,7 @@ export const TESTIMONIALS_HERO_IMAGE =
 export const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
   {
     id: "1",
-    src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerBlazes.mp4",
+    src: "https://samplelib.com/lib/preview/mp4/sample-30s.mp4",
     title: "Trusted Partner in Medical Innovation",
     subtitle: "Healthcare client on regulatory and product development support",
     category: "Product Development",
@@ -23,7 +23,7 @@ export const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
   },
   {
     id: "2",
-    src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerEscapes.mp4",
+    src: "https://samplelib.com/lib/preview/mp4/sample-20s.mp4",
     title: "Quality You Can Rely On",
     subtitle: "Industry partner on laboratory testing and compliance",
     category: "Microbiology",
@@ -32,7 +32,7 @@ export const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
   },
   {
     id: "3",
-    src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerFun.mp4",
+    src: "https://samplelib.com/lib/preview/mp4/sample-15s.mp4",
     title: "End-to-End Excellence",
     subtitle: "Client experience with RMT's integrated service delivery",
     category: "Manufacturing",
@@ -41,7 +41,7 @@ export const TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
   },
   {
     id: "4",
-    src: "https://storage.googleapis.com/gtv-videos-bucket/sample/ForBiggerJoyrides.mp4",
+    src: "https://samplelib.com/lib/preview/mp4/sample-10s.mp4",
     title: "A Team That Delivers",
     subtitle: "Long-term partner on device development and scale-up",
     category: "Regulatory",
