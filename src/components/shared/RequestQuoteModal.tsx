@@ -2,15 +2,17 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   X, ArrowRight, ArrowLeft, CheckCircle, Cpu, Shield, Brain,
-  FlaskConical, CircuitBoard, Settings2, Pill, Factory, Microscope, Dna,
-  DollarSign, Calendar, User, Mail, Phone, Building2, FileText
+  FlaskConical, CircuitBoard, Settings2, Factory, Microscope, Dna,
+  DollarSign, Calendar, User, Mail, Phone, Building2, FileText, Wrench
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { LogoSpinner } from "@/components/shared/LogoSpinner";
-import { sendFormEmail } from "@/lib/email";
+import { FileUploadField } from "@/components/shared/FileUploadField";
+import { sendFormEmail, getFriendlyFormError } from "@/lib/email";
 
 interface QuoteFormData {
   services: string[];
+  customService: string;
   projectType: string;
   projectScope: string;
   budget: string;
@@ -21,6 +23,8 @@ interface QuoteFormData {
   company: string;
   message: string;
 }
+
+const CUSTOM_SERVICE_ID = "custom-service";
 
 const SERVICES = [
   { id: "regulatory-compliance", label: "Regulatory Compliance (FDA/CE)", icon: <Shield className="w-4 h-4" /> },
@@ -34,6 +38,7 @@ const SERVICES = [
   { id: "mbl-laboratory", label: "Microbiology Laboratory Testing", icon: <Microscope className="w-4 h-4" /> },
   { id: "contract-manufacturing", label: "Medical Device Manufacturing", icon: <Factory className="w-4 h-4" /> },
   { id: "production-equipment-engineering", label: "Medical Equipment Manufacturing", icon: <Settings2 className="w-4 h-4" /> },
+  { id: CUSTOM_SERVICE_ID, label: "Custom / Other Service", icon: <Wrench className="w-4 h-4" /> },
 ];
 
 const PROJECT_TYPES = [
@@ -82,8 +87,11 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
   const [submitted, setSubmitted] = useState(false);
   const [transitioning, setTransitioning] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [fileError, setFileError] = useState<string | null>(null);
   const [form, setForm] = useState<QuoteFormData>({
     services: [],
+    customService: "",
     projectType: "",
     projectScope: "",
     budget: "",
@@ -95,17 +103,27 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
     message: "",
   });
 
+  const hasCustomService = form.services.includes(CUSTOM_SERVICE_ID);
+
   const toggleService = (id: string) => {
-    setForm((f) => ({
-      ...f,
-      services: f.services.includes(id)
-        ? f.services.filter((s) => s !== id)
-        : [...f.services, id],
-    }));
+    setForm((f) => {
+      const removing = f.services.includes(id);
+      return {
+        ...f,
+        services: removing
+          ? f.services.filter((s) => s !== id)
+          : [...f.services, id],
+        customService: removing && id === CUSTOM_SERVICE_ID ? "" : f.customService,
+      };
+    });
   };
 
   const canProceed = () => {
-    if (step === 0) return form.services.length > 0;
+    if (step === 0) {
+      if (form.services.length === 0) return false;
+      if (hasCustomService && form.customService.trim() === "") return false;
+      return true;
+    }
     if (step === 1) return form.projectType !== "" && form.projectScope.trim() !== "";
     if (step === 2) return form.budget !== "" && form.timeline !== "";
     if (step === 3) return form.name.trim() !== "" && form.email.trim() !== "";
@@ -130,34 +148,41 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
 
   const handleSubmit = async () => {
     setSubmitError(null);
+    setFileError(null);
     setTransitioning(true);
     try {
       const serviceLabels = form.services
-        .map((id) => SERVICES.find((s) => s.id === id)?.label ?? id)
+        .map((id) => {
+          if (id === CUSTOM_SERVICE_ID) {
+            return `Custom Service: ${form.customService.trim()}`;
+          }
+          return SERVICES.find((s) => s.id === id)?.label ?? id;
+        })
         .join(", ");
 
-      await sendFormEmail("quote", {
-        name: form.name,
-        email: form.email,
-        phone: form.phone || "Not provided",
-        company: form.company || "Not provided",
-        services: serviceLabels,
-        project_type: form.projectType,
-        project_scope: form.projectScope,
-        budget: form.budget,
-        timeline: form.timeline,
-        message: form.message || "None",
-        subject: `Quote Request from ${form.name}`,
-      });
+      await sendFormEmail(
+        "quote",
+        {
+          name: form.name,
+          email: form.email,
+          phone: form.phone || "Not provided",
+          company: form.company || "Not provided",
+          services: serviceLabels,
+          custom_service: hasCustomService ? form.customService.trim() : "N/A",
+          project_type: form.projectType,
+          project_scope: form.projectScope,
+          budget: form.budget,
+          timeline: form.timeline,
+          message: form.message || "None",
+          subject: `Quote Request from ${form.name}`,
+        },
+        { files }
+      );
 
       setSubmitted(true);
     } catch (err) {
       console.error("Quote email failed:", err);
-      setSubmitError(
-        err instanceof Error
-          ? err.message
-          : "Failed to send quote request. Please try again or email hr@rmt-pk.com."
-      );
+      setSubmitError(getFriendlyFormError(err));
     } finally {
       setTransitioning(false);
     }
@@ -170,7 +195,9 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
       setSubmitted(false);
       setTransitioning(false);
       setSubmitError(null);
-      setForm({ services: [], projectType: "", projectScope: "", budget: "", timeline: "", name: "", email: "", phone: "", company: "", message: "" });
+      setFileError(null);
+      setFiles([]);
+      setForm({ services: [], customService: "", projectType: "", projectScope: "", budget: "", timeline: "", name: "", email: "", phone: "", company: "", message: "" });
     }, 350);
   };
 
@@ -289,6 +316,7 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                           return (
                             <button
                               key={svc.id}
+                              type="button"
                               onClick={() => toggleService(svc.id)}
                               className={`flex items-center gap-3 p-3.5 rounded-xl border text-left transition-all duration-200 ${
                                 selected
@@ -305,6 +333,21 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                           );
                         })}
                       </div>
+                      {hasCustomService && (
+                        <div className="mt-4">
+                          <label className="block text-sm font-medium text-foreground mb-2">
+                            <Wrench className="inline w-4 h-4 mr-1.5 text-muted-foreground" />
+                            Describe your custom service *
+                          </label>
+                          <textarea
+                            value={form.customService}
+                            onChange={(e) => setForm((f) => ({ ...f, customService: e.target.value }))}
+                            placeholder="Tell us what custom service or support you need..."
+                            rows={3}
+                            className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm resize-none"
+                          />
+                        </div>
+                      )}
                     </motion.div>
                   )}
 
@@ -458,6 +501,15 @@ export function RequestQuoteModal({ open, onClose }: RequestQuoteModalProps) {
                           className="w-full px-4 py-3 rounded-xl border border-border bg-background text-foreground placeholder:text-muted-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm resize-none"
                         />
                       </div>
+                      <FileUploadField
+                        files={files}
+                        onChange={setFiles}
+                        label="Upload Documents"
+                        hint="Attach briefs, drawings, specs, or images (optional)."
+                        error={fileError}
+                        onError={setFileError}
+                        testId="input-quote-files"
+                      />
                       <p className="text-xs text-muted-foreground">
                         By submitting, you agree that RMT USA may contact you regarding your enquiry. We respect your privacy and never share your data.
                       </p>

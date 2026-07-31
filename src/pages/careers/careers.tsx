@@ -3,83 +3,27 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
-import { MapPin, Clock, ArrowRight, Users, TrendingUp, Shield, Heart, Briefcase, ChevronDown, ChevronUp } from "lucide-react";
+import { ArrowRight, Users, TrendingUp, Shield, Heart, Briefcase } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
-import { sendFormEmail } from "@/lib/email";
-
-interface Job {
-  id: string;
-  title: string;
-  department: string;
-  location: string;
-  type: string;
-  description: string;
-  requirements: string[];
-}
-
-const jobs: Job[] = [
-  {
-    id: "1",
-    title: "Regulatory Affairs Specialist",
-    department: "Regulatory",
-    location: "USA / Remote",
-    type: "Full-time",
-    description: "Lead regulatory submissions for FDA 510(k), PMA, and EU MDR technical files. Serve as regulatory liaison with notified bodies and competent authorities.",
-    requirements: ["3+ years regulatory affairs experience", "Knowledge of FDA 21 CFR Part 820, EU MDR", "Experience with ISO 13485", "Strong technical writing skills", "Degree in Life Sciences, Engineering, or related field"],
-  },
-  {
-    id: "2",
-    title: "Medical Device Design Engineer",
-    department: "Product Design",
-    location: "USA",
-    type: "Full-time",
-    description: "Design and develop medical devices from concept through design freeze, applying Design Controls per 21 CFR 820.30 and ISO 13485.",
-    requirements: ["5+ years medical device design experience", "Proficiency in SolidWorks or CATIA", "Understanding of design controls and DHF", "Experience with risk management per ISO 14971", "BSc/MSc Mechanical or Biomedical Engineering"],
-  },
-  {
-    id: "3",
-    title: "Software Engineer — Medical Devices (SaMD)",
-    department: "Software & AI",
-    location: "USA / Remote",
-    type: "Full-time",
-    description: "Develop software for medical devices and SaMD applications compliant with IEC 62304, including embedded firmware and cloud-connected health platforms.",
-    requirements: ["4+ years software development experience", "Knowledge of IEC 62304 and FDA SaMD guidance", "Experience with embedded C/C++ or Python/TypeScript", "Familiarity with cybersecurity for medical devices", "BSc Computer Science or Software Engineering"],
-  },
-  {
-    id: "4",
-    title: "Quality Engineer",
-    department: "Quality Testing",
-    location: "USA",
-    type: "Full-time",
-    description: "Drive quality system implementation, CAPA management, supplier quality, and design verification & validation activities under ISO 13485.",
-    requirements: ["3+ years quality engineering in medical devices", "ISO 13485:2016 QMS experience", "CAPA, NCR, and complaint handling", "Experience with IQ/OQ/PQ validation", "ASQ CQE or CQA certification preferred"],
-  },
-  {
-    id: "5",
-    title: "Electronics & Firmware Engineer",
-    department: "Electronics",
-    location: "USA / UAE",
-    type: "Full-time",
-    description: "Design analog and digital circuits and develop embedded firmware for medical-grade devices, ensuring compliance with IEC 60601 safety standards.",
-    requirements: ["4+ years medical electronics experience", "PCB layout with Altium or KiCad", "Embedded firmware in C/C++", "IEC 60601-1 compliance knowledge", "BSc/MSc Electrical or Electronic Engineering"],
-  },
-  {
-    id: "6",
-    title: "Project Manager — Medical Device Development",
-    department: "Operations",
-    location: "USA / Remote",
-    type: "Full-time",
-    description: "Manage multi-disciplinary medical device development projects from initiation through regulatory approval, ensuring on-time, on-budget delivery.",
-    requirements: ["5+ years project management in medtech", "PMP or Prince2 certification", "Experience managing FDA/EU MDR submissions", "Strong stakeholder communication skills", "BSc Engineering, Life Sciences, or Business"],
-  },
-];
+import { sendFormEmail, getFriendlyFormError } from "@/lib/email";
+import { FileUploadField } from "@/components/shared/FileUploadField";
 
 const benefits = [
   { icon: <TrendingUp className="w-5 h-5" />, title: "Career Growth", description: "Structured career development pathways, mentoring, and continuous learning opportunities in medical technology." },
   { icon: <Shield className="w-5 h-5" />, title: "Meaningful Work", description: "Contribute to medical devices that directly improve patient lives — work with purpose every day." },
   { icon: <Users className="w-5 h-5" />, title: "Expert Team", description: "Work alongside leading regulatory, engineering, and scientific professionals from around the world." },
   { icon: <Heart className="w-5 h-5" />, title: "Comprehensive Benefits", description: "Competitive salary, health insurance, flexible working arrangements, and professional development funding." },
+];
+
+const POSITION_OPTIONS = [
+  "Regulatory Affairs",
+  "Medical Device Design / Engineering",
+  "Software & SaMD",
+  "Quality Engineering",
+  "Electronics & Firmware",
+  "Project Management",
+  "General Enquiry / Speculative",
 ];
 
 interface FormData {
@@ -91,41 +35,44 @@ interface FormData {
 }
 
 export default function Careers() {
-  const [expandedJob, setExpandedJob] = useState<string | null>(null);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
   const [submitError, setSubmitError] = useState<string | null>(null);
+  const [files, setFiles] = useState<File[]>([]);
+  const [fileError, setFileError] = useState<string | null>(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
   useSEO({
     title: "Careers",
-    description: "Join RMT USA's growing team of medical device experts. We are hiring regulatory affairs specialists, medical device engineers, software developers, quality engineers, and more.",
+    description: "Join RMT USA's growing team of medical device experts. Submit a speculative application for regulatory, engineering, software, and quality roles.",
     keywords: "medical device careers, regulatory affairs jobs, medical device engineer jobs, SaMD software engineer, quality engineer medical device",
     path: "/careers",
   });
 
   const onSubmit = async (data: FormData) => {
     setSubmitError(null);
+    setFileError(null);
     setSubmitting(true);
     try {
-      await sendFormEmail("career", {
-        name: data.name,
-        email: data.email,
-        phone: data.phone || "Not provided",
-        position: data.position,
-        message: data.message,
-        subject: `Career Application: ${data.position} — ${data.name}`,
-      });
+      await sendFormEmail(
+        "career",
+        {
+          name: data.name,
+          email: data.email,
+          phone: data.phone || "Not provided",
+          position: data.position,
+          message: data.message,
+          subject: `Career Application: ${data.position} — ${data.name}`,
+        },
+        { files }
+      );
       setSubmitted(true);
       reset();
+      setFiles([]);
       setTimeout(() => setSubmitted(false), 6000);
     } catch (err) {
       console.error("Career email failed:", err);
-      setSubmitError(
-        err instanceof Error
-          ? err.message
-          : "Failed to send application. Please try again or email hr@rmt-pk.com."
-      );
+      setSubmitError(getFriendlyFormError(err));
     } finally {
       setSubmitting(false);
     }
@@ -136,7 +83,7 @@ export default function Careers() {
 
       {/* HERO */}
       <PageHero
-        eyebrow="We Are Hiring"
+        eyebrow="Join Our Team"
         title="Careers at RMT USA"
         description="Build your career at the intersection of medical technology, regulatory science, and engineering excellence. Help us bring life-changing devices to market."
         backgroundImage="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?w=1600&q=80"
@@ -178,74 +125,36 @@ export default function Careers() {
         </div>
       </section>
 
-      {/* JOB LISTINGS */}
+      {/* NO CURRENT OPENINGS */}
       <section className="py-20 bg-secondary/30">
         <div className="page-container">
-          <AnimatedSection className="text-center mb-12">
+          <AnimatedSection className="text-center mb-10">
             <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Open Roles</p>
             <h2 className="font-heading text-4xl font-bold text-foreground">Current Openings</h2>
           </AnimatedSection>
 
-          <div className="max-w-4xl mx-auto space-y-4">
-            {jobs.map((job, i) => (
-              <motion.div
-                key={job.id}
-                initial={{ opacity: 0, y: 16 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: i * 0.08 }}
-                className="bg-card border border-border rounded-xl overflow-hidden"
-                data-testid={`card-job-${job.id}`}
-              >
-                <button
-                  className="w-full text-left p-6 flex items-center justify-between gap-4 hover:bg-muted/50 transition-colors"
-                  onClick={() => setExpandedJob(expandedJob === job.id ? null : job.id)}
-                  data-testid={`button-expand-job-${job.id}`}
-                >
-                  <div className="flex items-start gap-4 min-w-0">
-                    <div className="w-10 h-10 bg-primary/10 text-primary rounded-lg flex items-center justify-center shrink-0 mt-0.5">
-                      <Briefcase className="w-5 h-5" />
-                    </div>
-                    <div className="min-w-0">
-                      <h3 className="font-heading text-lg font-bold text-foreground">{job.title}</h3>
-                      <div className="flex flex-wrap gap-3 mt-1.5">
-                        <span className="text-xs text-primary font-medium">{job.department}</span>
-                        <span className="text-xs text-muted-foreground flex items-center gap-1"><MapPin className="w-3 h-3" />{job.location}</span>
-                        <span className="text-xs text-muted-foreground flex items-center gap-1"><Clock className="w-3 h-3" />{job.type}</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="shrink-0 text-muted-foreground">
-                    {expandedJob === job.id ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
-                  </div>
-                </button>
-
-                {expandedJob === job.id && (
-                  <motion.div
-                    initial={{ opacity: 0, height: 0 }}
-                    animate={{ opacity: 1, height: "auto" }}
-                    exit={{ opacity: 0, height: 0 }}
-                    className="px-6 pb-6 border-t border-border"
-                  >
-                    <p className="text-muted-foreground text-sm leading-relaxed mt-4 mb-4">{job.description}</p>
-                    <h4 className="font-semibold text-foreground text-sm mb-3">Requirements</h4>
-                    <ul className="space-y-2 mb-5">
-                      {job.requirements.map((req) => (
-                        <li key={req} className="flex items-start gap-2 text-sm text-muted-foreground">
-                          <ArrowRight className="w-4 h-4 text-primary shrink-0 mt-0.5" />
-                          {req}
-                        </li>
-                      ))}
-                    </ul>
-                    <Button size="sm" className="rounded-lg" data-testid={`button-apply-${job.id}`}
-                      onClick={() => document.getElementById("apply-form")?.scrollIntoView({ behavior: "smooth" })}>
-                      Apply for This Role
-                    </Button>
-                  </motion.div>
-                )}
-              </motion.div>
-            ))}
-          </div>
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            className="max-w-xl mx-auto bg-card border border-border rounded-xl p-10 text-center"
+          >
+            <div className="w-14 h-14 bg-muted text-muted-foreground rounded-xl flex items-center justify-center mx-auto mb-4">
+              <Briefcase className="w-7 h-7" />
+            </div>
+            <h3 className="font-heading text-xl font-bold text-foreground mb-2">No Current Job Openings</h3>
+            <p className="text-muted-foreground text-sm leading-relaxed mb-6">
+              We do not have any open positions at the moment. You are welcome to submit a speculative application below — we review every submission and will reach out when a suitable role becomes available.
+            </p>
+            <Button
+              size="sm"
+              className="rounded-lg"
+              onClick={() => document.getElementById("apply-form")?.scrollIntoView({ behavior: "smooth" })}
+            >
+              Submit an Application
+              <ArrowRight className="ml-2 w-4 h-4" />
+            </Button>
+          </motion.div>
         </div>
       </section>
 
@@ -256,7 +165,7 @@ export default function Careers() {
             <AnimatedSection className="text-center mb-10">
               <p className="text-primary font-semibold text-sm uppercase tracking-widest mb-3">Apply Now</p>
               <h2 className="font-heading text-4xl font-bold text-foreground">Submit Your Application</h2>
-              <p className="text-muted-foreground mt-3">We review every application and will contact suitable candidates within 5 business days.</p>
+              <p className="text-muted-foreground mt-3">We review every application and will contact suitable candidates when a matching role opens.</p>
             </AnimatedSection>
 
             {submitted ? (
@@ -309,17 +218,16 @@ export default function Careers() {
                     />
                   </div>
                   <div>
-                    <label className="block text-sm font-medium text-foreground mb-1.5">Position of Interest *</label>
+                    <label className="block text-sm font-medium text-foreground mb-1.5">Area of Interest *</label>
                     <select
                       data-testid="select-applicant-position"
-                      {...register("position", { required: "Please select a position" })}
+                      {...register("position", { required: "Please select an area of interest" })}
                       className="w-full px-4 py-2.5 rounded-lg border border-border bg-background text-foreground focus:outline-none focus:ring-2 focus:ring-primary/30 text-sm"
                     >
-                      <option value="">Select a position...</option>
-                      {jobs.map((job) => (
-                        <option key={job.id} value={job.title}>{job.title}</option>
+                      <option value="">Select an area...</option>
+                      {POSITION_OPTIONS.map((pos) => (
+                        <option key={pos} value={pos}>{pos}</option>
                       ))}
-                      <option value="General Enquiry">General Enquiry / Speculative</option>
                     </select>
                     {errors.position && <p className="text-destructive text-xs mt-1">{errors.position.message}</p>}
                   </div>
@@ -337,9 +245,15 @@ export default function Careers() {
                   {errors.message && <p className="text-destructive text-xs mt-1">{errors.message.message}</p>}
                 </div>
 
-                <p className="text-xs text-muted-foreground">
-                  Please email your CV/resume to <a href="mailto:hr@rmt-pk.com" className="text-primary hover:underline">hr@rmt-pk.com</a> along with your application.
-                </p>
+                <FileUploadField
+                  files={files}
+                  onChange={setFiles}
+                  label="Upload CV / Documents"
+                  hint="Attach your CV/resume, portfolio, or supporting documents (optional)."
+                  error={fileError}
+                  onError={setFileError}
+                  testId="input-applicant-files"
+                />
 
                 {submitError && (
                   <p className="text-sm text-destructive bg-destructive/10 border border-destructive/20 rounded-lg px-3 py-2">

@@ -7,7 +7,7 @@ import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
 import { LogoSpinner } from "@/components/shared/LogoSpinner";
-import { sendFormEmail } from "@/lib/email";
+import { sendFormEmail, getFriendlyFormError } from "@/lib/email";
 
 interface FormData {
   name: string;
@@ -64,11 +64,7 @@ export default function Contact() {
       setTimeout(() => setSubmitted(false), 8000);
     } catch (err) {
       console.error("Contact email failed:", err);
-      setSubmitError(
-        err instanceof Error
-          ? err.message
-          : "Failed to send message. Please try again or email hr@rmt-pk.com."
-      );
+      setSubmitError(getFriendlyFormError(err));
     } finally {
       setSubmitting(false);
     }
