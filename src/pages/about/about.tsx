@@ -335,55 +335,29 @@ export default function About() {
         </div>
       </section>
 
-      {/* ===== SUPPLY CHAIN WING ===== */}
+      {/* ===== SUPPLY CHAIN & LOGISTICS WING ===== */}
       <section className="py-20 bg-background">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
-              Supply Chain Wing
+              Supply Chain & Logistics Wing
             </h2>
           </AnimatedSection>
 
-          <TeamMemberGrid members={SUPPLY_CHAIN_WING} />
+          <TeamMemberGrid members={[...SUPPLY_CHAIN_WING, ...WAREHOUSE_DISTRIBUTION_WING]} />
         </div>
       </section>
 
-      {/* ===== WAREHOUSE & DISTRIBUTION WING ===== */}
+      {/* ===== CORPORATE SUPPORT WING ===== */}
       <section className="py-20 bg-secondary/30">
         <div className="page-container">
           <AnimatedSection className="text-center mb-12">
             <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
-              Warehouse & Distribution Wing
+              Corporate Support Wing
             </h2>
           </AnimatedSection>
 
-          <TeamMemberGrid members={WAREHOUSE_DISTRIBUTION_WING} />
-        </div>
-      </section>
-
-      {/* ===== FINANCE DEPARTMENT ===== */}
-      <section className="py-20 bg-background">
-        <div className="page-container">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
-              Finance Department
-            </h2>
-          </AnimatedSection>
-
-          <TeamMemberGrid members={FINANCE_DEPARTMENT} />
-        </div>
-      </section>
-
-      {/* ===== HR & ADMIN SUPPORT WING ===== */}
-      <section className="py-20 bg-secondary/30">
-        <div className="page-container">
-          <AnimatedSection className="text-center mb-12">
-            <h2 className="font-heading text-4xl md:text-5xl font-bold text-foreground">
-              HR & Admin Support Wing
-            </h2>
-          </AnimatedSection>
-
-          <TeamMemberGrid members={HR_ADMIN_SUPPORT_WING} />
+          <TeamMemberGrid members={[...FINANCE_DEPARTMENT, ...HR_ADMIN_SUPPORT_WING]} />
         </div>
       </section>
 
