@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Simulation â€?customize this screen in:
+ * Simulation é–³?customize this screen in:
  * src/pages/services/quality-testing/simulation/index.tsx
  */
 export default function SimulationPage({ params }: PageProps) {

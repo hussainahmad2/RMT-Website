@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Defect Analysis â€?customize this screen in:
+ * Defect Analysis é–³?customize this screen in:
  * src/pages/services/quality-testing/defect-analysis/index.tsx
  */
 export default function DefectAnalysisPage({ params }: PageProps) {

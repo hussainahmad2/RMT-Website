@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Visual Inspection â€?customize this screen in:
+ * Visual Inspection é–³?customize this screen in:
  * src/pages/services/quality-testing/visual-inspection/index.tsx
  */
 export default function VisualInspectionPage({ params }: PageProps) {

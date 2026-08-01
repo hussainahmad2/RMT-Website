@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Physico Chemical Testing â€?customize this screen in:
+ * Physico Chemical Testing é–³?customize this screen in:
  * src/pages/services/quality-testing/physico-chemical-testing/index.tsx
  */
 export default function PhysicoChemicalTestingPage({ params }: PageProps) {

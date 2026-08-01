@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Packaging Integrity Testing â€?customize this screen in:
+ * Packaging Integrity Testing é–³?customize this screen in:
  * src/pages/services/quality-testing/packaging-integrity-testing/index.tsx
  */
 export default function PackagingIntegrityTestingPage({ params }: PageProps) {

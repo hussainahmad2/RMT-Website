@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Dimensional Analysis â€?customize this screen in:
+ * Dimensional Analysis é–³?customize this screen in:
  * src/pages/services/quality-testing/dimensional-analysis/index.tsx
  */
 export default function DimensionalAnalysisPage({ params }: PageProps) {

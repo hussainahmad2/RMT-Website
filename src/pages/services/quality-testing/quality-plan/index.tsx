@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Quality Plan â€?customize this screen in:
+ * Quality Plan é–³?customize this screen in:
  * src/pages/services/quality-testing/quality-plan/index.tsx
  */
 export default function QualityPlanPage({ params }: PageProps) {

@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Bench Testing â€?customize this screen in:
+ * Bench Testing é–³?customize this screen in:
  * src/pages/services/quality-testing/bench-testing/index.tsx
  */
 export default function BenchTestingPage({ params }: PageProps) {
