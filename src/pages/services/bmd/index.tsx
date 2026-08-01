@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import { ALL_SERVICES } from "@/data/services";
 import { buildBreadcrumbJsonLd, buildServiceJsonLd, servicePath } from "@/lib/service-seo";
 import { useSEO } from "@/lib/seo";
-import { BmdServiceDetail } from "../_shared/BmdServiceDetail";
+import { BmdServiceDetail } from "@/components/services/BmdServiceDetail";
 
 const SERVICE = ALL_SERVICES.find((s) => s.slug === "bmd")!;
 
