@@ -18,7 +18,7 @@ import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
 import { buildBreadcrumbJsonLd, buildServiceJsonLd, servicePath, subServicePath } from "@/lib/service-seo";
-import { ServiceCapabilitiesBlock } from "../_shared/ServiceTemplates";
+import { ServiceCapabilitiesBlock } from "@/components/services/serviceTemplateShared";
 
 const SERVICE = ALL_SERVICES.find((s) => s.slug === "regulatory-compliance")!;
 
