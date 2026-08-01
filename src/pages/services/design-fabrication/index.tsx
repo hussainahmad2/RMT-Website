@@ -1,4 +1,4 @@
-import { ServiceDetail } from "../_shared";
+import { ServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string } };
 
