@@ -38,7 +38,7 @@ import {
 } from "@/data/bmd-content";
 import { BMD_STANDARDS } from "@/data/bmd-standards";
 import { BMD_SECTION_IMAGES, ColumnWatermark, DnaWatermark, FlaskWatermark } from "./BmdVisuals";
-import { ServiceCapabilitiesBlock } from "./ServiceTemplates";
+import { ServiceCapabilitiesBlock } from "./serviceTemplateShared";
 import { Link } from "wouter";
 import { cn } from "@/lib/utils";
 
