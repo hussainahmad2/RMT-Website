@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Hr Training â€?customize this screen in:
+ * Hr Training é–³?customize this screen in:
  * src/pages/services/turnkey-commissioning/hr-training/index.tsx
  */
 export default function HrTrainingPage({ params }: PageProps) {

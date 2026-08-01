@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Supply Commission â€?customize this screen in:
+ * Supply Commission é–³?customize this screen in:
  * src/pages/services/turnkey-commissioning/supply-commission/index.tsx
  */
 export default function SupplyCommissionPage({ params }: PageProps) {

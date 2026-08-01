@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Product Licensing â€?customize this screen in:
+ * Product Licensing é–³?customize this screen in:
  * src/pages/services/turnkey-commissioning/product-licensing/index.tsx
  */
 export default function ProductLicensingPage({ params }: PageProps) {

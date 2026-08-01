@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Oq Pq Qualification â€?customize this screen in:
+ * Oq Pq Qualification é–³?customize this screen in:
  * src/pages/services/turnkey-commissioning/oq-pq-qualification/index.tsx
  */
 export default function OqPqQualificationPage({ params }: PageProps) {

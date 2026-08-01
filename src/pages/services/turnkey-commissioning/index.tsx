@@ -1,9 +1,9 @@
-import { ServiceDetail } from "../_shared";
+import { ServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string } };
 
 /**
- * Turnkey Commissioning â€?customize this screen in:
+ * Turnkey Commissioning é–³?customize this screen in:
  * src/pages/services/turnkey-commissioning/index.tsx
  */
 export default function TurnkeyCommissioningServicePage({ params }: PageProps) {

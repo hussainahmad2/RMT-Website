@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Commissioning Validation â€?customize this screen in:
+ * Commissioning Validation é–³?customize this screen in:
  * src/pages/services/turnkey-commissioning/commissioning-validation/index.tsx
  */
 export default function CommissioningValidationPage({ params }: PageProps) {

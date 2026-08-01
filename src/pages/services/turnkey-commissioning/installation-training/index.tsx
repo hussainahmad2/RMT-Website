@@ -1,9 +1,9 @@
-import { SubServiceDetail } from "../../_shared";
+import { SubServiceDetail } from "@/components/services/serviceTemplateShared";
 
 type PageProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Installation Training â€?customize this screen in:
+ * Installation Training é–³?customize this screen in:
  * src/pages/services/turnkey-commissioning/installation-training/index.tsx
  */
 export default function InstallationTrainingPage({ params }: PageProps) {
