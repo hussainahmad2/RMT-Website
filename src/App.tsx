@@ -11,29 +11,29 @@ import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
 /** Home stays eager for instant first paint; other routes load on demand */
-import Home from "@/pages/home/home";
+import Home from "@/pages/home";
 
-const About = lazy(() => import("@/pages/about/about"));
-const ServicesOverview = lazy(() => import("@/pages/services/services"));
+const About = lazy(() => import("@/pages/about"));
+const ServicesOverview = lazy(() => import("@/pages/services"));
 const ServiceRoute = lazy(() =>
   import("@/pages/services/ServiceRoute").then((m) => ({ default: m.ServiceRoute }))
 );
 const SubServiceRoute = lazy(() =>
   import("@/pages/services/SubServiceRoute").then((m) => ({ default: m.SubServiceRoute }))
 );
-const Projects = lazy(() => import("@/pages/projects/projects"));
-const Careers = lazy(() => import("@/pages/careers/careers"));
-const Contact = lazy(() => import("@/pages/contact/contact"));
-const Testing = lazy(() => import("@/pages/testing/testing"));
-const Training = lazy(() => import("@/pages/training/training"));
-const Insights = lazy(() => import("@/pages/insights/insights"));
+const Projects = lazy(() => import("@/pages/projects"));
+const Careers = lazy(() => import("@/pages/careers"));
+const Contact = lazy(() => import("@/pages/contact"));
+const Testing = lazy(() => import("@/pages/testing"));
+const Training = lazy(() => import("@/pages/training"));
+const Insights = lazy(() => import("@/pages/insights"));
 const InsightArticle = lazy(() => import("@/pages/insights/insight-article"));
-const Gallery = lazy(() => import("@/pages/gallery/gallery"));
-const Testimonials = lazy(() => import("@/pages/testimonials/testimonials"));
-const Products = lazy(() => import("@/pages/products/products"));
-const Pharmaceutical = lazy(() => import("@/pages/pharmaceutical/pharmaceutical"));
-const NotFound = lazy(() => import("@/pages/not-found/not-found"));
-const SitemapPage = lazy(() => import("@/pages/sitemap/sitemap"));
+const Gallery = lazy(() => import("@/pages/gallery"));
+const Testimonials = lazy(() => import("@/pages/testimonials"));
+const Products = lazy(() => import("@/pages/products"));
+const Pharmaceutical = lazy(() => import("@/pages/pharmaceutical"));
+const NotFound = lazy(() => import("@/pages/not-found"));
+const SitemapPage = lazy(() => import("@/pages/sitemap"));
 
 const queryClient = new QueryClient({
   defaultOptions: {

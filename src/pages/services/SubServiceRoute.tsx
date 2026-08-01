@@ -2,10 +2,10 @@ import { lazy, type ComponentType, type LazyExoticComponent } from "react";
 
 const modules = import.meta.glob<{
   default: ComponentType<{ params: { slug: string; subSlug: string } }>;
-}>("./*/*/*.tsx");
+}>("./*/*/index.tsx");
 
 const SubServiceDetail = lazy(() =>
-  import("./_shared").then((m) => ({ default: m.SubServiceDetail }))
+  import("@/components/services/serviceTemplateShared").then((m) => ({ default: m.SubServiceDetail }))
 );
 
 type SubParams = { params: { slug: string; subSlug: string } };
@@ -26,10 +26,10 @@ function getCustomPage(key: string) {
 type SubServiceRouteProps = { params: { slug: string; subSlug: string } };
 
 /**
- * Resolves /services/:slug/:subSlug to src/pages/services/:slug/:subSlug/:subSlug.tsx
+ * Resolves /services/:slug/:subSlug to src/pages/services/:slug/:subSlug/index.tsx
  */
 export function SubServiceRoute({ params }: SubServiceRouteProps) {
-  const key = `./${params.slug}/${params.subSlug}/${params.subSlug}.tsx`;
+  const key = `./${params.slug}/${params.subSlug}/index.tsx`;
   const Custom = getCustomPage(key);
 
   return Custom ? (
