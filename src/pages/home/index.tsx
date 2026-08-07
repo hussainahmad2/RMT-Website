@@ -164,12 +164,12 @@ export default function Home() {
 
               <div className={`relative flex min-h-[480px] flex-col justify-center gap-6 px-4 py-6 sm:min-h-[560px] sm:px-6 sm:py-8 md:px-8 lg:h-[calc(100svh-7rem)] lg:min-h-0 lg:flex-row lg:items-center lg:gap-8 lg:px-12 lg:pb-0 lg:pt-8 xl:px-16 ${isCompactHero ? "py-4 sm:py-5 lg:py-6 lg:gap-6" : ""}`}>
                 <div className={`mb-3 flex justify-end sm:mb-4 lg:absolute lg:right-12 lg:z-20 lg:w-auto ${isCompactHero ? "lg:top-4" : "lg:top-6"}`}>
-                  <div className="flex items-center gap-2.5 sm:gap-3 lg:gap-[calc(0.85rem*var(--hero-scale))]">
+                  <div className="flex items-center gap-3 sm:gap-4 lg:gap-[calc(1rem*var(--hero-scale))]">
                     {heroCertificationMarks.map((mark) => (
                       <div key={mark.label} className="flex items-center justify-center">
                         <span
                           aria-hidden
-                          className="block h-10 w-10 shrink-0 bg-white sm:h-12 sm:w-12 lg:h-[calc(3.8rem*var(--hero-scale))] lg:w-[calc(3.8rem*var(--hero-scale))]"
+                          className="block h-14 w-14 shrink-0 bg-white sm:h-16 sm:w-16 md:h-[4.75rem] md:w-[4.75rem] lg:h-[calc(5.5rem*var(--hero-scale))] lg:w-[calc(5.5rem*var(--hero-scale))]"
                           style={{
                             WebkitMaskImage: `url('${mark.icon}')`,
                             maskImage: `url('${mark.icon}')`,
