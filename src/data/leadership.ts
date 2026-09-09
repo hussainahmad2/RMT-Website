@@ -85,12 +85,13 @@ export const RD_WING_ELECTROMECHANICAL: LeadershipMember[] = [
 
 /** R&D Wing — Biomaterials Department */
 export const RD_WING_BIOMATERIALS: LeadershipMember[] = [
-  {
-    name: "Fatima Zahra",
-    role: "General Manager, Biomaterials & Drug Discovery",
-    image: teamImage("rd-wing/biomaterials-department", "fatima.webp"),
-    bio: "Oversees biomaterials research, drug discovery, and laboratory operations.",
-  },
+  // Temporarily hidden
+  // {
+  //   name: "Fatima Zahra",
+  //   role: "General Manager, Biomaterials & Drug Discovery",
+  //   image: teamImage("rd-wing/biomaterials-department", "fatima.webp"),
+  //   bio: "Oversees biomaterials research, drug discovery, and laboratory operations.",
+  // },
   {
     name: "Waleed Imtiaz",
     role: "Deputy Director, Biomaterials",
@@ -147,12 +148,13 @@ export const SOFTWARE_DEPARTMENT: LeadershipMember[] = [
 
 /** Production Wing */
 export const PRODUCTION_WING: LeadershipMember[] = [
-  {
-    name: "Manal Fatima",
-    role: "General Manager, Production",
-    image: teamImage("production-wing", "manal.webp"),
-    bio: "Leads production operations and ISO 13485-aligned medical device manufacturing.",
-  },
+  // Temporarily hidden
+  // {
+  //   name: "Manal Fatima",
+  //   role: "General Manager, Production",
+  //   image: teamImage("production-wing", "manal.webp"),
+  //   bio: "Leads production operations and ISO 13485-aligned medical device manufacturing.",
+  // },
   {
     name: "Umer Shahid",
     role: "Assistant Manager, Production",
@@ -175,12 +177,13 @@ export const PRODUCTION_WING: LeadershipMember[] = [
 
 /** Regulatory Department */
 export const REGULATORY_DEPARTMENT: LeadershipMember[] = [
-  {
-    name: "Nida Ali",
-    role: "Director, Regulatory Affairs",
-    image: teamImage("regulatory-department", "nida.webp"),
-    bio: "Leads regulatory affairs across FDA, CE, and international device submissions.",
-  },
+  // Temporarily hidden
+  // {
+  //   name: "Nida Ali",
+  //   role: "Director, Regulatory Affairs",
+  //   image: teamImage("regulatory-department", "nida.webp"),
+  //   bio: "Leads regulatory affairs across FDA, CE, and international device submissions.",
+  // },
   {
     name: "Ms. Fehmida Hamza",
     role: "Director, Clinical Affairs",
@@ -259,12 +262,13 @@ export const SUPPLY_CHAIN_WING: LeadershipMember[] = [
 
 /** Warehouse & Distribution Wing */
 export const WAREHOUSE_DISTRIBUTION_WING: LeadershipMember[] = [
-  {
-    name: "Azeem Iqbal Khan",
-    role: "Assistant Manager, Warehouse & Distribution",
-    image: teamImage("warehouse-distribution-wing", "azeem.jpeg"),
-    bio: "Supports warehouse operations, inventory control, and distribution coordination across RMT programmes.",
-  },
+  // Temporarily hidden
+  // {
+  //   name: "Azeem Iqbal Khan",
+  //   role: "Assistant Manager, Warehouse & Distribution",
+  //   image: teamImage("warehouse-distribution-wing", "azeem.jpeg"),
+  //   bio: "Supports warehouse operations, inventory control, and distribution coordination across RMT programmes.",
+  // },
   {
     name: "Esha Gull",
     role: "Assistant Manager, Store & Warehouse",
@@ -313,12 +317,13 @@ export const PRODUCT_DEVELOPMENT_WING: LeadershipMember[] = [
     image: teamImage("product-development-wing", "asad-abdullah.jpeg"),
     bio: "Leads product development strategy, turnkey programmes, and cross-functional delivery from concept through regulatory-ready commercialization.",
   },
-  {
-    name: "Muhammad Umar Javed",
-    role: "Assistant Manager, Product Development",
-    image: teamImage("product-development-wing", "umar.webp"),
-    bio: "Supports product development from concept through design validation and manufacturing transfer.",
-  },
+  // Temporarily hidden
+  // {
+  //   name: "Muhammad Umar Javed",
+  //   role: "Assistant Manager, Product Development",
+  //   image: teamImage("product-development-wing", "umar.webp"),
+  //   bio: "Supports product development from concept through design validation and manufacturing transfer.",
+  // },
   {
     name: "Sobia Rafique",
     role: "Assistant Manager, Product Development",
