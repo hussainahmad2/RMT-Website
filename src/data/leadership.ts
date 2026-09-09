@@ -324,12 +324,13 @@ export const PRODUCT_DEVELOPMENT_WING: LeadershipMember[] = [
   //   image: teamImage("product-development-wing", "umar.webp"),
   //   bio: "Supports product development from concept through design validation and manufacturing transfer.",
   // },
-  {
-    name: "Sobia Rafique",
-    role: "Assistant Manager, Product Development",
-    image: teamImage("product-development-wing", "sobia.jpeg"),
-    bio: "Assists product development planning, documentation, and cross-team coordination.",
-  },
+  // Temporarily hidden
+  // {
+  //   name: "Sobia Rafique",
+  //   role: "Assistant Manager, Product Development",
+  //   image: teamImage("product-development-wing", "sobia.jpeg"),
+  //   bio: "Assists product development planning, documentation, and cross-team coordination.",
+  // },
 ];
 
 /** Business Marketing Unit */
