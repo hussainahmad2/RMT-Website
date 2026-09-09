@@ -77,7 +77,7 @@ export const RD_WING_ELECTROMECHANICAL: LeadershipMember[] = [
   },
   {
     name: "Raheel Abid",
-    role: "PCB Lead",
+    role: "Automation Engineer,
     image: teamImage("rd-wing/electromechanical-department", "raheel.webp"),
     bio: "Leads PCB design, layout, and electronics development for regulated medical devices.",
   },
