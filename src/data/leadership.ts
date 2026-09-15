@@ -196,17 +196,25 @@ export const REGULATORY_DEPARTMENT: LeadershipMember[] = [
     image: teamImage("regulatory-department", "saleha-ali.webp"),
     bio: "Leads regulatory strategy and operations, aligning clinical, compliance, and market-access priorities across RMT programmes.",
   },
+  // Temporarily hidden
+  // {
+  //   name: "Ms. Sundleen Jannat",
+  //   role: "Manager, Regulatory Affairs",
+  //   image: teamImage("regulatory-department", "sundleen-jannat.webp"),
+  //   bio: "Manages regulatory submissions, technical documentation, and compliance activities across device programmes.",
+  // },
+  // Temporarily hidden
+  // {
+  //   name: "Ms. Zarqa Iqbal",
+  //   role: "Senior Research Specialist",
+  //   image: teamImage("regulatory-department", "zarqa-iqbal.webp"),
+  //   bio: "Supports regulatory research, literature review, and evidence compilation for clinical and compliance dossiers.",
+  // },
   {
-    name: "Ms. Sundleen Jannat",
-    role: "Manager, Regulatory Affairs",
-    image: teamImage("regulatory-department", "sundleen-jannat.webp"),
-    bio: "Manages regulatory submissions, technical documentation, and compliance activities across device programmes.",
-  },
-  {
-    name: "Ms. Zarqa Iqbal",
-    role: "Senior Research Specialist",
-    image: teamImage("regulatory-department", "zarqa-iqbal.webp"),
-    bio: "Supports regulatory research, literature review, and evidence compilation for clinical and compliance dossiers.",
+    name: "Ifrah Ansari",
+    role: "Senior Technical Writer",
+    image: teamImage("regulatory-department", "ifrah.webp"),
+    bio: "Leads technical writing for regulatory submissions, device documentation, and compliance-ready content across RMT programmes.",
   },
 ];
 

@@ -318,7 +318,7 @@ export default function About() {
             </h2>
           </AnimatedSection>
 
-          <TeamMemberGrid members={REGULATORY_DEPARTMENT} columns={5} />
+          <TeamMemberGrid members={REGULATORY_DEPARTMENT} />
         </div>
       </section>
 
