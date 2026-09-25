@@ -68,6 +68,8 @@ function resolveImageUrl(ogImage: string | undefined, origin: string): string {
 }
 
 export function useSEO({ title, description, keywords, ogImage, path, noIndex, jsonLd }: SEOProps) {
+  const jsonLdKey = jsonLd ? JSON.stringify(jsonLd) : "";
+
   useEffect(() => {
     const fullTitle = title === SITE_NAME ? SITE_NAME : `${title} | ${SITE_NAME}`;
     const origin = window.location.origin;
@@ -80,6 +82,7 @@ export function useSEO({ title, description, keywords, ogImage, path, noIndex, j
     setMeta("description", description);
     setMeta("robots", noIndex ? "noindex, nofollow" : "index, follow");
     if (keywords) setMeta("keywords", keywords);
+    else document.querySelector('meta[name="keywords"]')?.remove();
 
     setOG("og:title", fullTitle);
     setOG("og:description", description);
@@ -94,6 +97,6 @@ export function useSEO({ title, description, keywords, ogImage, path, noIndex, j
     setMeta("twitter:image", image);
 
     setLink("canonical", canonical);
-    setJsonLd(jsonLd);
-  }, [title, description, keywords, ogImage, path, noIndex, jsonLd]);
+    setJsonLd(jsonLdKey ? (JSON.parse(jsonLdKey) as SEOProps["jsonLd"]) : undefined);
+  }, [title, description, keywords, ogImage, path, noIndex, jsonLdKey]);
 }

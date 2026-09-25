@@ -1,3 +1,4 @@
+import { INSIGHT_ARTICLES } from "../data/insights-content";
 import { ALL_SERVICES } from "../data/services";
 import { SITE_URL } from "./site-config";
 
@@ -40,6 +41,14 @@ export function getAllSitemapEntries(): SitemapEntry[] {
         changefreq: "monthly",
       });
     }
+  }
+
+  for (const article of INSIGHT_ARTICLES) {
+    entries.push({
+      path: `/insights/${article.id}`,
+      priority: "0.6",
+      changefreq: "monthly",
+    });
   }
 
   return entries;

@@ -1799,9 +1799,9 @@ const PROVEN_PROCESS_PHASES = [
 ====================================================== */
 export function ServicesOverview() {
   useSEO({
-    title: "Our Services",
-    description: "RMT Medical Technologies provides comprehensive medical device and BMD services — product design, regulatory compliance, software & AI, automation, design & fabrication, engineering product development, quality testing, biomaterials, microbiology lab testing, and contract manufacturing.",
-    keywords: "medical device services, regulatory compliance, product design prototyping, contract manufacturing",
+    title: "Medical Device Manufacturing, R&D & Software Services",
+    description: "Device manufacturing, R&D, and software solutions, plus regulatory, quality testing, and production equipment from Revive Medical Technologies.",
+    keywords: "medical device manufacturing, medical device R&D, medical device software solutions, contract manufacturing, ISO 13485, SaMD",
     path: "/services",
   });
 
@@ -4135,7 +4135,7 @@ export function ServiceDetail({
   }, [service]);
 
   useSEO({
-    title: service ? service.name : "Service Not Found",
+    title: service ? (service.seoTitle ?? service.name) : "Service Not Found",
     description: service ? service.description : "Service not found.",
     keywords: service?.keywords,
     path,
@@ -4503,7 +4503,7 @@ export function SubServiceDetail({
   }, [service, subService]);
 
   useSEO({
-    title: subService && service ? `${subService.name} — ${service.shortName}` : "Not Found",
+    title: subService && service ? (subService.seoTitle ?? `${subService.name} — ${service.shortName}`) : "Not Found",
     description: service && subService ? buildSubServiceDescription(subService, service) : "Sub-service not found.",
     keywords: service && subService ? buildSubServiceKeywords(subService, service) : undefined,
     path,

@@ -23,7 +23,7 @@ const servicePillars = [
     title: "Engineering & Development",
     tagline: "From concept sketch to validated prototype",
     description:
-      "Mechanical design, software & AI, automation, simulation, and turnkey product development — one integrated engineering team for devices and production equipment.",
+      "Medical device R&D and software solutions, plus mechanical design, automation, and turnkey product development from one engineering team.",
     services: ["Product Development", "Software & AI", "Design & Fabrication", "Automation Services", "UI/UX Development"],
     accent: "bg-emerald-700",
     iconBg: "bg-emerald-400/20",
@@ -35,7 +35,7 @@ const servicePillars = [
     title: "Manufacturing & Scale-Up",
     tagline: "Bench to cleanroom to commercial batch",
     description:
-      "ISO-classified cleanroom production for Class I–III devices, contract manufacturing, validation, and scale-up — without handoffs between teams.",
+      "Medical device manufacturing in ISO-classified cleanrooms for Class I–III devices, including contract manufacturing, validation, and scale-up.",
     services: ["Contract Manufacturing", "Cleanroom Infrastructure", "Quality Control", "Process Validation", "Scale-Up"],
     accent: "bg-violet-700",
     iconBg: "bg-violet-400/20",

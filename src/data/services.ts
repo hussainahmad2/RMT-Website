@@ -19,6 +19,7 @@ import {
 export interface SubServiceData {
   slug: string;
   name: string;
+  seoTitle?: string;
   tagline: string;
   overview: string[];
   keyPoints: string[];
@@ -36,6 +37,7 @@ export interface ServiceData {
   capabilities: string[];
   whyRMT: { title: string; desc: string }[];
   keywords: string;
+  seoTitle?: string;
   heroImage: string;
   heroBg: string;
 }
@@ -457,7 +459,7 @@ export const ALL_SERVICES: ServiceData[] = [
     name: "Software & AI Solutions",
     shortName: "Software & AI",
     tagline: "Intelligent software powering next-generation medical devices.",
-    description: "Full-spectrum software development including AI/ML, cloud, SaMD compliance, application development, and complete software validation lifecycle for medical technology.",
+    description: "Medical device software solutions including AI/ML, cloud, SaMD compliance, application development, and complete software validation for medical technology.",
     overview: [
       "Software is increasingly at the heart of modern medical devices — from embedded firmware to cloud-connected diagnostic platforms. RMT USA's software engineering team brings healthcare-specific expertise to every development engagement.",
       "We develop software in compliance with IEC 62304 and FDA SaMD guidance, ensuring your codebase meets the rigorous documentation and verification requirements of regulatory submissions.",
@@ -531,7 +533,8 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "AI Expertise", desc: "Validated AI/ML models for diagnostics, imaging analysis, and clinical decision support." },
       { title: "Full SDLC Support", desc: "From requirements through deployment, verification, and post-market monitoring." },
     ],
-    keywords: "medical device software, AI machine learning healthcare, SaMD, IEC 62304, software as medical device",
+    keywords: "medical device software solutions, software solutions, healthcare software, medical device software, AI machine learning healthcare, SaMD, IEC 62304, software as medical device",
+    seoTitle: "Medical Device Software Solutions",
     heroImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
     heroBg: "from-indigo-950/60 to-indigo-900/40",
   },
@@ -618,7 +621,8 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Regulatory Excellence", desc: "ISO, FDA, CE, DRAP, and global compliance with structured documentation." },
       { title: "Flexible Engagement", desc: "Single workstream or full turnkey — scaled to your needs." },
     ],
-    keywords: "turnkey product development, regulatory consultancy, vascular devices, catheter development, ISO 13485, FDA CE DRAP registration, design transfer",
+    keywords: "medical device R&D, medical device product development, turnkey product development, regulatory consultancy, vascular devices, catheter development, ISO 13485, FDA CE DRAP registration, design transfer",
+    seoTitle: "Medical Device Product Development & R&D",
     heroImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
     heroBg: "from-sky-950/60 to-blue-900/40",
   },
@@ -947,9 +951,11 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "research-development-engineering",
         name: "Research & Development Engineering",
+        seoTitle: "Medical Device Research & Development",
         tagline: "Prototype engineering, experimental systems, and custom R&D projects.",
         overview: [
           "R&D engineering for experimental systems, rapid development solutions, and advanced technology integration.",
+          "Revive Medical Technologies runs medical device research and development from concept and prototype through test methods, design transfer, and manufacturing readiness — including catheters, biomaterials, and production equipment.",
         ],
         keyPoints: [
           "Prototype Engineering",
@@ -991,7 +997,8 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Cross-Disciplinary", desc: "Automation, mechanical, and embedded engineering under one team." },
       { title: "Complete Deliverables", desc: "CAD, electrical, software, and physical outputs with full documentation." },
     ],
-    keywords: "engineering product development, automation mechanical embedded, industrial design, biomedical engineering, prototype to production",
+    keywords: "medical device R&D, research and development, engineering product development, automation mechanical embedded, industrial design, biomedical engineering, prototype to production",
+    seoTitle: "Medical Device Engineering & R&D",
     heroImage: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
     heroBg: "from-indigo-950/60 to-indigo-900/40",
   },
@@ -1447,7 +1454,8 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Innovation Partnership", desc: "We collaborate from first concept through market launch." },
       { title: "Advanced Infrastructure", desc: "ISO-classified cleanrooms and specialized manufacturing lines." },
     ],
-    keywords: "medical device manufacturing, ISO 13485, DRAP, cleanroom ISO 14644, contract manufacturing, Class I II III devices, catheter manufacturing",
+    keywords: "medical device manufacturing, device manufacturing, contract manufacturing, ISO 13485, DRAP, cleanroom ISO 14644, Class I II III devices, catheter manufacturing",
+    seoTitle: "Medical Device Manufacturing",
     heroImage: "/mdm/cleanroom-1.jpeg",
     heroBg: "from-orange-950/60 to-orange-900/40",
   },

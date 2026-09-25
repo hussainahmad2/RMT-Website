@@ -14,7 +14,9 @@ import { ServicesSection } from "@/components/home/ServicesSection";
 import { WhyRmtSection } from "@/components/home/WhyRmtSection";
 import { WorldMap } from "@/components/shared/WorldMap";
 import { Button } from "@/components/ui/button";
+import { HOME_DESCRIPTION, HOME_FAQS, HOME_FOCUS_AREAS, HOME_KEYWORDS, HOME_TITLE } from "@/data/home-seo";
 import { useSEO } from "@/lib/seo";
+import { faqJsonLd, graphJsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
 import { HOME_IMAGES } from "@/data/home-images";
 import { HOME_PRODUCT_HERO_SLIDES } from "@/data/home-products";
 
@@ -86,10 +88,15 @@ export default function Home() {
   const activeHero = HOME_PRODUCT_HERO_SLIDES[heroIndex];
 
   useSEO({
-    title: "Revive Medical Technologies Inc",
-    description: "RMT designs and manufactures interventional catheters, microspheres, cleanroom medical devices, and custom production equipment — with end-to-end regulatory, development, and manufacturing services.",
-    keywords: "medical device development, regulatory compliance FDA CE, ISO 13485, contract manufacturing, pharmaceutical development",
+    title: HOME_TITLE,
+    description: HOME_DESCRIPTION,
+    keywords: HOME_KEYWORDS,
     path: "/",
+    jsonLd: graphJsonLd([
+      websiteJsonLd(),
+      organizationJsonLd(),
+      faqJsonLd(HOME_FAQS),
+    ]),
   });
 
   useEffect(() => {
@@ -194,6 +201,9 @@ export default function Home() {
                     transition={{ duration: 1.4, ease: [0.16, 1, 0.3, 1] }}
                     className={`max-w-xl lg:flex-1 lg:max-w-2xl ${isCompactHero ? "max-w-lg" : ""}`}
                   >
+                  <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-blue-200 sm:text-xs">
+                    Medical device manufacturing · R&amp;D · Software solutions
+                  </p>
                   <motion.h1
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
@@ -392,6 +402,48 @@ export default function Home() {
 
       {/* ===================== WHAT WE DO ===================== */}
       <ServicesSection />
+
+      <section className="bg-background py-16 sm:py-20 lg:py-24">
+        <div className="page-container">
+          <div className="mx-auto max-w-3xl text-center">
+            <p className="mb-3 text-sm font-semibold uppercase tracking-[0.24em] text-primary">Where teams start</p>
+            <h2 className="font-heading text-3xl font-bold leading-tight text-foreground sm:text-4xl">
+              Device manufacturing, R&amp;D, and software solutions
+            </h2>
+            <p className="mt-4 text-base leading-relaxed text-muted-foreground sm:text-lg">
+              Revive Medical Technologies is hired for medical device manufacturing, research and development, and regulated software. Start with the path that matches the project.
+            </p>
+          </div>
+
+          <div className="mt-10 grid gap-4 md:grid-cols-3">
+            {HOME_FOCUS_AREAS.map((area) => (
+              <Link
+                key={area.href}
+                href={area.href}
+                className="group flex h-full flex-col rounded-2xl border border-border bg-card p-6 shadow-sm transition-colors hover:border-primary/40"
+              >
+                <h3 className="font-heading text-xl font-bold text-foreground">{area.title}</h3>
+                <p className="mt-3 flex-1 text-sm leading-relaxed text-muted-foreground sm:text-base">{area.description}</p>
+                <span className="mt-5 inline-flex items-center gap-2 text-sm font-semibold text-primary">
+                  Explore <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                </span>
+              </Link>
+            ))}
+          </div>
+
+          <div className="mx-auto mt-14 max-w-3xl">
+            <h2 className="font-heading text-2xl font-bold text-foreground sm:text-3xl">Questions we hear before a project starts</h2>
+            <div className="mt-6 flex flex-col gap-3">
+              {HOME_FAQS.map((faq) => (
+                <details key={faq.question} className="rounded-2xl border border-border bg-card px-5 py-4">
+                  <summary className="cursor-pointer font-heading text-base font-semibold text-foreground sm:text-lg">{faq.question}</summary>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{faq.answer}</p>
+                </details>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
 
       {/* ===================== WHY RMT ===================== */}
       <WhyRmtSection />
