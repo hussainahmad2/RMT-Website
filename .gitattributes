@@ -1,1 +1,14 @@
+# Keep working copies matching GitHub (LF). No checkout conversion prompts.
+* text=auto eol=lf
+
+# Explicit text types
+*.{ts,tsx,js,jsx,mjs,cjs,json,css,html,md,txt,xml,svg,yml,yaml,toml} text eol=lf
+*.{env,example,npmrc,gitignore,gitattributes,editorconfig} text eol=lf
+
+# Binary assets — never convert
+*.{png,jpg,jpeg,gif,webp,ico,pdf,woff,woff2,ttf,eot} binary
+*.{mp4,webm,mov,mp3,wav} binary
+*.{zip,gz,7z} binary
+
+# LFS
 public/testimonials/*.mp4 filter=lfs diff=lfs merge=lfs -text
