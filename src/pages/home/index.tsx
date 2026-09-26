@@ -14,9 +14,9 @@ import { ServicesSection } from "@/components/home/ServicesSection";
 import { WhyRmtSection } from "@/components/home/WhyRmtSection";
 import { WorldMap } from "@/components/shared/WorldMap";
 import { Button } from "@/components/ui/button";
-import { HOME_DESCRIPTION, HOME_FAQS, HOME_FOCUS_AREAS, HOME_KEYWORDS, HOME_TITLE } from "@/data/home-seo";
+import { HOME_FOCUS_AREAS, HOME_FAQS } from "@/data/home-seo";
 import { useSEO } from "@/lib/seo";
-import { faqJsonLd, graphJsonLd, organizationJsonLd, websiteJsonLd } from "@/lib/structured-data";
+import { getRouteSeo } from "@/lib/route-seo";
 import { HOME_IMAGES } from "@/data/home-images";
 import { HOME_PRODUCT_HERO_SLIDES } from "@/data/home-products";
 
@@ -87,17 +87,7 @@ export default function Home() {
   const heroFrameRef = useRef<HTMLDivElement | null>(null);
   const activeHero = HOME_PRODUCT_HERO_SLIDES[heroIndex];
 
-  useSEO({
-    title: HOME_TITLE,
-    description: HOME_DESCRIPTION,
-    keywords: HOME_KEYWORDS,
-    path: "/",
-    jsonLd: graphJsonLd([
-      websiteJsonLd(),
-      organizationJsonLd(),
-      faqJsonLd(HOME_FAQS),
-    ]),
-  });
+  useSEO(getRouteSeo("/"));
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -202,7 +192,7 @@ export default function Home() {
                     className={`max-w-xl lg:flex-1 lg:max-w-2xl ${isCompactHero ? "max-w-lg" : ""}`}
                   >
                   <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-blue-200 sm:text-xs">
-                    Medical device manufacturing · R&amp;D · Software solutions
+                    ISO 13485 manufacturing · Medical device R&amp;D · SaMD software
                   </p>
                   <motion.h1
                     initial={{ opacity: 0, y: 40 }}
@@ -210,7 +200,7 @@ export default function Home() {
                     transition={{ delay: 0.15, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
                     className={`max-w-[18ch] font-heading font-bold tracking-[-0.045em] text-white sm:max-w-[17ch] md:max-w-[18ch] ${isCompactHero ? "text-[calc(1.6rem*var(--hero-scale))] leading-[0.95]" : "text-[clamp(1.25rem,4vw,2.7rem)] leading-[0.92] lg:text-[calc(2.7rem*var(--hero-scale))]"}`}
                   >
-                    Devices &amp; Machines<br />
+                    Medical Devices &amp; Machines<br />
                     Built for <span className="text-blue-300">Clinical Impact</span>
                   </motion.h1>
                   <motion.p

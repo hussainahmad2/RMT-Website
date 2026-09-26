@@ -1,6 +1,7 @@
 import { Link } from "wouter";
 import { ALL_SERVICES } from "@/data/services";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath, subServicePath } from "@/lib/service-seo";
 
 const MAIN_PAGES = [
@@ -20,12 +21,7 @@ const MAIN_PAGES = [
 ];
 
 export default function SitemapPage() {
-  useSEO({
-    title: "Sitemap",
-    description: "Complete sitemap of Revive Medical Technologies — all services, sub-services, and main pages for medical device development, regulatory compliance, and manufacturing.",
-    keywords: "RMT sitemap, medical device services, regulatory compliance services",
-    path: "/sitemap",
-  });
+  useSEO(getRouteSeo("/sitemap"));
 
   return (
     <div className="bg-background min-h-screen pt-28 pb-16">

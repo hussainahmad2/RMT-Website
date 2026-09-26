@@ -48,7 +48,9 @@ export const ALL_SERVICES: ServiceData[] = [
     name: "Regulatory Compliance",
     shortName: "Regulatory",
     tagline: "Navigate global regulatory pathways, risk management, and quality standards with confidence.",
-    description: "Expert regulatory affairs and quality assurance services covering risk management, biocompatibility evaluation, quality management system implementation, and global clearances (FDA, EU MDR, SFDA, TGA).",
+    description:
+      "FDA 510(k), EU MDR CE marking, ISO 13485 QMS, and ISO 14971 risk management for Class I–III medical devices. Global clearances with audit-ready documentation.",
+    seoTitle: "FDA 510(k) & EU MDR Regulatory Compliance",
     overview: [
       "Regulatory compliance and quality assurance are the cornerstones of successful medical device commercialization. RMT's regulatory affairs and quality experts have deep knowledge of ISO 13485, ISO 14971, ISO 10993, FDA 21 CFR, EU MDR, SFDA, and TGA requirements.",
       "We prepare comprehensive technical documentation packages, conduct gap analyses against applicable standards, and work alongside your team to build a quality management system that satisfies both regulatory requirements and operational efficiency.",
@@ -58,6 +60,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "risk-management",
         name: "Risk Management (ISO 14971)",
+        seoTitle: "ISO 14971 Medical Device Risk Management",
         tagline: "Systematic risk analysis, evaluation, control, and lifecycle verification.",
         overview: [
           "A documented Risk Management Plan defines the scope of risk management activities, roles and responsibilities, risk acceptance criteria, risk evaluation methods, and risk control measures.",
@@ -82,6 +85,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "biocompatibility-evaluation",
         name: "Biocompatibility Evaluation (ISO 10993)",
+        seoTitle: "ISO 10993 Biocompatibility Evaluation",
         tagline: "Biological safety assessment of medical devices for intended clinical body contact.",
         overview: [
           "Biocompatibility Documentation and Evaluation assess whether a medical device is biologically safe for its intended clinical use.",
@@ -102,6 +106,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "toxicological-risk-assessment",
         name: "Toxicological Risk Assessment (TRA)",
+        seoTitle: "Toxicological Risk Assessment ISO 10993-17",
         tagline: "Evaluates toxicological risks associated with device materials per ISO 10993-17.",
         overview: [
           "Conforming to ISO 10993-17:2023, toxicological risk assessment establishes allowable limits for leachable and extractable substances.",
@@ -122,6 +127,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "quality-management-system",
         name: "Quality Management System (ISO 13485)",
+        seoTitle: "ISO 13485 Quality Management System Setup",
         tagline: "Medical Device Quality Management System (QMS) development and compliance.",
         overview: [
           "Medical Device Quality Management System (QMS) implementation establishes the organizational framework necessary for compliance and quality consistency.",
@@ -143,6 +149,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "fda-compliance",
         name: "FDA Compliance",
+        seoTitle: "FDA 510(k) & PMA Compliance Consulting",
         tagline: "FDA registration, classification, 510(k), and PMA pathways.",
         overview: [
           "We support all medical device establishment requirements, including FDA Establishment Registration, Device Listing, and Device Classification.",
@@ -166,6 +173,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "eu-mdr-compliance",
         name: "EU MDR Compliance",
+        seoTitle: "EU MDR CE Marking & Technical Files",
         tagline: "CE Marking, Clinical Evaluation, and Technical Documentation per EU MDR 2017/745.",
         overview: [
           "The European Medical Device Regulation (EU MDR 2017/745) governs device approval and CE marking requirements in the European Union.",
@@ -248,6 +256,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "software-sdlc-iec-62304",
         name: "Software Lifecycle (SDLC) IEC 62304",
+        seoTitle: "IEC 62304 Software Lifecycle Documentation",
         tagline: "Compliant software development lifecycle documentation and verification for SaMD/SiMD.",
         overview: [
           "Medical device software must be developed within a structured, documented framework to ensure safety and clinical efficacy.",
@@ -353,6 +362,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "clinical-evaluation",
         name: "Clinical Evaluation",
+        seoTitle: "Medical Device Clinical Evaluation (CER)",
         tagline: "Clinical data abstraction and evidence mapping to support safety and efficacy claims.",
         overview: [
           "Demonstrating clinical safety and performance is required for all medical devices entering the market.",
@@ -450,7 +460,8 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Risk & Bio-Safety Experts", desc: "Specialized in ISO 14971 risk files and chemical characterization/TRA under ISO 10993." },
       { title: "Audit-Ready QMS Systems", desc: "From SOP development to training, we build fully integrated ISO 13485 environments." }
     ],
-    keywords: "regulatory compliance quality assurance, FDA 510k, EU MDR CE marking, ISO 13485 QMS, ISO 14971 risk management, ISO 10993 biocompatibility, SFDA MDMA, TGA ARTG, toxicological risk assessment TRA",
+    keywords:
+      "FDA 510k consulting, EU MDR compliance, CE marking medical device, ISO 13485 QMS, ISO 14971 risk management, ISO 10993 biocompatibility, SFDA MDMA, TGA ARTG",
     heroImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80",
     heroBg: "from-slate-900/70 to-slate-800/50",
   },
@@ -459,7 +470,8 @@ export const ALL_SERVICES: ServiceData[] = [
     name: "Software & AI Solutions",
     shortName: "Software & AI",
     tagline: "Intelligent software powering next-generation medical devices.",
-    description: "Medical device software solutions including AI/ML, cloud, SaMD compliance, application development, and complete software validation for medical technology.",
+    description:
+      "SaMD and medical device software development under IEC 62304 — custom clinical apps, AI/ML, cloud platforms, and software validation for regulated healthcare.",
     overview: [
       "Software is increasingly at the heart of modern medical devices — from embedded firmware to cloud-connected diagnostic platforms. RMT USA's software engineering team brings healthcare-specific expertise to every development engagement.",
       "We develop software in compliance with IEC 62304 and FDA SaMD guidance, ensuring your codebase meets the rigorous documentation and verification requirements of regulatory submissions.",
@@ -469,6 +481,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "custom-medical-software",
         name: "Custom Medical Software",
+        seoTitle: "Custom Medical Device Software Development",
         tagline: "Web, mobile, desktop, EHR, RPM, and CCM platforms built for regulated healthcare.",
         overview: [
           "RMT develops custom medical software across web, mobile, and desktop — from clinician workstations to patient-facing applications — aligned with your intended use and regulatory pathway.",
@@ -481,6 +494,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "software-compliance",
         name: "Software Compliance",
+        seoTitle: "IEC 62304 & HIPAA Medical Software Compliance",
         tagline: "HIPAA, IEC 62304, ISO 13485, ONC, ISO 27001, and FHIR/HL7 interoperability for health software.",
         overview: [
           "Regulated health software must satisfy multiple frameworks simultaneously. RMT helps you map, implement, and evidence compliance across HIPAA privacy and security, IEC 62304 software lifecycle, ISO 13485 quality management, ONC certification requirements, and ISO 27001 information security.",
@@ -493,6 +507,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "ai-solutions",
         name: "AI Solutions",
+        seoTitle: "Healthcare AI & Clinical Decision Support",
         tagline: "Custom AI apps, clinical decision support, predictive analytics, and intelligent healthcare automation.",
         overview: [
           "Artificial intelligence is reshaping diagnostics, operations, and patient engagement. RMT delivers custom AI applications, AI add-ons for existing platforms, workflow automation, and generative AI solutions with validation and explainability built in.",
@@ -533,8 +548,9 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "AI Expertise", desc: "Validated AI/ML models for diagnostics, imaging analysis, and clinical decision support." },
       { title: "Full SDLC Support", desc: "From requirements through deployment, verification, and post-market monitoring." },
     ],
-    keywords: "medical device software solutions, software solutions, healthcare software, medical device software, AI machine learning healthcare, SaMD, IEC 62304, software as medical device",
-    seoTitle: "Medical Device Software Solutions",
+    keywords:
+      "SaMD development, software as a medical device, IEC 62304, medical device software, healthcare AI, FDA SaMD, medical software validation",
+    seoTitle: "SaMD & Medical Device Software Development",
     heroImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
     heroBg: "from-indigo-950/60 to-indigo-900/40",
   },
@@ -544,12 +560,13 @@ export const ALL_SERVICES: ServiceData[] = [
     shortName: "Product Development",
     tagline: PRODUCT_DEVELOPMENT_TAGLINE,
     description:
-      "Comprehensive turnkey product development and regulatory consulting for vascular intervention and minimally invasive medical devices — end-to-end realization from concept through manufacturing transfer and registration.",
+      "End-to-end medical device product development — concept, design, prototyping, V&V, and design transfer for vascular and minimally invasive devices.",
     overview: [...PRODUCT_DEVELOPMENT_INTRO],
     subServices: [
       {
         slug: "concept-feasibility",
         name: "Concept Development & Feasibility",
+        seoTitle: "Medical Device Concept & Feasibility",
         tagline: "User needs, design input, feasibility, and commercial viability assessment.",
         overview: [
           "Structured early-stage evaluation covering user needs, market assessment, design input definition, and technical feasibility before major development investment.",
@@ -561,6 +578,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "design-engineering",
         name: "Product Design & Engineering",
+        seoTitle: "Medical Device Design & Engineering",
         tagline: "Product architecture, CAD modeling, simulations, and DFM optimization.",
         overview: [
           "Product architecture development, mechanical design, CAD modeling, and engineering analysis for vascular and minimally invasive devices.",
@@ -572,6 +590,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "prototyping-development",
         name: "Prototyping & Development",
+        seoTitle: "Medical Device Prototyping & Development",
         tagline: "Rapid prototypes, process development, packaging, and manufacturing feasibility.",
         overview: [
           "Functional prototype development with rapid prototyping, process development, and iterative design refinement.",
@@ -583,6 +602,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "verification-validation",
         name: "Verification & Validation",
+        seoTitle: "Medical Device Verification & Validation",
         tagline: "Design V&V, reliability testing, usability, packaging, and sterilization validation.",
         overview: [
           "Comprehensive verification and validation including functional and performance evaluation, reliability and durability testing, and usability assessments.",
@@ -594,6 +614,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "design-transfer-manufacturing",
         name: "Design Transfer & Manufacturing Support",
+        seoTitle: "Design Transfer to Medical Device Manufacturing",
         tagline: "Process development, production documentation, supplier qualification, and scale-up.",
         overview: [
           "Structured design transfer with manufacturing process development, production documentation, and assembly and inspection procedures.",
@@ -605,6 +626,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "regulatory-consultancy",
         name: "Regulatory & Quality Consultancy",
+        seoTitle: "Medical Device Regulatory Consultancy",
         tagline: "ISO 13485, ISO 14971, design controls, validation, and FDA/CE/DRAP registration.",
         overview: [
           "Full regulatory and quality consultancy spanning ISO 13485 implementation, ISO 14971 risk management, and design control compliance.",
@@ -621,8 +643,9 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Regulatory Excellence", desc: "ISO, FDA, CE, DRAP, and global compliance with structured documentation." },
       { title: "Flexible Engagement", desc: "Single workstream or full turnkey — scaled to your needs." },
     ],
-    keywords: "medical device R&D, medical device product development, turnkey product development, regulatory consultancy, vascular devices, catheter development, ISO 13485, FDA CE DRAP registration, design transfer",
-    seoTitle: "Medical Device Product Development & R&D",
+    keywords:
+      "medical device product development, catheter development, medical device R&D, design transfer manufacturing, vascular devices, ISO 13485, FDA CE registration",
+    seoTitle: "Medical Device Product Development & Catheter R&D",
     heroImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
     heroBg: "from-sky-950/60 to-blue-900/40",
   },
@@ -632,7 +655,8 @@ export const ALL_SERVICES: ServiceData[] = [
     shortName: "Quality Testing",
     tagline: "Hands-on testing, inspection, sign-off, and compliance support from Research and Development bench to production release.",
     description:
-      "Quality department services across QA, unified Quality Control, and software quality (SaMD/SiMD) — ISO 13485-led with advanced lab infrastructure and cross-functional collaboration.",
+      "Medical device QA, QC, and SaMD software quality under ISO 13485 — lab testing, inspection, and audit-ready release support from R&D to production.",
+    seoTitle: "Medical Device Quality Assurance & QC",
     overview: [
       "Our Quality Department delivers hands-on testing, inspection, sign-off, and compliance support across all product lines — from Research and Development bench to production release.",
       "QD leads all quality activities with department collaboration across EMD, SD, BMD, PD, PRD, and Supply Chain — ensuring traceable, audit-ready quality at every stage.",
@@ -642,6 +666,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "quality-assurance",
         name: "Quality Assurance (QA)",
+        seoTitle: "Medical Device Quality Assurance (QA)",
         tagline: "QMS development, audit readiness, CAPA, and operational quality for medical device manufacturers.",
         overview: [
           "Leverage our proven quality expertise to build, strengthen, and maintain compliant quality systems. Having successfully established and maintained an ISO 13485-certified Quality Management System and passed regulatory audits, our team supports medical device manufacturers with QMS development, design & development support, audit readiness, CAPA management, document control, trainings, product release, and continuous improvement initiatives.",
@@ -670,6 +695,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "quality-control",
         name: "Quality Control",
+        seoTitle: "Medical Device Quality Control (QC)",
         tagline: QC_TAGLINE,
         overview: [...QC_OVERVIEW],
         keyPoints: [...QC_KEY_POINTS],
@@ -678,6 +704,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "sqa-samd-simd",
         name: "Software Quality Assurance",
+        seoTitle: "SaMD Software Quality Assurance (SQA)",
         tagline: SQA_TAGLINE,
         overview: [...SQA_OVERVIEW],
         keyPoints: [...SQA_KEY_HIGHLIGHTS],
@@ -708,7 +735,8 @@ export const ALL_SERVICES: ServiceData[] = [
     shortName: "Automation",
     tagline: "Industrial automation for manufacturing, biomedical, and process-control applications.",
     description:
-      "Advanced industrial automation — PLC programming, HMI & SCADA, motion control, industrial communication, and intelligent monitoring for reliable real-time performance.",
+      "PLC, HMI/SCADA, and motion-control automation for medical device and biomedical manufacturing lines — reliable real-time process control.",
+    seoTitle: "Medical Device Industrial Automation",
     overview: [
       "We provide advanced industrial automation solutions for manufacturing, biomedical, and process-control applications. Our expertise includes PLC programming, HMI & SCADA systems, motion control, industrial communication, and intelligent monitoring systems.",
       "Our solutions are designed to improve operational efficiency, precision, safety, and scalability while ensuring reliable real-time performance in industrial environments.",
@@ -810,7 +838,8 @@ export const ALL_SERVICES: ServiceData[] = [
     shortName: "Design & Fabrication",
     tagline: "Precision mechanical systems, thermal engineering, simulation, and rapid prototyping.",
     description:
-      "Mechanical design, thermal engineering, ANSYS/COMSOL simulation, FDM & SLA 3D printing, and manufacturing support for industrial and biomedical platforms.",
+      "Medical device mechanical design, thermal engineering, simulation, and rapid prototyping (FDM/SLA) for industrial and biomedical platforms.",
+    seoTitle: "Medical Device Mechanical Design & Prototyping",
     overview: [
       "We develop precision mechanical systems for industrial machinery, biomedical devices, and automated platforms. Our engineering process focuses on structural reliability, thermal performance, manufacturability, and rapid prototyping.",
       "Using advanced CAD tools, simulations, and high-performance 3D printing technologies, we transform concepts into functional engineering solutions.",
@@ -1007,7 +1036,9 @@ export const ALL_SERVICES: ServiceData[] = [
     name: "Biomaterials & Drug Innovation",
     shortName: "BMD",
     tagline: "Turning Materials Science Into Real-World Impact — For MedTech, Pharma & Beyond",
-    description: "Testing, Validation, Scaffolds, Coatings & Custom Solutions — end-to-end biomaterials, polymer, pharmaceutical, and advanced testing services.",
+    description:
+      "Biomaterials R&D, coatings, drug delivery, and ISO 10993-aligned testing — from scaffolds and polymers to validated medical materials.",
+    seoTitle: "Biomaterials & Drug Delivery R&D",
     overview: [
       "At the intersection of biomaterials innovation, polymer engineering, pharmaceutical materials development, and advanced testing & validation, RMT delivers end-to-end research, development, and industrialization services.",
       "Our global partners include life science companies, biotech startups, medical device manufacturers, pharmaceutical innovators, and academic research institutions seeking cutting-edge solutions that translate efficiently from laboratory discovery to commercial deployment.",
@@ -1222,7 +1253,8 @@ export const ALL_SERVICES: ServiceData[] = [
     shortName: "Microbiology Lab",
     tagline: "Microbiology testing for product quality, safety, and GMP compliance / ISO 13485 alignment.",
     description:
-      "Microbiology laboratory testing — sterility testing, bacterial endotoxin testing (BET), microbial limit testing, and specific pathogen testing for pharmaceutical and medical device products.",
+      "Medical device and pharma microbiology testing — sterility, bacterial endotoxin (BET), microbial limits, and specific pathogen panels with GMP / ISO 13485-aligned reporting.",
+    seoTitle: "Medical Device Sterility & Endotoxin Testing",
     overview: [
       "The Microbiology Department is committed to ensuring product quality, safety, and compliance with GMP and ISO 13485 standards through reliable microbiological testing and contamination control practices.",
       "Our microbiology laboratory supports pharmaceutical, medical device, and biological products with documented sterility, endotoxin, microbial limit, and specified pathogen testing programmes.",
@@ -1232,6 +1264,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "sterility-testing",
         name: "Sterility Testing",
+        seoTitle: "Medical Device Sterility Testing",
         tagline: "Membrane filtration, direct inoculation, flush, immersion, and rapid sterility methods.",
         overview: [
           "Sterility testing confirms that pharmaceutical, medical, and biological products are free from viable microorganisms under defined incubation conditions.",
@@ -1249,6 +1282,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "bacterial-endotoxin-testing",
         name: "Bacterial Endotoxin Testing (BET)",
+        seoTitle: "Bacterial Endotoxin Testing (BET / LAL)",
         tagline: "Gel clot, turbidimetric, chromogenic, and recombinant Factor C endotoxin methods.",
         overview: [
           "Bacterial endotoxin testing detects pyrogenic lipopolysaccharides in products and raw materials, supporting patient safety and pharmacopeial compliance.",
@@ -1267,6 +1301,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "microbial-limit-testing",
         name: "Microbial Limit Test",
+        seoTitle: "Microbial Limit Testing for Medical Devices",
         tagline: "Microbial enumeration and limit testing for non-sterile and release testing programmes.",
         overview: [
           "Microbial limit testing evaluates the bioburden of pharmaceutical, medical, and biological products against acceptance criteria for non-sterile products and in-process controls.",
@@ -1286,6 +1321,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "specific-pathogen-testing",
         name: "Specific Pathogen Testing",
+        seoTitle: "Specific Pathogen Testing for Pharma & Devices",
         tagline: "Detection of specified harmful microorganisms for product safety and compliance.",
         overview: [
           "A microbiological test performed to detect the presence or absence of specified harmful microorganisms in pharmaceutical, medical, or biological products to ensure product safety and compliance.",
@@ -1317,7 +1353,8 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Broad Method Portfolio", desc: "Classical and rapid sterility, multiple BET platforms, and specified pathogen panels." },
       { title: "Regulatory-Ready Data", desc: "Traceable protocols, raw data, and reports supporting batch release and submissions." },
     ],
-    keywords: "microbiology laboratory testing, microbiology testing, sterility test, bacterial endotoxin BET, microbial limit test, specific pathogen, GMP ISO 13485",
+    keywords:
+      "sterility testing medical device, bacterial endotoxin testing, BET LAL, microbial limit test, specific pathogen testing, microbiology laboratory ISO 13485",
     heroImage: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80",
     heroBg: "from-cyan-950/60 to-cyan-900/40",
   },
@@ -1327,7 +1364,8 @@ export const ALL_SERVICES: ServiceData[] = [
     shortName: "Manufacturing",
     tagline: "From cleanroom to commercialization — medical devices engineered to save lives, at scale.",
     description:
-      "End-to-end development and manufacturing of high-performance medical devices — ISO 13485 quality systems, DRAP-registered operations, ISO-classified cleanrooms, and full lifecycle support from concept to market.",
+      "ISO 13485 medical device contract manufacturing in ISO Class 5–8 cleanrooms. Class I–III devices, design transfer, and pilot-to-commercial scale-up.",
+    seoTitle: "ISO 13485 Medical Device Contract Manufacturing",
     overview: [
       "At Revive Medical Technologies, we are more than a manufacturer — we are a strategic partner for medical innovators. We specialize in end-to-end development and manufacturing of high-performance medical devices engineered to meet the world's most rigorous international standards.",
       "From concept validation and pilot production through large-scale commercialization and continuous process optimization, our multidisciplinary teams deliver solutions that are reliable, scalable, and built for the real world of healthcare.",
@@ -1337,6 +1375,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "quality-compliance",
         name: "Quality & Compliance",
+        seoTitle: "ISO 13485 Manufacturing Quality & Compliance",
         tagline: "ISO 13485, DRAP registration, and built-in quality at every stage.",
         overview: [
           "Our quality systems are the foundation of everything we build. Every device leaving our facility is backed by documented, validated, and auditable processes.",
@@ -1356,6 +1395,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "manufacturing-capabilities",
         name: "Manufacturing Capabilities",
+        seoTitle: "Class I–III Medical Device Manufacturing",
         tagline: "Class I–III devices, active systems, contract manufacturing, and pilot-to-scale production.",
         overview: [
           "From low-risk Class I devices to life-sustaining Class III technologies, we maintain the infrastructure, expertise, and regulatory alignment to manufacture the full spectrum of medical devices.",
@@ -1373,6 +1413,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "cleanroom-infrastructure",
         name: "Cleanroom Infrastructure",
+        seoTitle: "ISO Class 5–8 Medical Device Cleanrooms",
         tagline: "ISO Class 05, 07, and 08 controlled environments with full environmental control.",
         overview: [
           "Our controlled manufacturing environments are purpose-built for sensitive, high-precision medical device production — delivering the contamination control and environmental integrity your product demands.",
@@ -1454,8 +1495,8 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Innovation Partnership", desc: "We collaborate from first concept through market launch." },
       { title: "Advanced Infrastructure", desc: "ISO-classified cleanrooms and specialized manufacturing lines." },
     ],
-    keywords: "medical device manufacturing, device manufacturing, contract manufacturing, ISO 13485, DRAP, cleanroom ISO 14644, Class I II III devices, catheter manufacturing",
-    seoTitle: "Medical Device Manufacturing",
+    keywords:
+      "ISO 13485 contract manufacturing, medical device contract manufacturing, cleanroom manufacturing, Class I II III devices, catheter manufacturing, Minnesota medical device manufacturer",
     heroImage: "/mdm/cleanroom-1.jpeg",
     heroBg: "from-orange-950/60 to-orange-900/40",
   },
@@ -1465,7 +1506,8 @@ export const ALL_SERVICES: ServiceData[] = [
     shortName: "Equipment Manufacturing",
     tagline: "Custom-engineered production equipment. Validated. Precision-built. Ready for the cleanroom.",
     description:
-      "Purpose-built manufacturing equipment for the medical device industry — custom design, production lines, cleanroom-compatible builds, IQ/OQ/PQ qualification, automation, and ongoing support.",
+      "Custom medical device production equipment — catheter forming, balloon bonding, cleanroom-compatible lines, and IQ/OQ/PQ qualification ready for regulated manufacturing.",
+    seoTitle: "Medical Device Production Equipment Engineering",
     overview: [
       "The precision, reliability, and regulatory compliance of a medical device begins long before the device itself is assembled. It begins with the equipment that makes it. At Revive Medical Technologies, we design, develop, and deliver purpose-built manufacturing equipment engineered from the ground up to perform in cleanroom environments, meet validation requirements, and sustain commercial-scale production.",
       "From concept and feasibility through fabrication, qualification, and ongoing support, our equipment engineering teams work at the intersection of mechanical precision, process science, and regulatory compliance — so your production lines are ready from day one.",
@@ -1474,6 +1516,7 @@ export const ALL_SERVICES: ServiceData[] = [
       {
         slug: "custom-equipment-design",
         name: "Custom Equipment Design",
+        seoTitle: "Custom Medical Device Production Equipment",
         tagline: "Bespoke machinery engineered for your specific device and process requirements.",
         overview: [
           "Our engineering team designs bespoke manufacturing equipment tailored to your product architecture, process requirements, material characteristics, and regulatory environment.",
@@ -1603,7 +1646,8 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Deep Process Knowledge", desc: "Hands-on expertise in catheter fabrication, balloon forming, sterile packaging, and fine assembly." },
       { title: "Embedded Partnership Model", desc: "From design reviews to FAT to ongoing maintenance — accountable throughout the equipment lifecycle." },
     ],
-    keywords: "medical device equipment manufacturing, production equipment engineering, IQ OQ PQ, cleanroom equipment, catheter forming equipment, balloon bonding, process automation, ISO 13485 equipment qualification",
+    keywords:
+      "medical device production equipment, catheter manufacturing equipment, balloon forming equipment, IQ OQ PQ qualification, cleanroom equipment, process automation medical device",
     heroImage: "/mdm/facility-2.jpeg",
     heroBg: "from-slate-950/60 to-sky-950/40",
   },

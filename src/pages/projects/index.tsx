@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 
 const CircuitBg = () => (
   <svg viewBox="0 0 200 200" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2">
@@ -53,12 +54,7 @@ const CATEGORIES: Category[] = ["All", "Medical Devices", "Regulatory", "Softwar
 export default function Projects() {
   const [filter, setFilter] = useState<Category>("All");
   const [selected, setSelected] = useState<Project | null>(null);
-  useSEO({
-    title: "Projects",
-    description: "RMT Medical Technologies project portfolio — medical device development, regulatory compliance, software, and manufacturing case studies across 30+ countries.",
-    keywords: "medical device projects portfolio, regulatory compliance case studies, ISO 13485 projects",
-    path: "/projects",
-  });
+  useSEO(getRouteSeo("/projects"));
 
   const filtered = filter === "All" ? projects : projects.filter((p) => p.category === filter);
 

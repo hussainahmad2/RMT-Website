@@ -1,10 +1,10 @@
-export const HOME_TITLE = "Medical Device Manufacturing, R&D & Software";
+export const HOME_TITLE = "ISO 13485 Medical Device Manufacturing & R&D";
 
 export const HOME_DESCRIPTION =
-  "Medical device manufacturing, R&D, and software solutions. ISO 13485 cleanroom production, device development, and SaMD from Revive Medical Technologies.";
+  "ISO 13485 contract manufacturing, medical device R&D, and SaMD software from Revive Medical Technologies. Cleanroom production in Minnesota and Pakistan — Class I–III devices.";
 
 export const HOME_KEYWORDS =
-  "medical device manufacturing, device manufacturing, medical device R&D, research and development, software solutions, medical device software, contract manufacturing, ISO 13485, SaMD, cleanroom manufacturing";
+  "medical device manufacturing, ISO 13485 contract manufacturing, medical device R&D, SaMD, medical device software, cleanroom manufacturing, Minnesota medical device manufacturer, Revive Medical Technologies";
 
 export const HOME_FOCUS_AREAS = [
   {
@@ -52,5 +52,10 @@ export const HOME_FAQS = [
     question: "Where is Revive Medical Technologies located?",
     answer:
       "Headquarters are in Sartell, Minnesota, United States, with manufacturing and R&D operations in Rawat Industrial Estate, Islamabad, Pakistan.",
+  },
+  {
+    question: "Is Revive Medical Technologies ISO 13485 certified?",
+    answer:
+      "Yes. Manufacturing and quality operations follow an ISO 13485 quality management system, with ISO-classified cleanrooms and documented process validation for medical device production.",
   },
 ] as const;

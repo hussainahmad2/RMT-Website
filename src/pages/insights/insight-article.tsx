@@ -4,6 +4,7 @@ import { ArrowLeft, Calendar, Clock, BookOpen, ExternalLink } from "lucide-react
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import { INSIGHT_ARTICLES, INSIGHT_CATEGORY_COLORS } from "@/data/insights-content";
 import { getInsightPostDetail } from "@/data/insights-posts";
 
@@ -64,12 +65,11 @@ export default function InsightArticlePage({ params }: InsightArticlePageProps) 
   const article = INSIGHT_ARTICLES.find((item) => item.id === params.slug);
   const detail = getInsightPostDetail(params.slug);
   const tags = uniqueTags((detail?.tags && detail.tags.length > 0 ? detail.tags : article?.tags ?? []));
+  const routeSeo = getRouteSeo(`/insights/${params.slug}`);
 
   useSEO({
-    title: article ? article.title : "Insight Article",
-    description: article?.excerpt ?? "Insight article",
-    path: `/insights/${params.slug}`,
-    ogImage: detail?.heroImage,
+    ...routeSeo,
+    ogImage: detail?.heroImage ?? routeSeo.ogImage,
   });
 
   if (!article || !detail) {

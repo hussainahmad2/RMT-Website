@@ -6,6 +6,7 @@ import { Button } from "@/components/ui/button";
 import { ArrowRight, Users, TrendingUp, Shield, Heart, Briefcase } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import { sendFormEmail, getFriendlyFormError } from "@/lib/email";
 import { FileUploadField } from "@/components/shared/FileUploadField";
 
@@ -42,12 +43,7 @@ export default function Careers() {
   const [fileError, setFileError] = useState<string | null>(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
-  useSEO({
-    title: "Careers",
-    description: "Join RMT USA's growing team of medical device experts. Submit a speculative application for regulatory, engineering, software, and quality roles.",
-    keywords: "medical device careers, regulatory affairs jobs, medical device engineer jobs, SaMD software engineer, quality engineer medical device",
-    path: "/careers",
-  });
+  useSEO(getRouteSeo("/careers"));
 
   const onSubmit = async (data: FormData) => {
     setSubmitError(null);

@@ -7,6 +7,7 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import { cn } from "@/lib/utils";
 import {
   PRODUCT_CATEGORIES,
@@ -163,12 +164,7 @@ function CategorySection({ category, reverse = false }: { category: ProductCateg
 export default function Products() {
   const [activeCategory, setActiveCategory] = useState<string>("all");
 
-  useSEO({
-    title: "Our Products",
-    description: "Explore RMT Medical Technologies product portfolio — medical devices, biomaterials, software products, and engineering solutions.",
-    keywords: "RMT products, medical devices, biomaterials, LegendEHR, SaMD software",
-    path: "/products",
-  });
+  useSEO(getRouteSeo("/products"));
 
   const visibleCategories =
     activeCategory === "all"

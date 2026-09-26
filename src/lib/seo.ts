@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { DEFAULT_OG_IMAGE, SITE_NAME } from "@/lib/site-config";
+import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "@/lib/site-config";
 
 interface SEOProps {
   title: string;
@@ -43,28 +43,38 @@ function setLink(rel: string, href: string) {
 }
 
 function setJsonLd(data?: Record<string, unknown> | Record<string, unknown>[]) {
-  const existing = document.getElementById("json-ld-seo");
+  const existing = document.getElementById("seo-jsonld");
   if (!data) {
     existing?.remove();
+    document.getElementById("json-ld-seo")?.remove();
     return;
   }
+
+  document.getElementById("json-ld-seo")?.remove();
 
   const payload = Array.isArray(data) ? data : [data];
   let el = existing as HTMLScriptElement | null;
   if (!el) {
     el = document.createElement("script");
-    el.id = "json-ld-seo";
+    el.id = "seo-jsonld";
     el.type = "application/ld+json";
     document.head.appendChild(el);
   }
   el.textContent = JSON.stringify(payload.length === 1 ? payload[0] : payload);
 }
 
-function resolveImageUrl(ogImage: string | undefined, origin: string): string {
+function resolveImageUrl(ogImage: string | undefined): string {
   if (!ogImage) return DEFAULT_OG_IMAGE;
   if (ogImage.startsWith("http")) return ogImage;
   const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-  return `${origin}${base}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
+  return `${SITE_URL}${base}${ogImage.startsWith("/") ? ogImage : `/${ogImage}`}`;
+}
+
+function toCanonical(path: string): string {
+  const base = import.meta.env.BASE_URL.replace(/\/$/, "");
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  if (normalized === "/") return `${SITE_URL}${base}/`;
+  return `${SITE_URL}${base}${normalized}`;
 }
 
 export function useSEO({ title, description, keywords, ogImage, path, noIndex, jsonLd }: SEOProps) {
@@ -72,11 +82,9 @@ export function useSEO({ title, description, keywords, ogImage, path, noIndex, j
 
   useEffect(() => {
     const fullTitle = title === SITE_NAME ? SITE_NAME : `${title} | ${SITE_NAME}`;
-    const origin = window.location.origin;
-    const base = import.meta.env.BASE_URL.replace(/\/$/, "");
-    const canonicalPath = path ?? `${window.location.pathname}${window.location.search}`;
-    const canonical = `${origin}${base}${canonicalPath.startsWith("/") ? canonicalPath : `/${canonicalPath}`}`;
-    const image = resolveImageUrl(ogImage, origin);
+    const canonicalPath = path ?? window.location.pathname;
+    const canonical = toCanonical(canonicalPath.split("?")[0] || "/");
+    const image = resolveImageUrl(ogImage);
 
     document.title = fullTitle;
     setMeta("description", description);

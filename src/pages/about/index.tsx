@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import {
   C_LEVEL_LEADERSHIP,
   BUSINESS_MARKETING_UNIT,
@@ -74,12 +75,7 @@ const RPM_CARD_IMAGE =
   "https://www.mygreatlearning.com/blog/wp-content/uploads/2021/12/iStock-1189916627.jpg";
 
 export default function About() {
-  useSEO({
-    title: "About Us",
-    description: "RMT Medical Technologies is a leading medical device and technology company providing comprehensive end-to-end solutions from product design through regulatory approval and contract manufacturing. Founded 2008, serving 30+ countries.",
-    keywords: "RMT Medical Technologies about, medical device company, regulatory compliance experts, ISO 13485 certified",
-    path: "/about",
-  });
+  useSEO(getRouteSeo("/about"));
 
   return (
     <div className="bg-background min-h-screen pt-20">

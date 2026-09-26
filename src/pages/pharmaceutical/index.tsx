@@ -11,6 +11,7 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import {
   PHARMA_EXPERTISE,
   PHARMA_HERO_IMAGE,
@@ -26,14 +27,7 @@ export default function Pharmaceutical() {
   const activeArea = PHARMA_EXPERTISE.find((e) => e.id === activeExpertise)!;
   const ActiveIcon = activeArea.icon;
 
-  useSEO({
-    title: "Pharmaceutical Domain",
-    description:
-      "End-to-end pharmaceutical development services — from pre-formulation and formulation development to scale-up, regulatory submission, technology transfer, and commercial manufacturing support.",
-    keywords:
-      "pharmaceutical development, formulation development, CMC support, QbD, analytical method development, technology transfer, CTD dossier, generic development, 505(b)(2)",
-    path: "/pharmaceutical",
-  });
+  useSEO(getRouteSeo("/pharmaceutical"));
 
   return (
     <div className="bg-background min-h-screen">

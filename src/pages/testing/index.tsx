@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 
 const StethoBg = () => (
   <svg viewBox="0 0 200 200" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="3.5">
@@ -116,12 +117,7 @@ export default function Testing() {
   const [active, setActive] = useState<string>("microbiology");
   const activeCategory = testCategories.find((c) => c.id === active)!;
 
-  useSEO({
-    title: "Testing Services",
-    description: "Comprehensive medical device testing services — microbiology, physical, chemical, electrical safety (IEC 60601), biocompatibility (ISO 10993), and packaging integrity testing.",
-    keywords: "medical device testing, microbiology testing, IEC 60601, ISO 10993 biocompatibility, sterility testing, electrical safety testing",
-    path: "/testing",
-  });
+  useSEO(getRouteSeo("/testing"));
 
   return (
     <div className="bg-background min-h-screen pt-20">

@@ -22,6 +22,7 @@ import { PageSection, SectionHeading as PageSectionHeading } from "@/components/
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PageHero } from "@/components/shared/PageHero";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import {
   buildBreadcrumbJsonLd,
   buildServiceJsonLd,
@@ -1798,12 +1799,7 @@ const PROVEN_PROCESS_PHASES = [
    SERVICES OVERVIEW
 ====================================================== */
 export function ServicesOverview() {
-  useSEO({
-    title: "Medical Device Manufacturing, R&D & Software Services",
-    description: "Device manufacturing, R&D, and software solutions, plus regulatory, quality testing, and production equipment from Revive Medical Technologies.",
-    keywords: "medical device manufacturing, medical device R&D, medical device software solutions, contract manufacturing, ISO 13485, SaMD",
-    path: "/services",
-  });
+  useSEO(getRouteSeo("/services"));
 
   return (
     <div className="bg-background min-h-screen pt-20">

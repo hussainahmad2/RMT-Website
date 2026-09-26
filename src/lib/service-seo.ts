@@ -40,7 +40,7 @@ export function buildServiceJsonLd(service: ServiceData) {
   return {
     "@context": "https://schema.org",
     "@type": "Service",
-    name: service.name,
+    name: service.seoTitle ?? service.name,
     description: service.description,
     url,
     provider: ORGANIZATION_PROVIDER,
@@ -54,7 +54,7 @@ export function buildServiceJsonLd(service: ServiceData) {
         position: index + 1,
         itemOffered: {
           "@type": "Service",
-          name: sub.name,
+          name: sub.seoTitle ?? sub.name,
           description: sub.tagline,
           url: absoluteUrl(subServicePath(service.slug, sub.slug)),
         },

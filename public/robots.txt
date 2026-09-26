@@ -1,4 +1,5 @@
 User-agent: *
 Allow: /
 
+# Canonical host: https://rmt-usa.com (www redirects to apex)
 Sitemap: https://rmt-usa.com/sitemap.xml

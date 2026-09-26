@@ -2,7 +2,7 @@ import { ALL_SERVICES } from "../data/services";
 import { INSIGHT_ARTICLES } from "../data/insights-content";
 import { HOME_DESCRIPTION, HOME_FAQS, HOME_KEYWORDS, HOME_TITLE } from "../data/home-seo";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "./site-config";
-import { faqJsonLd, graphJsonLd, organizationJsonLd, websiteJsonLd } from "./structured-data";
+import { faqJsonLd, graphJsonLd, localBusinessJsonLd, organizationJsonLd, websiteJsonLd } from "./structured-data";
 import { getAllSitemapEntries } from "./sitemap-urls";
 
 export interface RouteSeo {
@@ -27,17 +27,18 @@ const STATIC_SEO: Record<string, StaticSeo> = {
     keywords: HOME_KEYWORDS,
   },
   "/about": {
-    title: "About Our Medical Device Company",
+    title: "About Revive Medical Technologies",
     description:
-      "Revive Medical Technologies designs, develops, and manufactures medical devices, with R&D, software solutions, and ISO 13485 operations in the US and Pakistan.",
-    keywords: "medical device company, medical device manufacturing, medical device R&D, ISO 13485, Revive Medical Technologies",
+      "ISO 13485 medical device company in Sartell, Minnesota — contract manufacturing, R&D, SaMD software, and regulatory support with operations in the US and Pakistan.",
+    keywords:
+      "Revive Medical Technologies, medical device company Minnesota, ISO 13485 manufacturer, medical device R&D, RMT USA",
   },
   "/services": {
-    title: "Medical Device Manufacturing, R&D & Software Services",
+    title: "Medical Device Services: Manufacturing, R&D & Software",
     description:
-      "Device manufacturing, R&D, and software solutions, plus regulatory, quality testing, and production equipment from Revive Medical Technologies.",
+      "Browse ISO 13485 manufacturing, product development, SaMD software, FDA/EU MDR regulatory, testing, and production equipment services from RMT.",
     keywords:
-      "medical device manufacturing, medical device R&D, medical device software solutions, contract manufacturing, ISO 13485, SaMD",
+      "medical device services, contract manufacturing, medical device R&D, SaMD development, FDA regulatory consulting, ISO 13485",
   },
   "/pharmaceutical": {
     title: "Pharmaceutical Development Services",
@@ -48,8 +49,8 @@ const STATIC_SEO: Record<string, StaticSeo> = {
   "/products": {
     title: "Medical Devices & Production Equipment",
     description:
-      "Interventional devices, biomaterials, and custom production equipment designed and manufactured by Revive Medical Technologies.",
-    keywords: "medical devices, catheter, biomaterials, production equipment, medical device manufacturing",
+      "Interventional catheters, biomaterials, and custom production equipment designed and manufactured under ISO 13485 by Revive Medical Technologies.",
+    keywords: "medical devices, catheter manufacturing, biomaterials, production equipment, medical device manufacturing",
   },
   "/testimonials": {
     title: "Client Testimonials",
@@ -58,15 +59,15 @@ const STATIC_SEO: Record<string, StaticSeo> = {
     keywords: "medical device testimonials, RMT reviews, contract manufacturing clients",
   },
   "/projects": {
-    title: "Medical Device Projects",
+    title: "Medical Device Projects & Case Studies",
     description:
-      "Project examples spanning medical device development, regulatory submissions, software, and manufacturing across global markets.",
-    keywords: "medical device projects, device development portfolio, manufacturing case studies",
+      "Project examples spanning medical device development, regulatory submissions, SaMD software, and cleanroom manufacturing across global markets.",
+    keywords: "medical device projects, device development portfolio, manufacturing case studies, 510k projects",
   },
   "/testing": {
     title: "Medical Device Testing Services",
     description:
-      "Medical device testing including microbiology, electrical safety, biocompatibility, packaging integrity, and bench verification.",
+      "Medical device testing including microbiology, sterility, endotoxin, biocompatibility, electrical safety, packaging integrity, and bench verification.",
     keywords: "medical device testing, ISO 10993, IEC 60601, sterility testing, biocompatibility testing",
   },
   "/training": {
@@ -76,28 +77,29 @@ const STATIC_SEO: Record<string, StaticSeo> = {
     keywords: "medical device training, ISO 13485 workshop, ISO 14971 training, GMP training",
   },
   "/insights": {
-    title: "Medical Device Insights",
+    title: "Medical Device Insights & Guides",
     description:
-      "Articles on medical device manufacturing, R&D, regulatory pathways, and healthcare software from Revive Medical Technologies.",
+      "Practical articles on medical device manufacturing, FDA 510(k), SaMD, R&D, and healthcare software from Revive Medical Technologies.",
     keywords: "medical device insights, FDA 510k, SaMD, medical device R&D, manufacturing articles",
   },
   "/gallery": {
     title: "Facilities & Laboratory Gallery",
     description:
-      "Photos of Revive Medical Technologies laboratories, manufacturing space, and the teams behind device R&D and production.",
-    keywords: "medical device laboratory, manufacturing facility, RMT gallery",
+      "Photos of Revive Medical Technologies laboratories, ISO cleanrooms, and manufacturing space in the US and Pakistan.",
+    keywords: "medical device laboratory, manufacturing facility, ISO cleanroom, RMT gallery",
   },
   "/careers": {
     title: "Medical Device Careers",
     description:
-      "Careers in medical device manufacturing, R&D, quality, regulatory, and software at Revive Medical Technologies.",
-    keywords: "medical device jobs, R&D careers, SaMD engineer, quality engineer medical device",
+      "Careers in medical device manufacturing, R&D, quality, regulatory, and SaMD software at Revive Medical Technologies.",
+    keywords: "medical device jobs, R&D careers Minnesota, SaMD engineer, quality engineer medical device",
   },
   "/contact": {
     title: "Contact a Medical Device Manufacturer",
     description:
-      "Talk with Revive Medical Technologies about device manufacturing, R&D, software solutions, testing, and regulatory support.",
-    keywords: "contact medical device manufacturer, medical device R&D inquiry, software solutions quote",
+      "Request a quote for ISO 13485 manufacturing, device R&D, SaMD software, testing, or FDA/EU MDR support. Sartell, MN HQ — info@rmt-usa.com.",
+    keywords:
+      "contact medical device manufacturer, medical device R&D inquiry, contract manufacturing quote, Minnesota",
   },
   "/sitemap": {
     title: "Sitemap",
@@ -253,7 +255,12 @@ export function getRouteSeo(path: string): RouteSeo {
 
   const staticSeo = STATIC_SEO[normalized];
   if (staticSeo) {
-    const extra = normalized === "/" ? [faqJsonLd(HOME_FAQS)] : [];
+    const extra =
+      normalized === "/"
+        ? [faqJsonLd(HOME_FAQS)]
+        : normalized === "/contact"
+          ? [localBusinessJsonLd()]
+          : [];
     return {
       path: normalized,
       ...staticSeo,

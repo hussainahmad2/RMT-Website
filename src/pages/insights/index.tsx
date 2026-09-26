@@ -6,6 +6,7 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import {
   INSIGHT_ARTICLES,
   INSIGHT_CATEGORIES,
@@ -45,14 +46,7 @@ export default function Insights() {
     window.sessionStorage.setItem(INSIGHTS_SCROLL_KEY, String(window.scrollY));
   };
 
-  useSEO({
-    title: "Insights",
-    description:
-      "Expert insights, articles, and updates from Revive Medical Technologies — medical devices, regulatory compliance, software & AI, manufacturing, and research.",
-    keywords:
-      "RMT insights, medical device news, regulatory updates, healthtech software, FDA 510k, RPM digital health",
-    path: "/insights",
-  });
+  useSEO(getRouteSeo("/insights"));
 
   const featured = INSIGHT_ARTICLES.find((a) => a.featured)!;
   const featuredImage = articleImage(featured.id, featured.image);

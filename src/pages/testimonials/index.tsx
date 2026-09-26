@@ -7,6 +7,7 @@ import {
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import {
   TESTIMONIAL_VIDEOS,
   TESTIMONIALS_HERO_IMAGE,
@@ -195,12 +196,7 @@ export default function Testimonials() {
 
   const current = TESTIMONIAL_VIDEOS[active];
 
-  useSEO({
-    title: "Client Testimonials",
-    description: "Video testimonials from RMT Medical Technologies clients — partnership, quality, and results across medical device and software development.",
-    keywords: "RMT testimonials, client reviews, medical technology partners",
-    path: "/testimonials",
-  });
+  useSEO(getRouteSeo("/testimonials"));
 
   useEffect(() => {
     const t = setInterval(() => setHeroIdx((i) => (i + 1) % HERO_IMAGES.length), 5000);

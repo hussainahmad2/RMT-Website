@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 
 const DnaBg = () => (
   <svg viewBox="0 0 100 200" className="w-full h-full" fill="none" stroke="currentColor" strokeWidth="2.5">
@@ -111,12 +112,7 @@ export default function Training() {
   const [active, setActive] = useState<string>("regulatory");
   const activeTrack = tracks.find((t) => t.id === active)!;
 
-  useSEO({
-    title: "Training & Workshops",
-    description: "Professional medical device training and workshops — regulatory compliance (ISO 13485, ISO 14971), engineering (FMEA, design control), research entrepreneurship, and laboratory skills.",
-    keywords: "medical device training, ISO 13485 training, regulatory compliance workshop, FMEA training, GMP training, HPLC workshop",
-    path: "/training",
-  });
+  useSEO(getRouteSeo("/training"));
 
   return (
     <div className="bg-background min-h-screen pt-20">

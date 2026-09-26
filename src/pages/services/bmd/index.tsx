@@ -21,7 +21,7 @@ export default function BmdServicePage({ params }: PageProps) {
   );
 
   useSEO({
-    title: SERVICE.name,
+    title: SERVICE.seoTitle ?? SERVICE.name,
     description: SERVICE.description,
     keywords: SERVICE.keywords,
     path: servicePath(SERVICE.slug),

@@ -5,6 +5,7 @@ import { Button } from "@/components/ui/button";
 import { MapPin, Mail, Clock, ArrowRight, CheckCircle } from "lucide-react";
 import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import { ALL_SERVICES } from "@/data/services";
 import { LogoSpinner } from "@/components/shared/LogoSpinner";
 import { sendFormEmail, getFriendlyFormError } from "@/lib/email";
@@ -39,12 +40,7 @@ export default function Contact() {
   const [submitError, setSubmitError] = useState<string | null>(null);
   const { register, handleSubmit, reset, formState: { errors } } = useForm<FormData>();
 
-  useSEO({
-    title: "Contact Us",
-    description: "Contact RMT Medical Technologies for medical device development, regulatory compliance, software & AI, quality testing, and contract manufacturing enquiries. Offices in USA and Pakistan.",
-    keywords: "contact RMT medical technologies, medical device enquiry, regulatory compliance consultation",
-    path: "/contact",
-  });
+  useSEO(getRouteSeo("/contact"));
 
   const onSubmit = async (data: FormData) => {
     setSubmitError(null);

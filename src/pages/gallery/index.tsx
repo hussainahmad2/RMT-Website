@@ -4,6 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { PageHero } from "@/components/shared/PageHero";
 import { useSEO } from "@/lib/seo";
+import { getRouteSeo } from "@/lib/route-seo";
 import { INSIGHT_GALLERY_ITEMS } from "@/data/insight-gallery";
 
 interface GalleryItem {
@@ -56,12 +57,7 @@ export default function Gallery() {
   const [filter, setFilter] = useState("All");
   const [lightbox, setLightbox] = useState<GalleryItem | null>(null);
 
-  useSEO({
-    title: "Gallery",
-    description: "A visual journey through RMT Medical Technologies — our laboratories, team, manufacturing facilities, and company milestones.",
-    keywords: "RMT Medical Technologies gallery, medical device laboratory photos, company memories",
-    path: "/gallery",
-  });
+  useSEO(getRouteSeo("/gallery"));
 
   const filtered = filter === "All" ? items : items.filter((i) => i.category === filter);
 
