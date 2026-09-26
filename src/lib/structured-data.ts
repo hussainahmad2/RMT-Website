@@ -11,6 +11,17 @@ export function organizationJsonLd() {
     description:
       "ISO 13485 medical device manufacturing, research and development, and SaMD software solutions for regulated healthcare products.",
     logo: `${SITE_URL}/rmt-icon.png`,
+    knowsAbout: [
+      "ISO 13485",
+      "medical device manufacturing",
+      "medical device contract manufacturing",
+      "medical device research and development",
+      "medical device R&D",
+      "cleanroom manufacturing",
+      "SaMD",
+      "FDA 510(k)",
+      "EU MDR",
+    ],
     address: [
       {
         "@type": "PostalAddress",
@@ -69,6 +80,11 @@ export function localBusinessJsonLd() {
     },
     areaServed: ["US", "Worldwide"],
     priceRange: "$$",
+    knowsAbout: [
+      "ISO 13485 medical device manufacturing",
+      "medical device R&D",
+      "contract manufacturing",
+    ],
     contactPoint: [
       {
         "@type": "ContactPoint",

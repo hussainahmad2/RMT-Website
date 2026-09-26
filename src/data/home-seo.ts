@@ -4,7 +4,7 @@ export const HOME_DESCRIPTION =
   "ISO 13485 contract manufacturing, medical device R&D, and SaMD software from Revive Medical Technologies. Cleanroom production in Minnesota and Pakistan — Class I–III devices.";
 
 export const HOME_KEYWORDS =
-  "medical device manufacturing, ISO 13485 contract manufacturing, medical device R&D, SaMD, medical device software, cleanroom manufacturing, Minnesota medical device manufacturer, Revive Medical Technologies";
+  "ISO 13485, medical device manufacturing, manufacturing medical devices, medical device R&D, research and development, ISO 13485 contract manufacturing, SaMD, cleanroom manufacturing, Minnesota medical device manufacturer, Revive Medical Technologies";
 
 export const HOME_FOCUS_AREAS = [
   {
