@@ -5,6 +5,7 @@ import path from "path";
 import { mkdirSync, readFileSync, writeFileSync } from "fs";
 import { applyRouteSeoToHtml, getAllRouteSeo } from "./src/lib/route-seo";
 import { buildSitemapXml } from "./src/lib/sitemap-urls";
+import { DEFAULT_OG_IMAGE } from "./src/lib/site-config";
 
 function routeSeoPlugin(): Plugin {
   return {
@@ -25,6 +26,25 @@ function routeSeoPlugin(): Plugin {
         mkdirSync(dir, { recursive: true });
         writeFileSync(path.join(dir, "index.html"), html, "utf-8");
       }
+
+      // Real HTTP 404 page for Vercel static hosting (stops soft-404 SPA fallback)
+      const notFound = applyRouteSeoToHtml(template, {
+        path: "/404",
+        title: "Page Not Found",
+        description:
+          "The page you requested was not found on Revive Medical Technologies. Return home or browse our medical device services.",
+        keywords: "404, page not found, Revive Medical Technologies",
+        ogImage: DEFAULT_OG_IMAGE,
+        jsonLd: {
+          "@context": "https://schema.org",
+          "@type": "WebPage",
+          name: "Page Not Found",
+          description: "The requested page does not exist.",
+        },
+      })
+        .replace(/index,\s*follow/gi, "noindex, follow")
+        .replace(/<link\s+rel="canonical"[^>]*>\s*/i, "");
+      writeFileSync(path.resolve(outDir, "404.html"), notFound, "utf-8");
     },
   };
 }

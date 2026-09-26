@@ -1,4 +1,6 @@
 {
+  "cleanUrls": true,
+  "trailingSlash": false,
   "redirects": [
     {
       "source": "/",
@@ -10,6 +12,101 @@
       "source": "/:path((?!sitemap\\.xml$|robots\\.txt$).*)",
       "has": [{ "type": "host", "value": "www.rmt-usa.com" }],
       "destination": "https://rmt-usa.com/:path",
+      "permanent": true
+    },
+    {
+      "source": "/services/software-and-ai-solutions",
+      "destination": "/services/software-ai",
+      "permanent": true
+    },
+    {
+      "source": "/services/software-and-ai-solutions/",
+      "destination": "/services/software-ai",
+      "permanent": true
+    },
+    {
+      "source": "/services/pharmaceutical-product-development",
+      "destination": "/pharmaceutical",
+      "permanent": true
+    },
+    {
+      "source": "/services/pharmaceutical-product-development/",
+      "destination": "/pharmaceutical",
+      "permanent": true
+    },
+    {
+      "source": "/services/training-workshops",
+      "destination": "/training",
+      "permanent": true
+    },
+    {
+      "source": "/services/training-workshops/",
+      "destination": "/training",
+      "permanent": true
+    },
+    {
+      "source": "/services/turnkey-commissioning-of-product-lines-regulatory-approvals",
+      "destination": "/services/turnkey-commissioning",
+      "permanent": true
+    },
+    {
+      "source": "/services/turnkey-commissioning-of-product-lines-regulatory-approvals/",
+      "destination": "/services/turnkey-commissioning",
+      "permanent": true
+    },
+    {
+      "source": "/services/product-design-and-engineering",
+      "destination": "/services/design-fabrication",
+      "permanent": true
+    },
+    {
+      "source": "/services/product-design-and-engineering/",
+      "destination": "/services/design-fabrication",
+      "permanent": true
+    },
+    {
+      "source": "/services/electronics-firmware-development",
+      "destination": "/services/automation-services",
+      "permanent": true
+    },
+    {
+      "source": "/services/electronics-firmware-development/",
+      "destination": "/services/automation-services",
+      "permanent": true
+    },
+    {
+      "source": "/why-registering-your-software-as-a-medical-device-samd-with-the-fda-matters",
+      "destination": "/services/software-ai",
+      "permanent": true
+    },
+    {
+      "source": "/why-registering-your-software-as-a-medical-device-samd-with-the-fda-matters/",
+      "destination": "/services/software-ai",
+      "permanent": true
+    },
+    {
+      "source": "/the-three-pillars-of-healthcare-why-efficiency-technological-readiness-matter",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/the-three-pillars-of-healthcare-why-efficiency-technological-readiness-matter/",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/tag/:slug*",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/category/:slug*",
+      "destination": "/insights",
+      "permanent": true
+    },
+    {
+      "source": "/author/:slug*",
+      "destination": "/about",
       "permanent": true
     }
   ],
@@ -29,17 +126,17 @@
       ]
     },
     {
+      "source": "/404.html",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    },
+    {
       "source": "/(.*)",
       "headers": [
         { "key": "X-Content-Type-Options", "value": "nosniff" },
         { "key": "Referrer-Policy", "value": "strict-origin-when-cross-origin" }
       ]
-    }
-  ],
-  "rewrites": [
-    {
-      "source": "/((?!assets/|.*\\..*).*)",
-      "destination": "/index.html"
     }
   ]
 }
