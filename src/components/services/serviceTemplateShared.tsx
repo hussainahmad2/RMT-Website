@@ -4212,7 +4212,9 @@ export function ServiceDetail({
                     <span className="text-transparent bg-clip-text bg-gradient-to-r from-cyan-300 via-cyan-400 to-indigo-400">Software</span>
                     <br />for Healthcare
                   </>
-                ) : service.name}
+                ) : (
+                  service.seoTitle ?? service.name
+                )}
               </h1>
 
               <p className="text-white/65 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl">

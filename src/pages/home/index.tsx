@@ -192,16 +192,16 @@ export default function Home() {
                     className={`max-w-xl lg:flex-1 lg:max-w-2xl ${isCompactHero ? "max-w-lg" : ""}`}
                   >
                   <p className="mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.18em] text-blue-200 sm:text-xs">
-                    ISO 13485 manufacturing · Medical device R&amp;D · SaMD software
+                    ISO 13485 · Contract manufacturing · Medical device R&amp;D
                   </p>
                   <motion.h1
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                    className={`max-w-[18ch] font-heading font-bold tracking-[-0.045em] text-white sm:max-w-[17ch] md:max-w-[18ch] ${isCompactHero ? "text-[calc(1.6rem*var(--hero-scale))] leading-[0.95]" : "text-[clamp(1.25rem,4vw,2.7rem)] leading-[0.92] lg:text-[calc(2.7rem*var(--hero-scale))]"}`}
+                    className={`max-w-[20ch] font-heading font-bold tracking-[-0.045em] text-white sm:max-w-[22ch] md:max-w-[24ch] ${isCompactHero ? "text-[calc(1.45rem*var(--hero-scale))] leading-[0.95]" : "text-[clamp(1.2rem,3.6vw,2.5rem)] leading-[0.95] lg:text-[calc(2.5rem*var(--hero-scale))]"}`}
                   >
-                    Medical Devices &amp; Machines<br />
-                    Built for <span className="text-blue-300">Clinical Impact</span>
+                    ISO 13485 Medical Device<br />
+                    Manufacturing &amp; <span className="text-blue-300">R&amp;D</span>
                   </motion.h1>
                   <motion.p
                     initial={{ opacity: 0, y: 30 }}
@@ -211,7 +211,7 @@ export default function Home() {
                       ? "mt-2 hidden max-w-xl text-[calc(0.75rem*var(--hero-scale))] leading-relaxed text-white/84 sm:mt-3 sm:block"
                       : "mt-3 hidden max-w-2xl text-[clamp(0.8rem,1.25vw,1rem)] leading-relaxed text-white/84 sm:mt-4 sm:block lg:text-[calc(1rem*var(--hero-scale))]"}
                   >
-                    From interventional catheters and biomaterial microspheres to custom production equipment and ISO-classified cleanrooms — RMT engineers technologies that are as unique as the procedures they enable.
+                    ISO 13485 contract manufacturing and medical device research and development for Class I–III devices — cleanroom production, design transfer, and scale-up.
                   </motion.p>
                   <motion.p
                     initial={{ opacity: 0, y: 26 }}

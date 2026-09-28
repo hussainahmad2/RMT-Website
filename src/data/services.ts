@@ -1367,6 +1367,7 @@ export const ALL_SERVICES: ServiceData[] = [
       "ISO 13485 medical device contract manufacturing in ISO Class 5–8 cleanrooms. Class I–III devices, design transfer, and pilot-to-commercial scale-up.",
     seoTitle: "ISO 13485 Medical Device Contract Manufacturing",
     overview: [
+      "ISO 13485 medical device contract manufacturing for Class I, II, and III devices — from pilot builds to commercial scale in ISO Class 5–8 cleanrooms.",
       "At Revive Medical Technologies, we are more than a manufacturer — we are a strategic partner for medical innovators. We specialize in end-to-end development and manufacturing of high-performance medical devices engineered to meet the world's most rigorous international standards.",
       "From concept validation and pilot production through large-scale commercialization and continuous process optimization, our multidisciplinary teams deliver solutions that are reliable, scalable, and built for the real world of healthcare.",
       "Whether you are developing a breakthrough technology, scaling an existing product, or building manufacturing operations from the ground up, we bring the expertise, infrastructure, and commitment to quality your vision deserves.",
