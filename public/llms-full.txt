@@ -1,0 +1,23 @@
+# Revive Medical Technologies — service inventory
+
+## Manufacturing
+- /services/contract-manufacturing — ISO 13485 medical device contract manufacturing
+- /services/contract-manufacturing/manufacturing-capabilities — Class I–III manufacturing
+- /services/contract-manufacturing/cleanroom-infrastructure — ISO Class 5–8 cleanrooms
+- /services/contract-manufacturing/quality-compliance — ISO 13485 QMS manufacturing
+
+## R&D and product development
+- /services/engineering-product-development/research-development-engineering — Medical device R&D
+- /services/product-development — Product development & catheter R&D
+- /services/bmd — Biomaterials & drug delivery R&D
+
+## Software and regulatory
+- /services/software-ai — SaMD / medical device software (IEC 62304)
+- /services/regulatory-compliance — FDA 510(k), EU MDR, ISO 13485 QMS
+- /services/regulatory-compliance/fda-compliance — FDA pathways
+- /services/regulatory-compliance/eu-mdr-compliance — EU MDR CE marking
+
+## Testing
+- /services/mbl-laboratory — Sterility and bacterial endotoxin testing
+- /services/mbl-laboratory/sterility-testing
+- /services/mbl-laboratory/bacterial-endotoxin-testing

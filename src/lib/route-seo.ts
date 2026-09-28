@@ -341,5 +341,27 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   if (jsonPattern.test(next)) next = next.replace(jsonPattern, jsonTag);
   else next = next.replace("</head>", `    ${jsonTag}\n  </head>`);
 
+  // Crawlable body for bots/agents that do not execute JS (React createRoot replaces #root on load)
+  const staticMain = `<main data-seo-static>
+  <h1>${escapeAttr(route.title)}</h1>
+  <p>${escapeAttr(route.description)}</p>
+  <nav aria-label="Primary">
+    <ul>
+      <li><a href="/">Home</a></li>
+      <li><a href="/services">Services</a></li>
+      <li><a href="/services/contract-manufacturing">ISO 13485 Contract Manufacturing</a></li>
+      <li><a href="/services/engineering-product-development/research-development-engineering">Medical Device R&amp;D</a></li>
+      <li><a href="/services/product-development">Product Development</a></li>
+      <li><a href="/services/software-ai">SaMD Software</a></li>
+      <li><a href="/services/regulatory-compliance">Regulatory Compliance</a></li>
+      <li><a href="/contact">Contact</a></li>
+    </ul>
+  </nav>
+</main>`;
+  next = next.replace(
+    /<div id="root"><\/div>/i,
+    `<div id="root">${staticMain}</div>`
+  );
+
   return next;
 }
