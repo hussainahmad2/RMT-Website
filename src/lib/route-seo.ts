@@ -134,6 +134,12 @@ function resolveOg(image: string | undefined): string {
   return absoluteUrl(image);
 }
 
+function pageDocumentTitle(path: string, title: string): string {
+  // Home tab/index should be brand-only (avoid "Brand | Brand")
+  if (path === "/" || title === SITE_NAME) return SITE_NAME;
+  return `${title} | ${SITE_NAME}`;
+}
+
 function pageGraph(path: string, title: string, description: string, extra: Record<string, unknown>[] = []) {
   const url = absoluteUrl(path);
   const nodes: Record<string, unknown>[] = [
@@ -142,7 +148,7 @@ function pageGraph(path: string, title: string, description: string, extra: Reco
       "@type": "WebPage",
       "@id": `${url}#webpage`,
       url,
-      name: `${title} | ${SITE_NAME}`,
+      name: pageDocumentTitle(path, title),
       description,
       isPartOf: { "@id": `${SITE_URL}/#website` },
       about: { "@id": `${SITE_URL}/#organization` },
@@ -355,7 +361,7 @@ function upsertCanonical(html: string, href: string): string {
 }
 
 export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
-  const fullTitle = `${route.title} | ${SITE_NAME}`;
+  const fullTitle = pageDocumentTitle(route.path, route.title);
   const canonical = absoluteUrl(route.path);
   const json = JSON.stringify(route.jsonLd).replace(/</g, "\\u003c");
   const jsonTag = `<script type="application/ld+json" id="seo-jsonld">${json}</script>`;

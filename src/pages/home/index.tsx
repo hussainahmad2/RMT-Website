@@ -201,10 +201,10 @@ export default function Home() {
                     initial={{ opacity: 0, y: 40 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.15, duration: 1.1, ease: [0.16, 1, 0.3, 1] }}
-                    className={`max-w-[20ch] font-heading font-bold tracking-[-0.045em] text-white sm:max-w-[22ch] md:max-w-[24ch] ${isCompactHero ? "text-[calc(1.45rem*var(--hero-scale))] leading-[0.95]" : "text-[clamp(1.2rem,3.6vw,2.5rem)] leading-[0.95] lg:text-[calc(2.5rem*var(--hero-scale))]"}`}
+                    className={`max-w-[22ch] font-heading font-bold tracking-[-0.045em] text-white sm:max-w-[24ch] md:max-w-[26ch] ${isCompactHero ? "text-[calc(1.45rem*var(--hero-scale))] leading-[0.95]" : "text-[clamp(1.2rem,3.6vw,2.5rem)] leading-[0.95] lg:text-[calc(2.5rem*var(--hero-scale))]"}`}
                   >
-                    ISO 13485 Medical Device<br />
-                    Manufacturing &amp; <span className="text-blue-300">R&amp;D</span>
+                    Revive Medical<br />
+                    Technologies <span className="text-blue-300">Inc.</span>
                   </motion.h1>
                   <motion.p
                     initial={{ opacity: 0, y: 30 }}

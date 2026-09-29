@@ -1,7 +1,7 @@
-export const HOME_TITLE = "ISO 13485 Medical Device Manufacturing & R&D";
+export const HOME_TITLE = "Revive Medical Technologies Inc";
 
 export const HOME_DESCRIPTION =
-  "ISO 13485 medical device manufacturing, contract manufacturing, and medical device R&D. Cleanroom production for Class I–III devices in Minnesota and Pakistan.";
+  "Revive Medical Technologies Inc — ISO 13485 medical device manufacturing, contract manufacturing, and medical device R&D. Cleanroom production for Class I–III devices in Minnesota and Pakistan.";
 
 export const HOME_KEYWORDS =
   "ISO 13485, medical device manufacturing, medical device contract manufacturing, manufacturing medical devices, medical device R&D, research and development, cleanroom manufacturing, ISO 13485 QMS, Class I II III medical devices";
