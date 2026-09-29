@@ -237,4 +237,4 @@ export const PRODUCT_HIGHLIGHTS = [
 ] as const;
 
 export const PRODUCTS_HERO_IMAGE =
-  "/products-hero.png";
+  "/products-hero.jpg";

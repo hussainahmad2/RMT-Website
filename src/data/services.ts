@@ -1511,7 +1511,7 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Advanced Infrastructure", desc: "ISO-classified cleanrooms and specialized manufacturing lines." },
     ],
     keywords:
-      "ISO 13485 contract manufacturing, medical device contract manufacturing, cleanroom manufacturing, Class I II III devices, catheter manufacturing, Minnesota medical device manufacturer",
+      "ISO 13485, ISO 13485 medical device manufacturing, medical device manufacturing, medical device contract manufacturing, manufacturing medical devices, cleanroom manufacturing, Class I II III devices, catheter manufacturing, Minnesota medical device manufacturer",
     heroImage: "/mdm/cleanroom-1.jpeg",
     heroBg: "from-orange-950/60 to-orange-900/40",
   },

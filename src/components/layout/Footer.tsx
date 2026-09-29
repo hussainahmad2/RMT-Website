@@ -33,7 +33,7 @@ export const Footer = () => {
               <img src={`${BASE}rmt-logo.webp`} alt="RMT Medical Technologies Inc." className="h-12 w-auto object-contain drop-shadow-sm" />
             </Link>
             <p className="text-white/50 text-sm mb-5 leading-relaxed">
-              End-to-end medical device and technology solutions — from design through regulatory approval and contract manufacturing.
+              ISO 13485 medical device manufacturing, medical device R&D, and SaMD software — from design through regulatory approval and contract manufacturing.
             </p>
             <div className="flex gap-2.5">
               {[
@@ -77,7 +77,41 @@ export const Footer = () => {
           <div>
             <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-widest">Services</h4>
             <ul className="flex flex-col gap-2">
-              {ALL_SERVICES.map((svc) => (
+              <li>
+                <Link href="/services/contract-manufacturing" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                  ISO 13485 Contract Manufacturing
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/engineering-product-development/research-development-engineering" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                  Medical Device R&D
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/product-development" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                  Product Development
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/software-ai" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                  SaMD Software
+                </Link>
+              </li>
+              <li>
+                <Link href="/services/regulatory-compliance" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                  FDA 510(k) & EU MDR
+                </Link>
+              </li>
+              {ALL_SERVICES.filter(
+                (svc) =>
+                  ![
+                    "contract-manufacturing",
+                    "product-development",
+                    "software-ai",
+                    "regulatory-compliance",
+                    "engineering-product-development",
+                  ].includes(svc.slug)
+              ).map((svc) => (
                 <li key={svc.slug}>
                   <Link href={`/services/${svc.slug}`} className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
                     {svc.shortName}

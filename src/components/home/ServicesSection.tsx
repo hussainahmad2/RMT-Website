@@ -17,22 +17,24 @@ const servicePillars = [
     iconBg: "bg-blue-400/20",
     textAccent: "text-blue-200",
     Icon: ShieldCheck,
+    href: "/services/regulatory-compliance",
   },
   {
-    slug: "product-development",
-    title: "Engineering & Development",
-    tagline: "From concept sketch to validated prototype",
+    slug: "research-development-engineering",
+    title: "Medical Device R&D",
+    tagline: "From concept sketch to verified prototype",
     description:
-      "Medical device R&D and software solutions, plus mechanical design, automation, and turnkey product development from one engineering team.",
-    services: ["Product Development", "Software & AI", "Design & Fabrication", "Automation Services", "UI/UX Development"],
+      "Medical device research and development for catheters, biomaterials, and production equipment — with design transfer into ISO 13485 manufacturing.",
+    services: ["Device R&D", "Prototyping", "Product Development", "Software & AI", "Design Transfer"],
     accent: "bg-emerald-700",
     iconBg: "bg-emerald-400/20",
     textAccent: "text-emerald-200",
     Icon: Cpu,
+    href: "/services/engineering-product-development/research-development-engineering",
   },
   {
     slug: "contract-manufacturing",
-    title: "Manufacturing & Scale-Up",
+    title: "ISO 13485 Manufacturing",
     tagline: "Bench to cleanroom to commercial batch",
     description:
       "Medical device manufacturing in ISO-classified cleanrooms for Class I–III devices, including contract manufacturing, validation, and scale-up.",
@@ -41,6 +43,7 @@ const servicePillars = [
     iconBg: "bg-violet-400/20",
     textAccent: "text-violet-200",
     Icon: Factory,
+    href: "/services/contract-manufacturing",
   },
 ] as const;
 
@@ -116,7 +119,7 @@ export function ServicesSection() {
                   ))}
                 </div>
                 <Link
-                  href={`/services/${pillar.slug}`}
+                  href={pillar.href}
                   className="mt-6 inline-flex items-center gap-2 text-sm font-semibold text-blue-300 transition-all group-hover:gap-3 hover:text-blue-200"
                 >
                   Explore {pillar.title.split(" ")[0]} Services
