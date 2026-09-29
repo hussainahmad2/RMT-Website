@@ -342,26 +342,51 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   else next = next.replace("</head>", `    ${jsonTag}\n  </head>`);
 
   // Crawlable body for bots/agents that do not execute JS (React createRoot replaces #root on load)
+  const keywordLine = route.keywords
+    ? `<p><strong>Topics:</strong> ${escapeAttr(route.keywords)}</p>`
+    : "";
+  const faqBlock =
+    route.path === "/"
+      ? `<section aria-label="Frequently asked questions">
+  <h2>Medical device manufacturing and R&amp;D FAQs</h2>
+  <h3>What ISO 13485 medical device manufacturing services are available?</h3>
+  <p>ISO 13485 contract manufacturing in classified cleanrooms for Class I, II, and III medical devices, including design transfer, process validation, and pilot-to-commercial scale-up.</p>
+  <h3>Is medical device research and development supported?</h3>
+  <p>Yes. Medical device R&amp;D covers prototype engineering, biomaterials, catheters, production equipment, and transfer into manufacturing.</p>
+  <h3>Where is manufacturing located?</h3>
+  <p>Operations include Minnesota, United States headquarters and ISO-classified manufacturing and R&amp;D in Islamabad, Pakistan.</p>
+</section>`
+      : `<section aria-label="Related services">
+  <h2>Related medical device services</h2>
+  <p>${escapeAttr(route.description)}</p>
+  <p>Continue to ISO 13485 contract manufacturing, medical device R&amp;D, product development, SaMD software, or regulatory compliance for Class I–III devices.</p>
+</section>`;
+
   const staticMain = `<main data-seo-static>
   <h1>${escapeAttr(route.title)}</h1>
   <p>${escapeAttr(route.description)}</p>
+  ${keywordLine}
+  ${faqBlock}
   <nav aria-label="Primary">
     <ul>
-      <li><a href="/">Home</a></li>
-      <li><a href="/services">Services</a></li>
+      <li><a href="/">Home — ISO 13485 Manufacturing &amp; R&amp;D</a></li>
+      <li><a href="/services">Medical Device Services</a></li>
       <li><a href="/services/contract-manufacturing">ISO 13485 Contract Manufacturing</a></li>
       <li><a href="/services/engineering-product-development/research-development-engineering">Medical Device R&amp;D</a></li>
       <li><a href="/services/product-development">Product Development</a></li>
       <li><a href="/services/software-ai">SaMD Software</a></li>
-      <li><a href="/services/regulatory-compliance">Regulatory Compliance</a></li>
+      <li><a href="/services/regulatory-compliance">FDA 510(k) &amp; EU MDR Compliance</a></li>
+      <li><a href="/services/mbl-laboratory">Sterility &amp; Endotoxin Testing</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>
   </nav>
 </main>`;
-  next = next.replace(
-    /<div id="root"><\/div>/i,
-    `<div id="root">${staticMain}</div>`
-  );
+  // Replace empty or previously seeded #root (source index.html may already contain a home static shell)
+  if (/<div id="root">[\s\S]*?<\/div>/i.test(next)) {
+    next = next.replace(/<div id="root">[\s\S]*?<\/div>/i, `<div id="root">${staticMain}</div>`);
+  } else {
+    next = next.replace(/<div id="root"><\/div>/i, `<div id="root">${staticMain}</div>`);
+  }
 
   return next;
 }
