@@ -19,14 +19,11 @@ import { ALL_SERVICES } from "./services";
 
 const SERVICE = ALL_SERVICES.find((s) => s.slug === "software-ai")!;
 
-export const SOFTWARE_AI_HERO_IMAGE =
-  "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=1920&q=85";
+export const SOFTWARE_AI_HERO_IMAGE = "/assets/software-ai-expertise-bg.webp";
 
-export const SOFTWARE_AI_ABOUT_IMAGE =
-  "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=80";
+export const SOFTWARE_AI_ABOUT_IMAGE = "/mdm/facility-1.jpeg";
 
-export const SOFTWARE_AI_COMPLIANCE_IMAGE =
-  "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80";
+export const SOFTWARE_AI_COMPLIANCE_IMAGE = "/assets/compliance-bg.webp";
 
 export const SOFTWARE_AI_HIGHLIGHTS = [
   { label: "Software Projects Delivered", value: "50+" },

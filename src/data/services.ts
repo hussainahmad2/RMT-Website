@@ -130,20 +130,28 @@ export const ALL_SERVICES: ServiceData[] = [
         seoTitle: "ISO 13485 Quality Management System Setup",
         tagline: "Medical Device Quality Management System (QMS) development and compliance.",
         overview: [
-          "Medical Device Quality Management System (QMS) implementation establishes the organizational framework necessary for compliance and quality consistency.",
-          "Key areas of our QMS integration include QMS development, implementation, training, documentation control, design controls, risk management integration, and corrective and preventive actions (CAPA)."
+          "ISO 13485 Quality Management System (QMS) implementation builds the documented framework medical device companies need for consistent product quality, design control, and regulatory audits.",
+          "Engagements typically start with a gap assessment against ISO 13485:2016 (and related QMSR / MDSAP expectations where relevant), then move into QMS architecture, SOP development, training, and controlled documentation.",
+          "Core process areas include document and record control, design and development controls, purchasing and supplier controls, production and process controls, monitoring and measurement, CAPA, complaint handling, and management review.",
+          "Risk management (ISO 14971) and software lifecycle controls (IEC 62304) are integrated into the QMS so design transfer, verification evidence, and post-market feedback stay audit-ready.",
+          "Deliverables are practical: a QMS manual, process SOPs, templates for DHF/DMR inputs, CAPA workflows, internal audit schedules, and training records your team can operate day to day.",
         ],
         keyPoints: [
-          "ISO 13485 compliant QMS implementation",
-          "Design controls & documentation control",
-          "CAPA system development & training",
-          "Risk management processes integration"
+          "ISO 13485 gap assessment and implementation roadmap",
+          "QMS manual, SOP suite, and document control",
+          "Design controls and Design History File templates",
+          "CAPA, complaints, and management review processes",
+          "Supplier controls and production process documentation",
+          "Internal audit readiness and training records",
+          "ISO 14971 / IEC 62304 integration where applicable",
+          "Support toward certification and MDSAP/QMSR alignment",
         ],
         deliverables: [
-          "QMS Manual & SOP Documentation",
+          "Gap assessment report and implementation plan",
+          "QMS Manual & controlled SOP package",
           "Design History File (DHF) templates",
-          "CAPA process dossiers",
-          "Internal audit reports & training records"
+          "CAPA and complaint handling procedures",
+          "Internal audit checklist and training records",
         ]
       },
       {
@@ -462,7 +470,7 @@ export const ALL_SERVICES: ServiceData[] = [
     ],
     keywords:
       "FDA 510k consulting, EU MDR compliance, CE marking medical device, ISO 13485 QMS, ISO 14971 risk management, ISO 10993 biocompatibility, SFDA MDMA, TGA ARTG",
-    heroImage: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80",
+    heroImage: "/assets/regulatory-stack-visual-dark.webp",
     heroBg: "from-slate-900/70 to-slate-800/50",
   },
   {
@@ -551,7 +559,7 @@ export const ALL_SERVICES: ServiceData[] = [
     keywords:
       "SaMD development, software as a medical device, IEC 62304, medical device software, healthcare AI, FDA SaMD, medical software validation",
     seoTitle: "SaMD & Medical Device Software Development",
-    heroImage: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    heroImage: "/assets/software-ai-expertise-bg.webp",
     heroBg: "from-indigo-950/60 to-indigo-900/40",
   },
   {
@@ -950,12 +958,13 @@ export const ALL_SERVICES: ServiceData[] = [
     slug: "engineering-product-development",
     name: "Engineering & Product Development",
     shortName: "Engineering",
-    tagline: "End-to-end engineering — automation, mechanical design, embedded systems, and rapid product development.",
+    tagline: "Medical device R&D and engineering — prototypes, design transfer, and production-ready systems.",
     description:
-      "Cross-disciplinary engineering from concept to production: automation, mechanical design, embedded control, rapid prototyping, and complete documentation deliverables.",
+      "Medical device research and development plus cross-disciplinary engineering: prototypes, biomaterials and catheter programs, embedded control, and design transfer into ISO 13485 manufacturing.",
     overview: [
-      "We provide end-to-end engineering services covering automation, mechanical design, embedded systems, and rapid product development. Our services are structured to support concept-to-production development with high precision and industrial reliability.",
-      "A structured engineering workflow focused on innovation, precision, reliability, and scalable industrial solutions guides every project from requirement analysis through deployment and support.",
+      "RMT engineering and R&D teams take medical devices from concept and feasibility through prototypes, verification evidence, and manufacturing-ready documentation under an ISO 13485 quality framework.",
+      "Programs span interventional and electromechanical devices, biomaterials platforms, automation and thermal systems, and custom production equipment — with design controls and design-transfer packages built for cleanroom scale-up.",
+      "United States leadership sets program and regulatory direction; Pakistan labs and manufacturing capacity support rapid iteration so prototypes move into pilot builds without changing partners.",
     ],
     subServices: [
       {
@@ -1040,7 +1049,7 @@ export const ALL_SERVICES: ServiceData[] = [
       { title: "Cross-Disciplinary", desc: "Automation, mechanical, and embedded engineering under one team." },
       { title: "Complete Deliverables", desc: "CAD, electrical, software, and physical outputs with full documentation." },
     ],
-    keywords: "medical device R&D, research and development, engineering product development, automation mechanical embedded, industrial design, biomedical engineering, prototype to production",
+    keywords: "medical device R&D, research and development, medical device engineering, prototype to production, design transfer, ISO 13485, biomaterials, catheter development, industrial design, biomedical engineering",
     seoTitle: "Medical Device Engineering & R&D",
     heroImage: "/mdm/facility-1.jpeg",
     heroBg: "from-indigo-950/60 to-indigo-900/40",

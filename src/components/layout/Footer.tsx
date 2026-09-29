@@ -32,7 +32,7 @@ export const Footer = () => {
             <Link href="/" className="inline-block mb-4">
               <img src={`${BASE}rmt-logo.webp`} alt="RMT Medical Technologies Inc." className="h-12 w-auto object-contain drop-shadow-sm" />
             </Link>
-            <p className="text-white/50 text-sm mb-5 leading-relaxed">
+            <p className="text-white/70 text-sm mb-5 leading-relaxed">
               ISO 13485 medical device manufacturing, medical device R&D, and SaMD software — from design through regulatory approval and contract manufacturing.
             </p>
             <div className="flex gap-2.5">
@@ -51,7 +51,7 @@ export const Footer = () => {
 
           {/* LINKS */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-widest">Navigation</h4>
+            <h2 className="text-white font-semibold mb-4 text-xs uppercase tracking-widest">Navigation</h2>
             <ul className="flex flex-col gap-2.5">
               {[
                 { label: "Home", href: "/" },
@@ -67,7 +67,7 @@ export const Footer = () => {
                 { label: "Contact", href: "/contact" },
               ].map((link) => (
                 <li key={link.href}>
-                  <Link href={link.href} className="text-white/50 text-sm hover:text-primary transition-colors">{link.label}</Link>
+                  <Link href={link.href} className="text-white/70 text-sm hover:text-primary transition-colors">{link.label}</Link>
                 </li>
               ))}
             </ul>
@@ -75,30 +75,30 @@ export const Footer = () => {
 
           {/* SERVICES */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-widest">Services</h4>
+            <h2 className="text-white font-semibold mb-4 text-xs uppercase tracking-widest">Services</h2>
             <ul className="flex flex-col gap-2">
               <li>
-                <Link href="/services/contract-manufacturing" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                <Link href="/services/contract-manufacturing" className="text-white/70 text-xs hover:text-primary transition-colors leading-snug block">
                   ISO 13485 Contract Manufacturing
                 </Link>
               </li>
               <li>
-                <Link href="/services/engineering-product-development/research-development-engineering" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                <Link href="/services/engineering-product-development/research-development-engineering" className="text-white/70 text-xs hover:text-primary transition-colors leading-snug block">
                   Medical Device R&D
                 </Link>
               </li>
               <li>
-                <Link href="/services/product-development" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                <Link href="/services/product-development" className="text-white/70 text-xs hover:text-primary transition-colors leading-snug block">
                   Product Development
                 </Link>
               </li>
               <li>
-                <Link href="/services/software-ai" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                <Link href="/services/software-ai" className="text-white/70 text-xs hover:text-primary transition-colors leading-snug block">
                   SaMD Software
                 </Link>
               </li>
               <li>
-                <Link href="/services/regulatory-compliance" className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                <Link href="/services/regulatory-compliance" className="text-white/70 text-xs hover:text-primary transition-colors leading-snug block">
                   FDA 510(k) & EU MDR
                 </Link>
               </li>
@@ -113,7 +113,7 @@ export const Footer = () => {
                   ].includes(svc.slug)
               ).map((svc) => (
                 <li key={svc.slug}>
-                  <Link href={`/services/${svc.slug}`} className="text-white/50 text-xs hover:text-primary transition-colors leading-snug block">
+                  <Link href={`/services/${svc.slug}`} className="text-white/70 text-xs hover:text-primary transition-colors leading-snug block">
                     {svc.shortName}
                   </Link>
                 </li>
@@ -123,22 +123,22 @@ export const Footer = () => {
 
           {/* OFFICES */}
           <div>
-            <h4 className="text-white font-semibold mb-4 text-xs uppercase tracking-widest">Offices</h4>
+            <h2 className="text-white font-semibold mb-4 text-xs uppercase tracking-widest">Offices</h2>
             <ul className="flex flex-col gap-4">
               {offices.map((office) => (
                 <li key={office.city} className="flex items-start gap-2.5">
                   <MapPin className="w-3.5 h-3.5 text-primary shrink-0 mt-0.5" />
                   <div>
                     <p className="text-white text-xs font-semibold mb-0.5">{office.city}</p>
-                    <p className="text-white/40 text-xs leading-relaxed">{office.address}</p>
+                    <p className="text-white/70 text-xs leading-relaxed">{office.address}</p>
                     {office.phone && (
-                      <a href={`tel:${office.phone.replace(/[^+\d]/g, "")}`} className="flex items-center gap-1 text-white/40 text-xs hover:text-primary transition-colors mt-0.5">
+                      <a href={`tel:${office.phone.replace(/[^+\d]/g, "")}`} className="flex items-center gap-1 text-white/70 text-xs hover:text-primary transition-colors mt-0.5">
                         <Phone className="w-3 h-3 shrink-0" />
                         {office.phone}
                       </a>
                     )}
                     {office.email && (
-                      <a href={`mailto:${office.email}`} className="flex items-center gap-1 text-white/40 text-xs hover:text-primary transition-colors mt-0.5">
+                      <a href={`mailto:${office.email}`} className="flex items-center gap-1 text-white/70 text-xs hover:text-primary transition-colors mt-0.5">
                         <Mail className="w-3 h-3 shrink-0" />
                         {office.email}
                       </a>
@@ -149,7 +149,7 @@ export const Footer = () => {
             </ul>
 
             <div className="mt-5 pt-4 border-t border-white/10">
-              <p className="text-xs text-white/30 uppercase tracking-widest mb-2">Certifications</p>
+              <p className="text-xs text-white/70 uppercase tracking-widest mb-2">Certifications</p>
               <div className="flex flex-wrap gap-1.5">
                 {["ISO 13485:2016", "CE Mark", "ISO 14971", "IEC 62304"].map((cert) => (
                   <span key={cert} className="text-xs px-2 py-1 border border-primary/35 text-primary rounded font-medium">{cert}</span>

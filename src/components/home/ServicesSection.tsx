@@ -107,7 +107,7 @@ export function ServicesSection() {
               </div>
 
               <div className="flex flex-1 flex-col p-6 sm:p-7">
-                <p className="text-base leading-relaxed text-white/62 lg:text-lg">{pillar.description}</p>
+                <p className="text-base leading-relaxed text-white/75 lg:text-lg">{pillar.description}</p>
                 <div className="mt-5 flex flex-wrap gap-2">
                   {pillar.services.map((svc) => (
                     <span

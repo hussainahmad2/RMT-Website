@@ -13,7 +13,7 @@ import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
 import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath } from "@/lib/service-seo";
-import { MoneyPageFaqs } from "@/components/shared/MoneyPageFaqs";
+import { MoneyPageFaqs, MoneyPageRelatedServices } from "@/components/shared/MoneyPageFaqs";
 import {
   SOFTWARE_AI_ABOUT_IMAGE,
   SOFTWARE_AI_COMPLIANCE_IMAGE,
@@ -338,6 +338,7 @@ export default function SoftwareAiServicePage() {
         </div>
       </section>
       <MoneyPageFaqs path={servicePath(SERVICE.slug)} />
+      <MoneyPageRelatedServices currentPath={servicePath(SERVICE.slug)} />
     </div>
   );
 }

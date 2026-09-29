@@ -24,7 +24,7 @@ import { PageHero } from "@/components/shared/PageHero";
 import { useSEO } from "@/lib/seo";
 import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath, subServicePath } from "@/lib/service-seo";
-import { MoneyPageFaqs } from "@/components/shared/MoneyPageFaqs";
+import { MoneyPageFaqs, MoneyPageRelatedServices } from "@/components/shared/MoneyPageFaqs";
 import { cn } from "@/lib/utils";
 import { ALL_SERVICES, type ServiceData, type SubServiceData } from "@/data/services";
 import {
@@ -217,9 +217,9 @@ function EngineeringMethodology() {
               </div>
               <div className="flex-1 bg-card border border-border rounded-xl p-5 group-hover:border-primary/40 group-hover:shadow-sm transition-all duration-300 mt-1">
                 <div className="flex items-start justify-between gap-3 mb-2">
-                  <h4 className="font-heading font-bold text-foreground text-base group-hover:text-primary transition-colors">
+                  <h3 className="font-heading font-bold text-foreground text-base group-hover:text-primary transition-colors">
                     Step {i + 1} — {step.title}
-                  </h4>
+                  </h3>
                 </div>
                 <p className="text-muted-foreground text-sm leading-relaxed mb-3">{step.description}</p>
                 <div className="flex flex-wrap gap-1.5">
@@ -1572,11 +1572,11 @@ const SERVICE_SCATTER_ICONS: Record<string, React.ElementType[]> = {
 /* ---- Generic sub-service images per service (cycled by index) ---- */
 const SERVICE_GENERIC_SUB_IMAGES: Record<string, string[]> = {
   "regulatory-compliance": [
-    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=900&q=80",
-    "https://images.unsplash.com/photo-1559757148-5c350d0d3c56?w=900&q=80",
-    "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=900&q=80",
-    "https://images.unsplash.com/photo-1554224155-8d04cb21cd6c?w=900&q=80",
-    "https://images.unsplash.com/photo-1568992687947-868a62a9f521?w=900&q=80",
+    "/assets/regulatory-stack-visual-dark.webp",
+    "/assets/compliance-bg.webp",
+    "/mdm/facility-2.jpeg",
+    "/mdm/cleanroom-1.jpeg",
+    "/assets/regulatory-stack-visual-light.webp",
   ],
   "quality-testing": [
     "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=900&q=80",
@@ -2084,11 +2084,11 @@ function ServiceHeroCarousel({ service }: { service: ServiceData }) {
 }
 
 const SOFTWARE_AI_HERO_IMAGES = [
-  "https://images.unsplash.com/photo-1576091160550-2173dba999ef?w=1920&q=85",
-  "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1920&q=85",
-  "https://images.unsplash.com/photo-1639762681485-74b7f0150504?w=1920&q=85",
-  "https://images.unsplash.com/photo-1518770660439-4636190af475?w=1920&q=85",
-  "https://images.unsplash.com/photo-1559757175-08a4f7e5bbf9?w=1920&q=85",
+  "/assets/software-ai-expertise-bg.webp",
+  "/mdm/facility-1.jpeg",
+  "/assets/compliance-bg.webp",
+  "/mdm/facility-3.jpeg",
+  "/mdm/cleanroom-2.jpeg",
 ];
 
 /** Full-bleed Ken Burns hero background (same style as home page). */
@@ -2136,16 +2136,11 @@ function CinematicHeroBackground({ images, alt }: { images: string[]; alt: strin
 
 /* Card image per software-ai sub-service */
 const SOFTWARE_AI_SUB_IMAGES: Record<string, string> = {
-  "custom-medical-software":
-    "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=1200&q=80",
-  "software-compliance":
-    "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=1200&q=80",
-  "ai-solutions":
-    "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=1200&q=80",
-  "cloud-devops":
-    "https://images.unsplash.com/photo-1667372393119-3d4c48d07fc9?w=1200&q=80",
-  "software-quality-assurance":
-    "https://images.unsplash.com/photo-1551434678-e076c223a692?w=1200&q=80",
+  "custom-medical-software": "/assets/software-ai-expertise-bg.webp",
+  "software-compliance": "/assets/compliance-bg.webp",
+  "ai-solutions": "/mdm/facility-1.jpeg",
+  "cloud-devops": "/mdm/facility-3.jpeg",
+  "software-quality-assurance": "/mdm/cleanroom-2.jpeg",
 };
 
 /* Lucide icon per software-ai sub-service for card overlay */
@@ -4458,6 +4453,7 @@ export function ServiceDetail({
       )}
 
       {path ? <MoneyPageFaqs path={path} /> : null}
+      {path ? <MoneyPageRelatedServices currentPath={path} /> : null}
 
     </div>
   );
@@ -4741,6 +4737,7 @@ export function SubServiceDetail({
       )}
 
       {path ? <MoneyPageFaqs path={path} /> : null}
+      {path ? <MoneyPageRelatedServices currentPath={path} /> : null}
 
     </div>
   );

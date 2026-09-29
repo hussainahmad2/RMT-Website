@@ -20,7 +20,7 @@ import { ALL_SERVICES } from "@/data/services";
 import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath, subServicePath } from "@/lib/service-seo";
 import { ServiceCapabilitiesBlock } from "@/components/services/serviceTemplateShared";
-import { MoneyPageFaqs } from "@/components/shared/MoneyPageFaqs";
+import { MoneyPageFaqs, MoneyPageRelatedServices } from "@/components/shared/MoneyPageFaqs";
 
 const SERVICE = ALL_SERVICES.find((s) => s.slug === "regulatory-compliance")!;
 
@@ -317,14 +317,16 @@ export default function RegulatoryComplianceServicePage() {
               </AnimatedSection>
 
               <img
-                src="/assets/regulatory-stack-visual-light.png"
+                src="/assets/regulatory-stack-visual-light.webp"
                 alt="Regulatory compliance visual"
                 className="w-full max-w-full mx-auto h-auto object-contain drop-shadow-2xl dark:hidden"
+                loading="lazy"
               />
               <img
-                src="/assets/regulatory-stack-visual-dark.png"
+                src="/assets/regulatory-stack-visual-dark.webp"
                 alt="Regulatory compliance visual"
                 className="hidden w-full max-w-full mx-auto h-auto object-contain drop-shadow-2xl dark:block"
+                loading="lazy"
               />
             </div>
 
@@ -438,6 +440,7 @@ export default function RegulatoryComplianceServicePage() {
         </div>
       </section>
       <MoneyPageFaqs path={servicePath(SERVICE.slug)} />
+      <MoneyPageRelatedServices currentPath={servicePath(SERVICE.slug)} />
     </div>
   );
 }
