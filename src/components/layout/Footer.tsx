@@ -1,13 +1,24 @@
 import React from "react";
 import { Link } from "wouter";
-import { MapPin, Mail, Linkedin, Youtube, Facebook } from "lucide-react";
+import { MapPin, Mail, Phone, Linkedin, Youtube, Facebook } from "lucide-react";
 import { ALL_SERVICES } from "@/data/services";
+import { SITE_EMAIL, SITE_PHONE } from "@/lib/site-config";
 
 const BASE = import.meta.env.BASE_URL;
 
 const offices = [
-  { city: "United States", address: "St. Cloud Edgewater Business Centre Sartell, Minnesota, United States", email: "info@rmt-usa.com" },
-  { city: "Pakistan", address: "Building 2A, W1 Street, Rawat Industrial Estate, Islamabad, 46220", email: "info@rmt-usa.com" },
+  {
+    city: "United States",
+    address: "St. Cloud Edgewater Business Centre, Sartell, MN 56377, United States",
+    email: SITE_EMAIL,
+    phone: SITE_PHONE,
+  },
+  {
+    city: "Pakistan",
+    address: "Building 2A, W1 Street, Rawat Industrial Estate, Islamabad, 46220",
+    email: SITE_EMAIL,
+    phone: SITE_PHONE,
+  },
 ];
 
 export const Footer = () => {
@@ -86,7 +97,18 @@ export const Footer = () => {
                   <div>
                     <p className="text-white text-xs font-semibold mb-0.5">{office.city}</p>
                     <p className="text-white/40 text-xs leading-relaxed">{office.address}</p>
-                    {office.email && <a href={`mailto:${office.email}`} className="block text-white/40 text-xs hover:text-primary transition-colors mt-0.5">{office.email}</a>}
+                    {office.phone && (
+                      <a href={`tel:${office.phone.replace(/[^+\d]/g, "")}`} className="flex items-center gap-1 text-white/40 text-xs hover:text-primary transition-colors mt-0.5">
+                        <Phone className="w-3 h-3 shrink-0" />
+                        {office.phone}
+                      </a>
+                    )}
+                    {office.email && (
+                      <a href={`mailto:${office.email}`} className="flex items-center gap-1 text-white/40 text-xs hover:text-primary transition-colors mt-0.5">
+                        <Mail className="w-3 h-3 shrink-0" />
+                        {office.email}
+                      </a>
+                    )}
                   </div>
                 </li>
               ))}

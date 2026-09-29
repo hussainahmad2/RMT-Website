@@ -1,4 +1,4 @@
-import { SITE_NAME, SITE_URL } from "./site-config";
+import { SITE_EMAIL, SITE_NAME, SITE_PHONE, SITE_URL, US_POSTAL_CODE } from "./site-config";
 
 export function organizationJsonLd() {
   return {
@@ -7,7 +7,8 @@ export function organizationJsonLd() {
     name: SITE_NAME,
     alternateName: ["RMT", "RMT USA", "Revive Medical Technologies"],
     url: `${SITE_URL}/`,
-    email: "info@rmt-usa.com",
+    email: SITE_EMAIL,
+    telephone: SITE_PHONE,
     description:
       "ISO 13485 medical device manufacturing, research and development, and SaMD software solutions for regulated healthcare products.",
     logo: `${SITE_URL}/rmt-icon.png`,
@@ -28,6 +29,7 @@ export function organizationJsonLd() {
         streetAddress: "St. Cloud Edgewater Business Centre",
         addressLocality: "Sartell",
         addressRegion: "MN",
+        postalCode: US_POSTAL_CODE,
         addressCountry: "US",
       },
       {
@@ -42,6 +44,16 @@ export function organizationJsonLd() {
     sameAs: [
       "https://www.linkedin.com/company/revivemedicaltechnologies",
       "https://www.youtube.com/@ReviveMeditech",
+    ],
+    contactPoint: [
+      {
+        "@type": "ContactPoint",
+        contactType: "sales",
+        telephone: SITE_PHONE,
+        email: SITE_EMAIL,
+        availableLanguage: ["English"],
+        areaServed: ["US", "PK", "Worldwide"],
+      },
     ],
   };
 }
@@ -63,14 +75,16 @@ export function localBusinessJsonLd() {
     "@id": `${SITE_URL}/#localbusiness`,
     name: SITE_NAME,
     url: `${SITE_URL}/`,
-    email: "info@rmt-usa.com",
-    image: `${SITE_URL}/rmt-icon.png`,
+    email: SITE_EMAIL,
+    telephone: SITE_PHONE,
+    image: `${SITE_URL}/opengraph.jpg`,
     parentOrganization: { "@id": `${SITE_URL}/#organization` },
     address: {
       "@type": "PostalAddress",
       streetAddress: "St. Cloud Edgewater Business Centre",
       addressLocality: "Sartell",
       addressRegion: "MN",
+      postalCode: US_POSTAL_CODE,
       addressCountry: "US",
     },
     geo: {
@@ -89,7 +103,8 @@ export function localBusinessJsonLd() {
       {
         "@type": "ContactPoint",
         contactType: "sales",
-        email: "info@rmt-usa.com",
+        telephone: SITE_PHONE,
+        email: SITE_EMAIL,
         availableLanguage: ["English"],
       },
     ],

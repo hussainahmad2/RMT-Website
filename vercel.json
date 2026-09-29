@@ -158,6 +158,31 @@
       "source": "/index.html",
       "destination": "/",
       "permanent": true
+    },
+    {
+      "source": "/services/turnkey-commissioning",
+      "destination": "/services/contract-manufacturing",
+      "permanent": true
+    },
+    {
+      "source": "/services/turnkey-commissioning/",
+      "destination": "/services/contract-manufacturing",
+      "permanent": true
+    },
+    {
+      "source": "/services/turnkey-commissioning/iso-13485-implementation",
+      "destination": "/services/regulatory-compliance/quality-management-system",
+      "permanent": true
+    },
+    {
+      "source": "/services/turnkey-commissioning/iso-13485-implementation/",
+      "destination": "/services/regulatory-compliance/quality-management-system",
+      "permanent": true
+    },
+    {
+      "source": "/services/turnkey-commissioning/:slug*",
+      "destination": "/services/contract-manufacturing",
+      "permanent": true
     }
   ],
   "headers": [

@@ -5,40 +5,52 @@ Content-Signal: search=yes, ai-input=yes, ai-train=no
 # Allow major search / AI-search crawlers
 User-agent: Googlebot
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 User-agent: Bingbot
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 User-agent: OAI-SearchBot
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 User-agent: Claude-SearchBot
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 User-agent: PerplexityBot
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 User-agent: Applebot
 Allow: /
+Content-Signal: search=yes, ai-input=yes, ai-train=no
 
 # Training-only crawlers (does not affect Google Search or AI Overviews)
 User-agent: GPTBot
 Disallow: /
+Content-Signal: search=yes, ai-input=no, ai-train=no
 
 User-agent: Google-Extended
 Disallow: /
+Content-Signal: search=yes, ai-input=no, ai-train=no
 
 User-agent: ClaudeBot
 Disallow: /
+Content-Signal: search=yes, ai-input=no, ai-train=no
 
 User-agent: CCBot
 Disallow: /
+Content-Signal: search=yes, ai-input=no, ai-train=no
 
 User-agent: Bytespider
 Disallow: /
+Content-Signal: search=yes, ai-input=no, ai-train=no
 
 User-agent: Applebot-Extended
 Disallow: /
+Content-Signal: search=yes, ai-input=no, ai-train=no
 
 # Canonical host: https://rmt-usa.com (www redirects to apex)
 Sitemap: https://rmt-usa.com/sitemap.xml

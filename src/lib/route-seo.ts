@@ -257,7 +257,7 @@ export function getRouteSeo(path: string): RouteSeo {
   if (staticSeo) {
     const extra =
       normalized === "/"
-        ? [faqJsonLd(HOME_FAQS)]
+        ? [faqJsonLd(HOME_FAQS), localBusinessJsonLd()]
         : normalized === "/contact"
           ? [localBusinessJsonLd()]
           : [];
