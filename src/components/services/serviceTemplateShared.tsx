@@ -24,6 +24,7 @@ import { PageHero } from "@/components/shared/PageHero";
 import { useSEO } from "@/lib/seo";
 import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath, subServicePath } from "@/lib/service-seo";
+import { MoneyPageFaqs } from "@/components/shared/MoneyPageFaqs";
 import { cn } from "@/lib/utils";
 import { ALL_SERVICES, type ServiceData, type SubServiceData } from "@/data/services";
 import {
@@ -2113,7 +2114,14 @@ function CinematicHeroBackground({ images, alt }: { images: string[]; alt: strin
             scale: { duration: 4, ease: "linear" },
           }}
         >
-          <img src={images[idx]} alt={alt} className="w-full h-full object-cover" />
+          <img
+            src={images[idx]}
+            alt={alt}
+            className="w-full h-full object-cover"
+            loading={idx === 0 ? "eager" : "lazy"}
+            fetchPriority={idx === 0 ? "high" : "auto"}
+            decoding="async"
+          />
         </motion.div>
       </AnimatePresence>
       <div className="absolute inset-0 bg-gradient-to-r from-[#060d17] via-[#060d17]/88 to-[#060d17]/35" />
@@ -4449,6 +4457,8 @@ export function ServiceDetail({
         </section>
       )}
 
+      {path ? <MoneyPageFaqs path={path} /> : null}
+
     </div>
   );
 }
@@ -4729,6 +4739,8 @@ export function SubServiceDetail({
           </div>
         </section>
       )}
+
+      {path ? <MoneyPageFaqs path={path} /> : null}
 
     </div>
   );

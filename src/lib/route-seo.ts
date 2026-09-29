@@ -376,6 +376,18 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   next = upsertMetaName(next, "twitter:image", route.ogImage);
   next = upsertCanonical(next, canonical);
 
+  // Preload LCP candidate (service hero) so crawlers/lab tools discover it early
+  if (route.ogImage && !route.ogImage.includes("opengraph.jpg")) {
+    const preload = `<link rel="preload" as="image" href="${escapeAttr(route.ogImage)}" fetchpriority="high" />`;
+    const already = new RegExp(
+      `<link\\s+rel="preload"[^>]*href="${escapeAttr(route.ogImage).replace(/[.*+?^${}()|[\]\\]/g, "\\$&")}"`,
+      "i"
+    );
+    if (!already.test(next)) {
+      next = next.replace("</head>", `    ${preload}\n  </head>`);
+    }
+  }
+
   const jsonPattern = /<script type="application\/ld\+json" id="seo-jsonld">[\s\S]*?<\/script>/i;
   if (jsonPattern.test(next)) next = next.replace(jsonPattern, jsonTag);
   else next = next.replace("</head>", `    ${jsonTag}\n  </head>`);

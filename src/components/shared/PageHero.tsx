@@ -32,6 +32,9 @@ export function PageHero({
           alt=""
           className="h-full w-full object-cover scale-105"
           aria-hidden
+          loading="eager"
+          fetchPriority="high"
+          decoding="async"
         />
         <div className="absolute inset-0 bg-gradient-to-r from-[#060d17] via-[#060d17]/88 to-[#060d17]/45" />
         <div className="absolute inset-0 bg-gradient-to-t from-[#060d17] via-transparent to-[#060d17]/50" />

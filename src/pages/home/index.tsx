@@ -154,6 +154,9 @@ export default function Home() {
                     scale: { duration: 5, ease: "linear" },
                   }}
                   className="absolute inset-0 h-full w-full object-cover object-center"
+                  loading="eager"
+                  fetchPriority="high"
+                  decoding="async"
                 />
               </AnimatePresence>
               <div className="absolute inset-0 bg-[#07111d]/74 dark:bg-[#040a12]/80" />
