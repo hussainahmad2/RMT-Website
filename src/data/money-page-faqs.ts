@@ -49,6 +49,32 @@ export const PRODUCT_DEVELOPMENT_FAQS = [
   },
 ] as const;
 
+export const SOFTWARE_AI_FAQS = [
+  {
+    question: "What medical device software and SaMD services does RMT offer?",
+    answer:
+      "Custom clinical applications, software as a medical device (SaMD), AI solutions, cloud and DevOps platforms, and IEC 62304-aligned software quality documentation.",
+  },
+  {
+    question: "Can RMT support FDA registration for software as a medical device?",
+    answer:
+      "Yes. Teams align architecture, risk management, verification evidence, and submission-ready documentation with FDA SaMD expectations and related international pathways.",
+  },
+] as const;
+
+export const REGULATORY_FAQS = [
+  {
+    question: "What regulatory compliance services does RMT provide?",
+    answer:
+      "FDA 510(k) and related US pathways, EU MDR support, quality management system implementation including ISO 13485, and technical documentation for Class I–III devices.",
+  },
+  {
+    question: "Does RMT help with ISO 13485 quality management systems?",
+    answer:
+      "Yes. Regulatory and quality teams support QMS design, gap assessment, SOP development, and preparation for certification and ongoing compliance.",
+  },
+] as const;
+
 export function faqsForPath(path: string): readonly { question: string; answer: string }[] | null {
   if (path === "/services/contract-manufacturing" || path.startsWith("/services/contract-manufacturing/")) {
     return MANUFACTURING_FAQS;
@@ -61,6 +87,12 @@ export function faqsForPath(path: string): readonly { question: string; answer: 
   }
   if (path === "/services/product-development" || path.startsWith("/services/product-development/")) {
     return PRODUCT_DEVELOPMENT_FAQS;
+  }
+  if (path === "/services/software-ai" || path.startsWith("/services/software-ai/")) {
+    return SOFTWARE_AI_FAQS;
+  }
+  if (path === "/services/regulatory-compliance" || path.startsWith("/services/regulatory-compliance/")) {
+    return REGULATORY_FAQS;
   }
   return null;
 }

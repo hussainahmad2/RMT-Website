@@ -20,6 +20,7 @@ import { ALL_SERVICES } from "@/data/services";
 import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath, subServicePath } from "@/lib/service-seo";
 import { ServiceCapabilitiesBlock } from "@/components/services/serviceTemplateShared";
+import { MoneyPageFaqs } from "@/components/shared/MoneyPageFaqs";
 
 const SERVICE = ALL_SERVICES.find((s) => s.slug === "regulatory-compliance")!;
 
@@ -215,9 +216,9 @@ export default function RegulatoryComplianceServicePage() {
 
   return (
     <div className="bg-background min-h-screen pt-16">
-      <PageHero
+        <PageHero
         eyebrow="Regulatory Affairs"
-        title={SERVICE.name}
+        title={SERVICE.seoTitle ?? SERVICE.name}
         description={SERVICE.tagline}
         backgroundImage={SERVICE.heroImage}
         fullHeight
@@ -436,6 +437,7 @@ export default function RegulatoryComplianceServicePage() {
           </AnimatedSection>
         </div>
       </section>
+      <MoneyPageFaqs path={servicePath(SERVICE.slug)} />
     </div>
   );
 }

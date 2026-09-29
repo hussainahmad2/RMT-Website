@@ -646,7 +646,7 @@ export const ALL_SERVICES: ServiceData[] = [
     keywords:
       "medical device product development, catheter development, medical device R&D, design transfer manufacturing, vascular devices, ISO 13485, FDA CE registration",
     seoTitle: "Medical Device Product Development & Catheter R&D",
-    heroImage: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
+    heroImage: "/mdm/facility-2.jpeg",
     heroBg: "from-sky-950/60 to-blue-900/40",
   },
   {
@@ -1042,7 +1042,7 @@ export const ALL_SERVICES: ServiceData[] = [
     ],
     keywords: "medical device R&D, research and development, engineering product development, automation mechanical embedded, industrial design, biomedical engineering, prototype to production",
     seoTitle: "Medical Device Engineering & R&D",
-    heroImage: "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
+    heroImage: "/mdm/facility-1.jpeg",
     heroBg: "from-indigo-950/60 to-indigo-900/40",
   },
   {

@@ -13,6 +13,7 @@ import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
 import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath } from "@/lib/service-seo";
+import { MoneyPageFaqs } from "@/components/shared/MoneyPageFaqs";
 import {
   SOFTWARE_AI_ABOUT_IMAGE,
   SOFTWARE_AI_COMPLIANCE_IMAGE,
@@ -39,8 +40,8 @@ export default function SoftwareAiServicePage() {
     <div className="bg-background min-h-screen pt-16">
       <PageHero
         eyebrow="Software & AI Solutions"
-        title="Intelligent Software for Healthcare"
-        description="Full-spectrum software development — AI/ML, cloud, SaMD compliance, and complete validation lifecycle for next-generation medical technology."
+        title={SERVICE.seoTitle ?? SERVICE.name}
+        description={SERVICE.tagline}
         backgroundImage={SOFTWARE_AI_HERO_IMAGE}
         fullHeight
       >
@@ -336,6 +337,7 @@ export default function SoftwareAiServicePage() {
           </AnimatedSection>
         </div>
       </section>
+      <MoneyPageFaqs path={servicePath(SERVICE.slug)} />
     </div>
   );
 }

@@ -1585,10 +1585,10 @@ const SERVICE_GENERIC_SUB_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1579154204601-01588f351e67?w=900&q=80",
   ],
   "product-development": [
-    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
-    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
-    "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80",
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    "/mdm/facility-2.jpeg",
+    "/mdm/cleanroom-2.jpeg",
+    "/mdm/guiding-catheter.jpeg",
+    "/mdm/facility-3.jpeg",
   ],
   "automation-services": [
     "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
@@ -1603,10 +1603,10 @@ const SERVICE_GENERIC_SUB_IMAGES: Record<string, string[]> = {
     "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
   ],
   "engineering-product-development": [
-    "https://images.unsplash.com/photo-1504384308090-c894fdcc538d?w=900&q=80",
-    "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=900&q=80",
-    "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=900&q=80",
-    "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
+    "/mdm/facility-1.jpeg",
+    "/mdm/cleanroom-3.jpeg",
+    "/mdm/microspheres.jpeg",
+    "/mdm/angiographic-catheter.jpeg",
   ],
   "bmd": [
     "https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?w=900&q=80",
@@ -4531,7 +4531,7 @@ export function SubServiceDetail({
       <div className="bg-background min-h-screen">
         <PageHero
           eyebrow="Software & AI Solutions"
-          title={subService.name}
+          title={subService.seoTitle ?? subService.name}
           description={subService.tagline}
           backgroundImage={subHeroImage}
           fullHeight
@@ -4674,7 +4674,7 @@ export function SubServiceDetail({
                         </span>
                       </>
                     ) : (
-                      subService.name
+                      subService.seoTitle ?? subService.name
                     )}
                   </h1>
                   <p className="text-white/65 text-lg sm:text-xl leading-relaxed mb-8 max-w-2xl">
