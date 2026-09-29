@@ -398,10 +398,16 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   if (jsonPattern.test(next)) next = next.replace(jsonPattern, jsonTag);
   else next = next.replace("</head>", `    ${jsonTag}\n  </head>`);
 
-  // Ensure boot CSS exists on every prerendered route (hides SEO stub until React mounts)
+  // Ensure boot CSS exists on every prerendered route (overlay until React mounts)
   if (!/id=["']seo-boot["']/.test(next)) {
-    const bootCss = `<style id="seo-boot">html,body{margin:0;background:#060d17}#root{min-height:100vh;background:#060d17}[data-seo-static]{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important}</style>`;
+    const bootCss = `<style id="seo-boot">html,body{margin:0;background:#060d17}#root{min-height:100vh;background:#060d17;position:relative}html:not(.app-ready) #root::after{content:"";position:fixed;inset:0;background:#060d17;z-index:2147483646;pointer-events:none}</style>`;
     next = next.replace("</head>", `    ${bootCss}\n  </head>`);
+  } else {
+    // Migrate older clipped-stub boot CSS to overlay version on prerender
+    next = next.replace(
+      /<style id="seo-boot">[\s\S]*?<\/style>/i,
+      `<style id="seo-boot">html,body{margin:0;background:#060d17}#root{min-height:100vh;background:#060d17;position:relative}html:not(.app-ready) #root::after{content:"";position:fixed;inset:0;background:#060d17;z-index:2147483646;pointer-events:none}</style>`
+    );
   }
 
   // Crawlable body for bots/agents that do not execute JS (React createRoot replaces #root on load)

@@ -30,17 +30,11 @@
     <noscript>
       <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" />
       <style>
-        /* No-JS browsers: show the crawlable SEO body as readable content */
+        html:not(.app-ready) #root::after { display: none !important; }
         [data-seo-static] {
-          position: static !important;
-          width: auto !important;
-          height: auto !important;
-          margin: 1.5rem auto !important;
-          padding: 1.5rem !important;
-          clip: auto !important;
-          overflow: visible !important;
-          white-space: normal !important;
           max-width: 48rem;
+          margin: 1.5rem auto;
+          padding: 1.5rem;
           color: #0f172a;
           background: #fff;
           line-height: 1.55;
@@ -48,7 +42,6 @@
       </style>
     </noscript>
     <style id="seo-boot">
-      /* Brand backdrop while React boots (avoids white flash) */
       html, body {
         margin: 0;
         background: #060d17;
@@ -56,21 +49,20 @@
       #root {
         min-height: 100vh;
         background: #060d17;
+        position: relative;
       }
       /*
-        Keep crawlable SEO HTML in the document for bots that don't run JS,
-        but never flash the unstyled stub to sighted users before React mounts.
+        Keep crawlable SEO HTML fully in the document (indexable text).
+        Cover it with a brand overlay for sighted users until React mounts —
+        do NOT clip/hide the stub (that can look like hidden content to crawlers).
       */
-      [data-seo-static] {
-        position: absolute !important;
-        width: 1px !important;
-        height: 1px !important;
-        padding: 0 !important;
-        margin: -1px !important;
-        overflow: hidden !important;
-        clip: rect(0, 0, 0, 0) !important;
-        white-space: nowrap !important;
-        border: 0 !important;
+      html:not(.app-ready) #root::after {
+        content: "";
+        position: fixed;
+        inset: 0;
+        background: #060d17;
+        z-index: 2147483646;
+        pointer-events: none;
       }
     </style>
   </head>
