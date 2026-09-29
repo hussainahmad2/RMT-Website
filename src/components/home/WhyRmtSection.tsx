@@ -124,7 +124,7 @@ export function WhyRmtSection() {
                   <div className="relative h-28 overflow-hidden sm:h-32">
                     <img
                       src={item.image}
-                      alt=""
+                      alt={item.title}
                       className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
                       loading="lazy"
                     />

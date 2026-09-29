@@ -54,3 +54,4 @@ Content-Signal: search=yes, ai-input=no, ai-train=no
 
 # Canonical host: https://rmt-usa.com (www redirects to apex)
 Sitemap: https://rmt-usa.com/sitemap.xml
+# IndexNow key location: https://rmt-usa.com/rmtusa8f3a2c91e4b67d05.txt

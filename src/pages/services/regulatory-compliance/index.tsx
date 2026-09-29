@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from "react";
+import React, { useRef } from "react";
 import { Link } from "wouter";
 import { motion, useReducedMotion, useScroll, useTransform } from "framer-motion";
 import {
@@ -17,7 +17,8 @@ import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
-import { buildBreadcrumbJsonLd, buildServiceJsonLd, servicePath, subServicePath } from "@/lib/service-seo";
+import { getRouteSeo } from "@/lib/route-seo";
+import { servicePath, subServicePath } from "@/lib/service-seo";
 import { ServiceCapabilitiesBlock } from "@/components/services/serviceTemplateShared";
 
 const SERVICE = ALL_SERVICES.find((s) => s.slug === "regulatory-compliance")!;
@@ -210,25 +211,7 @@ export default function RegulatoryComplianceServicePage() {
   const columnTwoY = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : 16, reduceMotion ? 0 : 66]);
   const columnThreeY = useTransform(scrollYProgress, [0, 1], [reduceMotion ? 0 : 34, reduceMotion ? 0 : 92]);
 
-  const jsonLd = useMemo(
-    () => [
-      buildServiceJsonLd(SERVICE),
-      buildBreadcrumbJsonLd([
-        { name: "Services", path: "/services" },
-        { name: SERVICE.name, path: servicePath(SERVICE.slug) },
-      ]),
-    ],
-    []
-  );
-
-  useSEO({
-    title: SERVICE.seoTitle ?? SERVICE.name,
-    description: SERVICE.description,
-    keywords: SERVICE.keywords,
-    path: servicePath(SERVICE.slug),
-    ogImage: SERVICE.heroImage,
-    jsonLd,
-  });
+  useSEO(getRouteSeo(servicePath(SERVICE.slug)));
 
   return (
     <div className="bg-background min-h-screen pt-16">

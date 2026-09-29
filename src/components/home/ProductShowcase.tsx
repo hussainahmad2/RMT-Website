@@ -156,7 +156,7 @@ function CategoryCard({
         <div className="relative h-40 overflow-hidden sm:h-44 lg:h-48">
           <img
             src={category.image}
-            alt=""
+            alt={category.title}
             className="absolute inset-0 h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
             loading="lazy"
           />

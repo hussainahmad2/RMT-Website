@@ -41,6 +41,8 @@ export function organizationJsonLd() {
       },
     ],
     areaServed: ["US", "PK", "Worldwide"],
+    founder: { "@id": `${SITE_URL}/#ceo` },
+    employee: { "@id": `${SITE_URL}/#ceo` },
     sameAs: [
       "https://www.linkedin.com/company/revivemedicaltechnologies",
       "https://www.youtube.com/@ReviveMeditech",
@@ -122,6 +124,28 @@ export function faqJsonLd(faqs: readonly { question: string; answer: string }[])
         text: faq.answer,
       },
     })),
+  };
+}
+
+export function personJsonLd() {
+  return {
+    "@type": "Person",
+    "@id": `${SITE_URL}/#ceo`,
+    name: "Dr. Murtaza Najabat Ali",
+    jobTitle: "Chief Executive Officer",
+    description:
+      "Founder and CEO of Revive Medical Technologies. Biomedical engineer with a PhD from the University of Sheffield; leads ISO 13485 medical device manufacturing, R&D, and SaMD programs.",
+    worksFor: { "@id": `${SITE_URL}/#organization` },
+    url: `${SITE_URL}/about`,
+    image: `${SITE_URL}/team/c-level/ceo.webp`,
+    sameAs: ["https://www.linkedin.com/company/revivemedicaltechnologies"],
+    knowsAbout: [
+      "medical device manufacturing",
+      "medical device R&D",
+      "ISO 13485",
+      "biomaterials",
+      "regulatory strategy",
+    ],
   };
 }
 

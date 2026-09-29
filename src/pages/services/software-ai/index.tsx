@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useState } from "react";
 import { Link } from "wouter";
 import {
   ArrowRight,
@@ -11,7 +11,8 @@ import { PageHero } from "@/components/shared/PageHero";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { ALL_SERVICES } from "@/data/services";
-import { buildBreadcrumbJsonLd, buildServiceJsonLd, servicePath } from "@/lib/service-seo";
+import { getRouteSeo } from "@/lib/route-seo";
+import { servicePath } from "@/lib/service-seo";
 import {
   SOFTWARE_AI_ABOUT_IMAGE,
   SOFTWARE_AI_COMPLIANCE_IMAGE,
@@ -32,25 +33,7 @@ export default function SoftwareAiServicePage() {
   const activeArea = SOFTWARE_AI_EXPERTISE.find((e) => e.id === activeExpertise)!;
   const ActiveIcon = activeArea.icon;
 
-  const jsonLd = useMemo(
-    () => [
-      buildServiceJsonLd(SERVICE),
-      buildBreadcrumbJsonLd([
-        { name: "Services", path: "/services" },
-        { name: SERVICE.name, path: servicePath(SERVICE.slug) },
-      ]),
-    ],
-    []
-  );
-
-  useSEO({
-    title: SERVICE.seoTitle ?? SERVICE.name,
-    description: SERVICE.description,
-    keywords: SERVICE.keywords,
-    path: servicePath(SERVICE.slug),
-    ogImage: SERVICE.heroImage,
-    jsonLd,
-  });
+  useSEO(getRouteSeo(servicePath(SERVICE.slug)));
 
   return (
     <div className="bg-background min-h-screen pt-16">

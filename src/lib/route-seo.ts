@@ -1,8 +1,16 @@
 import { ALL_SERVICES } from "../data/services";
 import { INSIGHT_ARTICLES } from "../data/insights-content";
 import { HOME_DESCRIPTION, HOME_FAQS, HOME_KEYWORDS, HOME_TITLE } from "../data/home-seo";
+import { faqsForPath } from "../data/money-page-faqs";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "./site-config";
-import { faqJsonLd, graphJsonLd, localBusinessJsonLd, organizationJsonLd, websiteJsonLd } from "./structured-data";
+import {
+  faqJsonLd,
+  graphJsonLd,
+  localBusinessJsonLd,
+  organizationJsonLd,
+  personJsonLd,
+  websiteJsonLd,
+} from "./structured-data";
 import { getAllSitemapEntries } from "./sitemap-urls";
 
 export interface RouteSeo {
@@ -144,7 +152,26 @@ function pageGraph(path: string, title: string, description: string, extra: Reco
   ];
 
   if (path === "/") nodes.unshift(websiteJsonLd());
+  nodes.push(personJsonLd());
   return graphJsonLd(nodes);
+}
+
+function serviceOfferCatalog(service: (typeof ALL_SERVICES)[number]) {
+  if (!service.subServices.length) return undefined;
+  return {
+    "@type": "OfferCatalog",
+    name: `${service.name} offerings`,
+    itemListElement: service.subServices.map((sub, index) => ({
+      "@type": "Offer",
+      position: index + 1,
+      itemOffered: {
+        "@type": "Service",
+        name: sub.seoTitle ?? sub.name,
+        description: sub.tagline,
+        url: absoluteUrl(`/services/${service.slug}/${sub.slug}`),
+      },
+    })),
+  };
 }
 
 function serviceSeo(path: string): RouteSeo | null {
@@ -157,63 +184,75 @@ function serviceSeo(path: string): RouteSeo | null {
   const sub = parts[2] ? service.subServices.find((item) => item.slug === parts[2]) : undefined;
   if (parts[2] && !sub) return null;
 
+  const moneyFaqs = faqsForPath(path);
+
   if (sub) {
     const title = sub.seoTitle ?? `${sub.name} — ${service.shortName}`;
     const description = truncate(`${sub.tagline} ${sub.overview[0] ?? ""} ${service.name}.`);
     const keywords = `${sub.name}, ${service.name}, ${service.keywords}`;
-    return {
-      path,
-      title,
-      description,
-      keywords,
-      ogImage: resolveOg(service.heroImage),
-      jsonLd: pageGraph(path, title, description, [
-        {
-          "@type": "Service",
-          name: sub.seoTitle ?? sub.name,
-          description,
-          url: absoluteUrl(path),
-          provider: { "@id": `${SITE_URL}/#organization` },
-          serviceType: service.name,
-          areaServed: "Worldwide",
-        },
-        {
-          "@type": "BreadcrumbList",
-          itemListElement: [
-            { "@type": "ListItem", position: 1, name: "Services", item: absoluteUrl("/services") },
-            { "@type": "ListItem", position: 2, name: service.name, item: absoluteUrl(`/services/${service.slug}`) },
-            { "@type": "ListItem", position: 3, name: sub.name, item: absoluteUrl(path) },
-          ],
-        },
-      ]),
-    };
-  }
-
-  const title = service.seoTitle ?? service.name;
-  const description = truncate(service.description);
-  return {
-    path,
-    title,
-    description,
-    keywords: service.keywords,
-    ogImage: resolveOg(service.heroImage),
-    jsonLd: pageGraph(path, title, description, [
+    const extra: Record<string, unknown>[] = [
       {
         "@type": "Service",
-        name: title,
-        description: service.description,
+        name: sub.seoTitle ?? sub.name,
+        description,
         url: absoluteUrl(path),
         provider: { "@id": `${SITE_URL}/#organization` },
+        serviceType: service.name,
         areaServed: "Worldwide",
       },
       {
         "@type": "BreadcrumbList",
         itemListElement: [
           { "@type": "ListItem", position: 1, name: "Services", item: absoluteUrl("/services") },
-          { "@type": "ListItem", position: 2, name: service.name, item: absoluteUrl(path) },
+          { "@type": "ListItem", position: 2, name: service.name, item: absoluteUrl(`/services/${service.slug}`) },
+          { "@type": "ListItem", position: 3, name: sub.name, item: absoluteUrl(path) },
         ],
       },
-    ]),
+    ];
+    if (moneyFaqs) extra.push(faqJsonLd(moneyFaqs));
+    return {
+      path,
+      title,
+      description,
+      keywords,
+      ogImage: resolveOg(service.heroImage),
+      jsonLd: pageGraph(path, title, description, extra),
+    };
+  }
+
+  const title = service.seoTitle ?? service.name;
+  const description = truncate(service.description);
+  const catalog = serviceOfferCatalog(service);
+  const serviceNode: Record<string, unknown> = {
+    "@type": "Service",
+    name: title,
+    description: service.description,
+    url: absoluteUrl(path),
+    provider: { "@id": `${SITE_URL}/#organization` },
+    areaServed: "Worldwide",
+    serviceType: service.name,
+  };
+  if (catalog) serviceNode.hasOfferCatalog = catalog;
+
+  const extra: Record<string, unknown>[] = [
+    serviceNode,
+    {
+      "@type": "BreadcrumbList",
+      itemListElement: [
+        { "@type": "ListItem", position: 1, name: "Services", item: absoluteUrl("/services") },
+        { "@type": "ListItem", position: 2, name: service.name, item: absoluteUrl(path) },
+      ],
+    },
+  ];
+  if (moneyFaqs) extra.push(faqJsonLd(moneyFaqs));
+
+  return {
+    path,
+    title,
+    description,
+    keywords: service.keywords,
+    ogImage: resolveOg(service.heroImage),
+    jsonLd: pageGraph(path, title, description, extra),
   };
 }
 
@@ -255,12 +294,12 @@ export function getRouteSeo(path: string): RouteSeo {
 
   const staticSeo = STATIC_SEO[normalized];
   if (staticSeo) {
-    const extra =
-      normalized === "/"
-        ? [faqJsonLd(HOME_FAQS), localBusinessJsonLd()]
-        : normalized === "/contact"
-          ? [localBusinessJsonLd()]
-          : [];
+    const extra: Record<string, unknown>[] = [];
+    if (normalized === "/") {
+      extra.push(faqJsonLd(HOME_FAQS), localBusinessJsonLd());
+    } else if (normalized === "/contact") {
+      extra.push(localBusinessJsonLd());
+    }
     return {
       path: normalized,
       ...staticSeo,
@@ -345,6 +384,7 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   const keywordLine = route.keywords
     ? `<p><strong>Topics:</strong> ${escapeAttr(route.keywords)}</p>`
     : "";
+  const moneyFaqs = faqsForPath(route.path);
   const faqBlock =
     route.path === "/"
       ? `<section aria-label="Frequently asked questions">
@@ -356,7 +396,18 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   <h3>Where is manufacturing located?</h3>
   <p>Operations include Minnesota, United States headquarters and ISO-classified manufacturing and R&amp;D in Islamabad, Pakistan.</p>
 </section>`
-      : `<section aria-label="Related services">
+      : moneyFaqs
+        ? `<section aria-label="Frequently asked questions">
+  <h2>Frequently asked questions</h2>
+  ${moneyFaqs
+    .map(
+      (faq) =>
+        `<h3>${escapeAttr(faq.question)}</h3>
+  <p>${escapeAttr(faq.answer)}</p>`
+    )
+    .join("\n  ")}
+</section>`
+        : `<section aria-label="Related services">
   <h2>Related medical device services</h2>
   <p>${escapeAttr(route.description)}</p>
   <p>Continue to ISO 13485 contract manufacturing, medical device R&amp;D, product development, SaMD software, or regulatory compliance for Class I–III devices.</p>

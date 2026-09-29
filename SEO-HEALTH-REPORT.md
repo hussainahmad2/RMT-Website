@@ -15,7 +15,7 @@
 | Local | ~48 |
 | Images | ~52 |
 
-## Applied this round (pushed)
+## Applied (pushed)
 
 1. **MedicalBusiness JSON-LD on home** (not only `/contact`)
 2. **NAP:** US `postalCode` 56377 + telephone `+92-51-8480117` in Organization/MedicalBusiness + Footer
@@ -23,16 +23,19 @@
 4. **R&D money page:** expanded overview / keyPoints / deliverables for `research-development-engineering`
 5. **Orphan 404s:** `/services/turnkey-commissioning/*` → 301 to manufacturing / ISO 13485 QMS
 6. **robots.txt:** Content-Signal repeated on named AI search/training groups
-7. **Earlier:** per-route crawlable `#root` shell (fix home-H1 leak on money pages)
+7. **Per-route crawlable `#root` shell** (fix home-H1 leak on money pages)
+8. **Client JSON-LD:** `useSEO` / `setJsonLd` always emit `@graph`; service pages use `getRouteSeo` (no wipe of Organization/WebPage)
+9. **Person schema:** CEO `Person` on all routes; Organization `founder` / `employee` link
+10. **Money-page FAQs:** manufacturing / R&D / product-development FAQPage + no-JS FAQ blocks
+11. **IndexNow:** key file `/{key}.txt` + `npm run indexnow`
+12. **Security headers:** HSTS, X-Frame-Options, Permissions-Policy
+13. **Content image alts:** product showcase + Why RMT cards (decorative backgrounds remain `alt=""` + `aria-hidden`)
 
-## Still open
+## Still open (needs keys / larger work)
 
-- Richer no-JS body beyond SEO stub (true SSG/prerender)
-- Client `useSEO` JSON-LD replace vs prerender `@graph` consistency
-- IndexNow key + submit
-- Compress remaining empty alts on manufacturing images
-- PageSpeed/GSC when `GOOGLE_API_KEY` configured
-- Named Person schema for leadership on money pages
+- Richer no-JS body beyond SEO stub (true SSG/prerender of full React trees)
+- PageSpeed Insights / GSC live checks when `GOOGLE_API_KEY` is configured
+- Re-run Claude SEO specialists after deploy to refresh scores
 
 ## Capability list
 

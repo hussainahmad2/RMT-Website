@@ -7,3 +7,6 @@ export const DEFAULT_OG_IMAGE = `${SITE_URL}/opengraph.jpg`;
 export const SITE_PHONE = "+92-51-8480117";
 export const SITE_EMAIL = "info@rmt-usa.com";
 export const US_POSTAL_CODE = "56377";
+
+/** Public IndexNow key — file must exist at /{INDEXNOW_KEY}.txt */
+export const INDEXNOW_KEY = "rmtusa8f3a2c91e4b67d05";

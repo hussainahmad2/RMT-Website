@@ -52,7 +52,16 @@ function setJsonLd(data?: Record<string, unknown> | Record<string, unknown>[]) {
 
   document.getElementById("json-ld-seo")?.remove();
 
-  const payload = Array.isArray(data) ? data : [data];
+  // Always emit a single @graph document so client SEO matches prerendered Organization/WebPage nodes
+  let payload: Record<string, unknown>;
+  if (Array.isArray(data)) {
+    payload = { "@context": "https://schema.org", "@graph": data };
+  } else if (data["@graph"]) {
+    payload = { "@context": "https://schema.org", ...data };
+  } else {
+    payload = { "@context": "https://schema.org", "@graph": [data] };
+  }
+
   let el = existing as HTMLScriptElement | null;
   if (!el) {
     el = document.createElement("script");
@@ -60,7 +69,7 @@ function setJsonLd(data?: Record<string, unknown> | Record<string, unknown>[]) {
     el.type = "application/ld+json";
     document.head.appendChild(el);
   }
-  el.textContent = JSON.stringify(payload.length === 1 ? payload[0] : payload);
+  el.textContent = JSON.stringify(payload);
 }
 
 function resolveImageUrl(ogImage: string | undefined): string {

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "wouter";
 import {
   Cpu, Shield, Brain, FlaskConical, CircuitBoard,
@@ -23,15 +23,7 @@ import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { PageHero } from "@/components/shared/PageHero";
 import { useSEO } from "@/lib/seo";
 import { getRouteSeo } from "@/lib/route-seo";
-import {
-  buildBreadcrumbJsonLd,
-  buildServiceJsonLd,
-  buildSubServiceDescription,
-  buildSubServiceJsonLd,
-  buildSubServiceKeywords,
-  servicePath,
-  subServicePath,
-} from "@/lib/service-seo";
+import { servicePath, subServicePath } from "@/lib/service-seo";
 import { cn } from "@/lib/utils";
 import { ALL_SERVICES, type ServiceData, type SubServiceData } from "@/data/services";
 import {
@@ -4119,26 +4111,17 @@ export function ServiceDetail({
   const service = ALL_SERVICES.find((s) => s.slug === slug);
   const path = service ? servicePath(service.slug) : undefined;
 
-  const jsonLd = useMemo(() => {
-    if (!service) return undefined;
-    return [
-      buildServiceJsonLd(service),
-      buildBreadcrumbJsonLd([
-        { name: "Services", path: "/services" },
-        { name: service.name, path: servicePath(service.slug) },
-      ]),
-    ];
-  }, [service]);
+  const routeSeo = path ? getRouteSeo(path) : null;
 
-  useSEO({
-    title: service ? (service.seoTitle ?? service.name) : "Service Not Found",
-    description: service ? service.description : "Service not found.",
-    keywords: service?.keywords,
-    path,
-    ogImage: service?.heroImage,
-    noIndex: !service,
-    jsonLd,
-  });
+  useSEO(
+    routeSeo
+      ? { ...routeSeo, noIndex: !service }
+      : {
+          title: "Service Not Found",
+          description: "Service not found.",
+          noIndex: true,
+        }
+  );
 
   if (!service) {
     return (
@@ -4488,27 +4471,17 @@ export function SubServiceDetail({
   const subService = service?.subServices.find((ss) => ss.slug === subSlug);
   const path = service && subService ? subServicePath(service.slug, subService.slug) : undefined;
 
-  const jsonLd = useMemo(() => {
-    if (!service || !subService) return undefined;
-    return [
-      buildSubServiceJsonLd(service, subService),
-      buildBreadcrumbJsonLd([
-        { name: "Services", path: "/services" },
-        { name: service.name, path: servicePath(service.slug) },
-        { name: subService.name, path: subServicePath(service.slug, subService.slug) },
-      ]),
-    ];
-  }, [service, subService]);
+  const routeSeo = path ? getRouteSeo(path) : null;
 
-  useSEO({
-    title: subService && service ? (subService.seoTitle ?? `${subService.name} — ${service.shortName}`) : "Not Found",
-    description: service && subService ? buildSubServiceDescription(subService, service) : "Sub-service not found.",
-    keywords: service && subService ? buildSubServiceKeywords(subService, service) : undefined,
-    path,
-    ogImage: service?.heroImage,
-    noIndex: !service || !subService,
-    jsonLd,
-  });
+  useSEO(
+    routeSeo
+      ? { ...routeSeo, noIndex: !service || !subService }
+      : {
+          title: "Not Found",
+          description: "Sub-service not found.",
+          noIndex: true,
+        }
+  );
 
   if (!service || !subService) {
     return (
