@@ -1,5 +1,5 @@
-import { INSIGHT_ARTICLES } from "@/data/insights-content";
-import docxMap from "@/data/insights-images.json";
+import { INSIGHT_ARTICLES } from "./insights-content";
+import docxMap from "./insights-images.json";
 
 type DocxArticle = {
   index: number;
