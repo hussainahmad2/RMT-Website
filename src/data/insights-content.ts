@@ -43,7 +43,7 @@ export const INSIGHT_ARTICLES: InsightArticle[] = [
       "Revive Medical Technologies successfully launched the complete 22-RPM Remote Patient Monitoring solution — featuring a real-time web dashboard for clinicians and a secure mobile app for patients, built for scalable, patient-focused digital care.",
     author: { name: "RMT Software Team", role: "HealthTech Engineering", initials: "RMT", color: "bg-cyan-600" },
     image: "https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?w=800&q=80",
-    featured: true,
+    featured: false,
     tags: ["RPM", "Digital Health", "Mobile App"],
   },
   {
@@ -225,6 +225,55 @@ export const INSIGHT_ARTICLES: InsightArticle[] = [
     author: { name: "Michael Torres", role: "Software Architect", initials: "MT", color: "bg-teal-600" },
     image: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=800&q=80",
     tags: ["FHIR", "HL7", "Interoperability"],
+  },
+  {
+    id: "iso-13485-contract-manufacturing-guide",
+    category: "Manufacturing",
+    readTime: "9 min",
+    date: "Sep 2026",
+    title: "ISO 13485 Contract Manufacturing: How to Move from Prototype to Commercial Scale",
+    excerpt:
+      "A practical guide to choosing an ISO 13485 contract manufacturing partner for Class I–III devices — covering cleanrooms, design transfer, process validation, and scale-up without losing regulatory control.",
+    author: { name: "RMT Manufacturing", role: "Contract Manufacturing", initials: "RM", color: "bg-orange-600" },
+    image: "https://images.unsplash.com/photo-1581092160607-ee22621dd758?w=800&q=80",
+    featured: true,
+    tags: ["ISO 13485", "Contract Manufacturing", "Design Transfer", "Cleanroom"],
+  },
+  {
+    id: "samd-iec-62304-development-path",
+    category: "Software & AI",
+    readTime: "8 min",
+    date: "Sep 2026",
+    title: "SaMD Development Under IEC 62304: Building Software That Survives FDA and EU MDR Review",
+    excerpt:
+      "How medical software teams should structure IEC 62304 SDLC, cybersecurity, and verification evidence so Software as a Medical Device (SaMD) submissions move faster through FDA and EU MDR review.",
+    author: { name: "RMT Software Team", role: "HealthTech Engineering", initials: "RMT", color: "bg-cyan-600" },
+    image: "https://images.unsplash.com/photo-1551808525-51a94da548ce?w=800&q=80",
+    tags: ["SaMD", "IEC 62304", "FDA", "Software Validation"],
+  },
+  {
+    id: "fda-510k-eu-mdr-pathway",
+    category: "Regulatory",
+    readTime: "10 min",
+    date: "Sep 2026",
+    title: "FDA 510(k) vs EU MDR: Choosing the Right First Market Pathway for Your Device",
+    excerpt:
+      "Compare FDA 510(k) and EU MDR requirements for Class I–III devices — technical documentation, clinical evidence, QMS expectations, and how to sequence submissions without rework.",
+    author: { name: "RMT Regulatory Team", role: "Regulatory Affairs", initials: "RR", color: "bg-blue-600" },
+    image: "https://images.unsplash.com/photo-1450101499163-c8848c66ca85?w=800&q=80",
+    tags: ["FDA 510(k)", "EU MDR", "Regulatory Strategy", "Technical File"],
+  },
+  {
+    id: "medical-device-product-development-roadmap",
+    category: "Medical Devices",
+    readTime: "9 min",
+    date: "Sep 2026",
+    title: "Medical Device Product Development Roadmap: From Concept Feasibility to Design Transfer",
+    excerpt:
+      "A stage-by-stage roadmap for medical device product development — concept feasibility, design controls, prototyping, V&V, and design transfer into ISO 13485 manufacturing.",
+    author: { name: "RMT Product Team", role: "Product Development", initials: "RP", color: "bg-emerald-600" },
+    image: "https://images.unsplash.com/photo-1581094794329-c8112a89af12?w=800&q=80",
+    tags: ["Product Development", "Design Controls", "Prototyping", "Design Transfer"],
   },
 ];
 

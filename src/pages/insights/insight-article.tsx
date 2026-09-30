@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "wouter";
-import { ArrowLeft, Calendar, Clock, BookOpen, ExternalLink } from "lucide-react";
+import { ArrowLeft, ArrowRight, Calendar, Clock, BookOpen, ExternalLink } from "lucide-react";
 import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
@@ -101,6 +101,8 @@ export default function InsightArticlePage({ params }: InsightArticlePageProps) 
     );
   }
 
+  const primaryService = detail.relatedServices[0];
+
   return (
     <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
       <article className="page-container pt-4 pb-10 md:pt-6 md:pb-14">
@@ -138,7 +140,7 @@ export default function InsightArticlePage({ params }: InsightArticlePageProps) 
                 </span>
                 <span className="flex items-center gap-1.5">
                   <BookOpen className="h-4 w-4" />
-                  Source post
+                  Insight article
                 </span>
               </div>
 
@@ -156,14 +158,53 @@ export default function InsightArticlePage({ params }: InsightArticlePageProps) 
                 <p className="mb-5 text-xs font-bold uppercase tracking-[0.22em] text-primary">
                   From the Post
                 </p>
-                <div className="space-y-5">
-                  {renderBody(detail.body)}
-                </div>
+                <div className="space-y-5">{renderBody(detail.body)}</div>
               </div>
             </AnimatedSection>
+
+            {detail.relatedServices.length > 0 && (
+              <AnimatedSection delay={0.1} className="max-w-4xl">
+                <div className="rounded-3xl border border-border bg-card p-6 md:p-8 shadow-sm">
+                  <p className="mb-2 text-xs font-bold uppercase tracking-[0.22em] text-primary">
+                    Related services
+                  </p>
+                  <h2 className="font-heading text-2xl font-bold text-foreground mb-2">
+                    Put this into practice with RMT
+                  </h2>
+                  <p className="text-muted-foreground text-sm mb-5">
+                    Continue to the matching service page, then request a quote for your device program.
+                  </p>
+                  <div className="flex flex-wrap gap-2 mb-5">
+                    {detail.relatedServices.map((svc) => (
+                      <Link
+                        key={svc.href}
+                        href={svc.href}
+                        className="inline-flex items-center gap-1 text-sm font-medium text-primary border border-primary/20 bg-primary/5 rounded-full px-3 py-1.5 hover:bg-primary/10"
+                      >
+                        {svc.label} <ArrowRight className="w-3.5 h-3.5" />
+                      </Link>
+                    ))}
+                  </div>
+                  <div className="flex flex-wrap gap-3">
+                    {primaryService && (
+                      <Button asChild>
+                        <Link href={primaryService.href}>
+                          View {primaryService.label} <ArrowRight className="ml-2 w-4 h-4" />
+                        </Link>
+                      </Button>
+                    )}
+                    <Button asChild variant="outline">
+                      <Link href="/contact">
+                        Request a quote <ArrowRight className="ml-2 w-4 h-4" />
+                      </Link>
+                    </Button>
+                  </div>
+                </div>
+              </AnimatedSection>
+            )}
           </div>
 
-          <AnimatedSection delay={0.05} className="lg:sticky lg:top-24">
+          <AnimatedSection delay={0.05} className="lg:sticky lg:top-24 space-y-6">
             <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-2xl dark:border-white/10 dark:bg-slate-950/70">
               <div className="flex min-h-[24rem] items-center justify-center bg-card p-4 md:min-h-[34rem] md:p-6 dark:bg-slate-950/70">
                 <img
@@ -174,6 +215,26 @@ export default function InsightArticlePage({ params }: InsightArticlePageProps) 
                 />
               </div>
             </div>
+
+            {detail.relatedServices.length > 0 && (
+              <div className="rounded-3xl border border-border bg-card p-5 shadow-sm">
+                <p className="mb-3 text-xs font-bold uppercase tracking-[0.22em] text-primary">
+                  Related services
+                </p>
+                <ul className="space-y-2 mb-5">
+                  {detail.relatedServices.map((svc) => (
+                    <li key={svc.href}>
+                      <Link href={svc.href} className="text-sm font-medium text-primary hover:underline">
+                        {svc.label}
+                      </Link>
+                    </li>
+                  ))}
+                </ul>
+                <Button asChild className="w-full">
+                  <Link href="/contact">Request a quote</Link>
+                </Button>
+              </div>
+            )}
           </AnimatedSection>
         </div>
 

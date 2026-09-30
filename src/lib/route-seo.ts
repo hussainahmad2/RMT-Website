@@ -1,5 +1,6 @@
 import { ALL_SERVICES } from "../data/services";
 import { INSIGHT_ARTICLES } from "../data/insights-content";
+import { getInsightRelatedServices } from "../data/insights-posts";
 import { PROJECT_CASE_STUDIES } from "../data/projects-content";
 import { HOME_DESCRIPTION, HOME_FAQS, HOME_KEYWORDS, HOME_TITLE } from "../data/home-seo";
 import { faqsForPath } from "../data/money-page-faqs";
@@ -463,6 +464,11 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   const caseStudy = route.path.startsWith("/projects/")
     ? PROJECT_CASE_STUDIES.find((p) => `/projects/${p.slug}` === route.path)
     : undefined;
+  const insightId =
+    route.path.startsWith("/insights/") && route.path !== "/insights"
+      ? route.path.split("/").filter(Boolean)[1]
+      : undefined;
+  const insightServices = insightId ? getInsightRelatedServices(insightId) : [];
   const faqBlock = caseStudy
     ? `<section aria-label="Case study details">
   <h2>The challenge</h2>
@@ -476,6 +482,17 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   <h2>Related services</h2>
   <ul>
     ${caseStudy.relatedServices
+      .map((svc) => `<li><a href="${escapeAttr(svc.href)}">${escapeAttr(svc.label)}</a></li>`)
+      .join("\n    ")}
+    <li><a href="/contact">Request a quote</a></li>
+  </ul>
+</section>`
+    : insightServices.length > 0
+      ? `<section aria-label="Related services">
+  <h2>Related medical device services</h2>
+  <p>${escapeAttr(route.description)}</p>
+  <ul>
+    ${insightServices
       .map((svc) => `<li><a href="${escapeAttr(svc.href)}">${escapeAttr(svc.label)}</a></li>`)
       .join("\n    ")}
     <li><a href="/contact">Request a quote</a></li>
