@@ -1,5 +1,6 @@
 import { Link } from "wouter";
 import { ALL_SERVICES } from "@/data/services";
+import { PROJECT_CASE_STUDIES, projectPath } from "@/data/projects-content";
 import { useSEO } from "@/lib/seo";
 import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath, subServicePath } from "@/lib/service-seo";
@@ -38,6 +39,19 @@ export default function SitemapPage() {
               <li key={page.href}>
                 <Link href={page.href} className="text-primary hover:underline text-sm">
                   {page.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section className="mb-12">
+          <h2 className="font-heading text-2xl font-bold text-foreground mb-4">Case Studies</h2>
+          <ul className="grid sm:grid-cols-2 gap-2">
+            {PROJECT_CASE_STUDIES.map((project) => (
+              <li key={project.slug}>
+                <Link href={projectPath(project.slug)} className="text-primary hover:underline text-sm">
+                  {project.title}
                 </Link>
               </li>
             ))}

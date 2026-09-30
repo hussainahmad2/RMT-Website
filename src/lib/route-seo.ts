@@ -1,5 +1,6 @@
 import { ALL_SERVICES } from "../data/services";
 import { INSIGHT_ARTICLES } from "../data/insights-content";
+import { PROJECT_CASE_STUDIES } from "../data/projects-content";
 import { HOME_DESCRIPTION, HOME_FAQS, HOME_KEYWORDS, HOME_TITLE } from "../data/home-seo";
 import { faqsForPath } from "../data/money-page-faqs";
 import { DEFAULT_OG_IMAGE, SITE_NAME, SITE_URL } from "./site-config";
@@ -288,6 +289,45 @@ function insightSeo(path: string): RouteSeo | null {
   };
 }
 
+function projectSeo(path: string): RouteSeo | null {
+  const slug = path.split("/").filter(Boolean)[1];
+  if (!slug) return null;
+  const project = PROJECT_CASE_STUDIES.find((item) => item.slug === slug);
+  if (!project) return null;
+  const description = truncate(project.description);
+  const keywords = [
+    project.category,
+    ...project.tags,
+    "medical device case study",
+    "Revive Medical Technologies",
+  ].join(", ");
+  const relatedLinks = project.relatedServices.map((svc) => ({
+    "@type": "WebPage",
+    name: svc.label,
+    url: absoluteUrl(svc.href),
+  }));
+  return {
+    path,
+    title: `${project.title} | Case Study`,
+    description,
+    keywords,
+    ogImage: resolveOg(project.image),
+    jsonLd: pageGraph(path, project.title, description, [
+      {
+        "@type": "Article",
+        headline: project.title,
+        description,
+        articleSection: project.category,
+        keywords: project.tags.join(", "),
+        author: { "@type": "Organization", name: SITE_NAME },
+        publisher: { "@id": `${SITE_URL}/#organization` },
+        mainEntityOfPage: absoluteUrl(path),
+        about: relatedLinks,
+      },
+    ]),
+  };
+}
+
 export function getRouteSeo(path: string): RouteSeo {
   const normalized = path.startsWith("/") ? path : `/${path}`;
   const service = serviceSeo(normalized);
@@ -296,6 +336,11 @@ export function getRouteSeo(path: string): RouteSeo {
   if (normalized.startsWith("/insights/") && normalized !== "/insights") {
     const article = insightSeo(normalized);
     if (article) return article;
+  }
+
+  if (normalized.startsWith("/projects/") && normalized !== "/projects") {
+    const project = projectSeo(normalized);
+    if (project) return project;
   }
 
   const staticSeo = STATIC_SEO[normalized];
@@ -415,8 +460,28 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
     ? `<p><strong>Topics:</strong> ${escapeAttr(route.keywords)}</p>`
     : "";
   const moneyFaqs = faqsForPath(route.path);
-  const faqBlock =
-    route.path === "/"
+  const caseStudy = route.path.startsWith("/projects/")
+    ? PROJECT_CASE_STUDIES.find((p) => `/projects/${p.slug}` === route.path)
+    : undefined;
+  const faqBlock = caseStudy
+    ? `<section aria-label="Case study details">
+  <h2>The challenge</h2>
+  <p>${escapeAttr(caseStudy.challenge)}</p>
+  <h2>Our solution</h2>
+  <p>${escapeAttr(caseStudy.solution)}</p>
+  <h2>Key outcomes</h2>
+  <ul>
+    ${caseStudy.outcomes.map((o) => `<li>${escapeAttr(o)}</li>`).join("\n    ")}
+  </ul>
+  <h2>Related services</h2>
+  <ul>
+    ${caseStudy.relatedServices
+      .map((svc) => `<li><a href="${escapeAttr(svc.href)}">${escapeAttr(svc.label)}</a></li>`)
+      .join("\n    ")}
+    <li><a href="/contact">Request a quote</a></li>
+  </ul>
+</section>`
+    : route.path === "/"
       ? `<section aria-label="Frequently asked questions">
   <h2>Medical device manufacturing and R&amp;D FAQs</h2>
   <h3>What ISO 13485 medical device manufacturing services are available?</h3>
@@ -444,7 +509,7 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
 </section>`;
 
   const staticMain = `<main data-seo-static>
-  <h1>${escapeAttr(route.title)}</h1>
+  <h1>${escapeAttr(caseStudy ? caseStudy.title : route.title)}</h1>
   <p>${escapeAttr(route.description)}</p>
   ${keywordLine}
   ${faqBlock}
@@ -452,6 +517,7 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
     <ul>
       <li><a href="/">Home — ISO 13485 Manufacturing &amp; R&amp;D</a></li>
       <li><a href="/services">Medical Device Services</a></li>
+      <li><a href="/projects">Medical Device Case Studies</a></li>
       <li><a href="/services/contract-manufacturing">ISO 13485 Contract Manufacturing</a></li>
       <li><a href="/services/engineering-product-development/research-development-engineering">Medical Device R&amp;D</a></li>
       <li><a href="/services/product-development">Product Development</a></li>

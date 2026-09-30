@@ -22,6 +22,7 @@ const SubServiceRoute = lazy(() =>
   import("@/pages/services/SubServiceRoute").then((m) => ({ default: m.SubServiceRoute }))
 );
 const Projects = lazy(() => import("@/pages/projects"));
+const CaseStudy = lazy(() => import("@/pages/projects/case-study"));
 const Careers = lazy(() => import("@/pages/careers"));
 const Contact = lazy(() => import("@/pages/contact"));
 const Testing = lazy(() => import("@/pages/testing"));
@@ -66,6 +67,7 @@ function Router() {
           <Route path="/services" component={ServicesOverview} />
           <Route path="/services/:slug/:subSlug" component={SubServiceRoute} />
           <Route path="/services/:slug" component={ServiceRoute} />
+          <Route path="/projects/:slug" component={CaseStudy} />
           <Route path="/projects" component={Projects} />
           <Route path="/testing" component={Testing} />
           <Route path="/training" component={Training} />

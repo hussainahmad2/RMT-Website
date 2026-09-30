@@ -1,4 +1,5 @@
 import { INSIGHT_ARTICLES } from "../data/insights-content";
+import { PROJECT_CASE_STUDIES } from "../data/projects-content";
 import { ALL_SERVICES } from "../data/services";
 import { SITE_URL } from "./site-config";
 
@@ -80,6 +81,14 @@ export function getAllSitemapEntries(): SitemapEntry[] {
     entries.push({
       path: `/insights/${article.id}`,
       priority: "0.6",
+      changefreq: "monthly",
+    });
+  }
+
+  for (const project of PROJECT_CASE_STUDIES) {
+    entries.push({
+      path: `/projects/${project.slug}`,
+      priority: "0.75",
       changefreq: "monthly",
     });
   }
