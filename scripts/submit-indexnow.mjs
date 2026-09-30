@@ -31,6 +31,17 @@ const defaultUrls = [
   "https://rmt-usa.com/services/regulatory-compliance",
   "https://rmt-usa.com/about",
   "https://rmt-usa.com/contact",
+  "https://rmt-usa.com/media",
+  "https://rmt-usa.com/projects",
+  "https://rmt-usa.com/insights/iso-13485-contract-manufacturing-guide",
+  "https://rmt-usa.com/insights/samd-iec-62304-development-path",
+  "https://rmt-usa.com/insights/fda-510k-eu-mdr-pathway",
+  "https://rmt-usa.com/insights/medical-device-product-development-roadmap",
+  "https://rmt-usa.com/projects/class-iii-cardiac-monitor-ce-mark",
+  "https://rmt-usa.com/projects/ai-diagnostic-imaging-samd",
+  "https://rmt-usa.com/projects/poc-biosensor-manufacturing-scale-up",
+  "https://rmt-usa.com/projects/iso-13485-qms-medtech-startup",
+  "https://rmt-usa.com/projects/orthopaedic-implant-contract-manufacturing",
   "https://rmt-usa.com/sitemap.xml",
 ];
 

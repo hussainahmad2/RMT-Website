@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "wouter";
-import { MapPin, Mail, Phone, Linkedin, Youtube, Facebook } from "lucide-react";
+import { MapPin, Mail, Phone, Linkedin, Youtube } from "lucide-react";
 import { ALL_SERVICES } from "@/data/services";
 import { SITE_EMAIL, SITE_PHONE } from "@/lib/site-config";
 
@@ -39,7 +39,6 @@ export const Footer = () => {
               {[
                 { href: "https://www.linkedin.com/company/revivemedicaltechnologies", Icon: Linkedin, label: "LinkedIn" },
                 { href: "https://www.youtube.com/@ReviveMeditech", Icon: Youtube, label: "YouTube" },
-                { href: "https://facebook.com", Icon: Facebook, label: "Facebook" },
               ].map(({ href, Icon, label }) => (
                 <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
                   className="w-8 h-8 rounded-full border border-white/15 flex items-center justify-center text-white/45 hover:text-primary hover:border-primary transition-colors">
@@ -62,6 +61,8 @@ export const Footer = () => {
                 { label: "Testing", href: "/testing" },
                 { label: "Training & Workshops", href: "/training" },
                 { label: "Insights", href: "/insights" },
+                { label: "Projects", href: "/projects" },
+                { label: "Media kit", href: "/media" },
                 { label: "Gallery", href: "/gallery" },
                 { label: "Careers", href: "/careers" },
                 { label: "Contact", href: "/contact" },

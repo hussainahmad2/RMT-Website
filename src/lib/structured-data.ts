@@ -101,6 +101,10 @@ export function localBusinessJsonLd() {
       "medical device R&D",
       "contract manufacturing",
     ],
+    sameAs: [
+      "https://www.linkedin.com/company/revivemedicaltechnologies",
+      "https://www.youtube.com/@ReviveMeditech",
+    ],
     contactPoint: [
       {
         "@type": "ContactPoint",

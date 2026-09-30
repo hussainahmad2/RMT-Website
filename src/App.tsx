@@ -33,6 +33,7 @@ const Gallery = lazy(() => import("@/pages/gallery"));
 const Testimonials = lazy(() => import("@/pages/testimonials"));
 const Products = lazy(() => import("@/pages/products"));
 const Pharmaceutical = lazy(() => import("@/pages/pharmaceutical"));
+const Media = lazy(() => import("@/pages/media"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const SitemapPage = lazy(() => import("@/pages/sitemap"));
 
@@ -77,6 +78,7 @@ function Router() {
           <Route path="/testimonials" component={Testimonials} />
           <Route path="/products" component={Products} />
           <Route path="/pharmaceutical" component={Pharmaceutical} />
+          <Route path="/media" component={Media} />
           <Route path="/careers" component={Careers} />
           <Route path="/contact" component={Contact} />
           <Route path="/sitemap" component={SitemapPage} />

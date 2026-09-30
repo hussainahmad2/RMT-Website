@@ -18,6 +18,7 @@ const MAIN_PAGES = [
   { label: "Insights", href: "/insights" },
   { label: "Gallery", href: "/gallery" },
   { label: "Careers", href: "/careers" },
+  { label: "Media kit", href: "/media" },
   { label: "Contact", href: "/contact" },
 ];
 

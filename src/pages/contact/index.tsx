@@ -23,7 +23,7 @@ const offices = [
   {
     city: "United States",
     label: "Headquarters",
-    address: "St. Cloud Edgewater Business Centre\nSartell, Minnesota, United States",
+    address: "St. Cloud Edgewater Business Centre\nSartell, Minnesota 56377, United States",
     email: "info@rmt-usa.com",
   },
   {

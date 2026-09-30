@@ -111,6 +111,13 @@ const STATIC_SEO: Record<string, StaticSeo> = {
     keywords:
       "contact medical device manufacturer, medical device R&D inquiry, contract manufacturing quote, Minnesota",
   },
+  "/media": {
+    title: "Media Kit & Citation NAP | Revive Medical Technologies",
+    description:
+      "Official company name, NAP, logos, and directory listing guidance for Revive Medical Technologies Inc. — for partners, press, and citation sites.",
+    keywords:
+      "RMT media kit, Revive Medical Technologies NAP, medical device manufacturer directory",
+  },
   "/sitemap": {
     title: "Sitemap",
     description:
