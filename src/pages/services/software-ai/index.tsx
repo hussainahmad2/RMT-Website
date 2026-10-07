@@ -82,7 +82,7 @@ export default function SoftwareAiServicePage() {
                 <p className="text-primary text-xs font-bold uppercase tracking-widest">About Us</p>
               </div>
               <h2 className="font-heading text-3xl md:text-4xl font-bold text-foreground mb-4 leading-tight">
-                Software at the Heart of Modern Medical Devices
+                Healthcare Solution Software — SaMD, AI, ONC, CCM & PCM
               </h2>
               <div className="h-px w-16 bg-primary/50 mb-5" />
               {SOFTWARE_AI_OVERVIEW.map((para, i) => (

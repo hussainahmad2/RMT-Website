@@ -262,7 +262,7 @@ export function ManufacturingServiceDetail({ service }: { service: ServiceData }
       </PageSection>
 
       <PageSection variant="gradient-blue" bgImage={MDM_SECTION_IMAGES.why} overlayIntensity="medium" dots className="py-14 sm:py-16">
-        <SectionHeading title="Why Choose Us for Manufacturing" light className="mb-10" />
+        <SectionHeading title="Why Choose Us for Device Manufacturing" light className="mb-10" />
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {MANUFACTURING_WHY_CHOOSE.map((item, i) => {
             const Icon = WHY_ICONS[i] ?? CheckCircle;

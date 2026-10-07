@@ -44,11 +44,11 @@ const STATIC_SEO: Record<string, StaticSeo> = {
       "Revive Medical Technologies, medical device company Minnesota, ISO 13485 manufacturer, medical device R&D, RMT USA",
   },
   "/services": {
-    title: "Medical Device Services: Manufacturing, R&D & Software",
+    title: "Medical Device Services | Manufacturing, Regulatory & Software",
     description:
-      "Browse ISO 13485 manufacturing, product development, SaMD software, FDA/EU MDR regulatory, testing, and production equipment services from RMT.",
+      "Browse device manufacturing, regulatory compliance, software services, machine manufacturing, R&D, and testing services from RMT.",
     keywords:
-      "medical device services, contract manufacturing, medical device R&D, SaMD development, FDA regulatory consulting, ISO 13485",
+      "OEM manufacturing, medical device manufacturing, healthcare solution, AI solution, ONC certification, CCM PCM, medical device R&D, manufacturing R&D, regulatory compliance, software services, machine manufacturing, SaMD, ISO 13485",
   },
   "/pharmaceutical": {
     title: "Pharmaceutical Development Services",
@@ -507,11 +507,13 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
 </section>`
     : route.path === "/"
       ? `<section aria-label="Frequently asked questions">
-  <h2>Medical device manufacturing and R&amp;D FAQs</h2>
-  <h3>What ISO 13485 medical device manufacturing services are available?</h3>
-  <p>ISO 13485 contract manufacturing in classified cleanrooms for Class I, II, and III medical devices, including design transfer, process validation, and pilot-to-commercial scale-up.</p>
-  <h3>Is medical device research and development supported?</h3>
-  <p>Yes. Medical device R&amp;D covers prototype engineering, biomaterials, catheters, production equipment, and transfer into manufacturing.</p>
+  <h2>Device manufacturing, regulatory compliance, and software FAQs</h2>
+  <h3>What device manufacturing services are available?</h3>
+  <p>Device manufacturing and ISO 13485 contract manufacturing in classified cleanrooms for Class I, II, and III medical devices, including design transfer, process validation, and scale-up.</p>
+  <h3>Do you offer regulatory compliance services?</h3>
+  <p>Yes. Regulatory compliance covers FDA 510(k), EU MDR, ISO 13485 QMS, and risk management for medical devices.</p>
+  <h3>What software services do you provide?</h3>
+  <p>Software services include custom medical software, SaMD, AI solutions, cloud platforms, and IEC 62304 documentation.</p>
   <h3>Where is manufacturing located?</h3>
   <p>Operations include Minnesota, United States headquarters and ISO-classified manufacturing and R&amp;D in Islamabad, Pakistan.</p>
 </section>`
@@ -529,7 +531,7 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
         : `<section aria-label="Related services">
   <h2>Related medical device services</h2>
   <p>${escapeAttr(route.description)}</p>
-  <p>Continue to ISO 13485 contract manufacturing, medical device R&amp;D, product development, SaMD software, or regulatory compliance for Class I–III devices.</p>
+  <p>Continue to device manufacturing, regulatory compliance, software services, machine manufacturing, or medical device R&amp;D for Class I–III devices.</p>
 </section>`;
 
   const staticMain = `<main data-seo-static>
@@ -542,11 +544,12 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
       <li><a href="/">Home — ISO 13485 Manufacturing &amp; R&amp;D</a></li>
       <li><a href="/services">Medical Device Services</a></li>
       <li><a href="/projects">Medical Device Case Studies</a></li>
-      <li><a href="/services/contract-manufacturing">ISO 13485 Contract Manufacturing</a></li>
+      <li><a href="/services/contract-manufacturing">Device Manufacturing</a></li>
+      <li><a href="/services/regulatory-compliance">Regulatory Compliance</a></li>
+      <li><a href="/services/software-ai">Software Services</a></li>
+      <li><a href="/services/production-equipment-engineering">Machine Manufacturing</a></li>
       <li><a href="/services/engineering-product-development/research-development-engineering">Medical Device R&amp;D</a></li>
       <li><a href="/services/product-development">Product Development</a></li>
-      <li><a href="/services/software-ai">SaMD Software</a></li>
-      <li><a href="/services/regulatory-compliance">FDA 510(k) &amp; EU MDR Compliance</a></li>
       <li><a href="/services/mbl-laboratory">Sterility &amp; Endotoxin Testing</a></li>
       <li><a href="/contact">Contact</a></li>
     </ul>

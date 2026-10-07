@@ -17,7 +17,8 @@ export const PRODUCTION_EQUIPMENT_KEY_METRICS = [
 ] as const;
 
 export const PRODUCTION_EQUIPMENT_INTRO = [
-  "The precision, reliability, and regulatory compliance of a medical device begins long before the device itself is assembled. It begins with the equipment that makes it. At Revive Medical Technologies, we design, develop, and deliver purpose-built manufacturing equipment for the medical device industry — engineered from the ground up to perform in cleanroom environments, meet validation requirements, and sustain commercial-scale production.",
+  "Machine manufacturing for medical devices means building the production equipment that makes Class I–III products — forming, bonding, assembly, and cleanroom-ready lines. If you searched for machine manufacturing or production equipment, this is RMT’s engineering offering.",
+  "The precision and regulatory compliance of a medical device begin with the equipment that makes it. At Revive Medical Technologies, we design, develop, and deliver purpose-built manufacturing equipment engineered for cleanroom environments, validation requirements, and commercial-scale production.",
   "From concept and feasibility through fabrication, qualification, and ongoing support, our equipment engineering teams work at the intersection of mechanical precision, process science, and regulatory compliance — so your production lines are ready from day one.",
 ] as const;
 

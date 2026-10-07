@@ -244,7 +244,7 @@ export default function RegulatoryComplianceServicePage() {
             <div className="lg:col-span-3 space-y-6">
               <SectionIntro
                 eyebrow="Overview"
-                title="Navigate global regulatory pathways, risk management, and quality standards with confidence."
+                title="Regulatory compliance for medical devices — FDA, EU MDR, QMS, and risk management."
                 description={SERVICE.description}
               />
               <div className="space-y-4">

@@ -44,7 +44,7 @@ export function MoneyPageRelatedServices({ currentPath }: { currentPath: string 
           Related medical device services
         </h2>
         <p className="mt-3 max-w-2xl text-sm leading-relaxed text-muted-foreground sm:text-base">
-          Continue with ISO 13485 manufacturing, medical device R&D, product development, regulatory compliance, or SaMD software.
+          Continue with OEM manufacturing, medical device R&D, healthcare software, AI solutions, ONC/CCM/PCM, or regulatory compliance.
         </p>
         <ul className="mt-8 grid gap-3 sm:grid-cols-2">
           {links.map((link) => (

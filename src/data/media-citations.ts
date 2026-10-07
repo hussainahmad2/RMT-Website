@@ -40,11 +40,12 @@ export const CITATION_NAP = {
     { label: "YouTube", href: "https://www.youtube.com/@ReviveMeditech" },
   ],
   moneyPages: [
-    { label: "Contract Manufacturing", href: "https://rmt-usa.com/services/contract-manufacturing" },
+    { label: "Device Manufacturing", href: "https://rmt-usa.com/services/contract-manufacturing" },
+    { label: "Regulatory Compliance", href: "https://rmt-usa.com/services/regulatory-compliance" },
+    { label: "Software Services", href: "https://rmt-usa.com/services/software-ai" },
+    { label: "Machine Manufacturing", href: "https://rmt-usa.com/services/production-equipment-engineering" },
     { label: "Medical Device R&D", href: "https://rmt-usa.com/services/engineering-product-development/research-development-engineering" },
     { label: "Product Development", href: "https://rmt-usa.com/services/product-development" },
-    { label: "Software & AI (SaMD)", href: "https://rmt-usa.com/services/software-ai" },
-    { label: "Regulatory Compliance", href: "https://rmt-usa.com/services/regulatory-compliance" },
   ],
 } as const;
 
