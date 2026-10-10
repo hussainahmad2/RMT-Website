@@ -1,4 +1,5 @@
 import { INSIGHT_ARTICLES } from "../data/insights-content";
+import { getAllMoneyTopicPaths } from "../data/money-topics";
 import { PROJECT_CASE_STUDIES } from "../data/projects-content";
 import { ALL_SERVICES } from "../data/services";
 import { SITE_URL } from "./site-config";
@@ -95,6 +96,14 @@ export function getAllSitemapEntries(): SitemapEntry[] {
       path: `/projects/${project.slug}`,
       priority: "0.75",
       changefreq: "monthly",
+    });
+  }
+
+  for (const path of getAllMoneyTopicPaths()) {
+    entries.push({
+      path,
+      priority: "0.85",
+      changefreq: "weekly",
     });
   }
 

@@ -36,6 +36,7 @@ const Pharmaceutical = lazy(() => import("@/pages/pharmaceutical"));
 const Media = lazy(() => import("@/pages/media"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const SitemapPage = lazy(() => import("@/pages/sitemap"));
+const TopicPage = lazy(() => import("@/pages/topics/topic-page"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -82,6 +83,7 @@ function Router() {
           <Route path="/careers" component={Careers} />
           <Route path="/contact" component={Contact} />
           <Route path="/sitemap" component={SitemapPage} />
+          <Route path="/topics/:slug" component={TopicPage} />
           <Route component={NotFound} />
         </Switch>
       <Footer />

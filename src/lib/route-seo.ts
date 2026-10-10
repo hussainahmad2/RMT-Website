@@ -1,6 +1,7 @@
 import { ALL_SERVICES } from "../data/services";
 import { INSIGHT_ARTICLES } from "../data/insights-content";
 import { getInsightRelatedServices } from "../data/insights-posts";
+import { getMoneyTopic } from "../data/money-topics";
 import { PROJECT_CASE_STUDIES } from "../data/projects-content";
 import { HOME_DESCRIPTION, HOME_FAQS, HOME_KEYWORDS, HOME_TITLE } from "../data/home-seo";
 import { faqsForPath } from "../data/money-page-faqs";
@@ -336,6 +337,24 @@ function projectSeo(path: string): RouteSeo | null {
   };
 }
 
+function topicSeo(path: string): RouteSeo | null {
+  if (!path.startsWith("/topics/") || path === "/topics") return null;
+  const slug = path.slice("/topics/".length);
+  const topic = getMoneyTopic(slug);
+  if (!topic) return null;
+  const keywords = [topic.keyword, "Revive Medical Technologies", "RMT", "medical device"].join(", ");
+  return {
+    path,
+    title: `${topic.title} | Revive Medical Technologies`,
+    description: truncate(topic.description),
+    keywords,
+    ogImage: DEFAULT_OG_IMAGE,
+    jsonLd: pageGraph(path, topic.title, topic.description, [
+      faqJsonLd(topic.faqs.map((f) => ({ question: f.q, answer: f.a }))),
+    ]),
+  };
+}
+
 export function getRouteSeo(path: string): RouteSeo {
   const normalized = path.startsWith("/") ? path : `/${path}`;
   const service = serviceSeo(normalized);
@@ -350,6 +369,9 @@ export function getRouteSeo(path: string): RouteSeo {
     const project = projectSeo(normalized);
     if (project) return project;
   }
+
+  const topic = topicSeo(normalized);
+  if (topic) return topic;
 
   const staticSeo = STATIC_SEO[normalized];
   if (staticSeo) {
