@@ -412,12 +412,7 @@ def main():
         title = project_titles.get(slug, slug.replace("-", " "))
         MONEY_KEYWORDS.setdefault(path, [title, f"{title} case study"])
 
-    # Trim or pad to ~200 URLs
-    # Prefer keeping all unique real URLs; if < 200, we already have what exists
-    # If > 200, keep first 200 prioritizing money/static/services then insights/projects
-    if len(urls_order) > 200:
-        urls_order = urls_order[:200]
-
+    # Keep all unique real URLs (services + topics + insights + projects + static)
     for path in urls_order:
         label = path.strip("/").replace("/", " › ").replace("-", " ") or "Home"
         kws = MONEY_KEYWORDS.get(path) or default_keywords(path, label)
@@ -478,9 +473,8 @@ def main():
     lines = [
         "/**",
         " * Keyword → primary URL map for Google indexing / on-page SEO.",
-        " * Target: ~200 URLs and ~200+ keywords (short-head + money long-tail).",
-        " * Auto-maintained structure — prefer editing MONEY_KEYWORDS via scripts/build-200-keyword-map.py",
-        " * or append manually below.",
+        " * Keyword → URL map for indexing (short-head + money long-tail + topic landings).",
+        " * Rebuild with: python scripts/build-200-keyword-map.py",
         " */",
         "export type ShortKeywordTarget = {",
         "  keyword: string;",

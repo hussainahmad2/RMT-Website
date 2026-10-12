@@ -23,7 +23,7 @@ SCOPES = [
 INDEXNOW_KEY = "rmtusa8f3a2c91e4b67d05"
 
 
-def load_urls() -> list[str]:
+def load_urls(only_prefix: str | None = None) -> list[str]:
     text = (ROOT / "src/data/short-keywords.ts").read_text(encoding="utf-8")
     paths = []
     seen = set()
@@ -31,13 +31,24 @@ def load_urls() -> list[str]:
         if url in seen:
             continue
         seen.add(url)
+        if only_prefix and not url.startswith(only_prefix):
+            continue
         paths.append(ORIGIN if url == "/" else f"{ORIGIN}{url}")
     return paths
 
 
 def main():
-    urls = load_urls()
-    print(f"URLs to push: {len(urls)}", flush=True)
+    import sys
+
+    only_prefix = None
+    for arg in sys.argv[1:]:
+        if arg.startswith("--prefix="):
+            only_prefix = arg.split("=", 1)[1]
+        if arg == "--topics-only":
+            only_prefix = "/topics/"
+
+    urls = load_urls(only_prefix)
+    print(f"URLs to push: {len(urls)} prefix={only_prefix or '*'}", flush=True)
     if not SA_PATH.exists():
         raise SystemExit(f"Missing {SA_PATH}")
 
