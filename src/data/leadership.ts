@@ -32,18 +32,6 @@ export const C_LEVEL_LEADERSHIP: LeadershipMember[] = [
     bio: "Leads financial planning, reporting, and governance across RMT's global operations.",
   },
   {
-    name: "Ammad Ahmed",
-    role: "Chief Product Officer",
-    image: teamImage("c-level", "ammad.webp"),
-    bio: "Drives product strategy from concept through design validation and commercial readiness.",
-  },
-  {
-    name: "Muhammad Hafeez Khan",
-    role: "Chief Growth Officer",
-    image: teamImage("c-level", "hafeez.webp"),
-    bio: "Leads business development, partnerships, and market expansion in medical devices and digital health.",
-  },
-  {
     name: "Ibraheem Raza",
     role: "Chief Technology Officer",
     image: teamImage("c-level", "ibrahim.webp"),
@@ -227,12 +215,6 @@ export const QUALITY_CONTROL_WING: LeadershipMember[] = [
     bio: "Leads quality management across ISO 13485 systems, audits, and QMS excellence.",
   },
   {
-    name: "Hafsa Inam",
-    role: "Manager, QA",
-    image: teamImage("quality-control-wing", "hafsa.webp"),
-    bio: "Manages quality assurance processes, documentation control, and audit readiness.",
-  },
-  {
     name: "Sualeha Naveed",
     role: "Manager, QC (R&D)",
     image: teamImage("quality-control-wing", "sualeha.webp"),
@@ -303,12 +285,6 @@ export const FINANCE_DEPARTMENT: LeadershipMember[] = [
 
 /** HR & Admin Support Wing */
 export const HR_ADMIN_SUPPORT_WING: LeadershipMember[] = [
-  {
-    name: "Sonia Saleem",
-    role: "Manager, HR",
-    image: teamImage("hr-admin-wing", "sonia.webp"),
-    bio: "Leads recruitment, employee relations, and HR policy across RMT's global teams.",
-  },
   {
     name: "Muhammad Asad Tariq",
     role: "Manager, Admin",
