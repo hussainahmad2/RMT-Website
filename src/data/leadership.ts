@@ -28,7 +28,7 @@ export const C_LEVEL_LEADERSHIP: LeadershipMember[] = [
   {
     name: "Ali Asghar",
     role: "Chief Financial Officer",
-    image: teamImage("c-level", "ali.webp"),
+    image: teamImage("c-level", "ali.png"),
     bio: "Leads financial planning, reporting, and governance across RMT's global operations.",
   },
   {
@@ -286,10 +286,22 @@ export const FINANCE_DEPARTMENT: LeadershipMember[] = [
 /** HR & Admin Support Wing */
 export const HR_ADMIN_SUPPORT_WING: LeadershipMember[] = [
   {
+    name: "Umer Abbasi",
+    role: "Manager, HR/Admin",
+    image: teamImage("hr-admin-wing", "umer-abbasi.jpg"),
+    bio: "Leads HR and administrative operations, people support, and office coordination across RMT.",
+  },
+  {
     name: "Muhammad Asad Tariq",
     role: "Manager, Admin",
     image: teamImage("hr-admin-wing", "asad.webp"),
     bio: "Oversees office management, facilities, and internal administrative support services.",
+  },
+  {
+    name: "Naeem",
+    role: "HR Admin Coordinator",
+    image: teamImage("hr-admin-wing", "naeem.jpg"),
+    bio: "Coordinates HR and admin activities including documentation, scheduling, and day-to-day staff support.",
   },
 ];
 
