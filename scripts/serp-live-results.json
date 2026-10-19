@@ -1,0 +1,44 @@
+{
+  "checked_at": "2026-10-10",
+  "method": "Live Google US SERP via browser + web search cross-check + GSC Search Analytics",
+  "keyword_map_total": 42,
+  "unique_index_urls": 19,
+  "brand_controls": [
+    {
+      "keyword": "revive medical technologies",
+      "google_page": 1,
+      "approx_rank": 1,
+      "note": "rmt-usa.com #1 with sitelinks + GBP"
+    },
+    {
+      "keyword": "rmt usa / rmt medical",
+      "google_page": 1,
+      "note": "Brand queries rank; GSC top impressions"
+    }
+  ],
+  "live_google_page1_checks": [
+    {"keyword": "OEM manufacturing", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "OEM manufacturing medical device", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "medical device manufacturing", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "contract manufacturing", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "regulatory compliance", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "ONC certification", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "medical device R&D", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "FDA compliance", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "SaMD", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "sterility testing", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "CCM PCM implementation", "google_page": null, "status": "NOT_ON_PAGE_1"},
+    {"keyword": "healthcare AI", "google_page": null, "status": "NOT_ON_PAGE_1_unless_brand_added"}
+  ],
+  "gsc_exact_short_keywords": {
+    "hits_with_impressions": 5,
+    "misses": 37,
+    "note": "Only long-tail partial matches; no exact short-head rankings with meaningful impressions"
+  },
+  "index_blocker": {
+    "indexed_money_pages": 4,
+    "discovered": 4,
+    "unknown": 12,
+    "note": "Most short-keyword landing pages are not indexed yet — Google cannot rank unindexed URLs"
+  }
+}
