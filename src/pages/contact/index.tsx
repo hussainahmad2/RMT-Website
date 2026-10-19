@@ -7,6 +7,7 @@ import { useForm } from "react-hook-form";
 import { useSEO } from "@/lib/seo";
 import { getRouteSeo } from "@/lib/route-seo";
 import { ALL_SERVICES } from "@/data/services";
+import { CONTACT_FAQS } from "@/data/money-page-faqs";
 import { LogoSpinner } from "@/components/shared/LogoSpinner";
 import { sendFormEmail, getFriendlyFormError } from "@/lib/email";
 
@@ -83,9 +84,12 @@ export default function Contact() {
               <span className="w-2 h-2 rounded-full bg-primary animate-pulse" />
               <span className="text-primary text-xs font-bold uppercase tracking-widest">Get in Touch</span>
             </div>
-            <h1 className="font-heading text-5xl md:text-7xl font-bold text-white mb-5">Contact <span className="text-primary">RMT</span></h1>
+            <h1 className="font-heading text-4xl md:text-6xl font-bold text-white mb-5">
+              Contact a Medical Device Manufacturer
+            </h1>
             <p className="text-white/70 text-xl max-w-2xl mx-auto leading-relaxed">
-              Ready to discuss your medical device project? Our experts are here to help — we respond within one business day.
+              Request a quote for ISO 13485 manufacturing, device R&D, SaMD software, testing, or FDA/EU MDR support.
+              Sartell, MN headquarters — we respond within one business day.
             </p>
           </AnimatedSection>
         </div>
@@ -266,6 +270,26 @@ export default function Contact() {
             </div>
 
           </div>
+        </div>
+      </section>
+
+      <section className="py-16 border-t border-border bg-secondary/20">
+        <div className="page-container max-w-3xl">
+          <AnimatedSection>
+            <h2 className="font-heading text-3xl font-bold text-foreground mb-8">
+              Contact FAQs
+            </h2>
+            <div className="space-y-6">
+              {CONTACT_FAQS.map((faq) => (
+                <div key={faq.question}>
+                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2">
+                    {faq.question}
+                  </h3>
+                  <p className="text-muted-foreground leading-relaxed">{faq.answer}</p>
+                </div>
+              ))}
+            </div>
+          </AnimatedSection>
         </div>
       </section>
 

@@ -342,14 +342,21 @@ function topicSeo(path: string): RouteSeo | null {
   const slug = path.slice("/topics/".length);
   const topic = getMoneyTopic(slug);
   if (!topic) return null;
-  const keywords = [topic.keyword, "Revive Medical Technologies", "RMT", "medical device"].join(", ");
+  const keywords = [
+    topic.keyword,
+    "Revive Medical Technologies",
+    "RMT",
+    "medical device",
+    "ISO 13485",
+  ].join(", ");
+  const description = truncate(`${topic.description} ${topic.body}`);
   return {
     path,
-    title: `${topic.title} | Revive Medical Technologies`,
-    description: truncate(topic.description),
+    title: topic.title,
+    description,
     keywords,
     ogImage: DEFAULT_OG_IMAGE,
-    jsonLd: pageGraph(path, topic.title, topic.description, [
+    jsonLd: pageGraph(path, topic.title, description, [
       faqJsonLd(topic.faqs.map((f) => ({ question: f.q, answer: f.a }))),
     ]),
   };
@@ -379,6 +386,8 @@ export function getRouteSeo(path: string): RouteSeo {
     if (normalized === "/") {
       extra.push(faqJsonLd(HOME_FAQS), localBusinessJsonLd());
     } else if (normalized === "/contact") {
+      const contactFaqs = faqsForPath("/contact");
+      if (contactFaqs) extra.push(faqJsonLd([...contactFaqs]));
       extra.push(localBusinessJsonLd());
     }
     return {
@@ -490,6 +499,11 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
     ? `<p><strong>Topics:</strong> ${escapeAttr(route.keywords)}</p>`
     : "";
   const moneyFaqs = faqsForPath(route.path);
+  const topicSlug =
+    route.path.startsWith("/topics/") && route.path !== "/topics"
+      ? route.path.slice("/topics/".length)
+      : undefined;
+  const moneyTopic = topicSlug ? getMoneyTopic(topicSlug) : undefined;
   const caseStudy = route.path.startsWith("/projects/")
     ? PROJECT_CASE_STUDIES.find((p) => `/projects/${p.slug}` === route.path)
     : undefined;
@@ -514,6 +528,31 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
       .map((svc) => `<li><a href="${escapeAttr(svc.href)}">${escapeAttr(svc.label)}</a></li>`)
       .join("\n    ")}
     <li><a href="/contact">Request a quote</a></li>
+  </ul>
+</section>`
+    : moneyTopic
+      ? `<section aria-label="Topic details">
+  <h2>Why teams search for ${escapeAttr(moneyTopic.keyword)}</h2>
+  <p>${escapeAttr(moneyTopic.body)}</p>
+  <ul>
+    ${moneyTopic.bullets.map((b) => `<li>${escapeAttr(b)}</li>`).join("\n    ")}
+  </ul>
+  <h2>How RMT delivers</h2>
+  <ol>
+    ${moneyTopic.processSteps.map((s) => `<li>${escapeAttr(s)}</li>`).join("\n    ")}
+  </ol>
+  <h2>Frequently asked questions</h2>
+  ${moneyTopic.faqs
+    .map(
+      (faq) =>
+        `<h3>${escapeAttr(faq.q)}</h3>
+  <p>${escapeAttr(faq.a)}</p>`
+    )
+    .join("\n  ")}
+  <h2>Related pathway</h2>
+  <ul>
+    <li><a href="${escapeAttr(moneyTopic.relatedPath)}">Related service details</a></li>
+    <li><a href="/contact">Contact a medical device manufacturer</a></li>
   </ul>
 </section>`
     : insightServices.length > 0
@@ -556,8 +595,16 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
   <p>Continue to device manufacturing, regulatory compliance, software services, machine manufacturing, or medical device R&amp;D for Class I–III devices.</p>
 </section>`;
 
+  const staticH1 = caseStudy
+    ? caseStudy.title
+    : moneyTopic
+      ? moneyTopic.title
+      : route.path === "/contact"
+        ? "Contact a Medical Device Manufacturer"
+        : route.title;
+
   const staticMain = `<main data-seo-static>
-  <h1>${escapeAttr(caseStudy ? caseStudy.title : route.title)}</h1>
+  <h1>${escapeAttr(staticH1)}</h1>
   <p>${escapeAttr(route.description)}</p>
   ${keywordLine}
   ${faqBlock}
@@ -572,8 +619,10 @@ export function applyRouteSeoToHtml(html: string, route: RouteSeo): string {
       <li><a href="/services/production-equipment-engineering">Machine Manufacturing</a></li>
       <li><a href="/services/engineering-product-development/research-development-engineering">Medical Device R&amp;D</a></li>
       <li><a href="/services/product-development">Product Development</a></li>
+      <li><a href="/services/turnkey-commissioning">Turnkey Production Lines</a></li>
       <li><a href="/services/mbl-laboratory">Sterility &amp; Endotoxin Testing</a></li>
-      <li><a href="/contact">Contact</a></li>
+      <li><a href="/topics/oem-manufacturing">OEM Manufacturing</a></li>
+      <li><a href="/contact">Contact a Medical Device Manufacturer</a></li>
     </ul>
   </nav>
 </main>`;

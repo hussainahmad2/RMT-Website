@@ -1,7 +1,6 @@
-import React, { lazy, Suspense } from "react";
+import React, { lazy, Suspense, useLayoutEffect } from "react";
 import { Switch, Route, Router as WouterRouter } from "wouter";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { Loader2 } from "lucide-react";
 import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 
@@ -10,8 +9,10 @@ import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { ScrollToTop } from "@/components/layout/ScrollToTop";
 
-/** Home stays eager for instant first paint; other routes load on demand */
+/** Eager routes avoid Suspense "Loading page" flash on money / contact paths */
 import Home from "@/pages/home";
+import Contact from "@/pages/contact";
+import TopicPage from "@/pages/topics/topic-page";
 
 const About = lazy(() => import("@/pages/about"));
 const ServicesOverview = lazy(() => import("@/pages/services"));
@@ -24,7 +25,6 @@ const SubServiceRoute = lazy(() =>
 const Projects = lazy(() => import("@/pages/projects"));
 const CaseStudy = lazy(() => import("@/pages/projects/case-study"));
 const Careers = lazy(() => import("@/pages/careers"));
-const Contact = lazy(() => import("@/pages/contact"));
 const Testing = lazy(() => import("@/pages/testing"));
 const Training = lazy(() => import("@/pages/training"));
 const Insights = lazy(() => import("@/pages/insights"));
@@ -36,7 +36,6 @@ const Pharmaceutical = lazy(() => import("@/pages/pharmaceutical"));
 const Media = lazy(() => import("@/pages/media"));
 const NotFound = lazy(() => import("@/pages/not-found"));
 const SitemapPage = lazy(() => import("@/pages/sitemap"));
-const TopicPage = lazy(() => import("@/pages/topics/topic-page"));
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -47,17 +46,39 @@ const queryClient = new QueryClient({
   },
 });
 
+/** Matches #seo-boot overlay — no text (avoids FOUC / soft-404 "Loading page" signals). */
 function RouteLoadingScreen() {
   return (
-    <div className="min-h-[calc(100vh-4rem)] sm:min-h-[calc(100vh-4.5rem)] pt-16 sm:pt-[4.5rem] flex items-center justify-center bg-background">
-      <div className="flex flex-col items-center gap-4 rounded-2xl border border-border bg-card/90 px-8 py-7 shadow-lg">
-        <Loader2 className="h-8 w-8 animate-spin text-primary" />
-        <div className="text-center">
-          <p className="font-heading text-lg font-bold text-foreground">Loading page</p>
-        </div>
-      </div>
-    </div>
+    <div
+      className="min-h-[50vh] w-full"
+      style={{ background: "#060d17" }}
+      aria-busy="true"
+      aria-live="polite"
+      aria-label="Loading"
+    />
   );
+}
+
+/** Reveal app only after first paint so crawlers/users never see stub→loader flicker. */
+function AppReadyGate({ children }: { children: React.ReactNode }) {
+  useLayoutEffect(() => {
+    let cancelled = false;
+    const reveal = () => {
+      if (cancelled) return;
+      document.documentElement.classList.add("app-ready");
+    };
+    // Double rAF: after layout + paint of React shell
+    requestAnimationFrame(() => {
+      requestAnimationFrame(reveal);
+    });
+    // Fallback if rAF is delayed (slow devices / background tabs)
+    const t = window.setTimeout(reveal, 120);
+    return () => {
+      cancelled = true;
+      window.clearTimeout(t);
+    };
+  }, []);
+  return <>{children}</>;
 }
 
 function Router() {
@@ -97,13 +118,15 @@ function App() {
       <ThemeProvider>
         <TooltipProvider>
           <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, "")}>
-            <ScrollToTop />
-            <div className="flex flex-col min-h-screen">
-              <Navbar />
-              <main className="flex-grow">
-                <Router />
-              </main>
-            </div>
+            <AppReadyGate>
+              <ScrollToTop />
+              <div className="flex flex-col min-h-screen">
+                <Navbar />
+                <main className="flex-grow">
+                  <Router />
+                </main>
+              </div>
+            </AppReadyGate>
           </WouterRouter>
           <Toaster />
         </TooltipProvider>

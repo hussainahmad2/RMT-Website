@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Generate src/data/money-topics.ts — enough new URLs to reach ~200 indexable pages."""
+"""Generate src/data/money-topics.ts — deep money landings for indexing (~200+ URLs)."""
 from __future__ import annotations
 
 from pathlib import Path
@@ -63,7 +63,6 @@ TOPICS: list[tuple[str, str, str, str]] = [
     ("iec-60601-compliance-services", "IEC 60601 compliance services", "/services/regulatory-compliance/iec-60601-1-compliance", "IEC 60601-1 electrical safety compliance support for active devices."),
     ("medical-device-process-validation", "medical device process validation", "/services/contract-manufacturing/testing-validation", "Process validation and manufacturing evidence for commercial release."),
     ("medtech-outsourcing-partner", "medtech outsourcing partner", "/services", "One partner for R&D, regulatory, software, testing, and manufacturing."),
-    # Short-head money keywords (batch 2)
     ("oem-manufacturing", "OEM manufacturing", "/services/contract-manufacturing/manufacturing-capabilities", "OEM manufacturing for regulated medical devices under ISO 13485 controls."),
     ("medical-device-manufacturing", "medical device manufacturing", "/services/contract-manufacturing", "Medical device manufacturing from pilot builds through commercial lots."),
     ("contract-manufacturing", "contract manufacturing", "/services/contract-manufacturing", "Contract manufacturing for Class I–III medical devices and assemblies."),
@@ -118,7 +117,6 @@ TOPICS: list[tuple[str, str, str, str]] = [
     ("manufacturing-rd", "manufacturing R&D", "/services/engineering-product-development", "Manufacturing R&D that links design, process development, and scale-up."),
 ]
 
-# Unique slugs required
 _slugs = [t[0] for t in TOPICS]
 assert len(_slugs) == len(set(_slugs)), "duplicate topic slugs"
 print(f"topic_count={len(TOPICS)}")
@@ -128,11 +126,199 @@ def ts_escape(s: str) -> str:
     return s.replace("\\", "\\\\").replace('"', '\\"')
 
 
+def category_for(related: str, kw: str) -> str:
+    r = related.lower()
+    k = kw.lower()
+    if "software" in r or "ai" in r or any(x in k for x in ("samd", "ccm", "pcm", "rpm", "ehr", "fhir", "hl7", "onc", "hipaa")):
+        return "software"
+    if "regulatory" in r or any(x in k for x in ("510k", "mdr", "ce marking", "iso 13485 qms", "iso 14971", "qmsr", "de novo", "technical")):
+        return "regulatory"
+    if "mbl" in r or "testing" in r or "quality-testing" in r or any(x in k for x in ("sterility", "endotoxin", "biocompatibility", "bench")):
+        return "testing"
+    if "production-equipment" in r or "automation" in r or "machine" in k or "equipment" in k:
+        return "equipment"
+    if "product-development" in r or "engineering" in r or "rd" in k or "prototype" in k or "design transfer" in k:
+        return "rd"
+    if "turnkey" in r:
+        return "turnkey"
+    if "bmd" in r or "biomaterial" in k:
+        return "biomaterials"
+    return "manufacturing"
+
+
+def deep_copy(kw: str, pitch: str, cat: str) -> tuple[str, str, list[str], list[tuple[str, str]], list[str]]:
+    """Return (description, body, bullets, faqs, process_steps)."""
+    desc = (
+        f"{pitch} Revive Medical Technologies (RMT) delivers {kw} with ISO 13485 quality systems, "
+        f"design controls where applicable, and coordinated engineering, regulatory, and manufacturing teams "
+        f"across Minnesota headquarters and global operations."
+    )
+
+    bodies = {
+        "manufacturing": (
+            f"Buyers searching for {kw} need a partner that can move from pilot builds to repeatable commercial lots "
+            f"without breaking documentation or process control. RMT runs classified cleanroom production, material "
+            f"traceability, and batch-release discipline so OEM programs stay audit-ready."
+        ),
+        "regulatory": (
+            f"Teams evaluating {kw} usually need evidence packages that survive reviewer scrutiny — not generic templates. "
+            f"RMT builds pathway strategy, technical documentation, and risk/clinical evidence so US, EU, and global "
+            f"submissions stay aligned to the same design history."
+        ),
+        "software": (
+            f"Programs labeled {kw} must define intended use, software safety class, and validation evidence early. "
+            f"RMT engineers clinical and SaMD systems under IEC 62304-aligned lifecycle controls, with privacy, "
+            f"security, and interoperability planned into the architecture."
+        ),
+        "rd": (
+            f"When teams search {kw}, they want concept-to-prototype speed without losing design-control rigor. "
+            f"RMT combines feasibility engineering, prototyping, V&V planning, and transfer readiness so R&D outputs "
+            f"are manufacturable and submission-useful."
+        ),
+        "testing": (
+            f"Requests for {kw} typically sit on critical-path release or submission evidence. RMT supports method "
+            f"selection, protocol execution, and report packages that plug into design verification and quality release."
+        ),
+        "equipment": (
+            f"Buyers of {kw} need production systems that qualify under IQ/OQ/PQ and fit cleanroom constraints. "
+            f"RMT designs and builds custom machinery, automation, and controls for regulated device lines."
+        ),
+        "turnkey": (
+            f"Organizations searching {kw} want line supply, commissioning, training, and quality-system readiness "
+            f"in one program. RMT coordinates equipment, validation, and ISO 13485 implementation so production can start controlled."
+        ),
+        "biomaterials": (
+            f"Work under {kw} spans material characterization, tissue-contact planning, and development experiments. "
+            f"RMT supports biomaterials and combination-product pathways with testing and engineering collaboration."
+        ),
+    }
+    body = bodies.get(cat, bodies["manufacturing"])
+
+    bullets = [
+        f"Commercial intent page for “{kw}” mapped to a live RMT service pathway.",
+        pitch,
+        "ISO 13485 quality expectations and design controls applied where the product class requires them.",
+        "Documentation, validation, and transfer practices aimed at audit and submission readiness.",
+        "Minnesota HQ with manufacturing and engineering capacity for global delivery.",
+        "Direct handoff from inquiry to manufacturing, R&D, regulatory, software, or testing specialists.",
+    ]
+
+    process = {
+        "manufacturing": [
+            "Scope device class, volumes, materials, and sterile/cleanroom needs",
+            "Define process windows, fixtures, and inspection plans",
+            "Pilot builds with batch records and deviation control",
+            "Scale to commercial lots with ongoing QC release",
+        ],
+        "regulatory": [
+            "Confirm market pathway and predicate/clinical strategy",
+            "Gap the existing design history and technical file",
+            "Author or harden risk, clinical, and submission evidence",
+            "Support questions through clearance or CE readiness",
+        ],
+        "software": [
+            "Lock intended use, users, and software safety classification",
+            "Architect modules, integrations, and security controls",
+            "Implement under lifecycle docs (requirements → verification)",
+            "Validate, document, and prepare regulatory/compliance packages",
+        ],
+        "rd": [
+            "Feasibility and requirements capture",
+            "Prototype and iterate with usability inputs",
+            "Verification planning and design reviews",
+            "Transfer package into manufacturing or next regulatory gate",
+        ],
+        "testing": [
+            "Select standards and methods for the device/contact type",
+            "Protocol and sample plan agreement",
+            "Execute testing with controlled records",
+            "Deliver reports suitable for V&V or release files",
+        ],
+        "equipment": [
+            "Requirements and cleanroom/process constraints",
+            "Mechanical, electrical, and controls design",
+            "Build, FAT, and site commissioning",
+            "IQ/OQ/PQ support for production release",
+        ],
+        "turnkey": [
+            "Line layout and equipment bill of materials",
+            "Supply, install, and commission production cells",
+            "Qualify processes and train operators",
+            "Align QMS/licensing artifacts for startup",
+        ],
+        "biomaterials": [
+            "Define material/contact and performance goals",
+            "Characterize candidates and process routes",
+            "Support biocompatibility and development studies",
+            "Hand off into device or combination-product programs",
+        ],
+    }.get(cat, [
+        "Discovery and requirements",
+        "Technical plan and quotes",
+        "Execution with quality records",
+        "Delivery and next-phase roadmap",
+    ])
+
+    faqs = [
+        (
+            f"Does RMT provide {kw}?",
+            f"Yes. RMT provides {kw} through integrated engineering, regulatory, software, testing, and manufacturing teams. "
+            f"Use the related service page for capability depth, then contact us with device class and markets.",
+        ),
+        (
+            f"What makes RMT a fit for {kw}?",
+            "ISO 13485 operating discipline, Class I–III device experience, SaMD/software capability, and US + global delivery "
+            "so commercial, regulatory, and production work stay coordinated.",
+        ),
+        (
+            "Who typically buys this service?",
+            "MedTech OEMs, startups, HealthTech companies, and manufacturers that need regulated development, "
+            "software, testing, or contract production without assembling five separate vendors.",
+        ),
+        (
+            "How long does an engagement take?",
+            "Timelines depend on device class, documentation maturity, and markets. Share your current phase and deadline; "
+            "we propose a phased plan from discovery through delivery.",
+        ),
+        (
+            "How do we start?",
+            "Send device class, target markets, volumes or user scale, and any existing drawings or software scope via the contact form. "
+            "We respond within one business day with the right RMT pathway.",
+        ),
+    ]
+    return desc, body, bullets, faqs, process
+
+
+def related_topic_slugs(idx: int, cat: str) -> list[str]:
+    """Pick a few peer topics in the same category for internal links."""
+    peers = []
+    for i, (slug, _kw, related, _p) in enumerate(TOPICS):
+        if i == idx:
+            continue
+        if category_for(related, _kw) == cat:
+            peers.append(slug)
+    # stable sample: neighbors in list + first peers
+    out: list[str] = []
+    for slug in peers:
+        if slug not in out:
+            out.append(slug)
+        if len(out) >= 4:
+            break
+    if len(out) < 3:
+        for j, (slug, *_rest) in enumerate(TOPICS):
+            if j != idx and slug not in out:
+                out.append(slug)
+            if len(out) >= 3:
+                break
+    return out[:4]
+
+
 def main():
     lines = [
         "/**",
         " * Money-topic landing pages for short-head + commercial keyword indexing.",
         " * Routes: /topics/:slug — included in sitemap + keyword index map.",
+        " * Generated by scripts/generate-money-topics.py — do not hand-edit en masse.",
         " */",
         "",
         "export type MoneyTopic = {",
@@ -140,48 +326,43 @@ def main():
         "  keyword: string;",
         "  title: string;",
         "  description: string;",
+        "  body: string;",
         "  relatedPath: string;",
         "  pitch: string;",
         "  bullets: string[];",
+        "  processSteps: string[];",
+        "  relatedTopicSlugs: string[];",
         "  faqs: { q: string; a: string }[];",
         "};",
         "",
         "export const MONEY_TOPICS: MoneyTopic[] = [",
     ]
 
-    for slug, kw, related, pitch in TOPICS:
+    for idx, (slug, kw, related, pitch) in enumerate(TOPICS):
         title = kw[0].upper() + kw[1:] if kw else slug
-        desc = f"{pitch} Revive Medical Technologies (RMT) supports {kw} with ISO 13485 systems, engineering, and regulatory-aligned delivery."
-        bullets = [
-            f"Dedicated landing intent for “{kw}” with clear service pathway.",
-            "Aligned to ISO 13485 quality expectations and design controls where applicable.",
-            "Connected to the matching RMT service hub for deep capability detail.",
-            "US headquarters with global engineering and manufacturing operations.",
-        ]
-        faqs = [
-            (
-                f"Does RMT offer {kw}?",
-                f"Yes. RMT provides {kw} through integrated engineering, regulatory, and manufacturing teams. Start from the related service page for scope and next steps.",
-            ),
-            (
-                "Who is this for?",
-                "MedTech OEMs, startups, HealthTech teams, and manufacturers that need regulated development, software, testing, or contract production support.",
-            ),
-            (
-                "How do we start?",
-                "Share your device class, target markets, and timeline via the contact form. We map the pathway across the relevant RMT service lines.",
-            ),
-        ]
+        cat = category_for(related, kw)
+        desc, body, bullets, faqs, process = deep_copy(kw, pitch, cat)
+        related_slugs = related_topic_slugs(idx, cat)
+
         lines.append("  {")
         lines.append(f'    slug: "{slug}",')
         lines.append(f'    keyword: "{ts_escape(kw)}",')
         lines.append(f'    title: "{ts_escape(title)}",')
         lines.append(f'    description: "{ts_escape(desc)}",')
+        lines.append(f'    body: "{ts_escape(body)}",')
         lines.append(f'    relatedPath: "{related}",')
         lines.append(f'    pitch: "{ts_escape(pitch)}",')
         lines.append("    bullets: [")
         for b in bullets:
             lines.append(f'      "{ts_escape(b)}",')
+        lines.append("    ],")
+        lines.append("    processSteps: [")
+        for step in process:
+            lines.append(f'      "{ts_escape(step)}",')
+        lines.append("    ],")
+        lines.append("    relatedTopicSlugs: [")
+        for rs in related_slugs:
+            lines.append(f'      "{rs}",')
         lines.append("    ],")
         lines.append("    faqs: [")
         for q, a in faqs:

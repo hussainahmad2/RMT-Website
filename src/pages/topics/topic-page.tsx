@@ -4,7 +4,8 @@ import { AnimatedSection } from "@/components/shared/AnimatedSection";
 import { Button } from "@/components/ui/button";
 import { useSEO } from "@/lib/seo";
 import { getRouteSeo } from "@/lib/route-seo";
-import { getMoneyTopic } from "@/data/money-topics";
+import { getMoneyTopic, MONEY_TOPICS } from "@/data/money-topics";
+import { MONEY_PAGE_RELATED_LINKS } from "@/data/money-page-faqs";
 
 type TopicPageProps = {
   params: { slug: string };
@@ -21,6 +22,9 @@ export default function TopicPage({ params }: TopicPageProps) {
       <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
         <div className="page-container py-20">
           <h1 className="font-heading text-4xl font-bold text-foreground mb-4">Topic not found</h1>
+          <p className="text-muted-foreground mb-6">
+            This topic page is not available. Browse RMT medical device services or contact our team.
+          </p>
           <Button asChild className="rounded-xl">
             <Link href="/services">Browse services</Link>
           </Button>
@@ -28,6 +32,10 @@ export default function TopicPage({ params }: TopicPageProps) {
       </div>
     );
   }
+
+  const relatedTopics = topic.relatedTopicSlugs
+    .map((slug) => MONEY_TOPICS.find((t) => t.slug === slug))
+    .filter(Boolean);
 
   return (
     <div className="bg-background min-h-screen pt-16 sm:pt-[4.5rem]">
@@ -62,7 +70,8 @@ export default function TopicPage({ params }: TopicPageProps) {
           <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">
             Why teams search for {topic.keyword}
           </h2>
-          <p className="text-muted-foreground leading-relaxed mb-8">{topic.description}</p>
+          <p className="text-muted-foreground leading-relaxed mb-6">{topic.description}</p>
+          <p className="text-muted-foreground leading-relaxed mb-8">{topic.body}</p>
           <ul className="space-y-4">
             {topic.bullets.map((item) => (
               <li key={item} className="flex gap-3 text-muted-foreground">
@@ -77,19 +86,77 @@ export default function TopicPage({ params }: TopicPageProps) {
       <section className="border-y border-border bg-muted/30">
         <div className="page-container py-14 md:py-20">
           <AnimatedSection className="max-w-3xl">
-            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-8">
-              Frequently asked questions
+            <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-4">
+              How RMT delivers {topic.keyword}
             </h2>
-            <div className="space-y-6">
-              {topic.faqs.map((faq) => (
-                <div key={faq.q}>
-                  <h3 className="font-heading text-lg font-semibold text-foreground mb-2">{faq.q}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
-                </div>
+            <p className="text-muted-foreground leading-relaxed mb-8">
+              A practical engagement path from inquiry to delivery for regulated MedTech programs.
+            </p>
+            <ol className="space-y-4 list-decimal list-inside">
+              {topic.processSteps.map((step) => (
+                <li key={step} className="text-muted-foreground leading-relaxed pl-1">
+                  <span className="text-foreground font-medium">{step}</span>
+                </li>
               ))}
-            </div>
+            </ol>
           </AnimatedSection>
         </div>
+      </section>
+
+      <section className="page-container py-14 md:py-20">
+        <AnimatedSection className="max-w-3xl">
+          <h2 className="font-heading text-2xl md:text-3xl font-bold text-foreground mb-8">
+            Frequently asked questions
+          </h2>
+          <div className="space-y-6">
+            {topic.faqs.map((faq) => (
+              <div key={faq.q}>
+                <h3 className="font-heading text-lg font-semibold text-foreground mb-2">{faq.q}</h3>
+                <p className="text-muted-foreground leading-relaxed">{faq.a}</p>
+              </div>
+            ))}
+          </div>
+        </AnimatedSection>
+      </section>
+
+      {relatedTopics.length > 0 && (
+        <section className="border-t border-border bg-muted/20">
+          <div className="page-container py-14 md:py-16">
+            <AnimatedSection className="max-w-3xl">
+              <h2 className="font-heading text-2xl font-bold text-foreground mb-6">Related topics</h2>
+              <ul className="grid gap-3 sm:grid-cols-2">
+                {relatedTopics.map(
+                  (t) =>
+                    t && (
+                      <li key={t.slug}>
+                        <Link
+                          href={`/topics/${t.slug}`}
+                          className="text-primary hover:underline font-medium"
+                        >
+                          {t.title}
+                        </Link>
+                      </li>
+                    )
+                )}
+              </ul>
+            </AnimatedSection>
+          </div>
+        </section>
+      )}
+
+      <section className="page-container py-12 md:py-14">
+        <AnimatedSection className="max-w-3xl">
+          <h2 className="font-heading text-xl font-bold text-foreground mb-4">Core RMT services</h2>
+          <ul className="flex flex-wrap gap-x-4 gap-y-2">
+            {MONEY_PAGE_RELATED_LINKS.slice(0, 8).map((link) => (
+              <li key={link.href}>
+                <Link href={link.href} className="text-sm text-primary hover:underline">
+                  {link.label}
+                </Link>
+              </li>
+            ))}
+          </ul>
+        </AnimatedSection>
       </section>
 
       <section className="page-container py-14 md:py-20">

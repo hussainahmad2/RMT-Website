@@ -173,7 +173,33 @@ export const EQUIPMENT_FAQS = [
   },
 ] as const;
 
+export const CONTACT_FAQS = [
+  {
+    question: "How quickly does RMT respond to quote requests?",
+    answer:
+      "We typically respond within one business day. Include your device class, target markets, and timeline so we can route you to the right manufacturing, R&D, regulatory, or software team.",
+  },
+  {
+    question: "What should I include in a manufacturing or R&D inquiry?",
+    answer:
+      "Share device type and class, materials or software stack if known, intended markets (US, EU, or other), volume goals, and any existing quality-system constraints. Attach drawings or a brief when available.",
+  },
+  {
+    question: "Where is Revive Medical Technologies located?",
+    answer:
+      "Headquarters are in Sartell, Minnesota (St. Cloud Edgewater Business Centre). Manufacturing and R&D operations also run from Rawat Industrial Estate, Islamabad, Pakistan.",
+  },
+  {
+    question: "Can I request support for FDA, EU MDR, or SaMD projects?",
+    answer:
+      "Yes. Contact us for ISO 13485 contract manufacturing, medical device R&D, regulatory compliance (FDA 510(k), EU MDR), SaMD/IEC 62304 software, testing, or turnkey production-line commissioning.",
+  },
+] as const;
+
 export function faqsForPath(path: string): readonly { question: string; answer: string }[] | null {
+  if (path === "/contact") {
+    return CONTACT_FAQS;
+  }
   if (path === "/services/contract-manufacturing" || path.startsWith("/services/contract-manufacturing/")) {
     return MANUFACTURING_FAQS;
   }
