@@ -221,6 +221,12 @@ export const QUALITY_CONTROL_WING: LeadershipMember[] = [
     bio: "Leads quality control for R&D laboratory testing and research-phase product quality.",
   },
   {
+    name: "Bilal Hussain",
+    role: "AM QC R&D",
+    image: teamImage("quality-control-wing", "bilal-hussain.jpg"),
+    bio: "Supports R&D quality control, laboratory testing, and research-phase product quality assurance.",
+  },
+  {
     name: "Muhammad Wahaj",
     role: "Manager, QC (Production)",
     image: teamImage("quality-control-wing", "wahaj.webp"),
