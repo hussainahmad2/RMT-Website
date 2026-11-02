@@ -1,0 +1,484 @@
+{
+  "name": "patch-b",
+  "count": 79,
+  "unknown": 58,
+  "discovered": 21,
+  "urls": [
+    "https://rmt-usa.com/services/automation-services/hmi-scada-development",
+    "https://rmt-usa.com/services/automation-services/motion-control-systems",
+    "https://rmt-usa.com/services/automation-services/plc-programming-industrial-control",
+    "https://rmt-usa.com/services/bmd/biocompatibility-testing",
+    "https://rmt-usa.com/services/bmd/biomaterials-tissue-engineering",
+    "https://rmt-usa.com/services/bmd/coatings-surface-engineering",
+    "https://rmt-usa.com/services/bmd/device-prototyping-fabrication",
+    "https://rmt-usa.com/services/bmd/drug-delivery-pharmaceutical-development",
+    "https://rmt-usa.com/services/bmd/laboratory-setup-compliance",
+    "https://rmt-usa.com/services/design-fabrication",
+    "https://rmt-usa.com/services/design-fabrication/manufacturing-support",
+    "https://rmt-usa.com/services/design-fabrication/mechanical-design",
+    "https://rmt-usa.com/services/design-fabrication/rapid-prototyping-3d-printing",
+    "https://rmt-usa.com/services/design-fabrication/simulation-analysis",
+    "https://rmt-usa.com/services/engineering-product-development/biomedical-systems-engineering",
+    "https://rmt-usa.com/services/mbl-laboratory",
+    "https://rmt-usa.com/services/mbl-laboratory/microbial-limit-testing",
+    "https://rmt-usa.com/services/mbl-laboratory/specific-pathogen-testing",
+    "https://rmt-usa.com/services/mbl-laboratory/sterility-testing",
+    "https://rmt-usa.com/services/product-development/concept-feasibility",
+    "https://rmt-usa.com/services/product-development/design-engineering",
+    "https://rmt-usa.com/services/product-development/verification-validation",
+    "https://rmt-usa.com/services/production-equipment-engineering",
+    "https://rmt-usa.com/services/production-equipment-engineering/cleanroom-equipment-engineering",
+    "https://rmt-usa.com/services/production-equipment-engineering/custom-equipment-design",
+    "https://rmt-usa.com/services/production-equipment-engineering/equipment-qualification-validation",
+    "https://rmt-usa.com/services/quality-testing",
+    "https://rmt-usa.com/services/quality-testing/bench-testing",
+    "https://rmt-usa.com/services/quality-testing/defect-analysis",
+    "https://rmt-usa.com/services/quality-testing/dimensional-analysis",
+    "https://rmt-usa.com/services/quality-testing/packaging-integrity-testing",
+    "https://rmt-usa.com/services/quality-testing/physico-chemical-testing",
+    "https://rmt-usa.com/services/quality-testing/qc-production",
+    "https://rmt-usa.com/services/quality-testing/qc-rd",
+    "https://rmt-usa.com/services/quality-testing/quality-assurance",
+    "https://rmt-usa.com/services/quality-testing/quality-plan",
+    "https://rmt-usa.com/services/quality-testing/simulation",
+    "https://rmt-usa.com/services/quality-testing/sqa-samd-simd",
+    "https://rmt-usa.com/services/quality-testing/visual-inspection",
+    "https://rmt-usa.com/services/regulatory-compliance/biocompatibility-evaluation",
+    "https://rmt-usa.com/services/regulatory-compliance/clinical-evaluation",
+    "https://rmt-usa.com/services/regulatory-compliance/clinical-evaluation-report",
+    "https://rmt-usa.com/services/regulatory-compliance/iso-27001-compliance",
+    "https://rmt-usa.com/services/regulatory-compliance/post-market-clinical-evaluation",
+    "https://rmt-usa.com/services/regulatory-compliance/risk-management",
+    "https://rmt-usa.com/services/regulatory-compliance/sfda-compliance",
+    "https://rmt-usa.com/services/regulatory-compliance/technical-file-preparation",
+    "https://rmt-usa.com/services/regulatory-compliance/toxicological-risk-assessment",
+    "https://rmt-usa.com/services/software-ai/cloud-devops",
+    "https://rmt-usa.com/services/software-ai/software-quality-assurance",
+    "https://rmt-usa.com/services/turnkey-commissioning",
+    "https://rmt-usa.com/services/turnkey-commissioning/commissioning-validation",
+    "https://rmt-usa.com/services/turnkey-commissioning/hr-training",
+    "https://rmt-usa.com/services/turnkey-commissioning/installation-training",
+    "https://rmt-usa.com/services/turnkey-commissioning/iso-13485-implementation",
+    "https://rmt-usa.com/services/turnkey-commissioning/oq-pq-qualification",
+    "https://rmt-usa.com/services/turnkey-commissioning/product-licensing",
+    "https://rmt-usa.com/services/turnkey-commissioning/supply-commission",
+    "https://rmt-usa.com/services/automation-services",
+    "https://rmt-usa.com/services/automation-services/industrial-communication",
+    "https://rmt-usa.com/services/bmd/advanced-manufacturing-support",
+    "https://rmt-usa.com/services/bmd/analytical-testing",
+    "https://rmt-usa.com/services/bmd/material-characterization",
+    "https://rmt-usa.com/services/bmd/mechanical-physical-testing",
+    "https://rmt-usa.com/services/engineering-product-development/industrial-safety-engineering",
+    "https://rmt-usa.com/services/mbl-laboratory/bacterial-endotoxin-testing",
+    "https://rmt-usa.com/services/product-development/prototyping-development",
+    "https://rmt-usa.com/services/product-development/regulatory-consultancy",
+    "https://rmt-usa.com/services/production-equipment-engineering/maintenance-calibration-support",
+    "https://rmt-usa.com/services/production-equipment-engineering/process-automation",
+    "https://rmt-usa.com/services/production-equipment-engineering/production-line-development",
+    "https://rmt-usa.com/services/production-equipment-engineering/specialist-production-equipment",
+    "https://rmt-usa.com/services/quality-testing/quality-control",
+    "https://rmt-usa.com/services/regulatory-compliance/cybersecurity-testing",
+    "https://rmt-usa.com/services/regulatory-compliance/greenlight-guru-setup",
+    "https://rmt-usa.com/services/regulatory-compliance/iec-60601-1-compliance",
+    "https://rmt-usa.com/services/regulatory-compliance/literature-research-protocol",
+    "https://rmt-usa.com/services/regulatory-compliance/software-sdlc-iec-62304",
+    "https://rmt-usa.com/services/regulatory-compliance/tga-compliance"
+  ],
+  "rows": [
+    {
+      "url": "https://rmt-usa.com/services/automation-services/hmi-scada-development",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/automation-services/motion-control-systems",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/automation-services/plc-programming-industrial-control",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/biocompatibility-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/biomaterials-tissue-engineering",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/coatings-surface-engineering",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/device-prototyping-fabrication",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/drug-delivery-pharmaceutical-development",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/laboratory-setup-compliance",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/design-fabrication",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/design-fabrication/manufacturing-support",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/design-fabrication/mechanical-design",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/design-fabrication/rapid-prototyping-3d-printing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/design-fabrication/simulation-analysis",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/engineering-product-development/biomedical-systems-engineering",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/mbl-laboratory",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/mbl-laboratory/microbial-limit-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/mbl-laboratory/specific-pathogen-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/mbl-laboratory/sterility-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/product-development/concept-feasibility",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/product-development/design-engineering",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/product-development/verification-validation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/production-equipment-engineering",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/production-equipment-engineering/cleanroom-equipment-engineering",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/production-equipment-engineering/custom-equipment-design",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/production-equipment-engineering/equipment-qualification-validation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/bench-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/defect-analysis",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/dimensional-analysis",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/packaging-integrity-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/physico-chemical-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/qc-production",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/qc-rd",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/quality-assurance",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/quality-plan",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/simulation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/sqa-samd-simd",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/visual-inspection",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/biocompatibility-evaluation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/clinical-evaluation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/clinical-evaluation-report",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/iso-27001-compliance",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/post-market-clinical-evaluation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/risk-management",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/sfda-compliance",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/technical-file-preparation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/toxicological-risk-assessment",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/software-ai/cloud-devops",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/software-ai/software-quality-assurance",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/turnkey-commissioning",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/turnkey-commissioning/commissioning-validation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/turnkey-commissioning/hr-training",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/turnkey-commissioning/installation-training",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/turnkey-commissioning/iso-13485-implementation",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/turnkey-commissioning/oq-pq-qualification",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/turnkey-commissioning/product-licensing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/turnkey-commissioning/supply-commission",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/services/automation-services",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/automation-services/industrial-communication",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/advanced-manufacturing-support",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/analytical-testing",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/material-characterization",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd/mechanical-physical-testing",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/engineering-product-development/industrial-safety-engineering",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/mbl-laboratory/bacterial-endotoxin-testing",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/product-development/prototyping-development",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/product-development/regulatory-consultancy",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/production-equipment-engineering/maintenance-calibration-support",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/production-equipment-engineering/process-automation",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/production-equipment-engineering/production-line-development",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/production-equipment-engineering/specialist-production-equipment",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/quality-testing/quality-control",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/cybersecurity-testing",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/greenlight-guru-setup",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/iec-60601-1-compliance",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/literature-research-protocol",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/software-sdlc-iec-62304",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/tga-compliance",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    }
+  ]
+}

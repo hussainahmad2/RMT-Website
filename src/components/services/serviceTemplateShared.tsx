@@ -25,6 +25,7 @@ import { useSEO } from "@/lib/seo";
 import { getRouteSeo } from "@/lib/route-seo";
 import { servicePath, subServicePath } from "@/lib/service-seo";
 import { MoneyPageFaqs, MoneyPageRelatedServices } from "@/components/shared/MoneyPageFaqs";
+import { MoneyTopicsLinkBlock } from "@/components/shared/MoneyTopicsLinkBlock";
 import { cn } from "@/lib/utils";
 import { ALL_SERVICES, type ServiceData, type SubServiceData } from "@/data/services";
 import {
@@ -1974,6 +1975,12 @@ export function ServicesOverview() {
           </div>
         </div>
       </section>
+
+      <MoneyTopicsLinkBlock
+        limit={36}
+        title="Solution topics"
+        description="Keyword landings for OEM manufacturing, FDA/EU MDR, SaMD, testing, and more — each mapped to a live RMT service pathway."
+      />
 
       {/* CTA */}
       <section className="py-16 bg-primary">
@@ -4451,6 +4458,13 @@ export function ServiceDetail({
           </div>
         </section>
       )}
+
+      <MoneyTopicsLinkBlock
+        relatedPathPrefix={`/services/${service.slug}`}
+        limit={18}
+        title={`${service.shortName} solution topics`}
+        description={`Related commercial keyword pages for ${service.name}.`}
+      />
 
       {path ? <MoneyPageFaqs path={path} /> : null}
       {path ? <MoneyPageRelatedServices currentPath={path} /> : null}

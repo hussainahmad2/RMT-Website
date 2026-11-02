@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""URL Inspection summary for all short-keyword index URLs."""
+"""URL Inspection summary for all short-keyword index URLs (+ why not indexed)."""
 from __future__ import annotations
 
 import json
@@ -43,8 +43,12 @@ def classify(status: str) -> str:
         return "crawled_not_indexed"
     if "unknown" in s:
         return "unknown"
-    if "excluded" in s or "alternate" in s or "redirect" in s:
+    if "excluded" in s or "alternate" in s or "redirect" in s or "duplicate" in s:
         return "excluded_other"
+    if "not found" in s or "404" in s:
+        return "not_found"
+    if "blocked" in s or "robots" in s:
+        return "blocked"
     return "other"
 
 
@@ -63,36 +67,72 @@ def main():
                 .inspect(body={"inspectionUrl": url, "siteUrl": PROPERTY})
                 .execute()
             )
-            idx = resp.get("inspectionResult", {}).get("indexStatusResult", {})
+            ir = resp.get("inspectionResult", {})
+            idx = ir.get("indexStatusResult", {})
             status = (idx.get("coverageState") or idx.get("verdict") or "UNKNOWN").strip()
-            crawl = idx.get("lastCrawlTime") or "-"
             bucket = classify(status)
-            rows.append({"url": url, "status": status, "bucket": bucket, "crawl": crawl})
-            print(f"[{i}/{len(urls)}] {bucket:22} | {status[:40]:40} | {url}", flush=True)
+            row = {
+                "url": url,
+                "status": status,
+                "bucket": bucket,
+                "verdict": idx.get("verdict"),
+                "crawl": idx.get("lastCrawlTime") or "-",
+                "robotsTxt": idx.get("robotsTxtState"),
+                "indexingState": idx.get("indexingState"),
+                "pageFetch": idx.get("pageFetchState"),
+                "crawledAs": idx.get("crawledAs"),
+                "googleCanonical": idx.get("googleCanonical"),
+                "userCanonical": idx.get("userCanonical"),
+                "sitemap": idx.get("sitemap"),
+                "referringUrls": idx.get("referringUrls") or [],
+            }
+            rows.append(row)
+            print(f"[{i}/{len(urls)}] {bucket:22} | {status[:48]:48} | {url}", flush=True)
         except HttpError as e:
-            rows.append({"url": url, "status": f"ERROR:{e.resp.status}", "bucket": "error", "crawl": "-"})
+            rows.append(
+                {
+                    "url": url,
+                    "status": f"ERROR:{e.resp.status}",
+                    "bucket": "error",
+                    "crawl": "-",
+                    "verdict": None,
+                    "robotsTxt": None,
+                    "indexingState": None,
+                    "pageFetch": None,
+                    "crawledAs": None,
+                    "googleCanonical": None,
+                    "userCanonical": None,
+                    "sitemap": None,
+                    "referringUrls": [],
+                }
+            )
             print(f"[{i}/{len(urls)}] ERROR {e.resp.status} | {url}", flush=True)
             if e.resp.status == 429:
-                time.sleep(5)
-        time.sleep(0.3)
+                time.sleep(8)
+        time.sleep(0.35)
 
     buckets = Counter(r["bucket"] for r in rows)
+    reasons = Counter(r["status"] for r in rows if r["bucket"] != "indexed")
     print("\n=== SUMMARY ===", flush=True)
     for k, v in buckets.most_common():
         print(f"  {k}: {v}", flush=True)
+    print("\n=== WHY NOT INDEXED ===", flush=True)
+    for k, v in reasons.most_common():
+        print(f"  {v:4}  {k}", flush=True)
     left = sum(v for k, v in buckets.items() if k != "indexed")
     print(f"\n  TOTAL: {len(rows)}", flush=True)
     print(f"  INDEXED: {buckets.get('indexed', 0)}", flush=True)
     print(f"  LEFT (not indexed): {left}", flush=True)
 
-    out = Path.home() / "AppData" / "Local" / "Temp" / "gsc-index-status.json"
-    # also write to scripts for convenience
     out2 = ROOT / "scripts" / "gsc-index-status-latest.json"
     payload = {
         "total": len(rows),
         "indexed": buckets.get("indexed", 0),
         "left": left,
         "buckets": dict(buckets),
+        "why_not_indexed": dict(reasons),
+        "not_indexed_urls": [r for r in rows if r["bucket"] != "indexed"],
+        "indexed_urls": [r["url"] for r in rows if r["bucket"] == "indexed"],
         "rows": rows,
     }
     out2.write_text(json.dumps(payload, indent=2), encoding="utf-8")

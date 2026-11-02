@@ -1,0 +1,8 @@
+{
+  "checked_via": "WebFetch (live rmt-usa.com)",
+  "results": [
+    {"url": "https://rmt-usa.com/topics/oem-manufacturing", "ok": true, "h1": "OEM manufacturing"},
+    {"url": "https://rmt-usa.com/topics/onc-certification", "ok": true, "h1": "ONC certification"},
+    {"url": "https://rmt-usa.com/topics/fda-510k", "ok": true, "h1": "510k"}
+  ]
+}
