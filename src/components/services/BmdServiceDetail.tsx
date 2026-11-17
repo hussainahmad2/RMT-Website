@@ -378,7 +378,7 @@ export function BmdServiceDetail({ service }: { service: ServiceData }) {
           <h3 className="font-heading text-xl sm:text-2xl font-bold text-foreground dark:text-white mb-5">Areas of Expertise</h3>
           <div className="flex flex-wrap gap-2.5 mb-8">
             {BMD_EXPERTISE.map((e) => (
-              <span key={e} className="text-sm sm:text-base font-medium px-4 py-2 rounded-full bg-primary/8 dark:bg-white/10 border border-primary/20 dark:border-white/10 text-primary dark:text-white/85">
+              <span key={e} className="text-sm sm:text-base font-medium px-4 py-2 rounded-full bg-primary/8 dark:bg-white/10 border border-primary/20 dark:border-white/10 text-white">
                 {e}
               </span>
             ))}
