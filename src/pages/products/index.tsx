@@ -34,6 +34,8 @@ function ProductDetailCard({
 }) {
   return (
       <article className="group overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/35 hover:shadow-2xl transition-all duration-500">
+        {product.tag === "BMD" ? (
+          <div>
         <div className="relative aspect-[4/3] overflow-hidden bg-muted">
           <img
             src={product.image}
@@ -61,6 +63,14 @@ function ProductDetailCard({
           <h3 className="font-heading font-bold text-white text-lg leading-snug mt-1">{product.name}</h3>
         </div>
       </div>
+          </div>
+        ) : (
+          <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+            <img src={product.image} alt={product.name} className="h-full w-full object-cover" loading="lazy" />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+            <div className="absolute bottom-0 left-0 right-0 p-4"><h3 className="font-heading font-bold text-white text-lg leading-snug mt-1">{product.name}</h3></div>
+          </div>
+        )}
 
       <div className="p-5 sm:p-6">
         {product.description && (
