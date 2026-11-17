@@ -190,6 +190,7 @@ export const PRODUCT_CATEGORIES: ProductCategory[] = [
     serviceName: "Biomaterials (BMD)",
     bannerImage: "https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?w=1600&q=85",
     products: [
+      { name: "Nutrient Agar", description: "Dehydrated general-purpose culture medium powder. Product details are presented from the supplied draft specification, SDS, and certificate templates for verification.", image: "/mdm/microspheres.jpeg", tag: "BMD · For verification", spec: "23 g/L preparation rate" },
       ...BMD_PRODUCTS.innovative.map(bmdProduct),
       ...BMD_PRODUCTS.skincare.map(bmdProduct),
       ...BMD_PRODUCTS.haircare.map(bmdProduct),

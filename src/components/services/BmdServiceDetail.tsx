@@ -181,6 +181,7 @@ function PortfolioCarousel() {
               </div>
               <div className="min-h-[4.5rem] border-t border-white/10 p-3.5">
                 <h3 className="line-clamp-2 font-heading text-sm sm:text-base font-bold leading-snug text-white">{item.title}</h3>
+                <Link href={`/products/biomaterials/${encodeURIComponent(item.title.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, ""))}`} className="mt-2 inline-flex items-center gap-1 text-xs font-semibold text-sky-200 hover:text-white">View full detail <ArrowRight className="h-3.5 w-3.5" /></Link>
               </div>
             </motion.article>
           ))}

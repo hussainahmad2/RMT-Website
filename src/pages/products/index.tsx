@@ -105,10 +105,10 @@ function ProductDetailCard({
 
         <div className="h-px bg-border my-4" />
         <Link
-          href="/contact"
+          href={product.tag?.startsWith("BMD") ? `/products/biomaterials/${product.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}` : "/contact"}
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
         >
-          Request details <ArrowRight className="w-4 h-4" />
+          {product.tag?.startsWith("BMD") ? "View full detail" : "Request details"} <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
     </article>

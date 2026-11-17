@@ -32,6 +32,7 @@ const InsightArticle = lazy(() => import("@/pages/insights/insight-article"));
 const Gallery = lazy(() => import("@/pages/gallery"));
 const Testimonials = lazy(() => import("@/pages/testimonials"));
 const Products = lazy(() => import("@/pages/products"));
+const ProductDetail = lazy(() => import("@/pages/products/detail"));
 const Pharmaceutical = lazy(() => import("@/pages/pharmaceutical"));
 const Media = lazy(() => import("@/pages/media"));
 const NotFound = lazy(() => import("@/pages/not-found"));
@@ -99,6 +100,7 @@ function Router() {
           <Route path="/gallery" component={Gallery} />
           <Route path="/testimonials" component={Testimonials} />
           <Route path="/products" component={Products} />
+          <Route path="/products/:category/:slug" component={ProductDetail} />
           <Route path="/pharmaceutical" component={Pharmaceutical} />
           <Route path="/media" component={Media} />
           <Route path="/careers" component={Careers} />
