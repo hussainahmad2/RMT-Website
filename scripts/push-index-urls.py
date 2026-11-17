@@ -37,18 +37,33 @@ def load_urls(only_prefix: str | None = None) -> list[str]:
     return paths
 
 
+def load_urls_from_file(path: Path) -> list[str]:
+    data = json.loads(path.read_text(encoding="utf-8"))
+    if isinstance(data, list):
+        return [u if u.startswith("http") else f"{ORIGIN}{u}" for u in data]
+    urls = data.get("urls") or []
+    return [u if str(u).startswith("http") else f"{ORIGIN}{u}" for u in urls]
+
+
 def main():
     import sys
 
     only_prefix = None
+    from_file: Path | None = None
     for arg in sys.argv[1:]:
         if arg.startswith("--prefix="):
             only_prefix = arg.split("=", 1)[1]
         if arg == "--topics-only":
             only_prefix = "/topics/"
+        if arg.startswith("--from-file="):
+            from_file = Path(arg.split("=", 1)[1])
 
-    urls = load_urls(only_prefix)
-    print(f"URLs to push: {len(urls)} prefix={only_prefix or '*'}", flush=True)
+    if from_file:
+        urls = load_urls_from_file(from_file)
+        print(f"URLs to push: {len(urls)} from-file={from_file}", flush=True)
+    else:
+        urls = load_urls(only_prefix)
+        print(f"URLs to push: {len(urls)} prefix={only_prefix or '*'}", flush=True)
     if not SA_PATH.exists():
         raise SystemExit(f"Missing {SA_PATH}")
 

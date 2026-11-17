@@ -1,0 +1,160 @@
+{
+  "name": "patch-c",
+  "count": 25,
+  "unknown": 17,
+  "discovered": 8,
+  "urls": [
+    "https://rmt-usa.com/gallery",
+    "https://rmt-usa.com/insights/22-rpm-ecosystem",
+    "https://rmt-usa.com/insights/22-rpm-google-play",
+    "https://rmt-usa.com/insights/ace-pump",
+    "https://rmt-usa.com/insights/aquelis-coating",
+    "https://rmt-usa.com/insights/bath-shaker",
+    "https://rmt-usa.com/insights/comprehensive-testing",
+    "https://rmt-usa.com/insights/eu-mdr-cybersecurity",
+    "https://rmt-usa.com/insights/hl7-vs-fhir",
+    "https://rmt-usa.com/insights/iso-13485-contract-manufacturing-guide",
+    "https://rmt-usa.com/insights/medical-device-product-development-roadmap",
+    "https://rmt-usa.com/insights/product-development-lifecycle",
+    "https://rmt-usa.com/insights/rmt-biomaterials-legacy",
+    "https://rmt-usa.com/insights/samd-iec-62304-development-path",
+    "https://rmt-usa.com/insights/scttm-catheter-testing",
+    "https://rmt-usa.com/insights/tensura-stretching",
+    "https://rmt-usa.com/projects/remote-patient-monitoring-cloud-ai",
+    "https://rmt-usa.com/insights/biomaterial-scaffolds",
+    "https://rmt-usa.com/insights/fda-510k-eu-mdr-pathway",
+    "https://rmt-usa.com/insights/fda-small-business-waiver",
+    "https://rmt-usa.com/insights/microspheres-milestone",
+    "https://rmt-usa.com/insights/vision-awareness-device",
+    "https://rmt-usa.com/media",
+    "https://rmt-usa.com/projects/wearable-drug-delivery-design-prototyping",
+    "https://rmt-usa.com/testimonials"
+  ],
+  "rows": [
+    {
+      "url": "https://rmt-usa.com/gallery",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/22-rpm-ecosystem",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/22-rpm-google-play",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/ace-pump",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/aquelis-coating",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/bath-shaker",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/comprehensive-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/eu-mdr-cybersecurity",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/hl7-vs-fhir",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/iso-13485-contract-manufacturing-guide",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/medical-device-product-development-roadmap",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/product-development-lifecycle",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/rmt-biomaterials-legacy",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/samd-iec-62304-development-path",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/scttm-catheter-testing",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/tensura-stretching",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/projects/remote-patient-monitoring-cloud-ai",
+      "bucket": "unknown",
+      "status": "URL is unknown to Google"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/biomaterial-scaffolds",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/fda-510k-eu-mdr-pathway",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/fda-small-business-waiver",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/microspheres-milestone",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/insights/vision-awareness-device",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/media",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/projects/wearable-drug-delivery-design-prototyping",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    },
+    {
+      "url": "https://rmt-usa.com/testimonials",
+      "bucket": "discovered",
+      "status": "Discovered - currently not indexed"
+    }
+  ]
+}

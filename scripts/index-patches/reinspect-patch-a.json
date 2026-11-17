@@ -1,0 +1,796 @@
+{
+  "patch": "patch-a.json",
+  "total": 131,
+  "buckets": {
+    "unknown": 97,
+    "discovered": 34
+  },
+  "rows": [
+    {
+      "url": "https://rmt-usa.com/products",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/contract-manufacturing/capacity-building",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/contract-manufacturing/cleanroom-infrastructure",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/contract-manufacturing/development-journey",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/contract-manufacturing/testing-validation",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/product-development",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/eu-mdr-compliance",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/fda-compliance",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/regulatory-compliance/quality-management-system",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/software-ai",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/software-ai/ai-solutions",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/software-ai/software-compliance",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/ai-solution",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/bacterial-endotoxin-lal-testing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/biocompatibility",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/biomaterials-rd",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/biomaterials-testing-laboratory",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/catheter-contract-manufacturing",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/catheter-manufacturing",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/ccm-software",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/ce-marking",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/class-ii-device-manufacturing",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/cleanroom-assembly-medical-devices",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/clinical-evaluation-report-writing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/contract-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/custom-production-equipment-medical",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/cybersecurity",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/de-novo-fda",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/design-transfer",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/design-transfer-to-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/device-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/dfm-medical-device",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/ehr-integration",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/endotoxin-testing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/eu-mdr-ce-marking-consulting",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/fda-510k",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/fda-510k-consulting-services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/fda-compliance",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/fea-simulation-medical-devices",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/fhir-integration",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/healthcare-ai",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/healthcare-ai-software-development",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/healthcare-software",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/healthcare-solution",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/hipaa-compliance-software",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/hl7-integration",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/hmi-scada-medical-production",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iec-62304",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iq-oq-pq-equipment-qualification",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iso-10993-biocompatibility-consulting",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iso-13485-contract-manufacturer",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iso-13485-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iso-13485-qms",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iso-13485-qms-implementation",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iso-14971",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iso-14971-risk-management-services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/machine-manufacturing",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-cdmo",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-cybersecurity-testing",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-process-validation",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-product-licensing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-prototyping-services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-quality-control-testing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-rd-services",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-sterility-testing-lab",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-technical-file",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-testing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/microbial-limit-testing-services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/minnesota-medical-device-manufacturer",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/oem-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/oem-manufacturing-medical-devices",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/onc-certification",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/onc-health-it-certification-support",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/packaging-integrity-testing-medical",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/pcm-software",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/pcm-software-development",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/plc-automation-medical-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/process-automation",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/product-development",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/production-equipment",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/prototype-development",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/qmsr-compliance",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/quality-assurance",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/quality-control",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/rpm-software",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/rpm-software-platform",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/samd",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/sfda-medical-device-registration",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/software-services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/sterility-testing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/technical-documentation",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/tga-medical-device-registration",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/tissue-engineering-biomaterials",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/turnkey-medical-production-line",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/verification-validation-medical-devices",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/white-label-medical-devices",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/projects",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/bmd",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/contract-manufacturing/manufacturing-capabilities",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/contract-manufacturing/quality-compliance",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/engineering-product-development",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/engineering-product-development/research-development-engineering",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/product-development/design-transfer-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/services/software-ai/custom-medical-software",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/bench-testing-medical-devices",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/catheter-product-development",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/ccm-software-development",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/class-iii-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/cleanroom-equipment-design",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/cleanroom-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/clinical-decision-support",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/clinical-decision-support-software",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/drug-delivery-device-development",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/ehr-integration-services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/eu-mdr",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/hipaa-compliant-healthcare-software",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iec-60601-compliance-services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iec-62304-software-lifecycle",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/implantable-device-contract-manufacturing",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/iso-13485-implementation-services",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/manufacturing-rd",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-device-rd",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medical-software",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/medtech-outsourcing-partner",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/pmcf-medical-device",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/rapid-prototyping-medical-devices",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/regulatory-compliance",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/topics/samd-development-company",
+      "status": "URL is unknown to Google",
+      "bucket": "unknown",
+      "crawl": "-"
+    },
+    {
+      "url": "https://rmt-usa.com/training",
+      "status": "Discovered - currently not indexed",
+      "bucket": "discovered",
+      "crawl": "-"
+    }
+  ]
+}
