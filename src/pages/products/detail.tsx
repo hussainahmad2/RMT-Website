@@ -1,5 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Link, useRoute } from "wouter";
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import {
   ArrowLeft,
   ArrowRight,
@@ -22,6 +23,8 @@ import {
 } from "@/data/neutrix-products";
 import { useSEO } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+
+const pageEase = [0.22, 1, 0.36, 1] as const;
 
 const slugify = (v: string) =>
   v
@@ -56,7 +59,7 @@ function NeutrixRecommendCarousel({
   onQuickView,
 }: {
   products: NeutrixProduct[];
-  onQuickView: (p: NeutrixProduct) => void;
+  onQuickView: (p: NeutrixProduct | null) => void;
 }) {
   const trackRef = useRef<HTMLDivElement>(null);
   const [canPrev, setCanPrev] = useState(false);
@@ -148,6 +151,7 @@ function NeutrixRecommendCarousel({
               </button>
               <Link
                 href={`/products/biomaterials/${item.slug}`}
+                onClick={() => onQuickView(null)}
                 className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-emerald-800"
               >
                 Full details <ArrowRight className="h-3 w-3" />
@@ -169,6 +173,14 @@ function NeutrixDetail({
 }) {
   const [sizeIdx, setSizeIdx] = useState(0);
   const [quick, setQuick] = useState<NeutrixProduct | null>(null);
+  const [viewedSlug, setViewedSlug] = useState(product.slug);
+  const reduceMotion = useReducedMotion();
+
+  // Clear modal synchronously on route/product change so it never overlays the new page
+  if (product.slug !== viewedSlug) {
+    setViewedSlug(product.slug);
+    setQuick(null);
+  }
 
   const index = NEUTRIX_PRODUCTS.findIndex((p) => p.slug === product.slug);
   const prev = index > 0 ? NEUTRIX_PRODUCTS[index - 1] : NEUTRIX_PRODUCTS[NEUTRIX_PRODUCTS.length - 1];
@@ -179,8 +191,19 @@ function NeutrixDetail({
   const recommended = NEUTRIX_PRODUCTS.filter((p) => p.slug !== product.slug);
 
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  }, [product.slug]);
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }, [product.slug, reduceMotion]);
+
+  useEffect(() => {
+    if (!quick) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [quick]);
+
+  const closeQuick = () => setQuick(null);
 
   return (
     <div className="min-h-screen bg-background pt-16 sm:pt-[4.5rem]">
@@ -196,6 +219,7 @@ function NeutrixDetail({
           <div className="flex items-center gap-2 text-sm">
             <Link
               href={`/products/biomaterials/${prev.slug}`}
+              onClick={closeQuick}
               className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 font-medium hover:border-emerald-700/40 hover:text-emerald-800"
             >
               <ChevronLeft className="h-4 w-4" />
@@ -207,6 +231,7 @@ function NeutrixDetail({
             </span>
             <Link
               href={`/products/biomaterials/${next.slug}`}
+              onClick={closeQuick}
               className="inline-flex items-center gap-1 rounded-lg border border-border px-3 py-1.5 font-medium hover:border-emerald-700/40 hover:text-emerald-800"
             >
               <span className="hidden max-w-[140px] truncate sm:inline">{next.name}</span>
@@ -217,6 +242,14 @@ function NeutrixDetail({
         </div>
       </div>
 
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={product.slug}
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
+          transition={{ duration: 0.38, ease: pageEase }}
+        >
       <header className="relative overflow-hidden border-b border-border bg-[linear-gradient(135deg,#f7fbf8_0%,#ffffff_45%,#f3f8fc_100%)]">
         <div className="pointer-events-none absolute inset-y-0 right-0 w-1/2 bg-[radial-gradient(ellipse_at_top_right,rgba(16,185,129,0.08),transparent_55%)]" />
 
@@ -480,60 +513,78 @@ function NeutrixDetail({
 
         <NeutrixRecommendCarousel products={recommended} onQuickView={setQuick} />
       </main>
+        </motion.div>
+      </AnimatePresence>
 
-      {quick && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4"
-          role="presentation"
-          onMouseDown={(e) => {
-            if (e.target === e.currentTarget) setQuick(null);
-          }}
-        >
-          <section
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${quick.name} quick view`}
-            className="relative grid w-full max-w-3xl gap-6 rounded-2xl bg-background p-6 shadow-2xl sm:grid-cols-[160px_1fr] sm:p-8"
+      <AnimatePresence>
+        {quick && (
+          <motion.div
+            key="neutrix-quick-view"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4"
+            role="presentation"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onMouseDown={(e) => {
+              if (e.target === e.currentTarget) closeQuick();
+            }}
           >
-            <button
-              type="button"
-              aria-label="Close quick view"
-              onClick={() => setQuick(null)}
-              className="absolute right-4 top-4 rounded-full p-2 hover:bg-muted"
+            <motion.section
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${quick.name} quick view`}
+              initial={reduceMotion ? false : { opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: pageEase }}
+              className="relative grid w-full max-w-3xl gap-6 rounded-2xl bg-background p-6 shadow-2xl sm:grid-cols-[160px_1fr] sm:p-8"
             >
-              <X className="h-5 w-5" />
-            </button>
-            <div className="flex h-40 items-center justify-center rounded-xl bg-white p-3">
-              <img src={quick.image} alt={quick.name} className="h-full w-full object-contain" />
-            </div>
-            <div className="pr-8">
-              <p className="text-sm font-semibold text-emerald-700">Neutrix</p>
-              <h2 className="mt-1 text-2xl font-bold">{quick.name}</h2>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-                {quick.application}
-              </p>
-              <div className="mt-5 border-t border-border pt-4">
-                <p className="text-sm font-semibold">Pack options</p>
-                <div className="mt-3 flex flex-wrap gap-2">
-                  <span className="rounded-lg border border-border px-3 py-1.5 text-xs">
-                    {quick.packSize}
-                  </span>
-                  <span className="rounded-lg border border-border px-3 py-1.5 text-xs">
-                    {quick.properties.form}
-                  </span>
-                </div>
+              <button
+                type="button"
+                aria-label="Close quick view"
+                onClick={closeQuick}
+                className="absolute right-4 top-4 rounded-full p-2 hover:bg-muted"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <div className="flex h-40 items-center justify-center rounded-xl bg-white p-3">
+                <img src={quick.image} alt={quick.name} className="h-full w-full object-contain" />
               </div>
-              <p className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
-                <CheckCircle2 className="h-4 w-4 text-emerald-600" />
-                Contact RMT for availability
-              </p>
-              <Button asChild className="mt-5 bg-emerald-800 hover:bg-emerald-900">
-                <Link href={`/products/biomaterials/${quick.slug}`}>Open full detail</Link>
-              </Button>
-            </div>
-          </section>
-        </div>
-      )}
+              <div className="pr-8">
+                <p className="text-sm font-semibold text-emerald-700">Neutrix</p>
+                <h2 className="mt-1 text-2xl font-bold">{quick.name}</h2>
+                <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
+                  {quick.application}
+                </p>
+                <div className="mt-5 border-t border-border pt-4">
+                  <p className="text-sm font-semibold">Pack options</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    <span className="rounded-lg border border-border px-3 py-1.5 text-xs">
+                      {quick.packSize}
+                    </span>
+                    <span className="rounded-lg border border-border px-3 py-1.5 text-xs">
+                      {quick.properties.form}
+                    </span>
+                  </div>
+                </div>
+                <p className="mt-5 flex items-center gap-2 text-sm text-muted-foreground">
+                  <CheckCircle2 className="h-4 w-4 text-emerald-600" />
+                  Contact RMT for availability
+                </p>
+                <Button asChild className="mt-5 bg-emerald-800 hover:bg-emerald-900">
+                  <Link
+                    href={`/products/biomaterials/${quick.slug}`}
+                    onClick={closeQuick}
+                  >
+                    Open full detail
+                  </Link>
+                </Button>
+              </div>
+            </motion.section>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
@@ -546,127 +597,175 @@ function GenericProductDetail({
   category: { id: string; title: string; products: ProductItem[] };
 }) {
   const [quick, setQuick] = useState<ProductItem | null>(null);
+  const reduceMotion = useReducedMotion();
   const recommended = category.products.filter((p) => p.name !== product.name).slice(0, 4);
   const backHref = `/products?category=${category.id}`;
+  const productKey = slugify(product.name);
+  const [viewedKey, setViewedKey] = useState(productKey);
+
+  if (productKey !== viewedKey) {
+    setViewedKey(productKey);
+    setQuick(null);
+  }
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+  }, [productKey, reduceMotion]);
+
+  useEffect(() => {
+    if (!quick) return;
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [quick]);
+
+  const closeQuick = () => setQuick(null);
 
   return (
     <div className="min-h-screen bg-background pt-16 sm:pt-[4.5rem]">
-      <header className="border-b border-border bg-card">
-        <div className="page-container grid gap-8 py-8 md:grid-cols-[1fr_260px] md:py-10 lg:grid-cols-[1fr_280px_260px]">
-          <div className="order-2 lg:order-1">
-            <Link
-              href={backHref}
-              className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
-            >
-              <ArrowLeft className="h-4 w-4" /> Back to {category.title}
-            </Link>
-            <p className="mt-4 text-xs font-bold uppercase tracking-widest text-primary">
-              {category.title}
-            </p>
-            <h1 className="mt-2 font-heading text-3xl font-bold">{product.name}</h1>
-            <p className="mt-3 leading-relaxed text-muted-foreground">
-              {product.description ??
-                "Product grade, standards, form, intended use, and pack sizes are available on request."}
-            </p>
-          </div>
-          <div className="order-1 rounded-xl border border-border bg-white p-4 lg:order-2">
-            <img
-              src={product.image}
-              alt={product.name}
-              className="mx-auto aspect-square max-h-64 w-full object-contain"
-            />
-          </div>
-          <aside className="order-3 h-fit rounded-xl border border-border bg-muted/40 p-5">
-            <h2 className="font-heading text-lg font-bold">Product inquiry</h2>
-            <p className="mt-2 text-sm text-muted-foreground">
-              Ask RMT about availability, specifications, and documentation.
-            </p>
-            <Button asChild className="mt-4 w-full">
-              <Link href="/contact?subject=Product%20inquiry">Contact RMT</Link>
-            </Button>
-          </aside>
-        </div>
-      </header>
-
-      <main className="page-container py-10">
-        <section className="py-6">
-          <h2 className="font-heading text-xl font-bold">Recommended products</h2>
-          <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-            {recommended.map((item) => (
-              <article
-                key={item.name}
-                className="overflow-hidden rounded-xl border border-border bg-card"
-              >
-                <div className="flex h-32 items-center justify-center bg-white p-3">
-                  <img
-                    src={item.image}
-                    alt={item.name}
-                    className="h-full w-full object-contain"
-                  />
-                </div>
-                <div className="p-4">
-                  <p className="text-xs font-semibold text-primary">{item.tag ?? "RMT"}</p>
-                  <h3 className="mt-1 line-clamp-2 font-semibold">{item.name}</h3>
-                  <button
-                    type="button"
-                    className="mt-3 w-full rounded-lg border border-primary/40 px-3 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-white"
-                    onClick={() => setQuick(item)}
-                  >
-                    Quick view
-                  </button>
-                  <Link
-                    href={`/products/${category.id}/${slugify(item.name)}`}
-                    className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-primary"
-                  >
-                    Full details <ArrowRight className="h-3 w-3" />
-                  </Link>
-                </div>
-              </article>
-            ))}
-          </div>
-        </section>
-      </main>
-
-      {quick && (
-        <div
-          className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4"
-          role="presentation"
-          onMouseDown={(e) => {
-            if (e.target === e.currentTarget) setQuick(null);
-          }}
+      <AnimatePresence mode="wait">
+        <motion.div
+          key={productKey}
+          initial={reduceMotion ? false : { opacity: 0, y: 18 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={reduceMotion ? undefined : { opacity: 0, y: -12 }}
+          transition={{ duration: 0.38, ease: pageEase }}
         >
-          <section
-            role="dialog"
-            aria-modal="true"
-            aria-label={`${quick.name} quick view`}
-            className="relative grid w-full max-w-3xl gap-6 rounded-2xl bg-background p-6 shadow-2xl sm:grid-cols-[150px_1fr] sm:p-8"
-          >
-            <button
-              type="button"
-              aria-label="Close quick view"
-              onClick={() => setQuick(null)}
-              className="absolute right-4 top-4 rounded-full p-2 hover:bg-muted"
-            >
-              <X className="h-5 w-5" />
-            </button>
-            <div className="flex h-36 items-center justify-center rounded-xl bg-white p-3">
-              <img src={quick.image} alt={quick.name} className="h-full w-full object-contain" />
-            </div>
-            <div className="pr-8">
-              <p className="text-sm text-primary">{quick.tag ?? "RMT"}</p>
-              <h2 className="mt-1 text-2xl font-bold">{quick.name}</h2>
-              <p className="mt-3 text-sm text-muted-foreground">
-                {quick.description ?? "Product description available on request."}
-              </p>
-              <Button asChild className="mt-5">
-                <Link href={`/products/${category.id}/${slugify(quick.name)}`}>
-                  Open full detail
+          <header className="border-b border-border bg-card">
+            <div className="page-container grid gap-8 py-8 md:grid-cols-[1fr_260px] md:py-10 lg:grid-cols-[1fr_280px_260px]">
+              <div className="order-2 lg:order-1">
+                <Link
+                  href={backHref}
+                  className="inline-flex items-center gap-2 text-sm font-semibold text-primary"
+                >
+                  <ArrowLeft className="h-4 w-4" /> Back to {category.title}
                 </Link>
-              </Button>
+                <p className="mt-4 text-xs font-bold uppercase tracking-widest text-primary">
+                  {category.title}
+                </p>
+                <h1 className="mt-2 font-heading text-3xl font-bold">{product.name}</h1>
+                <p className="mt-3 leading-relaxed text-muted-foreground">
+                  {product.description ??
+                    "Product grade, standards, form, intended use, and pack sizes are available on request."}
+                </p>
+              </div>
+              <div className="order-1 rounded-xl border border-border bg-white p-4 lg:order-2">
+                <img
+                  src={product.image}
+                  alt={product.name}
+                  className="mx-auto aspect-square max-h-64 w-full object-contain"
+                />
+              </div>
+              <aside className="order-3 h-fit rounded-xl border border-border bg-muted/40 p-5">
+                <h2 className="font-heading text-lg font-bold">Product inquiry</h2>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Ask RMT about availability, specifications, and documentation.
+                </p>
+                <Button asChild className="mt-4 w-full">
+                  <Link href="/contact?subject=Product%20inquiry">Contact RMT</Link>
+                </Button>
+              </aside>
             </div>
-          </section>
-        </div>
-      )}
+          </header>
+
+          <main className="page-container py-10">
+            <section className="py-6">
+              <h2 className="font-heading text-xl font-bold">Recommended products</h2>
+              <div className="mt-5 grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+                {recommended.map((item) => (
+                  <article
+                    key={item.name}
+                    className="overflow-hidden rounded-xl border border-border bg-card"
+                  >
+                    <div className="flex h-32 items-center justify-center bg-white p-3">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="h-full w-full object-contain"
+                      />
+                    </div>
+                    <div className="p-4">
+                      <p className="text-xs font-semibold text-primary">{item.tag ?? "RMT"}</p>
+                      <h3 className="mt-1 line-clamp-2 font-semibold">{item.name}</h3>
+                      <button
+                        type="button"
+                        className="mt-3 w-full rounded-lg border border-primary/40 px-3 py-2 text-sm font-semibold text-primary hover:bg-primary hover:text-white"
+                        onClick={() => setQuick(item)}
+                      >
+                        Quick view
+                      </button>
+                      <Link
+                        href={`/products/${category.id}/${slugify(item.name)}`}
+                        onClick={closeQuick}
+                        className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-muted-foreground hover:text-primary"
+                      >
+                        Full details <ArrowRight className="h-3 w-3" />
+                      </Link>
+                    </div>
+                  </article>
+                ))}
+              </div>
+            </section>
+          </main>
+        </motion.div>
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {quick && (
+          <motion.div
+            key="generic-quick-view"
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/60 p-4"
+            role="presentation"
+            initial={reduceMotion ? false : { opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onMouseDown={(e) => {
+              if (e.target === e.currentTarget) closeQuick();
+            }}
+          >
+            <motion.section
+              role="dialog"
+              aria-modal="true"
+              aria-label={`${quick.name} quick view`}
+              initial={reduceMotion ? false : { opacity: 0, y: 16, scale: 0.98 }}
+              animate={{ opacity: 1, y: 0, scale: 1 }}
+              exit={{ opacity: 0, y: 10, scale: 0.98 }}
+              transition={{ duration: 0.22, ease: pageEase }}
+              className="relative grid w-full max-w-3xl gap-6 rounded-2xl bg-background p-6 shadow-2xl sm:grid-cols-[150px_1fr] sm:p-8"
+            >
+              <button
+                type="button"
+                aria-label="Close quick view"
+                onClick={closeQuick}
+                className="absolute right-4 top-4 rounded-full p-2 hover:bg-muted"
+              >
+                <X className="h-5 w-5" />
+              </button>
+              <div className="flex h-36 items-center justify-center rounded-xl bg-white p-3">
+                <img src={quick.image} alt={quick.name} className="h-full w-full object-contain" />
+              </div>
+              <div className="pr-8">
+                <p className="text-sm text-primary">{quick.tag ?? "RMT"}</p>
+                <h2 className="mt-1 text-2xl font-bold">{quick.name}</h2>
+                <p className="mt-3 text-sm text-muted-foreground">
+                  {quick.description ?? "Product description available on request."}
+                </p>
+                <Button asChild className="mt-5">
+                  <Link
+                    href={`/products/${category.id}/${slugify(quick.name)}`}
+                    onClick={closeQuick}
+                  >
+                    Open full detail
+                  </Link>
+                </Button>
+              </div>
+            </motion.section>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </div>
   );
 }
