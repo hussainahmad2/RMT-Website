@@ -34,7 +34,7 @@ function ProductDetailCard({
 }) {
   return (
       <article className="group overflow-hidden rounded-2xl border border-border bg-card hover:border-primary/35 hover:shadow-2xl transition-all duration-500">
-        {product.tag === "BMD" ? (
+        {product.tag === "BMD" || product.tag === "Neutrix" ? (
           <div>
         <div className="relative aspect-[4/3] overflow-hidden bg-muted">
           <img
@@ -42,7 +42,7 @@ function ProductDetailCard({
             alt={product.name}
             className={cn(
               "h-full w-full transition-transform duration-700 group-hover:scale-105",
-              product.tag === "BMD"
+              product.tag === "BMD" || product.tag === "Neutrix"
                 ? "object-contain p-4 sm:p-5 bg-white/90"
                 : "object-cover"
             )}
@@ -53,6 +53,11 @@ function ProductDetailCard({
           <span className="inline-flex h-8 min-w-8 items-center justify-center rounded-full border border-white/20 bg-black/55 px-2 text-xs font-bold text-white backdrop-blur-sm">
             {index + 1}
           </span>
+          {product.tag === "Neutrix" && (
+            <span className="rounded-full border border-emerald-400/40 bg-emerald-700/90 px-2.5 py-1 text-[10px] font-bold uppercase tracking-widest text-white">
+              Neutrix
+            </span>
+          )}
         </div>
         {product.spec && (
           <span className="absolute top-3 right-3 text-[10px] font-bold uppercase tracking-widest px-2.5 py-1 rounded-full bg-black/50 text-white border border-white/15">
@@ -105,10 +110,17 @@ function ProductDetailCard({
 
         <div className="h-px bg-border my-4" />
         <Link
-          href={product.tag?.startsWith("BMD") ? `/products/biomaterials/${product.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}` : "/contact"}
+          href={
+            product.tag === "Neutrix" || product.tag?.startsWith("BMD")
+              ? `/products/biomaterials/${product.name.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "")}`
+              : "/contact"
+          }
           className="inline-flex items-center gap-1.5 text-sm font-semibold text-primary hover:gap-2.5 transition-all"
         >
-          {product.tag?.startsWith("BMD") ? "View full detail" : "Request details"} <ArrowRight className="w-4 h-4" />
+          {product.tag === "Neutrix" || product.tag?.startsWith("BMD")
+            ? "View full detail"
+            : "Request details"}{" "}
+          <ArrowRight className="w-4 h-4" />
         </Link>
       </div>
     </article>
