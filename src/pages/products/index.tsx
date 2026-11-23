@@ -1,5 +1,5 @@
-import React, { useState } from "react";
-import { Link } from "wouter";
+import React, { useEffect, useMemo } from "react";
+import { Link, useLocation, useSearch } from "wouter";
 import {
   ArrowRight, Brain, CheckCircle, Factory, FlaskConical, Package, Settings2, ShieldCheck, Sparkles,
 } from "lucide-react";
@@ -17,6 +17,19 @@ import {
   type ProductItem,
 } from "@/data/products";
 import { ALL_SERVICES } from "@/data/services";
+
+const VALID_CATEGORY_IDS = new Set(PRODUCT_CATEGORIES.map((c) => c.id));
+
+function productsHref(categoryId: string) {
+  return categoryId === "all" ? "/products" : `/products?category=${categoryId}`;
+}
+
+function categoryFromSearch(search: string): string {
+  const params = new URLSearchParams(search.startsWith("?") ? search.slice(1) : search);
+  const fromQuery = params.get("category");
+  if (fromQuery && VALID_CATEGORY_IDS.has(fromQuery)) return fromQuery;
+  return "all";
+}
 
 const CATEGORY_ICONS: Record<string, React.ElementType> = {
   "medical-devices": Factory,
@@ -184,9 +197,25 @@ function CategorySection({ category, reverse = false }: { category: ProductCateg
 }
 
 export default function Products() {
-  const [activeCategory, setActiveCategory] = useState<string>("all");
+  const [, setLocation] = useLocation();
+  const search = useSearch();
+  const activeCategory = useMemo(() => categoryFromSearch(search), [search]);
 
   useSEO(getRouteSeo("/products"));
+
+  useEffect(() => {
+    if (activeCategory === "all") return;
+    const el = document.getElementById(activeCategory);
+    if (el) {
+      requestAnimationFrame(() => {
+        el.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+  }, [activeCategory]);
+
+  const selectCategory = (categoryId: string) => {
+    setLocation(productsHref(categoryId));
+  };
 
   const visibleCategories =
     activeCategory === "all"
@@ -286,7 +315,7 @@ export default function Products() {
         <div className="page-container flex flex-wrap gap-2">
           <button
             type="button"
-            onClick={() => setActiveCategory("all")}
+            onClick={() => selectCategory("all")}
             className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
               activeCategory === "all" ? "bg-primary text-white" : "bg-muted text-muted-foreground hover:text-primary"
             }`}
@@ -294,16 +323,16 @@ export default function Products() {
             All Products
           </button>
           {PRODUCT_CATEGORIES.map((cat) => (
-            <a
+            <button
               key={cat.id}
-              href={`#${cat.id}`}
-              onClick={() => setActiveCategory(cat.id)}
+              type="button"
+              onClick={() => selectCategory(cat.id)}
               className={`px-4 py-1.5 rounded-full text-sm font-medium transition-all ${
                 activeCategory === cat.id ? "bg-primary text-white" : "bg-muted text-muted-foreground hover:text-primary"
               }`}
             >
               {cat.title.split(" & ")[0]}
-            </a>
+            </button>
           ))}
         </div>
       </section>
