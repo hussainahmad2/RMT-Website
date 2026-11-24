@@ -33,6 +33,8 @@ export interface NeutrixProduct {
   brand: string;
   tagline: string;
   packSize: string;
+  /** Neutrix catalog number, e.g. NTX0001 */
+  productNumber: string;
   image: string;
   properties: NeutrixProperties;
   generalDescription: string;
@@ -42,6 +44,11 @@ export interface NeutrixProduct {
   analysisNotes: string[];
   storageClass: string;
   documents: NeutrixDocuments;
+}
+
+/** Neutrix catalog number from product id (01 → NTX0001) */
+export function neutrixProductNumber(id: string): string {
+  return `NTX${id.padStart(4, "0")}`;
 }
 
 export const NEUTRIX_BOTTLE_IMAGE = "/neutrix/images/bottle.png";
@@ -56,6 +63,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0001",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -91,9 +99,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/01_RMT_Buffered_Peptone_Water_spec.docx",
-      coa: "/neutrix/docs/coa/01_RMT_Buffered_Peptone_Water_coa.docx",
-      sds: "/neutrix/docs/sds/01_RMT_Buffered_Peptone_Water_sds.docx",
+      spec: "/neutrix/docs/spec/01_RMT_Buffered_Peptone_Water_spec.pdf",
+      coa: "/neutrix/docs/coa/01_RMT_Buffered_Peptone_Water_coa.pdf",
+      sds: "/neutrix/docs/sds/01_RMT_Buffered_Peptone_Water_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -104,6 +112,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0002",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -146,9 +155,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/02_RMT_Soyabean_Casein_Digest_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/02_RMT_Soyabean_Casein_Digest_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/02_RMT_Soyabean_Casein_Digest_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/02_RMT_Soyabean_Casein_Digest_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/02_RMT_Soyabean_Casein_Digest_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/02_RMT_Soyabean_Casein_Digest_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -159,6 +168,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0003",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -201,9 +211,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/03_RMT_Soyabean_Casein_Digest_Broth_spec.docx",
-      coa: "/neutrix/docs/coa/03_RMT_Soyabean_Casein_Digest_Broth_coa.docx",
-      sds: "/neutrix/docs/sds/03_RMT_Soyabean_Casein_Digest_Broth_sds.docx",
+      spec: "/neutrix/docs/spec/03_RMT_Soyabean_Casein_Digest_Broth_spec.pdf",
+      coa: "/neutrix/docs/coa/03_RMT_Soyabean_Casein_Digest_Broth_coa.pdf",
+      sds: "/neutrix/docs/sds/03_RMT_Soyabean_Casein_Digest_Broth_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -214,6 +224,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0004",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -250,9 +261,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/04_RMT_Sabouraud_Dextrose_Agar_SDA_spec.docx",
-      coa: "/neutrix/docs/coa/04_RMT_Sabouraud_Dextrose_Agar_SDA_coa.docx",
-      sds: "/neutrix/docs/sds/04_RMT_Sabouraud_Dextrose_Agar_SDA_sds.docx",
+      spec: "/neutrix/docs/spec/04_RMT_Sabouraud_Dextrose_Agar_SDA_spec.pdf",
+      coa: "/neutrix/docs/coa/04_RMT_Sabouraud_Dextrose_Agar_SDA_coa.pdf",
+      sds: "/neutrix/docs/sds/04_RMT_Sabouraud_Dextrose_Agar_SDA_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -263,6 +274,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0005",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -297,9 +309,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/05_RMT_Sabouraud_Dextrose_Broth_spec.docx",
-      coa: "/neutrix/docs/coa/05_RMT_Sabouraud_Dextrose_Broth_coa.docx",
-      sds: "/neutrix/docs/sds/05_RMT_Sabouraud_Dextrose_Broth_sds.docx",
+      spec: "/neutrix/docs/spec/05_RMT_Sabouraud_Dextrose_Broth_spec.pdf",
+      coa: "/neutrix/docs/coa/05_RMT_Sabouraud_Dextrose_Broth_coa.pdf",
+      sds: "/neutrix/docs/sds/05_RMT_Sabouraud_Dextrose_Broth_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -310,6 +322,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0006",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -347,9 +360,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/06_RMT_Potato_Dextrose_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/06_RMT_Potato_Dextrose_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/06_RMT_Potato_Dextrose_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/06_RMT_Potato_Dextrose_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/06_RMT_Potato_Dextrose_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/06_RMT_Potato_Dextrose_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -360,6 +373,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0007",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -399,9 +413,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/07_RMT_Enterobacteria_Enrichment_Broth_Mossel_spec.docx",
-      coa: "/neutrix/docs/coa/07_RMT_Enterobacteria_Enrichment_Broth_Mossel_coa.docx",
-      sds: "/neutrix/docs/sds/07_RMT_Enterobacteria_Enrichment_Broth_Mossel_sds.docx",
+      spec: "/neutrix/docs/spec/07_RMT_Enterobacteria_Enrichment_Broth_Mossel_spec.pdf",
+      coa: "/neutrix/docs/coa/07_RMT_Enterobacteria_Enrichment_Broth_Mossel_coa.pdf",
+      sds: "/neutrix/docs/sds/07_RMT_Enterobacteria_Enrichment_Broth_Mossel_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -412,6 +426,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0008",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -454,9 +469,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/08_RMT_Violet_Red_Bile_Glucose_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/08_RMT_Violet_Red_Bile_Glucose_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/08_RMT_Violet_Red_Bile_Glucose_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/08_RMT_Violet_Red_Bile_Glucose_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/08_RMT_Violet_Red_Bile_Glucose_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/08_RMT_Violet_Red_Bile_Glucose_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -467,6 +482,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0009",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -509,9 +525,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/09_RMT_MacConkey_Agar_without_Crystal_Violet_spec.docx",
-      coa: "/neutrix/docs/coa/09_RMT_MacConkey_Agar_without_Crystal_Violet_coa.docx",
-      sds: "/neutrix/docs/sds/09_RMT_MacConkey_Agar_without_Crystal_Violet_sds.docx",
+      spec: "/neutrix/docs/spec/09_RMT_MacConkey_Agar_without_Crystal_Violet_spec.pdf",
+      coa: "/neutrix/docs/coa/09_RMT_MacConkey_Agar_without_Crystal_Violet_coa.pdf",
+      sds: "/neutrix/docs/sds/09_RMT_MacConkey_Agar_without_Crystal_Violet_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -522,6 +538,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0010",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -558,9 +575,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/10_RMT_MacConkey_Broth_spec.docx",
-      coa: "/neutrix/docs/coa/10_RMT_MacConkey_Broth_coa.docx",
-      sds: "/neutrix/docs/sds/10_RMT_MacConkey_Broth_sds.docx",
+      spec: "/neutrix/docs/spec/10_RMT_MacConkey_Broth_spec.pdf",
+      coa: "/neutrix/docs/coa/10_RMT_MacConkey_Broth_coa.pdf",
+      sds: "/neutrix/docs/sds/10_RMT_MacConkey_Broth_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -571,6 +588,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0011",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -610,9 +628,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/11_RMT_Rappaport_Vassiliadis_Salmonella_Enrichment_Broth_spec.docx",
-      coa: "/neutrix/docs/coa/11_RMT_Rappaport_Vassiliadis_Salmonella_Enrichment_Broth_coa.docx",
-      sds: "/neutrix/docs/sds/11_RMT_Rappaport_Vassiliadis_Salmonella_Enrichment_Broth_sds.docx",
+      spec: "/neutrix/docs/spec/11_RMT_Rappaport_Vassiliadis_Salmonella_Enrichment_Broth_spec.pdf",
+      coa: "/neutrix/docs/coa/11_RMT_Rappaport_Vassiliadis_Salmonella_Enrichment_Broth_coa.pdf",
+      sds: "/neutrix/docs/sds/11_RMT_Rappaport_Vassiliadis_Salmonella_Enrichment_Broth_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -623,6 +641,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0012",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -668,9 +687,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/12_RMT_Xylose_Lysine_Deoxycholate_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/12_RMT_Xylose_Lysine_Deoxycholate_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/12_RMT_Xylose_Lysine_Deoxycholate_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/12_RMT_Xylose_Lysine_Deoxycholate_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/12_RMT_Xylose_Lysine_Deoxycholate_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/12_RMT_Xylose_Lysine_Deoxycholate_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -681,6 +700,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0013",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -718,9 +738,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "10-13 - Other liquids and solids Hazard statement: H412 Harmful to aquatic life with long lasting effects",
     documents: {
-      spec: "/neutrix/docs/spec/13_RMT_Cetrimide_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/13_RMT_Cetrimide_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/13_RMT_Cetrimide_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/13_RMT_Cetrimide_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/13_RMT_Cetrimide_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/13_RMT_Cetrimide_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -731,6 +751,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0014",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -771,9 +792,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/14_RMT_Mannitol_Salt_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/14_RMT_Mannitol_Salt_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/14_RMT_Mannitol_Salt_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/14_RMT_Mannitol_Salt_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/14_RMT_Mannitol_Salt_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/14_RMT_Mannitol_Salt_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -784,6 +805,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0015",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -825,9 +847,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/15_RMT_Reinforced_Medium_for_Clostridia_spec.docx",
-      coa: "/neutrix/docs/coa/15_RMT_Reinforced_Medium_for_Clostridia_coa.docx",
-      sds: "/neutrix/docs/sds/15_RMT_Reinforced_Medium_for_Clostridia_sds.docx",
+      spec: "/neutrix/docs/spec/15_RMT_Reinforced_Medium_for_Clostridia_spec.pdf",
+      coa: "/neutrix/docs/coa/15_RMT_Reinforced_Medium_for_Clostridia_coa.pdf",
+      sds: "/neutrix/docs/sds/15_RMT_Reinforced_Medium_for_Clostridia_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -838,6 +860,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0016",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -876,9 +899,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/16_RMT_Plate_Count_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/16_RMT_Plate_Count_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/16_RMT_Plate_Count_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/16_RMT_Plate_Count_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/16_RMT_Plate_Count_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/16_RMT_Plate_Count_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -889,6 +912,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0017",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -931,9 +955,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "10-13 - Other liquids and solids Hazard statement: H317 May cause an allergic skin reaction (Signal word: Warning)",
     documents: {
-      spec: "/neutrix/docs/spec/17_RMT_Fluid_Thioglycollate_Medium_FTM_spec.docx",
-      coa: "/neutrix/docs/coa/17_RMT_Fluid_Thioglycollate_Medium_FTM_coa.docx",
-      sds: "/neutrix/docs/sds/17_RMT_Fluid_Thioglycollate_Medium_FTM_sds.docx",
+      spec: "/neutrix/docs/spec/17_RMT_Fluid_Thioglycollate_Medium_FTM_spec.pdf",
+      coa: "/neutrix/docs/coa/17_RMT_Fluid_Thioglycollate_Medium_FTM_coa.pdf",
+      sds: "/neutrix/docs/sds/17_RMT_Fluid_Thioglycollate_Medium_FTM_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -944,6 +968,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0018",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -983,9 +1008,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/18_RMT_Nutrient_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/18_RMT_Nutrient_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/18_RMT_Nutrient_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/18_RMT_Nutrient_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/18_RMT_Nutrient_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/18_RMT_Nutrient_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -996,6 +1021,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0019",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -1034,9 +1060,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/19_RMT_Blood_Agar_Base_spec.docx",
-      coa: "/neutrix/docs/coa/19_RMT_Blood_Agar_Base_coa.docx",
-      sds: "/neutrix/docs/sds/19_RMT_Blood_Agar_Base_sds.docx",
+      spec: "/neutrix/docs/spec/19_RMT_Blood_Agar_Base_spec.pdf",
+      coa: "/neutrix/docs/coa/19_RMT_Blood_Agar_Base_coa.pdf",
+      sds: "/neutrix/docs/sds/19_RMT_Blood_Agar_Base_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -1047,6 +1073,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0020",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -1109,9 +1136,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/20_RMT_Iso_Sensitest_Agar_spec.docx",
-      coa: "/neutrix/docs/coa/20_RMT_Iso_Sensitest_Agar_coa.docx",
-      sds: "/neutrix/docs/sds/20_RMT_Iso_Sensitest_Agar_sds.docx",
+      spec: "/neutrix/docs/spec/20_RMT_Iso_Sensitest_Agar_spec.pdf",
+      coa: "/neutrix/docs/coa/20_RMT_Iso_Sensitest_Agar_coa.pdf",
+      sds: "/neutrix/docs/sds/20_RMT_Iso_Sensitest_Agar_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },
@@ -1122,6 +1149,7 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     brand: "Neutrix",
     tagline: "Suitable for microbiology",
     packSize: "500 g",
+    productNumber: "NTX0021",
     image: "/neutrix/images/bottle.png",
     properties: {
       productLine: "Neutrix",
@@ -1163,9 +1191,9 @@ export const NEUTRIX_PRODUCTS: NeutrixProduct[] = [
     ],
     storageClass: "11 — Combustible Solids",
     documents: {
-      spec: "/neutrix/docs/spec/21_RMT_MacConkey_Agar_with_Crystal_Violet_spec.docx",
-      coa: "/neutrix/docs/coa/21_RMT_MacConkey_Agar_with_Crystal_Violet_coa.docx",
-      sds: "/neutrix/docs/sds/21_RMT_MacConkey_Agar_with_Crystal_Violet_sds.docx",
+      spec: "/neutrix/docs/spec/21_RMT_MacConkey_Agar_with_Crystal_Violet_spec.pdf",
+      coa: "/neutrix/docs/coa/21_RMT_MacConkey_Agar_with_Crystal_Violet_coa.pdf",
+      sds: "/neutrix/docs/sds/21_RMT_MacConkey_Agar_with_Crystal_Violet_sds.pdf",
       coo: "/neutrix/docs/RMT_COO_DECLARATION.pdf",
     },
   },

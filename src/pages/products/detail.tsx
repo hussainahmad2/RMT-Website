@@ -7,9 +7,10 @@ import {
   CheckCircle2,
   ChevronLeft,
   ChevronRight,
-  Download,
+  ExternalLink,
   FileText,
   FlaskConical,
+  Search,
   ShieldCheck,
   X,
 } from "lucide-react";
@@ -23,6 +24,10 @@ import {
 } from "@/data/neutrix-products";
 import { useSEO } from "@/lib/seo";
 import { cn } from "@/lib/utils";
+
+function openDoc(url: string) {
+  window.open(url, "_blank", "noopener,noreferrer");
+}
 
 const pageEase = [0.22, 1, 0.36, 1] as const;
 
@@ -53,6 +58,122 @@ const PROP_ROWS: { key: keyof NeutrixProduct["properties"]; label: string }[] = 
 ];
 
 const BIOMATERIALS_BACK = "/products?category=biomaterials";
+
+function CertificateSearch({ product }: { product: NeutrixProduct }) {
+  const [productNumber, setProductNumber] = useState(product.productNumber);
+  const [lotNumber, setLotNumber] = useState("");
+  const [error, setError] = useState<string | null>(null);
+  const [result, setResult] = useState<NeutrixProduct | null>(null);
+
+  useEffect(() => {
+    setProductNumber(product.productNumber);
+    setLotNumber("");
+    setError(null);
+    setResult(null);
+  }, [product.productNumber, product.slug]);
+
+  const onSearch = (e: React.FormEvent) => {
+    e.preventDefault();
+    const pn = productNumber.trim().replace(/\s/g, "");
+    const lot = lotNumber.trim();
+    if (!pn || !lot) {
+      setError("Product number and lot/batch number are required.");
+      setResult(null);
+      return;
+    }
+
+    const match = NEUTRIX_PRODUCTS.find((p) => p.productNumber === pn);
+    if (!match) {
+      setError("No certificates found for this product number.");
+      setResult(null);
+      return;
+    }
+
+    setError(null);
+    setResult(match);
+  };
+
+  return (
+    <div className="overflow-hidden rounded-2xl border border-emerald-800/15 bg-gradient-to-br from-emerald-50/80 via-white to-sky-50/60 shadow-sm">
+      <div className="border-b border-emerald-800/10 bg-emerald-800 px-5 py-4 text-white">
+        <p className="text-sm font-semibold">Certificate lookup</p>
+        <p className="mt-0.5 text-xs text-emerald-100">
+          Enter product and lot/batch number to open COA or Certificate of Origin
+        </p>
+      </div>
+      <form onSubmit={onSearch} className="space-y-4 p-5 sm:p-6">
+        <div>
+          <label htmlFor="cert-product-number" className="text-sm font-semibold text-foreground">
+            <span className="text-red-600">*</span> Product Number
+          </label>
+          <input
+            id="cert-product-number"
+            value={productNumber}
+            onChange={(e) => setProductNumber(e.target.value)}
+            className="mt-1.5 h-11 w-full rounded-xl border-2 border-emerald-800/20 bg-white px-3 text-sm font-medium shadow-sm outline-none transition focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/20"
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="cert-lot-number" className="text-sm font-semibold text-foreground">
+            <span className="text-red-600">*</span> Lot/Batch Number
+          </label>
+          <input
+            id="cert-lot-number"
+            value={lotNumber}
+            onChange={(e) => setLotNumber(e.target.value)}
+            placeholder="e.g. 023J5431"
+            className="mt-1.5 h-11 w-full rounded-xl border-2 border-emerald-800/20 bg-white px-3 text-sm font-medium shadow-sm outline-none transition focus:border-emerald-700 focus:ring-2 focus:ring-emerald-700/20"
+            required
+          />
+        </div>
+        {error && (
+          <p className="rounded-lg bg-red-50 px-3 py-2 text-xs font-medium text-red-700">{error}</p>
+        )}
+        <Button
+          type="submit"
+          className="h-11 w-full bg-emerald-800 text-sm font-semibold hover:bg-emerald-900"
+        >
+          <Search className="mr-2 h-4 w-4" />
+          Search
+        </Button>
+      </form>
+
+      {result && !error && (
+        <div className="space-y-3 border-t border-emerald-800/10 bg-white/70 px-5 py-5 sm:px-6">
+          <p className="text-sm text-muted-foreground">
+            Results for <span className="font-semibold text-foreground">{result.name}</span> · lot{" "}
+            <span className="font-semibold text-foreground">{lotNumber}</span>
+          </p>
+          <div className="grid gap-2 sm:grid-cols-2">
+            <button
+              type="button"
+              onClick={() => openDoc(result.documents.coa)}
+              className="inline-flex items-center justify-between rounded-xl border border-emerald-800/20 bg-emerald-50/70 px-4 py-3 text-left text-sm font-semibold text-emerald-900 transition hover:border-emerald-700 hover:bg-emerald-50"
+            >
+              <span className="inline-flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Certificate of Analysis
+              </span>
+              <ExternalLink className="h-4 w-4 opacity-70" />
+            </button>
+            <button
+              type="button"
+              onClick={() => openDoc(result.documents.coo)}
+              className="inline-flex items-center justify-between rounded-xl border border-emerald-800/20 bg-emerald-50/70 px-4 py-3 text-left text-sm font-semibold text-emerald-900 transition hover:border-emerald-700 hover:bg-emerald-50"
+            >
+              <span className="inline-flex items-center gap-2">
+                <FileText className="h-4 w-4" />
+                Certificate of Origin
+              </span>
+              <ExternalLink className="h-4 w-4 opacity-70" />
+            </button>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
 
 function NeutrixRecommendCarousel({
   products,
@@ -267,15 +388,12 @@ function NeutrixDetail({
             <p className="mt-2 text-base text-muted-foreground">{product.tagline}</p>
 
             <div className="mt-5 flex flex-wrap gap-2">
+              <span className="inline-flex items-center rounded-md border border-emerald-800/15 bg-emerald-50 px-3 py-1.5 text-xs font-semibold tabular-nums tracking-wide text-emerald-900">
+                {product.productNumber}
+              </span>
               <span className="inline-flex items-center gap-1.5 rounded-md border border-emerald-800/15 bg-emerald-50 px-3 py-1.5 text-xs font-semibold text-emerald-900">
                 <FlaskConical className="h-3.5 w-3.5" />
                 {product.properties.form}
-              </span>
-              <span className="inline-flex items-center rounded-md border border-border bg-white px-3 py-1.5 text-xs font-semibold">
-                Pack: {product.packSize}
-              </span>
-              <span className="inline-flex items-center rounded-md border border-border bg-white px-3 py-1.5 text-xs font-semibold">
-                {product.properties.storageTemp}
               </span>
             </div>
 
@@ -341,16 +459,18 @@ function NeutrixDetail({
                   <a
                     key={key}
                     href={product.documents[key]}
-                    download
+                    target="_blank"
+                    rel="noopener noreferrer"
                     className="inline-flex items-center gap-2 rounded-lg border border-border bg-white px-3 py-2 text-xs font-semibold transition hover:border-emerald-700/40 hover:text-emerald-800"
                   >
                     <FileText className="h-3.5 w-3.5 text-emerald-700" />
                     {label}
-                    <Download className="h-3 w-3 opacity-50" />
+                    <ExternalLink className="h-3 w-3 opacity-50" />
                   </a>
                 ))}
               </div>
             </div>
+
           </div>
 
           <div className="order-1 lg:order-2 lg:sticky lg:top-28">
@@ -369,7 +489,11 @@ function NeutrixDetail({
       </header>
 
       <main className="page-container py-10">
-        <section className="grid gap-10 border-b border-border pb-10 lg:grid-cols-[.9fr_1.1fr]">
+        <div className="border-b border-border pb-4">
+          <NeutrixRecommendCarousel products={recommended} onQuickView={setQuick} />
+        </div>
+
+        <section className="grid gap-10 border-b border-border py-10 lg:grid-cols-[.9fr_1.1fr]">
           <div>
             <h2 className="font-heading text-xl font-bold">Properties</h2>
             <dl className="mt-4 overflow-hidden rounded-xl border border-border bg-muted/25">
@@ -405,13 +529,14 @@ function NeutrixDetail({
             </div>
 
             <div>
-              <h3 className="font-semibold">Composition</h3>
+              <h3 className="font-semibold">Preparations</h3>
               {product.compositionNote && (
                 <p className="mt-2 text-sm leading-7 text-muted-foreground">
                   {product.compositionNote}
                 </p>
               )}
-              <div className="mt-4 overflow-x-auto rounded-xl border border-border">
+              <h4 className="mt-4 text-sm font-semibold">Compositions</h4>
+              <div className="mt-2 overflow-x-auto rounded-xl border border-border">
                 <table className="w-full min-w-[420px] text-left text-sm">
                   <thead className="bg-muted/60">
                     <tr>
@@ -421,22 +546,18 @@ function NeutrixDetail({
                     </tr>
                   </thead>
                   <tbody>
-                    {product.composition.map((row) => {
-                      const isTotal = row.ingredient.toLowerCase() === "total";
-                      return (
+                    {product.composition
+                      .filter((row) => row.ingredient.toLowerCase() !== "total")
+                      .map((row) => (
                         <tr
                           key={`${row.ingredient}-${row.gPerLitre}`}
-                          className={cn(
-                            "border-t border-border",
-                            isTotal && "bg-muted/40 font-semibold"
-                          )}
+                          className="border-t border-border"
                         >
                           <td className="px-4 py-2.5">{row.ingredient}</td>
                           <td className="px-4 py-2.5 tabular-nums">{row.gPerLitre}</td>
                           <td className="px-4 py-2.5 tabular-nums">{row.gPerPack}</td>
                         </tr>
-                      );
-                    })}
+                      ))}
                   </tbody>
                 </table>
               </div>
@@ -464,22 +585,12 @@ function NeutrixDetail({
             <ShieldCheck className="h-6 w-6 text-emerald-700" />
             <h2 className="font-heading text-xl font-bold">Safety information</h2>
           </div>
-          <div className="mt-5 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="mt-5 max-w-sm">
             <div className="rounded-xl border border-border bg-muted/25 p-4">
               <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
                 Storage class
               </p>
               <p className="mt-2 text-sm font-medium">{product.storageClass}</p>
-            </div>
-            <div className="rounded-xl border border-border bg-muted/25 p-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">Form</p>
-              <p className="mt-2 text-sm font-medium">{product.properties.form}</p>
-            </div>
-            <div className="rounded-xl border border-border bg-muted/25 p-4">
-              <p className="text-xs font-bold uppercase tracking-wide text-muted-foreground">
-                Storage temperature
-              </p>
-              <p className="mt-2 text-sm font-medium">{product.properties.storageTemp}</p>
             </div>
           </div>
           <p className="mt-4 text-sm text-muted-foreground">
@@ -498,20 +609,30 @@ function NeutrixDetail({
               <a
                 key={key}
                 href={product.documents[key]}
-                download
+                target="_blank"
+                rel="noopener noreferrer"
                 className="flex items-center justify-between rounded-xl border border-border bg-card p-4 text-sm font-semibold transition-colors hover:border-emerald-700/40 hover:text-emerald-800"
               >
                 <span className="flex items-center gap-3">
                   <FileText className="h-5 w-5 text-emerald-700" />
                   {label}
                 </span>
-                <Download className="h-4 w-4" />
+                <ExternalLink className="h-4 w-4" />
               </a>
             ))}
           </div>
         </section>
 
-        <NeutrixRecommendCarousel products={recommended} onQuickView={setQuick} />
+        <section id="certificate-search" className="scroll-mt-28 py-10">
+          <h2 className="font-heading text-xl font-bold">Search certificates</h2>
+          <p className="mt-2 text-sm text-muted-foreground">
+            Look up Certificate of Analysis and Certificate of Origin using the Neutrix product
+            number and lot/batch number.
+          </p>
+          <div className="mt-5 max-w-lg">
+            <CertificateSearch product={product} />
+          </div>
+        </section>
       </main>
         </motion.div>
       </AnimatePresence>
